@@ -1,0 +1,790 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>TAP - Tag - Dokyung&#39;s DevOoOps</title>
+        <link>https://huntedhappy.github.io/ko/tags/tap/</link>
+        <description>TAP - Tag - Dokyung&#39;s DevOoOps</description>
+        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tap/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation TAP</title>
+    <link>https://huntedhappy.github.io/ko/tanzu-application-platform/</link>
+    <pubDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/tanzu-application-platform/</guid>
+    <description><![CDATA[<h2 id="1-vmware-tap">1. VMware TAP?</h2>
+<p>VMware Tanzu 애플리케이션 플랫폼은 개발자와 운영자가 Kubernetes 플랫폼에서 앱을 보다 쉽게 구축, 배포 및 관리할 수 있도록 도와주는 패키지된 구성 요소 집합입니다.</p>
+<p>Tanzu 애플리케이션 플랫폼은 Kubernetes 기반 앱 개발의 내부 루프와 외부 루프 모두에서 워크플로를 단순화합니다.</p>
+<ul>
+<li>
+<p>내부 루프: 내부 루프는 개발자가 앱을 코딩하고 테스트하는 로컬 개발 환경을 설명합니다. 내부 루프에서 발생하는 활동에는 코드 작성, 버전 제어 시스템에 커밋, 개발 또는 스테이징 환경에 배포, 테스트 및 추가 코드 변경이 포함됩니다.</p>
+</li>
+<li>
+<p>외부 루프: 외부 루프는 앱을 프로덕션에 배포하고 시간이 지남에 따라 유지 관리하는 단계를 설명합니다. 예를 들어, 클라우드 네이티브 플랫폼에서 외부 루프에는 컨테이너 이미지 빌드, 컨테이너 보안 추가, 지속적 통합(CI) 및 지속적 전달(CD) 파이프라인 구성과 같은 활동이 포함됩니다.</p>
+</li>
+</ul>
+<p>VMware Tanzu 애플리케이션 플랫폼은 보안 및 확장을 지원하는 모든 Kubernetes에서 코드를 실행할 수 있도록 사전 포장된 프로덕션 경로를 개발 팀에 제공합니다. 팀이 조직의 기본 설정에 따라 사용자 지정할 수 있도록 모듈화된 애플리케이션 인식 플랫폼입니다.</p>
+<h3 id="주의-사항">주의 사항</h3>
+<p>현재 버그가 있는것으로 보임 Private Harbor 구성시 사설 인증서 문제가 발생 하기 때문에 외부 Registry 활용 필요,
+Github 연동시 Integration으로 설정</p>
+<h3 id="사전-설치">사전 설치</h3>
+<ul>
+<li>DOCKER</li>
+<li>GCR (Google Container Registry)</li>
+<li>GitHub</li>
+<li>DNS Records</li>
+</ul>
+<h3 id="resource-requirements">Resource requirements</h3>
+<p>To deploy all Tanzu Application Platform packages, your cluster must have at least:</p>
+<ul>
+<li>8 CPUs for i9 (or equivalent) available to Tanzu Application Platform components</li>
+<li>12 CPUs for i7 (or equivalent) available to Tanzu Application Platform components</li>
+<li>8 GB of RAM across all nodes available to Tanzu Application Platform</li>
+<li>12 GB of RAM is available to build and deploy applications, including Minikube. VMware recommends 16 GB of RAM for an optimal experience.</li>
+<li>70 GB of disk space available per node
+For the full profile, or use of Security Chain Security Tools - Store, your cluster must have a configured default StorageClass.</li>
+</ul>
+<h3 id="tools-and-cli-requirements">Tools and CLI requirements</h3>
+<p>Installation requires:</p>
+<ul>
+<li>The Kubernetes CLI, kubectl, v1.20, v1.21 or v1.22, installed and authenticated with administrator rights for your target cluster. See Install Tools in the Kubernetes documentation.</li>
+</ul>
+<h2 id="2-tap">2. TAP</h2>
+<h3 id="21-tanzu-network-등록">2.1. Tanzu Network 등록</h3>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tanzu Network ID/PW<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_USERNAME</span><span class="o">=</span>        <span class="c1">#### Tanzu Network ID</span>
+<span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="o">=</span>        <span class="c1">#### Tanzu Network PW</span>
+<span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="o">=</span>registry.tanzu.vmware.com
+<span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>1.0.1
+</code></pre></td></tr></table>
+</div>
+</div><p>namespace 생성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create ns tap-install
+</code></pre></td></tr></table>
+</div>
+</div><p>tanzu registry 추가</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu secret registry add tap-registry <span class="se">\
+</span><span class="se"></span>  --username <span class="si">${</span><span class="nv">INSTALL_REGISTRY_USERNAME</span><span class="si">}</span> --password <span class="si">${</span><span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>  --server <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>  --export-to-all-namespaces --yes --namespace tap-install
+</code></pre></td></tr></table>
+</div>
+</div><p>tanzu repository 추가</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu package repository add tanzu-tap-repository <span class="se">\
+</span><span class="se"></span>  --url registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="nv">$TAP_VERSION</span> <span class="se">\
+</span><span class="se"></span>  --namespace tap-install
+</code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p><figure><figcaption>
+            <h4>EULA 허용</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>EULA 허용</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="22-tanzu-tap-설치-리스트-확인">2.2. Tanzu TAP 설치 리스트 확인</h3>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Registry / Repository 확인<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu secret registry list -n tap-install
+
+tanzu package repository list -n tap-install
+
+tanzu package repository get tanzu-tap-repository --namespace tap-install
+
+tanzu package available list --namespace tap-install
+
+tanzu package available list tap.tanzu.vmware.com --namespace tap-install
+</code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p><figure><figcaption>
+            <h4>Registry 리스트 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Repository 리스트 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Package 리스트 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="23-tanzu-tap-설치">2.3. Tanzu TAP 설치</h3>
+<p>Private Harbor의 경우 사설 인증서가 문제가 있으므로 외부에서 제공하는 Registry 사용하는 필요.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>TAP 설치<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>GCR에서 키값을 json으로 다운로드 받은 후 service_account_key[변수] 저장</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu secret registry add registry-credentials --server gcr.io --username _json_key --password <span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span> --namespace tap-install
+<span class="nv">service_account_key</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>실행 파일 설정</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat <span class="s">&lt;&lt;EOF &gt; gcr-tap-values.yaml
+</span><span class="s">profile: full
+</span><span class="s">ceip_policy_disclosed: true # The value must be true for installation to succeed
+</span><span class="s">
+</span><span class="s">buildservice:
+</span><span class="s">  kp_default_repository: &#34;gcr.io/{Registry ID}/build-service&#34;
+</span><span class="s">  kp_default_repository_username: _json_key
+</span><span class="s">  kp_default_repository_password: &#39;$(echo $service_account_key)&#39;
+</span><span class="s">  tanzunet_username: &#34;&#34;                             ## Tanzu Network ID
+</span><span class="s">  tanzunet_password: &#34;&#34;                             ## Tanzu Network Password
+</span><span class="s">  descriptor_name: &#34;tap-1.0.0-full&#34;
+</span><span class="s">  enable_automatic_dependency_updates: true
+</span><span class="s">
+</span><span class="s">supply_chain: basic
+</span><span class="s">
+</span><span class="s">cnrs:
+</span><span class="s">  domain_name: tkg.io
+</span><span class="s">
+</span><span class="s">accelerator:
+</span><span class="s">  server:
+</span><span class="s">    service_type: &#34;ClusterIP&#34;
+</span><span class="s">
+</span><span class="s">ootb_supply_chain_basic:
+</span><span class="s">  registry:
+</span><span class="s">    server: &#34;gcr.io&#34;
+</span><span class="s">    repository: &#34;{Registry ID}/supply_chain&#34;
+</span><span class="s">  gitops:
+</span><span class="s">    #repository_prefix: git@github.com:vmware-tanzu/
+</span><span class="s">    #branch: main
+</span><span class="s">    #user_name: supplychain
+</span><span class="s">    #user_email: supplychain
+</span><span class="s">    #commit_message: supplychain@cluster.local
+</span><span class="s">    #ssh_secret: git-ssh  
+</span><span class="s">    ssh_secret: &#34;&#34;
+</span><span class="s">  cluster_builder: default
+</span><span class="s">  service_account: default
+</span><span class="s">
+</span><span class="s">learningcenter:
+</span><span class="s">  ingressDomain: &#34;tkg.io&#34;
+</span><span class="s">  ingressClass: contour
+</span><span class="s">  ingressSecret:
+</span><span class="s">    secretName: workshops.example.com-tls
+</span><span class="s">
+</span><span class="s">contour:
+</span><span class="s">  envoy:
+</span><span class="s">    service:
+</span><span class="s">      type: LoadBalancer
+</span><span class="s">
+</span><span class="s">tap_gui:
+</span><span class="s">  service_type: ClusterIP
+</span><span class="s">  ingressEnabled: &#34;true&#34;
+</span><span class="s">  ingressDomain: &#34;tkg.io&#34;
+</span><span class="s">  app_config:
+</span><span class="s">    app:
+</span><span class="s">      baseUrl: http://tap-gui.tkg.io
+</span><span class="s">      support:
+</span><span class="s">        url: https://tanzu.vmware.com/support
+</span><span class="s">        items:
+</span><span class="s">          - title: Contact Support
+</span><span class="s">            icon: email
+</span><span class="s">            links:
+</span><span class="s">              - url: https://tanzu.vmware.com/support
+</span><span class="s">                title: Tanzu Support Page
+</span><span class="s">          - title: Documentation
+</span><span class="s">            icon: docs
+</span><span class="s">            links:
+</span><span class="s">              - url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html
+</span><span class="s">                title: Tanzu Application Platform Documentation
+</span><span class="s">    integrations:
+</span><span class="s">      github: # Other integrations available see NOTE below
+</span><span class="s">        - host: github.com
+</span><span class="s">          token: &#34;{GIT TOKEN}&#34;
+</span><span class="s">
+</span><span class="s">    catalog:
+</span><span class="s">      locations:
+</span><span class="s">        - type: url
+</span><span class="s">          target: https://github.com/huntedhappy/tanzu-java-web-app/catalog-info.yaml
+</span><span class="s">
+</span><span class="s">    backend:
+</span><span class="s">      baseUrl: http://tap-gui.tkg.io
+</span><span class="s">      cors:
+</span><span class="s">        origin: http://tap-gui.tkg.io
+</span><span class="s">
+</span><span class="s">#    ##Existing values file above (OIDC)
+</span><span class="s">#    auth:
+</span><span class="s">#      allowGuestAccess: true
+</span><span class="s">#      environment: development
+</span><span class="s">#      loginPage:
+</span><span class="s">#        github:
+</span><span class="s">#          title: Github Login
+</span><span class="s">#          message: Enter with your GitHub account
+</span><span class="s">#      providers:
+</span><span class="s">#        github:
+</span><span class="s">#          development:
+</span><span class="s">#            clientId: 
+</span><span class="s">#            clientSecret: 
+</span><span class="s">#            ## uncomment if using GitHub Enterprise
+</span><span class="s">#            # enterpriseInstanceUrl:
+</span><span class="s">
+</span><span class="s">metadata_store:
+</span><span class="s">  app_service_type: LoadBalancer # (optional) Defaults to LoadBalancer. Change to NodePort for distributions that don&#39;t support LoadBalancer
+</span><span class="s">
+</span><span class="s">grype:
+</span><span class="s">  namespace: &#34;tap-install&#34; # (optional) Defaults to default namespace.
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>TAP 설치</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu package install tap -p tap.tanzu.vmware.com -v <span class="nv">$TAP_VERSION</span> --values-file gcr-tap-values.yml -n tap-install
+</code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<figure><figcaption>
+            <h4>TAP 설치 완료</h4>
+        </figcaption>
+</figure>
+
+<h3 id="24-tanzu-tap-rbac-설정">2.4. Tanzu TAP RBAC 설정</h3>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>RBAC 설정<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">dockerconfigjson</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>kubectl get secret tbs-builder-secret-gen-placeholder-secret -n tap-install -o <span class="nv">jsonpath</span><span class="o">={</span>.data.<span class="se">\\</span>.dockerconfigjson<span class="o">}</span><span class="k">)</span><span class="s2">&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat <span class="s">&lt;&lt;EOF | tee rbac.yaml
+</span><span class="s">apiVersion: v1
+</span><span class="s">kind: Secret
+</span><span class="s">metadata:
+</span><span class="s">  name: tap-registry
+</span><span class="s">  annotations:
+</span><span class="s">    secretgen.carvel.dev/image-pull-secret: &#34;&#34;
+</span><span class="s">type: kubernetes.io/dockerconfigjson
+</span><span class="s">data:
+</span><span class="s">  .dockerconfigjson: $(echo $dockerconfigjson)
+</span><span class="s">---
+</span><span class="s">apiVersion: v1
+</span><span class="s">kind: ServiceAccount
+</span><span class="s">metadata:
+</span><span class="s">  name: default
+</span><span class="s">secrets:
+</span><span class="s">  - name: registry-credentials
+</span><span class="s">imagePullSecrets:
+</span><span class="s">  - name: registry-credentials
+</span><span class="s">  - name: tap-registry
+</span><span class="s">---
+</span><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span><span class="s">kind: Role
+</span><span class="s">metadata:
+</span><span class="s">  name: default
+</span><span class="s">rules:
+</span><span class="s">- apiGroups: [source.toolkit.fluxcd.io]
+</span><span class="s">  resources: [gitrepositories]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [source.apps.tanzu.vmware.com]
+</span><span class="s">  resources: [imagerepositories]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [carto.run]
+</span><span class="s">  resources: [deliverables, runnables]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [kpack.io]
+</span><span class="s">  resources: [images]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [conventions.apps.tanzu.vmware.com]
+</span><span class="s">  resources: [podintents]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [&#34;&#34;]
+</span><span class="s">  resources: [&#39;configmaps&#39;]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [&#34;&#34;]
+</span><span class="s">  resources: [&#39;pods&#39;]
+</span><span class="s">  verbs: [&#39;list&#39;]
+</span><span class="s">- apiGroups: [tekton.dev]
+</span><span class="s">  resources: [taskruns, pipelineruns]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [tekton.dev]
+</span><span class="s">  resources: [pipelines]
+</span><span class="s">  verbs: [&#39;list&#39;]
+</span><span class="s">- apiGroups: [kappctrl.k14s.io]
+</span><span class="s">  resources: [apps]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [serving.knative.dev]
+</span><span class="s">  resources: [&#39;services&#39;]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [servicebinding.io]
+</span><span class="s">  resources: [&#39;servicebindings&#39;]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [services.apps.tanzu.vmware.com]
+</span><span class="s">  resources: [&#39;resourceclaims&#39;]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">- apiGroups: [scanning.apps.tanzu.vmware.com]
+</span><span class="s">  resources: [&#39;imagescans&#39;, &#39;sourcescans&#39;]
+</span><span class="s">  verbs: [&#39;*&#39;]
+</span><span class="s">---
+</span><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span><span class="s">kind: RoleBinding
+</span><span class="s">metadata:
+</span><span class="s">  name: default
+</span><span class="s">roleRef:
+</span><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span><span class="s">  kind: Role
+</span><span class="s">  name: default
+</span><span class="s">subjects:
+</span><span class="s">  - kind: ServiceAccount
+</span><span class="s">    name: default
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<h3 id="25-workload-실행">2.5. workload 실행</h3>
+<p>INGRESS IP 확인</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl get svc -n tap-install
+
+kubectl get httpproxy -A
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>ingress 및 DNS 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>gui 접속 후 Tanzu Java Web App 실행</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>gui 접속 후 Tanzu Java Web App 실행</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>gui 접속 후 Tanzu Java Web App 실행</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>gui 접속 후 Tanzu Java Web App 다운로드</h4>
+        </figcaption>
+</figure>
+</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>GIT PUSH<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>미리 GIT에 프로젝트 생성 후 다운로드 받은 ZIP파일 PUSH</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">unzip tanzu-java-web-app.zip
+
+git init
+git remote add origin git@github.com:huntedhappy/tanzu-java-web-app
+git add .
+git commit -m <span class="s1">&#39;first&#39;</span>
+git push origin main
+</code></pre></td></tr></table>
+</div>
+</div><p>apps workload 실행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu apps workload create tanzu-java-web-app <span class="se">\
+</span><span class="se"></span> --git-repo https://github.com/huntedhappy/tanzu-java-web-app <span class="se">\
+</span><span class="se"></span> --git-branch main <span class="se">\
+</span><span class="se"></span> --type web <span class="se">\
+</span><span class="se"></span> --label apps.tanzu.vmware.com/has-tests<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span><span class="se"></span> --yes <span class="se">\
+</span><span class="se"></span> -n tap-install
+</code></pre></td></tr></table>
+</div>
+</div><p>배포 상태 확인</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu apps cluster-supply-chain list
+
+tanzu apps workload tail tanzu-java-web-app --since 10m --timestamp -n tap-install
+
+kubectl get workload,gitrepository,pipelinerun,images.kpack,podintent,app,services.serving -n tap-install
+</code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<h2 id="3-visural-studio">3. Visural Studio</h2>
+<h3 id="31-extenstion-설정">3.1. Extenstion 설정</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apt search openjdk
+
+apt install openjdk-11-jdk -y
+java --version
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">echo</span> <span class="s2">&#34;allow_k8s_contexts(&#39;</span><span class="k">$(</span>kubectl config current-context<span class="k">)</span><span class="s2">&#39;)&#34;</span> &gt;&gt; /var/tmp/tap/tanzu-java-web-app/Tiltfile
+
+<span class="c1">## 맨아래 해당 context가 들어가 있는 것을 확인 할 수 있다.</span>
+cat /var/tmp/tap/tanzu-java-web-app/Tiltfile
+
+ctrl + <span class="nb">shift</span> + p
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>VS 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>VS 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>VS 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>VS 설정</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="32-live-update-start">3.2. Live Update Start</h3>
+<p>해당 부분을 수정 하면 자동으로 GIT에 업데이트가 되면서 바뀌는것을 볼수 있다.
+<figure><figcaption>
+            <h4>수정#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>수정#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>수정#3</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>수정#4</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item></channel>
+</rss>
