@@ -620,7 +620,7 @@ mount /dev/vg_xfs_minio_4/xfs_minio_4 /root/xfs_minio_4/
 df -hT /root/xfs_minio_4/
 </code></pre></td></tr></table>
 </div>
-</div><p>부팅 후에도 마운투가 될 수 있게 fstab에 저장해준다.
+</div><p>부팅 후에도 마운투가 될 수 있게 fstab에 저장해준다. 
 blkid로 UUID를 확인</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

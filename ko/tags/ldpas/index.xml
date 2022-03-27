@@ -13,7 +13,7 @@
     <description><![CDATA[<h2 id="1-ldap-over-ssl">1. LDAP Over SSL</h2>
 <p>대략 설명 보다. 이미지를 많이 첨부</p>
 <p>LDAPS를 구성 할 경우 IP로 ldapsearch를 하면 실패하는 경우를 보게 될 것이다.
-FQDN인증서를 확인 하면 FQDN만 구성이 되어 있는 것을 알 수 있다.
+FQDN인증서를 확인 하면 FQDN만 구성이 되어 있는 것을 알 수 있다. 
 그래서 SAN으로 구성하면서 IP도 포함되게 구성을 해보자.</p>
 <figure><figcaption>
             <h4>Ldaps 인증서 확인</h4>

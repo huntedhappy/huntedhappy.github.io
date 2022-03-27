@@ -4669,7 +4669,7 @@ ansible-playbook 01_deploy_first_node.yml -vvv
     <description><![CDATA[<h2 id="1-ldap-over-ssl">1. LDAP Over SSL</h2>
 <p>대략 설명 보다. 이미지를 많이 첨부</p>
 <p>LDAPS를 구성 할 경우 IP로 ldapsearch를 하면 실패하는 경우를 보게 될 것이다.
-FQDN인증서를 확인 하면 FQDN만 구성이 되어 있는 것을 알 수 있다.
+FQDN인증서를 확인 하면 FQDN만 구성이 되어 있는 것을 알 수 있다. 
 그래서 SAN으로 구성하면서 IP도 포함되게 구성을 해보자.</p>
 <figure><figcaption>
             <h4>Ldaps 인증서 확인</h4>
@@ -7236,7 +7236,7 @@ witelist / balcklist의 경우 ldapsearch에서 distinguishedName: CN=test test,
 </span><span class="s">EOF</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>이후에 자동으로 싱크가 되는 것을 알수 있다. 만약에 그룹을 추가 했는대 그 그룹만 막고 싶으면 blacklist, 또는 기존에 있는 것만 하고 자동 싱크 하고 싶으면 witelist를 적용 하면된다.
+</div><p>이후에 자동으로 싱크가 되는 것을 알수 있다. 만약에 그룹을 추가 했는대 그 그룹만 막고 싶으면 blacklist, 또는 기존에 있는 것만 하고 자동 싱크 하고 싶으면 witelist를 적용 하면된다. 
 흠 생각에는 그냥 witelist 방식으로만 적용하면 될 것으로 보인다. 만약에 필요 하다면 필요 없이 모든 그룹을 자동 싱크 하겠따면 witelist / blaklist는 필요 없다.</p>
 <p>자동 싱크가 되었으면 해당하는 그룹에 권한을 준다.</p>
 <div class="highlight"><div class="chroma">

@@ -1,5 +1,2 @@
 User-agent: *
-Allow: /
-
 Sitemap: https://huntedhappy.github.io/ko/sitemap.xml
-

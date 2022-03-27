@@ -158,7 +158,7 @@ VM형태로 설치를 하였다.</p>
             <i class="icon fas fa-lightbulb fa-fw"></i>CI/CD<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
+            <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다. 
 CI (Continuous Integration) CI를 통해 개발자들은 코드 변경사항을 공유 브랜치로 다시 병합하는 작업을 더욱 수월하게 자주 수행 할 수 있다.
 CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으로 사용됨.</p>
 <ul>
@@ -332,8 +332,8 @@ systemctl restart jenkins
 </figure>
 
 <h3 id="22-nginx로-https-구성">2.2. NGINX로 HTTPS 구성</h3>
-<p>NGINX를 구성하기 위해 Jenkins 설정은 그냥 HTTP로 구성을 해도 무방하다. 여기서는 위에서 설정을 했기 때문에 별도로 설정을 변경하지 않고했기 때문에 뒷단의 Jenkins를 HTTPS로 그대로 놔둔것이라고 봐도 된다.
-만약에 Jenkins Server는 HTTP로 구성을 하려면 그냥 두고 NGINX에서 Reverse Proxy 구성을 하면 된다.
+<p>NGINX를 구성하기 위해 Jenkins 설정은 그냥 HTTP로 구성을 해도 무방하다. 여기서는 위에서 설정을 했기 때문에 별도로 설정을 변경하지 않고했기 때문에 뒷단의 Jenkins를 HTTPS로 그대로 놔둔것이라고 봐도 된다. 
+만약에 Jenkins Server는 HTTP로 구성을 하려면 그냥 두고 NGINX에서 Reverse Proxy 구성을 하면 된다. 
 용어가 나와서 헷갈릴수도 있지만. Proxy_pass 부분만 http:// 로 바꾸면 된다.</p>
 <p><div class="details admonition example open">
         <div class="details-summary admonition-title">
