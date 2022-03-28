@@ -183,6 +183,6 @@ VxRail OVA 이미지 필요
 cd /mystic/vxm_backup_restore
 python vxm_backup_restore.py -l
 
-## Recovery 실행
+## Recovery 실행 1
 python vxm_backup_restore.py -r –-vcenter 192.168.215.10
 ```

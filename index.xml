@@ -486,7 +486,7 @@ python vxm_backup_restore.py -b
 <span class="nb">cd</span> /mystic/vxm_backup_restore
 python vxm_backup_restore.py -l
 
-<span class="c1">## Recovery 실행</span>
+<span class="c1">## Recovery 실행 1</span>
 python vxm_backup_restore.py -r –-vcenter 192.168.215.10
 </code></pre></td></tr></table>
 </div>
