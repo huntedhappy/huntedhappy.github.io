@@ -4,9 +4,16 @@
         <link>https://huntedhappy.github.io/</link>
         <description>Dokung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 28 Mar 2022 22:55:22 &#43;0900</lastBuildDate>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 05 Apr 2022 21:51:21 &#43;0900</lastBuildDate>
             <atom:link href="https://huntedhappy.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>The Documentation NSXT to Avi</title>
+    <link>https://huntedhappy.github.io/avi/</link>
+    <pubDate>Tue, 05 Apr 2022 21:51:21 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/avi/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>The Documentation VxRail</title>
     <link>https://huntedhappy.github.io/vxrail/</link>
     <pubDate>Mon, 28 Mar 2022 22:55:22 &#43;0900</pubDate>
@@ -7747,197 +7754,6 @@ oc adm policy remove-cluster-role-from-group cluster-admin tkg
         </figcaption>
 </figure>
 
-]]></description>
-</item><item>
-    <title>The Documentation EKS</title>
-    <link>https://huntedhappy.github.io/eks/</link>
-    <pubDate>Thu, 13 Jan 2022 14:02:30 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/eks/</guid>
-    <description><![CDATA[<h2 id="1-eksamazon-elastic-kubernetes-service">1. EKS(Amazon Elastic Kubernetes Service)?</h2>
-<p>Kubernetes를 실행하는 데 사용할 수 있는 관리형 서비스이다. 마스터노드, 워커노드를 설치, 작동 및 유지관리를 할 필요 없는 솔루션이다.</p>
-<p>우선 문서가 너무 잘되어 있지만 그래도 나름 예전에 EKS를 테스트 했었던 지라 내가 테스트 했던 방법을 공유하고자 한다.</p>
-<p>참고 문헌 <a href="https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/what-is-eks.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> AWS </a></p>
-<h3 id="11-사전설치">1.1. 사전설치</h3>
-<p>우선 OS의 따라 설치해야 되는 것들이 조금 있다. (chocolatey를 설치한 이유는 chocolatey를 통해 eksctl을 배포 하기 위함)</p>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw"></i>설치 Tool<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>Chocolatey 설치 링크 <a href="https://chocolatey.org/install" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> chocolatey </a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Set-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="n">-Scope</span> <span class="k">Process</span> <span class="n">-Force</span><span class="p">;</span> <span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="p">=</span> <span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="o">-bor</span> <span class="n">3072</span><span class="p">;</span> <span class="nb">iex </span><span class="p">((</span><span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://community.chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>eksctl 설치 링크 <a href="https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/eksctl.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> AWS eksctl </a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">chocolatey</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">eksctl</span> <span class="nb">aws-iam</span><span class="n">-authenticator</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>kubectl 설치 링크 <a href="https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/install-kubectl.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> AWS kubectl </a></p>
-<p>링크를 보게 되면 버전별로 다운로드 받을 수 있게 되어 있다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">curl </span><span class="n">-o</span> <span class="n">kubectl</span><span class="p">.</span><span class="n">exe</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="nb">amazon-eks</span><span class="p">.</span><span class="n">s3</span><span class="p">.</span><span class="nb">us-west</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">2</span><span class="p">/</span><span class="n">2021</span><span class="p">-</span><span class="n">07</span><span class="p">-</span><span class="n">05</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">windows</span><span class="p">/</span><span class="n">amd64</span><span class="p">/</span><span class="n">kubectl</span><span class="p">.</span><span class="n">exe</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>awscli 설치링크 <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> AWS awscli </a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">msiexec</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">i</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">awscli</span><span class="p">.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">AWSCLIV2</span><span class="p">.</span><span class="n">msi</span>
-<span class="n">aws</span> <span class="p">-</span><span class="n">-version</span>
-</code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h2 id="12-vpc-생성">1.2. VPC 생성</h2>
-<p>CloudFormation을 통해 vpc를 자동으로 생성 해준다. 아래 링크는 현재 최신상태인지 확인이 가능.</p>
-<p>eks vcp cloudformation 최신 상태 확인 링크 <a href="https://docs.aws.amazon.com/eks/latest/userguide/creating-a-vpc.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> AWS eks vcp </a></p>
-<p>eks vcp cloudformation 최신 파일 링크 <a href="https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2020-10-29/amazon-eks-vpc-private-subnets.yaml" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> AWS eks vcp download </a></p>
-<p>위에 받은 파일로 cloudformation을 설정 해주면 된다.
-<figure><figcaption>
-            <h4>cloud formation 설정#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>cloud formation 설정#2</h4>
-        </figcaption>
-</figure>
-
-원하는 N/W으로 수정 후 그 이후에는 그냥 NEXT 후 CREATE만 하면 VPC가 구성이 된다.
-<figure><figcaption>
-            <h4>cloud formation 설정#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>cloud formation 설정#4</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>cloud formation 설정#5</h4>
-        </figcaption>
-</figure>
-
-완료가 되면 보는 바와 같이 VPC가 생성이 된 것을 확인 할 수 있다.
-<figure><figcaption>
-            <h4>VPC 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Route Table 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>IGW 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>NAT GW 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<h3 id="13-private-key등록">1.3. private key등록</h3>
-<p>aws에서 ec2에 접속하기 위한 security 키를 sshkeygen으로 publickey 생성
-<figure><figcaption>
-            <h4>public key 생성#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>public key 생성#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Notepad로 복사</h4>
-        </figcaption>
-</figure>
-</p>
-<h3 id="14-eks-실행">1.4. EKS 실행</h3>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw"></i>EKS 실행<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>그리고 아래와 같이 명령어를 넣어 준다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">eksctl</span> <span class="n">create</span> <span class="n">cluster</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-name</span> <span class="nb">aws-eks</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-region</span> <span class="nb">us-east</span><span class="p">-</span><span class="n">2</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-nodegroup-name</span> <span class="nb">aws-node</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-node-type</span> <span class="n">t3</span><span class="p">.</span><span class="n">medium</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-nodes</span> <span class="n">3</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-nodes-min</span> <span class="n">1</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-nodes-max</span> <span class="n">4</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-ssh-access</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-ssh-public-key</span> <span class="n">huntedhappy</span><span class="p">.</span><span class="n">pub</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-with-oidc</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-managed</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>구성 EKS 연동 및 확인
-aws eks update-kubeconfig &ndash;name aws-eks</p>
-</div>
-        </div>
-    </div>
-<p>Cloud Formation이 자동으로 돌아간다
-<figure><figcaption>
-            <h4>Cloud Formation</h4>
-        </figcaption>
-</figure>
-
-IAM에서 OIDC가 생성 되었는지 확인 한다. OIDC는 CSI를 EFS로 구성 할 떄 필요 하다.
-<figure><figcaption>
-            <h4>OIDC 생성 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="2-csi-efs구성-작성예정">2. CSI EFS구성 (작성예정)</h2>
-<h2 id="iam">IAM</h2>
-<p>참고로 IAM은 아래와 같이 구성 하였다.
-<figure><figcaption>
-            <h4>IAM</h4>
-        </figcaption>
-</figure>
-</p>
 ]]></description>
 </item></channel>
 </rss>

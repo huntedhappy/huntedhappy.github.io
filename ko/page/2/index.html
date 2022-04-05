@@ -106,6 +106,24 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-3" class="typeit"></div></h2><div class="links"><a href="https://github.com/huntedhappy" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://linkedin.com/in/huntedhappy" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw"></i></a><a href="mailto:huntedhappy@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/ko/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/ko/nsxt/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/ko/nsxt/nsxt-ansible.png"
+        data-srcset="/ko/nsxt/nsxt-ansible.png, /ko/nsxt/nsxt-ansible.png 1.5x, /ko/nsxt/nsxt-ansible.png 2x"
+        data-sizes="auto"
+        alt="/ko/nsxt/nsxt-ansible.png"
+        title="Ansible Configuration for NSXT" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/ko/nsxt/">The Documentation NSXT and Ansible</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-19">2022-01-19</time></span>&nbsp;<span class="post-category">included in <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">1. Ansible을 통한 NSXT 구성 NSXT를 Ansible로 구성.
+Ansible의 대한 보충 설명을 할 수 있으면 추후에 진행 하기로 하고 우선 설정의 대해서 설명을 먼저 하겠다.
+먼저.. 이 부분을 블로그로 쓰는게 맞을까라는 고민을 좀 했다.
+이유는 우선 Ansible로 구성이 되어 있기 때문에 코드가 들어가 있다. 그래서 NSXT Ansible Module을 다운로드 받고 나서 추가 된 부분을 Git Hub에 올려 두었다.
+2. 설치 2.1. 파이썬 설치 1 2 3 4 5 6 7 8 9 10 11  yum update -y rpm -Uvh https://dl.</div><div class="post-footer">
+        <a href="/ko/nsxt/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/ko/tags/minio/">minio</a>,&nbsp;<a href="/ko/tags/object-storage/">object storage</a>,&nbsp;<a href="/ko/tags/tanzu/">tanzu</a>,&nbsp;<a href="/ko/tags/k8s/">k8s</a>,&nbsp;<a href="/ko/tags/devops/">devops</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/ko/ldaps/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -184,21 +202,6 @@ LDAPS를 구성 할 경우 IP로 ldapsearch를 하면 실패하는 경우를 보
     </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-11">2022-01-11</time></span>&nbsp;<span class="post-category">included in <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">간단하게 CICD의 대해 구성 하는 것을 기술 할 예정 사용자가 VS를 사용하여 Docker 내용을 수정 후 Git에 Push를 하면 Jenkins에서 5분에 한번씩 Polling을 하여 Git에 변화가 있으면 Pipeline이 동작 하면서 자동으로 Docker Build를 수행 후 Harbor에 이미지를 Push 후 새로운 이미지의 대한 Version을 Manifest의 변경 하여 다시 Git에 Push, 이후 3분에 한번씩 Argo가 Git의 내용의 변화가 있는지 확인 후 변화가 있으면 K8S의 환경의 Manifest를 적용</div><div class="post-footer">
         <a href="/ko/cicd/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/ko/tags/argo/">argo</a>,&nbsp;<a href="/ko/tags/jenkins/">jenkins</a>,&nbsp;<a href="/ko/tags/visual-studio/">visual studio</a>,&nbsp;<a href="/ko/tags/cicd/">cicd</a>,&nbsp;<a href="/ko/tags/harbor/">harbor</a>,&nbsp;<a href="/ko/tags/tanzu/">tanzu</a>,&nbsp;<a href="/ko/tags/k8s/">k8s</a>,&nbsp;<a href="/ko/tags/devops/">devops</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/ko/k8s/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/ko/k8s/AKO.png"
-        data-srcset="/ko/k8s/AKO.png, /ko/k8s/AKO.png 1.5x, /ko/k8s/AKO.png 2x"
-        data-sizes="auto"
-        alt="/ko/k8s/AKO.png"
-        title="Tanzu Explain" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/ko/k8s/">The Documentation K8s</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-08">2022-01-08</time></span>&nbsp;<span class="post-category">included in <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">아래 내용을 작성 하는 이유 같이 일했던 동료가 다른 곳으로 회사를 이직 하고 나서 컨테이너를 해야 되는거 같았다. 같이 일을 했기 때문에 L4 / L7을 잘 했던 친구 였다. 그런대 뜬금없이 L4를 연동 하면 어떻게 컨테이너로 트래픽을 전달하냐라고 물어본적이 있었다. 그래서 혹시 모르는 사람을 위해서 간략하게 적어 내려 간다.
-1. Service Type 컨테이너를 하기 위해서는 우선 Deploy , STS등으로 Pod를 생성한다. 그럼 일반적으로 테스트를 하기 위해서 아래와 같이 명령어를 칠 것이다.</div><div class="post-footer">
-        <a href="/ko/k8s/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/ko/tags/tanzu/">tanzu</a>,&nbsp;<a href="/ko/tags/k8s/">k8s</a>,&nbsp;<a href="/ko/tags/devops/">devops</a>,&nbsp;<a href="/ko/tags/avi/">avi</a>,&nbsp;<a href="/ko/tags/ako/">ako</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/ko/">1</a>
