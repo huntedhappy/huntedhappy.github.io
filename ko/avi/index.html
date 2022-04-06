@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/ko/avi/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/avi/avi.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-05T21:51:24+09:00" />
-<meta property="article:modified_time" content="2022-04-05T21:54:50+09:00" />
+<meta property="article:modified_time" content="2022-04-06T18:35:55+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://huntedhappy.github.io/ko/avi/avi.png"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/huntedhappy.github.io\/ko\/avi\/avi.png",
                             "width":  914 ,
                             "height":  328 
-                        }],"genre": "posts","keywords": "tanzu, avi, tanzu integration avi, dk, dokyung","wordcount":  767 ,
-        "url": "https:\/\/huntedhappy.github.io\/ko\/avi\/","datePublished": "2022-04-05T21:51:24+09:00","dateModified": "2022-04-05T21:54:50+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tanzu, avi, tanzu integration avi, AVIinfrasetting, ClusterIP, AVI BGP, AVI AutoScalling, NodePort, NodePortLocal, dk, dokyung, avi rhi","wordcount":  966 ,
+        "url": "https:\/\/huntedhappy.github.io\/ko\/avi\/","datePublished": "2022-04-05T21:51:24+09:00","dateModified": "2022-04-06T18:35:55+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Dokyung"},"author": {
                 "@type": "Person",
@@ -114,8 +114,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">The Documentation vSphere Tanzu with AVI Load Balancer</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-05">2022-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;767 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-05">2022-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;966 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -643,28 +643,201 @@ kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ing
         </figcaption>
 </figure>
 
-<div class="highlight"><div class="chroma">
+<p><div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>autoscalling 재 조정값<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">switchto tenant admin
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## AVI Controller SSH접속 </span>
+
+switchto tenant admin
 switchto cloud Default-Cloud
 auto_rebalance
 save
+
+configure serviceenginegroup Default-Group
+
+auto_rebalance_interval interval-value 
+auto_rebalance_criteria option
+auto_rebalance_capacity_per_se integer-value
+
+예시: auto_rebalance_interval <span class="m">300</span>
+
+auto_rebalance_criteria 의 옵션 값은 아래와 같음
+se_auto_rebalance_cpu
+se_auto_rebalance_mbps
+se_auto_rebalance_open_conns
+se_auto_rebalance_pps
+
+예시: auto_rebalance_capacity_per_se <span class="m">200000</span>
+
+max_cpu_usage value
+min_cpu_usage value
+
+<span class="c1">## 종합 </span>
+switchto tenant Avi
+switchto cloud azure
+configure serviceenginegroup Default-Group
+auto_rebalance_interval <span class="m">300</span>
+auto_rebalance_criteria se_auto_rebalance_pps
+auto_rebalance_capacity_per_se <span class="m">200000</span>
+max_cpu_usage <span class="m">70</span>
+min_cpu_usage <span class="m">30</span>
+save
+
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="4-bgp-연동-후-rhiroute-health-injection">4. BGP 연동 후 Rhi(Route Health Injection)</h2>
+</div></div>
+        </div>
+    </div>
+<figure><img src="/images/avi/3-2.png"/><figcaption>
+            <h4>auto_rebalance 변경 전</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/3-3.png"/><figcaption>
+            <h4>auto_rebalance 변경 후</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><img src="/images/avi/3-4.png"/><figcaption>
+            <h4>auto scallingout </h4>
+        </figcaption>
+</figure>
+
+<h2 id="4-bgp-연동-후-rhiroute-health-injection">4. BGP 연동 후 Rhi(Route Health Injection)</h2>
 <p>BGP ECMP를 구성 하여 SE를 탄력적으로 확장을 할 수 있습니다.</p>
+<p>물리 스위치에는 ECMP를 구성이 필요.</p>
+<figure><img src="/images/avi/4-5.png"/><figcaption>
+            <h4>구성</h4>
+        </figcaption>
+</figure>
+
+<p>AVI에서 BGP 설정
+<figure><img src="/images/avi/4-1.png"/><figcaption>
+            <h4>BGP 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/4-2.png"/><figcaption>
+            <h4>BGP 설정</h4>
+        </figcaption>
+</figure>
+</p>
+<p>SE에 접속 해서 BGP 상태를 확인 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## AVI Controller SSH 접속</span>
+shell
+admin /  <span class="o">{</span>password<span class="o">}</span>
+<span class="c1">## 서비스 엔진 접속</span>
+attach serviceengine tkcdevAvi-se-jpjbe
+ip netns
+<span class="c1">## 서비스 엔진 bash 접속</span>
+sudo ip netns <span class="nb">exec</span> avi_ns1 bash
+
+<span class="c1">## BGP 확인</span>
+netcat localhost bgpd
+<span class="nb">enable</span>
+show run
+show bgp summary
+
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><img src="/images/avi/4-3.png"/><figcaption>
+            <h4>BGP 상태 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/4-4.png"/><figcaption>
+            <h4>BGP 상태 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<p>RHI Enabled</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/network/enableRhi&#34;,&#34;value&#34;:true}]&#39;</span> 
+</code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/avi/4-6.png"/><figcaption>
+            <h4>Rhi Enable</h4>
+        </figcaption>
+</figure>
+
+<p>스위치에서 라우팅 확인
+<figure><img src="/images/avi/4-7.png"/><figcaption>
+            <h4>BGP 라우팅</h4>
+        </figcaption>
+</figure>
+</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-04-05&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/cb9ae1afff41a335d8694591277a79409867713d" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) cb9ae1afff41a335d8694591277a79409867713d: rebuilding site Tue Apr  5 21:54:50     2022">
-                                    <i class="fas fa-hashtag fa-fw"></i>cb9ae1a</a></span>
+                <span>Updated on 2022-04-06&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/e5467d28bcb224237978f9235ebf669e842bca78" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) e5467d28bcb224237978f9235ebf669e842bca78: rebuilding site Wed Apr  6 18:35:54     2022">
+                                    <i class="fas fa-hashtag fa-fw"></i>e5467d2</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -679,7 +852,7 @@ save
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/ko/tags/tanzu/">tanzu</a>,&nbsp;<a href="/ko/tags/avi/">avi</a>,&nbsp;<a href="/ko/tags/tanzu-integration-avi/">tanzu integration avi</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/ko/tags/tanzu/">tanzu</a>,&nbsp;<a href="/ko/tags/avi/">avi</a>,&nbsp;<a href="/ko/tags/tanzu-integration-avi/">tanzu integration avi</a>,&nbsp;<a href="/ko/tags/aviinfrasetting/">AVIinfrasetting</a>,&nbsp;<a href="/ko/tags/clusterip/">ClusterIP</a>,&nbsp;<a href="/ko/tags/avi-bgp/">AVI BGP</a>,&nbsp;<a href="/ko/tags/avi-autoscalling/">AVI AutoScalling</a>,&nbsp;<a href="/ko/tags/nodeport/">NodePort</a>,&nbsp;<a href="/ko/tags/nodeportlocal/">NodePortLocal</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a>,&nbsp;<a href="/ko/tags/avi-rhi/">avi rhi</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/ko/">Home</a></span>
         </section>

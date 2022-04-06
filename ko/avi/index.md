@@ -250,12 +250,94 @@ kubectl patch ing hello --patch '{"spec": {"ingressClassName": "other-infra"}}'
 ## 3. AVI AutoScalling
 {{< figure src="/images/avi/3-1.png" title="AVI Autoscalling 기본 동작 " >}}
 
+{{< admonition tip "autoscalling 재 조정값" >}}
+
 ```shell
+## AVI Controller SSH접속 
+
 switchto tenant admin
 switchto cloud Default-Cloud
 auto_rebalance
 save
+
+configure serviceenginegroup Default-Group
+
+auto_rebalance_interval interval-value 
+auto_rebalance_criteria option
+auto_rebalance_capacity_per_se integer-value
+
+예시: auto_rebalance_interval 300
+
+auto_rebalance_criteria 의 옵션 값은 아래와 같음
+se_auto_rebalance_cpu
+se_auto_rebalance_mbps
+se_auto_rebalance_open_conns
+se_auto_rebalance_pps
+
+예시: auto_rebalance_capacity_per_se 200000
+
+max_cpu_usage value
+min_cpu_usage value
+
+## 종합 
+switchto tenant Avi
+switchto cloud azure
+configure serviceenginegroup Default-Group
+auto_rebalance_interval 300
+auto_rebalance_criteria se_auto_rebalance_pps
+auto_rebalance_capacity_per_se 200000
+max_cpu_usage 70
+min_cpu_usage 30
+save
+
 ```
+{{< /admonition >}}
+{{< figure src="/images/avi/3-2.png" title="auto_rebalance 변경 전" >}}
+{{< figure src="/images/avi/3-3.png" title="auto_rebalance 변경 후" >}}
+
+{{< figure src="/images/avi/3-4.png" title="auto scallingout " >}}
+
+
 
 ## 4. BGP 연동 후 Rhi(Route Health Injection)
 BGP ECMP를 구성 하여 SE를 탄력적으로 확장을 할 수 있습니다.
+
+물리 스위치에는 ECMP를 구성이 필요.
+
+{{< figure src="/images/avi/4-5.png" title="구성" >}}
+
+AVI에서 BGP 설정
+{{< figure src="/images/avi/4-1.png" title="BGP 설정" >}}
+{{< figure src="/images/avi/4-2.png" title="BGP 설정" >}}
+
+SE에 접속 해서 BGP 상태를 확인 한다.
+```shell
+## AVI Controller SSH 접속
+shell
+admin /  {password}
+## 서비스 엔진 접속
+attach serviceengine tkcdevAvi-se-jpjbe
+ip netns
+## 서비스 엔진 bash 접속
+sudo ip netns exec avi_ns1 bash
+
+## BGP 확인
+netcat localhost bgpd
+enable
+show run
+show bgp summary
+
+```
+
+{{< figure src="/images/avi/4-3.png" title="BGP 상태 확인" >}}
+{{< figure src="/images/avi/4-4.png" title="BGP 상태 확인" >}}
+
+RHI Enabled
+```shell
+kubectl patch aviinfrasettings other-infra --type 'json' -p '[{"op":"replace","path":"/spec/network/enableRhi","value":true}]' 
+```
+
+{{< figure src="/images/avi/4-6.png" title="Rhi Enable" >}}
+
+스위치에서 라우팅 확인
+{{< figure src="/images/avi/4-7.png" title="BGP 라우팅" >}}
