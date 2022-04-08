@@ -1,6 +1,8 @@
 # The Documentation vSphere Tanzu with AVI Load Balancer
 
 
+AVI에서 제공하는 AKO인 INGRESS Controller를 사용 하는 방법 제공
+
 ## 1. TANZU에서 Cluster ServiceType 변경
 
 {{< admonition tip "serviceType" >}}
@@ -341,3 +343,106 @@ kubectl patch aviinfrasettings other-infra --type 'json' -p '[{"op":"replace","p
 
 스위치에서 라우팅 확인
 {{< figure src="/images/avi/4-7.png" title="BGP 라우팅" >}}
+
+
+## 5. GatewayClass
+GATEWAY를 사용하는 이유는 여러개의 LoadBalancer의 IP를 하나의 IP로 설정하고 Port를 사용하기 위해서다.
+SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 공통으로 사용을 할 수 있다.
+
+{{< figure src="/images/avi/5-1.png" title="GATEWAYCLASS 연계" >}}
+
+구성을 하기 위해서는 클러스터에서 servicesAPI: true 를 True로 변경 필요 및 AutoFQDN와 DefaultDomain이 필요하다.
+
+위에서 언급한 AVIINFRASETTING을 한 후 GATEWAYCLASS를 생성한다.
+
+```shell
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.x-k8s.io/v1alpha1
+kind: GatewayClass
+metadata:
+  name: critical-gwc
+spec:
+  controller: ako.vmware.com/avi-lb
+  parametersRef:
+    group: ako.vmware.com
+    kind: AviInfraSetting
+    name: other-infra
+EOF
+```
+
+GATEWAY 생성
+```shell
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.x-k8s.io/v1alpha1
+kind: Gateway
+metadata:
+  name: avi-alb-gw
+  namespace: default
+spec: 
+  gatewayClassName: critical-gwc    
+  listeners: 
+  - protocol: TCP 
+    port: 8080 
+    routes: 
+      selector: 
+       matchLabels: 
+        ako.vmware.com/gateway-namespace: default 
+        ako.vmware.com/gateway-name: avi-alb-gw
+      group: v1 
+      kind: Service
+  - protocol: TCP 
+    port: 80 
+    routes: 
+      selector: 
+       matchLabels: 
+        ako.vmware.com/gateway-namespace: default 
+        ako.vmware.com/gateway-name: avi-alb-gw
+      group: v1 
+      kind: Service
+EOF
+```
+만약에 LB IP를 지정 하고 싶다면. 아래와 같이 IP를 지정하면 된다.
+```shell
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.x-k8s.io/v1alpha1
+kind: Gateway
+metadata:
+  name: avi-alb-gw
+  namespace: default
+spec: 
+  gatewayClassName: critical-gwc
+  addresses:
+  - type: IPAddress
+    value: 10.253.107.203
+  listeners: 
+  - protocol: TCP 
+    port: 8080 
+    routes: 
+      selector: 
+       matchLabels: 
+        ako.vmware.com/gateway-namespace: default 
+        ako.vmware.com/gateway-name: avi-alb-gw
+      group: v1 
+      kind: Service
+  - protocol: TCP 
+    port: 80 
+    routes: 
+      selector: 
+       matchLabels: 
+        ako.vmware.com/gateway-namespace: default 
+        ako.vmware.com/gateway-name: avi-alb-gw
+      group: v1 
+      kind: Service
+EOF
+```
+
+테스트
+```shell
+kubectl create deploy hello --image=paulbouwer/hello-kubernetes:1.7 --replicas=3 --port=8080
+kubectl expose deployment hello --type=LoadBalancer --port=80 --target-port=8080 -l 'ako.vmware.com/gateway-namespace=default','ako.vmware.com/gateway-name=avi-alb-gw'
+```
+아래와 같이 동일한 IP로 두개의 SVC를 동일한 IP로 Port(80 , 8080)만 다른게 구성 할 수 있다.
+{{< figure src="/images/avi/5-2.png" title="VS상태#1" >}}
+{{< figure src="/images/avi/5-3.png" title="VS상태#2" >}}
+{{< figure src="/images/avi/5-4.png" title="VS상태#2" >}}
+

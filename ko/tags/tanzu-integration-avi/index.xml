@@ -706,6 +706,205 @@ show bgp summary
         </figcaption>
 </figure>
 </p>
+<h2 id="5-gatewayclass">5. GatewayClass</h2>
+<p>GATEWAY를 사용하는 이유는 여러개의 LoadBalancer의 IP를 하나의 IP로 설정하고 Port를 사용하기 위해서다.
+SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 공통으로 사용을 할 수 있다.</p>
+<figure><figcaption>
+            <h4>GATEWAYCLASS 연계</h4>
+        </figcaption>
+</figure>
+
+<p>구성을 하기 위해서는 클러스터에서 servicesAPI: true 를 True로 변경 필요 및 AutoFQDN와 DefaultDomain이 필요하다.</p>
+<p>위에서 언급한 AVIINFRASETTING을 한 후 GATEWAYCLASS를 생성한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
+</span><span class="s">kind: GatewayClass
+</span><span class="s">metadata:
+</span><span class="s">  name: critical-gwc
+</span><span class="s">spec:
+</span><span class="s">  controller: ako.vmware.com/avi-lb
+</span><span class="s">  parametersRef:
+</span><span class="s">    group: ako.vmware.com
+</span><span class="s">    kind: AviInfraSetting
+</span><span class="s">    name: other-infra
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>GATEWAY 생성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
+</span><span class="s">kind: Gateway
+</span><span class="s">metadata:
+</span><span class="s">  name: avi-alb-gw
+</span><span class="s">  namespace: default
+</span><span class="s">spec: 
+</span><span class="s">  gatewayClassName: critical-gwc    
+</span><span class="s">  listeners: 
+</span><span class="s">  - protocol: TCP 
+</span><span class="s">    port: 8080 
+</span><span class="s">    routes: 
+</span><span class="s">      selector: 
+</span><span class="s">       matchLabels: 
+</span><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span><span class="s">      group: v1 
+</span><span class="s">      kind: Service
+</span><span class="s">  - protocol: TCP 
+</span><span class="s">    port: 80 
+</span><span class="s">    routes: 
+</span><span class="s">      selector: 
+</span><span class="s">       matchLabels: 
+</span><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span><span class="s">      group: v1 
+</span><span class="s">      kind: Service
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>만약에 LB IP를 지정 하고 싶다면. 아래와 같이 IP를 지정하면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
+</span><span class="s">kind: Gateway
+</span><span class="s">metadata:
+</span><span class="s">  name: avi-alb-gw
+</span><span class="s">  namespace: default
+</span><span class="s">spec: 
+</span><span class="s">  gatewayClassName: critical-gwc
+</span><span class="s">  addresses:
+</span><span class="s">  - type: IPAddress
+</span><span class="s">    value: 10.253.107.203
+</span><span class="s">  listeners: 
+</span><span class="s">  - protocol: TCP 
+</span><span class="s">    port: 8080 
+</span><span class="s">    routes: 
+</span><span class="s">      selector: 
+</span><span class="s">       matchLabels: 
+</span><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span><span class="s">      group: v1 
+</span><span class="s">      kind: Service
+</span><span class="s">  - protocol: TCP 
+</span><span class="s">    port: 80 
+</span><span class="s">    routes: 
+</span><span class="s">      selector: 
+</span><span class="s">       matchLabels: 
+</span><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span><span class="s">      group: v1 
+</span><span class="s">      kind: Service
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>테스트</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
+kubectl expose deployment hello --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span> -l <span class="s1">&#39;ako.vmware.com/gateway-namespace=default&#39;</span>,<span class="s1">&#39;ako.vmware.com/gateway-name=avi-alb-gw&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>아래와 같이 동일한 IP로 두개의 SVC를 동일한 IP로 Port(80 , 8080)만 다른게 구성 할 수 있다.
+<figure><figcaption>
+            <h4>VS상태#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>VS상태#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>VS상태#2</h4>
+        </figcaption>
+</figure>
+</p>
 ]]></description>
 </item></channel>
 </rss>
