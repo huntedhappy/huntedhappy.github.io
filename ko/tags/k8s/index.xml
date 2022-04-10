@@ -4,7 +4,94 @@
         <link>https://huntedhappy.github.io/ko/tags/k8s/</link>
         <description>k8s - Tag - Dokyung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 10 Apr 2022 18:32:52 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation Networks</title>
+    <link>https://huntedhappy.github.io/ko/networks/</link>
+    <pubDate>Sun, 10 Apr 2022 18:32:52 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/networks/</guid>
+    <description><![CDATA[<figure><figcaption>
+            <h4>OSI 7Layer</h4>
+        </figcaption>
+</figure>
+
+<h2 id="1-l2">1. L2</h2>
+<h3 id="11-mac주소">1.1. MAC주소</h3>
+<p>MAC은 일반적으로 OSI 7 Layer중에서 2 Layer에 속한다. 확인하는 방법은 윈두우에서 CMD창을 연 후 ipconfig /all명령어를 사용하면 확인할 수 있다. 나오는 부분중에 물리적 주소라고 나오는 것을 확인 할 수 있다. 리눅스의 경우는 ifconfig라고 치면 바로 확인을 할 수 있을 것이다.</p>
+<ul>
+<li>물론 H/W 주소이지만 변경은 가능하다. 그러므르 보안적으로 이슈가 될 수 있다.</li>
+</ul>
+<figure><figcaption>
+            <h4>MAC 주소 확인</h4>
+        </figcaption>
+</figure>
+
+<p>확인을 하게 되면
+E0-3F-49-AB-C8-AD
+위와 같이 표시가 되며 절반으로 나누어 앞의 세부분은 생산자를 나타내고, 뒤의 세 부분은 장치의 일련번호(Host Identifier)을 나타낸다.</p>
+<p><a href="https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> MAC 제조회사 찾는 곳 </a>
+<figure><figcaption>
+            <h4>제조회사 찾는 방법</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="12-arp--rarp--garp">1.2. ARP &amp; RARP &amp; GARP</h3>
+<p>ARP(Address Resolution Protofcol)는 IP주소를 MAC주소와 대응(Bind)시키기 위해 사용되는 프로토콜이다.
+IP주소는 알지만 MAC주소를 모르는 경우 사용 할 수 있다.</p>
+<p>윈도우에서 arp -a {IP} 로 확인 할 수 있다.
+<figure><figcaption>
+            <h4>ARP 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<p>RARP(Reverse Address Resolution Protocol)는 그 반대로 MAC주소로 IP를 대응(Bind)시키기 위해 사용되는 프로토콜이다.
+MAC주소는 알지만 IP주소를 모르는 경우 사용 할 수 있다.</p>
+<p>GARP(Gratuitous ARP)는 PC를 스위치에 연결을 하게 되면 나의 IP와 MAC은 이거라고 알리는대 사용한다. 3번정도 GARP를 보낸다. 그래서 IP 주소 충돌을 감지 할 수 있으며, GARP를 수신한 모든 호스트/라우터는 ARP Table을 갱신할 수 있다. 또 다른 목적은 VRRP/HSRP프로토콜에서 사용된다(VRRP/HSRP의 설명은 패스한다).</p>
+<h3 id="13-l2-통신">1.3. L2 통신</h3>
+<table>
+<thead>
+<tr>
+<th>기능</th>
+<th>설명</th>
+<th>기술</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>learning</td>
+<td>출발지 주소가 MAC 테이블에 주소가 없으면 MAC 주소를 저장</td>
+<td>MAC table</td>
+</tr>
+<tr>
+<td>flooding</td>
+<td>목적지 주소가 MAC 테이블에 없으면 전체 포트로 전달</td>
+<td>Broadcast</td>
+</tr>
+<tr>
+<td>filtering</td>
+<td>출발지/목적지가 동일 네트워크에 있으면 다른 네트워크로 전파 차단</td>
+<td>Collision Domain</td>
+</tr>
+<tr>
+<td>aging</td>
+<td>MAC 테이블 캐쉬</td>
+<td>Aging Time</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>PC를 연결 하면 PC에서 GARP를 3번 정도 보내면서 스위치 및 PC에서는 ARP를 Learning한다.</li>
+<li>만약 스위치 및 PC에서 arp table이 없으면 aging Time이 끝났거나 또는 GARP를 받지 못했을 경우 또는 ARP테이블이 갱신이 안될 경우, PC 1에서 PC 2로 통신을 할 때 Broadcast(flooding)를 보낸다. 이 때 스위치에서는 동일한 VLAN의 모든 포트로 (목적지 IP:ff:ff:ff:ff:ff) 브로드캐스트를 보낸다.</li>
+<li>PC2는 해당 브로드캐스트를 받고 반대로 PC1에게 전달을 하게 된다.</li>
+<li>스위치 및 PC는 해당 MAC Table에 저장한다. 그리고 스위치에서 연결된 PC에서 트래픽을 전달 한다.(Forwarding)</li>
+</ol>
+<figure><figcaption>
+            <h4>L2 통신</h4>
+        </figcaption>
+</figure>
+
+]]></description>
+</item><item>
     <title>The Documentation TAP</title>
     <link>https://huntedhappy.github.io/ko/tanzu-application-platform/</link>
     <pubDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</pubDate>
@@ -3792,351 +3879,6 @@ RAID는 무결성 위협으로 부터 데이터 보호를 용이 하게 할 수 
 <h3 id="13-tanzu-kubernetes-integrated">1.3. Tanzu Kubernetes Integrated?</h3>
 <p>기존 Pivotal에서 Bosh로 배포한 PKS라고 보면 될거 같다. 현재는 사용하지 않을 것 같으므로 설명은 패스 하겠다.</p>
 <p>자세한 TKGI의 대한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/index.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> VMware TKGI</a></p>
-]]></description>
-</item><item>
-    <title>The Documentation Jenkins</title>
-    <link>https://huntedhappy.github.io/ko/jenkins/</link>
-    <pubDate>Fri, 31 Dec 2021 20:49:26 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/jenkins/</guid>
-    <description><![CDATA[<h2 id="jenkins">Jenkins?</h2>
-<p>Jenkins는 아무래도 많이 사용하는 CI/CD 일것이다. 우선 컨테이너 환경에서 CI를 구성하기 위해서 Jenkins를 구성 하였고, 클러스터가 많은 환경에서도 접근을 할 수 있게 (물론 컨테이너로 구성을 해도 되나. 굳이 컨테이너로 구성할 필요성이 있나 싶어 별도의 VM으로 구성)
-VM형태로 설치를 하였다.</p>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>CI/CD<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다. 
-CI (Continuous Integration) CI를 통해 개발자들은 코드 변경사항을 공유 브랜치로 다시 병합하는 작업을 더욱 수월하게 자주 수행 할 수 있다.
-CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으로 사용됨.</p>
-<ul>
-<li>Continuous Deliver의 경우 코드 변경 , 병합으로부터 Prodcution에 적합한 빌드를 제공하여 모든 단계에 테스트 및 릴리스를 자동화한다.</li>
-<li>Continuous Deploy는 어플리케이션을 프로덕션으로 릴리스 작업을 자동화</li>
-</ul>
-</div>
-        </div>
-    </div>
-<figure><figcaption>
-            <h4>CICD</h4>
-        </figcaption>
-</figure>
-
-<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Redhat </a></p>
-<h2 id="1-설치">1. 설치</h2>
-<div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw"></i>Jenkins Install<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>JAVA Install</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apt update <span class="o">&amp;&amp;</span> apt upgrade 
-
-sudo apt search openjdk
-
-sudo apt install openjdk-11-jdk -y
-
-java --version
-</code></pre></td></tr></table>
-</div>
-</div><p>Jenkins Install</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key <span class="p">|</span> sudo apt-key add -
-sudo sh -c <span class="s1">&#39;echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list&#39;</span>
-
-sudo apt update -y
-sudo apt install jenkins -y
-
-systemctl restart jenkins
-systemctl <span class="nb">enable</span> jenkins
-</code></pre></td></tr></table>
-</div>
-</div><p>패스워드 확인</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat /var/lib/jenkins/secrets/initialAdminPassword
-</code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h3 id="11-설치-완료">1.1. 설치 완료</h3>
-<p><figure><figcaption>
-            <h4>접속 화면 #1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>접속 화면 #2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>접속 화면 #3</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="2-ssl-설정">2. SSL 설정</h2>
-<p>인증서 설치, <a href="/ko/jenkins/root.sh" rel=""><i class="far fa-file-archive fa-fw"></i>&nbsp;root.sh</a>.</p>
-<div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw"></i>Jenkins SSL 구성<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>인증서 생성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io
-</code></pre></td></tr></table>
-</div>
-</div><p>root.sh에 있는 파일 내용을 복사해서 shell 실행</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">. root.sh
-</code></pre></td></tr></table>
-</div>
-</div><p>인증서 권한 변경</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">chmod <span class="m">700</span> /data/cert
-chmod <span class="m">600</span> /data/cert/yourdomain.com.cert
-chmod <span class="m">600</span> /data/cert/yourdomain.com.key
-</code></pre></td></tr></table>
-</div>
-</div><p>Jenkins 파일 변경</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vi /etc/default/jenkins
-
-<span class="nv">HTTP_PORT</span><span class="o">=</span><span class="m">8080</span>             <span class="c1">### ---&gt; 이부분을 찾아서 아래 부분을 채워 넣어주자.</span>
-<span class="nv">HTTP_PORT_DISABLE</span><span class="o">=</span>-1       <span class="c1">### HTTP DISABLE</span>
-<span class="nv">HTTPS_CERT</span><span class="o">=</span>/data/cert/yourdomain.com.cert      <span class="c1">### 인증서</span>
-<span class="nv">HTTPS_KEY</span><span class="o">=</span>/data/cert/yourdomain.com.key        <span class="c1">### KEY</span>
-
-<span class="c1">### args 마지막 줄에 빨간 부분을 채워서 넣어준다.</span>
-<span class="nv">JENKINS_ARGS</span><span class="o">=</span><span class="s2">&#34;--webroot=/var/cache/</span><span class="nv">$NAME</span><span class="s2">/war --httpPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpPort=</span><span class="nv">$HTTP_PORT_DISABLE</span><span class="s2"> --httpsPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpsCertificate=</span><span class="nv">$HTTPS_CERT</span><span class="s2"> --httpsPrivateKey=</span><span class="nv">$HTTPS_KEY</span><span class="s2">&#34;</span>
-
-<span class="c1">### jenkins restart</span>
-systemctl restart jenkins
-</code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h3 id="21-설치-완료">2.1. 설치 완료</h3>
-<figure><figcaption>
-            <h4>HTTPS 접속 화면 #1</h4>
-        </figcaption>
-</figure>
-
-<h3 id="22-nginx로-https-구성">2.2. NGINX로 HTTPS 구성</h3>
-<p><div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw"></i>NGINX PROXY 구성<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>NGINX 가상 서버 구성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vi  /etc/nginx/sites-available/jenkins
-
-server <span class="o">{</span>
-    server_name jenkins.tkg.io<span class="p">;</span>
-
-    location / <span class="o">{</span>
-        proxy_redirect off<span class="p">;</span>
-        proxy_pass_header Server<span class="p">;</span>
-        proxy_set_header Host <span class="nv">$http_host</span><span class="p">;</span>
-        proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
-        proxy_set_header X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
-        proxy_pass https://127.0.0.1:8080/<span class="p">;</span>
-    <span class="o">}</span>
-
-    listen <span class="m">443</span> ssl<span class="p">;</span>
-    ssl_certificate /data/cert/yourdomain.com.crt<span class="p">;</span>
-    ssl_certificate_key /data/cert/yourdomain.com.key<span class="p">;</span>
-    ssl_client_certificate /data/cert/ca.crt<span class="p">;</span>
-<span class="o">}</span>
-
-server <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="nv">$host</span> <span class="o">=</span> jenkins.tkg.io<span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="m">301</span> https://<span class="nv">$host$request_uri</span><span class="p">;</span>
-    <span class="o">}</span> <span class="c1"># managed by Certbot</span>
-
-    listen 80<span class="p">;</span>
-    server_name jenkins.tkg.io<span class="p">;</span>
-    <span class="k">return</span> 404<span class="p">;</span> <span class="c1"># managed by Certbot</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>symbolic link 연결</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"> <span class="nb">cd</span> /etc/nginx/sites-enabled
-
- ln -s  /etc/nginx/sites-available/jenkins .
-</code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<figure><figcaption>
-            <h4>NGINX로 연결 후 HTTPS 접속 화면 #1</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="3-slack-연동">3. SLACK 연동</h2>
-<p>SLACK을 연동하여 메시지를 받을 수 있게 구성을 한다.</p>
-<h3 id="31-slcak-설정">3.1. SLCAK 설정</h3>
-<figure><figcaption>
-            <h4>SLACK 접속</h4>
-        </figcaption>
-</figure>
-
-<p>APP 등록
-<figure><figcaption>
-            <h4>SLACK APP 추가#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>SLACK APP 추가#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>SLACK APP 추가#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>SLACK APP 추가#4</h4>
-        </figcaption>
-</figure>
-</p>
-<p>위에 내용까지 설정을 하면 Jenkins를 어떻게 설정하라고 나오는대 좀 오래 되었나보다. 요즘에 변경된 부분의 대해서 설정 하는 방법을 나열한다.</p>
-<h3 id="32-jenkins-설정">3.2. JENKINS 설정</h3>
-<p><figure><figcaption>
-            <h4>Jenkins Slack Plugin 설치#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack Plugin 설치#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack Plugin 설치#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack 설정#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack 설정#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack Credentials 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack 설정 테스트</h4>
-        </figcaption>
-</figure>
-</p>
 ]]></description>
 </item></channel>
 </rss>
