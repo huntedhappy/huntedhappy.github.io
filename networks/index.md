@@ -33,11 +33,11 @@ GARP(Gratuitous ARP)는 PC를 스위치에 연결을 하게 되면 나의 IP와 
 ARP probe
 ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주소의 충돌을 감지 할 수 있다.
 
-{{< figure src="/images/network/1-5.png" title="Probe 확인" >}}
+{{< figure src="/images/network/1-6.png" title="Probe 확인" >}}
 
 ARP announcements
 다른 호스트의 ARP 테이블을 갱신 할 수 있다.
-{{< figure src="/images/network/1-6.png" title="Announcement 확인" >}}
+{{< figure src="/images/network/1-7.png" title="Announcement 확인" >}}
 
 
 ### 1.3. L2 통신
