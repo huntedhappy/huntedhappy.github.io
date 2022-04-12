@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/networks/" /><meta property="og:image" content="https://huntedhappy.github.io/networks/1-1.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-10T18:32:47+09:00" />
-<meta property="article:modified_time" content="2022-04-10T18:32:47+09:00" />
+<meta property="article:modified_time" content="2022-04-10T21:26:44+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://huntedhappy.github.io/networks/1-1.jpg"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/huntedhappy.github.io\/networks\/1-1.jpg",
                             "width":  690 ,
                             "height":  414 
-                        }],"genre": "posts","keywords": "nap, tanzu, k8s, devops, dk, dokyung","wordcount":  307 ,
-        "url": "https:\/\/huntedhappy.github.io\/networks\/","datePublished": "2022-04-10T18:32:47+09:00","dateModified": "2022-04-10T18:32:47+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "nap, tanzu, k8s, devops, dk, dokyung","wordcount":  340 ,
+        "url": "https:\/\/huntedhappy.github.io\/networks\/","datePublished": "2022-04-10T18:32:47+09:00","dateModified": "2022-04-10T21:26:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Dokyung"},"author": {
                 "@type": "Person",
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">The Documentation Networks</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;307 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;340 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -176,6 +176,20 @@ IP주소는 알지만 MAC주소를 모르는 경우 사용 할 수 있다.</p>
 <p>RARP(Reverse Address Resolution Protocol)는 그 반대로 MAC주소로 IP를 대응(Bind)시키기 위해 사용되는 프로토콜이다.
 MAC주소는 알지만 IP주소를 모르는 경우 사용 할 수 있다.</p>
 <p>GARP(Gratuitous ARP)는 PC를 스위치에 연결을 하게 되면 나의 IP와 MAC은 이거라고 알리는대 사용한다. 3번정도 GARP를 보낸다. 그래서 IP 주소 충돌을 감지 할 수 있으며, GARP를 수신한 모든 호스트/라우터는 ARP Table을 갱신할 수 있다. 또 다른 목적은 VRRP/HSRP프로토콜에서 사용된다(VRRP/HSRP의 설명은 패스한다).</p>
+<p>ARP probe
+ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주소의 충돌을 감지 할 수 있다.</p>
+<figure><img src="/images/network/1-5.png"/><figcaption>
+            <h4>Probe 확인</h4>
+        </figcaption>
+</figure>
+
+<p>ARP announcements
+다른 호스트의 ARP 테이블을 갱신 할 수 있다.
+<figure><img src="/images/network/1-6.png"/><figcaption>
+            <h4>Announcement 확인</h4>
+        </figcaption>
+</figure>
+</p>
 <h3 id="13-l2-통신">1.3. L2 통신</h3>
 <table>
 <thead>
@@ -209,8 +223,8 @@ MAC주소는 알지만 IP주소를 모르는 경우 사용 할 수 있다.</p>
 </tbody>
 </table>
 <ol>
-<li>PC를 연결 하면 PC에서 GARP를 3번 정도 보내면서 스위치 및 PC에서는 ARP를 Learning한다.</li>
-<li>만약 스위치 및 PC에서 arp table이 없으면 aging Time이 끝났거나 또는 GARP를 받지 못했을 경우 또는 ARP테이블이 갱신이 안될 경우, PC 1에서 PC 2로 통신을 할 때 Broadcast(flooding)를 보낸다. 이 때 스위치에서는 동일한 VLAN의 모든 포트로 (목적지 IP:ff:ff:ff:ff:ff) 브로드캐스트를 보낸다.</li>
+<li>PC를 연결 하면 PC에서 PROBE를 3번 정도 보내고 Announcement 후 스위치 및 PC에서는 ARP를 Learning한다.</li>
+<li>만약 스위치 및 PC에서 arp table이 없으면 aging Time이 끝났거나 또는 GARP를 받지 못했을 경우 또는 ARP테이블이 갱신이 안될 경우, PC 1에서 PC 2로 통신을 할 때 Broadcast(flooding)를 보낸다. 이 때 스위치에서는 동일한 VLAN(Filtering)의 모든 포트로 (목적지 IP:ff:ff:ff:ff:ff) 브로드캐스트를 보낸다.</li>
 <li>PC2는 해당 브로드캐스트를 받고 반대로 PC1에게 전달을 하게 된다.</li>
 <li>스위치 및 PC는 해당 MAC Table에 저장한다. 그리고 스위치에서 연결된 PC에서 트래픽을 전달 한다.(Forwarding)</li>
 </ol>
@@ -223,7 +237,8 @@ MAC주소는 알지만 IP주소를 모르는 경우 사용 할 수 있다.</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-04-10</span>
+                <span>Updated on 2022-04-10&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/0b0e683254bbc54f6e8036de7930d71e531b0de5" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 0b0e683254bbc54f6e8036de7930d71e531b0de5: rebuilding site Sun Apr 10 21:26:44     2022">
+                                    <i class="fas fa-hashtag fa-fw"></i>0b0e683</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

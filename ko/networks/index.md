@@ -30,6 +30,15 @@ MAC주소는 알지만 IP주소를 모르는 경우 사용 할 수 있다.
 
 GARP(Gratuitous ARP)는 PC를 스위치에 연결을 하게 되면 나의 IP와 MAC은 이거라고 알리는대 사용한다. 3번정도 GARP를 보낸다. 그래서 IP 주소 충돌을 감지 할 수 있으며, GARP를 수신한 모든 호스트/라우터는 ARP Table을 갱신할 수 있다. 또 다른 목적은 VRRP/HSRP프로토콜에서 사용된다(VRRP/HSRP의 설명은 패스한다). 
 
+ARP probe
+ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주소의 충돌을 감지 할 수 있다.
+
+{{< figure src="/images/network/1-5.png" title="Probe 확인" >}}
+
+ARP announcements
+다른 호스트의 ARP 테이블을 갱신 할 수 있다.
+{{< figure src="/images/network/1-6.png" title="Announcement 확인" >}}
+
 ### 1.3. L2 통신
 
 | 기능 | 설명 | 기술 |
@@ -39,8 +48,8 @@ GARP(Gratuitous ARP)는 PC를 스위치에 연결을 하게 되면 나의 IP와 
 | filtering | 출발지/목적지가 동일 네트워크에 있으면 다른 네트워크로 전파 차단 | Collision Domain |
 | aging     | MAC 테이블 캐쉬 | Aging Time |
 
-1. PC를 연결 하면 PC에서 GARP를 3번 정도 보내면서 스위치 및 PC에서는 ARP를 Learning한다.
-2. 만약 스위치 및 PC에서 arp table이 없으면 aging Time이 끝났거나 또는 GARP를 받지 못했을 경우 또는 ARP테이블이 갱신이 안될 경우, PC 1에서 PC 2로 통신을 할 때 Broadcast(flooding)를 보낸다. 이 때 스위치에서는 동일한 VLAN의 모든 포트로 (목적지 IP:ff:ff:ff:ff:ff) 브로드캐스트를 보낸다. 
+1. PC를 연결 하면 PC에서 PROBE를 3번 정도 보내고 Announcement 후 스위치 및 PC에서는 ARP를 Learning한다.
+2. 만약 스위치 및 PC에서 arp table이 없으면 aging Time이 끝났거나 또는 GARP를 받지 못했을 경우 또는 ARP테이블이 갱신이 안될 경우, PC 1에서 PC 2로 통신을 할 때 Broadcast(flooding)를 보낸다. 이 때 스위치에서는 동일한 VLAN(Filtering)의 모든 포트로 (목적지 IP:ff:ff:ff:ff:ff) 브로드캐스트를 보낸다. 
 3. PC2는 해당 브로드캐스트를 받고 반대로 PC1에게 전달을 하게 된다.
 4. 스위치 및 PC는 해당 MAC Table에 저장한다. 그리고 스위치에서 연결된 PC에서 트래픽을 전달 한다.(Forwarding) 
 

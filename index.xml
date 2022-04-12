@@ -49,6 +49,20 @@ IP주소는 알지만 MAC주소를 모르는 경우 사용 할 수 있다.</p>
 <p>RARP(Reverse Address Resolution Protocol)는 그 반대로 MAC주소로 IP를 대응(Bind)시키기 위해 사용되는 프로토콜이다.
 MAC주소는 알지만 IP주소를 모르는 경우 사용 할 수 있다.</p>
 <p>GARP(Gratuitous ARP)는 PC를 스위치에 연결을 하게 되면 나의 IP와 MAC은 이거라고 알리는대 사용한다. 3번정도 GARP를 보낸다. 그래서 IP 주소 충돌을 감지 할 수 있으며, GARP를 수신한 모든 호스트/라우터는 ARP Table을 갱신할 수 있다. 또 다른 목적은 VRRP/HSRP프로토콜에서 사용된다(VRRP/HSRP의 설명은 패스한다).</p>
+<p>ARP probe
+ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주소의 충돌을 감지 할 수 있다.</p>
+<figure><figcaption>
+            <h4>Probe 확인</h4>
+        </figcaption>
+</figure>
+
+<p>ARP announcements
+다른 호스트의 ARP 테이블을 갱신 할 수 있다.
+<figure><figcaption>
+            <h4>Announcement 확인</h4>
+        </figcaption>
+</figure>
+</p>
 <h3 id="13-l2-통신">1.3. L2 통신</h3>
 <table>
 <thead>
@@ -82,8 +96,8 @@ MAC주소는 알지만 IP주소를 모르는 경우 사용 할 수 있다.</p>
 </tbody>
 </table>
 <ol>
-<li>PC를 연결 하면 PC에서 GARP를 3번 정도 보내면서 스위치 및 PC에서는 ARP를 Learning한다.</li>
-<li>만약 스위치 및 PC에서 arp table이 없으면 aging Time이 끝났거나 또는 GARP를 받지 못했을 경우 또는 ARP테이블이 갱신이 안될 경우, PC 1에서 PC 2로 통신을 할 때 Broadcast(flooding)를 보낸다. 이 때 스위치에서는 동일한 VLAN의 모든 포트로 (목적지 IP:ff:ff:ff:ff:ff) 브로드캐스트를 보낸다.</li>
+<li>PC를 연결 하면 PC에서 PROBE를 3번 정도 보내고 Announcement 후 스위치 및 PC에서는 ARP를 Learning한다.</li>
+<li>만약 스위치 및 PC에서 arp table이 없으면 aging Time이 끝났거나 또는 GARP를 받지 못했을 경우 또는 ARP테이블이 갱신이 안될 경우, PC 1에서 PC 2로 통신을 할 때 Broadcast(flooding)를 보낸다. 이 때 스위치에서는 동일한 VLAN(Filtering)의 모든 포트로 (목적지 IP:ff:ff:ff:ff:ff) 브로드캐스트를 보낸다.</li>
 <li>PC2는 해당 브로드캐스트를 받고 반대로 PC1에게 전달을 하게 된다.</li>
 <li>스위치 및 PC는 해당 MAC Table에 저장한다. 그리고 스위치에서 연결된 PC에서 트래픽을 전달 한다.(Forwarding)</li>
 </ol>
