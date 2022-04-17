@@ -10,6 +10,36 @@
 
 ### 0.2. Ethernet Header ( 2 Layer)
 
+Destination Address 6 bytes = 48 bits
+* 목적지 맥 주소 6 bytes(48bits), 주소의 첫 번째 비트가 1이면 멀티캐스트 이며, 모든 비트가 1이면 브로드캐스트이다.
+FF:FF:FF:FF:FF = Broadcast
+
+Source Address 6 bytes = 48 bits
+* 출발지 맥 주소 6 bytes(48bits)
+
+802.1q tag 4 bytes = 32 bits
+* L2에서 VLAN 설정
+
+Ethernet Type 2 bytes = 16 bits
+* MAC 프레임 데이터 부분에 있는 상위계층의 프로토콜 종류 표시, 0x0800이면 IPv4 패킷, 0x0806이면 ARP, 0x8100이면 VLAN Tag가 Ethernet 헤더와 L3 패킷 사이에 붙는다는 의미
+
+|  Type Field | Description | 
+| ------- | -------------- | 
+| 0x0600h | Xerox XNS IDP |
+| 0x0800h | IPv4 |
+| 0x0805h | X.25 |
+| 0x0806h | ARP |
+| 0x0835h | RARP |
+| 0x6003h | DEC DECnet Phase IV |
+| 0x8100h | VLAN ID |
+| 0x8137h | Novell Netware IPX |
+| 0x8191h | NetBIOS |
+| 0x86DDh | IPv6 |
+| 0x8847h | MPLS }
+| 0x8863h | PPPoE Discovery Stage |
+| 0x8864h | PPPoE PPP Session Stage |
+| 0x888Eh | IEEE 802.1X |
+| 0x88CCh | LLDP (Link Layer Discovery Protocol) |
 
 
 ### 0.3. IP Header (3 Layer)

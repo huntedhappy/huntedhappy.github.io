@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/networks/" /><meta property="og:image" content="https://huntedhappy.github.io/networks/1-1.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-10T18:32:47+09:00" />
-<meta property="article:modified_time" content="2022-04-17T23:05:44+09:00" />
+<meta property="article:modified_time" content="2022-04-17T23:27:13+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://huntedhappy.github.io/networks/1-1.jpg"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/huntedhappy.github.io\/networks\/1-1.jpg",
                             "width":  690 ,
                             "height":  414 
-                        }],"genre": "posts","keywords": "network, l2, l3, l4, osi 7layer, tcp, vxlan, geneve, dk, dokyung","wordcount":  1293 ,
-        "url": "https:\/\/huntedhappy.github.io\/networks\/","datePublished": "2022-04-10T18:32:47+09:00","dateModified": "2022-04-17T23:05:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "network, l2, l3, l4, osi 7layer, tcp, vxlan, geneve, dk, dokyung","wordcount":  1424 ,
+        "url": "https:\/\/huntedhappy.github.io\/networks\/","datePublished": "2022-04-10T18:32:47+09:00","dateModified": "2022-04-17T23:27:13+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Dokyung"},"author": {
                 "@type": "Person",
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">The Documentation Networks</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1293 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1424 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -172,6 +172,93 @@
 </figure>
 
 <h3 id="02-ethernet-header--2-layer">0.2. Ethernet Header ( 2 Layer)</h3>
+<p>Destination Address 6 bytes = 48 bits</p>
+<ul>
+<li>목적지 맥 주소 6 bytes(48bits), 주소의 첫 번째 비트가 1이면 멀티캐스트 이며, 모든 비트가 1이면 브로드캐스트이다.
+FF:FF:FF:FF:FF = Broadcast</li>
+</ul>
+<p>Source Address 6 bytes = 48 bits</p>
+<ul>
+<li>출발지 맥 주소 6 bytes(48bits)</li>
+</ul>
+<p>802.1q tag 4 bytes = 32 bits</p>
+<ul>
+<li>L2에서 VLAN 설정</li>
+</ul>
+<p>Ethernet Type 2 bytes = 16 bits</p>
+<ul>
+<li>MAC 프레임 데이터 부분에 있는 상위계층의 프로토콜 종류 표시, 0x0800이면 IPv4 패킷, 0x0806이면 ARP, 0x8100이면 VLAN Tag가 Ethernet 헤더와 L3 패킷 사이에 붙는다는 의미</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Type Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x0600h</td>
+<td>Xerox XNS IDP</td>
+</tr>
+<tr>
+<td>0x0800h</td>
+<td>IPv4</td>
+</tr>
+<tr>
+<td>0x0805h</td>
+<td>X.25</td>
+</tr>
+<tr>
+<td>0x0806h</td>
+<td>ARP</td>
+</tr>
+<tr>
+<td>0x0835h</td>
+<td>RARP</td>
+</tr>
+<tr>
+<td>0x6003h</td>
+<td>DEC DECnet Phase IV</td>
+</tr>
+<tr>
+<td>0x8100h</td>
+<td>VLAN ID</td>
+</tr>
+<tr>
+<td>0x8137h</td>
+<td>Novell Netware IPX</td>
+</tr>
+<tr>
+<td>0x8191h</td>
+<td>NetBIOS</td>
+</tr>
+<tr>
+<td>0x86DDh</td>
+<td>IPv6</td>
+</tr>
+<tr>
+<td>0x8847h</td>
+<td>MPLS }</td>
+</tr>
+<tr>
+<td>0x8863h</td>
+<td>PPPoE Discovery Stage</td>
+</tr>
+<tr>
+<td>0x8864h</td>
+<td>PPPoE PPP Session Stage</td>
+</tr>
+<tr>
+<td>0x888Eh</td>
+<td>IEEE 802.1X</td>
+</tr>
+<tr>
+<td>0x88CCh</td>
+<td>LLDP (Link Layer Discovery Protocol)</td>
+</tr>
+</tbody>
+</table>
 <h3 id="03-ip-header-3-layer">0.3. IP Header (3 Layer)</h3>
 <figure><img src="/images/network/2-2.png"/><figcaption>
             <h4>IP Header</h4>
@@ -494,8 +581,8 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-04-17&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/bb5a0e63a0e56624460188b752b26071c517d276" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) bb5a0e63a0e56624460188b752b26071c517d276: rebuilding site Sun Apr 17 23:05:44     2022">
-                                    <i class="fas fa-hashtag fa-fw"></i>bb5a0e6</a></span>
+                <span>Updated on 2022-04-17&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/bbcf77a31b6a3d69e7e7ae8f04357c5b945ad193" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) bbcf77a31b6a3d69e7e7ae8f04357c5b945ad193: rebuilding site Sun Apr 17 23:27:13     2022">
+                                    <i class="fas fa-hashtag fa-fw"></i>bbcf77a</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

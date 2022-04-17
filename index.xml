@@ -25,6 +25,93 @@
 </figure>
 
 <h3 id="02-ethernet-header--2-layer">0.2. Ethernet Header ( 2 Layer)</h3>
+<p>Destination Address 6 bytes = 48 bits</p>
+<ul>
+<li>목적지 맥 주소 6 bytes(48bits), 주소의 첫 번째 비트가 1이면 멀티캐스트 이며, 모든 비트가 1이면 브로드캐스트이다.
+FF:FF:FF:FF:FF = Broadcast</li>
+</ul>
+<p>Source Address 6 bytes = 48 bits</p>
+<ul>
+<li>출발지 맥 주소 6 bytes(48bits)</li>
+</ul>
+<p>802.1q tag 4 bytes = 32 bits</p>
+<ul>
+<li>L2에서 VLAN 설정</li>
+</ul>
+<p>Ethernet Type 2 bytes = 16 bits</p>
+<ul>
+<li>MAC 프레임 데이터 부분에 있는 상위계층의 프로토콜 종류 표시, 0x0800이면 IPv4 패킷, 0x0806이면 ARP, 0x8100이면 VLAN Tag가 Ethernet 헤더와 L3 패킷 사이에 붙는다는 의미</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Type Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x0600h</td>
+<td>Xerox XNS IDP</td>
+</tr>
+<tr>
+<td>0x0800h</td>
+<td>IPv4</td>
+</tr>
+<tr>
+<td>0x0805h</td>
+<td>X.25</td>
+</tr>
+<tr>
+<td>0x0806h</td>
+<td>ARP</td>
+</tr>
+<tr>
+<td>0x0835h</td>
+<td>RARP</td>
+</tr>
+<tr>
+<td>0x6003h</td>
+<td>DEC DECnet Phase IV</td>
+</tr>
+<tr>
+<td>0x8100h</td>
+<td>VLAN ID</td>
+</tr>
+<tr>
+<td>0x8137h</td>
+<td>Novell Netware IPX</td>
+</tr>
+<tr>
+<td>0x8191h</td>
+<td>NetBIOS</td>
+</tr>
+<tr>
+<td>0x86DDh</td>
+<td>IPv6</td>
+</tr>
+<tr>
+<td>0x8847h</td>
+<td>MPLS }</td>
+</tr>
+<tr>
+<td>0x8863h</td>
+<td>PPPoE Discovery Stage</td>
+</tr>
+<tr>
+<td>0x8864h</td>
+<td>PPPoE PPP Session Stage</td>
+</tr>
+<tr>
+<td>0x888Eh</td>
+<td>IEEE 802.1X</td>
+</tr>
+<tr>
+<td>0x88CCh</td>
+<td>LLDP (Link Layer Discovery Protocol)</td>
+</tr>
+</tbody>
+</table>
 <h3 id="03-ip-header-3-layer">0.3. IP Header (3 Layer)</h3>
 <figure><figcaption>
             <h4>IP Header</h4>
