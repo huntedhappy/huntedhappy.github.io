@@ -21,9 +21,13 @@ Source Address 6 bytes = 48 bits
 * L2에서 VLAN 설정
 
 Ethernet Type 2 bytes = 16 bits
-* MAC 프레임 데이터 부분에 있는 상위계층의 프로토콜 종류 표시, 0x0800이면 IPv4 패킷, 0x0806이면 ARP, 0x8100이면 VLAN Tag가 Ethernet 헤더와 L3 패킷 사이에 붙는다는 의미
 
+* Ethernet 및 802.3 와의 호환성을 위한 구분 방법 (Len/Type : 길이 또는 타입)
+  * 0x 600 이하이면 => Length (IEEE 802.3) 로 해석
+    * Length : 수납되는 LLC 프레임 길이(3~1500 바이트)를 나타냄   ☞  MTU
 
+  * 0x 600 이상이면 => Type (DIX 2.0) 로 해석
+    * Type   : Data에 담겨있는 상위 프로토콜 종류
 
 |  Type Field | Description | 
 | ------- | -------------- | 
@@ -42,7 +46,6 @@ Ethernet Type 2 bytes = 16 bits
 | 0x8864h | PPPoE PPP Session Stage |
 | 0x888Eh | IEEE 802.1X |
 | 0x88CCh | LLDP (Link Layer Discovery Protocol) |
-
 
 ### 0.3. IP Header (3 Layer)
 
