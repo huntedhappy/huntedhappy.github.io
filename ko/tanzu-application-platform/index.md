@@ -32,13 +32,14 @@ To deploy all Tanzu Application Platform packages, your cluster must have at lea
 * 70 GB of disk space available per node
 For the full profile, or use of Security Chain Security Tools - Store, your cluster must have a configured default StorageClass.
 
+## 2. TAP 1.0.1
 ### Tools and CLI requirements
 Installation requires:
 
 * The Kubernetes CLI, kubectl, v1.20, v1.21 or v1.22, installed and authenticated with administrator rights for your target cluster. See Install Tools in the Kubernetes documentation.
 
-## 2. TAP
-### 2.1. Tanzu Network 등록
+### 2.1. TAP
+#### 2.1.1 Tanzu Network 등록
 {{< admonition tip "Tanzu Network ID/PW" >}}
 ```shell
 export INSTALL_REGISTRY_USERNAME=        #### Tanzu Network ID
@@ -349,9 +350,221 @@ kubectl get workload,gitrepository,pipelinerun,images.kpack,podintent,app,servic
 ```
 {{< /admonition >}}
 
-## 3. Visural Studio 
+## 3. TAP 1.1.0
 
-### 3.1. Extenstion 설정
+Repository를 설정한다. 여기서는 GCR을 사용하기 때문에 GCR의 정보를 입력
+
+```shell
+export INSTALL_REGISTRY_HOSTNAME=gcr.io
+export TAP_VERSION=1.1.0
+```
+
+TANZU NET 및 GCR docker login 후 GCR에 이미지들을 다운로드 
+```shell
+docker login registry.tanzu.vmware.com
+
+docker login -u _json_key --password-stdin https://gcr.io < {gcr key}
+
+imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:${TAP_VERSION} --to-repo ${INSTALL_REGISTRY_HOSTNAME}/{gcr project}/tap-packages
+
+```
+
+namespace 및 secret 생성 후 tanzu package Repository 생성
+```shell
+tanzu secret registry add tap-registry --server gcr.io --username _json_key --password "$(cat {gcr key})" --export-to-all-namespaces --yes -n tap-install
+
+tanzu secret registry add registry-credentials --server gcr.io --username _json_key --password "$(cat {gcr key})" --export-to-all-namespaces --yes -n tap-install
+
+
+tanzu package repository add tanzu-tap-repository \
+  --url ${INSTALL_REGISTRY_HOSTNAME}/main-tokenizer-343509/tap-packages:$TAP_VERSION \
+  --namespace tap-install 
+
+## Repository가 생성이 되었으면 설치 가능한 packages를 확인
+tanzu package available list tap.tanzu.vmware.com --namespace tap-install
+```
+권한 설정
+```shell
+kubectl annotate secret tap-registry -n tap-install secretgen.carvel.dev/image-pull-secret=""
+
+kubectl patch sa default -n tap-install --type 'json' -p '[{"op":"add","path":"/secrets","value":["name":"registry-credentials","name":"tap-registry"]}]'
+kubectl patch sa default -n tap-install --type 'json' -p '[{"op":"add","path":"/imagePullSecrets","value":["name":"registry-credentials","name":"tap-registry"]}]'
+
+cat <<EOF | kubectl -n tap-install apply -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-permit-deliverable
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: deliverable
+subjects:
+  - kind: ServiceAccount
+    name: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-permit-workload
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: workload
+subjects:
+  - kind: ServiceAccount
+    name: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dev-permit-app-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: app-viewer
+subjects:
+  - kind: Group
+    name: "namespace-developers"
+    apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: namespace-dev-permit-app-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: app-viewer-cluster-access
+subjects:
+  - kind: Group
+    name: "namespace-developers"
+    apiGroup: rbac.authorization.k8s.io
+EOF
+```
+TAP 1.1.0 설치
+
+GCR에서 키값을 json으로 다운로드 받은 후 service_account_key[변수] 저장
+```shell
+tanzu secret registry add registry-credentials --server gcr.io --username _json_key --password "$(cat main-xxxx-xxx-xxxx.json)" --namespace tap-install
+service_account_key="$(cat main-xxxx-xxx-xxxx.json)"
+```
+실행 파일 설정
+```shell
+cat <<EOF > gcr-tap-values.yaml
+profile: full
+ceip_policy_disclosed: true # The value must be true for installation to succeed
+
+buildservice:
+  kp_default_repository: "gcr.io/{Registry ID}/build-service"
+  kp_default_repository_username: _json_key
+  kp_default_repository_password: '$(echo $service_account_key)'
+  tanzunet_username: ""                             ## Tanzu Network ID
+  tanzunet_password: ""                             ## Tanzu Network Password
+  descriptor_name: "full"
+  enable_automatic_dependency_updates: true
+
+supply_chain: basic
+
+cnrs:
+  domain_name: tkg.io
+
+accelerator:
+  server:
+    service_type: "ClusterIP"
+
+ootb_supply_chain_basic:
+  registry:
+    server: "gcr.io"
+    repository: "{Registry ID}/supply_chain"
+  gitops:
+    #repository_prefix: git@github.com:vmware-tanzu/
+    #branch: main
+    #user_name: supplychain
+    #user_email: supplychain
+    #commit_message: supplychain@cluster.local
+    #ssh_secret: git-ssh  
+    ssh_secret: ""
+  cluster_builder: default
+  service_account: default
+
+learningcenter:
+  ingressDomain: "tkg.io"
+  ingressClass: contour
+  ingressSecret:
+    secretName: workshops.example.com-tls
+
+contour:
+  envoy:
+    service:
+      type: LoadBalancer
+
+tap_gui:
+  service_type: ClusterIP
+  ingressEnabled: "true"
+  ingressDomain: "tkg.io"
+  app_config:
+    app:
+      baseUrl: http://tap-gui.tkg.io
+      support:
+        url: https://tanzu.vmware.com/support
+        items:
+          - title: Contact Support
+            icon: email
+            links:
+              - url: https://tanzu.vmware.com/support
+                title: Tanzu Support Page
+          - title: Documentation
+            icon: docs
+            links:
+              - url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html
+                title: Tanzu Application Platform Documentation
+    integrations:
+      github: # Other integrations available see NOTE below
+        - host: github.com
+          token: "{GIT TOKEN}"
+
+    catalog:
+      locations:
+        - type: url
+          target: https://github.com/huntedhappy/tanzu-java-web-app/catalog-info.yaml
+
+    backend:
+      baseUrl: http://tap-gui.tkg.io
+      cors:
+        origin: http://tap-gui.tkg.io
+
+#    ##Existing values file above (OIDC)
+#    auth:
+#      allowGuestAccess: true
+#      environment: development
+#      loginPage:
+#        github:
+#          title: Github Login
+#          message: Enter with your GitHub account
+#      providers:
+#        github:
+#          development:
+#            clientId: 
+#            clientSecret: 
+#            ## uncomment if using GitHub Enterprise
+#            # enterpriseInstanceUrl:
+
+metadata_store:
+  app_service_type: LoadBalancer # (optional) Defaults to LoadBalancer. Change to NodePort for distributions that don't support LoadBalancer
+
+grype:
+  namespace: "tap-install" # (optional) Defaults to default namespace.
+EOF
+```
+
+TANZU 설치
+```shell
+tanzu package install tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file gcr-tap-values.yaml -n tap-install
+```
+## 4. Visural Studio 
+
+### 4.1. Extenstion 설정
 ```shell
 apt search openjdk
 
@@ -372,10 +585,9 @@ ctrl + shift + p
 {{< figure src="/images/tap/5-3.png" title="VS 설정" >}}
 {{< figure src="/images/tap/5-4.png" title="VS 설정" >}}
 
-### 3.2. Live Update Start
+### 4.2. Live Update Start
 해당 부분을 수정 하면 자동으로 GIT에 업데이트가 되면서 바뀌는것을 볼수 있다.
 {{< figure src="/images/tap/6-1.png" title="수정#1" >}}
 {{< figure src="/images/tap/6-4.png" title="수정#2" >}}
 {{< figure src="/images/tap/6-2.png" title="수정#3" >}}
 {{< figure src="/images/tap/6-3.png" title="수정#4" >}}
-
