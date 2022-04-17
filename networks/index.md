@@ -124,6 +124,8 @@ Checksum (16 bits)
 
 [<i class="fas fa-link"></i> TCP Header wiki  ](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)
 
+[<i class="fas fa-link"></i> Ethernet Type 참고 ](http://www.ktword.co.kr/test/view/view.php?m_temp1=2039)
+
 #### 0.4.1. (FIN, FIN-WAIT)관련
 
 {{< figure src="/images/network/3-1.png" title="FIN" >}}

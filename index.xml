@@ -209,6 +209,7 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
 <p><a href="https://en.wikipedia.org/wiki/Ethernet_frame" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Ethernet frame wiki </a></p>
 <p><a href="https://en.wikipedia.org/wiki/IPv4" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> IP Header wiki  </a></p>
 <p><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> TCP Header wiki  </a></p>
+<p><a href="http://www.ktword.co.kr/test/view/view.php?m_temp1=2039" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Ethernet Type 참고 </a></p>
 <h4 id="041-fin-fin-wait관련">0.4.1. (FIN, FIN-WAIT)관련</h4>
 <figure><figcaption>
             <h4>FIN</h4>
