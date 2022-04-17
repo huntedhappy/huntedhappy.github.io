@@ -116,8 +116,11 @@
         title="NAP Built" /></a>
         </div><h1 class="single-title" itemprop="name headline">
         <a href="/networks/">The Documentation Networks</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-04-10">2022-04-10</time></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">OSI 7Layer   1. L2 1.1. MAC주소 MAC은 일반적으로 OSI 7 Layer중에서 2 Layer에 속한다. 확인하는 방법은 윈두우에서 CMD창을 연 후 ipconfig /all명령어를 사용하면 확인할 수 있다. 나오는 부분중에 물리적 주소라고 나오는 것을 확인 할 수 있다. 리눅스의 경우는 ifconfig라고 치면 바로 확인을 할 수 있을 것이다.
- 물론 H/W 주소이지만 변경은 가능하다. 그러므르 보안적으로 이슈가 될 수 있다.   MAC 주소 확인   확인을 하게 되면 E0-3F-49-AB-C8-AD 위와 같이 표시가 되며 절반으로 나누어 앞의 세부분은 생산자를 나타내고, 뒤의 세 부분은 장치의 일련번호(Host Identifier)을 나타낸다.</div><div class="post-footer">
+    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-04-10">2022-04-10</time></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">0. OSI 7 Layer  OSI 7Layer   0.1. Ethernet Frame  EthernetFrame   0.2. Ethernet Header ( 2 Layer) 0.3. IP Header (3 Layer)  IP Header   windows에서 MTU 사이즈 확인 하는 방법
+ping Option 설정 -l size , -f 조각화 하지 않음, IP 20 bytes, ICMP 8 bytes
+1500 - (IP + ICMP) = 1472
+ping -l -f 1472
+ ICMP로 확인   명령어로 MTU 확인 netsh interface ipv4 show interfaces</div><div class="post-footer">
         <a href="/networks/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/nap/">nap</a>,&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/devops/">devops</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
