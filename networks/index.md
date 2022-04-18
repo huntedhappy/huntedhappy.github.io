@@ -164,8 +164,9 @@ VLAN 포함
 {{< figure src="/images/network/4-1.png" title="VXLAN" >}}
 
 #### 0.5.2. GENEVE
-{{< figure src="/images/network/4-2.png" title="GENEVE" >}}
+{{< figure src="/images/network/4-2.png" title="GENEVE#1" >}}
 
+{{< figure src="/images/network/4-3.png" title="GENEVE#2" >}}
 
 |  PARAMETER  | VXLAN | GENEVE | 
 | ------------------------------------------------------- | -------------- | ------------ | 
@@ -181,6 +182,9 @@ VLAN 포함
 | Extensibility           | No. Infact all fields in VXLAN header have predefined value | Yes |
 | Hardware friendly vendor extensibility mechanism        | Limited | Yes |
 | Term used for Tunnel Endpoints                          | VTEP | TEP |
+
+
+
 
 [<i class="fas fa-link"></i> VXLAN - GENEVE 참고  ](https://ipwithease.com/vxlan-vs-geneve-understand-the-difference/)
 
@@ -254,6 +258,12 @@ route print 명령어를 통해 확인 해보자. 만약 피시에 Network Inter
 
 {{< figure src="/images/network/1-11.png" title="route print" >}}
 
+그리고 MAC주소는 라우터를 거치면서 바뀌게 된다. 아래에서 보듯이
+실제 10.253.107.2의 MAC주소는 00:50:56:b0:f8:47 이지만 목적지 Host 10.253.126.25에서 확인하였을 때는 G/W인 10.253.126.1의 MAC주소로 바뀌어서 들어오는 것을 확인 할 수 있다. 
+
+{{< figure src="/images/network/1-12.png" title="route print" >}}
+
+
 ## 3. L4
 
 L3라우터의 경우 IP N/W을 통해 라우팅 경로(라우팅 경로라고 하면 G/W를 통해 봤듯이 자기가 모르는 대역을 다른 라우터에 물어보기 위한 것이라고 보면 된다. 이에 활용되는 것이 STATIC, RIP, EIGRP, OSPF. BGP가 있으며 하나 하나의 대한 기술적 내용은 기술 하지 않는다.)를 확보하는 반면. L4의 경우 Port까지 확인 한다. 이때부터 세션 베이스라고 보면 된다. 한마디로 라우터의 경우 2개의 물리적인 라우터가 있을 경우 A라는 라우터를 통해 들어온 트래픽이 B라는 트래픽을 통해 나가더라도 통신에 이슈가 발생 하지 않는다.
@@ -265,3 +275,32 @@ L3라우터의 경우 IP N/W을 통해 라우팅 경로(라우팅 경로라고 �
 {{< figure src="/images/network/1-10.png" title="L4의 경우 Asymmetirc구조일 경우 Drop" >}}
 
 또한 기술적으로 LoadBalancer의 경우 One-Arm구성 일 경우 어떻게 구성해야되는지의 대한 여러가지 방안들이 있지만 단순하게 어떻게 통신을 한다는지의 대한 내용만 적었다.. 마찬가지로 LoadBalancer의 경우 다양한 기술이 포함되어 있기 때문에 이렇게 되면 안됩니다. 라는 정도만 작성했다.
+
+
+## 4. HTTPS 이야기
+HTTPS는 공개키와 비공개키를 사용한다. 이유는 공개키는 비공개키보다 암/복호화 하는대 더 많은 트래픽이 필요 하기 때문에 공개키로 비공개키를 암호화하여 비공개키를 안전하고 전달 후 비공개키를 통해 데이터를 전달한다. 
+
+{{< figure src="/images/network/5-1.png" title="HTTPS 이야기" >}}
+{{< figure src="/images/network/5-2.png" title="HTTPS 이야기" >}}
+{{< figure src="/images/network/5-3.png" title="HTTPS 이야기" >}}
+
+1. 클라이언 헬로우겠죠 : < sslversion, random number, cipersuites, session id 포함>
+   * ciphersuites 복수인 이유는 클라이언트에서 어떤 암호화 프로토콜이 있는지 서버에게 알려주게 된다.
+
+2. 서버 헬로우 : < sslversion, random number, ciphersuit, session id 포함 >
+   * 사이트의 ciphersuite 단수인데요. 이유는 클라이언트가 보내준 암호화중에 제일 암호화가 높은것으로 선택
+
+3. 사용자의 웹브라우저에는 인증기관의 공개키가 이미 내장되어 있기 때문에 내장된 공개키로 인증서가 제대로된 인증서인지 판단   
+   * 가끔 브라우저 버전이 낮으면 최신 인증기관의 정보가 없을 수 있다. 
+   * 만약에 사설 인증서일 경우 인증된 인증서가 아닐 뿐 사아트에서는 공개키를 전달 했기 때문에 전달 받은 공개키로 대칭키를 암호화(Pre-Master-Secret) 한다.
+
+4. 사용자는 사이트에서 얻은 공개키를 이용하여, PMS(Pre-Master-Secret)를 암호화
+   * (Pre-Master-Secret)는 사용자가 Hello 보낼때 들어가있는 randomKey, 서버가 hello 할때 random key를 조합하여 만듦
+
+5. 사이트는 자기의 개인키로 사용자가 공개키로 암호화한것을 복호화 하여 안에 들어있는 Pre-Master-Secret를 이용하여 사용자와 메시지를 주고 받음
+
+6. Pre-Master-Secret는 master Secret을 만들고 master-Secret 은 세션키를 생성 이후 세션키 값을 이용하여 아까 했던 일련의 상황들을 모두 reuse를 하여 복잡한 방식을 모두 하지 않고 대칭키 방식으로 메시지를 주고 받습니다.
+
+
+
+* 공인된 인증기관에서 발급 받은 인증서의 경우 기본적으로 인증서에는 공개키와 개인키가 포함되어 있기 때문에 이미 브라우저에 내장되어 있는 인증기관의 공개키로 복호화 하여 사이트가 인증기관에서 인증을 받은 사이트라는것을 검증 한다. 만약 사설 인증서인 경우 웹브라우저에서 검증되지 않는 사이트라고 나오며 * 이는 인증기관에서 인증되지 않는 사이트라는 것만 검사 할뿐 이를 무시를 하게 되면 서버에서는 이미 공개키를 전달 했기 때문에 해당 공개키를 가지고 대칭키를 암호화 하여 사이트에 전달을 하게 된다 그리고 사이트에는 개인키로 복호화 하여 대칭키를 획득 한 후 대칭키로 암/복호화를 하여 데이터를 주고 받게 된다.
