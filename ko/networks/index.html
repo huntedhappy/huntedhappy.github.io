@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/ko/networks/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/networks/1-1.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-10T18:32:52+09:00" />
-<meta property="article:modified_time" content="2022-04-18T00:40:51+09:00" />
+<meta property="article:modified_time" content="2022-04-18T21:36:05+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://huntedhappy.github.io/ko/networks/1-1.jpg"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/huntedhappy.github.io\/ko\/networks\/1-1.jpg",
                             "width":  690 ,
                             "height":  414 
-                        }],"genre": "posts","keywords": "network, l2, l3, l4, osi 7layer, tcp, vxlan, geneve, vmware, nsxt, dk, dokyung","wordcount":  1752 ,
-        "url": "https:\/\/huntedhappy.github.io\/ko\/networks\/","datePublished": "2022-04-10T18:32:52+09:00","dateModified": "2022-04-18T00:40:51+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "network, l2, l3, l4, osi 7layer, tcp, vxlan, vxlan header, geneve, geneve header, ip header, ethernet header, Ethernet Frame, tpc\/ip header, vmware, nsxt, https, tls, dk, dokyung","wordcount":  1752 ,
+        "url": "https:\/\/huntedhappy.github.io\/ko\/networks\/","datePublished": "2022-04-10T18:32:52+09:00","dateModified": "2022-04-18T21:36:05+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Dokyung"},"author": {
                 "@type": "Person",
@@ -607,7 +607,7 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 
 <p>또한 기술적으로 LoadBalancer의 경우 One-Arm구성 일 경우 어떻게 구성해야되는지의 대한 여러가지 방안들이 있지만 단순하게 어떻게 통신을 한다는지의 대한 내용만 적었다.. 마찬가지로 LoadBalancer의 경우 다양한 기술이 포함되어 있기 때문에 이렇게 되면 안됩니다. 라는 정도만 작성했다.</p>
 <h2 id="4-https-이야기">4. HTTPS 이야기</h2>
-<p>HTTPS는 공개키와 비공개키를 사용한다. 이유는 공개키는 비공개키보다 암/복호화 하는대 더 많은 트래픽이 필요 하기 때문에 공개키로 비공개키를 암호화하여 비공개키를 안전하고 전달 후 비공개키를 통해 데이터를 전달한다.</p>
+<p>HTTPS는 공개키와 비공개키를 사용한다. 이유는 공개키는 비공개키보다 암/복호화 하는대 더 많은 트래픽이 필요 하기 때문에 공개키로 비공개키를 암호화하여 비공개키를 안전하게 전달 후 비공개키를 통해 데이터를 전달한다.</p>
 <p><figure><img src="/images/network/5-1.png"/><figcaption>
             <h4>HTTPS 이야기</h4>
         </figcaption>
@@ -625,7 +625,7 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 </p>
 <ol>
 <li>
-<p>클라이언 헬로우겠죠 : &lt; sslversion, random number, cipersuites, session id 포함&gt;</p>
+<p>클라이언 헬로우 : &lt; sslversion, random number, cipersuites, session id 포함&gt;</p>
 <ul>
 <li>ciphersuites 복수인 이유는 클라이언트에서 어떤 암호화 프로토콜이 있는지 서버에게 알려주게 된다.</li>
 </ul>
@@ -663,8 +663,8 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-04-18&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/7afc3438af8b4a664c775def871ca7a3e8ec132d" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 7afc3438af8b4a664c775def871ca7a3e8ec132d: rebuilding site Mon Apr 18 00:40:51     2022">
-                                    <i class="fas fa-hashtag fa-fw"></i>7afc343</a></span>
+                <span>Updated on 2022-04-18&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/4325f422a9fe5c5f8c498fc2cd9906b51d30f28a" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 4325f422a9fe5c5f8c498fc2cd9906b51d30f28a: rebuilding site Mon Apr 18 21:36:05     2022">
+                                    <i class="fas fa-hashtag fa-fw"></i>4325f42</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -679,7 +679,7 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/ko/tags/network/">network</a>,&nbsp;<a href="/ko/tags/l2/">l2</a>,&nbsp;<a href="/ko/tags/l3/">l3</a>,&nbsp;<a href="/ko/tags/l4/">l4</a>,&nbsp;<a href="/ko/tags/osi-7layer/">osi 7layer</a>,&nbsp;<a href="/ko/tags/tcp/">tcp</a>,&nbsp;<a href="/ko/tags/vxlan/">vxlan</a>,&nbsp;<a href="/ko/tags/geneve/">geneve</a>,&nbsp;<a href="/ko/tags/vmware/">vmware</a>,&nbsp;<a href="/ko/tags/nsxt/">nsxt</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/ko/tags/network/">network</a>,&nbsp;<a href="/ko/tags/l2/">l2</a>,&nbsp;<a href="/ko/tags/l3/">l3</a>,&nbsp;<a href="/ko/tags/l4/">l4</a>,&nbsp;<a href="/ko/tags/osi-7layer/">osi 7layer</a>,&nbsp;<a href="/ko/tags/tcp/">tcp</a>,&nbsp;<a href="/ko/tags/vxlan/">vxlan</a>,&nbsp;<a href="/ko/tags/vxlan-header/">vxlan header</a>,&nbsp;<a href="/ko/tags/geneve/">geneve</a>,&nbsp;<a href="/ko/tags/geneve-header/">geneve header</a>,&nbsp;<a href="/ko/tags/ip-header/">ip header</a>,&nbsp;<a href="/ko/tags/ethernet-header/">ethernet header</a>,&nbsp;<a href="/ko/tags/ethernet-frame/">Ethernet Frame</a>,&nbsp;<a href="/ko/tags/tpc/ip-header/">tpc/ip header</a>,&nbsp;<a href="/ko/tags/vmware/">vmware</a>,&nbsp;<a href="/ko/tags/nsxt/">nsxt</a>,&nbsp;<a href="/ko/tags/https/">https</a>,&nbsp;<a href="/ko/tags/tls/">tls</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/ko/">Home</a></span>
         </section>
