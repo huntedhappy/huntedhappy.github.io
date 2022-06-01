@@ -722,6 +722,29 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 <ul>
 <li>공인된 인증기관에서 발급 받은 인증서의 경우 기본적으로 인증서에는 공개키와 개인키가 포함되어 있기 때문에 이미 브라우저에 내장되어 있는 인증기관의 공개키로 복호화 하여 사이트가 인증기관에서 인증을 받은 사이트라는것을 검증 한다. 만약 사설 인증서인 경우 웹브라우저에서 검증되지 않는 사이트라고 나오며 * 이는 인증기관에서 인증되지 않는 사이트라는 것만 검사 할뿐 이를 무시를 하게 되면 서버에서는 이미 공개키를 전달 했기 때문에 해당 공개키를 가지고 대칭키를 암호화 하여 사이트에 전달을 하게 된다 그리고 사이트에는 개인키로 복호화 하여 대칭키를 획득 한 후 대칭키로 암/복호화를 하여 데이터를 주고 받게 된다.</li>
 </ul>
+<h2 id="5-유저에서-웹서핑-까지">5. 유저에서 웹서핑 까지</h2>
+<figure><figcaption>
+            <h4>웹서핑</h4>
+        </figcaption>
+</figure>
+
+<ol>
+<li>
+<p>사용자가 웹서핑을 하기 위해 브라우저에서 해당하는 DOMAIN을 입력한다. 예를 들어 <a href="http://www.naver.com" target="_blank" rel="noopener noreffer">www.naver.com</a>을 입력하게 되면 최초로 LDNS에게 요청하게 된다. LDNS는 자기가 잡은 DNS를 LDSN라고 한다.</p>
+</li>
+<li>
+<p>LDSN에서는 해당 도메인의 ROOT DNS에 쿼리를 날린다.</p>
+</li>
+<li>
+<p>ROOT DNS는 하위 DNS인 .COM의 IP를 응답해준다.</p>
+</li>
+<li>
+<p>.COM의 DNS는 하위 DNS인 naver.com의 DNS의 IP를 응답해준다.</p>
+</li>
+<li>
+<p>naver.com은 실제적으로 <a href="http://www.naver.com" target="_blank" rel="noopener noreffer">www.naver.com</a>의 A 레코드를 가지고 있으면 LDNS에게 응답을 해주고 LDNS는 최종적으로 사용자에게 <a href="http://www.naver.com" target="_blank" rel="noopener noreffer">www.naver.com</a>의 IP를 알려주게 된다.</p>
+</li>
+</ol>
 ]]></description>
 </item><item>
     <title>The Documentation vSphere Tanzu with AVI Load Balancer</title>
