@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://huntedhappy.github.io/ko/networks/</loc>
-    <lastmod>2022-04-18T21:36:05+09:00</lastmod>
+    <lastmod>2022-04-19T21:38:01+09:00</lastmod>
   </url>
 
   <url>
@@ -19,7 +19,7 @@
 
   <url>
     <loc>https://huntedhappy.github.io/ko/tanzu-application-platform/</loc>
-    <lastmod>2022-04-17T11:53:32+09:00</lastmod>
+    <lastmod>2022-04-19T21:38:01+09:00</lastmod>
   </url>
 
   <url>
@@ -101,5 +101,8 @@
     <loc>https://huntedhappy.github.io/ko/k10/</loc>
     <lastmod>2022-03-09T19:08:05+09:00</lastmod>
   </url>
+
+  <url>
+    <loc>https://huntedhappy.github.io/ko/wordpress/</loc>  </url>
 
 </urlset>
