@@ -1,0 +1,169 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>OKTA - Tag - Dokyung&#39;s DevOoOps</title>
+        <link>https://huntedhappy.github.io/ko/tags/okta/</link>
+        <description>OKTA - Tag - Dokyung&#39;s DevOoOps</description>
+        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Jul 2022 17:17:42 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/okta/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation Tanzu &amp; OTKA</title>
+    <link>https://huntedhappy.github.io/ko/tanzu-okta/</link>
+    <pubDate>Fri, 15 Jul 2022 17:17:42 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/tanzu-okta/</guid>
+    <description><![CDATA[<h2 id="1-tanzu와-okta-연동">1. TANZU와 OKTA 연동</h2>
+<p>TANZU는 기본적으로 LDAPS 또는 OIDC와 연동이 가능합니다. 그 중에 OKTA 서비스를 활용하여 TANZU와 OKTA를 연동 하겠습니다.
+OKTA는 기본적으로 30일간 무료로 사용이 가능합니다.</p>
+<h2 id="2-okta-구성">2. OKTA 구성</h2>
+<p>OKTA접속 후 관리자로 변경</p>
+<figure><figcaption>
+            <h4>관리자로 변경</h4>
+        </figcaption>
+</figure>
+
+<p>Application 추가</p>
+<p><figure><figcaption>
+            <h4>Apps 추가</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Apps 추가</h4>
+        </figcaption>
+</figure>
+</p>
+<p>redirect URIs는 kubectl get svc를 통해 확인
+<figure><figcaption>
+            <h4>Apps 추가</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><figcaption>
+            <h4>Redirect URIs 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Sign On 수정</h4>
+        </figcaption>
+</figure>
+
+<p>Group을 생성은 Optional
+<figure><figcaption>
+            <h4>Groups 생성 및 Assignment</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+
+<p><figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="3-tanzu-구성">3. TANZU 구성</h2>
+<p>OIDC_IDENTITY_PROVIDER_CLIENT_SECRET를 base64로 변경 필요</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">echo</span> -n <span class="s1">&#39;{CLIENT SECRETS}&#39;</span> <span class="p">|</span> base64
+</code></pre></td></tr></table>
+</div>
+</div><p>TANZU MGMT 에서 OIDC 부분을 찾은 후 파일 수정</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">
+IDENTITY_MANAGEMENT_TYPE: <span class="s2">&#34;oidc&#34;</span>
+
+<span class="c1">#! Settings for IDENTITY_MANAGEMENT_TYPE: &#34;oidc&#34;</span>
+CERT_DURATION: 2160h
+CERT_RENEW_BEFORE: 360h
+IDENTITY_MANAGEMENT_TYPE: oidc
+OIDC_IDENTITY_PROVIDER_CLIENT_ID: 0oa2i<span class="o">[</span>...<span class="o">]</span>NKst4x7
+OIDC_IDENTITY_PROVIDER_CLIENT_SECRET: &lt;encoded:LVVnMFNsZFIy<span class="o">[</span>...<span class="o">]</span><span class="nv">TMTV3WUdPZDJ2Xw</span><span class="o">==</span>&gt;
+OIDC_IDENTITY_PROVIDER_GROUPS_CLAIM: groups
+OIDC_IDENTITY_PROVIDER_ISSUER_URL: https://dev-<span class="o">[</span>...<span class="o">]</span>.okta.com
+OIDC_IDENTITY_PROVIDER_SCOPES: openid,profile,email,groups,offline_access
+OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-sa-생성-후-test">4. SA 생성 후 TEST</h2>
+<p>SA 생성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create clusterrolebinding id-mgmt-test-user --clusterrole cluster-admin --user <span class="o">{</span>mail address<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>TEST</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-cjenm-tkgm02
+
+kubectl get pod -A --kubeconfig tanzu-cli-cjenm-tkgm02
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item></channel>
+</rss>

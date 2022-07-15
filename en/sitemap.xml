@@ -3,13 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://huntedhappy.github.io/tanzu-keycloak/</loc>
+    <lastmod>2022-07-15T17:49:40+09:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://huntedhappy.github.io/tanzu-okta/</loc>
+    <lastmod>2022-07-15T17:17:45+09:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://huntedhappy.github.io/wordpress/</loc>
     <lastmod>2022-06-01T10:38:30+09:00</lastmod>
   </url>
 
   <url>
     <loc>https://huntedhappy.github.io/networks/</loc>
-    <lastmod>2022-04-19T21:38:01+09:00</lastmod>
+    <lastmod>2022-06-01T11:39:46+09:00</lastmod>
   </url>
 
   <url>

@@ -4,7 +4,503 @@
         <link>https://huntedhappy.github.io/posts/</link>
         <description>All Posts | Dokyung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Jun 2022 07:27:35 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Jul 2022 17:49:40 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation Tanzu &amp; Keycloak</title>
+    <link>https://huntedhappy.github.io/tanzu-keycloak/</link>
+    <pubDate>Fri, 15 Jul 2022 17:49:40 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/tanzu-keycloak/</guid>
+    <description><![CDATA[<h2 id="1-tanzu와-keycloak-연동">1. TANZU와 KEYCLOAK 연동</h2>
+<p>TANZU는 기본적으로 LDAPS 또는 OIDC와 연동이 가능합니다. 그 중에 무료 서비스인 KEYCLOAK을 활용하여 TANZU와 KEYCLOAK 연동</p>
+<h2 id="2-keycloak-구성">2. KEYCLOAK 구성</h2>
+<p><a href="https://www.keycloak.org/downloads" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> KEYCLOAK DOWNLOAD LINK</a></p>
+<figure><figcaption>
+            <h4>keycloak download</h4>
+        </figcaption>
+</figure>
+
+<p>KEYCLOAK 설치
+인증서는 사설 인증서로 생성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## 압축 해제</span>
+tar zxvf keycloak-18.0.2.tar.gz
+
+<span class="nb">cd</span> keycloak-18.0.2
+<span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN</span><span class="o">=</span>admin
+<span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN_PASSWORD</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+
+bin/kc.sh start-dev --https-certificate-file <span class="o">{</span>인증서<span class="o">}</span> --https-certificate-key-file <span class="o">{</span>인증서 KEY<span class="o">}</span> --https-port <span class="m">8443</span> --hostname <span class="o">{</span>hostname<span class="o">}</span> <span class="p">&amp;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>reaml 생성
+<figure><figcaption>
+            <h4>realm 생성</h4>
+        </figcaption>
+</figure>
+</p>
+<p>필요한 Client Scopes
+<figure><figcaption>
+            <h4>Client Scopes</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Client Scopes</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Client Scopes</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Clients 생성
+<figure><figcaption>
+            <h4>Clients 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Clients 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Clients 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Clients 생성</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><figcaption>
+            <h4>Role</h4>
+        </figcaption>
+</figure>
+
+<p>생성한 Client Scopes를 Default Client Scopes에 이동
+<figure><figcaption>
+            <h4>Scopes 선택</h4>
+        </figcaption>
+</figure>
+</p>
+<p><figure><figcaption>
+            <h4>Groups 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Groups 설정</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Roles
+<figure><figcaption>
+            <h4>Roles 설정</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Groups
+<figure><figcaption>
+            <h4>Groups 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Groups 설정</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Users
+<figure><figcaption>
+            <h4>Users 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Users 생성</h4>
+        </figcaption>
+</figure>
+</p>
+<p>User Password 설정
+<figure><figcaption>
+            <h4>User Password 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>User Password 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Group에 할당</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="3-tanzu-구성">3. TANZU 구성</h2>
+<p>사설 인증서로 구성을 했기 때문에 당연히 worker Node에도 신뢰된 인증서로 들어가 있어야 하며, 처음 구성시 CA를 넣는 부분이 없기 때문에 배포가 완료 후 CA를 넣어야 함</p>
+<p>OIDC 추출</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">
+<span class="c1">## management cluster 변경</span>
+<span class="nv">cluster</span><span class="o">=</span>tkgm02
+
+<span class="nb">echo</span> <span class="nv">$IDENTITY_MANAGEMENT_TYPE</span>
+<span class="nb">export</span> <span class="nv">_TKG_CLUSTER_FORCE_ROLE</span><span class="o">=</span><span class="s2">&#34;management&#34;</span>
+<span class="nb">export</span> <span class="nv">FILTER_BY_ADDON_TYPE</span><span class="o">=</span><span class="s2">&#34;authentication/pinniped&#34;</span>
+
+tanzu cluster create <span class="nv">$cluster</span> --dry-run -f tkgm01.yaml &gt; <span class="nv">$cluster</span>-example-secret.yaml
+
+</code></pre></td></tr></table>
+</div>
+</div><p>위와 같이 하면 아래와 같은 파일을 확인 할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    tkg.tanzu.vmware.com/addon-type: authentication/pinniped
+  labels:
+    clusterctl.cluster.x-k8s.io/move: <span class="s2">&#34;&#34;</span>
+    tkg.tanzu.vmware.com/addon-name: pinniped
+    tkg.tanzu.vmware.com/cluster-name: tkgm02
+  name: cjenm-tkgm02-pinniped-addon
+  namespace: tkg-system
+stringData:
+  values.yaml: <span class="p">|</span>
+    <span class="c1">#@data/values</span>
+    <span class="c1">#@overlay/match-child-defaults missing_ok=True</span>
+    ---
+    infrastructure_provider: vsphere
+    tkg_cluster_role: management
+    custom_cluster_issuer: <span class="s2">&#34;&#34;</span>
+    custom_tls_secret: <span class="s2">&#34;&#34;</span>
+    http_proxy: <span class="s2">&#34;&#34;</span>
+    https_proxy: <span class="s2">&#34;&#34;</span>
+    no_proxy: <span class="s2">&#34;&#34;</span>
+    identity_management_type: oidc
+    pinniped:
+      cert_duration: 2160h
+      cert_renew_before: 360h
+      supervisor_svc_endpoint: https://0.0.0.0:31234
+      supervisor_ca_bundle_data: ca_bundle_data_of_supervisor_svc
+      supervisor_svc_external_ip: 0.0.0.0
+      supervisor_svc_external_dns: null
+      upstream_oidc_client_id: <span class="o">{</span>CLIENT ID<span class="o">}</span>
+      upstream_oidc_client_secret: <span class="o">{</span>CLIENT SECRET<span class="o">}</span>
+      upstream_oidc_issuer_url: https://<span class="o">{</span>KEYCLAOK FQDN<span class="o">}</span>:8443/realms/access
+      upstream_oidc_tls_ca_data: <span class="o">{</span>base64로 CA인증서<span class="o">}</span>
+      upstream_oidc_additional_scopes:
+      - openid
+      - profile
+      - email
+      - groups
+      - offline_access
+      upstream_oidc_claims:
+        username: email
+        groups: groups
+      supervisor:
+        service:
+          name: pinniped-supervisor
+          type: LoadBalancer
+type: tkg.tanzu.vmware.com/addon
+</code></pre></td></tr></table>
+</div>
+</div><p>실행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl apply -f <span class="nv">$cluster</span>-example-secret.yaml -n tkg-system
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>완료 후 테스트</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-tkgm02
+
+kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
+</code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>요청</h4>
+        </figcaption>
+</figure>
+
+<p>생성한 계정으로 로그인
+<figure><figcaption>
+            <h4>LOGIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>TOKEN을 얻을 수 있다.
+<figure><figcaption>
+            <h4>TOKEN 얻기</h4>
+        </figcaption>
+</figure>
+</p>
+<p>TOKEN을 붙여 넣으면 아래와 같이 요청이 되는 것을 확인 할 수 있다.
+<figure><figcaption>
+            <h4>kubectl 요청</h4>
+        </figcaption>
+</figure>
+</p>
+<p>만약 권한이 없다면 아래 처럼 권한이 없다고 나온다.
+<figure><figcaption>
+            <h4>kubectl 요청</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
+    <title>The Documentation Tanzu &amp; OTKA</title>
+    <link>https://huntedhappy.github.io/tanzu-okta/</link>
+    <pubDate>Fri, 15 Jul 2022 17:17:45 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/tanzu-okta/</guid>
+    <description><![CDATA[<h2 id="1-tanzu와-okta-연동">1. TANZU와 OKTA 연동</h2>
+<p>TANZU는 기본적으로 LDAPS 또는 OIDC와 연동이 가능합니다. 그 중에 OKTA 서비스를 활용하여 TANZU와 OKTA를 연동 하겠습니다.
+OKTA는 기본적으로 30일간 무료로 사용이 가능합니다.</p>
+<h2 id="2-okta-구성">2. OKTA 구성</h2>
+<p>OKTA접속 후 관리자로 변경</p>
+<figure><figcaption>
+            <h4>관리자로 변경</h4>
+        </figcaption>
+</figure>
+
+<p>Application 추가</p>
+<p><figure><figcaption>
+            <h4>Apps 추가</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Apps 추가</h4>
+        </figcaption>
+</figure>
+</p>
+<p>redirect URIs는 kubectl get svc를 통해 확인
+<figure><figcaption>
+            <h4>Apps 추가</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><figcaption>
+            <h4>Redirect URIs 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Sign On 수정</h4>
+        </figcaption>
+</figure>
+
+<p>Group을 생성은 Optional
+<figure><figcaption>
+            <h4>Groups 생성 및 Assignment</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+
+<p><figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="3-tanzu-구성">3. TANZU 구성</h2>
+<p>OIDC_IDENTITY_PROVIDER_CLIENT_SECRET를 base64로 변경 필요</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">echo</span> -n <span class="s1">&#39;{CLIENT SECRETS}&#39;</span> <span class="p">|</span> base64
+</code></pre></td></tr></table>
+</div>
+</div><p>TANZU MGMT 에서 OIDC 부분을 찾은 후 파일 수정</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">
+IDENTITY_MANAGEMENT_TYPE: <span class="s2">&#34;oidc&#34;</span>
+
+<span class="c1">#! Settings for IDENTITY_MANAGEMENT_TYPE: &#34;oidc&#34;</span>
+CERT_DURATION: 2160h
+CERT_RENEW_BEFORE: 360h
+IDENTITY_MANAGEMENT_TYPE: oidc
+OIDC_IDENTITY_PROVIDER_CLIENT_ID: 0oa2i<span class="o">[</span>...<span class="o">]</span>NKst4x7
+OIDC_IDENTITY_PROVIDER_CLIENT_SECRET: &lt;encoded:LVVnMFNsZFIy<span class="o">[</span>...<span class="o">]</span><span class="nv">TMTV3WUdPZDJ2Xw</span><span class="o">==</span>&gt;
+OIDC_IDENTITY_PROVIDER_GROUPS_CLAIM: groups
+OIDC_IDENTITY_PROVIDER_ISSUER_URL: https://dev-<span class="o">[</span>...<span class="o">]</span>.okta.com
+OIDC_IDENTITY_PROVIDER_SCOPES: openid,profile,email,groups,offline_access
+OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-sa-생성-후-test">4. SA 생성 후 TEST</h2>
+<p>SA 생성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create clusterrolebinding id-mgmt-test-user --clusterrole cluster-admin --user <span class="o">{</span>mail address<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>TEST</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-cjenm-tkgm02
+
+kubectl get pod -A --kubeconfig tanzu-cli-cjenm-tkgm02
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
     <title>The Documentation Wordpress &amp; Nginx Install</title>
     <link>https://huntedhappy.github.io/wordpress/</link>
     <pubDate>Wed, 01 Jun 2022 07:27:35 &#43;0900</pubDate>
@@ -7972,288 +8468,6 @@ func validateUserInput<span class="o">(</span>firstName string, lastName string,
 <p><a href="https://cormachogan.com/2016/02/15/vsan-6-2-part-2-raid-5-and-raid-6-configurations/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> 참고 문헌</a></p>
 <p><a href="https://download3.vmware.com/vcat/vmw-vcloud-architecture-toolkit-spv1-webworks/index.html#page/Storage%20and%20Availability/Architecting%20VMware%20vSAN%206.2/Architecting%20Virtual%20SAN%206.2.2.022.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> 참고 문헌</a></p>
 <p><a href="https://blogs.vmware.com/virtualblocks/2018/06/07/the-use-of-erasure-coding-in-vsan/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> 참고 문헌</a></p>
-]]></description>
-</item><item>
-    <title>The Documentation NSXT and Ansible</title>
-    <link>https://huntedhappy.github.io/nsxt/</link>
-    <pubDate>Wed, 19 Jan 2022 09:27:36 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/nsxt/</guid>
-    <description><![CDATA[<h2 id="1-ansible을-통한-nsxt-구성">1. Ansible을 통한 NSXT 구성</h2>
-<p>NSXT를 Ansible로 구성.</p>
-<p>Ansible의 대한 보충 설명을 할 수 있으면 추후에 진행 하기로 하고 우선 설정의 대해서 설명을 먼저 하겠다.</p>
-<p>먼저.. 이 부분을 블로그로 쓰는게 맞을까라는 고민을 좀 했다.</p>
-<p>이유는 우선 Ansible로 구성이 되어 있기 때문에 코드가 들어가 있다. 그래서 NSXT Ansible Module을 다운로드 받고 나서 추가 된 부분을 Git Hub에 올려 두었다.</p>
-<h2 id="2-설치">2. 설치</h2>
-<h3 id="21-파이썬-설치">2.1. 파이썬 설치</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yum update -y
-
-rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-
-rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-
-yum install epel-release yum-utils python3-pip -y
-
-pip3 install --upgrade pip setuptools ansible pyvmomi pyvim requests ruamel.yaml
-
-dnf install libnsl -y
-</code></pre></td></tr></table>
-</div>
-</div><p>파이썬을 설치 후 버전을 변경 하고 싶으면 아래 처럼 구성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rm /usr/bin/python
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python<span class="o">(</span>TAB<span class="o">)</span> <span class="c1">## 설치되어 있는 버전을 확인 할 수 있다.</span>
-</code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>파이썬 버전 확인</h4>
-        </figcaption>
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 <span class="m">1</span>
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 <span class="m">2</span>
-
-sudo update-alternatives --config python
-</code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>파이썬 버전 선택</h4>
-        </figcaption>
-</figure>
-
-<h3 id="22-ovf-tool">2.2. OVF Tool</h3>
-<p>OVF Tool 다운로드</p>
-<p><a href="https://developer.vmware.com/web/tool/4.4.0/ovf" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> OVF Tool 다운로드 링크</a></p>
-<figure><figcaption>
-            <h4>원하는 버전으로 다운로드 받는다.</h4>
-        </figcaption>
-</figure>
-
-<h3 id="23-nsxt-ansible-download">2.3. NSXT Ansible Download</h3>
-<p>제공한 버전은 3.1 기준으로 구성을 하였다.</p>
-<figure><figcaption>
-            <h4>원하는 버전으로 다운로드 받는다.</h4>
-        </figcaption>
-</figure>
-
-<h3 id="24-ansible-실행">2.4. Ansible 실행</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ovftool -v 에러가 나오면 dnf install libnsl 설치
-ansible-playbook 01_deploy_first_node.yml -vvv
-</code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>에러 발생시 dnf install libnsl 설치.</h4>
-        </figcaption>
-</figure>
-
-<h3 id="25-github">2.5. Github</h3>
-<p>다운로드 NSXT Ansible Module을 압축을 해제 하면 되는대, 그 부분을 별도로 github에 올려두었다.</p>
-<p>추가적으로 vars라는 폴더와, 00 ~ 10 번 , answerfile,yml이 추가 된 것을 확인 할 수 있다.</p>
-<p>코드를 하나 하나 설명을 하기에는.. 좀 벅찬 느낌이 든다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git clone https://github.com/huntedhappy/nsxt3.1
-</code></pre></td></tr></table>
-</div>
-</div>]]></description>
-</item><item>
-    <title>The Documentation LDAPS(AD)</title>
-    <link>https://huntedhappy.github.io/ldaps/</link>
-    <pubDate>Sun, 16 Jan 2022 22:32:24 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ldaps/</guid>
-    <description><![CDATA[<h2 id="1-ldap-over-ssl">1. LDAP Over SSL</h2>
-<p>대략 설명 보다. 이미지를 많이 첨부</p>
-<p>LDAPS를 구성 할 경우 IP로 ldapsearch를 하면 실패하는 경우를 보게 될 것이다.
-FQDN인증서를 확인 하면 FQDN만 구성이 되어 있는 것을 알 수 있다. 
-그래서 SAN으로 구성하면서 IP도 포함되게 구성을 해보자.</p>
-<figure><figcaption>
-            <h4>Ldaps 인증서 확인</h4>
-        </figcaption>
-</figure>
-
-<h3 id="11-certreqreq-설정">1.1. certreq.req 설정</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## 아래 IP로 ldapsearch를 하게 되면 에러가 난다. 만약 IP로도 가능하게 하려면 인증서 변경이 필요하다.</span>
-ldapsearch -x -H ldaps://10.253.241.2 -D <span class="s1">&#39;cn=administrator,cn=users,dc=tkg,dc=io&#39;</span> -w <span class="s1">&#39;Passw0rd&#39;</span> -b <span class="s1">&#39;ou=tanzu,dc=tkg,dc=io&#39;</span>
-<span class="c1">## 에러</span>
-ldap_sasl_bind<span class="o">(</span>SIMPLE<span class="o">)</span>: Can<span class="err">&#39;</span>t contact LDAP server <span class="o">(</span>-1<span class="o">)</span>
-</code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>Ldaps Falied</h4>
-        </figcaption>
-</figure>
-
-<p>윈도우에서 certlm.msc 실행</p>
-<figure><figcaption>
-            <h4>certlm.msc</h4>
-        </figcaption>
-</figure>
-
-<p>certlm.msc &gt; 개인용 &gt; 모든 작업 &gt; 고급 작업 &gt; 사용자 지정 요청 만들기</p>
-<p><figure><figcaption>
-            <h4>certlm #1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #4</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #5</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #6</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #7</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #8</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #9</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #10</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>certlm #11</h4>
-        </figcaption>
-</figure>
-</p>
-<p>인증서 생성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">certreq</span> <span class="n">-submit</span> <span class="n">-sttrib</span> <span class="s2">&#34;CertificateTemplate:webserver&#34;</span> <span class="n">certreq</span><span class="p">.</span><span class="n">req</span> <span class="n">certreq</span><span class="p">.</span><span class="n">cer</span>
-</code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>certlm #12</h4>
-        </figcaption>
-</figure>
-
-<h3 id="12-인증서-등록">1.2. 인증서 등록</h3>
-<p>certlm.msc &gt; 개인용 &gt; 인증서 &gt; 모든 작업 &gt; 가져오기</p>
-<p><figure><figcaption>
-            <h4>인증서 등록#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>인증서 등록#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>인증서 등록#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>인증서 등록#4</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>인증서 등록#5</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>인증서 등록#6</h4>
-        </figcaption>
-</figure>
-</p>
-<p>등록 확인
-<figure><figcaption>
-            <h4>인증서 등록 확인#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>인증서 등록 확인#2</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Ldapsearch를 IP로 했을 때 성공 하는 것을 확인 할 수 있다.
-<figure><figcaption>
-            <h4>인증서 등록 확인#2</h4>
-        </figcaption>
-</figure>
-</p>
 ]]></description>
 </item></channel>
 </rss>

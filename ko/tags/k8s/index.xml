@@ -4,7 +4,503 @@
         <link>https://huntedhappy.github.io/ko/tags/k8s/</link>
         <description>k8s - Tag - Dokyung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Jul 2022 17:49:37 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation Tanzu &amp; Keycloak</title>
+    <link>https://huntedhappy.github.io/ko/tanzu-keycloak/</link>
+    <pubDate>Fri, 15 Jul 2022 17:49:37 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/tanzu-keycloak/</guid>
+    <description><![CDATA[<h2 id="1-tanzu와-keycloak-연동">1. TANZU와 KEYCLOAK 연동</h2>
+<p>TANZU는 기본적으로 LDAPS 또는 OIDC와 연동이 가능합니다. 그 중에 무료 서비스인 KEYCLOAK을 활용하여 TANZU와 KEYCLOAK 연동</p>
+<h2 id="2-keycloak-구성">2. KEYCLOAK 구성</h2>
+<p><a href="https://www.keycloak.org/downloads" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> KEYCLOAK DOWNLOAD LINK</a></p>
+<figure><figcaption>
+            <h4>keycloak download</h4>
+        </figcaption>
+</figure>
+
+<p>KEYCLOAK 설치
+인증서는 사설 인증서로 생성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## 압축 해제</span>
+tar zxvf keycloak-18.0.2.tar.gz
+
+<span class="nb">cd</span> keycloak-18.0.2
+<span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN</span><span class="o">=</span>admin
+<span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN_PASSWORD</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+
+bin/kc.sh start-dev --https-certificate-file <span class="o">{</span>인증서<span class="o">}</span> --https-certificate-key-file <span class="o">{</span>인증서 KEY<span class="o">}</span> --https-port <span class="m">8443</span> --hostname <span class="o">{</span>hostname<span class="o">}</span> <span class="p">&amp;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>reaml 생성
+<figure><figcaption>
+            <h4>realm 생성</h4>
+        </figcaption>
+</figure>
+</p>
+<p>필요한 Client Scopes
+<figure><figcaption>
+            <h4>Client Scopes</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Client Scopes</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Client Scopes</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Clients 생성
+<figure><figcaption>
+            <h4>Clients 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Clients 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Clients 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Clients 생성</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><figcaption>
+            <h4>Role</h4>
+        </figcaption>
+</figure>
+
+<p>생성한 Client Scopes를 Default Client Scopes에 이동
+<figure><figcaption>
+            <h4>Scopes 선택</h4>
+        </figcaption>
+</figure>
+</p>
+<p><figure><figcaption>
+            <h4>Groups 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Groups 설정</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Roles
+<figure><figcaption>
+            <h4>Roles 설정</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Groups
+<figure><figcaption>
+            <h4>Groups 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Groups 설정</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Users
+<figure><figcaption>
+            <h4>Users 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Users 생성</h4>
+        </figcaption>
+</figure>
+</p>
+<p>User Password 설정
+<figure><figcaption>
+            <h4>User Password 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>User Password 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Group에 할당</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="3-tanzu-구성">3. TANZU 구성</h2>
+<p>사설 인증서로 구성을 했기 때문에 당연히 worker Node에도 신뢰된 인증서로 들어가 있어야 하며, 처음 구성시 CA를 넣는 부분이 없기 때문에 배포가 완료 후 CA를 넣어야 함</p>
+<p>OIDC 추출</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">
+<span class="c1">## management cluster 변경</span>
+<span class="nv">cluster</span><span class="o">=</span>tkgm02
+
+<span class="nb">echo</span> <span class="nv">$IDENTITY_MANAGEMENT_TYPE</span>
+<span class="nb">export</span> <span class="nv">_TKG_CLUSTER_FORCE_ROLE</span><span class="o">=</span><span class="s2">&#34;management&#34;</span>
+<span class="nb">export</span> <span class="nv">FILTER_BY_ADDON_TYPE</span><span class="o">=</span><span class="s2">&#34;authentication/pinniped&#34;</span>
+
+tanzu cluster create <span class="nv">$cluster</span> --dry-run -f tkgm01.yaml &gt; <span class="nv">$cluster</span>-example-secret.yaml
+
+</code></pre></td></tr></table>
+</div>
+</div><p>위와 같이 하면 아래와 같은 파일을 확인 할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    tkg.tanzu.vmware.com/addon-type: authentication/pinniped
+  labels:
+    clusterctl.cluster.x-k8s.io/move: <span class="s2">&#34;&#34;</span>
+    tkg.tanzu.vmware.com/addon-name: pinniped
+    tkg.tanzu.vmware.com/cluster-name: tkgm02
+  name: cjenm-tkgm02-pinniped-addon
+  namespace: tkg-system
+stringData:
+  values.yaml: <span class="p">|</span>
+    <span class="c1">#@data/values</span>
+    <span class="c1">#@overlay/match-child-defaults missing_ok=True</span>
+    ---
+    infrastructure_provider: vsphere
+    tkg_cluster_role: management
+    custom_cluster_issuer: <span class="s2">&#34;&#34;</span>
+    custom_tls_secret: <span class="s2">&#34;&#34;</span>
+    http_proxy: <span class="s2">&#34;&#34;</span>
+    https_proxy: <span class="s2">&#34;&#34;</span>
+    no_proxy: <span class="s2">&#34;&#34;</span>
+    identity_management_type: oidc
+    pinniped:
+      cert_duration: 2160h
+      cert_renew_before: 360h
+      supervisor_svc_endpoint: https://0.0.0.0:31234
+      supervisor_ca_bundle_data: ca_bundle_data_of_supervisor_svc
+      supervisor_svc_external_ip: 0.0.0.0
+      supervisor_svc_external_dns: null
+      upstream_oidc_client_id: <span class="o">{</span>CLIENT ID<span class="o">}</span>
+      upstream_oidc_client_secret: <span class="o">{</span>CLIENT SECRET<span class="o">}</span>
+      upstream_oidc_issuer_url: https://<span class="o">{</span>KEYCLAOK FQDN<span class="o">}</span>:8443/realms/access
+      upstream_oidc_tls_ca_data: <span class="o">{</span>base64로 CA인증서<span class="o">}</span>
+      upstream_oidc_additional_scopes:
+      - openid
+      - profile
+      - email
+      - groups
+      - offline_access
+      upstream_oidc_claims:
+        username: email
+        groups: groups
+      supervisor:
+        service:
+          name: pinniped-supervisor
+          type: LoadBalancer
+type: tkg.tanzu.vmware.com/addon
+</code></pre></td></tr></table>
+</div>
+</div><p>실행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl apply -f <span class="nv">$cluster</span>-example-secret.yaml -n tkg-system
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>완료 후 테스트</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-tkgm02
+
+kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
+</code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>요청</h4>
+        </figcaption>
+</figure>
+
+<p>생성한 계정으로 로그인
+<figure><figcaption>
+            <h4>LOGIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>TOKEN을 얻을 수 있다.
+<figure><figcaption>
+            <h4>TOKEN 얻기</h4>
+        </figcaption>
+</figure>
+</p>
+<p>TOKEN을 붙여 넣으면 아래와 같이 요청이 되는 것을 확인 할 수 있다.
+<figure><figcaption>
+            <h4>kubectl 요청</h4>
+        </figcaption>
+</figure>
+</p>
+<p>만약 권한이 없다면 아래 처럼 권한이 없다고 나온다.
+<figure><figcaption>
+            <h4>kubectl 요청</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
+    <title>The Documentation Tanzu &amp; OTKA</title>
+    <link>https://huntedhappy.github.io/ko/tanzu-okta/</link>
+    <pubDate>Fri, 15 Jul 2022 17:17:42 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/tanzu-okta/</guid>
+    <description><![CDATA[<h2 id="1-tanzu와-okta-연동">1. TANZU와 OKTA 연동</h2>
+<p>TANZU는 기본적으로 LDAPS 또는 OIDC와 연동이 가능합니다. 그 중에 OKTA 서비스를 활용하여 TANZU와 OKTA를 연동 하겠습니다.
+OKTA는 기본적으로 30일간 무료로 사용이 가능합니다.</p>
+<h2 id="2-okta-구성">2. OKTA 구성</h2>
+<p>OKTA접속 후 관리자로 변경</p>
+<figure><figcaption>
+            <h4>관리자로 변경</h4>
+        </figcaption>
+</figure>
+
+<p>Application 추가</p>
+<p><figure><figcaption>
+            <h4>Apps 추가</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Apps 추가</h4>
+        </figcaption>
+</figure>
+</p>
+<p>redirect URIs는 kubectl get svc를 통해 확인
+<figure><figcaption>
+            <h4>Apps 추가</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><figcaption>
+            <h4>Redirect URIs 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Sign On 수정</h4>
+        </figcaption>
+</figure>
+
+<p>Group을 생성은 Optional
+<figure><figcaption>
+            <h4>Groups 생성 및 Assignment</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+
+<p><figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>APP Assign</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="3-tanzu-구성">3. TANZU 구성</h2>
+<p>OIDC_IDENTITY_PROVIDER_CLIENT_SECRET를 base64로 변경 필요</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">echo</span> -n <span class="s1">&#39;{CLIENT SECRETS}&#39;</span> <span class="p">|</span> base64
+</code></pre></td></tr></table>
+</div>
+</div><p>TANZU MGMT 에서 OIDC 부분을 찾은 후 파일 수정</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">
+IDENTITY_MANAGEMENT_TYPE: <span class="s2">&#34;oidc&#34;</span>
+
+<span class="c1">#! Settings for IDENTITY_MANAGEMENT_TYPE: &#34;oidc&#34;</span>
+CERT_DURATION: 2160h
+CERT_RENEW_BEFORE: 360h
+IDENTITY_MANAGEMENT_TYPE: oidc
+OIDC_IDENTITY_PROVIDER_CLIENT_ID: 0oa2i<span class="o">[</span>...<span class="o">]</span>NKst4x7
+OIDC_IDENTITY_PROVIDER_CLIENT_SECRET: &lt;encoded:LVVnMFNsZFIy<span class="o">[</span>...<span class="o">]</span><span class="nv">TMTV3WUdPZDJ2Xw</span><span class="o">==</span>&gt;
+OIDC_IDENTITY_PROVIDER_GROUPS_CLAIM: groups
+OIDC_IDENTITY_PROVIDER_ISSUER_URL: https://dev-<span class="o">[</span>...<span class="o">]</span>.okta.com
+OIDC_IDENTITY_PROVIDER_SCOPES: openid,profile,email,groups,offline_access
+OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-sa-생성-후-test">4. SA 생성 후 TEST</h2>
+<p>SA 생성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create clusterrolebinding id-mgmt-test-user --clusterrole cluster-admin --user <span class="o">{</span>mail address<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>TEST</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-cjenm-tkgm02
+
+kubectl get pod -A --kubeconfig tanzu-cli-cjenm-tkgm02
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TEST</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
     <title>The Documentation TAP</title>
     <link>https://huntedhappy.github.io/ko/tanzu-application-platform/</link>
     <pubDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</pubDate>
@@ -5044,402 +5540,6 @@ RAID는 무결성 위협으로 부터 데이터 보호를 용이 하게 할 수 
     </div>
 <p>자세한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.min.io/docs/minio-bucket-object-lock-guide.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Minio Immutability</a></p>
 <h3 id="카스텐-설정시-minio로-backup-storage-구성-링크-참조-i-classfas-fa-linki-kasten-minio-installhttpshuntedhappygithubiokok10">카스텐 설정시 MiniO로 Backup Storage 구성 링크 참조. <a href="https://huntedhappy.github.io/ko/k10/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Kasten MiniO Install</a></h3>
-]]></description>
-</item><item>
-    <title>The Documentation Tanzu</title>
-    <link>https://huntedhappy.github.io/ko/tanzu/</link>
-    <pubDate>Sat, 01 Jan 2022 17:50:00 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/tanzu/</guid>
-    <description><![CDATA[<h2 id="1-vmware-tanzu">1. VMware TANZU?</h2>
-<p>2019년 8월 VMware에서 처음으로 TANZU 포트 폴리오를 발표 했다. VM웨어의 대표 제품군인 ‘브이스피어(vSphere)’를 쿠버네티스 네이티브 플랫폼으로 바꾸겠다고 선언했다. 이를 위해 VM웨어는 ‘프로젝트 퍼시픽(Project Pacific)’을 진행했다.</p>
-<blockquote>
-<figure><figcaption>
-            <h4>Tanzu Portfolio</h4>
-        </figcaption>
-</figure>
-
-</blockquote>
-<p>처음에는 VCF(VMware Cloud Foundation)라는 솔루션을 같이 설치 하면서 배포 해야 되었던 vsphere with tanzu가 현재는 VCF를 구성하지 않아도 설치가 가능하도록 변하게 되었다.</p>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw"></i>VCF(VMware Cloud Foundation)?<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">VMware 제품군을 자동으로 설치 해주는 솔루션이다. Excel, JSON파일을 읽어 드려 vSphere, vCenter, vSAN 그리고 NSX-T를 한번에 배포 해주는 솔루션</div>
-        </div>
-    </div>
-<h3 id="11-vsphere-with-tanzu">1.1. vsphere with tanzu?</h3>
-<p>vsphere with tanzu는 말그대로 vsphere 에서 컨테이너를 바로 올리는 컨셉으로 나왔다. 용어로 TKGS라고도 불린다. Tanzu를 서비스형태로 올릴 수 있다고 해서 TKGS라고 불리며, 말그대로 vCenter에서 서비스 형태로 설치를 할 수 있기 때문이다. 하지만 vCenter에 종속이 되버리기 때문에 vCenter가 업그레이드가 되어야 K8S의 버전을 올릴수 있다. 정확히 말하면 vsphere위에 올릴 경우는 이벤트 형식으로 올리고, 프로덕션의 경우 TKC위에다가 POD를 올리는 것이 낫지 않을까 싶다.</p>
-<p>그래서 컨셉은 아래와 같다.</p>
-<blockquote>
-<figure><figcaption>
-            <h4>TKGS</h4>
-        </figcaption>
-</figure>
-
-</blockquote>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw"></i>TKC(Tanzu Kubernetes Cluster)?<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">TKC는 별도로 클러스터를 배포 하는 것이다. vmware에서 배포되는 Supervisor가 관리를 하게 되며, 네임스페이스에 TKC를 배포 하여 사용 할 수 있다.</div>
-        </div>
-    </div>
-<p>자세한 TKGS의 대한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.vmware.com/kr/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-4D0D375F-C001-4F1D-AAB1-1789C5577A94.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> VMware TKGS</a></p>
-<h3 id="12-tanzu-kubernetes-grid">1.2. Tanzu Kubernetes Grid?</h3>
-<p>TKGM이라고 하며, 예전 Pivotal에서 PKS가 이렇게 변한 것이 아닐까 싶다. 예전 Pivotal에서는 bosh라는 관리 솔루션을 통해 PKS를 배포 하여 클러스터를 구성 하였다. 그렇다고 TKG가 기존에 없었던 솔루션은 아니다 6.7에서 이미 TKG는 있었지만 많은 사람들이 사용하지는 않았다. 그리고 Pivotal이 VMware로 인수 되면서 Tanzu로 변화하고 있는 것으로 알고 있다. TKGM은 TKGS와는 다른게 별도로 관리 클러스터를 배포해야 한다. TKGS같은 경우에는 Supervisor가 그 역할을 하였다.
-그리고 TKC를 배포하는 형식이다.</p>
-<p>자세한 TKG의 대한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-tkg-concepts.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> VMware TKG</a></p>
-<h3 id="13-tanzu-kubernetes-integrated">1.3. Tanzu Kubernetes Integrated?</h3>
-<p>기존 Pivotal에서 Bosh로 배포한 PKS라고 보면 될거 같다. 현재는 사용하지 않을 것 같으므로 설명은 패스 하겠다.</p>
-<p>자세한 TKGI의 대한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/index.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> VMware TKGI</a></p>
-]]></description>
-</item><item>
-    <title>The Documentation Jenkins</title>
-    <link>https://huntedhappy.github.io/ko/jenkins/</link>
-    <pubDate>Fri, 31 Dec 2021 20:49:26 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/jenkins/</guid>
-    <description><![CDATA[<h2 id="jenkins">Jenkins?</h2>
-<p>Jenkins는 아무래도 많이 사용하는 CI/CD 일것이다. 우선 컨테이너 환경에서 CI를 구성하기 위해서 Jenkins를 구성 하였고, 클러스터가 많은 환경에서도 접근을 할 수 있게 (물론 컨테이너로 구성을 해도 되나. 굳이 컨테이너로 구성할 필요성이 있나 싶어 별도의 VM으로 구성)
-VM형태로 설치를 하였다.</p>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>CI/CD<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다. 
-CI (Continuous Integration) CI를 통해 개발자들은 코드 변경사항을 공유 브랜치로 다시 병합하는 작업을 더욱 수월하게 자주 수행 할 수 있다.
-CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으로 사용됨.</p>
-<ul>
-<li>Continuous Deliver의 경우 코드 변경 , 병합으로부터 Prodcution에 적합한 빌드를 제공하여 모든 단계에 테스트 및 릴리스를 자동화한다.</li>
-<li>Continuous Deploy는 어플리케이션을 프로덕션으로 릴리스 작업을 자동화</li>
-</ul>
-</div>
-        </div>
-    </div>
-<figure><figcaption>
-            <h4>CICD</h4>
-        </figcaption>
-</figure>
-
-<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Redhat </a></p>
-<h2 id="1-설치">1. 설치</h2>
-<div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw"></i>Jenkins Install<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>JAVA Install</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apt update <span class="o">&amp;&amp;</span> apt upgrade 
-
-sudo apt search openjdk
-
-sudo apt install openjdk-11-jdk -y
-
-java --version
-</code></pre></td></tr></table>
-</div>
-</div><p>Jenkins Install</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key <span class="p">|</span> sudo apt-key add -
-sudo sh -c <span class="s1">&#39;echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list&#39;</span>
-
-sudo apt update -y
-sudo apt install jenkins -y
-
-systemctl restart jenkins
-systemctl <span class="nb">enable</span> jenkins
-</code></pre></td></tr></table>
-</div>
-</div><p>패스워드 확인</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat /var/lib/jenkins/secrets/initialAdminPassword
-</code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h3 id="11-설치-완료">1.1. 설치 완료</h3>
-<p><figure><figcaption>
-            <h4>접속 화면 #1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>접속 화면 #2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>접속 화면 #3</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="2-ssl-설정">2. SSL 설정</h2>
-<p>인증서 설치, <a href="/ko/jenkins/root.sh" rel=""><i class="far fa-file-archive fa-fw"></i>&nbsp;root.sh</a>.</p>
-<div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw"></i>Jenkins SSL 구성<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>인증서 생성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io
-</code></pre></td></tr></table>
-</div>
-</div><p>root.sh에 있는 파일 내용을 복사해서 shell 실행</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">. root.sh
-</code></pre></td></tr></table>
-</div>
-</div><p>인증서 권한 변경</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">chmod <span class="m">700</span> /data/cert
-chmod <span class="m">600</span> /data/cert/yourdomain.com.cert
-chmod <span class="m">600</span> /data/cert/yourdomain.com.key
-</code></pre></td></tr></table>
-</div>
-</div><p>Jenkins 파일 변경</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vi /etc/default/jenkins
-
-<span class="nv">HTTP_PORT</span><span class="o">=</span><span class="m">8080</span>             <span class="c1">### ---&gt; 이부분을 찾아서 아래 부분을 채워 넣어주자.</span>
-<span class="nv">HTTP_PORT_DISABLE</span><span class="o">=</span>-1       <span class="c1">### HTTP DISABLE</span>
-<span class="nv">HTTPS_CERT</span><span class="o">=</span>/data/cert/yourdomain.com.cert      <span class="c1">### 인증서</span>
-<span class="nv">HTTPS_KEY</span><span class="o">=</span>/data/cert/yourdomain.com.key        <span class="c1">### KEY</span>
-
-<span class="c1">### args 마지막 줄에 빨간 부분을 채워서 넣어준다.</span>
-<span class="nv">JENKINS_ARGS</span><span class="o">=</span><span class="s2">&#34;--webroot=/var/cache/</span><span class="nv">$NAME</span><span class="s2">/war --httpPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpPort=</span><span class="nv">$HTTP_PORT_DISABLE</span><span class="s2"> --httpsPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpsCertificate=</span><span class="nv">$HTTPS_CERT</span><span class="s2"> --httpsPrivateKey=</span><span class="nv">$HTTPS_KEY</span><span class="s2">&#34;</span>
-
-<span class="c1">### jenkins restart</span>
-systemctl restart jenkins
-</code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h3 id="21-설치-완료">2.1. 설치 완료</h3>
-<figure><figcaption>
-            <h4>HTTPS 접속 화면 #1</h4>
-        </figcaption>
-</figure>
-
-<h3 id="22-nginx로-https-구성">2.2. NGINX로 HTTPS 구성</h3>
-<p><div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw"></i>NGINX PROXY 구성<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>NGINX 가상 서버 구성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vi  /etc/nginx/sites-available/jenkins
-
-server <span class="o">{</span>
-    server_name jenkins.tkg.io<span class="p">;</span>
-
-    location / <span class="o">{</span>
-        proxy_redirect off<span class="p">;</span>
-        proxy_pass_header Server<span class="p">;</span>
-        proxy_set_header Host <span class="nv">$http_host</span><span class="p">;</span>
-        proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
-        proxy_set_header X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
-        proxy_pass https://127.0.0.1:8080/<span class="p">;</span>
-    <span class="o">}</span>
-
-    listen <span class="m">443</span> ssl<span class="p">;</span>
-    ssl_certificate /data/cert/yourdomain.com.crt<span class="p">;</span>
-    ssl_certificate_key /data/cert/yourdomain.com.key<span class="p">;</span>
-    ssl_client_certificate /data/cert/ca.crt<span class="p">;</span>
-<span class="o">}</span>
-
-server <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="nv">$host</span> <span class="o">=</span> jenkins.tkg.io<span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="m">301</span> https://<span class="nv">$host$request_uri</span><span class="p">;</span>
-    <span class="o">}</span> <span class="c1"># managed by Certbot</span>
-
-    listen 80<span class="p">;</span>
-    server_name jenkins.tkg.io<span class="p">;</span>
-    <span class="k">return</span> 404<span class="p">;</span> <span class="c1"># managed by Certbot</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>symbolic link 연결</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"> <span class="nb">cd</span> /etc/nginx/sites-enabled
-
- ln -s  /etc/nginx/sites-available/jenkins .
-</code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<figure><figcaption>
-            <h4>NGINX로 연결 후 HTTPS 접속 화면 #1</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="3-slack-연동">3. SLACK 연동</h2>
-<p>SLACK을 연동하여 메시지를 받을 수 있게 구성을 한다.</p>
-<h3 id="31-slcak-설정">3.1. SLCAK 설정</h3>
-<figure><figcaption>
-            <h4>SLACK 접속</h4>
-        </figcaption>
-</figure>
-
-<p>APP 등록
-<figure><figcaption>
-            <h4>SLACK APP 추가#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>SLACK APP 추가#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>SLACK APP 추가#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>SLACK APP 추가#4</h4>
-        </figcaption>
-</figure>
-</p>
-<p>위에 내용까지 설정을 하면 Jenkins를 어떻게 설정하라고 나오는대 좀 오래 되었나보다. 요즘에 변경된 부분의 대해서 설정 하는 방법을 나열한다.</p>
-<h3 id="32-jenkins-설정">3.2. JENKINS 설정</h3>
-<p><figure><figcaption>
-            <h4>Jenkins Slack Plugin 설치#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack Plugin 설치#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack Plugin 설치#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack 설정#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack 설정#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack Credentials 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Jenkins Slack 설정 테스트</h4>
-        </figcaption>
-</figure>
-</p>
 ]]></description>
 </item></channel>
 </rss>
