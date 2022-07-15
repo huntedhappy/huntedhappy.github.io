@@ -402,11 +402,6 @@ OKTA는 기본적으로 30일간 무료로 사용이 가능합니다.</p>
             <h4>APP Assign</h4>
         </figcaption>
 </figure>
-
-<figure><figcaption>
-            <h4>APP Assign</h4>
-        </figcaption>
-</figure>
 </p>
 <h2 id="3-tanzu-구성">3. TANZU 구성</h2>
 <p>OIDC_IDENTITY_PROVIDER_CLIENT_SECRET를 base64로 변경 필요</p>
@@ -469,9 +464,9 @@ OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-cjenm-tkgm02
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-tkgm02
 
-kubectl get pod -A --kubeconfig tanzu-cli-cjenm-tkgm02
+kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
 </code></pre></td></tr></table>
 </div>
 </div><p><figure><figcaption>

@@ -30,7 +30,6 @@ Group을 생성은 Optional
 {{< figure src="/images/okta/1-8.png" title="APP Assign" >}}
 
 {{< figure src="/images/okta/1-9.png" title="APP Assign" >}}
-{{< figure src="/images/okta/1-10.png" title="APP Assign" >}}
 {{< figure src="/images/okta/1-11.png" title="APP Assign" >}}
 
 ## 3. TANZU 구성
@@ -67,9 +66,9 @@ kubectl create clusterrolebinding id-mgmt-test-user --clusterrole cluster-admin 
 
 TEST
 ```shell
-tanzu mc kubeconfig get --export-file=tanzu-cli-cjenm-tkgm02
+tanzu mc kubeconfig get --export-file=tanzu-cli-tkgm02
 
-kubectl get pod -A --kubeconfig tanzu-cli-cjenm-tkgm02
+kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
 ```
 
 {{< figure src="/images/okta/2-1.png" title="TEST" >}}
