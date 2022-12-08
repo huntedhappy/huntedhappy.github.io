@@ -1,4 +1,4 @@
-# The Documentation Tanzu Community Edition
+# The Documentation Tanzu Community Edition with TAP
 
 
 ## 1. TANZU Community Edition?
