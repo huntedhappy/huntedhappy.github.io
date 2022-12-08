@@ -32,18 +32,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yum update -y
-
-rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-
-rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-
-yum install epel-release yum-utils python3-pip -y
-
-pip3 install --upgrade pip setuptools ansible pyvmomi pyvim requests ruamel.yaml
-
-dnf install libnsl -y
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">yum update -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">yum install epel-release yum-utils python3-pip -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pip3 install --upgrade pip setuptools ansible pyvmomi pyvim requests ruamel.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">dnf install libnsl -y
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>파이썬을 설치 후 버전을 변경 하고 싶으면 아래 처럼 구성</p>
 <div class="highlight"><div class="chroma">
@@ -52,9 +52,9 @@ dnf install libnsl -y
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rm /usr/bin/python
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python<span class="o">(</span>TAB<span class="o">)</span> <span class="c1">## 설치되어 있는 버전을 확인 할 수 있다.</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rm /usr/bin/python
+</span></span><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python python /usr/bin/python<span class="o">(</span>TAB<span class="o">)</span> <span class="c1">## 설치되어 있는 버전을 확인 할 수 있다.</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>파이썬 버전 확인</h4>
@@ -69,11 +69,11 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python<span c
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 <span class="m">1</span>
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 <span class="m">2</span>
-
-sudo update-alternatives --config python
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 <span class="m">1</span>
+</span></span><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 <span class="m">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo update-alternatives --config python
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>파이썬 버전 선택</h4>
@@ -102,9 +102,9 @@ sudo update-alternatives --config python
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ovftool -v 에러가 나오면 dnf install libnsl 설치
-ansible-playbook 01_deploy_first_node.yml -vvv
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ovftool -v 에러가 나오면 dnf install libnsl 설치
+</span></span><span class="line"><span class="cl">ansible-playbook 01_deploy_first_node.yml -vvv
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>에러 발생시 dnf install libnsl 설치.</h4>
@@ -120,8 +120,8 @@ ansible-playbook 01_deploy_first_node.yml -vvv
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git clone https://github.com/huntedhappy/nsxt3.1
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/huntedhappy/nsxt3.1
+</span></span></code></pre></td></tr></table>
 </div>
 </div>]]></description>
 </item><item>

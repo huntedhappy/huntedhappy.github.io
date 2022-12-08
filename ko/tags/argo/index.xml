@@ -65,8 +65,8 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create ns argocd
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns argocd
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Helm Repo 등록</p>
 <div class="highlight"><div class="chroma">
@@ -75,9 +75,9 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">helm repo add argo https://argoproj.github.io/argo-helm
-helm repo update
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm repo add argo https://argoproj.github.io/argo-helm
+</span></span><span class="line"><span class="cl">helm repo update
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>Optional : Helm 에서 value 값을 수정 하고 싶으면 별도로 다운로드</p>
@@ -87,8 +87,8 @@ helm repo update
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">helm show values argo/argo-cd &gt; argocd.yaml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values argo/argo-cd &gt; argocd.yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>Optional : HTTPS로 구성을 하려고 한다면 인증서 등록을 해준다.</p>
@@ -98,8 +98,8 @@ helm repo update
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create secret tls argo-tls --cert<span class="o">=</span>/data/cert/yourdomain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n argocd
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret tls argo-tls --cert<span class="o">=</span>/data/cert/yourdomain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n argocd
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>수정이 필요 없으면 바로 시작 하면 된다.</p>
 <div class="highlight"><div class="chroma">
@@ -107,8 +107,8 @@ helm repo update
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">helm install argocd argo/argo-cd -n argo
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm install argocd argo/argo-cd -n argo
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>접속 하기 위해 Portfoward를 하자</p>
 <div class="highlight"><div class="chroma">
@@ -116,8 +116,8 @@ helm repo update
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl port-forward service/argocd-server -n argo 8080:443
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ID는 admin 이며, PW는 별도의 명령으로 알아 낼수 있다.</p>
 <div class="highlight"><div class="chroma">
@@ -125,8 +125,8 @@ helm repo update
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -152,9 +152,9 @@ helm repo update
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">helm show values argo/argo-cd &gt; argocd.yaml
-vi argocd.yaml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values argo/argo-cd &gt; argocd.yaml
+</span></span><span class="line"><span class="cl">vi argocd.yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다운로드 받은 Yaml파일중에 dex부분을 수정한다, 없으면 추가 한다.</p>
 <div class="highlight"><div class="chroma">
@@ -188,34 +188,34 @@ vi argocd.yaml
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">    dex.config: <span class="p">|</span>
-      connectors:
-      - type: ldap
-        name: Ldap
-        id: ldap
-        config:
-          <span class="c1"># Ldap server address</span>
-          host: tanzu-dns.tkg.io:389
-          insecureNoSSL: <span class="nb">true</span>
-          insecureSkipVerify: <span class="nb">true</span>
-          startTLS: <span class="nb">false</span>
-          bindDN: <span class="s2">&#34;</span><span class="nv">$dex</span><span class="s2">.ldap.bindDN&#34;</span>
-          bindPW: <span class="s2">&#34;</span><span class="nv">$dex</span><span class="s2">.ldap.bindPW&#34;</span>
-          usernamePrompt: Username
-          userSearch:
-            baseDN: <span class="s2">&#34;ou=tanzu,dc=tkg,dc=io&#34;</span>
-            filter: <span class="o">(</span><span class="nv">objectClass</span><span class="o">=</span>person<span class="o">)</span>
-            username: sAMAccountName
-            idAttr: DN
-            emailAttr: mail
-            nameAttr: sAMAccountName
-          groupSearch:
-            baseDN: <span class="s2">&#34;ou=tanzu,dc=tkg,dc=io&#34;</span>
-            filter: <span class="o">(</span><span class="nv">objectClass</span><span class="o">=</span>person<span class="o">)</span>
-            userAttr: DN
-            groupAttr: member
-            nameAttr: name
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">    dex.config: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">      connectors:
+</span></span><span class="line"><span class="cl">      - type: ldap
+</span></span><span class="line"><span class="cl">        name: Ldap
+</span></span><span class="line"><span class="cl">        id: ldap
+</span></span><span class="line"><span class="cl">        config:
+</span></span><span class="line"><span class="cl">          <span class="c1"># Ldap server address</span>
+</span></span><span class="line"><span class="cl">          host: tanzu-dns.tkg.io:389
+</span></span><span class="line"><span class="cl">          insecureNoSSL: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">          insecureSkipVerify: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">          startTLS: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">          bindDN: <span class="s2">&#34;</span><span class="nv">$dex</span><span class="s2">.ldap.bindDN&#34;</span>
+</span></span><span class="line"><span class="cl">          bindPW: <span class="s2">&#34;</span><span class="nv">$dex</span><span class="s2">.ldap.bindPW&#34;</span>
+</span></span><span class="line"><span class="cl">          usernamePrompt: Username
+</span></span><span class="line"><span class="cl">          userSearch:
+</span></span><span class="line"><span class="cl">            baseDN: <span class="s2">&#34;ou=tanzu,dc=tkg,dc=io&#34;</span>
+</span></span><span class="line"><span class="cl">            filter: <span class="o">(</span><span class="nv">objectClass</span><span class="o">=</span>person<span class="o">)</span>
+</span></span><span class="line"><span class="cl">            username: sAMAccountName
+</span></span><span class="line"><span class="cl">            idAttr: DN
+</span></span><span class="line"><span class="cl">            emailAttr: mail
+</span></span><span class="line"><span class="cl">            nameAttr: sAMAccountName
+</span></span><span class="line"><span class="cl">          groupSearch:
+</span></span><span class="line"><span class="cl">            baseDN: <span class="s2">&#34;ou=tanzu,dc=tkg,dc=io&#34;</span>
+</span></span><span class="line"><span class="cl">            filter: <span class="o">(</span><span class="nv">objectClass</span><span class="o">=</span>person<span class="o">)</span>
+</span></span><span class="line"><span class="cl">            userAttr: DN
+</span></span><span class="line"><span class="cl">            groupAttr: member
+</span></span><span class="line"><span class="cl">            nameAttr: name
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 Secret을 생성 해준다.</p>
 <div class="highlight"><div class="chroma">
@@ -224,9 +224,9 @@ vi argocd.yaml
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindPW\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s1">&#39;Passw0rd&#39;</span> <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span>
-kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindDN\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">cn</span><span class="o">=</span>administrator,cn<span class="o">=</span>users,dc<span class="o">=</span>tanzu,dc<span class="o">=</span>io <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindPW\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s1">&#39;Passw0rd&#39;</span> <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span>
+</span></span><span class="line"><span class="cl">kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindDN\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">cn</span><span class="o">=</span>administrator,cn<span class="o">=</span>users,dc<span class="o">=</span>tanzu,dc<span class="o">=</span>io <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>HELM 실행</p>
 <div class="highlight"><div class="chroma">
@@ -236,10 +236,10 @@ kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">helm install argocd argo/argo-cd -n argo <span class="se">\
-</span><span class="se"></span>--set server.extraArgs<span class="o">[</span>0<span class="o">]=</span>--insecure <span class="se">\
-</span><span class="se"></span>-f argocd.yaml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm install argocd argo/argo-cd -n argo <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--set server.extraArgs<span class="o">[</span>0<span class="o">]=</span>--insecure <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-f argocd.yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>접속 하기 위해 Portfoward를 하자</p>
 <div class="highlight"><div class="chroma">
@@ -247,8 +247,8 @@ kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl port-forward service/argocd-server -n argo 8080:443
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ID는 admin 이며, PW는 별도의 명령으로 알아 낼수 있다.</p>
 <div class="highlight"><div class="chroma">
@@ -256,8 +256,8 @@ kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -275,8 +275,8 @@ kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl edit cm argocd-rbac-cm -n argo
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl edit cm argocd-rbac-cm -n argo
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>configmap을 수정 하면 아래 내용이 있으면 수정 하고 없으면 추가 해준다.</p>
 <div class="highlight"><div class="chroma">
@@ -296,20 +296,20 @@ kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apiVersion: v1
-data:
-  policy.csv: <span class="p">|</span>
-    p, role:my1208, applications, *, my1208/*, allow
-    p, role:my1208, projects, get, my1208, allow
-    p, role:my1208, repositories, get, *, allow
-    p, role:my1208, clusters, get, *, allow
-    g, my1208, role:admin
-    p, role:none, *, *, */*, deny
-    g, tkg, role:readonly
-    g, my1208@openbase.co.kr, role:admin
-  policy.default: role:none
-  scopes: <span class="s1">&#39;[groups,email]&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">data:
+</span></span><span class="line"><span class="cl">  policy.csv: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">    p, role:my1208, applications, *, my1208/*, allow
+</span></span><span class="line"><span class="cl">    p, role:my1208, projects, get, my1208, allow
+</span></span><span class="line"><span class="cl">    p, role:my1208, repositories, get, *, allow
+</span></span><span class="line"><span class="cl">    p, role:my1208, clusters, get, *, allow
+</span></span><span class="line"><span class="cl">    g, my1208, role:admin
+</span></span><span class="line"><span class="cl">    p, role:none, *, *, */*, deny
+</span></span><span class="line"><span class="cl">    g, tkg, role:readonly
+</span></span><span class="line"><span class="cl">    g, my1208@openbase.co.kr, role:admin
+</span></span><span class="line"><span class="cl">  policy.default: role:none
+</span></span><span class="line"><span class="cl">  scopes: <span class="s1">&#39;[groups,email]&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Pod를 재 실행 해 준다.</p>
 <div class="highlight"><div class="chroma">
@@ -318,9 +318,9 @@ data:
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">delete</span><span class="o">=</span><span class="sb">`</span>kubectl get pod -n argo <span class="p">|</span> grep -v  repo <span class="p">|</span> egrep  <span class="s1">&#39;server|dex&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> xargs <span class="nb">echo</span><span class="sb">`</span>
-kubectl delete pod <span class="nv">$delete</span> -n argo
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">delete</span><span class="o">=</span><span class="sb">`</span>kubectl get pod -n argo <span class="p">|</span> grep -v  repo <span class="p">|</span> egrep  <span class="s1">&#39;server|dex&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> xargs <span class="nb">echo</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">kubectl delete pod <span class="nv">$delete</span> -n argo
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -414,12 +414,12 @@ APP을 추가 해준다.
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">wget -O argo-noty-secret.yaml https://raw.githubusercontent.com/argoproj-labs/argocd-notifications/v1.2.1/manifests/install.yaml
-wget -O argo-noty-config.yaml https://raw.githubusercontent.com/argoproj-labs/argocd-notifications/v1.2.1/catalog/install.yaml
-
-kubectl apply -f argo-noty-secret.yaml -n argo
-kubectl apply -f argo-noty-config.yaml -n argo
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget -O argo-noty-secret.yaml https://raw.githubusercontent.com/argoproj-labs/argocd-notifications/v1.2.1/manifests/install.yaml
+</span></span><span class="line"><span class="cl">wget -O argo-noty-config.yaml https://raw.githubusercontent.com/argoproj-labs/argocd-notifications/v1.2.1/catalog/install.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f argo-noty-secret.yaml -n argo
+</span></span><span class="line"><span class="cl">kubectl apply -f argo-noty-config.yaml -n argo
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 secret 과 configmap을 수정한다. 사전에 변경해도 상관은 없다.</p>
 <div class="highlight"><div class="chroma">
@@ -447,28 +447,28 @@ kubectl apply -f argo-noty-config.yaml -n argo
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl edit secret argocd-notifications-secret -n argo
-
-apiVersion: v1
-kind: Secret
-metadata:
-  name: argocd-notifications-secret
-stringData:
-  slack-token: xoxb-xxxxxxxxxx-xxxxxxxxxx-xxxxxxx
-
-kubectl edit cm argocd-notifications-cm -n argo
-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: argocd-notifications-cm
-data:
-  service.slack: <span class="p">|</span>
-    <span class="c1">## apiURL: &lt;url&gt;                 # optional URL, e.g. https://example.com/api</span>
-    token: <span class="nv">$slack</span>-token              <span class="c1"># 위에 secret을 참고 함 </span>
-    <span class="c1">## username: &lt;override-username&gt; # optional username</span>
-    <span class="c1">## icon: &lt;override-icon&gt; # optional icon for the message (supports both emoij and url notation)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl edit secret argocd-notifications-secret -n argo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Secret
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: argocd-notifications-secret
+</span></span><span class="line"><span class="cl">stringData:
+</span></span><span class="line"><span class="cl">  slack-token: xoxb-xxxxxxxxxx-xxxxxxxxxx-xxxxxxx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl edit cm argocd-notifications-cm -n argo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: ConfigMap
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: argocd-notifications-cm
+</span></span><span class="line"><span class="cl">data:
+</span></span><span class="line"><span class="cl">  service.slack: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## apiURL: &lt;url&gt;                 # optional URL, e.g. https://example.com/api</span>
+</span></span><span class="line"><span class="cl">    token: <span class="nv">$slack</span>-token              <span class="c1"># 위에 secret을 참고 함 </span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## username: &lt;override-username&gt; # optional username</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## icon: &lt;override-icon&gt; # optional icon for the message (supports both emoij and url notation)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -509,32 +509,32 @@ Default Definition 참고. <a href="https://argocd-notifications.readthedocs.io/
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat <span class="s">&lt;&lt; EOF | tee guestbook.yaml
-</span><span class="s">apiVersion: argoproj.io/v1alpha1
-</span><span class="s">kind: Application
-</span><span class="s">metadata:
-</span><span class="s">  name: guestbook
-</span><span class="s">  annotations:
-</span><span class="s">    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: dk-devops
-</span><span class="s">    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: dk-devops
-</span><span class="s">    notifications.argoproj.io/subscribe.on-sync-failed.slack: dk-devops
-</span><span class="s">    notifications.argoproj.io/subscribe.on-sync-running.slack: dk-devops
-</span><span class="s">    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: dev-ops
-</span><span class="s">    notifications.argoproj.io/subscribe.on-deployed.slack: dk-devops
-</span><span class="s">    notifications.argoproj.io/subscribe.on-health-degraded.slack: dk-devops
-</span><span class="s">spec:
-</span><span class="s">  destination:
-</span><span class="s">    namespace: default
-</span><span class="s">    server: https://kubernetes.default.svc
-</span><span class="s">  project: default
-</span><span class="s">  source:
-</span><span class="s">    path: kustomize-guestbook
-</span><span class="s">    repoURL: https://github.com/argoproj/argocd-example-apps.git
-</span><span class="s">    targetRevision: HEAD
-</span><span class="s">  syncPolicy:
-</span><span class="s">    automated: {}
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee guestbook.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: argoproj.io/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Application
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: guestbook
+</span></span></span><span class="line"><span class="cl"><span class="s">  annotations:
+</span></span></span><span class="line"><span class="cl"><span class="s">    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: dk-devops
+</span></span></span><span class="line"><span class="cl"><span class="s">    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: dk-devops
+</span></span></span><span class="line"><span class="cl"><span class="s">    notifications.argoproj.io/subscribe.on-sync-failed.slack: dk-devops
+</span></span></span><span class="line"><span class="cl"><span class="s">    notifications.argoproj.io/subscribe.on-sync-running.slack: dk-devops
+</span></span></span><span class="line"><span class="cl"><span class="s">    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: dev-ops
+</span></span></span><span class="line"><span class="cl"><span class="s">    notifications.argoproj.io/subscribe.on-deployed.slack: dk-devops
+</span></span></span><span class="line"><span class="cl"><span class="s">    notifications.argoproj.io/subscribe.on-health-degraded.slack: dk-devops
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  destination:
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: default
+</span></span></span><span class="line"><span class="cl"><span class="s">    server: https://kubernetes.default.svc
+</span></span></span><span class="line"><span class="cl"><span class="s">  project: default
+</span></span></span><span class="line"><span class="cl"><span class="s">  source:
+</span></span></span><span class="line"><span class="cl"><span class="s">    path: kustomize-guestbook
+</span></span></span><span class="line"><span class="cl"><span class="s">    repoURL: https://github.com/argoproj/argocd-example-apps.git
+</span></span></span><span class="line"><span class="cl"><span class="s">    targetRevision: HEAD
+</span></span></span><span class="line"><span class="cl"><span class="s">  syncPolicy:
+</span></span></span><span class="line"><span class="cl"><span class="s">    automated: {}
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>

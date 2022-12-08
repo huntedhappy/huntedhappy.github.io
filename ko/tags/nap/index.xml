@@ -31,10 +31,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create ns ingress-nginx
-
-git clone https://github.com/OpenVPN/easy-rsa.git
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns ingress-nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git clone https://github.com/OpenVPN/easy-rsa.git
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>easy rsa</h4>
@@ -50,11 +50,11 @@ git clone https://github.com/OpenVPN/easy-rsa.git
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> easy-rsa/easyrsa3/
-
-./easyrsa init-pki
-./easyrsa build-ca
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> easy-rsa/easyrsa3/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./easyrsa init-pki
+</span></span><span class="line"><span class="cl">./easyrsa build-ca
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>easy rsa 구성#1</h4>
@@ -68,10 +68,10 @@ git clone https://github.com/OpenVPN/easy-rsa.git
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">./easyrsa gen-req wildcard
-
-./easyrsa sign-req server wildcard
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./easyrsa gen-req wildcard
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./easyrsa sign-req server wildcard
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>easy rsa 구성#2</h4>
@@ -89,14 +89,14 @@ git clone https://github.com/OpenVPN/easy-rsa.git
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">openssl rsa -in /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard.key -out /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
-
-<span class="c1">## 인증서 Secret 생성</span>
-kubectl create -n ingress-nginx secret tls wildcard-tls --key /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key --cert /var/tmp/easy-rsa/easyrsa3/pki/issued/wildcard.crt
-
-<span class="c1">## 안지워도된다.</span>
-rm /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">openssl rsa -in /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard.key -out /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 인증서 Secret 생성</span>
+</span></span><span class="line"><span class="cl">kubectl create -n ingress-nginx secret tls wildcard-tls --key /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key --cert /var/tmp/easy-rsa/easyrsa3/pki/issued/wildcard.crt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 안지워도된다.</span>
+</span></span><span class="line"><span class="cl">rm /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>ssl 인증서 secret 생성</h4>
@@ -109,8 +109,8 @@ rm /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl get secret -n ingress-nginx
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get secret -n ingress-nginx
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>secret 확인</h4>
@@ -128,14 +128,14 @@ rm /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /var/tmp
-
-<span class="c1">## nap을 위한 yaml파일 다운로드</span>
-git clone https://github.com/nginxinc/kubernetes-ingress/
-
-<span class="c1">## nap을 위한 helm repo 주소 추가</span>
-helm repo add nginx-stable https://helm.nginx.com/stable
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## nap을 위한 yaml파일 다운로드</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/nginxinc/kubernetes-ingress/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## nap을 위한 helm repo 주소 추가</span>
+</span></span><span class="line"><span class="cl">helm repo add nginx-stable https://helm.nginx.com/stable
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>git clone</h4>
@@ -148,9 +148,9 @@ helm repo add nginx-stable https://helm.nginx.com/stable
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /var/tmp/kubernetes-ingress/deployments/helm-chart
-git checkout v1.11.3
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp/kubernetes-ingress/deployments/helm-chart
+</span></span><span class="line"><span class="cl">git checkout v1.11.3
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>git checkout</h4>
@@ -168,11 +168,11 @@ git checkout v1.11.3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">REGISTRY</span><span class="o">=</span>&lt;registry IP or FQDN&gt;
-<span class="nv">NS</span><span class="o">=</span>&lt;your namespace&gt;
-<span class="nv">REGISTRY</span><span class="o">=</span>10.253.110.4
-<span class="nv">NS</span><span class="o">=</span>ingress-nginx
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">REGISTRY</span><span class="o">=</span>&lt;registry IP or FQDN&gt;
+</span></span><span class="line"><span class="cl"><span class="nv">NS</span><span class="o">=</span>&lt;your namespace&gt;
+</span></span><span class="line"><span class="cl"><span class="nv">REGISTRY</span><span class="o">=</span>10.253.110.4
+</span></span><span class="line"><span class="cl"><span class="nv">NS</span><span class="o">=</span>ingress-nginx
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>Harbor 확인</h4>
@@ -186,9 +186,9 @@ git checkout v1.11.3
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mkdir -p /var/tmp/kubernetes-ingress
-cp nginx-repo.key nginx-repo.crt  /var/tmp/kubernetes-ingress
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir -p /var/tmp/kubernetes-ingress
+</span></span><span class="line"><span class="cl">cp nginx-repo.key nginx-repo.crt  /var/tmp/kubernetes-ingress
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>라이센스 복사</h4>
@@ -202,10 +202,10 @@ cp nginx-repo.key nginx-repo.crt  /var/tmp/kubernetes-ingress
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /var/tmp/kubernetes-ingress
-
-make debian-image-nap-plus <span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress <span class="nv">TARGET</span><span class="o">=</span>container
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp/kubernetes-ingress
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">make debian-image-nap-plus <span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress <span class="nv">TARGET</span><span class="o">=</span>container
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>Docker Pull</h4>
@@ -218,8 +218,8 @@ make debian-image-nap-plus <span class="nv">PREFIX</span><span class="o">=</span
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">docker images
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker images
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>Docker Image 확인</h4>
@@ -235,11 +235,11 @@ make debian-image-nap-plus <span class="nv">PREFIX</span><span class="o">=</span
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">docker image tag 18a49497920c <span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress:1.11.3
-
-docker login &lt;harbor IP&gt;
-make push <span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker image tag 18a49497920c <span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress:1.11.3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker login &lt;harbor IP&gt;
+</span></span><span class="line"><span class="cl">make push <span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><figcaption>
             <h4>Harbor push#1</h4>
@@ -263,9 +263,9 @@ make push <span class="nv">PREFIX</span><span class="o">=</span><span class="nv"
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> deployments/helm-chart
-cp values-plus.yaml values-plus.yaml.orig
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> deployments/helm-chart
+</span></span><span class="line"><span class="cl">cp values-plus.yaml values-plus.yaml.orig
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>Helm Value 복사</h4>
@@ -313,43 +313,43 @@ cp values-plus.yaml values-plus.yaml.orig
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## vi 편집</span>
-vi values-plus.yaml 
-
-<span class="c1">## 내용 (imagePullSecretName의 경우 Harbor에 Public으로 만들었으면 상관 없음)</span>
-controller:
-  replicaCount: <span class="m">1</span>
-  nginxplus: <span class="nb">true</span>
-  image:
-    repository: 10.253.106.46/ingress-nginx/nginx-plus-ingress
-    tag: <span class="s2">&#34;1.11.3&#34;</span>
-  service:
-    externalTrafficPolicy: Cluster
-  appprotect:
-    <span class="c1">## Enable the App Protect module in the Ingress Controller.</span>
-    enable: <span class="nb">true</span>
-  wildcardTLS:
-    <span class="c1">## The base64-encoded TLS certificate for every Ingress host that has TLS enabled but no secret specified.</span>
-    <span class="c1">## If the parameter is not set, for such Ingress hosts NGINX will break any attempt to establish a TLS connection.</span>
-    cert: <span class="s2">&#34;&#34;</span>
-
-    <span class="c1">## The base64-encoded TLS key for every Ingress host that has TLS enabled but no secret specified.</span>
-    <span class="c1">## If the parameter is not set, for such Ingress hosts NGINX will break any attempt to establish a TLS connection.</span>
-    key: <span class="s2">&#34;&#34;</span>
-
-    <span class="c1">## The secret with a TLS certificate and key for every Ingress host that has TLS enabled but no secret specified.</span>
-    <span class="c1">## The value must follow the following format: `&lt;namespace&gt;/&lt;name&gt;`.</span>
-    <span class="c1">## Used as an alternative to specifying a certificate and key using `controller.wildcardTLS.cert` and `controller.wildcardTLS.key` parameters.</span>
-    <span class="c1">## Format: &lt;namespace&gt;/&lt;secret_name&gt;</span>
-    secret: ingress-nginx/wildcard-tls
-  serviceAccount:
-    <span class="c1">## The name of the service account of the Ingress controller pods. Used for RBAC.</span>
-    <span class="c1">## Autogenerated if not set or set to &#34;&#34;.</span>
-    name: ingress-nginx
-    <span class="c1">## The name of the secret containing docker registry credentials.</span>
-    <span class="c1">## Secret must exist in the same namespace as the helm release.</span>
-    imagePullSecretName: <span class="s2">&#34;regcred&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## vi 편집</span>
+</span></span><span class="line"><span class="cl">vi values-plus.yaml 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 내용 (imagePullSecretName의 경우 Harbor에 Public으로 만들었으면 상관 없음)</span>
+</span></span><span class="line"><span class="cl">controller:
+</span></span><span class="line"><span class="cl">  replicaCount: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  nginxplus: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  image:
+</span></span><span class="line"><span class="cl">    repository: 10.253.106.46/ingress-nginx/nginx-plus-ingress
+</span></span><span class="line"><span class="cl">    tag: <span class="s2">&#34;1.11.3&#34;</span>
+</span></span><span class="line"><span class="cl">  service:
+</span></span><span class="line"><span class="cl">    externalTrafficPolicy: Cluster
+</span></span><span class="line"><span class="cl">  appprotect:
+</span></span><span class="line"><span class="cl">    <span class="c1">## Enable the App Protect module in the Ingress Controller.</span>
+</span></span><span class="line"><span class="cl">    enable: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  wildcardTLS:
+</span></span><span class="line"><span class="cl">    <span class="c1">## The base64-encoded TLS certificate for every Ingress host that has TLS enabled but no secret specified.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## If the parameter is not set, for such Ingress hosts NGINX will break any attempt to establish a TLS connection.</span>
+</span></span><span class="line"><span class="cl">    cert: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">## The base64-encoded TLS key for every Ingress host that has TLS enabled but no secret specified.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## If the parameter is not set, for such Ingress hosts NGINX will break any attempt to establish a TLS connection.</span>
+</span></span><span class="line"><span class="cl">    key: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">## The secret with a TLS certificate and key for every Ingress host that has TLS enabled but no secret specified.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## The value must follow the following format: `&lt;namespace&gt;/&lt;name&gt;`.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## Used as an alternative to specifying a certificate and key using `controller.wildcardTLS.cert` and `controller.wildcardTLS.key` parameters.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## Format: &lt;namespace&gt;/&lt;secret_name&gt;</span>
+</span></span><span class="line"><span class="cl">    secret: ingress-nginx/wildcard-tls
+</span></span><span class="line"><span class="cl">  serviceAccount:
+</span></span><span class="line"><span class="cl">    <span class="c1">## The name of the service account of the Ingress controller pods. Used for RBAC.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## Autogenerated if not set or set to &#34;&#34;.</span>
+</span></span><span class="line"><span class="cl">    name: ingress-nginx
+</span></span><span class="line"><span class="cl">    <span class="c1">## The name of the secret containing docker registry credentials.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## Secret must exist in the same namespace as the helm release.</span>
+</span></span><span class="line"><span class="cl">    imagePullSecretName: <span class="s2">&#34;regcred&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>PSP를 혀용하기 위해 해당 파일을 실행 해준다.</p>
 <div class="highlight"><div class="chroma">
@@ -357,8 +357,8 @@ controller:
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl apply -f https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/nginx-psp.yaml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/nginx-psp.yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>psp 허용</h4>
@@ -373,10 +373,10 @@ controller:
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create secret generic regcred --from-file<span class="o">=</span>.dockerconfigjson<span class="o">=</span><span class="nv">$HOME</span>/.docker/config.json --type<span class="o">=</span>kubernetes.io/dockerconfigjson -n ingress-nginx
-
-helm install nap nginx-stable/nginx-ingress -f values-plus.yaml -n ingress-nginx
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret generic regcred --from-file<span class="o">=</span>.dockerconfigjson<span class="o">=</span><span class="nv">$HOME</span>/.docker/config.json --type<span class="o">=</span>kubernetes.io/dockerconfigjson -n ingress-nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">helm install nap nginx-stable/nginx-ingress -f values-plus.yaml -n ingress-nginx
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>helm으로 nap 설치</h4>
@@ -389,8 +389,8 @@ helm install nap nginx-stable/nginx-ingress -f values-plus.yaml -n ingress-nginx
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">watch -n <span class="m">1</span> kubectl -n ingress-nginx get all
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">watch -n <span class="m">1</span> kubectl -n ingress-nginx get all
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><figcaption>
             <h4>설치 확인</h4>
@@ -418,15 +418,15 @@ helm install nap nginx-stable/nginx-ingress -f values-plus.yaml -n ingress-nginx
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-rbac.yaml
-wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe.yaml
-wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-ingress.yaml
-
-kubectl apply -f cafe-rbac.yaml -n <span class="nb">test</span>
-kubectl apply -f cafe.yaml -n <span class="nb">test</span>
-
-vi cafe-ingress.yaml <span class="o">(</span>인증서 만들었던 Domain으로 변경<span class="o">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-rbac.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-ingress.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f cafe-rbac.yaml -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f cafe.yaml -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vi cafe-ingress.yaml <span class="o">(</span>인증서 만들었던 Domain으로 변경<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>Domain을 변경 한다.</h4>
@@ -439,8 +439,8 @@ vi cafe-ingress.yaml <span class="o">(</span>인증서 만들었던 Domain으로
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl apply -f cafe-ingress.yaml -n <span class="nb">test</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f cafe-ingress.yaml -n <span class="nb">test</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>Ingress 확인.</h4>
@@ -463,11 +463,11 @@ vi cafe-ingress.yaml <span class="o">(</span>인증서 만들었던 Domain으로
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/syslog-rbac.yaml
-wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/syslog.yaml
-
-kubectl apply -f syslog-rbac.yaml -n ingress-nginx
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/syslog-rbac.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/syslog.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f syslog-rbac.yaml -n ingress-nginx
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -481,15 +481,15 @@ kubectl apply -f syslog-rbac.yaml -n ingress-nginx
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl apply -f syslog.yaml -n ingress-nginx
-wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-apple-uds.yaml
-wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-dataguard-alarm-policy.yaml
-wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-logconf.yaml
-
-kubectl apply -f  ap-apple-uds.yaml -n <span class="nb">test</span>
-kubeclt apply -f  ap-dataguard-alarm-policy.yaml -n <span class="nb">test</span>
-kubectl apply -f  ap-logconf.yaml -n <span class="nb">test</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f syslog.yaml -n ingress-nginx
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-apple-uds.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-dataguard-alarm-policy.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-logconf.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f  ap-apple-uds.yaml -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">kubeclt apply -f  ap-dataguard-alarm-policy.yaml -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f  ap-logconf.yaml -n <span class="nb">test</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ingress에 annotation을 설정</p>
 <div class="highlight"><div class="chroma">
@@ -528,39 +528,39 @@ kubectl apply -f  ap-logconf.yaml -n <span class="nb">test</span>
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-ingress-ap.yaml
-kubectl get pod -n ingress-nginx -o wide
-
-<span class="c1">## vi 편집 실행</span>
-vi cafe-ingress-ap.yaml
-
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: cafe-ingress
-  annotations:
-    appprotect.f5.com/app-protect-policy: <span class="s2">&#34;test/dataguard-alarm&#34;</span>
-    appprotect.f5.com/app-protect-enable: <span class="s2">&#34;True&#34;</span>
-    appprotect.f5.com/app-protect-security-log-enable: <span class="s2">&#34;True&#34;</span>
-    appprotect.f5.com/app-protect-security-log: <span class="s2">&#34;test/logconf&#34;</span>
-    appprotect.f5.com/app-protect-security-log-destination: <span class="s2">&#34;syslog:server=SYSLOG:514&#34;</span>
-spec:
-  ingressClassName: nginx <span class="c1"># use only with k8s version &gt;= 1.18.0</span>
-  tls:  - hosts:
-    - cafe.vcf.local  <span class="c1">## 인증서와 동일한 도메인으로 변경</span>
-  rules:
-  - host: cafe.vcf.local <span class="c1">## 인증서와 동일한 도메인으로 변경</span>
-    http:
-      paths:
-      - path: /tea
-        backend:
-          serviceName: tea-svc
-          servicePort: <span class="m">80</span>
-      - path: /coffee
-        backend:
-          serviceName: coffee-svc
-          servicePort: <span class="m">80</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-ingress-ap.yaml
+</span></span><span class="line"><span class="cl">kubectl get pod -n ingress-nginx -o wide
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## vi 편집 실행</span>
+</span></span><span class="line"><span class="cl">vi cafe-ingress-ap.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: networking.k8s.io/v1beta1
+</span></span><span class="line"><span class="cl">kind: Ingress
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: cafe-ingress
+</span></span><span class="line"><span class="cl">  annotations:
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-policy: <span class="s2">&#34;test/dataguard-alarm&#34;</span>
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-enable: <span class="s2">&#34;True&#34;</span>
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-security-log-enable: <span class="s2">&#34;True&#34;</span>
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-security-log: <span class="s2">&#34;test/logconf&#34;</span>
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-security-log-destination: <span class="s2">&#34;syslog:server=SYSLOG:514&#34;</span>
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  ingressClassName: nginx <span class="c1"># use only with k8s version &gt;= 1.18.0</span>
+</span></span><span class="line"><span class="cl">  tls:  - hosts:
+</span></span><span class="line"><span class="cl">    - cafe.vcf.local  <span class="c1">## 인증서와 동일한 도메인으로 변경</span>
+</span></span><span class="line"><span class="cl">  rules:
+</span></span><span class="line"><span class="cl">  - host: cafe.vcf.local <span class="c1">## 인증서와 동일한 도메인으로 변경</span>
+</span></span><span class="line"><span class="cl">    http:
+</span></span><span class="line"><span class="cl">      paths:
+</span></span><span class="line"><span class="cl">      - path: /tea
+</span></span><span class="line"><span class="cl">        backend:
+</span></span><span class="line"><span class="cl">          serviceName: tea-svc
+</span></span><span class="line"><span class="cl">          servicePort: <span class="m">80</span>
+</span></span><span class="line"><span class="cl">      - path: /coffee
+</span></span><span class="line"><span class="cl">        backend:
+</span></span><span class="line"><span class="cl">          serviceName: coffee-svc
+</span></span><span class="line"><span class="cl">          servicePort: <span class="m">80</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -577,18 +577,18 @@ spec:
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## syslog service ip</span>
-<span class="nv">SYSLOG_IP</span><span class="o">=</span>10.101.182.155
-vi cafe-ingress-ap.yaml
-
-sed -e <span class="s2">&#34;s/SYSLOG/</span><span class="nv">$SYSLOG_IP</span><span class="s2">/&#34;</span> cafe-ingress-ap.yaml &gt; cafe-ingress-ap-syslog.yaml
-kubectl apply -n <span class="nb">test</span> -f cafe-ingress-ap-syslog.yaml
-
-kubectl get ingress -n <span class="nb">test</span>
-
-<span class="c1">## 아래 명령어로 annotation을 확인 할 수 있다.</span>
-kubrectl get ingress cafe-ingress -n <span class="nb">test</span> -o yaml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## syslog service ip</span>
+</span></span><span class="line"><span class="cl"><span class="nv">SYSLOG_IP</span><span class="o">=</span>10.101.182.155
+</span></span><span class="line"><span class="cl">vi cafe-ingress-ap.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sed -e <span class="s2">&#34;s/SYSLOG/</span><span class="nv">$SYSLOG_IP</span><span class="s2">/&#34;</span> cafe-ingress-ap.yaml &gt; cafe-ingress-ap-syslog.yaml
+</span></span><span class="line"><span class="cl">kubectl apply -n <span class="nb">test</span> -f cafe-ingress-ap-syslog.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get ingress -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래 명령어로 annotation을 확인 할 수 있다.</span>
+</span></span><span class="line"><span class="cl">kubrectl get ingress cafe-ingress -n <span class="nb">test</span> -o yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>Annotation 확인.</h4>
@@ -603,11 +603,11 @@ kubrectl get ingress cafe-ingress -n <span class="nb">test</span> -o yaml
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl get pod -n ingress-nginx
-
-LOG 확인
-kubectl -n ingress-nginx <span class="nb">exec</span> -it syslog-65d847447d-ghbvq -- tail -f /var/log/messages
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get pod -n ingress-nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">LOG 확인
+</span></span><span class="line"><span class="cl">kubectl -n ingress-nginx <span class="nb">exec</span> -it syslog-65d847447d-ghbvq -- tail -f /var/log/messages
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><figcaption>
             <h4>syslog pod 확인.</h4>
@@ -649,10 +649,10 @@ logstash yaml 파일, <a href="/ko/nap/logstash_test.yaml" rel=""><i class="far 
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mkdir /var/tmp/kibana
-<span class="nb">cd</span> /var/tmp/kibana
-cp false-positives-dashboards.ndjson overview-dashboard.ndjson /var/tmp/kibana
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir /var/tmp/kibana
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp/kibana
+</span></span><span class="line"><span class="cl">cp false-positives-dashboards.ndjson overview-dashboard.ndjson /var/tmp/kibana
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><figcaption>
             <h4>파일 다운로드</h4>
@@ -680,23 +680,23 @@ cp false-positives-dashboards.ndjson overview-dashboard.ndjson /var/tmp/kibana
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /var/tmp
-
-<span class="nv">KIBANA_URL</span><span class="o">=</span> <span class="o">{</span>FQDN or IP<span class="o">}</span>
-<span class="nv">KIBANA_URL</span><span class="o">=</span>http://kibana.vcf.local:5601
-
-jq -s . kibana/overview-dashboard.ndjson <span class="p">|</span> jq <span class="s1">&#39;{&#34;objects&#34;: . }&#39;</span> <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>curl -k --location --request POST <span class="s2">&#34;</span><span class="nv">$KIBANA_URL</span><span class="s2">/api/kibana/dashboards/import&#34;</span> <span class="se">\
-</span><span class="se"></span>--header <span class="s1">&#39;kbn-xsrf: true&#39;</span> <span class="se">\
-</span><span class="se"></span>--header <span class="s1">&#39;Content-Type: text/plain&#39;</span> -d @- <span class="se">\
-</span><span class="se"></span><span class="p">|</span> jq
-
-jq -s . kibana/false-positives-dashboards.ndjson <span class="p">|</span> jq <span class="s1">&#39;{&#34;objects&#34;: . }&#39;</span> <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>curl -k --location --request POST <span class="s2">&#34;</span><span class="nv">$KIBANA_URL</span><span class="s2">/api/kibana/dashboards/import&#34;</span> <span class="se">\
-</span><span class="se"></span>--header <span class="s1">&#39;kbn-xsrf: true&#39;</span> <span class="se">\
-</span><span class="se"></span>--header <span class="s1">&#39;Content-Type: text/plain&#39;</span> -d @- <span class="se">\
-</span><span class="se"></span><span class="p">|</span> jq
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">KIBANA_URL</span><span class="o">=</span> <span class="o">{</span>FQDN or IP<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">KIBANA_URL</span><span class="o">=</span>http://kibana.vcf.local:5601
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jq -s . kibana/overview-dashboard.ndjson <span class="p">|</span> jq <span class="s1">&#39;{&#34;objects&#34;: . }&#39;</span> <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>curl -k --location --request POST <span class="s2">&#34;</span><span class="nv">$KIBANA_URL</span><span class="s2">/api/kibana/dashboards/import&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;kbn-xsrf: true&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;Content-Type: text/plain&#39;</span> -d @- <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> jq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jq -s . kibana/false-positives-dashboards.ndjson <span class="p">|</span> jq <span class="s1">&#39;{&#34;objects&#34;: . }&#39;</span> <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>curl -k --location --request POST <span class="s2">&#34;</span><span class="nv">$KIBANA_URL</span><span class="s2">/api/kibana/dashboards/import&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;kbn-xsrf: true&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;Content-Type: text/plain&#39;</span> -d @- <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> jq
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>kibana접속 후 index patterns에 waf-logs-* 확인
 <figure><figcaption>

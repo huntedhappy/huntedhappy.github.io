@@ -19,7 +19,7 @@
 <meta name="application-name" content="Dokyung&#39;s DevOoOps">
 <meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/tanzu-keycloak/" /><link rel="prev" href="https://huntedhappy.github.io/tanzu-okta/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/tanzu-keycloak/" /><link rel="prev" href="https://huntedhappy.github.io/tanzu-okta/" /><link rel="next" href="https://huntedhappy.github.io/tce/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -33,7 +33,7 @@
                             "url": "https:\/\/huntedhappy.github.io\/tanzu-keycloak\/tanzu-keycloak.png",
                             "width":  554 ,
                             "height":  183 
-                        }],"genre": "posts","keywords": "tanzu, k8s, KEYCLOAK, OIDC, devops, dk, dokyung","wordcount":  398 ,
+                        }],"genre": "posts","keywords": "tanzu, k8s, KEYCLOAK, OIDC, devops, dk, dokyung","wordcount":  397 ,
         "url": "https:\/\/huntedhappy.github.io\/tanzu-keycloak\/","datePublished": "2022-07-15T17:49:40+09:00","dateModified": "2022-07-15T19:03:19+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Dokyung"},"author": {
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">The Documentation Tanzu &amp; Keycloak</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-15">2022-07-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;398 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-15">2022-07-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;397 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -158,15 +158,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## 압축 해제</span>
-tar zxvf keycloak-18.0.2.tar.gz
-
-<span class="nb">cd</span> keycloak-18.0.2
-<span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN</span><span class="o">=</span>admin
-<span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN_PASSWORD</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-
-bin/kc.sh start-dev --https-certificate-file <span class="o">{</span>인증서<span class="o">}</span> --https-certificate-key-file <span class="o">{</span>인증서 KEY<span class="o">}</span> --https-port <span class="m">8443</span> --hostname <span class="o">{</span>hostname<span class="o">}</span> <span class="p">&amp;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 압축 해제</span>
+</span></span><span class="line"><span class="cl">tar zxvf keycloak-18.0.2.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> keycloak-18.0.2
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN</span><span class="o">=</span>admin
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN_PASSWORD</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">bin/kc.sh start-dev --https-certificate-file <span class="o">{</span>인증서<span class="o">}</span> --https-certificate-key-file <span class="o">{</span>인증서 KEY<span class="o">}</span> --https-port <span class="m">8443</span> --hostname <span class="o">{</span>hostname<span class="o">}</span> <span class="p">&amp;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>reaml 생성
 <figure><img src="/images/keycloak/1-2.png"/><figcaption>
@@ -281,29 +281,27 @@ bin/kc.sh start-dev --https-certificate-file <span class="o">{</span>인증서<s
 <p>OIDC 추출</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">
-<span class="c1">## management cluster 변경</span>
-<span class="nv">cluster</span><span class="o">=</span>tkgm02
-
-<span class="nb">echo</span> <span class="nv">$IDENTITY_MANAGEMENT_TYPE</span>
-<span class="nb">export</span> <span class="nv">_TKG_CLUSTER_FORCE_ROLE</span><span class="o">=</span><span class="s2">&#34;management&#34;</span>
-<span class="nb">export</span> <span class="nv">FILTER_BY_ADDON_TYPE</span><span class="o">=</span><span class="s2">&#34;authentication/pinniped&#34;</span>
-
-tanzu cluster create <span class="nv">$cluster</span> --dry-run -f tkgm01.yaml &gt; <span class="nv">$cluster</span>-example-secret.yaml
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## management cluster 변경</span>
+</span></span><span class="line"><span class="cl"><span class="nv">cluster</span><span class="o">=</span>tkgm02
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$IDENTITY_MANAGEMENT_TYPE</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">_TKG_CLUSTER_FORCE_ROLE</span><span class="o">=</span><span class="s2">&#34;management&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">FILTER_BY_ADDON_TYPE</span><span class="o">=</span><span class="s2">&#34;authentication/pinniped&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tanzu cluster create <span class="nv">$cluster</span> --dry-run -f tkgm01.yaml &gt; <span class="nv">$cluster</span>-example-secret.yaml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>위와 같이 하면 아래와 같은 파일을 확인 할 수 있다.</p>
 <div class="highlight"><div class="chroma">
@@ -359,56 +357,56 @@ tanzu cluster create <span class="nv">$cluster</span> --dry-run -f tkgm01.yaml &
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apiVersion: v1
-kind: Secret
-metadata:
-  annotations:
-    tkg.tanzu.vmware.com/addon-type: authentication/pinniped
-  labels:
-    clusterctl.cluster.x-k8s.io/move: <span class="s2">&#34;&#34;</span>
-    tkg.tanzu.vmware.com/addon-name: pinniped
-    tkg.tanzu.vmware.com/cluster-name: tkgm02
-  name: cjenm-tkgm02-pinniped-addon
-  namespace: tkg-system
-stringData:
-  values.yaml: <span class="p">|</span>
-    <span class="c1">#@data/values</span>
-    <span class="c1">#@overlay/match-child-defaults missing_ok=True</span>
-    ---
-    infrastructure_provider: vsphere
-    tkg_cluster_role: management
-    custom_cluster_issuer: <span class="s2">&#34;&#34;</span>
-    custom_tls_secret: <span class="s2">&#34;&#34;</span>
-    http_proxy: <span class="s2">&#34;&#34;</span>
-    https_proxy: <span class="s2">&#34;&#34;</span>
-    no_proxy: <span class="s2">&#34;&#34;</span>
-    identity_management_type: oidc
-    pinniped:
-      cert_duration: 2160h
-      cert_renew_before: 360h
-      supervisor_svc_endpoint: https://0.0.0.0:31234
-      supervisor_ca_bundle_data: ca_bundle_data_of_supervisor_svc
-      supervisor_svc_external_ip: 0.0.0.0
-      supervisor_svc_external_dns: null
-      upstream_oidc_client_id: <span class="o">{</span>CLIENT ID<span class="o">}</span>
-      upstream_oidc_client_secret: <span class="o">{</span>CLIENT SECRET<span class="o">}</span>
-      upstream_oidc_issuer_url: https://<span class="o">{</span>KEYCLAOK FQDN<span class="o">}</span>:8443/realms/access
-      upstream_oidc_tls_ca_data: <span class="o">{</span>base64로 CA인증서<span class="o">}</span>
-      upstream_oidc_additional_scopes:
-      - openid
-      - profile
-      - email
-      - groups
-      - offline_access
-      upstream_oidc_claims:
-        username: email
-        groups: groups
-      supervisor:
-        service:
-          name: pinniped-supervisor
-          type: LoadBalancer
-type: tkg.tanzu.vmware.com/addon
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Secret
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  annotations:
+</span></span><span class="line"><span class="cl">    tkg.tanzu.vmware.com/addon-type: authentication/pinniped
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    clusterctl.cluster.x-k8s.io/move: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    tkg.tanzu.vmware.com/addon-name: pinniped
+</span></span><span class="line"><span class="cl">    tkg.tanzu.vmware.com/cluster-name: tkgm02
+</span></span><span class="line"><span class="cl">  name: cjenm-tkgm02-pinniped-addon
+</span></span><span class="line"><span class="cl">  namespace: tkg-system
+</span></span><span class="line"><span class="cl">stringData:
+</span></span><span class="line"><span class="cl">  values.yaml: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#@data/values</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#@overlay/match-child-defaults missing_ok=True</span>
+</span></span><span class="line"><span class="cl">    ---
+</span></span><span class="line"><span class="cl">    infrastructure_provider: vsphere
+</span></span><span class="line"><span class="cl">    tkg_cluster_role: management
+</span></span><span class="line"><span class="cl">    custom_cluster_issuer: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    custom_tls_secret: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    http_proxy: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    https_proxy: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    no_proxy: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    identity_management_type: oidc
+</span></span><span class="line"><span class="cl">    pinniped:
+</span></span><span class="line"><span class="cl">      cert_duration: 2160h
+</span></span><span class="line"><span class="cl">      cert_renew_before: 360h
+</span></span><span class="line"><span class="cl">      supervisor_svc_endpoint: https://0.0.0.0:31234
+</span></span><span class="line"><span class="cl">      supervisor_ca_bundle_data: ca_bundle_data_of_supervisor_svc
+</span></span><span class="line"><span class="cl">      supervisor_svc_external_ip: 0.0.0.0
+</span></span><span class="line"><span class="cl">      supervisor_svc_external_dns: null
+</span></span><span class="line"><span class="cl">      upstream_oidc_client_id: <span class="o">{</span>CLIENT ID<span class="o">}</span>
+</span></span><span class="line"><span class="cl">      upstream_oidc_client_secret: <span class="o">{</span>CLIENT SECRET<span class="o">}</span>
+</span></span><span class="line"><span class="cl">      upstream_oidc_issuer_url: https://<span class="o">{</span>KEYCLAOK FQDN<span class="o">}</span>:8443/realms/access
+</span></span><span class="line"><span class="cl">      upstream_oidc_tls_ca_data: <span class="o">{</span>base64로 CA인증서<span class="o">}</span>
+</span></span><span class="line"><span class="cl">      upstream_oidc_additional_scopes:
+</span></span><span class="line"><span class="cl">      - openid
+</span></span><span class="line"><span class="cl">      - profile
+</span></span><span class="line"><span class="cl">      - email
+</span></span><span class="line"><span class="cl">      - groups
+</span></span><span class="line"><span class="cl">      - offline_access
+</span></span><span class="line"><span class="cl">      upstream_oidc_claims:
+</span></span><span class="line"><span class="cl">        username: email
+</span></span><span class="line"><span class="cl">        groups: groups
+</span></span><span class="line"><span class="cl">      supervisor:
+</span></span><span class="line"><span class="cl">        service:
+</span></span><span class="line"><span class="cl">          name: pinniped-supervisor
+</span></span><span class="line"><span class="cl">          type: LoadBalancer
+</span></span><span class="line"><span class="cl">type: tkg.tanzu.vmware.com/addon
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>실행</p>
 <div class="highlight"><div class="chroma">
@@ -416,8 +414,8 @@ type: tkg.tanzu.vmware.com/addon
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl apply -f <span class="nv">$cluster</span>-example-secret.yaml -n tkg-system
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f <span class="nv">$cluster</span>-example-secret.yaml -n tkg-system
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="4">
 <li>완료 후 테스트</li>
@@ -429,10 +427,10 @@ type: tkg.tanzu.vmware.com/addon
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-tkgm02
-
-kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-tkgm02
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><img src="/images/keycloak/2-1.png"/><figcaption>
             <h4>요청</h4>
@@ -489,7 +487,8 @@ kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
         </section>
     </div>
 
-    <div class="post-nav"><a href="/tanzu-okta/" class="prev" rel="prev" title="The Documentation Tanzu &amp; OTKA"><i class="fas fa-angle-left fa-fw"></i>The Documentation Tanzu &amp; OTKA</a></div>
+    <div class="post-nav"><a href="/tanzu-okta/" class="prev" rel="prev" title="The Documentation Tanzu &amp; OTKA"><i class="fas fa-angle-left fa-fw"></i>The Documentation Tanzu &amp; OTKA</a>
+            <a href="/tce/" class="next" rel="next" title="The Documentation Tanzu Community Edition">The Documentation Tanzu Community Edition<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

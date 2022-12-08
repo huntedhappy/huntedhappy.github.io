@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://huntedhappy.github.io/tce/</loc>
+    <lastmod>2022-12-06T20:51:50+09:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://huntedhappy.github.io/tanzu-keycloak/</loc>
     <lastmod>2022-07-15T19:03:19+09:00</lastmod>
   </url>

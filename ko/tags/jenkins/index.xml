@@ -61,14 +61,14 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apt update <span class="o">&amp;&amp;</span> apt upgrade 
-
-sudo apt search openjdk
-
-sudo apt install openjdk-11-jdk -y
-
-java --version
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apt update <span class="o">&amp;&amp;</span> apt upgrade 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt search openjdk
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt install openjdk-11-jdk -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">java --version
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Jenkins Install</p>
 <div class="highlight"><div class="chroma">
@@ -83,15 +83,15 @@ java --version
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key <span class="p">|</span> sudo apt-key add -
-sudo sh -c <span class="s1">&#39;echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list&#39;</span>
-
-sudo apt update -y
-sudo apt install jenkins -y
-
-systemctl restart jenkins
-systemctl <span class="nb">enable</span> jenkins
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key <span class="p">|</span> sudo apt-key add -
+</span></span><span class="line"><span class="cl">sudo sh -c <span class="s1">&#39;echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt update -y
+</span></span><span class="line"><span class="cl">sudo apt install jenkins -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl restart jenkins
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> jenkins
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>패스워드 확인</p>
 <div class="highlight"><div class="chroma">
@@ -99,8 +99,8 @@ systemctl <span class="nb">enable</span> jenkins
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat /var/lib/jenkins/secrets/initialAdminPassword
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat /var/lib/jenkins/secrets/initialAdminPassword
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -134,8 +134,8 @@ systemctl <span class="nb">enable</span> jenkins
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>root.sh에 있는 파일 내용을 복사해서 shell 실행</p>
 <div class="highlight"><div class="chroma">
@@ -143,8 +143,8 @@ systemctl <span class="nb">enable</span> jenkins
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">. root.sh
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">. root.sh
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>인증서 권한 변경</p>
 <div class="highlight"><div class="chroma">
@@ -154,10 +154,10 @@ systemctl <span class="nb">enable</span> jenkins
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">chmod <span class="m">700</span> /data/cert
-chmod <span class="m">600</span> /data/cert/yourdomain.com.cert
-chmod <span class="m">600</span> /data/cert/yourdomain.com.key
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">chmod <span class="m">700</span> /data/cert
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.cert
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.key
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Jenkins 파일 변경</p>
 <div class="highlight"><div class="chroma">
@@ -176,19 +176,19 @@ chmod <span class="m">600</span> /data/cert/yourdomain.com.key
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vi /etc/default/jenkins
-
-<span class="nv">HTTP_PORT</span><span class="o">=</span><span class="m">8080</span>             <span class="c1">### ---&gt; 이부분을 찾아서 아래 부분을 채워 넣어주자.</span>
-<span class="nv">HTTP_PORT_DISABLE</span><span class="o">=</span>-1       <span class="c1">### HTTP DISABLE</span>
-<span class="nv">HTTPS_CERT</span><span class="o">=</span>/data/cert/yourdomain.com.cert      <span class="c1">### 인증서</span>
-<span class="nv">HTTPS_KEY</span><span class="o">=</span>/data/cert/yourdomain.com.key        <span class="c1">### KEY</span>
-
-<span class="c1">### args 마지막 줄에 빨간 부분을 채워서 넣어준다.</span>
-<span class="nv">JENKINS_ARGS</span><span class="o">=</span><span class="s2">&#34;--webroot=/var/cache/</span><span class="nv">$NAME</span><span class="s2">/war --httpPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpPort=</span><span class="nv">$HTTP_PORT_DISABLE</span><span class="s2"> --httpsPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpsCertificate=</span><span class="nv">$HTTPS_CERT</span><span class="s2"> --httpsPrivateKey=</span><span class="nv">$HTTPS_KEY</span><span class="s2">&#34;</span>
-
-<span class="c1">### jenkins restart</span>
-systemctl restart jenkins
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vi /etc/default/jenkins
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">HTTP_PORT</span><span class="o">=</span><span class="m">8080</span>             <span class="c1">### ---&gt; 이부분을 찾아서 아래 부분을 채워 넣어주자.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">HTTP_PORT_DISABLE</span><span class="o">=</span>-1       <span class="c1">### HTTP DISABLE</span>
+</span></span><span class="line"><span class="cl"><span class="nv">HTTPS_CERT</span><span class="o">=</span>/data/cert/yourdomain.com.cert      <span class="c1">### 인증서</span>
+</span></span><span class="line"><span class="cl"><span class="nv">HTTPS_KEY</span><span class="o">=</span>/data/cert/yourdomain.com.key        <span class="c1">### KEY</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### args 마지막 줄에 빨간 부분을 채워서 넣어준다.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">JENKINS_ARGS</span><span class="o">=</span><span class="s2">&#34;--webroot=/var/cache/</span><span class="nv">$NAME</span><span class="s2">/war --httpPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpPort=</span><span class="nv">$HTTP_PORT_DISABLE</span><span class="s2"> --httpsPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpsCertificate=</span><span class="nv">$HTTPS_CERT</span><span class="s2"> --httpsPrivateKey=</span><span class="nv">$HTTPS_KEY</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### jenkins restart</span>
+</span></span><span class="line"><span class="cl">systemctl restart jenkins
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -239,36 +239,36 @@ systemctl restart jenkins
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vi  /etc/nginx/sites-available/jenkins
-
-server <span class="o">{</span>
-    server_name jenkins.tkg.io<span class="p">;</span>
-
-    location / <span class="o">{</span>
-        proxy_redirect off<span class="p">;</span>
-        proxy_pass_header Server<span class="p">;</span>
-        proxy_set_header Host <span class="nv">$http_host</span><span class="p">;</span>
-        proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
-        proxy_set_header X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
-        proxy_pass https://127.0.0.1:8080/<span class="p">;</span>
-    <span class="o">}</span>
-
-    listen <span class="m">443</span> ssl<span class="p">;</span>
-    ssl_certificate /data/cert/yourdomain.com.crt<span class="p">;</span>
-    ssl_certificate_key /data/cert/yourdomain.com.key<span class="p">;</span>
-    ssl_client_certificate /data/cert/ca.crt<span class="p">;</span>
-<span class="o">}</span>
-
-server <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="nv">$host</span> <span class="o">=</span> jenkins.tkg.io<span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="m">301</span> https://<span class="nv">$host$request_uri</span><span class="p">;</span>
-    <span class="o">}</span> <span class="c1"># managed by Certbot</span>
-
-    listen 80<span class="p">;</span>
-    server_name jenkins.tkg.io<span class="p">;</span>
-    <span class="k">return</span> 404<span class="p">;</span> <span class="c1"># managed by Certbot</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vi  /etc/nginx/sites-available/jenkins
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    server_name jenkins.tkg.io<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        proxy_redirect off<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_pass_header Server<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header Host <span class="nv">$http_host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_pass https://127.0.0.1:8080/<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    listen <span class="m">443</span> ssl<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    ssl_certificate /data/cert/yourdomain.com.crt<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    ssl_certificate_key /data/cert/yourdomain.com.key<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    ssl_client_certificate /data/cert/ca.crt<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="nv">$host</span> <span class="o">=</span> jenkins.tkg.io<span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="m">301</span> https://<span class="nv">$host$request_uri</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="c1"># managed by Certbot</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server_name jenkins.tkg.io<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> 404<span class="p">;</span> <span class="c1"># managed by Certbot</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>symbolic link 연결</p>
 <div class="highlight"><div class="chroma">
@@ -278,10 +278,10 @@ server <span class="o">{</span>
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"> <span class="nb">cd</span> /etc/nginx/sites-enabled
-
- ln -s  /etc/nginx/sites-available/jenkins .
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> <span class="nb">cd</span> /etc/nginx/sites-enabled
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> ln -s  /etc/nginx/sites-available/jenkins .
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>

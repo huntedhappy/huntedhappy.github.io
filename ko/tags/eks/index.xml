@@ -27,8 +27,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Set-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="n">-Scope</span> <span class="k">Process</span> <span class="n">-Force</span><span class="p">;</span> <span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="p">=</span> <span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="o">-bor</span> <span class="n">3072</span><span class="p">;</span> <span class="nb">iex </span><span class="p">((</span><span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://community.chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Set-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="n">-Scope</span> <span class="k">Process</span> <span class="n">-Force</span><span class="p">;</span> <span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="p">=</span> <span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="o">-bor</span> <span class="n">3072</span><span class="p">;</span> <span class="nb">iex </span><span class="p">((</span><span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://community.chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>eksctl 설치 링크 <a href="https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/eksctl.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> AWS eksctl </a></p>
 <div class="highlight"><div class="chroma">
@@ -36,8 +36,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">chocolatey</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">eksctl</span> <span class="nb">aws-iam</span><span class="n">-authenticator</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">chocolatey</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">eksctl</span> <span class="nb">aws-iam</span><span class="n">-authenticator</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>kubectl 설치 링크 <a href="https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/install-kubectl.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> AWS kubectl </a></p>
 <p>링크를 보게 되면 버전별로 다운로드 받을 수 있게 되어 있다.</p>
@@ -46,8 +46,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">curl </span><span class="n">-o</span> <span class="n">kubectl</span><span class="p">.</span><span class="n">exe</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="nb">amazon-eks</span><span class="p">.</span><span class="n">s3</span><span class="p">.</span><span class="nb">us-west</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">2</span><span class="p">/</span><span class="n">2021</span><span class="p">-</span><span class="n">07</span><span class="p">-</span><span class="n">05</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">windows</span><span class="p">/</span><span class="n">amd64</span><span class="p">/</span><span class="n">kubectl</span><span class="p">.</span><span class="n">exe</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">curl </span><span class="n">-o</span> <span class="n">kubectl</span><span class="p">.</span><span class="n">exe</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="nb">amazon-eks</span><span class="p">.</span><span class="n">s3</span><span class="p">.</span><span class="nb">us-west</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">2</span><span class="p">/</span><span class="n">2021</span><span class="p">-</span><span class="n">07</span><span class="p">-</span><span class="n">05</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">windows</span><span class="p">/</span><span class="n">amd64</span><span class="p">/</span><span class="n">kubectl</span><span class="p">.</span><span class="n">exe</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>awscli 설치링크 <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> AWS awscli </a></p>
 <div class="highlight"><div class="chroma">
@@ -56,9 +56,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">msiexec</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">i</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">awscli</span><span class="p">.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">AWSCLIV2</span><span class="p">.</span><span class="n">msi</span>
-<span class="n">aws</span> <span class="p">-</span><span class="n">-version</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">msiexec</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">i</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">awscli</span><span class="p">.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">AWSCLIV2</span><span class="p">.</span><span class="n">msi</span>
+</span></span><span class="line"><span class="cl"><span class="n">aws</span> <span class="p">-</span><span class="n">-version</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -155,19 +155,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">eksctl</span> <span class="n">create</span> <span class="n">cluster</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-name</span> <span class="nb">aws-eks</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-region</span> <span class="nb">us-east</span><span class="p">-</span><span class="n">2</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-nodegroup-name</span> <span class="nb">aws-node</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-node-type</span> <span class="n">t3</span><span class="p">.</span><span class="n">medium</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-nodes</span> <span class="n">3</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-nodes-min</span> <span class="n">1</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-nodes-max</span> <span class="n">4</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-ssh-access</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-ssh-public-key</span> <span class="n">huntedhappy</span><span class="p">.</span><span class="n">pub</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-with-oidc</span> <span class="p">\</span>
- <span class="p">-</span><span class="n">-managed</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">eksctl</span> <span class="n">create</span> <span class="n">cluster</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-name</span> <span class="nb">aws-eks</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-region</span> <span class="nb">us-east</span><span class="p">-</span><span class="n">2</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-nodegroup-name</span> <span class="nb">aws-node</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-node-type</span> <span class="n">t3</span><span class="p">.</span><span class="n">medium</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-nodes</span> <span class="n">3</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-nodes-min</span> <span class="n">1</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-nodes-max</span> <span class="n">4</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-ssh-access</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-ssh-public-key</span> <span class="n">huntedhappy</span><span class="p">.</span><span class="n">pub</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-with-oidc</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-managed</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>구성 EKS 연동 및 확인
 aws eks update-kubeconfig &ndash;name aws-eks</p>

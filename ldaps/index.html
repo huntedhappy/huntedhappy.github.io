@@ -157,11 +157,11 @@ FQDN인증서를 확인 하면 FQDN만 구성이 되어 있는 것을 알 수 �
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## 아래 IP로 ldapsearch를 하게 되면 에러가 난다. 만약 IP로도 가능하게 하려면 인증서 변경이 필요하다.</span>
-ldapsearch -x -H ldaps://10.253.241.2 -D <span class="s1">&#39;cn=administrator,cn=users,dc=tkg,dc=io&#39;</span> -w <span class="s1">&#39;Passw0rd&#39;</span> -b <span class="s1">&#39;ou=tanzu,dc=tkg,dc=io&#39;</span>
-<span class="c1">## 에러</span>
-ldap_sasl_bind<span class="o">(</span>SIMPLE<span class="o">)</span>: Can<span class="err">&#39;</span>t contact LDAP server <span class="o">(</span>-1<span class="o">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 아래 IP로 ldapsearch를 하게 되면 에러가 난다. 만약 IP로도 가능하게 하려면 인증서 변경이 필요하다.</span>
+</span></span><span class="line"><span class="cl">ldapsearch -x -H ldaps://10.253.241.2 -D <span class="s1">&#39;cn=administrator,cn=users,dc=tkg,dc=io&#39;</span> -w <span class="s1">&#39;Passw0rd&#39;</span> -b <span class="s1">&#39;ou=tanzu,dc=tkg,dc=io&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 에러</span>
+</span></span><span class="line"><span class="cl">ldap_sasl_bind<span class="o">(</span>SIMPLE<span class="o">)</span>: Can<span class="err">&#39;</span>t contact LDAP server <span class="o">(</span>-1<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><img src="/images/ldaps/1-2.png"/><figcaption>
             <h4>Ldaps Falied</h4>
@@ -236,8 +236,8 @@ ldap_sasl_bind<span class="o">(</span>SIMPLE<span class="o">)</span>: Can<span c
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">certreq</span> <span class="n">-submit</span> <span class="n">-sttrib</span> <span class="s2">&#34;CertificateTemplate:webserver&#34;</span> <span class="n">certreq</span><span class="p">.</span><span class="n">req</span> <span class="n">certreq</span><span class="p">.</span><span class="n">cer</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">certreq</span> <span class="n">-submit</span> <span class="n">-sttrib</span> <span class="s2">&#34;CertificateTemplate:webserver&#34;</span> <span class="n">certreq</span><span class="p">.</span><span class="n">req</span> <span class="n">certreq</span><span class="p">.</span><span class="n">cer</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><img src="/images/ldaps/1-15.png"/><figcaption>
             <h4>certlm #12</h4>

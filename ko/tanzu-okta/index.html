@@ -201,8 +201,8 @@ OKTA는 기본적으로 30일간 무료로 사용이 가능합니다.</p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">echo</span> -n <span class="s1">&#39;{CLIENT SECRETS}&#39;</span> <span class="p">|</span> base64
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s1">&#39;{CLIENT SECRETS}&#39;</span> <span class="p">|</span> base64
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>TANZU MGMT 에서 OIDC 부분을 찾은 후 파일 수정</p>
 <div class="highlight"><div class="chroma">
@@ -222,20 +222,20 @@ OKTA는 기본적으로 30일간 무료로 사용이 가능합니다.</p>
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">
-IDENTITY_MANAGEMENT_TYPE: <span class="s2">&#34;oidc&#34;</span>
-
-<span class="c1">#! Settings for IDENTITY_MANAGEMENT_TYPE: &#34;oidc&#34;</span>
-CERT_DURATION: 2160h
-CERT_RENEW_BEFORE: 360h
-IDENTITY_MANAGEMENT_TYPE: oidc
-OIDC_IDENTITY_PROVIDER_CLIENT_ID: 0oa2i<span class="o">[</span>...<span class="o">]</span>NKst4x7
-OIDC_IDENTITY_PROVIDER_CLIENT_SECRET: &lt;encoded:LVVnMFNsZFIy<span class="o">[</span>...<span class="o">]</span><span class="nv">TMTV3WUdPZDJ2Xw</span><span class="o">==</span>&gt;
-OIDC_IDENTITY_PROVIDER_GROUPS_CLAIM: groups
-OIDC_IDENTITY_PROVIDER_ISSUER_URL: https://dev-<span class="o">[</span>...<span class="o">]</span>.okta.com
-OIDC_IDENTITY_PROVIDER_SCOPES: openid,profile,email,groups,offline_access
-OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">IDENTITY_MANAGEMENT_TYPE: <span class="s2">&#34;oidc&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#! Settings for IDENTITY_MANAGEMENT_TYPE: &#34;oidc&#34;</span>
+</span></span><span class="line"><span class="cl">CERT_DURATION: 2160h
+</span></span><span class="line"><span class="cl">CERT_RENEW_BEFORE: 360h
+</span></span><span class="line"><span class="cl">IDENTITY_MANAGEMENT_TYPE: oidc
+</span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_CLIENT_ID: 0oa2i<span class="o">[</span>...<span class="o">]</span>NKst4x7
+</span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_CLIENT_SECRET: &lt;encoded:LVVnMFNsZFIy<span class="o">[</span>...<span class="o">]</span><span class="nv">TMTV3WUdPZDJ2Xw</span><span class="o">==</span>&gt;
+</span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_GROUPS_CLAIM: groups
+</span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_ISSUER_URL: https://dev-<span class="o">[</span>...<span class="o">]</span>.okta.com
+</span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_SCOPES: openid,profile,email,groups,offline_access
+</span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="4-sa-생성-후-test">4. SA 생성 후 TEST</h2>
 <p>SA 생성</p>
@@ -244,8 +244,8 @@ OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create clusterrolebinding id-mgmt-test-user --clusterrole cluster-admin --user <span class="o">{</span>mail address<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create clusterrolebinding id-mgmt-test-user --clusterrole cluster-admin --user <span class="o">{</span>mail address<span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>TEST</p>
 <div class="highlight"><div class="chroma">
@@ -255,10 +255,10 @@ OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-tkgm02
-
-kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-tkgm02
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><img src="/images/okta/2-1.png"/><figcaption>
             <h4>TEST</h4>

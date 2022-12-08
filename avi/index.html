@@ -33,7 +33,7 @@
                             "url": "https:\/\/huntedhappy.github.io\/avi\/avi.png",
                             "width":  914 ,
                             "height":  328 
-                        }],"genre": "posts","keywords": "tanzu, avi, tanzu integration avi, AVIinfrasetting, ClusterIP, AVI BGP, AVI AutoScalling, NodePort, NodePortLocal, dk, dokyung, avi rhi","wordcount":  1284 ,
+                        }],"genre": "posts","keywords": "tanzu, avi, tanzu integration avi, AVIinfrasetting, ClusterIP, AVI BGP, AVI AutoScalling, NodePort, NodePortLocal, dk, dokyung, avi rhi","wordcount":  1280 ,
         "url": "https:\/\/huntedhappy.github.io\/avi\/","datePublished": "2022-04-05T21:51:21+09:00","dateModified": "2022-04-08T20:55:38+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Dokyung"},"author": {
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">The Documentation vSphere Tanzu with AVI Load Balancer</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-05">2022-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1284 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-05">2022-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1280 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -186,44 +186,44 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">### NodePort 변경</span>
-kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
-</span><span class="s">kind: AKODeploymentConfig
-</span><span class="s">metadata:
-</span><span class="s">  name: nodeport01
-</span><span class="s">spec:
-</span><span class="s">  adminCredentialRef:
-</span><span class="s">    name: avi-controller-credentials
-</span><span class="s">    namespace: tkg-system-networking
-</span><span class="s">  certificateAuthorityRef:
-</span><span class="s">    name: avi-controller-ca
-</span><span class="s">    namespace: tkg-system-networking
-</span><span class="s">  cloudName: Default-Cloud
-</span><span class="s">  clusterSelector:
-</span><span class="s">    matchLabels:
-</span><span class="s">      ako-l7-nodeport-01: &#34;true&#34;
-</span><span class="s">  controller: avi.tkg.io
-</span><span class="s">  dataNetwork:
-</span><span class="s">    cidr: 10.253.127.0/24
-</span><span class="s">    name: LS_TKGM_10.253.127.x
-</span><span class="s">  extraConfigs:
-</span><span class="s">    cniPlugin: antrea
-</span><span class="s">    disableStaticRouteSync: false
-</span><span class="s">    l4Config:
-</span><span class="s">      autoFQDN: disabled
-</span><span class="s">    ingress:
-</span><span class="s">      defaultIngressController: true
-</span><span class="s">      disableIngressClass: false  
-</span><span class="s">      nodeNetworkList:
-</span><span class="s">        - cidrs:
-</span><span class="s">            - 10.253.127.0/24
-</span><span class="s">          networkName: LS_TKGM_10.253.127.x
-</span><span class="s">      serviceType: NodePort
-</span><span class="s">      shardVSSize: SMALL
-</span><span class="s">  serviceEngineGroup: Default-Group
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### NodePort 변경</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: AKODeploymentConfig
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: nodeport01
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  adminCredentialRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-credentials
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  certificateAuthorityRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-ca
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  cloudName: Default-Cloud
+</span></span></span><span class="line"><span class="cl"><span class="s">  clusterSelector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      ako-l7-nodeport-01: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: avi.tkg.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  dataNetwork:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">  extraConfigs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cniPlugin: antrea
+</span></span></span><span class="line"><span class="cl"><span class="s">    disableStaticRouteSync: false
+</span></span></span><span class="line"><span class="cl"><span class="s">    l4Config:
+</span></span></span><span class="line"><span class="cl"><span class="s">      autoFQDN: disabled
+</span></span></span><span class="line"><span class="cl"><span class="s">    ingress:
+</span></span></span><span class="line"><span class="cl"><span class="s">      defaultIngressController: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      disableIngressClass: false  
+</span></span></span><span class="line"><span class="cl"><span class="s">      nodeNetworkList:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - cidrs:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">          networkName: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePort
+</span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL
+</span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -266,44 +266,44 @@ kubectl apply -f - <span class="s">&lt;&lt; EOF
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">### ClusterIP 변경</span>
-kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
-</span><span class="s">kind: AKODeploymentConfig
-</span><span class="s">metadata:
-</span><span class="s">  name: clusterip01
-</span><span class="s">spec:
-</span><span class="s">  adminCredentialRef:
-</span><span class="s">    name: avi-controller-credentials
-</span><span class="s">    namespace: tkg-system-networking
-</span><span class="s">  certificateAuthorityRef:
-</span><span class="s">    name: avi-controller-ca
-</span><span class="s">    namespace: tkg-system-networking
-</span><span class="s">  cloudName: Default-Cloud
-</span><span class="s">  clusterSelector:
-</span><span class="s">    matchLabels:
-</span><span class="s">      ako-l7-clusterip-01: &#34;true&#34;
-</span><span class="s">  controller: avi.tkg.io
-</span><span class="s">  dataNetwork:
-</span><span class="s">    cidr: 10.253.127.0/24
-</span><span class="s">    name: LS_TKGM_10.253.127.x
-</span><span class="s">  extraConfigs:
-</span><span class="s">    cniPlugin: antrea
-</span><span class="s">    disableStaticRouteSync: false                               # required
-</span><span class="s">    l4Config:
-</span><span class="s">      autoFQDN: disabled
-</span><span class="s">    ingress:
-</span><span class="s">      defaultIngressController: true
-</span><span class="s">      disableIngressClass: false                                # required
-</span><span class="s">      nodeNetworkList:                                          # required
-</span><span class="s">        - cidrs:
-</span><span class="s">            - 10.253.127.0/24
-</span><span class="s">          networkName: LS_TKGM_10.253.127.x
-</span><span class="s">      serviceType: ClusterIP                                    # required
-</span><span class="s">      shardVSSize: SMALL                                       # required
-</span><span class="s">  serviceEngineGroup: Default-Group
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### ClusterIP 변경</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: AKODeploymentConfig
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: clusterip01
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  adminCredentialRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-credentials
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  certificateAuthorityRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-ca
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  cloudName: Default-Cloud
+</span></span></span><span class="line"><span class="cl"><span class="s">  clusterSelector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      ako-l7-clusterip-01: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: avi.tkg.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  dataNetwork:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">  extraConfigs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cniPlugin: antrea
+</span></span></span><span class="line"><span class="cl"><span class="s">    disableStaticRouteSync: false                               # required
+</span></span></span><span class="line"><span class="cl"><span class="s">    l4Config:
+</span></span></span><span class="line"><span class="cl"><span class="s">      autoFQDN: disabled
+</span></span></span><span class="line"><span class="cl"><span class="s">    ingress:
+</span></span></span><span class="line"><span class="cl"><span class="s">      defaultIngressController: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      disableIngressClass: false                                # required
+</span></span></span><span class="line"><span class="cl"><span class="s">      nodeNetworkList:                                          # required
+</span></span></span><span class="line"><span class="cl"><span class="s">        - cidrs:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">          networkName: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: ClusterIP                                    # required
+</span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       # required
+</span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -349,47 +349,47 @@ kubectl apply -f - <span class="s">&lt;&lt; EOF
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">### NodePortLocal 변경</span>
-kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
-</span><span class="s">kind: AKODeploymentConfig
-</span><span class="s">metadata:
-</span><span class="s">  name: npl-enabled
-</span><span class="s">spec:
-</span><span class="s">  adminCredentialRef:
-</span><span class="s">    name: avi-controller-credentials
-</span><span class="s">    namespace: tkg-system-networking
-</span><span class="s">  certificateAuthorityRef:
-</span><span class="s">    name: avi-controller-ca
-</span><span class="s">    namespace: tkg-system-networking
-</span><span class="s">  cloudName: Default-Cloud
-</span><span class="s">  clusterSelector:
-</span><span class="s">    matchLabels:
-</span><span class="s">      npl-enabled: &#34;true&#34;
-</span><span class="s">  controlPlaneNetwork:
-</span><span class="s">    cidr: 10.253.127.0/24
-</span><span class="s">    name: LS_TKGM_10.253.127.x
-</span><span class="s">  controller: avi.tkg.io
-</span><span class="s">  dataNetwork:
-</span><span class="s">    cidr: 10.253.127.0/24
-</span><span class="s">    name: LS_TKGM_10.253.127.x
-</span><span class="s">  extraConfigs:
-</span><span class="s">    cniPlugin: antrea
-</span><span class="s">    disableStaticRouteSync: false                               # required
-</span><span class="s">    l4Config:
-</span><span class="s">      autoFQDN: disabled
-</span><span class="s">    ingress:
-</span><span class="s">      defaultIngressController: true
-</span><span class="s">      disableIngressClass: false                               
-</span><span class="s">      nodeNetworkList:                                          
-</span><span class="s">        - cidrs:
-</span><span class="s">            - 10.253.127.0/24
-</span><span class="s">          networkName: LS_TKGM_10.253.127.x
-</span><span class="s">      serviceType: NodePortLocal                                     # required
-</span><span class="s">      shardVSSize: SMALL                                       
-</span><span class="s">  serviceEngineGroup: Default-Group
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### NodePortLocal 변경</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: AKODeploymentConfig
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: npl-enabled
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  adminCredentialRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-credentials
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  certificateAuthorityRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-ca
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  cloudName: Default-Cloud
+</span></span></span><span class="line"><span class="cl"><span class="s">  clusterSelector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      npl-enabled: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  controlPlaneNetwork:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: avi.tkg.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  dataNetwork:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">  extraConfigs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cniPlugin: antrea
+</span></span></span><span class="line"><span class="cl"><span class="s">    disableStaticRouteSync: false                               # required
+</span></span></span><span class="line"><span class="cl"><span class="s">    l4Config:
+</span></span></span><span class="line"><span class="cl"><span class="s">      autoFQDN: disabled
+</span></span></span><span class="line"><span class="cl"><span class="s">    ingress:
+</span></span></span><span class="line"><span class="cl"><span class="s">      defaultIngressController: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      disableIngressClass: false                               
+</span></span></span><span class="line"><span class="cl"><span class="s">      nodeNetworkList:                                          
+</span></span></span><span class="line"><span class="cl"><span class="s">        - cidrs:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">          networkName: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePortLocal                                     # required
+</span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       
+</span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -404,12 +404,12 @@ kubectl apply -f - <span class="s">&lt;&lt; EOF
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl config use-context <span class="o">{</span>Management Cluster<span class="o">}</span>
-
-kubectl get cluster --show-labels
-
-kubectl label cluster tkgm01-tkc-dev01 ako-l7-nodeport-01<span class="o">=</span><span class="nb">true</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>Management Cluster<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-nodeport-01<span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -422,14 +422,14 @@ kubectl label cluster tkgm01-tkc-dev01 ako-l7-nodeport-01<span class="o">=</span
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl config use-context <span class="o">{</span>TKC<span class="o">}</span>
-
-kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-
-kubectl expose deployment hello --type<span class="o">=</span>NodePort --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
-
-kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>TKC<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>NodePort --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><img src="/images/avi/1-1.png"/><figcaption>
             <h4>접속 화면</h4>
@@ -452,12 +452,12 @@ kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span c
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl config use-context <span class="o">{</span>Management Cluster<span class="o">}</span>
-
-kubectl get cluster --show-labels
-
-kubectl label cluster tkgm01-tkc-dev01 ako-l7-clusterip-01<span class="o">=</span><span class="nb">true</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>Management Cluster<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-clusterip-01<span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -472,16 +472,16 @@ kubectl label cluster tkgm01-tkc-dev01 ako-l7-clusterip-01<span class="o">=</spa
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl config use-context <span class="o">{</span>TKC<span class="o">}</span>
-
-kubectl get cm avi-k8s-config -n avi-system -o <span class="nv">jsonpath</span><span class="o">={</span>.data.serviceType<span class="o">}</span>
-
-kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-
-kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
-
-kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>TKC<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get cm avi-k8s-config -n avi-system -o <span class="nv">jsonpath</span><span class="o">={</span>.data.serviceType<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><img src="/images/avi/1-3.png"/><figcaption>
             <h4>ServiceType 변경 확인</h4>
@@ -537,40 +537,38 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </span><span class="lnt">27
 </span><span class="lnt">28
 </span><span class="lnt">29
-</span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span><span class="s">apiVersion: ako.vmware.com/v1alpha1
-</span><span class="s">kind: AviInfraSetting
-</span><span class="s">metadata:
-</span><span class="s">  name: other-infra
-</span><span class="s">spec:
-</span><span class="s">  seGroup:
-</span><span class="s">    name: Default-Group
-</span><span class="s">  network:
-</span><span class="s">    vipNetworks:
-</span><span class="s">      - networkName: pg-dk-10.253.107.x
-</span><span class="s">        cidr: 10.253.107.0/24
-</span><span class="s">    enableRhi: false
-</span><span class="s">  l7Settings:
-</span><span class="s">    shardSize: MEDIUM
-</span><span class="s">EOF</span>
-
-kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span><span class="s">apiVersion: networking.k8s.io/v1
-</span><span class="s">kind: IngressClass
-</span><span class="s">metadata:
-</span><span class="s">  name: other-infra
-</span><span class="s">spec:
-</span><span class="s">  controller: ako.vmware.com/avi-lb
-</span><span class="s">  parameters:
-</span><span class="s">    apiGroup: ako.vmware.com
-</span><span class="s">    kind: AviInfraSetting
-</span><span class="s">    name: other-infra
-</span><span class="s">EOF</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: ako.vmware.com/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: AviInfraSetting
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: other-infra
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  seGroup:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: Default-Group
+</span></span></span><span class="line"><span class="cl"><span class="s">  network:
+</span></span></span><span class="line"><span class="cl"><span class="s">    vipNetworks:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - networkName: pg-dk-10.253.107.x
+</span></span></span><span class="line"><span class="cl"><span class="s">        cidr: 10.253.107.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    enableRhi: false
+</span></span></span><span class="line"><span class="cl"><span class="s">  l7Settings:
+</span></span></span><span class="line"><span class="cl"><span class="s">    shardSize: MEDIUM
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: IngressClass
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: other-infra
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: ako.vmware.com/avi-lb
+</span></span></span><span class="line"><span class="cl"><span class="s">  parameters:
+</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: ako.vmware.com
+</span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>테스트</p>
 <div class="highlight"><div class="chroma">
@@ -582,12 +580,12 @@ kubectl apply -f - <span class="s">&lt;&lt; EOF
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-
-kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
-
-kubectl create ingress hello --class<span class="o">=</span>other-infra --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>other-infra --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><img src="/images/avi/2-3.png"/><figcaption>
             <h4>VS IP 변경 전</h4>
@@ -612,15 +610,13 @@ kubectl create ingress hello --class<span class="o">=</span>other-infra --rule<s
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## SEGROUP을 변경</span>
-kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/seGroup/name&#34;,&#34;value&#34;:&#34;tkgm01&#34;}]&#39;</span>
-
-kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ingressClassName&#34;: &#34;other-infra&#34;}}&#39;</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## SEGROUP을 변경</span>
+</span></span><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/seGroup/name&#34;,&#34;value&#34;:&#34;tkgm01&#34;}]&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ingressClassName&#34;: &#34;other-infra&#34;}}&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>현재는 SE가 기존의 
 <figure><img src="/images/avi/2-5.png"/><figcaption>
@@ -688,47 +684,45 @@ kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ing
 </span><span class="lnt">34
 </span><span class="lnt">35
 </span><span class="lnt">36
-</span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## AVI Controller SSH접속 </span>
-
-switchto tenant admin
-switchto cloud Default-Cloud
-auto_rebalance
-save
-
-configure serviceenginegroup Default-Group
-
-auto_rebalance_interval interval-value 
-auto_rebalance_criteria option
-auto_rebalance_capacity_per_se integer-value
-
-예시: auto_rebalance_interval <span class="m">300</span>
-
-auto_rebalance_criteria 의 옵션 값은 아래와 같음
-se_auto_rebalance_cpu
-se_auto_rebalance_mbps
-se_auto_rebalance_open_conns
-se_auto_rebalance_pps
-
-예시: auto_rebalance_capacity_per_se <span class="m">200000</span>
-
-max_cpu_usage value
-min_cpu_usage value
-
-<span class="c1">## 종합 </span>
-switchto tenant Avi
-switchto cloud azure
-configure serviceenginegroup Default-Group
-auto_rebalance_interval <span class="m">300</span>
-auto_rebalance_criteria se_auto_rebalance_pps
-auto_rebalance_capacity_per_se <span class="m">200000</span>
-max_cpu_usage <span class="m">70</span>
-min_cpu_usage <span class="m">30</span>
-save
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## AVI Controller SSH접속 </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">switchto tenant admin
+</span></span><span class="line"><span class="cl">switchto cloud Default-Cloud
+</span></span><span class="line"><span class="cl">auto_rebalance
+</span></span><span class="line"><span class="cl">save
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">configure serviceenginegroup Default-Group
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">auto_rebalance_interval interval-value 
+</span></span><span class="line"><span class="cl">auto_rebalance_criteria option
+</span></span><span class="line"><span class="cl">auto_rebalance_capacity_per_se integer-value
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">예시: auto_rebalance_interval <span class="m">300</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">auto_rebalance_criteria 의 옵션 값은 아래와 같음
+</span></span><span class="line"><span class="cl">se_auto_rebalance_cpu
+</span></span><span class="line"><span class="cl">se_auto_rebalance_mbps
+</span></span><span class="line"><span class="cl">se_auto_rebalance_open_conns
+</span></span><span class="line"><span class="cl">se_auto_rebalance_pps
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">예시: auto_rebalance_capacity_per_se <span class="m">200000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">max_cpu_usage value
+</span></span><span class="line"><span class="cl">min_cpu_usage value
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 종합 </span>
+</span></span><span class="line"><span class="cl">switchto tenant Avi
+</span></span><span class="line"><span class="cl">switchto cloud azure
+</span></span><span class="line"><span class="cl">configure serviceenginegroup Default-Group
+</span></span><span class="line"><span class="cl">auto_rebalance_interval <span class="m">300</span>
+</span></span><span class="line"><span class="cl">auto_rebalance_criteria se_auto_rebalance_pps
+</span></span><span class="line"><span class="cl">auto_rebalance_capacity_per_se <span class="m">200000</span>
+</span></span><span class="line"><span class="cl">max_cpu_usage <span class="m">70</span>
+</span></span><span class="line"><span class="cl">min_cpu_usage <span class="m">30</span>
+</span></span><span class="line"><span class="cl">save
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -784,25 +778,23 @@ save
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## AVI Controller SSH 접속</span>
-shell
-admin /  <span class="o">{</span>password<span class="o">}</span>
-<span class="c1">## 서비스 엔진 접속</span>
-attach serviceengine tkcdevAvi-se-jpjbe
-ip netns
-<span class="c1">## 서비스 엔진 bash 접속</span>
-sudo ip netns <span class="nb">exec</span> avi_ns1 bash
-
-<span class="c1">## BGP 확인</span>
-netcat localhost bgpd
-<span class="nb">enable</span>
-show run
-show bgp summary
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## AVI Controller SSH 접속</span>
+</span></span><span class="line"><span class="cl">shell
+</span></span><span class="line"><span class="cl">admin /  <span class="o">{</span>password<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 서비스 엔진 접속</span>
+</span></span><span class="line"><span class="cl">attach serviceengine tkcdevAvi-se-jpjbe
+</span></span><span class="line"><span class="cl">ip netns
+</span></span><span class="line"><span class="cl"><span class="c1">## 서비스 엔진 bash 접속</span>
+</span></span><span class="line"><span class="cl">sudo ip netns <span class="nb">exec</span> avi_ns1 bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## BGP 확인</span>
+</span></span><span class="line"><span class="cl">netcat localhost bgpd
+</span></span><span class="line"><span class="cl"><span class="nb">enable</span>
+</span></span><span class="line"><span class="cl">show run
+</span></span><span class="line"><span class="cl">show bgp summary
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><img src="/images/avi/4-3.png"/><figcaption>
             <h4>BGP 상태 확인</h4>
@@ -820,8 +812,8 @@ show bgp summary
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/network/enableRhi&#34;,&#34;value&#34;:true}]&#39;</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/network/enableRhi&#34;,&#34;value&#34;:true}]&#39;</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><figure><img src="/images/avi/4-6.png"/><figcaption>
             <h4>Rhi Enable</h4>
@@ -860,19 +852,19 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
-</span><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
-</span><span class="s">kind: GatewayClass
-</span><span class="s">metadata:
-</span><span class="s">  name: critical-gwc
-</span><span class="s">spec:
-</span><span class="s">  controller: ako.vmware.com/avi-lb
-</span><span class="s">  parametersRef:
-</span><span class="s">    group: ako.vmware.com
-</span><span class="s">    kind: AviInfraSetting
-</span><span class="s">    name: other-infra
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: GatewayClass
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: critical-gwc
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: ako.vmware.com/avi-lb
+</span></span></span><span class="line"><span class="cl"><span class="s">  parametersRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    group: ako.vmware.com
+</span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>GATEWAY 생성</p>
 <div class="highlight"><div class="chroma">
@@ -907,35 +899,35 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
-</span><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
-</span><span class="s">kind: Gateway
-</span><span class="s">metadata:
-</span><span class="s">  name: avi-alb-gw
-</span><span class="s">  namespace: default
-</span><span class="s">spec: 
-</span><span class="s">  gatewayClassName: critical-gwc    
-</span><span class="s">  listeners: 
-</span><span class="s">  - protocol: TCP 
-</span><span class="s">    port: 8080 
-</span><span class="s">    routes: 
-</span><span class="s">      selector: 
-</span><span class="s">       matchLabels: 
-</span><span class="s">        ako.vmware.com/gateway-namespace: default 
-</span><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
-</span><span class="s">      group: v1 
-</span><span class="s">      kind: Service
-</span><span class="s">  - protocol: TCP 
-</span><span class="s">    port: 80 
-</span><span class="s">    routes: 
-</span><span class="s">      selector: 
-</span><span class="s">       matchLabels: 
-</span><span class="s">        ako.vmware.com/gateway-namespace: default 
-</span><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
-</span><span class="s">      group: v1 
-</span><span class="s">      kind: Service
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Gateway
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: default
+</span></span></span><span class="line"><span class="cl"><span class="s">spec: 
+</span></span></span><span class="line"><span class="cl"><span class="s">  gatewayClassName: critical-gwc    
+</span></span></span><span class="line"><span class="cl"><span class="s">  listeners: 
+</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
+</span></span></span><span class="line"><span class="cl"><span class="s">    port: 8080 
+</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
+</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
+</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
+</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
+</span></span></span><span class="line"><span class="cl"><span class="s">    port: 80 
+</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
+</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
+</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>만약에 LB IP를 지정 하고 싶다면. 아래와 같이 IP를 지정하면 된다.</p>
 <div class="highlight"><div class="chroma">
@@ -973,38 +965,38 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
-</span><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
-</span><span class="s">kind: Gateway
-</span><span class="s">metadata:
-</span><span class="s">  name: avi-alb-gw
-</span><span class="s">  namespace: default
-</span><span class="s">spec: 
-</span><span class="s">  gatewayClassName: critical-gwc
-</span><span class="s">  addresses:
-</span><span class="s">  - type: IPAddress
-</span><span class="s">    value: 10.253.107.203
-</span><span class="s">  listeners: 
-</span><span class="s">  - protocol: TCP 
-</span><span class="s">    port: 8080 
-</span><span class="s">    routes: 
-</span><span class="s">      selector: 
-</span><span class="s">       matchLabels: 
-</span><span class="s">        ako.vmware.com/gateway-namespace: default 
-</span><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
-</span><span class="s">      group: v1 
-</span><span class="s">      kind: Service
-</span><span class="s">  - protocol: TCP 
-</span><span class="s">    port: 80 
-</span><span class="s">    routes: 
-</span><span class="s">      selector: 
-</span><span class="s">       matchLabels: 
-</span><span class="s">        ako.vmware.com/gateway-namespace: default 
-</span><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
-</span><span class="s">      group: v1 
-</span><span class="s">      kind: Service
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Gateway
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: default
+</span></span></span><span class="line"><span class="cl"><span class="s">spec: 
+</span></span></span><span class="line"><span class="cl"><span class="s">  gatewayClassName: critical-gwc
+</span></span></span><span class="line"><span class="cl"><span class="s">  addresses:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - type: IPAddress
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: 10.253.107.203
+</span></span></span><span class="line"><span class="cl"><span class="s">  listeners: 
+</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
+</span></span></span><span class="line"><span class="cl"><span class="s">    port: 8080 
+</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
+</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
+</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
+</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
+</span></span></span><span class="line"><span class="cl"><span class="s">    port: 80 
+</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
+</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
+</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>테스트</p>
 <div class="highlight"><div class="chroma">
@@ -1013,9 +1005,9 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-kubectl expose deployment hello --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span> -l <span class="s1">&#39;ako.vmware.com/gateway-namespace=default&#39;</span>,<span class="s1">&#39;ako.vmware.com/gateway-name=avi-alb-gw&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span> -l <span class="s1">&#39;ako.vmware.com/gateway-namespace=default&#39;</span>,<span class="s1">&#39;ako.vmware.com/gateway-name=avi-alb-gw&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>아래와 같이 동일한 IP로 두개의 SVC를 동일한 IP로 Port(80 , 8080)만 다른게 구성 할 수 있다.
 <figure><img src="/images/avi/5-2.png"/><figcaption>

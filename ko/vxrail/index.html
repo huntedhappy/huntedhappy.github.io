@@ -343,11 +343,11 @@ esxcli vm process list 명령어를 VxRail Manager가 보이는 호스트를 찾
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">esxcli network vswitch standard portgroup list
-esxcli network vswitch standard portgroup <span class="nb">set</span> -p <span class="s2">&#34;Private Management Network&#34;</span> -v <span class="m">0</span>
-esxcli network ip interface list
-esxcli network ip interface ipv4 <span class="nb">set</span> -i vmk2 -I 192.168.215.13 -N 255.255.255.0 -g 192.168.215.1 -t static
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">esxcli network vswitch standard portgroup list
+</span></span><span class="line"><span class="cl">esxcli network vswitch standard portgroup <span class="nb">set</span> -p <span class="s2">&#34;Private Management Network&#34;</span> -v <span class="m">0</span>
+</span></span><span class="line"><span class="cl">esxcli network ip interface list
+</span></span><span class="line"><span class="cl">esxcli network ip interface ipv4 <span class="nb">set</span> -i vmk2 -I 192.168.215.13 -N 255.255.255.0 -g 192.168.215.1 -t static
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>VxRail Manager IP 변경 방법</p>
 <div class="highlight"><div class="chroma">
@@ -355,8 +355,8 @@ esxcli network ip interface ipv4 <span class="nb">set</span> -i vmk2 -I 192.168.
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vxrail-primary --setup --vxrail-address 192.168.215.9 --vxrail-netmask 255.255.255.0 --vxrail-gateway 192.168.215.1 --no-roll-back --verbose
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vxrail-primary --setup --vxrail-address 192.168.215.9 --vxrail-netmask 255.255.255.0 --vxrail-gateway 192.168.215.1 --no-roll-back --verbose
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -572,13 +572,13 @@ Dynamic Node Cluster (2 or more hosts) VSAN 구성이 아닌 외부 스토리지
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## 백업 리스트 확인</span>
-<span class="nb">cd</span> /mystic/vxm_backup_restore
-python vxm_backup_restore.py -l
-
-<span class="c1">## 메뉴얼 백업</span>
-python vxm_backup_restore.py -b
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 백업 리스트 확인</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /mystic/vxm_backup_restore
+</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -l
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 메뉴얼 백업</span>
+</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -b
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><img src="/images/vxrail/6-1.png"/><figcaption>
             <h4>스케쥴 백업</h4>
@@ -612,16 +612,16 @@ python vxm_backup_restore.py -b
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">## 신규 설치한 vxrail manager 접속 후 IP 변경</span>
-/opt/vmware/share/vami/vami_set_network eth0 STATICV4 192.168.215.9 255.255.255.0 192.168.215.1
-
-<span class="c1">## Backup 확인</span>
-<span class="nb">cd</span> /mystic/vxm_backup_restore
-python vxm_backup_restore.py -l
-
-<span class="c1">## Recovery 실행</span>
-python vxm_backup_restore.py -r –-vcenter 192.168.215.10
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 신규 설치한 vxrail manager 접속 후 IP 변경</span>
+</span></span><span class="line"><span class="cl">/opt/vmware/share/vami/vami_set_network eth0 STATICV4 192.168.215.9 255.255.255.0 192.168.215.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Backup 확인</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /mystic/vxm_backup_restore
+</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -l
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Recovery 실행</span>
+</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -r –-vcenter 192.168.215.10
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
