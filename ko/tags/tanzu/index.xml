@@ -4,7 +4,457 @@
         <link>https://huntedhappy.github.io/ko/tags/tanzu/</link>
         <description>tanzu - Tag - Dokyung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 06 Dec 2022 20:51:50 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 07 Jan 2023 19:00:14 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation Harbor</title>
+    <link>https://huntedhappy.github.io/ko/harbor/</link>
+    <pubDate>Sat, 07 Jan 2023 19:00:14 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/harbor/</guid>
+    <description><![CDATA[<h2 id="harbor에-vm-disk가-부족-하게-되면-사이즈를-늘려보자">Harbor에 VM Disk가 부족 하게 되면 사이즈를 늘려보자</h2>
+<h2 id="1-harbor-vm-disk-증설">1. Harbor VM DISK 증설</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">df -h
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">fdisk -l
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래와 같이 에러가 나온다면</span>
+</span></span><span class="line"><span class="cl">&gt;&gt; GPT PMBR size mismatch 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## parted로 fix를 해보자</span>
+</span></span><span class="line"><span class="cl">parted /dev/sda
+</span></span><span class="line"><span class="cl">p &gt; f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>Disk 상태 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Disk 증설</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Disk 증설 후</h4>
+        </figcaption>
+</figure>
+</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 그리고 온라인 상태에서 디스크가 보이지 않은 경우는 아래와 같이 하자.</span>
+</span></span><span class="line"><span class="cl">ls /sys/class/scsi_host
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> line in <span class="k">$(</span>ls /sys/class/scsi_host<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl"> <span class="nb">echo</span> <span class="s2">&#34;- - -&#34;</span> &gt; /sys/class/scsi_host/<span class="nv">$line</span>/scan
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ls -lat /dev/sd*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>Disk 증설 후 SCAN</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>디스크 증설 확인#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>디스크 증설 확인#2</h4>
+        </figcaption>
+</figure>
+</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pvs
+</span></span><span class="line"><span class="cl">lvs
+</span></span><span class="line"><span class="cl">pvcreate /dev/sdb
+</span></span><span class="line"><span class="cl">vgextend ubuntu-vg /dev/sdb
+</span></span><span class="line"><span class="cl">lvextend /dev/mapper/ubuntu--vg-ubuntu--lv /dev/sdb
+</span></span><span class="line"><span class="cl">resize2fs -p /dev/mapper/ubuntu--vg-ubuntu--lv
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>Disk 확인 및 증설#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Disk 확인 및 증설#2</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="2-tanzu에-pacakge로-설치-한-harbor-사이즈-증설">2. TANZU에 Pacakge로 설치 한 Harbor 사이즈 증설</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n tanzu-system-registry get pvc --selector<span class="o">=</span><span class="nv">component</span><span class="o">=</span>registry --show-labels
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래 storage 용량을 설정한다.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; harbor-registry-pvc.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: PersistentVolumeClaim
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  finalizers:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kubernetes.io/pvc-protection
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: harbor
+</span></span></span><span class="line"><span class="cl"><span class="s">    component: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">    kapp.k14s.io/app: &#34;1610567506920108209&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    kapp.k14s.io/association: v1.034269eb21810ed9131cc41a27c729d4
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: harbor-registry-200gb
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tanzu-system-registry
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  accessModes:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - ReadWriteOnce
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">    requests:
+</span></span></span><span class="line"><span class="cl"><span class="s">      storage: 200Gi
+</span></span></span><span class="line"><span class="cl"><span class="s">  storageClassName: default
+</span></span></span><span class="line"><span class="cl"><span class="s">  volumeMode: Filesystem
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 그리고 pvc 생성 후 pod를 삭제 하기 위해 0으로 변경</span>
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry apply -f harbor-registry-pvc.yaml
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry scale deployment harbor-registry --replicas<span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">watch -n <span class="m">5</span> kubectl get pod -n tanzu-system-registry
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## volumemount 및 volumes을 설정 해준다.</span>
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry edit deployment harbor-registry
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래 항목을 찾는다.</span>
+</span></span><span class="line"><span class="cl">      volumeMounts:
+</span></span><span class="line"><span class="cl">        - mountPath: /storage
+</span></span><span class="line"><span class="cl">          name: registry-data
+</span></span><span class="line"><span class="cl">        - mountPath: /etc/registry/passwd
+</span></span><span class="line"><span class="cl">          name: registry-htpasswd
+</span></span><span class="line"><span class="cl">          subPath: passwd
+</span></span><span class="line"><span class="cl">        - mountPath: /etc/registry/config.yml
+</span></span><span class="line"><span class="cl">          name: registry-config
+</span></span><span class="line"><span class="cl">          subPath: config.yml
+</span></span><span class="line"><span class="cl">        - mountPath: /etc/harbor/ssl/registry
+</span></span><span class="line"><span class="cl">          name: registry-internal-certs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 마지막줄에 아래 내용을 추가 한다.</span>
+</span></span><span class="line"><span class="cl">        - mountPath: /storage2
+</span></span><span class="line"><span class="cl">          name: registry-data2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래 항목을 찾는다.</span>
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - name: registry-htpasswd
+</span></span><span class="line"><span class="cl">        secret:
+</span></span><span class="line"><span class="cl">          defaultMode: <span class="m">420</span>
+</span></span><span class="line"><span class="cl">          items:
+</span></span><span class="line"><span class="cl">          - key: REGISTRY_HTPASSWD
+</span></span><span class="line"><span class="cl">            path: passwd
+</span></span><span class="line"><span class="cl">          secretName: harbor-registry-htpasswd
+</span></span><span class="line"><span class="cl">      - configMap:
+</span></span><span class="line"><span class="cl">          defaultMode: <span class="m">420</span>
+</span></span><span class="line"><span class="cl">          name: harbor-registry-ver-6
+</span></span><span class="line"><span class="cl">        name: registry-config
+</span></span><span class="line"><span class="cl">      - name: registry-internal-certs
+</span></span><span class="line"><span class="cl">        secret:
+</span></span><span class="line"><span class="cl">          defaultMode: <span class="m">420</span>
+</span></span><span class="line"><span class="cl">          secretName: harbor-registry-internal-tls
+</span></span><span class="line"><span class="cl"><span class="c1">## 마지막줄에 아래 내용을 추가 한다.</span>
+</span></span><span class="line"><span class="cl">      - name: registry-data2
+</span></span><span class="line"><span class="cl">        persistentVolumeClaim:
+</span></span><span class="line"><span class="cl">          claimName: harbor-registry-200gb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## pod를 생성 한다.</span>
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry scale deployments.apps harbor-registry --replicas<span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">watch -n <span class="m">5</span> kubectl get pod -n tanzu-system-registry
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## pod에 접속 하여 storage repository를 확인 한 후 신규로 연결된 storage2에 Copy.</span>
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry get po --selector<span class="o">=</span><span class="nv">component</span><span class="o">=</span>registry
+</span></span><span class="line"><span class="cl"><span class="nv">registry</span><span class="o">=</span><span class="k">$(</span>kubectl -n tanzu-system-registry get po --selector<span class="o">=</span><span class="nv">component</span><span class="o">=</span>registry <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> grep  harbor<span class="k">)</span>
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry <span class="nb">exec</span> -ti <span class="nv">$registry</span> -- /bin/bash
+</span></span><span class="line"><span class="cl">df -h /storage
+</span></span><span class="line"><span class="cl">ls storage/docker/registry/v2/repositories/library/
+</span></span><span class="line"><span class="cl">cp -rfp /storage/* /storage2/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## pod 삭제</span>
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry scale deployment harbor-registry --replicas<span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">watch -n <span class="m">5</span> kubectl get pod -n tanzu-system-registry
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 위에 설정한 volumemount 및 volumes 삭제</span>
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry edit deployment harbor-registry
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 새로 생성 한 pvc 확인</span>
+</span></span><span class="line"><span class="cl"><span class="nv">newpvc</span><span class="o">=</span><span class="k">$(</span>kubectl get pv <span class="p">|</span>grep 200gb <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">kubectl patch pv <span class="nv">$newpvc</span> -p <span class="s1">&#39;{&#34;spec&#34;:{&#34;persistentVolumeReclaimPolicy&#34;:&#34;Retain&#34;}}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get pv <span class="p">|</span> grep harbor-registry
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry delete pvc --selector<span class="o">=</span><span class="nv">component</span><span class="o">=</span>registry
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## pv에서 아래 내용 삭제</span>
+</span></span><span class="line"><span class="cl"><span class="nv">newpv</span><span class="o">=</span><span class="k">$(</span>kubectl get pv <span class="p">|</span> grep 200gb <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">kubectl edit pv <span class="nv">$newpv</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래 항목을 찾은 후 claimRef 내용을 삭제 해준다.</span>
+</span></span><span class="line"><span class="cl">  claimRef:
+</span></span><span class="line"><span class="cl">    apiVersion: v1
+</span></span><span class="line"><span class="cl">    kind: PersistentVolumeClaim
+</span></span><span class="line"><span class="cl">    name: harbor-registry-100gb
+</span></span><span class="line"><span class="cl">    namespace: tanzu-system-registry
+</span></span><span class="line"><span class="cl">    resourceVersion: <span class="s2">&#34;5894668&#34;</span>
+</span></span><span class="line"><span class="cl">    uid: 326b24df-dd6f-4679-af84-6530013aed22
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pvc-생성">pvc 생성</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; harbor-registry-200gb.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: PersistentVolumeClaim
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  finalizers:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kubernetes.io/pvc-protection
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: harbor
+</span></span></span><span class="line"><span class="cl"><span class="s">    component: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">    kapp.k14s.io/app: &#34;1610567506920108209&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    kapp.k14s.io/association: v1.034269eb21810ed9131cc41a27c729d4
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: harbor-registry
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tanzu-system-registry
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  accessModes:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - ReadWriteOnce
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">    requests:
+</span></span></span><span class="line"><span class="cl"><span class="s">      storage: 200Gi
+</span></span></span><span class="line"><span class="cl"><span class="s">  storageClassName: default
+</span></span></span><span class="line"><span class="cl"><span class="s">  volumeName: $newpvc
+</span></span></span><span class="line"><span class="cl"><span class="s">  volumeMode: Filesystem
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## pvc 생성</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f harbor-registry-200gb.yaml -n tanzu-system-registry
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## pod 생성</span>
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry scale deployment harbor-registry --replicas<span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">watch -n <span class="m">5</span> kubectl get pod -n tanzu-system-registry
+</span></span><span class="line"><span class="cl"><span class="c1">## Delete로 변경</span>
+</span></span><span class="line"><span class="cl">kubectl patch pv <span class="nv">$newpvc</span> -p <span class="s1">&#39;{&#34;spec&#34;:{&#34;persistentVolumeReclaimPolicy&#34;:&#34;Delete&#34;}}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 확인</span>
+</span></span><span class="line"><span class="cl"><span class="nv">registry</span><span class="o">=</span><span class="k">$(</span>kubectl -n tanzu-system-registry get po --selector<span class="o">=</span><span class="nv">component</span><span class="o">=</span>registry <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> grep  harbor<span class="k">)</span>
+</span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry <span class="nb">exec</span> -ti <span class="nv">$registry</span> -- /bin/bash
+</span></span><span class="line"><span class="cl">df -h /storage
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>증설 전</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>증설 후 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Docker Image 확인</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
     <title>The Documentation Tanzu Community Edition with TAP</title>
     <link>https://huntedhappy.github.io/ko/tce/</link>
     <pubDate>Tue, 06 Dec 2022 20:51:50 &#43;0900</pubDate>
@@ -4962,119 +5412,6 @@ NodePort를 하게 될 경우 아래와 같이 30000대의 Port를 확인 할 �
 </p>
 <h2 id="결과">결과</h2>
 <p>위에서 보듯이 NodePort와 ClusterIP의 차이점을 확인해 볼 수 있을 거 같다.</p>
-]]></description>
-</item><item>
-    <title>The Documentation Minio</title>
-    <link>https://huntedhappy.github.io/ko/minio/</link>
-    <pubDate>Thu, 06 Jan 2022 23:47:23 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/minio/</guid>
-    <description><![CDATA[<p>MiniO는 Minimal Object Storage를 의미 하며, 오픈소스 형태로 제공 하는 오브젝트 스토리지이다.</p>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>Object Storage?<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">오브젝트 스토리지는 이미지, 오디오 파일, 스프레드시트 또는 바이너리 실행 코드등 문서 처럼 한줄 한문자 바꾸는 형식이 아니라 하나의 파일이 다 바뀌는 것으로 이해하면 쉬울 거 같다.</div>
-        </div>
-    </div>
-<p>MiniO는 3가지 형태로 도구를 제공 한다.</p>
-<ul>
-<li>MiniO Console / Server - UI / Cloud Storage Server를 구성 할 수 있다.</li>
-<li>MiniO Client(mc,admin) - Minio Server, AWS S3, GCS등등 연결하여 파일 업로드 및 관리등을 할 수 있다.</li>
-<li>MiniO gateway - Minio는 스토리지 Gateway도 지원한다. 예를들어 miniO게이트웨이를 구성 하면 가상머신등에서 Nas를 통해 파일 또는 파일공유 지점으로 miniO안 객체에 엑세스 할 수 있다.</li>
-</ul>
-<p>MiniO는 2가지의 배포 형식을 제공 한다.</p>
-<ul>
-<li>독립형 배포: 단일 스토리지 볼륨 또는 폴더가 있는 단일 MiniO 서버</li>
-<li>분산 배포: 모든 서버에 총 스토리지 볼륨이 4개 이상인 하나 이상의 MiniO서버</li>
-</ul>
-<p>위의 내용은 Kasten 설치 후 백업 스토리지를 MiniO로 구성하기 위해 간단하게 MiniO가 무엇인지의 대한 설명</p>
-<p>아래 내용은 Kasten으로 백업 스토리지를 MiniO로 구성시 Erasure Coding 및 Immutability가 되어야 하는대 이 부분의 대해서 설명 하고자 한다.</p>
-<h2 id="1-erasure-coding">1. Erasure Coding</h2>
-<p>Erasure Coding은 클러스터의 여러개 디스크 드라이브 중 몇개가 손실이 발생 하더라도 자동으로 복구 를 할 수 있게 해주는 데이터 중복성 및 가용성 기능이다. Erasure Coding은 RAID 또는 복제와 같은 기술보다 적은 오버헤드로 복구를 제공한다.</p>
-<h3 id="11-erasure-coding-동작">1.1. Erasure Coding 동작</h3>
-<p>Erasure Coding은 원본 데이터를 가져와서 데이터가 필요할 때 원본 정보를 재생성하기 위해 부분 집합만 필요로 하는 방식으로 인코딩을 한다. 예를들어 개체 또는 데이터의 원래 값이 95라고 가정하고 x=9 및 y=5가 되도록 나눈다. 인코딩 프로세스는 일련의 방정식을 생성 한다.</p>
-<p>이 경우 다음과 같은 방적식을 생성한다고 가정 합니다.</p>
-<ul>
-<li>x + y = 14</li>
-<li>x - y = 4</li>
-<li>2x + y = 23</li>
-</ul>
-<p>객체를 재생성 하려면 이 세 방정식 중 두가지가 필요 하므로 디코딩 할 수 있습니다. 따라서 방정식을 풀면 x와 y에 대한 값을 얻을 수 있습니다.</p>
-<p>3개의 방정식이 있지만 그 중 2개에서 원래 정보를 얻을 수 있기 때문에 데이터를 조각으로 나누고 인코딩하여 여러위치에 저장하는 데이터 보호 체계 입니다.</p>
-<p>요약하자면, Erasure Code를 활용하여 데이터를 인코딩 하고, 데이터 손실시 디코딩 과정을 거쳐 원본 데이터를 복구하는 데이터 복구 기법중 하나</p>
-<figure><figcaption>
-            <h4>Decode / Encode</h4>
-        </figcaption>
-</figure>
-
-<p>자세한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.min.io/minio/baremetal/concepts/erasure-coding.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Minio Erasure Coding</a></p>
-<p>참고링크#1 <a href="https://stonefly.com/blog/understanding-erasure-coding" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> 참고링크#1</a></p>
-<h3 id="12-erasure-coding-vs-raid">1.2. Erasure Coding vs RAID?</h3>
-<p>RAID로 구성시 데이터를 다른 위치에 저장할 수 있으며 드라이브 오류로부터 보호, Erasure Coding은 데이터가 부분적으로 분할된 다음 확장되고 인코딩이 된다. 그 후 세그먼트는 여러 위치에 보관하도록 구성이 된다. 
-RAID는 무결성 위협으로 부터 데이터 보호를 용이 하게 할 수 있으며, Erasure Coding은 스토리지 소모를 덜 할 수 있게 해준다. 
-상황에 따라 RAID 및 Erasure Coding 모두 적합 할 수 있다.</p>
-<p>Erasure Coding의 현재 사용 사례 중 하나는 객체 기반 클라우드 스토리지입니다. Erasure Coding은 높은 CPU 사용률을 요구하고 대기 시간이 발생하므로 애플리케이션 보관에 적합합니다. 또한 Erasure Coding은 데이터 무결성 위협으로부터 보호할 수 없기 때문에 기본 워크로드에 적합하지 않습니다.</p>
-<h3 id="13-erasure-coding의-이점">1.3. Erasure Coding의 이점</h3>
-<p>Erasure Coding은 고급 데이터 보호 및 재해 복구 방법을 제공합니다 .</p>
-<ul>
-<li>저장 공간 활용도: Erasure Coding은 소비되는 공간을 줄이고 동일한 수준의 중복성을 제공하여 더 나은 저장 활용률을 제공(복사본 3개). Erasure Coding을 활용하면 최대 50% 더 많은 공간을 절약할 수 있습니다.</li>
-<li>신뢰성 향상:  데이터 조각은 독립적인 오류 더미 로 조각화됩니다 . 이렇게 하면 종속되거나 상관된 오류가 발생하지 않습니다.</li>
-<li>적합성: Erasure Coding은 모든 파일 크기에 사용할 수 있습니다. KiloBytes의 작은 블록 크기에서 PetaBytes의 큰 블록 크기에 이르기까지 다양합니다.</li>
-<li>Suitability: 데이터를 복구하는 데 데이터의 Suitability만 필요합니다. 원본 데이터가 필요하지 않습니다.</li>
-<li>유연성: 시스템을 오프라인으로 전환하지 않고도 편리할 때 고장난 구성 요소를 교체할 수 있습니다.</li>
-</ul>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>Suitablility?<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Suitablility란 더 큰 집합에서의 부분적인 집합.</div>
-        </div>
-    </div>
-<h3 id="14-minio-erasure-code-계산기">1.4. MiniO Erasure Code 계산기</h3>
-<blockquote>
-<p><a href="https://min.io/product/erasure-code-calculator?utm_term=erasure%20coding&amp;utm_campaign=Erasure&#43;Coding&#43;1.4&amp;utm_source=adwords&amp;utm_medium=ppc&amp;hsa_acc=8976569894&amp;hsa_cam=13884673572&amp;hsa_grp=127699937027&amp;hsa_ad=533469681242&amp;hsa_src=g&amp;hsa_tgt=kwd-314402742856&amp;hsa_kw=erasure%20coding&amp;hsa_mt=p&amp;hsa_net=adwords&amp;hsa_ver=3&amp;gclid=Cj0KCQiAip-PBhDVARIsAPP2xc2nLMVBzYtNdDYlETP-3UjGr3ZqD7sA-IPzfhNnxWhzes03cq62ViUaAtprEALw_wcB" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> 계산기 LINK</a></p>
-</blockquote>
-<h2 id="2-immutability">2. Immutability</h2>
-<p>MiniO 서버는 특정 개체에 대해 WORM을 허용하거나 모든 객체에 기본 보존 모드 및 보존기간을 적용하는 객체 잠금 구성으로 버킷을 구성하여 WORM을 허용합니다. 이렇게 하면 버킷의 객체를 변경 할 수 없습니다. 즉, 버킷의 객체 잠금 구성 또는 객체 보존에 지정된 만료일 까지 버전 삭제가 허용 되지 않습니다.</p>
-<p>객체 잠금을 사용하려면 버킷 생성시 잠금을 활성화해야 하며, 객체 잠금도 버킷의 버전 관리를 자동으로 활성화 합니다. 또는 버킷에서 생성된 객체에 적용할 기본 보존 기간 및 보존 모드를 버킷에 구성 할 수 있습니다.</p>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>WORM?<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Read Many(WORM)</div>
-        </div>
-    </div>
-<h3 id="21-개념">2.1. 개념</h3>
-<div class="details admonition note open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw"></i>Immutability 개념<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><ul>
-<li>객체가 법적 보존 상태에 있는 경우 해당 버전ID에 대한 법적 보존이 명시적으로 제거되지 않는 한 삭제 할 수 없다. 그렇지 않으면 DeleteObjectVersio()이 실패 한다.</li>
-<li>Compliance모드 에서는 해당 버전 ID의 보존기간이 만료될 때때가지 누구도 객체를 삭제 할 수 없다. 사용자에게 필요한 거버넌스 우회 권한이 있는 경우 Compliance모드 에서 개체의 보존 날짜를 연장 할 수 있다.</li>
-<li>객체 잠금 구성이 버킷으로 설정되면</li>
-</ul>
-<blockquote>
-<ul>
-<li>새 객체는 버킷 객체 잠금 구성의 보존 설정을 자동으로 상속한다.</li>
-<li>개체를 업로드할 때 보존 헤더를 선택적으로 설정 할 수 있다.</li>
-<li>개체에서 명시적으로 PutObjectRetention API 호출을 할 수 있다.</li>
-</ul>
-</blockquote>
-<ul>
-<li>MINIO_NTP_SERVER환경 변수는 보존하는 날짜를 시스템시간으로 설정이 필요하지 않는 경우 원격 NTP 서버를 구성 할 수 있다.</li>
-<li>객체잠금 기능은 삭제 코드 및 분산 삭제 코드 설정에서만 사용 할 수 있다.</li>
-</ul>
-</div>
-        </div>
-    </div>
-<p>자세한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.min.io/docs/minio-bucket-object-lock-guide.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Minio Immutability</a></p>
-<h3 id="카스텐-설정시-minio로-backup-storage-구성-링크-참조-i-classfas-fa-linki-kasten-minio-installhttpshuntedhappygithubiokok10">카스텐 설정시 MiniO로 Backup Storage 구성 링크 참조. <a href="https://huntedhappy.github.io/ko/k10/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Kasten MiniO Install</a></h3>
 ]]></description>
 </item></channel>
 </rss>
