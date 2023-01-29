@@ -16,7 +16,7 @@ Tanzu Community Edition은 무료로 사용 가능한 VMware에서 제공하는 
 [<i class="fas fa-link"></i> Docker 설치 링크](https://docs.docker.com/desktop/install/windows-install/)
 [<i class="fas fa-link"></i> KIND 설치 링크](https://kind.sigs.k8s.io/)
 
-KIND는 Kubernetes 클러스터는 싱글 노드에서 구축을 할 수 있으며, 비슷한 솔루션으로는 MINIKUBE, K3S등이 있다.
+KIND Kubernetes 클러스터는 싱글 노드에서 구축을 할 수 있으며, 비슷한 솔루션으로는 MINIKUBE, K3S등이 있다.
 구성환경은 윈도우 10, i7-4770 CPU 16GB 이며 아래는 gitops를 사용하지 않았으며, 마찬가지로 gitops로 구성하여 git에 소스를 머지 할 수도 있지만 여기서는 해당 기능의 대해서는 넣지 않았다.
 
 {{< admonition tip "KIND Install" true >}}

@@ -55,7 +55,7 @@ secret contoller를 설치를 안할 경우 발생하는 에러
 ## Error: exit status 1
 ```
 
-## 3. TANZU FRAMEWORK 및 Pcakage Image Repository 업르도
+## 3. TANZU FRAMEWORK 및 Pcakage Image Repository 업로드
 TANZU FRAMEWORK다운로드는 Tanzu Net에서 다운로드를 받을 수 있다. 
 TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행 
 

@@ -23,7 +23,7 @@
 <h2 id="2-tanzu-community-edition-구성">2. TANZU Community Edition 구성</h2>
 <p><a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Docker 설치 링크</a>
 <a href="https://kind.sigs.k8s.io/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> KIND 설치 링크</a></p>
-<p>KIND는 Kubernetes 클러스터는 싱글 노드에서 구축을 할 수 있으며, 비슷한 솔루션으로는 MINIKUBE, K3S등이 있다.
+<p>KIND Kubernetes 클러스터는 싱글 노드에서 구축을 할 수 있으며, 비슷한 솔루션으로는 MINIKUBE, K3S등이 있다.
 구성환경은 윈도우 10, i7-4770 CPU 16GB 이며 아래는 gitops를 사용하지 않았으며, 마찬가지로 gitops로 구성하여 git에 소스를 머지 할 수도 있지만 여기서는 해당 기능의 대해서는 넣지 않았다.</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
