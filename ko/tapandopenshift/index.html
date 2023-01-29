@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/ko/tapandopenshift/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/tapandopenshift/tapandopenshift.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-29T21:55:28+09:00" />
-<meta property="article:modified_time" content="2023-01-30T00:04:53+09:00" />
+<meta property="article:modified_time" content="2023-01-30T00:20:26+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://huntedhappy.github.io/ko/tapandopenshift/tapandopenshift.png"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/huntedhappy.github.io\/ko\/tapandopenshift\/tapandopenshift.png",
                             "width":  1040 ,
                             "height":  281 
-                        }],"genre": "posts","keywords": "tanzu, k8s, OKTA, OIDC, devops, dk, dokyung","wordcount":  1667 ,
-        "url": "https:\/\/huntedhappy.github.io\/ko\/tapandopenshift\/","datePublished": "2023-01-29T21:55:28+09:00","dateModified": "2023-01-30T00:04:53+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tanzu, k8s, OKTA, OIDC, devops, dk, dokyung","wordcount":  1655 ,
+        "url": "https:\/\/huntedhappy.github.io\/ko\/tapandopenshift\/","datePublished": "2023-01-29T21:55:28+09:00","dateModified": "2023-01-30T00:20:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Dokyung"},"author": {
                 "@type": "Person",
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Tap install on Openshift</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1667 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1655 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -169,7 +169,7 @@
 </ul>
 </blockquote>
 <blockquote>
-<p>처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.</p>
+<p>처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었습니다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.</p>
 </blockquote>
 <p>아래에 route에 포함되어 있지 않은 도메인을 차단 하는것인지.. 여기 route에 tap를 구성 후 tap-gui 또는 어플리케이션의 대해서 어떻게 설정 해야 되는지는 아직 의문이 남아 있습니다.
 <figure><img src="/images/tapandopenshift/0-4.png"/><figcaption>
@@ -244,12 +244,10 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
-</span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir /var/tmp/tanzu-utils/framework/tap/1.4.0
-</span></span><span class="line"><span class="cl">tar xvf /var/tmp/tanzu-utils/framework/tap/1.4.0/tanzu-framework-linux-amd64-v0.25.4.1.tar -C /var/tmp/tanzu-utils/framework/tap/1.4.0
-</span></span><span class="line"><span class="cl">tanzu plugin install -l  /var/tmp/tanzu-utils/framework/tap/1.4.0/cli/ all
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tar xvf tanzu-framework-linux-amd64-v0.25.4.1.tar
+</span></span><span class="line"><span class="cl">tanzu plugin install -l ./cli/ all
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 이미지를 받기 위해 tanzu net에 로그인 한다.</span>
 </span></span><span class="line"><span class="cl">docker login registry.tanzu.vmware.com -u <span class="o">{</span>tanzuusername<span class="o">}</span>
@@ -697,7 +695,7 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## rback 설정</span>
-</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; tap-gui-viewer-service-account-rbac.yaml
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | kubectl apply -f -
 </span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
 </span></span></span><span class="line"><span class="cl"><span class="s">kind: Namespace
 </span></span></span><span class="line"><span class="cl"><span class="s">metadata:
@@ -869,7 +867,7 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## rolebding 설정</span>
-</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; rolebinding.yaml
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | kubectl apply -f -
 </span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
 </span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
 </span></span></span><span class="line"><span class="cl"><span class="s">metadata:
@@ -926,16 +924,10 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/secrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
 </span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/imagePullSecrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl apply -f rolebinding.yaml -n tap-install 
-</span></span><span class="line"><span class="cl">kubectl apply -f tap-gui-viewer-service-account-rbac.yaml
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -1004,8 +996,8 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-01-30&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/68e5330a4b48aaa329ba27b2661536dab6ca7146" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 68e5330a4b48aaa329ba27b2661536dab6ca7146: rebuilding site Mon Jan 30 00:04:52     2023">
-                                    <i class="fas fa-hashtag fa-fw"></i>68e5330</a></span>
+                <span>Updated on 2023-01-30&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/1763479aaff55f4b17310387ce00db7ca7fd96c2" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 1763479aaff55f4b17310387ce00db7ca7fd96c2: rebuilding site Mon Jan 30 00:20:26     2023">
+                                    <i class="fas fa-hashtag fa-fw"></i>1763479</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

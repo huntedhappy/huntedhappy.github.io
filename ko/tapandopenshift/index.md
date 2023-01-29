@@ -21,7 +21,7 @@ Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다
 > * TBS 1.9.0
 > * AVI 22.1.2
 
-> 처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.
+> 처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었습니다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.
 
 아래에 route에 포함되어 있지 않은 도메인을 차단 하는것인지.. 여기 route에 tap를 구성 후 tap-gui 또는 어플리케이션의 대해서 어떻게 설정 해야 되는지는 아직 의문이 남아 있습니다.
 {{< figure src="/images/tapandopenshift/0-4.png" title="oc route 확인" >}}
@@ -60,9 +60,8 @@ TANZU FRAMEWORK다운로드는 Tanzu Net에서 다운로드를 받을 수 있다
 TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행 
 
 ```shell
-mkdir /var/tmp/tanzu-utils/framework/tap/1.4.0
-tar xvf /var/tmp/tanzu-utils/framework/tap/1.4.0/tanzu-framework-linux-amd64-v0.25.4.1.tar -C /var/tmp/tanzu-utils/framework/tap/1.4.0
-tanzu plugin install -l  /var/tmp/tanzu-utils/framework/tap/1.4.0/cli/ all
+tar xvf tanzu-framework-linux-amd64-v0.25.4.1.tar
+tanzu plugin install -l ./cli/ all
 
 ## 이미지를 받기 위해 tanzu net에 로그인 한다.
 docker login registry.tanzu.vmware.com -u {tanzuusername}
@@ -239,7 +238,7 @@ excluded_packages:
 ```
 ```shell
 ## rback 설정
-cat << EOF > tap-gui-viewer-service-account-rbac.yaml
+cat << EOF | kubectl apply -f -
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -355,7 +354,7 @@ EOF
 ```
 ```shell
 ## rolebding 설정
-cat << EOF > rolebinding.yaml
+cat << EOF | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -411,8 +410,6 @@ EOF
 kubectl patch sa default -n tap-install --type 'json' -p '[{"op":"add","path":"/secrets","value":["name":"registry-credentials"]}]'
 kubectl patch sa default -n tap-install --type 'json' -p '[{"op":"add","path":"/imagePullSecrets","value":["name":"registry-credentials"]}]'
 
-kubectl apply -f rolebinding.yaml -n tap-install 
-kubectl apply -f tap-gui-viewer-service-account-rbac.yaml
 ```
 ```shell
 ## TANZU PACKAGE 1.4.0 설치
