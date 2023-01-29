@@ -4,9 +4,855 @@
         <link>https://huntedhappy.github.io/ko/</link>
         <description>Full Stack DevOps</description>
         <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 07 Jan 2023 19:00:14 &#43;0900</lastBuildDate>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 29 Jan 2023 21:55:28 &#43;0900</lastBuildDate>
             <atom:link href="https://huntedhappy.github.io/ko/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Tap install on Openshift</title>
+    <link>https://huntedhappy.github.io/ko/tapandopenshift/</link>
+    <pubDate>Sun, 29 Jan 2023 21:55:28 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/tapandopenshift/</guid>
+    <description><![CDATA[<h2 id="1-tanzu-application-platform-on-openshift">1. TANZU APPLICATION PLATFORM ON OPENSHIFT</h2>
+<p>Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다. 기본 VMware제품들은 대부분 VMware 솔루션에 Dependency가 있었습니다. 
+그러나 TAP의 경우는 어떤 K8S 환경이면 어디든 설치가 된다는 컨셉으로 나온 것이 아닌가 싶습니다. 
+1.3.x 부터 OPENSHIFT에서도 지원을 한다고 해서 한번 설치를 진행 해 보았으며 어떻게 설치를 할 수 있는지 한번 알아 보도록 하겠습니다.</p>
+<p>기본적으로 OPENSHIFT는 설치가 되어 있다는 것을 가정으로 TAP를 설치를 진행을 하겠습니다.
+참고로 OPENSHIFT의 경우 TAP에서 지원하는 것은 4.10 , 4.11 두가지를 지원 합니다.</p>
+<figure><figcaption>
+            <h4>ocp 지원 버전</h4>
+        </figcaption>
+</figure>
+
+<p><figure><figcaption>
+            <h4>ocp 설치 버전</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>ocp 설치 버전</h4>
+        </figcaption>
+</figure>
+</p>
+<blockquote>
+<p>설치 버전</p>
+<ul>
+<li>Openshift Version 4.11.9</li>
+<li>Tanzu Application Platform 1.4.0</li>
+<li>TBS 1.9.0</li>
+<li>AVI 22.1.2</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>처음에 Openshift를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명을 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.</p>
+</blockquote>
+<h2 id="2-kapp-설치">2. KAPP 설치</h2>
+<p>기본적으로 KAPP이 설치가 되어 있지 않기 때문에 KAPP 설치가 필요 합니다. 이유는 TAP이라는 솔루션이 Tanzu라는 명령어를 통해 설치가 되기 때문에 입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## package를 설치 할 수 있게 kapp-contoller 설치</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f https://github.com/vmware-tanzu/carvel-kapp-controller/releases/latest/download/release.yml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## tanzu에서 secret을 생성 할 수 있게 secretget-controller 설치</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f https://github.com/carvel-dev/secretgen-controller/releases/latest/download/release.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>kapp을 설치를 하게 되면 이제 tanzu package repository 및  secret repository를 등록 할 수 있습니다.</p>
+<figure><figcaption>
+            <h4>package 및 reository</h4>
+        </figcaption>
+</figure>
+
+<p>그러면 위와 같이 list를 확인 할 수 있습니다. 위에 controller를 설치를 하지 않으면 에러가 발생 하는 것을 알 수 있습니다. 에러 내용은 아래와 같습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kapp contoller를 설치를 안할 경우 발생하는 에러
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: failed to check for the availability of &#39;packaging.carvel.dev&#39; API: failed to discover unmatched GroupVersionResources: the server is currently unable to handle the request</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: exit status 1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">secret contoller를 설치를 안할 경우 발생하는 에러
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: secret plugin can not be used as &#39;secretgen.carvel.dev/v1alpha1&#39; API is not available in the cluster</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: exit status 1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-tanzu-framework-및-pcakage-image-repository-업르도">3. TANZU FRAMEWORK 및 Pcakage Image Repository 업르도</h2>
+<p>TANZU FRAMEWORK다운로드는 Tanzu Net에서 다운로드를 받을 수 있다. 
+TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir /var/tmp/tanzu-utils/framework/tap/1.4.0
+</span></span><span class="line"><span class="cl">tar xvf /var/tmp/tanzu-utils/framework/tap/1.4.0/tanzu-framework-linux-amd64-v0.25.4.1.tar -C /var/tmp/tanzu-utils/framework/tap/1.4.0
+</span></span><span class="line"><span class="cl">tanzu plugin install -l  /var/tmp/tanzu-utils/framework/tap/1.4.0/cli/ all
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 이미지를 받기 위해 tanzu net에 로그인 한다.</span>
+</span></span><span class="line"><span class="cl">docker login registry.tanzu.vmware.com -u <span class="o">{</span>tanzuusername<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 이후에 내부 또는 gcr 등등 repository에 로그인 한다. 테스트는 내부 Harbor를 사용한다.</span>
+</span></span><span class="line"><span class="cl">docker login infra-harbor.huntedhappy.kro.kr -u admin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TAP Package 내부 Harbor에 업로드</span>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:1.4.0 --to-repo infra-harbor.huntedhappy.kro.kr/tap-packages/1.4.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-tap-package-등록">4. TAP Package 등록</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## namespace 생성</span>
+</span></span><span class="line"><span class="cl">kubectl create ns tap-install 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Harbor Secret 사용할 경우</span>
+</span></span><span class="line"><span class="cl">kubectl create secret docker-registry registry-credentials --docker-server<span class="o">=</span>infra-harbor.huntedhappy.kro.kr --docker-username<span class="o">=</span>admin --docker-password<span class="o">=</span><span class="si">${</span><span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="si">}</span> -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## package repository 추가</span>
+</span></span><span class="line"><span class="cl">tanzu package repository add tanzu-tap-repository <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url harbor-infra.huntedhappy.kro.kr/tap-packages/1.4.0 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS 설치</span>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-deps-package-repo:1.9.0 --to-tar<span class="o">=</span>tbs-full-deps-1.9.0.tar
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS Harobr업로드</span>
+</span></span><span class="line"><span class="cl">imgpkg copy --tar tbs-full-deps-1.9.0.tar --to-repo harbor-infra.huntedhappy.kro.kr/tap/tbs-full-deps/1.9.0 --include-non-distributable-layers
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS Repository 등록</span>
+</span></span><span class="line"><span class="cl">tanzu package repository add tbs-full-deps-repository <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url infra-harbor.huntedhappy.kro.kr/tap/tbs-full-deps/1.9.0 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-설치">5. 설치</h2>
+<p>TAP같은 경우 멀티 클러스터를 지원 하지만, 테스트는 full 기반으로 테스트를 진행 하였습니다.</p>
+<p>설치는 ootb_supply_chain_testing_scanning 로 테스트를 진행 했지만. 좀 복잡 할 수 있기 때문에
+여기에는 ootb_supply_chain_basic으로 기술 합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vi tap-full-vaules.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">profile: full
+</span></span><span class="line"><span class="cl">ceip_policy_disclosed: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">buildservice:
+</span></span><span class="line"><span class="cl">  kp_default_repository: <span class="s2">&#34;infra-harbor.huntedhappy.kro.kr/tap/tap-packages&#34;</span>
+</span></span><span class="line"><span class="cl">  kp_default_repository_secret:
+</span></span><span class="line"><span class="cl">    name: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">    namespace: <span class="s2">&#34;tap-install&#34;</span>
+</span></span><span class="line"><span class="cl">  exclude_dependencies: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">springboot_conventions:
+</span></span><span class="line"><span class="cl">  autoConfigureActuators: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">policy:
+</span></span><span class="line"><span class="cl">  tuf_enable: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">accelerator:
+</span></span><span class="line"><span class="cl">  domain: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  ingress:
+</span></span><span class="line"><span class="cl">    include: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">    enable_tls: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    secret_name: share-secret
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">  server:
+</span></span><span class="line"><span class="cl">    service_type: <span class="s2">&#34;ClusterIP&#34;</span>
+</span></span><span class="line"><span class="cl">    watched_namespace: <span class="s2">&#34;accelerator-system&#34;</span>
+</span></span><span class="line"><span class="cl">  samples:
+</span></span><span class="line"><span class="cl">    include: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">shared:
+</span></span><span class="line"><span class="cl">  kubernetes_distribution: <span class="s2">&#34;openshift&#34;</span> <span class="c1"># To be passed only for OpenShift. Defaults to &#34;&#34;.</span>
+</span></span><span class="line"><span class="cl">  ingress_issuer: default-ca-issuer
+</span></span><span class="line"><span class="cl">  image_registry:
+</span></span><span class="line"><span class="cl">    secret:
+</span></span><span class="line"><span class="cl">      name: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">      namespace: <span class="s2">&#34;tap-install&#34;</span>
+</span></span><span class="line"><span class="cl">  ingress_domain: <span class="s2">&#34;huntedhappy.kro.kr&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  ca_cert_data: |</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">appliveview:
+</span></span><span class="line"><span class="cl">  ingressEnabled: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  sslDisabled: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">    secretName: share-secret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">appliveview_connector:
+</span></span><span class="line"><span class="cl">  backend:
+</span></span><span class="line"><span class="cl">    sslDisabled: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">    host: appliveview.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cnrs:
+</span></span><span class="line"><span class="cl">  domain_name: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  domain_template: <span class="s2">&#34;{{.Name}}.{{.Domain}}&#34;</span>
+</span></span><span class="line"><span class="cl">  default_tls_secret: tap-install/share-secret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">scanning:
+</span></span><span class="line"><span class="cl">  metadataStore:
+</span></span><span class="line"><span class="cl">    url: <span class="s2">&#34;&#34;</span> <span class="c1"># Disable embedded integration since it&#39;s deprecated</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">metadata_store:
+</span></span><span class="line"><span class="cl">  ns_for_export_app_cert: <span class="s2">&#34;*&#34;</span>
+</span></span><span class="line"><span class="cl">  ingress_domain: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  app_service_type: ClusterIP
+</span></span><span class="line"><span class="cl">  ingress_enabled: <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">  targetImagePullSecret: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    secretName: share-secret
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">supply_chain: basic
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ootb_supply_chain_basic:
+</span></span><span class="line"><span class="cl">  registry:
+</span></span><span class="line"><span class="cl">    server: <span class="s2">&#34;infra-harbor.huntedhappy.kro.kr&#34;</span>
+</span></span><span class="line"><span class="cl">    repository: <span class="s2">&#34;app/supply_chain&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">grype:
+</span></span><span class="line"><span class="cl">  namespace: <span class="s2">&#34;tap-install&#34;</span> <span class="c1"># (optional) Defaults to default namespace.</span>
+</span></span><span class="line"><span class="cl">  targetImagePullSecret: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tap_gui:
+</span></span><span class="line"><span class="cl">  service_type: ClusterIP
+</span></span><span class="line"><span class="cl">  ingressEnabled: <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">  ingressDomain: <span class="s2">&#34;huntedhappy.kro.kr&#34;</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">    secretName: share-secret
+</span></span><span class="line"><span class="cl">  app_config:
+</span></span><span class="line"><span class="cl">    organization:
+</span></span><span class="line"><span class="cl">      name: <span class="s1">&#39;huntedhappy&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    app:
+</span></span><span class="line"><span class="cl">      title: <span class="s1">&#39;huntedhappy TAP&#39;</span>
+</span></span><span class="line"><span class="cl">      baseUrl: https://tap-gui.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">      support:
+</span></span><span class="line"><span class="cl">        url: https://tanzu.vmware.com/support
+</span></span><span class="line"><span class="cl">        items:
+</span></span><span class="line"><span class="cl">          - title: Contact Support
+</span></span><span class="line"><span class="cl">            icon: email
+</span></span><span class="line"><span class="cl">            links:
+</span></span><span class="line"><span class="cl">              - url: https://tanzu.vmware.com/support
+</span></span><span class="line"><span class="cl">                title: Tanzu Support Page
+</span></span><span class="line"><span class="cl">          - title: Documentation
+</span></span><span class="line"><span class="cl">            icon: doc
+</span></span><span class="line"><span class="cl">            links:
+</span></span><span class="line"><span class="cl">              - url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html
+</span></span><span class="line"><span class="cl">                title: Tanzu Application Platform Documentation
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    backend:
+</span></span><span class="line"><span class="cl">      baseUrl: https://tap-gui.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">      cors:
+</span></span><span class="line"><span class="cl">        origin: https://tap-gui.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">contour:
+</span></span><span class="line"><span class="cl">  certificates.duration: 87600h
+</span></span><span class="line"><span class="cl">  certificates.renewBefore: 360h
+</span></span><span class="line"><span class="cl">  envoy:
+</span></span><span class="line"><span class="cl">    service:
+</span></span><span class="line"><span class="cl">      type: LoadBalancer
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">excluded_packages:
+</span></span><span class="line"><span class="cl">- policy.apps.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">- learningcenter.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">- workshops.learningcenter.tanzu.vmware.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## rback 설정</span>
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; tap-gui-viewer-service-account-rbac.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">automountServiceAccountToken: false
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Secret
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">  annotations:
+</span></span></span><span class="line"><span class="cl"><span class="s">    kubernetes.io/service-account.name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">type: kubernetes.io/service-account-token
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-read-k8s
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">- kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: k8s-reader
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: k8s-reader
+</span></span></span><span class="line"><span class="cl"><span class="s">rules:
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;pods&#39;, &#39;pods/log&#39;, &#39;services&#39;, &#39;configmaps&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;apps&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;deployments&#39;, &#39;replicasets&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;autoscaling&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;horizontalpodautoscalers&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;networking.k8s.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;ingresses&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;networking.internal.knative.dev&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;serverlessservices&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [ &#39;autoscaling.internal.knative.dev&#39; ]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [ &#39;podautoscalers&#39; ]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [ &#39;get&#39;, &#39;watch&#39;, &#39;list&#39; ]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;serving.knative.dev&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configurations
+</span></span></span><span class="line"><span class="cl"><span class="s">  - revisions
+</span></span></span><span class="line"><span class="cl"><span class="s">  - routes
+</span></span></span><span class="line"><span class="cl"><span class="s">  - services
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;carto.run&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterconfigtemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterdeliveries
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterdeploymenttemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterimagetemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterruntemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clustersourcetemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clustersupplychains
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clustertemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - deliverables
+</span></span></span><span class="line"><span class="cl"><span class="s">  - runnables
+</span></span></span><span class="line"><span class="cl"><span class="s">  - workloads
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;source.toolkit.fluxcd.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - gitrepositories
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;source.apps.tanzu.vmware.com&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - imagerepositories
+</span></span></span><span class="line"><span class="cl"><span class="s">  - mavenartifacts
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;conventions.carto.run&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - podintents
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;kpack.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - images
+</span></span></span><span class="line"><span class="cl"><span class="s">  - builds
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;scanning.apps.tanzu.vmware.com&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - sourcescans
+</span></span></span><span class="line"><span class="cl"><span class="s">  - imagescans
+</span></span></span><span class="line"><span class="cl"><span class="s">  - scanpolicies
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;tekton.dev&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - taskruns
+</span></span></span><span class="line"><span class="cl"><span class="s">  - pipelineruns
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;kappctrl.k14s.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - apps
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## rolebding 설정</span>
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; rolebinding.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-deliverable
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: deliverable
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-workload
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: workload
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: dev-permit-app-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: namespace-dev-permit-app-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer-cluster-access
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/secrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
+</span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/imagePullSecrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f rolebinding.yaml -n tap-install 
+</span></span><span class="line"><span class="cl">kubectl apply -f tap-gui-viewer-service-account-rbac.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## TANZU PACKAGE 1.4.0 설치</span>
+</span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.4.0 -f tap-full-vaules.yaml -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS 설치</span>
+</span></span><span class="line"><span class="cl">tanzu package install full-tbs-deps -p full-tbs-deps.tanzu.vmware.com -v 1.9.0 -n tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6-설치-완료">6. 설치 완료</h2>
+<figure><figcaption>
+            <h4>설치 완료#1</h4>
+        </figcaption>
+</figure>
+
+<p>Sample App Test
+<figure><figcaption>
+            <h4>설치 완료#2</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Sample App Test를 하게 될 경우 아래와 같은 문구가 나오는대 왜 나오는지는 아직 파악 하지 못하였습니다. 하지만 SAMPLE APP 배포는 잘 동작 하는 것을 확인 할 수 있습니다.</p>
+<p>I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to client-side throttling, not priority and fairness, request: GET:https://api.openshift.huntedhappy.kro.kr:6443/apis/console.openshift.io/v1alpha1?timeout=32s</p>
+<p><figure><figcaption>
+            <h4>설치 완료#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP GUI 화면#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP GUI 화면#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP GUI 화면#2</h4>
+        </figcaption>
+</figure>
+</p>
+<p>설치가 완료 되면 TAP의 대해서는 Visual Sutudio Code, IntelliJ 환경에서도 잘 동작하는 것을 확인 할 수 있습니다.</p>
+]]></description>
+</item><item>
     <title>The Documentation Harbor</title>
     <link>https://huntedhappy.github.io/ko/harbor/</link>
     <pubDate>Sat, 07 Jan 2023 19:00:14 &#43;0900</pubDate>
@@ -8607,500 +9453,6 @@ var bookings [50]string -&gt; bookings := []string{}</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><a href="https://youtu.be/yyUHQIec83I" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> 참고동영상: TechWorld with Nana</a></p>
-]]></description>
-</item><item>
-    <title>The Documentation OWASP</title>
-    <link>https://huntedhappy.github.io/ko/owsap/</link>
-    <pubDate>Thu, 20 Jan 2022 13:37:45 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/owsap/</guid>
-    <description><![CDATA[<p>OWASP TOP10을 정리해보자.
-<figure><figcaption>
-            <h4>owasp top10 출처:OWASP</h4>
-        </figcaption>
-</figure>
-</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th>Name</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">A01</td>
-<td>Broken Access Control</td>
-<td>Moving up from the fifth position, 94% of applications were tested for some form of broken access control with the average incidence rate of 3.81%, and has the most occurrences in the contributed dataset with over 318k. Notable Common Weakness Enumerations (CWEs) included are CWE-200: Exposure of Sensitive Information to an Unauthorized Actor, CWE-201: Exposure of Sensitive Information Through Sent Data, and CWE-352: Cross-Site Request Forgery.</td>
-</tr>
-<tr>
-<td style="text-align:center">A02</td>
-<td>Cryptographic Failures</td>
-<td>Shifting up one position to #2, previously known as Sensitive Data Exposure, which is more of a broad symptom rather than a root cause, the focus is on failures related to cryptography (or lack thereof). Which often lead to exposure of sensitive data. Notable Common Weakness Enumerations (CWEs) included are CWE-259: Use of Hard-coded Password, CWE-327: Broken or Risky Crypto Algorithm, and CWE-331 Insufficient Entropy .</td>
-</tr>
-<tr>
-<td style="text-align:center">A03</td>
-<td>Injection</td>
-<td>Injection slides down to the third position. 94% of the applications were tested for some form of injection with a max incidence rate of 19%, an average incidence rate of 3%, and 274k occurances. Notable Common Weakness Enumerations (CWEs) included are CWE-79: Cross-site Scripting, CWE-89: SQL Injection, and CWE-73: External Control of File Name or Path.</td>
-</tr>
-<tr>
-<td style="text-align:center">A04</td>
-<td>Insecure Design</td>
-<td>A new category for 2021 focuses on risks related to design and architectural flaws, with a call for more use of threat modeling, secure design patterns, and reference architectures. As a community we need to move beyond &ldquo;shift-left&rdquo; in the coding space to pre-code activities that are critical for the principles of Secure by Design. Notable Common Weakness Enumerations (CWEs) include CWE-209: Generation of Error Message Containing Sensitive Information, CWE-256: Unprotected Storage of Credentials, CWE-501: Trust Boundary Violation, and CWE-522: Insufficiently Protected Credentials.</td>
-</tr>
-<tr>
-<td style="text-align:center">A05</td>
-<td>Security Misconfiguration</td>
-<td>Moving up from #6 in the previous edition, 90% of applications were tested for some form of misconfiguration, with an average incidence rate of 4.%, and over 208k occurences of a Common Weakness Enumeration (CWE) in this risk category. With more shifts into highly configurable software, it&rsquo;s not surprising to see this category move up. Notable CWEs included are CWE-16 Configuration and CWE-611 Improper Restriction of XML External Entity Reference.</td>
-</tr>
-<tr>
-<td style="text-align:center">A06</td>
-<td>Vulnerable and Outdated Components</td>
-<td>It was #2 from the Top 10 community survey but also had enough data to make the Top 10 via data. Vulnerable Components are a known issue that we struggle to test and assess risk and is the only category to not have any Common Weakness Enumerations (CWEs) mapped to the included CWEs, so a default exploits/impact weight of 5.0 is used. Notable CWEs included are CWE-1104: Use of Unmaintained Third-Party Components and the two CWEs from Top 10 2013 and 2017.</td>
-</tr>
-<tr>
-<td style="text-align:center">A07</td>
-<td>Identification and Authentication Failures</td>
-<td>Previously known as Broken Authentication, this category slid down from the second position and now includes Common Weakness Enumerations (CWEs) related to identification failures. Notable CWEs included are CWE-297: Improper Validation of Certificate with Host Mismatch, CWE-287: Improper Authentication, and CWE-384: Session Fixation</td>
-</tr>
-<tr>
-<td style="text-align:center">A08</td>
-<td>Software and Data Integrity Failures</td>
-<td>A new category for 2021 focuses on making assumptions related to software updates, critical data, and CI/CD pipelines without verifying integrity. One of the highest weighted impacts from Common Vulnerability and Exposures/Common Vulnerability Scoring System (CVE/CVSS) data. Notable Common Weakness Enumerations (CWEs) include CWE-829: Inclusion of Functionality from Untrusted Control Sphere, CWE-494: Download of Code Without Integrity Check, and CWE-502: Deserialization of Untrusted Data.</td>
-</tr>
-<tr>
-<td style="text-align:center">A09</td>
-<td>Security Logging and Monitoring Failures</td>
-<td>Security logging and monitoring came from the Top 10 community survey (#3), up slightly from the tenth position in the OWASP Top 10 2017. Logging and monitoring can be challenging to test, often involving interviews or asking if attacks were detected during a penetration test. There isn&rsquo;t much CVE/CVSS data for this category, but detecting and responding to breaches is critical. Still, it can be very impactful for accountability, visibility, incident alerting, and forensics. This category expands beyond CWE-778 Insufficient Logging to include CWE-117 Improper Output Neutralization for Logs, CWE-223 Omission of Security-relevant Information, and CWE-532 Insertion of Sensitive Information into Log File.</td>
-</tr>
-<tr>
-<td style="text-align:center">A10</td>
-<td>Server-Side Request Forgery (SSRF)</td>
-<td>This category is added from the Top 10 community survey (#1). The data shows a relatively low incidence rate with above average testing coverage and above-average Exploit and Impact potential ratings. As new entries are likely to be a single or small cluster of Common Weakness Enumerations (CWEs) for attention and awareness, the hope is that they are subject to focus and can be rolled into a larger category in a future edition.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="a01-broken-access-control">A01 Broken Access Control</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">34</td>
-<td style="text-align:center">55.97%</td>
-<td style="text-align:center">3.81%</td>
-<td style="text-align:center">6.92</td>
-<td style="text-align:center">5.93</td>
-<td style="text-align:center">94.55%</td>
-<td style="text-align:center">47.72%</td>
-<td style="text-align:center">318,487</td>
-<td style="text-align:center">19,013</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명">설명</h4>
-<p>액세스 제어는 사용자가 의도한 권한을 벗어나 행동할 수 없도록 정책을 시행합니다. 실패는 일반적으로 모든 데이터의 무단 정보 공개, 수정 또는 파괴로 이어지거나 사용자의 한계를 벗어난 비즈니스 기능을 수행하게 됩니다. 일반적인 액세스 제어 취약점은 다음과 같습니다.</p>
-<ul>
-<li>
-<p>특정 기능, 역할 또는 사용자에게만 액세스 권한을 부여해야 하지만 누구나 사용할 수 있는 최소 권한 또는 기본 거부 원칙 위반입니다.</p>
-</li>
-<li>
-<p>URL(매개변수 변조 또는 강제 탐색), 내부 애플리케이션 상태 또는 HTML 페이지를 수정하거나 API 요청을 수정하는 공격 도구를 사용하여 액세스 제어 검사를 우회합니다.</p>
-</li>
-<li>
-<p>고유 식별자를 제공하여 다른 사람의 계정 보기 또는 편집 허용(안전하지 않은 직접 개체 참조)</p>
-</li>
-<li>
-<p>POST, PUT 및 DELETE에 대한 액세스 제어가 누락된 API 액세스.</p>
-</li>
-<li>
-<p>특권 상승. 로그인하지 않고 사용자로 활동하거나 사용자로 로그인하면 관리자로 활동합니다.</p>
-</li>
-<li>
-<p>JSON 웹 토큰(JWT) 액세스 제어 토큰 재생 또는 변조, 권한 상승을 위해 조작된 쿠키 또는 숨겨진 필드, JWT 무효화 남용과 같은 메타데이터 조작.</p>
-</li>
-<li>
-<p>CORS 구성이 잘못되면 승인되지 않은/신뢰할 수 없는 출처의 API 액세스가 허용됩니다.</p>
-</li>
-<li>
-<p>인증되지 않은 사용자로 인증된 페이지를 강제로 탐색하거나 표준 사용자로 권한 있는 페이지를 탐색합니다.</p>
-</li>
-</ul>
-<h2 id="a02-cryptographic-failures">A02 Cryptographic Failures</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">29</td>
-<td style="text-align:center">46.44%</td>
-<td style="text-align:center">4.49%</td>
-<td style="text-align:center">7.29</td>
-<td style="text-align:center">6.81</td>
-<td style="text-align:center">79.33%</td>
-<td style="text-align:center">34.85%</td>
-<td style="text-align:center">233,788</td>
-<td style="text-align:center">3,075</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명-1">설명</h4>
-<p>첫 번째는 전송 중인 데이터와 저장되지 않은 데이터의 보호 요구 사항을 결정하는 것입니다. 예를 들어 암호, 신용 카드 번호, 건강 기록, 개인 정보 및 비즈니스 비밀은 주로 해당 데이터가 개인 정보 보호법(예: EU의 일반 데이터 보호 규정(GDPR) 또는 규정(예: 금융 데이터 보호)에 해당하는 경우 추가 보호가 필요합니다. PCI 데이터 보안 표준(PCI DSS)과 같은. 이러한 모든 데이터의 경우:</p>
-<ul>
-<li>
-<p>데이터가 일반 텍스트로 전송됩니까? 이는 STARTTLS와 같은 TLS 업그레이드도 사용하는 HTTP, SMTP, FTP와 같은 프로토콜과 관련이 있습니다. 외부 인터넷 트래픽은 위험합니다. 로드 밸런서, 웹 서버 또는 백엔드 시스템 간의 모든 내부 트래픽을 확인합니다.</p>
-</li>
-<li>
-<p>기본적으로 또는 이전 코드에서 사용되는 오래되거나 약한 암호화 알고리즘이나 프로토콜이 있습니까?</p>
-</li>
-<li>
-<p>기본 암호화 키가 사용 중이거나 약한 암호화 키가 생성 또는 재사용되거나 적절한 키 관리 또는 순환이 누락되었습니까? 암호화 키는 소스 코드 저장소에 체크인됩니까?</p>
-</li>
-<li>
-<p>암호화가 시행되지 않습니까? 예를 들어 HTTP 헤더(브라우저) 보안 지시문이나 헤더가 누락되었습니까?</p>
-</li>
-<li>
-<p>수신한 서버 인증서와 신뢰 체인이 제대로 검증되었습니까?</p>
-</li>
-<li>
-<p>초기화 벡터가 무시, 재사용 또는 생성된 암호화 작동 모드에 대해 충분히 안전하지 않습니까? ECB와 같은 안전하지 않은 작동 모드가 사용 중입니까? 인증된 암호화가 더 적절할 때 암호화가 사용됩니까?</p>
-</li>
-<li>
-<p>암호 기반 키 파생 기능이 없는 경우 암호가 암호 키로 사용됩니까?</p>
-</li>
-<li>
-<p>암호화 요구 사항을 충족하도록 설계되지 않은 암호화 목적에 무작위성이 사용됩니까? 올바른 기능을 선택하더라도 개발자가 시드해야 합니까? 그렇지 않은 경우 개발자가 엔트로피/예측 불가능성이 부족한 시드로 내장된 강력한 시딩 기능을 덮어썼습니까?</p>
-</li>
-<li>
-<p>MD5 또는 SHA1과 같은 더 이상 사용되지 않는 해시 함수가 사용 중이거나 암호화 해시 함수가 필요할 때 비암호화 해시 함수가 사용됩니까?</p>
-</li>
-<li>
-<p>PKCS 번호 1 v1.5와 같은 더 이상 사용되지 않는 암호화 패딩 방법이 사용 중입니까?</p>
-</li>
-<li>
-<p>예를 들어 패딩 오라클 공격의 형태로 암호화 오류 메시지 또는 부채널 정보가 악용될 수 있습니까?</p>
-</li>
-</ul>
-<h2 id="a03-injection">A03 Injection</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">33</td>
-<td style="text-align:center">19.09%</td>
-<td style="text-align:center">3.37%</td>
-<td style="text-align:center">7.25</td>
-<td style="text-align:center">7.15</td>
-<td style="text-align:center">94.04%</td>
-<td style="text-align:center">47.90%</td>
-<td style="text-align:center">274,228</td>
-<td style="text-align:center">32,078</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명-2">설명</h4>
-<p>애플리케이션은 다음과 같은 경우 공격에 취약합니다.</p>
-<ul>
-<li>사용자 제공 데이터는 애플리케이션에서 검증, 필터링 또는 삭제되지 않습니다.</li>
-<li>컨텍스트 인식 이스케이프가 없는 동적 쿼리 또는 매개변수화되지 않은 호출은 인터프리터에서 직접 사용됩니다.</li>
-<li>적대적인 데이터는 ORM(객체 관계형 매핑) 검색 매개변수 내에서 사용되어 중요한 추가 레코드를 추출합니다.</li>
-<li>적대적인 데이터를 직접 사용하거나 연결합니다. SQL 또는 명령은 동적 쿼리, 명령 또는 저장 프로시저의 구조 및 악성 데이터를 포함합니다.</li>
-<li>더 일반적인 주입에는 SQL, NoSQL, OS 명령, ORM(Object Relational Mapping), LDAP 및 EL(Expression Language) 또는 OGNL(Object Graph Navigation Library) 주입이 있습니다. 개념은 모든 통역사 간에 동일합니다. 소스 코드 검토는 애플리케이션이 주입에 취약한지 감지하는 가장 좋은 방법입니다. 모든 매개변수, 헤더, URL, 쿠키, JSON, SOAP 및 XML 데이터 입력에 대한 자동 테스트를 적극 권장합니다. 조직은 CI/CD 파이프라인에 정적(SAST), 동적(DAST) 및 대화형(IAST) 애플리케이션 보안 테스트 도구를 포함하여 프로덕션 배포 전에 도입된 주입 결함을 식별할 수 있습니다.</li>
-</ul>
-<h2 id="a04-insecure-design">A04 Insecure Design</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">40</td>
-<td style="text-align:center">24.19%</td>
-<td style="text-align:center">3.00%</td>
-<td style="text-align:center">6.46</td>
-<td style="text-align:center">6.78</td>
-<td style="text-align:center">77.25%</td>
-<td style="text-align:center">42.51%</td>
-<td style="text-align:center">262,407</td>
-<td style="text-align:center">2,691</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명-3">설명</h4>
-<p>안전하지 않은 설계는 &ldquo;누락되거나 비효율적인 제어 설계&quot;로 표현되는 다양한 약점을 나타내는 광범위한 범주입니다. 안전하지 않은 디자인은 다른 모든 상위 10개 위험 범주의 원인이 아닙니다. 안전하지 않은 설계와 안전하지 않은 구현에는 차이가 있습니다. 우리는 근본 원인과 해결 방법이 다르기 때문에 설계 결함과 구현 결함을 구별합니다. 보안 설계에는 여전히 악용될 수 있는 취약점으로 이어지는 구현 결함이 있을 수 있습니다. 안전하지 않은 설계는 정의상 특정 공격을 방어하기 위해 필요한 보안 제어가 생성되지 않았기 때문에 완벽한 구현으로 수정할 수 없습니다. 안전하지 않은 설계에 기여하는 요인 중 하나는 개발 중인 소프트웨어 또는 시스템에 내재된 비즈니스 위험 프로파일링의 부족입니다.</p>
-<h2 id="a05-security-misconfiguration">A05 Security Misconfiguration</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">20</td>
-<td style="text-align:center">19.84%</td>
-<td style="text-align:center">4.51%</td>
-<td style="text-align:center">8.12</td>
-<td style="text-align:center">6.56</td>
-<td style="text-align:center">89.58%</td>
-<td style="text-align:center">44.84%</td>
-<td style="text-align:center">208,387</td>
-<td style="text-align:center">789</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명-4">설명</h4>
-<p>애플리케이션이 다음과 같은 경우 취약할 수 있습니다.</p>
-<ul>
-<li>애플리케이션 스택의 모든 부분에서 적절한 보안 강화가 누락되었거나 클라우드 서비스에 대한 권한이 부적절하게 구성되었습니다.</li>
-<li>불필요한 기능이 활성화되거나 설치됩니다(예: 불필요한 포트, 서비스, 페이지, 계정 또는 권한).</li>
-<li>기본 계정과 해당 암호는 여전히 활성화되어 있으며 변경되지 않습니다.</li>
-<li>오류 처리는 스택 추적 또는 기타 지나치게 유익한 오류 메시지를 사용자에게 보여줍니다.</li>
-<li>업그레이드된 시스템의 경우 최신 보안 기능이 비활성화되거나 안전하게 구성되지 않습니다.</li>
-<li>애플리케이션 서버, 애플리케이션 프레임워크(예: Struts, Spring, ASP.NET), 라이브러리, 데이터베이스 등의 보안 설정이 보안 값으로 설정되어 있지 않습니다.</li>
-<li>서버가 보안 헤더 또는 지시문을 보내지 않거나 보안 값으로 설정되지 않았습니다.</li>
-<li>소프트웨어가 오래되었거나 취약합니다( A06:2021-Vulnerable and Outdated Components 참조).</li>
-</ul>
-<p>일관되고 반복 가능한 애플리케이션 보안 구성 프로세스가 없으면 시스템이 더 큰 위험에 노출됩니다.</p>
-<h2 id="a06-vulnerable-and-outdated-components">A06 Vulnerable and Outdated Components</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">27.96%</td>
-<td style="text-align:center">8.77%</td>
-<td style="text-align:center">51.78%</td>
-<td style="text-align:center">22.47%</td>
-<td style="text-align:center">5.00</td>
-<td style="text-align:center">5.00</td>
-<td style="text-align:center">30,457</td>
-<td style="text-align:center">0</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명-5">설명</h4>
-<p>당신은 취약할 가능성이 있습니다:</p>
-<ul>
-<li>사용하는 모든 구성 요소(클라이언트 측 및 서버 측 모두)의 버전을 모르는 경우. 여기에는 직접 사용하는 구성 요소와 중첩된 종속성이 포함됩니다.</li>
-<li>소프트웨어가 취약하거나 지원되지 않거나 오래된 경우. 여기에는 OS, 웹/애플리케이션 서버, 데이터베이스 관리 시스템(DBMS), 애플리케이션, API 및 모든 구성 요소, 런타임 환경 및 라이브러리가 포함됩니다.</li>
-<li>취약점을 정기적으로 스캔하지 않고 사용하는 구성 요소와 관련된 보안 게시판을 구독하지 않는 경우.</li>
-<li>위험 기반의 적시에 기본 플랫폼, 프레임워크 및 종속성을 수정하거나 업그레이드하지 않는 경우. 이는 패치가 변경 통제 하에 있는 월별 또는 분기별 작업인 환경에서 일반적으로 발생하여 조직이 수정된 취약점에 며칠 또는 몇 달 동안 불필요하게 노출될 수 있습니다.</li>
-<li>소프트웨어 개발자가 업데이트, 업그레이드 또는 패치된 라이브러리의 호환성을 테스트하지 않는 경우.</li>
-<li>구성 요소의 구성을 보호하지 않는 경우(A05:2021-Security Misconfiguration 참조).</li>
-</ul>
-<h2 id="a07-identification-and-authentication-failures">A07 Identification and Authentication Failures</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">22</td>
-<td style="text-align:center">14.84%</td>
-<td style="text-align:center">2.55%</td>
-<td style="text-align:center">7.40</td>
-<td style="text-align:center">6.50</td>
-<td style="text-align:center">79.51%</td>
-<td style="text-align:center">45.72%</td>
-<td style="text-align:center">132,195</td>
-<td style="text-align:center">3,897</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명-6">설명</h4>
-<p>사용자의 신원 확인, 인증 및 세션 관리는 인증 관련 공격으로부터 보호하는 데 중요합니다. 애플리케이션이 다음과 같은 경우 인증 취약점이 있을 수 있습니다.</p>
-<ul>
-<li>공격자가 유효한 사용자 이름 및 암호 목록을 가지고 있는 경우 자격 증명 스터핑과 같은 자동화된 공격을 허용합니다.</li>
-<li>무차별 대입 또는 기타 자동화된 공격을 허용합니다.</li>
-<li>&ldquo;Password1&rdquo; 또는 &ldquo;admin/admin&quot;과 같은 기본 암호, 취약하거나 잘 알려진 암호를 허용합니다.</li>
-<li>안전할 수 없는 &ldquo;지식 기반 답변&quot;과 같은 취약하거나 비효율적인 자격 증명 복구 및 비밀번호 찾기 프로세스를 사용합니다.</li>
-<li>일반 텍스트, 암호화되거나 약하게 해시된 암호 데이터 저장소를 사용합니다( A02:2021-Cryptographic Failures 참조).</li>
-<li>다단계 인증이 없거나 비효율적입니다.</li>
-<li>URL의 세션 식별자를 노출합니다.</li>
-<li>로그인 성공 후 세션 식별자를 재사용합니다.</li>
-<li>세션 ID를 올바르게 무효화하지 않습니다. 사용자 세션 또는 인증 토큰(주로 SSO(Single Sign-On) 토큰)은 로그아웃 또는 비활성 기간 동안 제대로 무효화되지 않습니다.</li>
-</ul>
-<h2 id="a08-software-and-data-integrity-failures">A08 Software and Data Integrity Failures</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">10</td>
-<td style="text-align:center">16.67%</td>
-<td style="text-align:center">2.05%</td>
-<td style="text-align:center">6.94</td>
-<td style="text-align:center">7.94</td>
-<td style="text-align:center">75.04%</td>
-<td style="text-align:center">45.35%</td>
-<td style="text-align:center">47,972</td>
-<td style="text-align:center">1,152</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명-7">설명</h4>
-<p>소프트웨어 및 데이터 무결성 오류는 무결성 위반으로부터 보호하지 않는 코드 및 인프라와 관련됩니다. 이에 대한 예는 애플리케이션이 신뢰할 수 없는 소스, 저장소 및 CDN(콘텐츠 전달 네트워크)의 플러그인, 라이브러리 또는 모듈에 의존하는 경우입니다. 안전하지 않은 CI/CD 파이프라인은 무단 액세스, 악성 코드 또는 시스템 손상의 가능성을 유발할 수 있습니다. 마지막으로, 많은 응용 프로그램에는 이제 충분한 무결성 확인 없이 업데이트가 다운로드되고 이전에 신뢰했던 응용 프로그램에 적용되는 자동 업데이트 기능이 포함됩니다. 공격자는 잠재적으로 자신의 업데이트를 업로드하여 배포하고 모든 설치에서 실행할 수 있습니다. 또 다른 예는 공격자가 보고 수정할 수 있는 구조로 개체 또는 데이터가 인코딩되거나 직렬화되어 안전하지 않은 역직렬화에 취약한 경우입니다.</p>
-<h2 id="a09-security-logging-and-monitoring-failures">A09 Security Logging and Monitoring Failures</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">19.23%</td>
-<td style="text-align:center">6.51%</td>
-<td style="text-align:center">6.87</td>
-<td style="text-align:center">4.99</td>
-<td style="text-align:center">53.67%</td>
-<td style="text-align:center">39.97%</td>
-<td style="text-align:center">53,615</td>
-<td style="text-align:center">242</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명-8">설명</h4>
-<p>OWASP Top 10 2021로 돌아가서 이 카테고리는 활성 침해를 감지, 에스컬레이션 및 대응하는 데 도움이 됩니다. 로깅 및 모니터링 없이는 위반을 감지할 수 없습니다. 불충분한 로깅, 탐지, 모니터링 및 활성 응답은 다음과 같은 경우에 발생합니다.</p>
-<ul>
-<li>로그인, 로그인 실패 및 가치가 높은 트랜잭션과 같은 감사 가능한 이벤트는 기록되지 않습니다.</li>
-<li>경고 및 오류는 아니오, 부적절하거나 불명확한 로그 메시지를 생성합니다.</li>
-<li>애플리케이션 및 API 로그는 의심스러운 활동에 대해 모니터링되지 않습니다.</li>
-<li>로그는 로컬에만 저장됩니다.</li>
-<li>적절한 경고 임계값 및 응답 에스컬레이션 프로세스가 적절하지 않거나 효과적이지 않습니다.</li>
-<li>DAST(동적 애플리케이션 보안 테스트) 도구(예: OWASP ZAP)에 의한 침투 테스트 및 스캔은 경고를 트리거하지 않습니다.</li>
-<li>애플리케이션은 실시간 또는 거의 실시간으로 활성 공격을 감지, 확대 또는 경고할 수 없습니다.</li>
-</ul>
-<p>사용자나 공격자가 볼 수 있는 로깅 및 경고 이벤트를 통해 정보 유출에 취약합니다( A01:2021-Broken Access Control 참조).</p>
-<h2 id="a10-server-side-request-forgery-ssrf">A10 Server-Side Request Forgery (SSRF)</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">CWEs Mapped</th>
-<th style="text-align:center">Max Incidence Rate</th>
-<th style="text-align:center">Avg Incidence Rate</th>
-<th style="text-align:center">Avg Weighted Exploit</th>
-<th style="text-align:center">Avg Weighted Impact</th>
-<th style="text-align:center">Max Coverage</th>
-<th style="text-align:center">Avg Coverage</th>
-<th style="text-align:center">Total Occurrences</th>
-<th style="text-align:center">Total CVEs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2.72%</td>
-<td style="text-align:center">2.72%</td>
-<td style="text-align:center">8.28</td>
-<td style="text-align:center">6.72</td>
-<td style="text-align:center">67.72%</td>
-<td style="text-align:center">67.72%</td>
-<td style="text-align:center">9,503</td>
-<td style="text-align:center">385</td>
-</tr>
-</tbody>
-</table>
-<h4 id="설명-9">설명</h4>
-<p>SSRF 결함은 웹 애플리케이션이 사용자가 제공한 URL의 유효성을 검사하지 않고 원격 리소스를 가져올 때마다 발생합니다. 이를 통해 공격자는 방화벽, VPN 또는 다른 유형의 네트워크 ACL(액세스 제어 목록)에 의해 보호되는 경우에도 응용 프로그램이 조작된 요청을 예기치 않은 대상으로 보내도록 강제할 수 있습니다.</p>
-<p>최신 웹 애플리케이션이 최종 사용자에게 편리한 기능을 제공함에 따라 URL 가져오기가 일반적인 시나리오가 되었습니다. 그 결과 SSRF의 발병률이 증가하고 있습니다. 또한 클라우드 서비스와 아키텍처의 복잡성으로 인해 SSRF의 심각도가 높아지고 있습니다.</p>
-<p><a href="https://owasp.org/Top10/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> 자료출처: OWASP</a></p>
 ]]></description>
 </item></channel>
 </rss>

@@ -106,6 +106,23 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-3" class="typeit"></div></h2><div class="links"><a href="https://github.com/huntedhappy" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://linkedin.com/in/huntedhappy" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw"></i></a><a href="mailto:huntedhappy@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/vsan/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/vsan/large.jfif"
+        data-srcset="/vsan/large.jfif, /vsan/large.jfif 1.5x, /vsan/large.jfif 2x"
+        data-sizes="auto"
+        alt="/vsan/large.jfif"
+        title="VASN RAID-5, RAID-6" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/vsan/">The Documentation vSAN</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-20">2022-01-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">1. VSAN 개념 VSAN SDS(Software Defined Storage), ESXi 호스트의 로컬 스토리지 리소스를 가상화하고, 서비스 품질 요구 사항에 따라 분할하여 가상 시스템 및 애플리케이션에 할당 할 수 있는 스토리지 풀로 변환.
+ 참고 문헌
+2. VSAN Erasure Coding RAID-5 및 RAID-6 Erasure Coding이란 일부 조각이 누락된 경우에도 원본데이터를 복구할 수 있는 방식으로 데이터를 조각으로 인코딩하고 분할하는 모든 체계를 나타내는 일반적인 용어.
+ 여기서 더 자세한 내용을 확인 할 수 있을 거 같다.</div><div class="post-footer">
+        <a href="/vsan/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vsan/">vsan</a>,&nbsp;<a href="/tags/erasure-coding-raid-5/raid-6/">Erasure Coding RAID-5/RAID-6</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/nsxt/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -188,20 +205,6 @@ LDAPS를 구성 할 경우 IP로 ldapsearch를 하면 실패하는 경우를 보
 설치 Tool  Chocolatey 설치 링크  chocolatey</div><div class="post-footer">
         <a href="/eks/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/eks/">EKS</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/cicd/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/cicd/cicd.png"
-        data-srcset="/cicd/cicd.png, /cicd/cicd.png 1.5x, /cicd/cicd.png 2x"
-        data-sizes="auto"
-        alt="/cicd/cicd.png"
-        title="CICD Design And Built" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/cicd/">The Documentation CICD</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-11">2022-01-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">간단하게 CICD의 대해 구성 하는 것을 기술 할 예정 사용자가 VS를 사용하여 Docker 내용을 수정 후 Git에 Push를 하면 Jenkins에서 5분에 한번씩 Polling을 하여 Git에 변화가 있으면 Pipeline이 동작 하면서 자동으로 Docker Build를 수행 후 Harbor에 이미지를 Push 후 새로운 이미지의 대한 Version을 Manifest의 변경 하여 다시 Git에 Push, 이후 3분에 한번씩 Argo가 Git의 내용의 변화가 있는지 확인 후 변화가 있으면 K8S의 환경의 Manifest를 적용</div><div class="post-footer">
-        <a href="/cicd/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/argo/">argo</a>,&nbsp;<a href="/tags/jenkins/">jenkins</a>,&nbsp;<a href="/tags/visual-studio/">visual studio</a>,&nbsp;<a href="/tags/cicd/">cicd</a>,&nbsp;<a href="/tags/harbor/">harbor</a>,&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/devops/">devops</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -217,6 +220,10 @@ LDAPS를 구성 할 경우 IP로 ldapsearch를 하면 실패하는 경우를 보
                 </li><li class="page-item ">
                     <span class="page-link">
                         <a href="/page/4/">4</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/5/">5</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

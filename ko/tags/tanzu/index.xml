@@ -4,7 +4,853 @@
         <link>https://huntedhappy.github.io/ko/tags/tanzu/</link>
         <description>tanzu - Tag - Dokyung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 07 Jan 2023 19:00:14 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 29 Jan 2023 21:55:28 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu/" rel="self" type="application/rss+xml" /><item>
+    <title>Tap install on Openshift</title>
+    <link>https://huntedhappy.github.io/ko/tapandopenshift/</link>
+    <pubDate>Sun, 29 Jan 2023 21:55:28 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/tapandopenshift/</guid>
+    <description><![CDATA[<h2 id="1-tanzu-application-platform-on-openshift">1. TANZU APPLICATION PLATFORM ON OPENSHIFT</h2>
+<p>Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다. 기본 VMware제품들은 대부분 VMware 솔루션에 Dependency가 있었습니다. 
+그러나 TAP의 경우는 어떤 K8S 환경이면 어디든 설치가 된다는 컨셉으로 나온 것이 아닌가 싶습니다. 
+1.3.x 부터 OPENSHIFT에서도 지원을 한다고 해서 한번 설치를 진행 해 보았으며 어떻게 설치를 할 수 있는지 한번 알아 보도록 하겠습니다.</p>
+<p>기본적으로 OPENSHIFT는 설치가 되어 있다는 것을 가정으로 TAP를 설치를 진행을 하겠습니다.
+참고로 OPENSHIFT의 경우 TAP에서 지원하는 것은 4.10 , 4.11 두가지를 지원 합니다.</p>
+<figure><figcaption>
+            <h4>ocp 지원 버전</h4>
+        </figcaption>
+</figure>
+
+<p><figure><figcaption>
+            <h4>ocp 설치 버전</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>ocp 설치 버전</h4>
+        </figcaption>
+</figure>
+</p>
+<blockquote>
+<p>설치 버전</p>
+<ul>
+<li>Openshift Version 4.11.9</li>
+<li>Tanzu Application Platform 1.4.0</li>
+<li>TBS 1.9.0</li>
+<li>AVI 22.1.2</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>처음에 Openshift를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명을 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.</p>
+</blockquote>
+<h2 id="2-kapp-설치">2. KAPP 설치</h2>
+<p>기본적으로 KAPP이 설치가 되어 있지 않기 때문에 KAPP 설치가 필요 합니다. 이유는 TAP이라는 솔루션이 Tanzu라는 명령어를 통해 설치가 되기 때문에 입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## package를 설치 할 수 있게 kapp-contoller 설치</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f https://github.com/vmware-tanzu/carvel-kapp-controller/releases/latest/download/release.yml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## tanzu에서 secret을 생성 할 수 있게 secretget-controller 설치</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f https://github.com/carvel-dev/secretgen-controller/releases/latest/download/release.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>kapp을 설치를 하게 되면 이제 tanzu package repository 및  secret repository를 등록 할 수 있습니다.</p>
+<figure><figcaption>
+            <h4>package 및 reository</h4>
+        </figcaption>
+</figure>
+
+<p>그러면 위와 같이 list를 확인 할 수 있습니다. 위에 controller를 설치를 하지 않으면 에러가 발생 하는 것을 알 수 있습니다. 에러 내용은 아래와 같습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kapp contoller를 설치를 안할 경우 발생하는 에러
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: failed to check for the availability of &#39;packaging.carvel.dev&#39; API: failed to discover unmatched GroupVersionResources: the server is currently unable to handle the request</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: exit status 1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">secret contoller를 설치를 안할 경우 발생하는 에러
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: secret plugin can not be used as &#39;secretgen.carvel.dev/v1alpha1&#39; API is not available in the cluster</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: exit status 1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-tanzu-framework-및-pcakage-image-repository-업르도">3. TANZU FRAMEWORK 및 Pcakage Image Repository 업르도</h2>
+<p>TANZU FRAMEWORK다운로드는 Tanzu Net에서 다운로드를 받을 수 있다. 
+TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir /var/tmp/tanzu-utils/framework/tap/1.4.0
+</span></span><span class="line"><span class="cl">tar xvf /var/tmp/tanzu-utils/framework/tap/1.4.0/tanzu-framework-linux-amd64-v0.25.4.1.tar -C /var/tmp/tanzu-utils/framework/tap/1.4.0
+</span></span><span class="line"><span class="cl">tanzu plugin install -l  /var/tmp/tanzu-utils/framework/tap/1.4.0/cli/ all
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 이미지를 받기 위해 tanzu net에 로그인 한다.</span>
+</span></span><span class="line"><span class="cl">docker login registry.tanzu.vmware.com -u <span class="o">{</span>tanzuusername<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 이후에 내부 또는 gcr 등등 repository에 로그인 한다. 테스트는 내부 Harbor를 사용한다.</span>
+</span></span><span class="line"><span class="cl">docker login infra-harbor.huntedhappy.kro.kr -u admin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TAP Package 내부 Harbor에 업로드</span>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:1.4.0 --to-repo infra-harbor.huntedhappy.kro.kr/tap-packages/1.4.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-tap-package-등록">4. TAP Package 등록</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## namespace 생성</span>
+</span></span><span class="line"><span class="cl">kubectl create ns tap-install 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Harbor Secret 사용할 경우</span>
+</span></span><span class="line"><span class="cl">kubectl create secret docker-registry registry-credentials --docker-server<span class="o">=</span>infra-harbor.huntedhappy.kro.kr --docker-username<span class="o">=</span>admin --docker-password<span class="o">=</span><span class="si">${</span><span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="si">}</span> -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## package repository 추가</span>
+</span></span><span class="line"><span class="cl">tanzu package repository add tanzu-tap-repository <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url harbor-infra.huntedhappy.kro.kr/tap-packages/1.4.0 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS 설치</span>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-deps-package-repo:1.9.0 --to-tar<span class="o">=</span>tbs-full-deps-1.9.0.tar
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS Harobr업로드</span>
+</span></span><span class="line"><span class="cl">imgpkg copy --tar tbs-full-deps-1.9.0.tar --to-repo harbor-infra.huntedhappy.kro.kr/tap/tbs-full-deps/1.9.0 --include-non-distributable-layers
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS Repository 등록</span>
+</span></span><span class="line"><span class="cl">tanzu package repository add tbs-full-deps-repository <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url infra-harbor.huntedhappy.kro.kr/tap/tbs-full-deps/1.9.0 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-설치">5. 설치</h2>
+<p>TAP같은 경우 멀티 클러스터를 지원 하지만, 테스트는 full 기반으로 테스트를 진행 하였습니다.</p>
+<p>설치는 ootb_supply_chain_testing_scanning 로 테스트를 진행 했지만. 좀 복잡 할 수 있기 때문에
+여기에는 ootb_supply_chain_basic으로 기술 합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vi tap-full-vaules.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">profile: full
+</span></span><span class="line"><span class="cl">ceip_policy_disclosed: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">buildservice:
+</span></span><span class="line"><span class="cl">  kp_default_repository: <span class="s2">&#34;infra-harbor.huntedhappy.kro.kr/tap/tap-packages&#34;</span>
+</span></span><span class="line"><span class="cl">  kp_default_repository_secret:
+</span></span><span class="line"><span class="cl">    name: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">    namespace: <span class="s2">&#34;tap-install&#34;</span>
+</span></span><span class="line"><span class="cl">  exclude_dependencies: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">springboot_conventions:
+</span></span><span class="line"><span class="cl">  autoConfigureActuators: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">policy:
+</span></span><span class="line"><span class="cl">  tuf_enable: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">accelerator:
+</span></span><span class="line"><span class="cl">  domain: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  ingress:
+</span></span><span class="line"><span class="cl">    include: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">    enable_tls: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    secret_name: share-secret
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">  server:
+</span></span><span class="line"><span class="cl">    service_type: <span class="s2">&#34;ClusterIP&#34;</span>
+</span></span><span class="line"><span class="cl">    watched_namespace: <span class="s2">&#34;accelerator-system&#34;</span>
+</span></span><span class="line"><span class="cl">  samples:
+</span></span><span class="line"><span class="cl">    include: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">shared:
+</span></span><span class="line"><span class="cl">  kubernetes_distribution: <span class="s2">&#34;openshift&#34;</span> <span class="c1"># To be passed only for OpenShift. Defaults to &#34;&#34;.</span>
+</span></span><span class="line"><span class="cl">  ingress_issuer: default-ca-issuer
+</span></span><span class="line"><span class="cl">  image_registry:
+</span></span><span class="line"><span class="cl">    secret:
+</span></span><span class="line"><span class="cl">      name: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">      namespace: <span class="s2">&#34;tap-install&#34;</span>
+</span></span><span class="line"><span class="cl">  ingress_domain: <span class="s2">&#34;huntedhappy.kro.kr&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  ca_cert_data: |</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">appliveview:
+</span></span><span class="line"><span class="cl">  ingressEnabled: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  sslDisabled: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">    secretName: share-secret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">appliveview_connector:
+</span></span><span class="line"><span class="cl">  backend:
+</span></span><span class="line"><span class="cl">    sslDisabled: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">    host: appliveview.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cnrs:
+</span></span><span class="line"><span class="cl">  domain_name: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  domain_template: <span class="s2">&#34;{{.Name}}.{{.Domain}}&#34;</span>
+</span></span><span class="line"><span class="cl">  default_tls_secret: tap-install/share-secret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">scanning:
+</span></span><span class="line"><span class="cl">  metadataStore:
+</span></span><span class="line"><span class="cl">    url: <span class="s2">&#34;&#34;</span> <span class="c1"># Disable embedded integration since it&#39;s deprecated</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">metadata_store:
+</span></span><span class="line"><span class="cl">  ns_for_export_app_cert: <span class="s2">&#34;*&#34;</span>
+</span></span><span class="line"><span class="cl">  ingress_domain: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  app_service_type: ClusterIP
+</span></span><span class="line"><span class="cl">  ingress_enabled: <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">  targetImagePullSecret: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    secretName: share-secret
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">supply_chain: basic
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ootb_supply_chain_basic:
+</span></span><span class="line"><span class="cl">  registry:
+</span></span><span class="line"><span class="cl">    server: <span class="s2">&#34;infra-harbor.huntedhappy.kro.kr&#34;</span>
+</span></span><span class="line"><span class="cl">    repository: <span class="s2">&#34;app/supply_chain&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">grype:
+</span></span><span class="line"><span class="cl">  namespace: <span class="s2">&#34;tap-install&#34;</span> <span class="c1"># (optional) Defaults to default namespace.</span>
+</span></span><span class="line"><span class="cl">  targetImagePullSecret: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tap_gui:
+</span></span><span class="line"><span class="cl">  service_type: ClusterIP
+</span></span><span class="line"><span class="cl">  ingressEnabled: <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">  ingressDomain: <span class="s2">&#34;huntedhappy.kro.kr&#34;</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">    secretName: share-secret
+</span></span><span class="line"><span class="cl">  app_config:
+</span></span><span class="line"><span class="cl">    organization:
+</span></span><span class="line"><span class="cl">      name: <span class="s1">&#39;huntedhappy&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    app:
+</span></span><span class="line"><span class="cl">      title: <span class="s1">&#39;huntedhappy TAP&#39;</span>
+</span></span><span class="line"><span class="cl">      baseUrl: https://tap-gui.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">      support:
+</span></span><span class="line"><span class="cl">        url: https://tanzu.vmware.com/support
+</span></span><span class="line"><span class="cl">        items:
+</span></span><span class="line"><span class="cl">          - title: Contact Support
+</span></span><span class="line"><span class="cl">            icon: email
+</span></span><span class="line"><span class="cl">            links:
+</span></span><span class="line"><span class="cl">              - url: https://tanzu.vmware.com/support
+</span></span><span class="line"><span class="cl">                title: Tanzu Support Page
+</span></span><span class="line"><span class="cl">          - title: Documentation
+</span></span><span class="line"><span class="cl">            icon: doc
+</span></span><span class="line"><span class="cl">            links:
+</span></span><span class="line"><span class="cl">              - url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html
+</span></span><span class="line"><span class="cl">                title: Tanzu Application Platform Documentation
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    backend:
+</span></span><span class="line"><span class="cl">      baseUrl: https://tap-gui.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">      cors:
+</span></span><span class="line"><span class="cl">        origin: https://tap-gui.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">contour:
+</span></span><span class="line"><span class="cl">  certificates.duration: 87600h
+</span></span><span class="line"><span class="cl">  certificates.renewBefore: 360h
+</span></span><span class="line"><span class="cl">  envoy:
+</span></span><span class="line"><span class="cl">    service:
+</span></span><span class="line"><span class="cl">      type: LoadBalancer
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">excluded_packages:
+</span></span><span class="line"><span class="cl">- policy.apps.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">- learningcenter.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">- workshops.learningcenter.tanzu.vmware.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## rback 설정</span>
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; tap-gui-viewer-service-account-rbac.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">automountServiceAccountToken: false
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Secret
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">  annotations:
+</span></span></span><span class="line"><span class="cl"><span class="s">    kubernetes.io/service-account.name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">type: kubernetes.io/service-account-token
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-read-k8s
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">- kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: k8s-reader
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: k8s-reader
+</span></span></span><span class="line"><span class="cl"><span class="s">rules:
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;pods&#39;, &#39;pods/log&#39;, &#39;services&#39;, &#39;configmaps&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;apps&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;deployments&#39;, &#39;replicasets&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;autoscaling&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;horizontalpodautoscalers&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;networking.k8s.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;ingresses&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;networking.internal.knative.dev&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;serverlessservices&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [ &#39;autoscaling.internal.knative.dev&#39; ]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [ &#39;podautoscalers&#39; ]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [ &#39;get&#39;, &#39;watch&#39;, &#39;list&#39; ]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;serving.knative.dev&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configurations
+</span></span></span><span class="line"><span class="cl"><span class="s">  - revisions
+</span></span></span><span class="line"><span class="cl"><span class="s">  - routes
+</span></span></span><span class="line"><span class="cl"><span class="s">  - services
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;carto.run&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterconfigtemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterdeliveries
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterdeploymenttemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterimagetemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterruntemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clustersourcetemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clustersupplychains
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clustertemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - deliverables
+</span></span></span><span class="line"><span class="cl"><span class="s">  - runnables
+</span></span></span><span class="line"><span class="cl"><span class="s">  - workloads
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;source.toolkit.fluxcd.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - gitrepositories
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;source.apps.tanzu.vmware.com&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - imagerepositories
+</span></span></span><span class="line"><span class="cl"><span class="s">  - mavenartifacts
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;conventions.carto.run&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - podintents
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;kpack.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - images
+</span></span></span><span class="line"><span class="cl"><span class="s">  - builds
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;scanning.apps.tanzu.vmware.com&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - sourcescans
+</span></span></span><span class="line"><span class="cl"><span class="s">  - imagescans
+</span></span></span><span class="line"><span class="cl"><span class="s">  - scanpolicies
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;tekton.dev&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - taskruns
+</span></span></span><span class="line"><span class="cl"><span class="s">  - pipelineruns
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;kappctrl.k14s.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - apps
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## rolebding 설정</span>
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; rolebinding.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-deliverable
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: deliverable
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-workload
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: workload
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: dev-permit-app-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: namespace-dev-permit-app-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer-cluster-access
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/secrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
+</span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/imagePullSecrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f rolebinding.yaml -n tap-install 
+</span></span><span class="line"><span class="cl">kubectl apply -f tap-gui-viewer-service-account-rbac.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## TANZU PACKAGE 1.4.0 설치</span>
+</span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.4.0 -f tap-full-vaules.yaml -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS 설치</span>
+</span></span><span class="line"><span class="cl">tanzu package install full-tbs-deps -p full-tbs-deps.tanzu.vmware.com -v 1.9.0 -n tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6-설치-완료">6. 설치 완료</h2>
+<figure><figcaption>
+            <h4>설치 완료#1</h4>
+        </figcaption>
+</figure>
+
+<p>Sample App Test
+<figure><figcaption>
+            <h4>설치 완료#2</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Sample App Test를 하게 될 경우 아래와 같은 문구가 나오는대 왜 나오는지는 아직 파악 하지 못하였습니다. 하지만 SAMPLE APP 배포는 잘 동작 하는 것을 확인 할 수 있습니다.</p>
+<p>I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to client-side throttling, not priority and fairness, request: GET:https://api.openshift.huntedhappy.kro.kr:6443/apis/console.openshift.io/v1alpha1?timeout=32s</p>
+<p><figure><figcaption>
+            <h4>설치 완료#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP GUI 화면#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP GUI 화면#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP GUI 화면#2</h4>
+        </figcaption>
+</figure>
+</p>
+<p>설치가 완료 되면 TAP의 대해서는 Visual Sutudio Code, IntelliJ 환경에서도 잘 동작하는 것을 확인 할 수 있습니다.</p>
+]]></description>
+</item><item>
     <title>The Documentation Harbor</title>
     <link>https://huntedhappy.github.io/ko/harbor/</link>
     <pubDate>Sat, 07 Jan 2023 19:00:14 &#43;0900</pubDate>
@@ -5328,90 +6174,6 @@ logstash yaml 파일, <a href="/ko/nap/logstash_test.yaml" rel=""><i class="far 
     <guid>https://huntedhappy.github.io/ko/cicd/</guid>
     <description><![CDATA[<p>간단하게 CICD의 대해 구성 하는 것을 기술 할 예정
 사용자가 VS를 사용하여 Docker 내용을 수정 후 Git에 Push를 하면 Jenkins에서 5분에 한번씩 Polling을 하여 Git에 변화가 있으면 Pipeline이 동작 하면서 자동으로 Docker Build를 수행 후 Harbor에 이미지를 Push 후 새로운 이미지의 대한 Version을 Manifest의 변경 하여 다시 Git에 Push, 이후 3분에 한번씩 Argo가 Git의 내용의 변화가 있는지 확인 후 변화가 있으면 K8S의 환경의 Manifest를 적용</p>
-]]></description>
-</item><item>
-    <title>The Documentation K8s</title>
-    <link>https://huntedhappy.github.io/ko/k8s/</link>
-    <pubDate>Sat, 08 Jan 2022 14:32:33 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/k8s/</guid>
-    <description><![CDATA[<p>아래 내용을 작성 하는 이유
-같이 일했던 동료가 다른 곳으로 회사를 이직 하고 나서 컨테이너를 해야 되는거 같았다. 같이 일을 했기 때문에 L4 / L7을 잘 했던 친구 였다. 그런대 뜬금없이 L4를 연동 하면 어떻게 컨테이너로 트래픽을 전달하냐라고 물어본적이 있었다. 
-그래서 혹시 모르는 사람을 위해서 간략하게 적어 내려 간다.</p>
-<h2 id="1-service-type">1. Service Type</h2>
-<p>컨테이너를 하기 위해서는 우선 Deploy , STS등으로 Pod를 생성한다. 그럼 일반적으로 테스트를 하기 위해서 아래와 같이 명령어를 칠 것이다.</p>
-<ul>
-<li>kubectl create deploy nginx &ndash;image=nginx -n nginx</li>
-</ul>
-<p>그러면 deploy를 통해 pod가 생성 된 것을 확인 할 수 있다. 그리고 나서 서비스를 연동 할 것이다. 그럼 아래와 같은 명령어를 칠 것이다.</p>
-<ul>
-<li>kubectl expose deploy nginx &ndash;port=80 &ndash;target-port=80 &ndash;type=ClusterIP -n nginx</li>
-</ul>
-<p>ClusterIP는 그럼 아래와 같은 정보를 보게 될 것이다.</p>
-<figure><figcaption>
-            <h4>svc ClusterIP상태</h4>
-        </figcaption>
-</figure>
-
-<p>NodePort는 아래처럼 정보를 보게 된다.</p>
-<ul>
-<li>kubectl expose deploy nginx &ndash;port=80 &ndash;target-port=80 &ndash;type=NodePort -n nginx</li>
-</ul>
-<figure><figcaption>
-            <h4>svc NodePort상태</h4>
-        </figcaption>
-</figure>
-
-<p>그럼 보는바와 같이 차이가 좀 있는 것을 알 수 있다.
-NodePort를 하게 될 경우 아래와 같이 30000대의 Port를 확인 할 수 있을 것이다.</p>
-<h2 id="l4연동-후-nodeport">L4연동 후 NodePort</h2>
-<p>그럼 만약에 L4장비와 연결을 하게 되면 어떻게 보이게 될까? 아래 그림으로 한번 확인을 해보자</p>
-<ul>
-<li>kubectl expose deploy nginx &ndash;port=80 &ndash;target-port=80 &ndash;type=LoadBalancer -n nginx</li>
-</ul>
-<figure><figcaption>
-            <h4>svc LoadBalancer상태#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>svc LoadBalancer상태#2</h4>
-        </figcaption>
-</figure>
-
-<p>위에 AVI에 설정된 서버가 실제적인 K8S의 Node인것을 확인 할 수 있다.</p>
-<figure><figcaption>
-            <h4>svc LoadBalancer상태#3</h4>
-        </figcaption>
-</figure>
-
-<p>보는 것과 같이 실제 노드IP에 32676번 (30000번대의 포트를 할당 받음) 포트가 연동 되어 있는것을 확인 할 수 있다.</p>
-<p>그럼 실제적으로 클라이언트가 접속을 하게 되면 Node:Port(32767)의 연결된 노드로 트래픽이 가게 되고 노드는 트래픽이 들어오면 해당하는 EndPoint로 접속 하게 되는 것이다.</p>
-<ul>
-<li>Source &gt; L4 &gt; Node:Port &gt; Container</li>
-</ul>
-<p>그럼 아래와 같이 SVC와 그의 대한 Endpoint가 어떻게 연결되어 있는지 알 수 있다.
-<figure><figcaption>
-            <h4>svc LoadBalancer상태#4</h4>
-        </figcaption>
-</figure>
-</p>
-<p>아래와 같이 접속이 되는 것을 확인 할 수 있다.
-<figure><figcaption>
-            <h4>svc LoadBalancer상태#5</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="l4연동-후-clusterip">L4연동 후 ClusterIP</h2>
-<p>그런대 여기서 의문점이 들 것이다. 그럼 ClusterIP는 지원이 안되는건가? 그건 연동하는 L4에서 지원을 하면 가능 하다. 그럼 어떻게 나오는지 한번 확인 해보자.</p>
-<p>특별하게 설정 할 것은 없고, AVI를 NodePort를 지원하는 것에서 ClusterIP로 변경 후 상태를 확인 해보면 실제 Pod의 IP로 맵핑이 된 것을 확인 할 수 있다.
-<figure><figcaption>
-            <h4>svc LoadBalancer상태#6</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="결과">결과</h2>
-<p>위에서 보듯이 NodePort와 ClusterIP의 차이점을 확인해 볼 수 있을 거 같다.</p>
 ]]></description>
 </item></channel>
 </rss>
