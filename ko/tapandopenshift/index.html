@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/ko/tapandopenshift/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/tapandopenshift/tapandopenshift.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-29T21:55:28+09:00" />
-<meta property="article:modified_time" content="2023-01-29T21:55:28+09:00" />
+<meta property="article:modified_time" content="2023-01-30T00:04:53+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://huntedhappy.github.io/ko/tapandopenshift/tapandopenshift.png"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/huntedhappy.github.io\/ko\/tapandopenshift\/tapandopenshift.png",
                             "width":  1040 ,
                             "height":  281 
-                        }],"genre": "posts","keywords": "tanzu, k8s, OKTA, OIDC, devops, dk, dokyung","wordcount":  1582 ,
-        "url": "https:\/\/huntedhappy.github.io\/ko\/tapandopenshift\/","datePublished": "2023-01-29T21:55:28+09:00","dateModified": "2023-01-29T21:55:28+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tanzu, k8s, OKTA, OIDC, devops, dk, dokyung","wordcount":  1667 ,
+        "url": "https:\/\/huntedhappy.github.io\/ko\/tapandopenshift\/","datePublished": "2023-01-29T21:55:28+09:00","dateModified": "2023-01-30T00:04:53+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "Dokyung"},"author": {
                 "@type": "Person",
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Tap install on Openshift</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1582 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1667 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -140,7 +140,7 @@
 </nav></div>
             </div><div class="content" id="content"><h2 id="1-tanzu-application-platform-on-openshift">1. TANZU APPLICATION PLATFORM ON OPENSHIFT</h2>
 <p>Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다. 기본 VMware제품들은 대부분 VMware 솔루션에 Dependency가 있었습니다. 
-그러나 TAP의 경우는 어떤 K8S 환경이면 어디든 설치가 된다는 컨셉으로 나온 것이 아닌가 싶습니다. 
+그러나 TAP의 경우는 K8S 환경이면 어디든 설치가 된다는 컨셉으로 나온 것이 아닌가 싶습니다. 
 1.3.x 부터 OPENSHIFT에서도 지원을 한다고 해서 한번 설치를 진행 해 보았으며 어떻게 설치를 할 수 있는지 한번 알아 보도록 하겠습니다.</p>
 <p>기본적으로 OPENSHIFT는 설치가 되어 있다는 것을 가정으로 TAP를 설치를 진행을 하겠습니다.
 참고로 OPENSHIFT의 경우 TAP에서 지원하는 것은 4.10 , 4.11 두가지를 지원 합니다.</p>
@@ -169,8 +169,20 @@
 </ul>
 </blockquote>
 <blockquote>
-<p>처음에 Openshift를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명을 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.</p>
+<p>처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.</p>
 </blockquote>
+<p>아래에 route에 포함되어 있지 않은 도메인을 차단 하는것인지.. 여기 route에 tap를 구성 후 tap-gui 또는 어플리케이션의 대해서 어떻게 설정 해야 되는지는 아직 의문이 남아 있습니다.
+<figure><img src="/images/tapandopenshift/0-4.png"/><figcaption>
+            <h4>oc route 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<p>AVI 와 Openshift를 연동시 생성 되는 VIP가 많아서 이 부분도 당황 스러운 부분이 있었지만, 이 부분도 깊게 파고 들지는 않았습니다. 우선 목표는 TAP를 구성 하기 위함이 크기 때문입니다.
+<figure><img src="/images/tapandopenshift/0-3.png"/><figcaption>
+            <h4>AVI 상태</h4>
+        </figcaption>
+</figure>
+</p>
 <h2 id="2-kapp-설치">2. KAPP 설치</h2>
 <p>기본적으로 KAPP이 설치가 되어 있지 않기 때문에 KAPP 설치가 필요 합니다. 이유는 TAP이라는 솔루션이 Tanzu라는 명령어를 통해 설치가 되기 때문에 입니다.</p>
 <div class="highlight"><div class="chroma">
@@ -955,7 +967,15 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </figure>
 </p>
 <p>Sample App Test를 하게 될 경우 아래와 같은 문구가 나오는대 왜 나오는지는 아직 파악 하지 못하였습니다. 하지만 SAMPLE APP 배포는 잘 동작 하는 것을 확인 할 수 있습니다.</p>
-<p>I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to client-side throttling, not priority and fairness, request: GET:https://api.openshift.huntedhappy.kro.kr:6443/apis/console.openshift.io/v1alpha1?timeout=32s</p>
+<ul>
+<li>I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to client-side throttling, not priority and fairness, request: GET:https://api.openshift.huntedhappy.kro.kr:6443/apis/console.openshift.io/v1alpha1?timeout=32s</li>
+</ul>
+<p>배포가 완료 되면 httpproxy,pod,deliverable을 확인 하여 httpproxy에 설정된 도메인으로 접속 할 수 있다.
+<figure><img src="/images/tapandopenshift/1-8.png"/><figcaption>
+            <h4>FQDN 확인</h4>
+        </figcaption>
+</figure>
+</p>
 <p><figure><img src="/images/tapandopenshift/1-4.png"/><figcaption>
             <h4>설치 완료#2</h4>
         </figcaption>
@@ -977,11 +997,15 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </figure>
 </p>
 <p>설치가 완료 되면 TAP의 대해서는 Visual Sutudio Code, IntelliJ 환경에서도 잘 동작하는 것을 확인 할 수 있습니다.</p>
+<ul>
+<li>나중에 추가적인 설명을 할 수 있으면 적을 수 있도록 하겠습니다.</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-01-29</span>
+                <span>Updated on 2023-01-30&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/68e5330a4b48aaa329ba27b2661536dab6ca7146" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 68e5330a4b48aaa329ba27b2661536dab6ca7146: rebuilding site Mon Jan 30 00:04:52     2023">
+                                    <i class="fas fa-hashtag fa-fw"></i>68e5330</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

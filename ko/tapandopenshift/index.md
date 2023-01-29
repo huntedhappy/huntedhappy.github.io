@@ -4,7 +4,7 @@
 ## 1. TANZU APPLICATION PLATFORM ON OPENSHIFT
 
 Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다. 기본 VMware제품들은 대부분 VMware 솔루션에 Dependency가 있었습니다. 
-그러나 TAP의 경우는 어떤 K8S 환경이면 어디든 설치가 된다는 컨셉으로 나온 것이 아닌가 싶습니다. 
+그러나 TAP의 경우는 K8S 환경이면 어디든 설치가 된다는 컨셉으로 나온 것이 아닌가 싶습니다. 
 1.3.x 부터 OPENSHIFT에서도 지원을 한다고 해서 한번 설치를 진행 해 보았으며 어떻게 설치를 할 수 있는지 한번 알아 보도록 하겠습니다.
 
 기본적으로 OPENSHIFT는 설치가 되어 있다는 것을 가정으로 TAP를 설치를 진행을 하겠습니다.
@@ -21,10 +21,15 @@ Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다
 > * TBS 1.9.0
 > * AVI 22.1.2
 
-> 처음에 Openshift를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명을 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.
+> 처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.
+
+아래에 route에 포함되어 있지 않은 도메인을 차단 하는것인지.. 여기 route에 tap를 구성 후 tap-gui 또는 어플리케이션의 대해서 어떻게 설정 해야 되는지는 아직 의문이 남아 있습니다.
+{{< figure src="/images/tapandopenshift/0-4.png" title="oc route 확인" >}}
+
+AVI 와 Openshift를 연동시 생성 되는 VIP가 많아서 이 부분도 당황 스러운 부분이 있었지만, 이 부분도 깊게 파고 들지는 않았습니다. 우선 목표는 TAP를 구성 하기 위함이 크기 때문입니다.
+{{< figure src="/images/tapandopenshift/0-3.png" title="AVI 상태" >}}
 
 ## 2. KAPP 설치 
-
 기본적으로 KAPP이 설치가 되어 있지 않기 때문에 KAPP 설치가 필요 합니다. 이유는 TAP이라는 솔루션이 Tanzu라는 명령어를 통해 설치가 되기 때문에 입니다.
 
 ```shell
@@ -426,7 +431,10 @@ Sample App Test
 
 Sample App Test를 하게 될 경우 아래와 같은 문구가 나오는대 왜 나오는지는 아직 파악 하지 못하였습니다. 하지만 SAMPLE APP 배포는 잘 동작 하는 것을 확인 할 수 있습니다.
 
-I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to client-side throttling, not priority and fairness, request: GET:https://api.openshift.huntedhappy.kro.kr:6443/apis/console.openshift.io/v1alpha1?timeout=32s
+* I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to client-side throttling, not priority and fairness, request: GET:https://api.openshift.huntedhappy.kro.kr:6443/apis/console.openshift.io/v1alpha1?timeout=32s
+
+배포가 완료 되면 httpproxy,pod,deliverable을 확인 하여 httpproxy에 설정된 도메인으로 접속 할 수 있다.
+{{< figure src="/images/tapandopenshift/1-8.png" title="FQDN 확인" >}}
 
 {{< figure src="/images/tapandopenshift/1-4.png" title="설치 완료#2" >}}
 {{< figure src="/images/tapandopenshift/1-5.png" title="TAP GUI 화면#1" >}}
@@ -435,3 +443,4 @@ I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to cli
 
 설치가 완료 되면 TAP의 대해서는 Visual Sutudio Code, IntelliJ 환경에서도 잘 동작하는 것을 확인 할 수 있습니다.
 
+* 나중에 추가적인 설명을 할 수 있으면 적을 수 있도록 하겠습니다.
