@@ -102,7 +102,7 @@
 </span></span><span class="line"><span class="cl"><span class="c1">## Error: exit status 1</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-tanzu-framework-및-pcakage-image-repository-업르도">3. TANZU FRAMEWORK 및 Pcakage Image Repository 업르도</h2>
+</div><h2 id="3-tanzu-framework-및-pcakage-image-repository-업로드">3. TANZU FRAMEWORK 및 Pcakage Image Repository 업로드</h2>
 <p>TANZU FRAMEWORK다운로드는 Tanzu Net에서 다운로드를 받을 수 있다. 
 TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 <div class="highlight"><div class="chroma">
