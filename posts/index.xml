@@ -4,7 +4,604 @@
         <link>https://huntedhappy.github.io/posts/</link>
         <description>All Posts | Dokyung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation SupplyChain on TAP</title>
+    <link>https://huntedhappy.github.io/cicd/</link>
+    <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/cicd/</guid>
+    <description><![CDATA[<h2 id="tanzu-supplychain">TANZU SUPPLYCHAIN</h2>
+<blockquote>
+<p>아래 내용은 기본적으로 VMWARE의 TAP솔루션을 알고 있다는 가정하에 작성을 하였습니다.</p>
+</blockquote>
+<p>CI/CD는 (Continuous Integration/Continuous Delivery) 지속적인 통합 및 지속적인 배포입니다.</p>
+<p>예를 들어:</p>
+<ol>
+<li>사용자는 IDE 환경 (IntelliJ or visual studio or eclipse)에서 소스코드를 수정 및 디버깅을 합니다.</li>
+<li>이 후에 수정된 소스코드를 GIT에 PUSH를 합니다.</li>
+<li>JENKINS에서는 GIT에 수정된 소스를 Webhook 또는 Polling을 통해 변경을 감지 합니다.</li>
+<li>JENKINS에서 수정된 코드를 통해 Docker Image를 생성을 합니다.</li>
+<li>생성된 Docker Image를 이미지 레포지토리에 업로드 합니다.</li>
+<li>Docker Image가 변경이 되었기 때문에 CD를 위해 별도의 GIT Project에 변경된 이미지를 수정 합니다.</li>
+<li>CD 솔루션을 통해 (ARGO 등) GIT이 변경이 되었으므로 컨테이너이미지를 업데이트 합니다.</li>
+</ol>
+<ul>
+<li>MANIFEST의 경우 HELM or KUSTOMIZATION or 각각 생성 할 수도 있습니다.</li>
+</ul>
+<blockquote>
+<ol>
+<li>JENKINS의 PIPELINE figure 1-1 와 같이 구성 할 수 있습니다.</li>
+<li>SLACK을 연동 후 원하는 문자로 알림을 받을 수 있습니다. figure 1-2</li>
+</ol>
+</blockquote>
+<figure><figcaption>
+            <h4>1-1 JENKINS PIPELINE</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>1-2 SLACK ALERT</h4>
+        </figcaption>
+</figure>
+
+<p>위와 같이 JENKINS와 ARGO 를 통해 CI/CD를 구성 할 수 있습니다. 하지만 각각 구성하기 위해서는 JENKINS 그리고 ARGO의 대해서도 이해가 필요 합니다. 또한 K8S에 배포를 하기 위해서는 MANIFEST의 대해서도 이해가 필요 합니다. 가령 Deployment, statfulset, ingress 등등의 대해서도, 이해가 필요 하며 HELM 또는 KUSTOMIZAION을 사용한다면 해당 오픈소스의 대해서도 이해가 필요 합니다.</p>
+<p>TANZU APPLICATION PLATFORM은 여러 이해가 필요 한부분을 workload.yaml을 구성하면 SUPPLYCHAIN을 통해 CI/CD 구성을 사용자가 각각 구성 할 필요 없이 제공을 하고 있습니다.</p>
+<p><a href="https://huntedhappy.github.io/tanzu-application-platform/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
+<figure><figcaption>
+            <h4>1-3 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+
+<p>기본적으로 하나의 클러스터에 3가지중 하나의 SUPPLYCHAIN을 제공 하고 있습니다. DEFULAT의 경우 위의 설명 드린 대로 사용자는 workload.yaml을 적절하게 작성을 하게 되면 CI/CD가 동작 합니다.</p>
+<p>아래 그림과 같이 workload.yaml 실행을 통해 supplychain이 순차적으로 동작을 하게 됩니다.
+<figure><figcaption>
+            <h4>1-4 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>GUI에서 확인을 해보면 아래와 같습니다. 
+<figure><figcaption>
+            <h4>1-5 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>그리고 두번째의 경우는 추가적으로 TEKTON을 통해 소스코드를 테스팅 할 수 있습니다. 
+그리고 마지막의 경우는 GRYPE을 통해 소스 및 이미지에 보안 취약점이 있는지 확인을 합니다.</p>
+<p>GUI에서 확인을 해보면 아래와 같이 취약점에 대해서 확인 할 수 있습니다.
+<figure><figcaption>
+            <h4>1-6 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<blockquote>
+<p>하지만 위에서 설명 드린 대로 하나의 클러스터에는 3가지중 하나만 사용을 할 수 있습니다. 추가적인 supplychain을 구성 하고 싶을수도 있을 것입니다. 동일한 서비스의 대해서 빠르게 개발을 위해 BASIC으로 구성을 하고 싶을 것이며, QA/STAGING은 소스/이미지에 보안취약점이 있는지 잘 생성을 했는지 확인을 하고 싶을 것입니다. 물론 클러스터를 분리해서 구성 할 수도 있을 것입니다. 하지만 리소스 부족으로 분리를 할 수 없을 경우 하나의 클러스터에 모두 구성이 필요할수도 있을수 있습니다. 만약 그런 상황이 발생하면 3개중에 하나의 supplychain만 사용이 가능하기 때문에 한가지를 선택 해야 합니다. 그렇기 때문에 supplychain을 추가 하는 방법이 필요 할 수 있습니다.</p>
+</blockquote>
+<p>아래와 같이 기본적으로 제공 하고 있습니다. 
+<figure><figcaption>
+            <h4>1-7 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>SUPPLYCHAIN ADD<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt; basic_supply_chain.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ load(&#34;@ytt:data&#34;, &#34;data&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ load(&#34;@ytt:assert&#34;, &#34;assert&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ data.values.registry.server or assert.fail(&#34;missing registry.server&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ data.values.registry.repository or assert.fail(&#34;missing registry.repository&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: carto.run/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterSupplyChain
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: source-to-url-with-custom-support
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: source-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: #@ data.values.service_account
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: gitImplementation
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: #@ data.values.git_implementation
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterSourceTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: source-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: image-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">      value: #@ data.values.service_account
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">      value:
+</span></span></span><span class="line"><span class="cl"><span class="s">        ca_cert_data: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        repository: #@ data.values.registry.repository
+</span></span></span><span class="line"><span class="cl"><span class="s">        server: #@ data.values.registry.server
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: default
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: clusterBuilder
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: ./Dockerfile
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: dockerfile
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: ./
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: docker_build_context
+</span></span></span><span class="line"><span class="cl"><span class="s">    sources:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: source
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: source-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterImageTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      options:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: kpack-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchFields:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - key: spec.params[?(@.name==&#34;dockerfile&#34;)]
+</span></span></span><span class="line"><span class="cl"><span class="s">            operator: DoesNotExist
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: kaniko-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchFields:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - key: spec.params[?(@.name==&#34;dockerfile&#34;)]
+</span></span></span><span class="line"><span class="cl"><span class="s">            operator: Exists
+</span></span></span><span class="line"><span class="cl"><span class="s">  - images:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: image
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: image-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: config-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">      value: #@ data.values.service_account
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: convention-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: config
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: config-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: app-config
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      options:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: config-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            apps.tanzu.vmware.com/workload-type: web
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: server-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            apps.tanzu.vmware.com/workload-type: server
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: worker-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            apps.tanzu.vmware.com/workload-type: worker
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: app_def
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: app-config
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: service-bindings
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: service-bindings
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: app_def
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: service-bindings
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: api-descriptors
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: api-descriptors
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: config
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: api-descriptors
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: config-writer
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: default
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">      value:
+</span></span></span><span class="line"><span class="cl"><span class="s">        ca_cert_data: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        repository: #@ data.values.registry.repository
+</span></span></span><span class="line"><span class="cl"><span class="s">        server: #@ data.values.registry.server
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: config-writer-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: deliverable
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">      value:
+</span></span></span><span class="line"><span class="cl"><span class="s">        ca_cert_data: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        repository: #@ data.values.registry.repository
+</span></span></span><span class="line"><span class="cl"><span class="s">        server: #@ data.values.registry.server
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: external-deliverable-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    apps.tanzu.vmware.com/custom: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  selectorMatchExpressions:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - key: apps.tanzu.vmware.com/workload-type
+</span></span></span><span class="line"><span class="cl"><span class="s">    operator: In
+</span></span></span><span class="line"><span class="cl"><span class="s">    values:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - web
+</span></span></span><span class="line"><span class="cl"><span class="s">    - server
+</span></span></span><span class="line"><span class="cl"><span class="s">    - worker
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p>위와 같이 추가하게 되면 별도로 SUPPLYCHAIN이 추가 된 것을 확인 할 수 있다. 
+<figure><figcaption>
+            <h4>1-8 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>그리고 아래와 같이 다른 workload.yaml과는 다른 SUPPLYCHAIN이 등록 된 것을 확인 할 수 있습니다. 
+<figure><figcaption>
+            <h4>1-9 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
+    <title>The Documentation TechDocs in Tap</title>
+    <link>https://huntedhappy.github.io/tap-techdocs/</link>
+    <pubDate>Sat, 04 Mar 2023 22:33:00 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/tap-techdocs/</guid>
+    <description><![CDATA[<h2 id="1-간단한-설명">1. 간단한 설명</h2>
+<h3 id="11-backstage">1.1. Backstage?</h3>
+<p>Backstage는 개발자 포털 구축을 위한 오픈 플랫폼입니다. 2년 전 Spotify의 소규모 팀이 내부에서 Backstage를 오픈소스로 출시 후 CNCF SANDBOX에서 현재는 INCUBATING 단계가 되었습니다. CNCF는 프로젝트 성숙도에 따라서 SANDBOX, INCUBATING, GRADUATED 단계로  구성 되어 있습니다.</p>
+<p>프로젝트의 성숙도는 CNCF 위원회 멤버들에 의해서 결정되며, GRADUATED 단계의 프로젝트가 되기 위해서는 GRADUATED 요건이 필요 하며 위원회 멤버 과반수 이상의 찬성표를 받아야 합니다.</p>
+<figure><figcaption>
+            <h4>https://www.cncf.io/projects/</h4>
+        </figcaption>
+</figure>
+
+<p>Backstage WebPage를 가게 되면 엄청 많은 기능들을 확인 할 수 있습니다.</p>
+<p><a href="https://backstage.io/docs/overview/what-is-backstage" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Backstage LINK</a></p>
+<h3 id="12-techdocs">1.2. TechDocs?</h3>
+<p>Backstage에 내장되어 있으며 MarkDown 파일을 작성 함으로 Backstage에 문서형 사이트를 얻을 수 있습니다.
+<a href="https://backstage.io/docs/features/techdocs/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Backstage TechDocs 참고링크</a></p>
+<p>TANZU의 TAP의 경우 Backstage의 기능으로 구성이 되어 있습니다.</p>
+<h2 id="2-techdocs-설정">2. TechDocs 설정</h2>
+<blockquote>
+<p>사전 구성</p>
+<ol>
+<li>Object Storage : &lsquo;awsS3&rsquo; or &lsquo;googleGcs&rsquo; or &lsquo;azureBlobStorage&rsquo; or &lsquo;openStackSwift&rsquo;</li>
+<li>TANZU TAP</li>
+<li>npm, node, npx (9.5.0, 18.14.2, 9.5.0)의 버전으로 테스트 진행</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>앞서 설명에서 MarkDown를 통해 Tanzu의 TAP에 문서형태를 구성 할 수 있습니다. 사전에 Tanzu Net에서 sample을 다운로드 받을 수 있습니다.</p>
+</blockquote>
+<figure><figcaption>
+            <h4>Sample Download</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 압축 해제</span>
+</span></span><span class="line"><span class="cl">tar zxvf tap-gui-yelb-catalog.tgz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## markdown </span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> tap-gui-yelb-catalog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>위의 Sample 파일을 다운로드 받은 후 TAP에서 Catalog를 등록 한 후 DOCS를 보면 아래와 같이 오류가 나는 것을 확인 할 수 있습니다.</p>
+</blockquote>
+<figure><figcaption>
+            <h4>Error</h4>
+        </figcaption>
+</figure>
+
+<p>TANZU에서 TechDocs 관련 LINK는 아래에서 참고 할 수 있지만, 문서를 보면 어떻게 해야 되는지 잘 알지 못할 수도 있습니다.
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/tap-gui-techdocs-usage.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> TechDocs In TAP 참고링크</a></p>
+<blockquote>
+<p>그리고 SAMPLE에서 mkdocs.yml 의 내용을 보면 docs에 index.md, add-docs.md를 읽을 수 있게 구성이 되어져 있는 것을 확인 해 볼 수 있습니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">site_name: <span class="s1">&#39;Yelb demo catalog&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nav:
+</span></span><span class="line"><span class="cl">  - Home: index.md
+</span></span><span class="line"><span class="cl">  - Adding Documentation: add-docs.md
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">plugins:
+</span></span><span class="line"><span class="cl">  - techdocs-core
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>spotify에서 제공하는 techdocs docker를 다운로드 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull spotify/techdocs:v1.1.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>테스트 환경에서는 AWS의 S3를 구성 하지 않고, MINIO를 사용하여 구성하였습니다. S3의 계정 정보를 환경변수로 저장합니다. MINIO에 저장 할 수 있는 버킷을 생성 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_REGION</span><span class="o">=</span>ap-northeast-2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>페이지를 작성 하기 위해 MarkDown을 npx로 웹 관련 파일을 생성 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli generate --source-dir /var/tmp/tkgm/workload/catalog/yelb-catalog --output-dir ./site
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래와 같이 ./site 폴더에 파일들이 생성 된 것을 확인 할 수 있습니다.</span>
+</span></span><span class="line"><span class="cl">ls site/
+</span></span><span class="line"><span class="cl">404.html  README.md  add-docs  assets  images  index.html  search  sitemap.xml  sitemap.xml.gz  techdocs_metadata.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>사전에 Catalog를 등록 하면 DOCS에서 아래처럼 확인이 가능 합니다.</p>
+</blockquote>
+<figure><figcaption>
+            <h4>yelb-catalog-info</h4>
+        </figcaption>
+</figure>
+
+<blockquote>
+<p>확인 및 site 파일이 생성이 되면 오브젝트 스토리지에 파일들을 업로드 해줍니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli publish --publisher-type awsS3 --storage-name techdocs --entity default/location/yelb-catalog-info --directory ./site --awsEndpoint https://minio-volumes.huntedhappy.kro.kr --awsS3ForcePathStyle <span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>MINIO BUCKET</h4>
+        </figcaption>
+</figure>
+
+<blockquote>
+<p>여기까지 완료가 되면 tap values yaml 파일을 업데이트 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">    techdocs:
+</span></span><span class="line"><span class="cl">      builder: <span class="s1">&#39;external&#39;</span> <span class="c1"># Alternatives - &#39;external&#39;</span>
+</span></span><span class="line"><span class="cl">      publisher:
+</span></span><span class="line"><span class="cl">        type: <span class="s1">&#39;awsS3&#39;</span> <span class="c1"># Alternatives - &#39;googleGcs&#39; or &#39;awsS3&#39; or &#39;azureBlobStorage&#39; or &#39;openStackSwift&#39;. Read documentation for using alternatives.</span>
+</span></span><span class="line"><span class="cl">        awsS3:
+</span></span><span class="line"><span class="cl">          bucketName: <span class="s1">&#39;techdocs&#39;</span>
+</span></span><span class="line"><span class="cl">          credentials:
+</span></span><span class="line"><span class="cl">            accessKeyId: <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">            secretAccessKey: <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">          region: ap-northeast-2
+</span></span><span class="line"><span class="cl">          s3ForcePathStyle: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">          endpoint: https://minio-volumes.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 수정 후 </span>
+</span></span><span class="line"><span class="cl">tanzu package installed update tap -n tap-install --values-file <span class="o">{</span>file.yaml<span class="o">}</span>          
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>이 후 완료가 되면 아래 처럼 DOCS를 확인 할 수 있습니다. MARKDOWN을 작성 함으로 인해서 TAP에 개발을 한 Application의 대한 설명을 작성 할 수 있습니다.</p>
+</blockquote>
+<p><figure><figcaption>
+            <h4>DOCS1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DOCS2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DOCS3</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DOCS4</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
     <title>The Documentation TANZU CUSTOM IMAGE</title>
     <link>https://huntedhappy.github.io/tanzu-custom-image/</link>
     <pubDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</pubDate>
@@ -9739,1385 +10336,5 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 </li>
 </ol>
 ]]></description>
-</item><item>
-    <title>The Documentation vSphere Tanzu with AVI Load Balancer</title>
-    <link>https://huntedhappy.github.io/avi/</link>
-    <pubDate>Tue, 05 Apr 2022 21:51:21 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/avi/</guid>
-    <description><![CDATA[<p>AVI에서 제공하는 AKO인 INGRESS Controller를 사용 하는 방법 제공</p>
-<h2 id="1-tanzu에서-cluster-servicetype-변경">1. TANZU에서 Cluster ServiceType 변경</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>serviceType<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>ManageMent Cluster로 Context 변경</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### NodePort 변경</span>
-</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: AKODeploymentConfig
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: nodeport01
-</span></span></span><span class="line"><span class="cl"><span class="s">spec:
-</span></span></span><span class="line"><span class="cl"><span class="s">  adminCredentialRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-credentials
-</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
-</span></span></span><span class="line"><span class="cl"><span class="s">  certificateAuthorityRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-ca
-</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
-</span></span></span><span class="line"><span class="cl"><span class="s">  cloudName: Default-Cloud
-</span></span></span><span class="line"><span class="cl"><span class="s">  clusterSelector:
-</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
-</span></span></span><span class="line"><span class="cl"><span class="s">      ako-l7-nodeport-01: &#34;true&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  controller: avi.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  dataNetwork:
-</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
-</span></span></span><span class="line"><span class="cl"><span class="s">  extraConfigs:
-</span></span></span><span class="line"><span class="cl"><span class="s">    cniPlugin: antrea
-</span></span></span><span class="line"><span class="cl"><span class="s">    disableStaticRouteSync: false
-</span></span></span><span class="line"><span class="cl"><span class="s">    l4Config:
-</span></span></span><span class="line"><span class="cl"><span class="s">      autoFQDN: disabled
-</span></span></span><span class="line"><span class="cl"><span class="s">    ingress:
-</span></span></span><span class="line"><span class="cl"><span class="s">      defaultIngressController: true
-</span></span></span><span class="line"><span class="cl"><span class="s">      disableIngressClass: false  
-</span></span></span><span class="line"><span class="cl"><span class="s">      nodeNetworkList:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - cidrs:
-</span></span></span><span class="line"><span class="cl"><span class="s">            - 10.253.127.0/24
-</span></span></span><span class="line"><span class="cl"><span class="s">          networkName: LS_TKGM_10.253.127.x
-</span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePort
-</span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL
-</span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### ClusterIP 변경</span>
-</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: AKODeploymentConfig
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: clusterip01
-</span></span></span><span class="line"><span class="cl"><span class="s">spec:
-</span></span></span><span class="line"><span class="cl"><span class="s">  adminCredentialRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-credentials
-</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
-</span></span></span><span class="line"><span class="cl"><span class="s">  certificateAuthorityRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-ca
-</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
-</span></span></span><span class="line"><span class="cl"><span class="s">  cloudName: Default-Cloud
-</span></span></span><span class="line"><span class="cl"><span class="s">  clusterSelector:
-</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
-</span></span></span><span class="line"><span class="cl"><span class="s">      ako-l7-clusterip-01: &#34;true&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  controller: avi.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  dataNetwork:
-</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
-</span></span></span><span class="line"><span class="cl"><span class="s">  extraConfigs:
-</span></span></span><span class="line"><span class="cl"><span class="s">    cniPlugin: antrea
-</span></span></span><span class="line"><span class="cl"><span class="s">    disableStaticRouteSync: false                               # required
-</span></span></span><span class="line"><span class="cl"><span class="s">    l4Config:
-</span></span></span><span class="line"><span class="cl"><span class="s">      autoFQDN: disabled
-</span></span></span><span class="line"><span class="cl"><span class="s">    ingress:
-</span></span></span><span class="line"><span class="cl"><span class="s">      defaultIngressController: true
-</span></span></span><span class="line"><span class="cl"><span class="s">      disableIngressClass: false                                # required
-</span></span></span><span class="line"><span class="cl"><span class="s">      nodeNetworkList:                                          # required
-</span></span></span><span class="line"><span class="cl"><span class="s">        - cidrs:
-</span></span></span><span class="line"><span class="cl"><span class="s">            - 10.253.127.0/24
-</span></span></span><span class="line"><span class="cl"><span class="s">          networkName: LS_TKGM_10.253.127.x
-</span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: ClusterIP                                    # required
-</span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       # required
-</span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### NodePortLocal 변경</span>
-</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: AKODeploymentConfig
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: npl-enabled
-</span></span></span><span class="line"><span class="cl"><span class="s">spec:
-</span></span></span><span class="line"><span class="cl"><span class="s">  adminCredentialRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-credentials
-</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
-</span></span></span><span class="line"><span class="cl"><span class="s">  certificateAuthorityRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-ca
-</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
-</span></span></span><span class="line"><span class="cl"><span class="s">  cloudName: Default-Cloud
-</span></span></span><span class="line"><span class="cl"><span class="s">  clusterSelector:
-</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
-</span></span></span><span class="line"><span class="cl"><span class="s">      npl-enabled: &#34;true&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  controlPlaneNetwork:
-</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
-</span></span></span><span class="line"><span class="cl"><span class="s">  controller: avi.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  dataNetwork:
-</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
-</span></span></span><span class="line"><span class="cl"><span class="s">  extraConfigs:
-</span></span></span><span class="line"><span class="cl"><span class="s">    cniPlugin: antrea
-</span></span></span><span class="line"><span class="cl"><span class="s">    disableStaticRouteSync: false                               # required
-</span></span></span><span class="line"><span class="cl"><span class="s">    l4Config:
-</span></span></span><span class="line"><span class="cl"><span class="s">      autoFQDN: disabled
-</span></span></span><span class="line"><span class="cl"><span class="s">    ingress:
-</span></span></span><span class="line"><span class="cl"><span class="s">      defaultIngressController: true
-</span></span></span><span class="line"><span class="cl"><span class="s">      disableIngressClass: false                               
-</span></span></span><span class="line"><span class="cl"><span class="s">      nodeNetworkList:                                          
-</span></span></span><span class="line"><span class="cl"><span class="s">        - cidrs:
-</span></span></span><span class="line"><span class="cl"><span class="s">            - 10.253.127.0/24
-</span></span></span><span class="line"><span class="cl"><span class="s">          networkName: LS_TKGM_10.253.127.x
-</span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePortLocal                                     # required
-</span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       
-</span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<p>NodePort 테스트</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>Management Cluster<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-nodeport-01<span class="o">=</span><span class="nb">true</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>TKC<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>NodePort --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>접속 화면</h4>
-        </figcaption>
-</figure>
-
-<p>NodePort로 구성이 되어 있기 때문에 아래와 같이 NodeIP와 30000번대의 Port로 서버풀이 지정되는 것을 확인 할 수 있다.
-<figure><figcaption>
-            <h4>AVI VS 상태 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<p>ClusterIP 테스트</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>Management Cluster<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-clusterip-01<span class="o">=</span><span class="nb">true</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>TKC<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get cm avi-k8s-config -n avi-system -o <span class="nv">jsonpath</span><span class="o">={</span>.data.serviceType<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>ServiceType 변경 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>AVI Routing 확인</h4>
-        </figcaption>
-</figure>
-
-ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 실제 Port로 서버풀이 지정되는 것을 확인 할 수 있다.
-<figure><figcaption>
-            <h4>AVI VS 상태 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="2-avi-infra-settings">2. AVI Infra Settings</h2>
-<p>만약에 하나의 클러스터에서 VS별 SE-GROUP을 분리 하거나, 또는 VS의 IP 대역을 분리 하고 싶을 경우 AVIINFRASETTING을 사용하여 구성을 할 수 있다.
-<figure><figcaption>
-            <h4>구성</h4>
-        </figcaption>
-</figure>
-</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: ako.vmware.com/v1alpha1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: AviInfraSetting
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: other-infra
-</span></span></span><span class="line"><span class="cl"><span class="s">spec:
-</span></span></span><span class="line"><span class="cl"><span class="s">  seGroup:
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">  network:
-</span></span></span><span class="line"><span class="cl"><span class="s">    vipNetworks:
-</span></span></span><span class="line"><span class="cl"><span class="s">      - networkName: pg-dk-10.253.107.x
-</span></span></span><span class="line"><span class="cl"><span class="s">        cidr: 10.253.107.0/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    enableRhi: false
-</span></span></span><span class="line"><span class="cl"><span class="s">  l7Settings:
-</span></span></span><span class="line"><span class="cl"><span class="s">    shardSize: MEDIUM
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: IngressClass
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: other-infra
-</span></span></span><span class="line"><span class="cl"><span class="s">spec:
-</span></span></span><span class="line"><span class="cl"><span class="s">  controller: ako.vmware.com/avi-lb
-</span></span></span><span class="line"><span class="cl"><span class="s">  parameters:
-</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: ako.vmware.com
-</span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>테스트</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>other-infra --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>VS IP 변경 전</h4>
-        </figcaption>
-</figure>
-
-아래와 같이 VS IP가 변경 된 것을 확인 할 수 있다.
-<figure><figcaption>
-            <h4>VS IP 변경 후</h4>
-        </figcaption>
-</figure>
-</p>
-<p>기존의 하나의 SE그룹에 모두 VS가 구성이 되어 있다.
-<figure><figcaption>
-            <h4>SE Group 생성</h4>
-        </figcaption>
-</figure>
-</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## SEGROUP을 변경</span>
-</span></span><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/seGroup/name&#34;,&#34;value&#34;:&#34;tkgm01&#34;}]&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ingressClassName&#34;: &#34;other-infra&#34;}}&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>현재는 SE가 기존의 
-<figure><figcaption>
-            <h4>기존 SE 배포 전</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>다른 SE 그룹으로 변경 후 </h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>다른 SE 그룹으로 변경 후 </h4>
-        </figcaption>
-</figure>
-</p>
-<p>위와 같은 방법으로 동일한 클러스터 내에서 FQDN별로 SE-GROUP 또는 IP 대역을 분리 할 수 있다.</p>
-<h2 id="3-avi-autoscalling">3. AVI AutoScalling</h2>
-<figure><figcaption>
-            <h4>AVI Autoscalling 기본 동작 </h4>
-        </figcaption>
-</figure>
-
-<p><div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>autoscalling 재 조정값<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## AVI Controller SSH접속 </span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">switchto tenant admin
-</span></span><span class="line"><span class="cl">switchto cloud Default-Cloud
-</span></span><span class="line"><span class="cl">auto_rebalance
-</span></span><span class="line"><span class="cl">save
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">configure serviceenginegroup Default-Group
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">auto_rebalance_interval interval-value 
-</span></span><span class="line"><span class="cl">auto_rebalance_criteria option
-</span></span><span class="line"><span class="cl">auto_rebalance_capacity_per_se integer-value
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">예시: auto_rebalance_interval <span class="m">300</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">auto_rebalance_criteria 의 옵션 값은 아래와 같음
-</span></span><span class="line"><span class="cl">se_auto_rebalance_cpu
-</span></span><span class="line"><span class="cl">se_auto_rebalance_mbps
-</span></span><span class="line"><span class="cl">se_auto_rebalance_open_conns
-</span></span><span class="line"><span class="cl">se_auto_rebalance_pps
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">예시: auto_rebalance_capacity_per_se <span class="m">200000</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">max_cpu_usage value
-</span></span><span class="line"><span class="cl">min_cpu_usage value
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 종합 </span>
-</span></span><span class="line"><span class="cl">switchto tenant Avi
-</span></span><span class="line"><span class="cl">switchto cloud azure
-</span></span><span class="line"><span class="cl">configure serviceenginegroup Default-Group
-</span></span><span class="line"><span class="cl">auto_rebalance_interval <span class="m">300</span>
-</span></span><span class="line"><span class="cl">auto_rebalance_criteria se_auto_rebalance_pps
-</span></span><span class="line"><span class="cl">auto_rebalance_capacity_per_se <span class="m">200000</span>
-</span></span><span class="line"><span class="cl">max_cpu_usage <span class="m">70</span>
-</span></span><span class="line"><span class="cl">min_cpu_usage <span class="m">30</span>
-</span></span><span class="line"><span class="cl">save
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<figure><figcaption>
-            <h4>auto_rebalance 변경 전</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>auto_rebalance 변경 후</h4>
-        </figcaption>
-</figure>
-</p>
-<figure><figcaption>
-            <h4>auto scallingout </h4>
-        </figcaption>
-</figure>
-
-<h2 id="4-bgp-연동-후-rhiroute-health-injection">4. BGP 연동 후 Rhi(Route Health Injection)</h2>
-<p>BGP ECMP를 구성 하여 SE를 탄력적으로 확장을 할 수 있습니다.</p>
-<p>물리 스위치에는 ECMP를 구성이 필요.</p>
-<figure><figcaption>
-            <h4>구성</h4>
-        </figcaption>
-</figure>
-
-<p>AVI에서 BGP 설정
-<figure><figcaption>
-            <h4>BGP 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>BGP 설정</h4>
-        </figcaption>
-</figure>
-</p>
-<p>SE에 접속 해서 BGP 상태를 확인 한다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## AVI Controller SSH 접속</span>
-</span></span><span class="line"><span class="cl">shell
-</span></span><span class="line"><span class="cl">admin /  <span class="o">{</span>password<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="c1">## 서비스 엔진 접속</span>
-</span></span><span class="line"><span class="cl">attach serviceengine tkcdevAvi-se-jpjbe
-</span></span><span class="line"><span class="cl">ip netns
-</span></span><span class="line"><span class="cl"><span class="c1">## 서비스 엔진 bash 접속</span>
-</span></span><span class="line"><span class="cl">sudo ip netns <span class="nb">exec</span> avi_ns1 bash
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## BGP 확인</span>
-</span></span><span class="line"><span class="cl">netcat localhost bgpd
-</span></span><span class="line"><span class="cl"><span class="nb">enable</span>
-</span></span><span class="line"><span class="cl">show run
-</span></span><span class="line"><span class="cl">show bgp summary
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>BGP 상태 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>BGP 상태 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<p>RHI Enabled</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/network/enableRhi&#34;,&#34;value&#34;:true}]&#39;</span> 
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>Rhi Enable</h4>
-        </figcaption>
-</figure>
-
-<p>스위치에서 라우팅 확인
-<figure><figcaption>
-            <h4>BGP 라우팅</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="5-gatewayclass">5. GatewayClass</h2>
-<p>GATEWAY를 사용하는 이유는 여러개의 LoadBalancer의 IP를 하나의 IP로 설정하고 Port를 사용하기 위해서다.
-SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 공통으로 사용을 할 수 있다.</p>
-<figure><figcaption>
-            <h4>GATEWAYCLASS 연계</h4>
-        </figcaption>
-</figure>
-
-<p>구성을 하기 위해서는 클러스터에서 servicesAPI: true 를 True로 변경 필요 및 AutoFQDN와 DefaultDomain이 필요하다.</p>
-<p>위에서 언급한 AVIINFRASETTING을 한 후 GATEWAYCLASS를 생성한다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: GatewayClass
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: critical-gwc
-</span></span></span><span class="line"><span class="cl"><span class="s">spec:
-</span></span></span><span class="line"><span class="cl"><span class="s">  controller: ako.vmware.com/avi-lb
-</span></span></span><span class="line"><span class="cl"><span class="s">  parametersRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">    group: ako.vmware.com
-</span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>GATEWAY 생성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: Gateway
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: avi-alb-gw
-</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: default
-</span></span></span><span class="line"><span class="cl"><span class="s">spec: 
-</span></span></span><span class="line"><span class="cl"><span class="s">  gatewayClassName: critical-gwc    
-</span></span></span><span class="line"><span class="cl"><span class="s">  listeners: 
-</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
-</span></span></span><span class="line"><span class="cl"><span class="s">    port: 8080 
-</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
-</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
-</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
-</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
-</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
-</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
-</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
-</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
-</span></span></span><span class="line"><span class="cl"><span class="s">    port: 80 
-</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
-</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
-</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
-</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
-</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
-</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
-</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>만약에 LB IP를 지정 하고 싶다면. 아래와 같이 IP를 지정하면 된다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: Gateway
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: avi-alb-gw
-</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: default
-</span></span></span><span class="line"><span class="cl"><span class="s">spec: 
-</span></span></span><span class="line"><span class="cl"><span class="s">  gatewayClassName: critical-gwc
-</span></span></span><span class="line"><span class="cl"><span class="s">  addresses:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - type: IPAddress
-</span></span></span><span class="line"><span class="cl"><span class="s">    value: 10.253.107.203
-</span></span></span><span class="line"><span class="cl"><span class="s">  listeners: 
-</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
-</span></span></span><span class="line"><span class="cl"><span class="s">    port: 8080 
-</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
-</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
-</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
-</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
-</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
-</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
-</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
-</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
-</span></span></span><span class="line"><span class="cl"><span class="s">    port: 80 
-</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
-</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
-</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
-</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
-</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
-</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
-</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>테스트</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span> -l <span class="s1">&#39;ako.vmware.com/gateway-namespace=default&#39;</span>,<span class="s1">&#39;ako.vmware.com/gateway-name=avi-alb-gw&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>아래와 같이 동일한 IP로 두개의 SVC를 동일한 IP로 Port(80 , 8080)만 다른게 구성 할 수 있다.
-<figure><figcaption>
-            <h4>VS상태#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>VS상태#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>VS상태#2</h4>
-        </figcaption>
-</figure>
-</p>
-]]></description>
-</item><item>
-    <title>The Documentation VxRail</title>
-    <link>https://huntedhappy.github.io/vxrail/</link>
-    <pubDate>Mon, 28 Mar 2022 22:55:22 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/vxrail/</guid>
-    <description><![CDATA[<p>VxRail은 전체 스택 무결성 및 포괄적인 수명주기 관리로 비즈니스 변화에 신속하게 대응하는 인프라스트럭처를 제공하여 운영 효율성을 높이고, 위험을 줄이며, 팀이 비즈니스에 집중할 수 있도록 지원합니다.</p>
-<h2 id="preconfig">PreConfig</h2>
-<h3 id="dns-구성">DNS 구성</h3>
-<table>
-<thead>
-<tr>
-<th>Component Name</th>
-<th>BaseDomain</th>
-<th>A Record</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>vcsa01</td>
-<td>vxrail.local</td>
-<td>192.168.215.10</td>
-</tr>
-<tr>
-<td>vxmgr</td>
-<td>vxrail.local</td>
-<td>192.168.215.9</td>
-</tr>
-<tr>
-<td>esxi01</td>
-<td>vxrail.local</td>
-<td>192.168.215.11</td>
-</tr>
-<tr>
-<td>esxi02</td>
-<td>vxrail.local</td>
-<td>192.168.215.12</td>
-</tr>
-<tr>
-<td>esxi03</td>
-<td>vxrail.local</td>
-<td>192.168.215.13</td>
-</tr>
-<tr>
-<td>esxi04</td>
-<td>vxrail.local</td>
-<td>192.168.215.14</td>
-</tr>
-</tbody>
-</table>
-<h3 id="default-passwqord">Default Passwqord</h3>
-<table>
-<thead>
-<tr>
-<th>Component Name</th>
-<th>Networking Configuration</th>
-<th>Username</th>
-<th>Default Password</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>BIOS</td>
-<td>N/A</td>
-<td>192.168.215.10</td>
-<td></td>
-</tr>
-<tr>
-<td>iDRAC</td>
-<td>DHCP</td>
-<td>192.168.215.9</td>
-<td>root</td>
-</tr>
-<tr>
-<td>ESXi</td>
-<td>DHCP</td>
-<td>192.168.215.11</td>
-<td>root</td>
-</tr>
-<tr>
-<td>vCenter Server Applicance</td>
-<td>root</td>
-<td>vmware</td>
-<td></td>
-</tr>
-<tr>
-<td>VxRail Manager</td>
-<td>192.168.10.200</td>
-<td>root</td>
-<td>Passw0rd!</td>
-</tr>
-<tr>
-<td>VxRail Manager</td>
-<td>192.168.10.200</td>
-<td>mystic</td>
-<td>VxRailManager@201602!</td>
-</tr>
-</tbody>
-</table>
-<h2 id="1-rasr을-통해-초기화">1. RASR을 통해 초기화</h2>
-<p>기본적으로 VxRail장비가 입고가 되면 기본 이미지로 부팅이 되며 라이센스가 있을 경우 업그레이드를 할 수 있다.</p>
-<ol>
-<li>초기화를 하는 이유는 테스트 위해 60일 EVALUATION을 재사용하려면 RASR을 통해 공장 초기화를 해야 한다.</li>
-<li>기존의 VxRail을 구성한 상태에서 증설을 위해 추가로 구성을 하게 될경우 기본 들어오는 버전이 낮거나 높을 수 있다. 이럴 경우 RASR을 통해 펌웨어, 이미지를 업그레이드 또는 다운그레이드를 통해 증설을 할 수 있다.</li>
-<li>기본 설치되어 있는 VxRail이 테스트 하고자 하는 버전 보다 낮거나 또는 높거나 할 경우 변경을 할 수 있다.</li>
-</ol>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>초기화 방법<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><blockquote>
-<ol>
-<li>USB</li>
-</ol>
-<ul>
-<li>장비 모든 부분의 버전을 업그레이드 및 다운그레이가 필요 할 경우 USB 방법사용, 또한 설치가 제일 빠름</li>
-</ul>
-</blockquote>
-<blockquote>
-<ol start="2">
-<li>Virtual Media</li>
-</ol>
-<ul>
-<li>iDRAC의 Virtual Media를 통해 설치 하는 방법 부분적 설치만 가능 (Firmware 등등 업그레이드 또는 다운그레이드 못함) 또한 설치가 느림</li>
-</ul>
-</blockquote>
-</div>
-        </div>
-    </div>
-<p>USB를 연결 한 후 iDRAC에서 Local SD Card로 부팅
-<figure><figcaption>
-            <h4>USB 설치#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>USB 설치#2</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Advancde 항목으로 접근 
-<figure><figcaption>
-            <h4>Advanced</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Install DUP(s)
-펌웨어 등 업그레이드 및 다운그레이드할 내용이 있는지 확인이 필요
-<figure><figcaption>
-            <h4>Install DUP(s)#1</h4>
-        </figcaption>
-</figure>
-</p>
-<p>업그레이드 / 다운그레이드를 선택 후 업그레이드가 있는지 다운그레이드가 있는지 체크 후 있으면 설치
-<figure><figcaption>
-            <h4>Install DUP(s)#2</h4>
-        </figcaption>
-</figure>
-</p>
-<p>진행 시 재부팅이 여러번 발생 대략 30분 ~ 1시간 소요
-<figure><figcaption>
-            <h4>Install DUP(s)#3</h4>
-        </figcaption>
-</figure>
-</p>
-<p>DUP를 업그레이드 또는 다운그레이드 이후 [F]actory Reset 실행 (1시간 소요)</p>
-<h2 id="2-esxi-초기-설정">2. ESXI 초기 설정</h2>
-<p><figure><figcaption>
-            <h4>ESXI#1</h4>
-        </figcaption>
-</figure>
-
-ESXi Shell Enable을 통해 콘솔 접속
-<figure><figcaption>
-            <h4>ESXI#2</h4>
-        </figcaption>
-</figure>
-
-esxcli vm process list 명령어를 VxRail Manager가 보이는 호스트를 찾는다.
-아무곳에서나 해도 되지만. 시간이 오래 걸린다.
-<figure><figcaption>
-            <h4>ESXI#3</h4>
-        </figcaption>
-</figure>
-</p>
-<p>기본 디폴트 IP는 192.168.10.200이므로 통신이 된다면 VxRail Manager VM을 켜고 접속 하면 된다. 
-만약 VLAN 또는 ESXI에 접근을 하고 싶으면 명령어로 VLAN 또는 IP를 설정 할 수 있다 또는 VM을 킬 수도 있다.
-여기에서는 여러가지 방법을 설명하지는 않겠다. 기본 디폴트 IP와 변경하고자 하는 IP 둘다 통신이 되면 된다.</p>
-<p>여러가지 방법론이 있겠지만, 신경을 쓰고 싶지 않다면 DEFAULT IP와 변경하고자 하는 IP 둘다 통신이 되는 것으로 테스트를 하면 좋을 것이다.</p>
-<p>VLAN 3939가 실제적으로 Discovery를 하는 부분으로 스위치에서 3939설정을 해주면 나중에 호스트 증설을 할때 별도로 신경을 쓰지 않아도 된다.</p>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>명령어<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">esxcli network vswitch standard portgroup list
-</span></span><span class="line"><span class="cl">esxcli network vswitch standard portgroup <span class="nb">set</span> -p <span class="s2">&#34;Private Management Network&#34;</span> -v <span class="m">0</span>
-</span></span><span class="line"><span class="cl">esxcli network ip interface list
-</span></span><span class="line"><span class="cl">esxcli network ip interface ipv4 <span class="nb">set</span> -i vmk2 -I 192.168.215.13 -N 255.255.255.0 -g 192.168.215.1 -t static
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>VxRail Manager IP 변경 방법</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vxrail-primary --setup --vxrail-address 192.168.215.9 --vxrail-netmask 255.255.255.0 --vxrail-gateway 192.168.215.1 --no-roll-back --verbose
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h2 id="3-init">3. INIT</h2>
-<p>원하는 언어를 선택 할 수 있다.
-<figure><figcaption>
-            <h4>INIT#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#2</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Standrad Cluster (3 or more hosts)는 3개이상의 VSAN 구성
-VSAN 2-Node Cluster (2 hosts only) witness host 필요
-Dynamic Node Cluster (2 or more hosts) VSAN 구성이 아닌 외부 스토리지로 구성 할 경우
-<figure><figcaption>
-            <h4>INIT#3</h4>
-        </figcaption>
-</figure>
-
-설치가 잘 되었다면 아래와 같이 자동으로 Discovery가 됨
-<figure><figcaption>
-            <h4>INIT#4</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#5</h4>
-        </figcaption>
-</figure>
-</p>
-<p>JSON파일로 구성이 다 되어 있다면 JSON을 삽입 해도 되지만 없으면 Step-by-step으로 진행
-<figure><figcaption>
-            <h4>INIT#6</h4>
-        </figcaption>
-</figure>
-</p>
-<p><figure><figcaption>
-            <h4>INIT#7</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#8</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#9</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#10</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#11</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#12</h4>
-        </figcaption>
-</figure>
-</p>
-<p>나중을 위해서 JSON파일을 다운로드 받을 수 있다.
-<figure><figcaption>
-            <h4>INIT#13</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#14</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#15</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#16</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="4-host-add">4. HOST ADD</h2>
-<p>만약 기존 구성된 클러스터와 다른 버전이 설치되어 있는 호스트라면 RSAR 초기화 필요</p>
-<p>호스트를 추가 할 때 Host DISCOVERY가 되지 않으면 loudmouth restart를 해준다.</p>
-<p><figure><figcaption>
-            <h4>HOST ADD#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#4</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#5</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#6</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#7</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#8</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#9</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#10</h4>
-        </figcaption>
-</figure>
-</p>
-<p>HOST ADD 시 HOST가 DISCOVERY되지 않는다면 loudmouth를 리스타트 해준다.
-<figure><figcaption>
-            <h4>HOST ADD#11</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="5-upgrade">5. UPGRADE</h2>
-<p><figure><figcaption>
-            <h4>UPGRADE#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#4</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#5</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#6</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#7</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#8</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#9</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#10</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="6-vxrail-backup">6. VxRail BackUP</h2>
-<p>백업 스케줄 설정 가능</p>
-<p>VxRail 접속</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 백업 리스트 확인</span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /mystic/vxm_backup_restore
-</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -l
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 메뉴얼 백업</span>
-</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -b
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>스케쥴 백업</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>메뉴얼 백업</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>백업 리스트 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="6-vxrail-recovery">6. VxRail Recovery</h2>
-<p>VxRail Manager가 망가졌을 경우 사용 가능</p>
-<p>백업이 없으면 의미 없음</p>
-<p>VxRail OVA 이미지 필요</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 신규 설치한 vxrail manager 접속 후 IP 변경</span>
-</span></span><span class="line"><span class="cl">/opt/vmware/share/vami/vami_set_network eth0 STATICV4 192.168.215.9 255.255.255.0 192.168.215.1
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## Backup 확인</span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /mystic/vxm_backup_restore
-</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -l
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## Recovery 실행 1</span>
-</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -r –-vcenter 192.168.215.10
-</span></span></code></pre></td></tr></table>
-</div>
-</div>]]></description>
 </item></channel>
 </rss>

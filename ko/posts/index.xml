@@ -4,7 +4,604 @@
         <link>https://huntedhappy.github.io/ko/posts/</link>
         <description>All Posts | Dokyung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation SupplyChain on TAP</title>
+    <link>https://huntedhappy.github.io/ko/cicd/</link>
+    <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/cicd/</guid>
+    <description><![CDATA[<h2 id="tanzu-supplychain">TANZU SUPPLYCHAIN</h2>
+<blockquote>
+<p>아래 내용은 기본적으로 VMWARE의 TAP솔루션을 알고 있다는 가정하에 작성을 하였습니다.</p>
+</blockquote>
+<p>CI/CD는 (Continuous Integration/Continuous Delivery) 지속적인 통합 및 지속적인 배포입니다.</p>
+<p>예를 들어:</p>
+<ol>
+<li>사용자는 IDE 환경 (IntelliJ or visual studio or eclipse)에서 소스코드를 수정 및 디버깅을 합니다.</li>
+<li>이 후에 수정된 소스코드를 GIT에 PUSH를 합니다.</li>
+<li>JENKINS에서는 GIT에 수정된 소스를 Webhook 또는 Polling을 통해 변경을 감지 합니다.</li>
+<li>JENKINS에서 수정된 코드를 통해 Docker Image를 생성을 합니다.</li>
+<li>생성된 Docker Image를 이미지 레포지토리에 업로드 합니다.</li>
+<li>Docker Image가 변경이 되었기 때문에 CD를 위해 별도의 GIT Project에 변경된 이미지를 수정 합니다.</li>
+<li>CD 솔루션을 통해 (ARGO 등) GIT이 변경이 되었으므로 컨테이너이미지를 업데이트 합니다.</li>
+</ol>
+<ul>
+<li>MANIFEST의 경우 HELM or KUSTOMIZATION or 각각 생성 할 수도 있습니다.</li>
+</ul>
+<blockquote>
+<ol>
+<li>JENKINS의 PIPELINE figure 1-1 와 같이 구성 할 수 있습니다.</li>
+<li>SLACK을 연동 후 원하는 문자로 알림을 받을 수 있습니다. figure 1-2</li>
+</ol>
+</blockquote>
+<figure><figcaption>
+            <h4>1-1 JENKINS PIPELINE</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>1-2 SLACK ALERT</h4>
+        </figcaption>
+</figure>
+
+<p>위와 같이 JENKINS와 ARGO 를 통해 CI/CD를 구성 할 수 있습니다. 하지만 각각 구성하기 위해서는 JENKINS 그리고 ARGO의 대해서도 이해가 필요 합니다. 또한 K8S에 배포를 하기 위해서는 MANIFEST의 대해서도 이해가 필요 합니다. 가령 Deployment, statfulset, ingress 등등의 대해서도, 이해가 필요 하며 HELM 또는 KUSTOMIZAION을 사용한다면 해당 오픈소스의 대해서도 이해가 필요 합니다.</p>
+<p>TANZU APPLICATION PLATFORM은 여러 이해가 필요 한부분을 workload.yaml을 구성하면 SUPPLYCHAIN을 통해 CI/CD 구성을 사용자가 각각 구성 할 필요 없이 제공을 하고 있습니다.</p>
+<p><a href="https://huntedhappy.github.io/tanzu-application-platform/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
+<figure><figcaption>
+            <h4>1-3 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+
+<p>기본적으로 하나의 클러스터에 3가지중 하나의 SUPPLYCHAIN을 제공 하고 있습니다. DEFULAT의 경우 위의 설명 드린 대로 사용자는 workload.yaml을 적절하게 작성을 하게 되면 CI/CD가 동작 합니다.</p>
+<p>아래 그림과 같이 workload.yaml 실행을 통해 supplychain이 순차적으로 동작을 하게 됩니다.
+<figure><figcaption>
+            <h4>1-4 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>GUI에서 확인을 해보면 아래와 같습니다. 
+<figure><figcaption>
+            <h4>1-5 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>그리고 두번째의 경우는 추가적으로 TEKTON을 통해 소스코드를 테스팅 할 수 있습니다. 
+그리고 마지막의 경우는 GRYPE을 통해 소스 및 이미지에 보안 취약점이 있는지 확인을 합니다.</p>
+<p>GUI에서 확인을 해보면 아래와 같이 취약점에 대해서 확인 할 수 있습니다.
+<figure><figcaption>
+            <h4>1-6 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<blockquote>
+<p>하지만 위에서 설명 드린 대로 하나의 클러스터에는 3가지중 하나만 사용을 할 수 있습니다. 추가적인 supplychain을 구성 하고 싶을수도 있을 것입니다. 동일한 서비스의 대해서 빠르게 개발을 위해 BASIC으로 구성을 하고 싶을 것이며, QA/STAGING은 소스/이미지에 보안취약점이 있는지 잘 생성을 했는지 확인을 하고 싶을 것입니다. 물론 클러스터를 분리해서 구성 할 수도 있을 것입니다. 하지만 리소스 부족으로 분리를 할 수 없을 경우 하나의 클러스터에 모두 구성이 필요할수도 있을수 있습니다. 만약 그런 상황이 발생하면 3개중에 하나의 supplychain만 사용이 가능하기 때문에 한가지를 선택 해야 합니다. 그렇기 때문에 supplychain을 추가 하는 방법이 필요 할 수 있습니다.</p>
+</blockquote>
+<p>아래와 같이 기본적으로 제공 하고 있습니다. 
+<figure><figcaption>
+            <h4>1-7 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>SUPPLYCHAIN ADD<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt; basic_supply_chain.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ load(&#34;@ytt:data&#34;, &#34;data&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ load(&#34;@ytt:assert&#34;, &#34;assert&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ data.values.registry.server or assert.fail(&#34;missing registry.server&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ data.values.registry.repository or assert.fail(&#34;missing registry.repository&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: carto.run/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterSupplyChain
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: source-to-url-with-custom-support
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: source-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: #@ data.values.service_account
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: gitImplementation
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: #@ data.values.git_implementation
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterSourceTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: source-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: image-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">      value: #@ data.values.service_account
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">      value:
+</span></span></span><span class="line"><span class="cl"><span class="s">        ca_cert_data: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        repository: #@ data.values.registry.repository
+</span></span></span><span class="line"><span class="cl"><span class="s">        server: #@ data.values.registry.server
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: default
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: clusterBuilder
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: ./Dockerfile
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: dockerfile
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: ./
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: docker_build_context
+</span></span></span><span class="line"><span class="cl"><span class="s">    sources:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: source
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: source-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterImageTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      options:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: kpack-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchFields:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - key: spec.params[?(@.name==&#34;dockerfile&#34;)]
+</span></span></span><span class="line"><span class="cl"><span class="s">            operator: DoesNotExist
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: kaniko-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchFields:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - key: spec.params[?(@.name==&#34;dockerfile&#34;)]
+</span></span></span><span class="line"><span class="cl"><span class="s">            operator: Exists
+</span></span></span><span class="line"><span class="cl"><span class="s">  - images:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: image
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: image-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: config-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">      value: #@ data.values.service_account
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: convention-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: config
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: config-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: app-config
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      options:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: config-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            apps.tanzu.vmware.com/workload-type: web
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: server-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            apps.tanzu.vmware.com/workload-type: server
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: worker-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            apps.tanzu.vmware.com/workload-type: worker
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: app_def
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: app-config
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: service-bindings
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: service-bindings
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: app_def
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: service-bindings
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: api-descriptors
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: api-descriptors
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: config
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: api-descriptors
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: config-writer
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: default
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">      value:
+</span></span></span><span class="line"><span class="cl"><span class="s">        ca_cert_data: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        repository: #@ data.values.registry.repository
+</span></span></span><span class="line"><span class="cl"><span class="s">        server: #@ data.values.registry.server
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: config-writer-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: deliverable
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">      value:
+</span></span></span><span class="line"><span class="cl"><span class="s">        ca_cert_data: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        repository: #@ data.values.registry.repository
+</span></span></span><span class="line"><span class="cl"><span class="s">        server: #@ data.values.registry.server
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: external-deliverable-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    apps.tanzu.vmware.com/custom: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  selectorMatchExpressions:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - key: apps.tanzu.vmware.com/workload-type
+</span></span></span><span class="line"><span class="cl"><span class="s">    operator: In
+</span></span></span><span class="line"><span class="cl"><span class="s">    values:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - web
+</span></span></span><span class="line"><span class="cl"><span class="s">    - server
+</span></span></span><span class="line"><span class="cl"><span class="s">    - worker
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p>위와 같이 추가하게 되면 별도로 SUPPLYCHAIN이 추가 된 것을 확인 할 수 있다. 
+<figure><figcaption>
+            <h4>1-8 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>그리고 아래와 같이 다른 workload.yaml과는 다른 SUPPLYCHAIN이 등록 된 것을 확인 할 수 있습니다. 
+<figure><figcaption>
+            <h4>1-9 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
+    <title>The Documentation TechDocs in Tap</title>
+    <link>https://huntedhappy.github.io/ko/tap-techdocs/</link>
+    <pubDate>Sat, 04 Mar 2023 22:33:00 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/tap-techdocs/</guid>
+    <description><![CDATA[<h2 id="1-간단한-설명">1. 간단한 설명</h2>
+<h3 id="11-backstage">1.1. Backstage?</h3>
+<p>Backstage는 개발자 포털 구축을 위한 오픈 플랫폼입니다. 2년 전 Spotify의 소규모 팀이 내부에서 Backstage를 오픈소스로 출시 후 CNCF SANDBOX에서 현재는 INCUBATING 단계가 되었습니다. CNCF는 프로젝트 성숙도에 따라서 SANDBOX, INCUBATING, GRADUATED 단계로  구성 되어 있습니다.</p>
+<p>프로젝트의 성숙도는 CNCF 위원회 멤버들에 의해서 결정되며, GRADUATED 단계의 프로젝트가 되기 위해서는 GRADUATED 요건이 필요 하며 위원회 멤버 과반수 이상의 찬성표를 받아야 합니다.</p>
+<figure><figcaption>
+            <h4>https://www.cncf.io/projects/</h4>
+        </figcaption>
+</figure>
+
+<p>Backstage WebPage를 가게 되면 엄청 많은 기능들을 확인 할 수 있습니다.</p>
+<p><a href="https://backstage.io/docs/overview/what-is-backstage" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Backstage LINK</a></p>
+<h3 id="12-techdocs">1.2. TechDocs?</h3>
+<p>Backstage에 내장되어 있으며 MarkDown 파일을 작성 함으로 Backstage에 문서형 사이트를 얻을 수 있습니다.
+<a href="https://backstage.io/docs/features/techdocs/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Backstage TechDocs 참고링크</a></p>
+<p>TANZU의 TAP의 경우 Backstage의 기능으로 구성이 되어 있습니다.</p>
+<h2 id="2-techdocs-설정">2. TechDocs 설정</h2>
+<blockquote>
+<p>사전 구성</p>
+<ol>
+<li>Object Storage : &lsquo;awsS3&rsquo; or &lsquo;googleGcs&rsquo; or &lsquo;azureBlobStorage&rsquo; or &lsquo;openStackSwift&rsquo;</li>
+<li>TANZU TAP</li>
+<li>npm, node, npx (9.5.0, 18.14.2, 9.5.0)의 버전으로 테스트 진행</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>앞서 설명에서 MarkDown를 통해 Tanzu의 TAP에 문서형태를 구성 할 수 있습니다. 사전에 Tanzu Net에서 sample을 다운로드 받을 수 있습니다.</p>
+</blockquote>
+<figure><figcaption>
+            <h4>Sample Download</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 압축 해제</span>
+</span></span><span class="line"><span class="cl">tar zxvf tap-gui-yelb-catalog.tgz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## markdown </span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> tap-gui-yelb-catalog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>위의 Sample 파일을 다운로드 받은 후 TAP에서 Catalog를 등록 한 후 DOCS를 보면 아래와 같이 오류가 나는 것을 확인 할 수 있습니다.</p>
+</blockquote>
+<figure><figcaption>
+            <h4>Error</h4>
+        </figcaption>
+</figure>
+
+<p>TANZU에서 TechDocs 관련 LINK는 아래에서 참고 할 수 있지만, 문서를 보면 어떻게 해야 되는지 잘 알지 못할 수도 있습니다.
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/tap-gui-techdocs-usage.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> TechDocs In TAP 참고링크</a></p>
+<blockquote>
+<p>그리고 SAMPLE에서 mkdocs.yml 의 내용을 보면 docs에 index.md, add-docs.md를 읽을 수 있게 구성이 되어져 있는 것을 확인 해 볼 수 있습니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">site_name: <span class="s1">&#39;Yelb demo catalog&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nav:
+</span></span><span class="line"><span class="cl">  - Home: index.md
+</span></span><span class="line"><span class="cl">  - Adding Documentation: add-docs.md
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">plugins:
+</span></span><span class="line"><span class="cl">  - techdocs-core
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>spotify에서 제공하는 techdocs docker를 다운로드 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull spotify/techdocs:v1.1.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>테스트 환경에서는 AWS의 S3를 구성 하지 않고, MINIO를 사용하여 구성하였습니다. S3의 계정 정보를 환경변수로 저장합니다. MINIO에 저장 할 수 있는 버킷을 생성 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_REGION</span><span class="o">=</span>ap-northeast-2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>페이지를 작성 하기 위해 MarkDown을 npx로 웹 관련 파일을 생성 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli generate --source-dir /var/tmp/tkgm/workload/catalog/yelb-catalog --output-dir ./site
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래와 같이 ./site 폴더에 파일들이 생성 된 것을 확인 할 수 있습니다.</span>
+</span></span><span class="line"><span class="cl">ls site/
+</span></span><span class="line"><span class="cl">404.html  README.md  add-docs  assets  images  index.html  search  sitemap.xml  sitemap.xml.gz  techdocs_metadata.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>사전에 Catalog를 등록 하면 DOCS에서 아래처럼 확인이 가능 합니다.</p>
+</blockquote>
+<figure><figcaption>
+            <h4>yelb-catalog-info</h4>
+        </figcaption>
+</figure>
+
+<blockquote>
+<p>확인 및 site 파일이 생성이 되면 오브젝트 스토리지에 파일들을 업로드 해줍니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli publish --publisher-type awsS3 --storage-name techdocs --entity default/location/yelb-catalog-info --directory ./site --awsEndpoint https://minio-volumes.huntedhappy.kro.kr --awsS3ForcePathStyle <span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>MINIO BUCKET</h4>
+        </figcaption>
+</figure>
+
+<blockquote>
+<p>여기까지 완료가 되면 tap values yaml 파일을 업데이트 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">    techdocs:
+</span></span><span class="line"><span class="cl">      builder: <span class="s1">&#39;external&#39;</span> <span class="c1"># Alternatives - &#39;external&#39;</span>
+</span></span><span class="line"><span class="cl">      publisher:
+</span></span><span class="line"><span class="cl">        type: <span class="s1">&#39;awsS3&#39;</span> <span class="c1"># Alternatives - &#39;googleGcs&#39; or &#39;awsS3&#39; or &#39;azureBlobStorage&#39; or &#39;openStackSwift&#39;. Read documentation for using alternatives.</span>
+</span></span><span class="line"><span class="cl">        awsS3:
+</span></span><span class="line"><span class="cl">          bucketName: <span class="s1">&#39;techdocs&#39;</span>
+</span></span><span class="line"><span class="cl">          credentials:
+</span></span><span class="line"><span class="cl">            accessKeyId: <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">            secretAccessKey: <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">          region: ap-northeast-2
+</span></span><span class="line"><span class="cl">          s3ForcePathStyle: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">          endpoint: https://minio-volumes.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 수정 후 </span>
+</span></span><span class="line"><span class="cl">tanzu package installed update tap -n tap-install --values-file <span class="o">{</span>file.yaml<span class="o">}</span>          
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>이 후 완료가 되면 아래 처럼 DOCS를 확인 할 수 있습니다. MARKDOWN을 작성 함으로 인해서 TAP에 개발을 한 Application의 대한 설명을 작성 할 수 있습니다.</p>
+</blockquote>
+<p><figure><figcaption>
+            <h4>DOCS1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DOCS2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DOCS3</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DOCS4</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
     <title>The Documentation TANZU CUSTOM IMAGE</title>
     <link>https://huntedhappy.github.io/ko/tanzu-custom-image/</link>
     <pubDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</pubDate>
@@ -10418,2572 +11015,6 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 
 <figure><figcaption>
             <h4>VS상태#2</h4>
-        </figcaption>
-</figure>
-</p>
-]]></description>
-</item><item>
-    <title>The Documentation VxRail</title>
-    <link>https://huntedhappy.github.io/ko/vxrail/</link>
-    <pubDate>Mon, 28 Mar 2022 22:55:27 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/vxrail/</guid>
-    <description><![CDATA[<p>VxRail은 전체 스택 무결성 및 포괄적인 수명주기 관리로 비즈니스 변화에 신속하게 대응하는 인프라스트럭처를 제공하여 운영 효율성을 높이고, 위험을 줄이며, 팀이 비즈니스에 집중할 수 있도록 지원합니다.</p>
-<h2 id="preconfig">PreConfig</h2>
-<h3 id="dns-구성">DNS 구성</h3>
-<table>
-<thead>
-<tr>
-<th>Component Name</th>
-<th>BaseDomain</th>
-<th>A Record</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>vcsa01</td>
-<td>vxrail.local</td>
-<td>192.168.215.10</td>
-</tr>
-<tr>
-<td>vxmgr</td>
-<td>vxrail.local</td>
-<td>192.168.215.9</td>
-</tr>
-<tr>
-<td>esxi01</td>
-<td>vxrail.local</td>
-<td>192.168.215.11</td>
-</tr>
-<tr>
-<td>esxi02</td>
-<td>vxrail.local</td>
-<td>192.168.215.12</td>
-</tr>
-<tr>
-<td>esxi03</td>
-<td>vxrail.local</td>
-<td>192.168.215.13</td>
-</tr>
-<tr>
-<td>esxi04</td>
-<td>vxrail.local</td>
-<td>192.168.215.14</td>
-</tr>
-</tbody>
-</table>
-<h3 id="default-passwqord">Default Passwqord</h3>
-<table>
-<thead>
-<tr>
-<th>Component Name</th>
-<th>Networking Configuration</th>
-<th>Username</th>
-<th>Default Password</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>BIOS</td>
-<td>N/A</td>
-<td>192.168.215.10</td>
-<td></td>
-</tr>
-<tr>
-<td>iDRAC</td>
-<td>DHCP</td>
-<td>192.168.215.9</td>
-<td>root</td>
-</tr>
-<tr>
-<td>ESXi</td>
-<td>DHCP</td>
-<td>192.168.215.11</td>
-<td>root</td>
-</tr>
-<tr>
-<td>vCenter Server Applicance</td>
-<td>root</td>
-<td>vmware</td>
-<td></td>
-</tr>
-<tr>
-<td>VxRail Manager</td>
-<td>192.168.10.200</td>
-<td>root</td>
-<td>Passw0rd!</td>
-</tr>
-<tr>
-<td>VxRail Manager</td>
-<td>192.168.10.200</td>
-<td>mystic</td>
-<td>VxRailManager@201602!</td>
-</tr>
-</tbody>
-</table>
-<h2 id="1-rasr을-통해-초기화">1. RASR을 통해 초기화</h2>
-<p>기본적으로 VxRail장비가 입고가 되면 기본 이미지로 부팅이 되며 라이센스가 있을 경우 업그레이드를 할 수 있다.</p>
-<ol>
-<li>초기화를 하는 이유는 테스트 위해 60일 EVALUATION을 재사용하려면 RASR을 통해 공장 초기화를 해야 한다.</li>
-<li>기존의 VxRail을 구성한 상태에서 증설을 위해 추가로 구성을 하게 될경우 기본 들어오는 버전이 낮거나 높을 수 있다. 이럴 경우 RASR을 통해 펌웨어, 이미지를 업그레이드 또는 다운그레이드를 통해 증설을 할 수 있다.</li>
-<li>기본 설치되어 있는 VxRail이 테스트 하고자 하는 버전 보다 낮거나 또는 높거나 할 경우 변경을 할 수 있다.</li>
-</ol>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>초기화 방법<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><blockquote>
-<ol>
-<li>USB</li>
-</ol>
-<ul>
-<li>장비 모든 부분의 버전을 업그레이드 및 다운그레이가 필요 할 경우 USB 방법사용, 또한 설치가 제일 빠름</li>
-</ul>
-</blockquote>
-<blockquote>
-<ol start="2">
-<li>Virtual Media</li>
-</ol>
-<ul>
-<li>iDRAC의 Virtual Media를 통해 설치 하는 방법 부분적 설치만 가능 (Firmware 등등 업그레이드 또는 다운그레이드 못함) 또한 설치가 느림</li>
-</ul>
-</blockquote>
-</div>
-        </div>
-    </div>
-<p>USB를 연결 한 후 iDRAC에서 Local SD Card로 부팅
-<figure><figcaption>
-            <h4>USB 설치#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>USB 설치#2</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Advancde 항목으로 접근 
-<figure><figcaption>
-            <h4>Advanced</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Install DUP(s)
-펌웨어 등 업그레이드 및 다운그레이드할 내용이 있는지 확인이 필요
-<figure><figcaption>
-            <h4>Install DUP(s)#1</h4>
-        </figcaption>
-</figure>
-</p>
-<p>업그레이드 / 다운그레이드를 선택 후 업그레이드가 있는지 다운그레이드가 있는지 체크 후 있으면 설치
-<figure><figcaption>
-            <h4>Install DUP(s)#2</h4>
-        </figcaption>
-</figure>
-</p>
-<p>진행 시 재부팅이 여러번 발생 대략 30분 ~ 1시간 소요
-<figure><figcaption>
-            <h4>Install DUP(s)#3</h4>
-        </figcaption>
-</figure>
-</p>
-<p>DUP를 업그레이드 또는 다운그레이드 이후 [F]actory Reset 실행 (1시간 소요)</p>
-<h2 id="2-esxi-초기-설정">2. ESXI 초기 설정</h2>
-<p><figure><figcaption>
-            <h4>ESXI#1</h4>
-        </figcaption>
-</figure>
-
-ESXi Shell Enable을 통해 콘솔 접속
-<figure><figcaption>
-            <h4>ESXI#2</h4>
-        </figcaption>
-</figure>
-
-esxcli vm process list 명령어를 VxRail Manager가 보이는 호스트를 찾는다.
-아무곳에서나 해도 되지만. 시간이 오래 걸린다.
-<figure><figcaption>
-            <h4>ESXI#3</h4>
-        </figcaption>
-</figure>
-</p>
-<p>기본 디폴트 IP는 192.168.10.200이므로 통신이 된다면 VxRail Manager VM을 켜고 접속 하면 된다. 
-만약 VLAN 또는 ESXI에 접근을 하고 싶으면 명령어로 VLAN 또는 IP를 설정 할 수 있다 또는 VM을 킬 수도 있다.
-여기에서는 여러가지 방법을 설명하지는 않겠다. 기본 디폴트 IP와 변경하고자 하는 IP 둘다 통신이 되면 된다.</p>
-<p>여러가지 방법론이 있겠지만, 신경을 쓰고 싶지 않다면 DEFAULT IP와 변경하고자 하는 IP 둘다 통신이 되는 것으로 테스트를 하면 좋을 것이다.</p>
-<p>VLAN 3939가 실제적으로 Discovery를 하는 부분으로 스위치에서 3939설정을 해주면 나중에 호스트 증설을 할때 별도로 신경을 쓰지 않아도 된다.</p>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>명령어<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">esxcli network vswitch standard portgroup list
-</span></span><span class="line"><span class="cl">esxcli network vswitch standard portgroup <span class="nb">set</span> -p <span class="s2">&#34;Private Management Network&#34;</span> -v <span class="m">0</span>
-</span></span><span class="line"><span class="cl">esxcli network ip interface list
-</span></span><span class="line"><span class="cl">esxcli network ip interface ipv4 <span class="nb">set</span> -i vmk2 -I 192.168.215.13 -N 255.255.255.0 -g 192.168.215.1 -t static
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>VxRail Manager IP 변경 방법</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vxrail-primary --setup --vxrail-address 192.168.215.9 --vxrail-netmask 255.255.255.0 --vxrail-gateway 192.168.215.1 --no-roll-back --verbose
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h2 id="3-init">3. INIT</h2>
-<p>원하는 언어를 선택 할 수 있다.
-<figure><figcaption>
-            <h4>INIT#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#2</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Standrad Cluster (3 or more hosts)는 3개이상의 VSAN 구성
-VSAN 2-Node Cluster (2 hosts only) witness host 필요
-Dynamic Node Cluster (2 or more hosts) VSAN 구성이 아닌 외부 스토리지로 구성 할 경우
-<figure><figcaption>
-            <h4>INIT#3</h4>
-        </figcaption>
-</figure>
-
-설치가 잘 되었다면 아래와 같이 자동으로 Discovery가 됨
-<figure><figcaption>
-            <h4>INIT#4</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#5</h4>
-        </figcaption>
-</figure>
-</p>
-<p>JSON파일로 구성이 다 되어 있다면 JSON을 삽입 해도 되지만 없으면 Step-by-step으로 진행
-<figure><figcaption>
-            <h4>INIT#6</h4>
-        </figcaption>
-</figure>
-</p>
-<p><figure><figcaption>
-            <h4>INIT#7</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#8</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#9</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#10</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#11</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#12</h4>
-        </figcaption>
-</figure>
-</p>
-<p>나중을 위해서 JSON파일을 다운로드 받을 수 있다.
-<figure><figcaption>
-            <h4>INIT#13</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#14</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#15</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>INIT#16</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="4-host-add">4. HOST ADD</h2>
-<p>만약 기존 구성된 클러스터와 다른 버전이 설치되어 있는 호스트라면 RSAR 초기화 필요</p>
-<p>호스트를 추가 할 때 Host DISCOVERY가 되지 않으면 loudmouth restart를 해준다.</p>
-<p><figure><figcaption>
-            <h4>HOST ADD#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#4</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#5</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#6</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#7</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#8</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#9</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>HOST ADD#10</h4>
-        </figcaption>
-</figure>
-</p>
-<p>HOST ADD 시 HOST가 DISCOVERY되지 않는다면 loudmouth를 리스타트 해준다.
-<figure><figcaption>
-            <h4>HOST ADD#11</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="5-upgrade">5. UPGRADE</h2>
-<p><figure><figcaption>
-            <h4>UPGRADE#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#4</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#5</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#6</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#7</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#8</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#9</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>UPGRADE#10</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="6-vxrail-backup">6. VxRail BackUP</h2>
-<p>백업 스케줄 설정 가능</p>
-<p>VxRail 접속</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 백업 리스트 확인</span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /mystic/vxm_backup_restore
-</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -l
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 메뉴얼 백업</span>
-</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -b
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>스케쥴 백업</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>메뉴얼 백업</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>백업 리스트 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="6-vxrail-recovery">6. VxRail Recovery</h2>
-<p>VxRail Manager가 망가졌을 경우 사용 가능</p>
-<p>백업이 없으면 의미 없음</p>
-<p>VxRail OVA 이미지 필요</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 신규 설치한 vxrail manager 접속 후 IP 변경</span>
-</span></span><span class="line"><span class="cl">/opt/vmware/share/vami/vami_set_network eth0 STATICV4 192.168.215.9 255.255.255.0 192.168.215.1
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## Backup 확인</span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /mystic/vxm_backup_restore
-</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -l
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## Recovery 실행</span>
-</span></span><span class="line"><span class="cl">python vxm_backup_restore.py -r –-vcenter 192.168.215.10
-</span></span></code></pre></td></tr></table>
-</div>
-</div>]]></description>
-</item><item>
-    <title>The Documentation TAP</title>
-    <link>https://huntedhappy.github.io/ko/tanzu-application-platform/</link>
-    <pubDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/tanzu-application-platform/</guid>
-    <description><![CDATA[<h2 id="1-vmware-tap">1. VMware TAP?</h2>
-<p>VMware Tanzu 애플리케이션 플랫폼은 개발자와 운영자가 Kubernetes 플랫폼에서 앱을 보다 쉽게 구축, 배포 및 관리할 수 있도록 도와주는 패키지된 구성 요소 집합입니다.</p>
-<p>Tanzu 애플리케이션 플랫폼은 Kubernetes 기반 앱 개발의 내부 루프와 외부 루프 모두에서 워크플로를 단순화합니다.</p>
-<ul>
-<li>
-<p>내부 루프: 내부 루프는 개발자가 앱을 코딩하고 테스트하는 로컬 개발 환경을 설명합니다. 내부 루프에서 발생하는 활동에는 코드 작성, 버전 제어 시스템에 커밋, 개발 또는 스테이징 환경에 배포, 테스트 및 추가 코드 변경이 포함됩니다.</p>
-</li>
-<li>
-<p>외부 루프: 외부 루프는 앱을 프로덕션에 배포하고 시간이 지남에 따라 유지 관리하는 단계를 설명합니다. 예를 들어, 클라우드 네이티브 플랫폼에서 외부 루프에는 컨테이너 이미지 빌드, 컨테이너 보안 추가, 지속적 통합(CI) 및 지속적 전달(CD) 파이프라인 구성과 같은 활동이 포함됩니다.</p>
-</li>
-</ul>
-<p>VMware Tanzu 애플리케이션 플랫폼은 보안 및 확장을 지원하는 모든 Kubernetes에서 코드를 실행할 수 있도록 사전 포장된 프로덕션 경로를 개발 팀에 제공합니다. 팀이 조직의 기본 설정에 따라 사용자 지정할 수 있도록 모듈화된 애플리케이션 인식 플랫폼입니다.</p>
-<h3 id="주의-사항">주의 사항</h3>
-<p>현재 버그가 있는것으로 보임 Private Harbor 구성시 사설 인증서 문제가 발생 하기 때문에 외부 Registry 활용 필요,
-Github 연동시 Integration으로 설정</p>
-<h3 id="사전-설치">사전 설치</h3>
-<ul>
-<li>DOCKER</li>
-<li>GCR (Google Container Registry)</li>
-<li>GitHub</li>
-<li>DNS Records</li>
-</ul>
-<h3 id="resource-requirements">Resource requirements</h3>
-<p>To deploy all Tanzu Application Platform packages, your cluster must have at least:</p>
-<ul>
-<li>8 CPUs for i9 (or equivalent) available to Tanzu Application Platform components</li>
-<li>12 CPUs for i7 (or equivalent) available to Tanzu Application Platform components</li>
-<li>8 GB of RAM across all nodes available to Tanzu Application Platform</li>
-<li>12 GB of RAM is available to build and deploy applications, including Minikube. VMware recommends 16 GB of RAM for an optimal experience.</li>
-<li>70 GB of disk space available per node
-For the full profile, or use of Security Chain Security Tools - Store, your cluster must have a configured default StorageClass.</li>
-</ul>
-<h2 id="2-tap-101">2. TAP 1.0.1</h2>
-<h3 id="tools-and-cli-requirements">Tools and CLI requirements</h3>
-<p>Installation requires:</p>
-<ul>
-<li>The Kubernetes CLI, kubectl, v1.20, v1.21 or v1.22, installed and authenticated with administrator rights for your target cluster. See Install Tools in the Kubernetes documentation.</li>
-</ul>
-<h3 id="21-tap">2.1. TAP</h3>
-<h4 id="211-tanzu-network-등록">2.1.1 Tanzu Network 등록</h4>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>Tanzu Network ID/PW<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_USERNAME</span><span class="o">=</span>        <span class="c1">#### Tanzu Network ID</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="o">=</span>        <span class="c1">#### Tanzu Network PW</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="o">=</span>registry.tanzu.vmware.com
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>1.0.1
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>namespace 생성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>tanzu registry 추가</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu secret registry add tap-registry <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --username <span class="si">${</span><span class="nv">INSTALL_REGISTRY_USERNAME</span><span class="si">}</span> --password <span class="si">${</span><span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="si">}</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --server <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --export-to-all-namespaces --yes --namespace tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>tanzu repository 추가</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package repository add tanzu-tap-repository <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="nv">$TAP_VERSION</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<p><figure><figcaption>
-            <h4>EULA 허용</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>EULA 허용</h4>
-        </figcaption>
-</figure>
-</p>
-<h3 id="22-tanzu-tap-설치-리스트-확인">2.2. Tanzu TAP 설치 리스트 확인</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>Registry / Repository 확인<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu secret registry list -n tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu package repository list -n tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu package repository get tanzu-tap-repository --namespace tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu package available list --namespace tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu package available list tap.tanzu.vmware.com --namespace tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<p><figure><figcaption>
-            <h4>Registry 리스트 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Repository 리스트 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Package 리스트 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<h3 id="23-tanzu-tap-설치">2.3. Tanzu TAP 설치</h3>
-<p>Private Harbor의 경우 사설 인증서가 문제가 있으므로 외부에서 제공하는 Registry 사용하는 필요.</p>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>TAP 설치<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>GCR에서 키값을 json으로 다운로드 받은 후 service_account_key[변수] 저장</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu secret registry add registry-credentials --server gcr.io --username _json_key --password <span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span> --namespace tap-install
-</span></span><span class="line"><span class="cl"><span class="nv">service_account_key</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>실행 파일 설정</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF &gt; gcr-tap-values.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">profile: full
-</span></span></span><span class="line"><span class="cl"><span class="s">ceip_policy_disclosed: true # The value must be true for installation to succeed
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">buildservice:
-</span></span></span><span class="line"><span class="cl"><span class="s">  kp_default_repository: &#34;gcr.io/{Registry ID}/build-service&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  kp_default_repository_username: _json_key
-</span></span></span><span class="line"><span class="cl"><span class="s">  kp_default_repository_password: &#39;$(echo $service_account_key)&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s">  tanzunet_username: &#34;&#34;                             ## Tanzu Network ID
-</span></span></span><span class="line"><span class="cl"><span class="s">  tanzunet_password: &#34;&#34;                             ## Tanzu Network Password
-</span></span></span><span class="line"><span class="cl"><span class="s">  descriptor_name: &#34;tap-1.0.0-full&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  enable_automatic_dependency_updates: true
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">supply_chain: basic
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">cnrs:
-</span></span></span><span class="line"><span class="cl"><span class="s">  domain_name: tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">accelerator:
-</span></span></span><span class="line"><span class="cl"><span class="s">  server:
-</span></span></span><span class="line"><span class="cl"><span class="s">    service_type: &#34;ClusterIP&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">ootb_supply_chain_basic:
-</span></span></span><span class="line"><span class="cl"><span class="s">  registry:
-</span></span></span><span class="line"><span class="cl"><span class="s">    server: &#34;gcr.io&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">    repository: &#34;{Registry ID}/supply_chain&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  gitops:
-</span></span></span><span class="line"><span class="cl"><span class="s">    #repository_prefix: git@github.com:vmware-tanzu/
-</span></span></span><span class="line"><span class="cl"><span class="s">    #branch: main
-</span></span></span><span class="line"><span class="cl"><span class="s">    #user_name: supplychain
-</span></span></span><span class="line"><span class="cl"><span class="s">    #user_email: supplychain
-</span></span></span><span class="line"><span class="cl"><span class="s">    #commit_message: supplychain@cluster.local
-</span></span></span><span class="line"><span class="cl"><span class="s">    #ssh_secret: git-ssh  
-</span></span></span><span class="line"><span class="cl"><span class="s">    ssh_secret: &#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  cluster_builder: default
-</span></span></span><span class="line"><span class="cl"><span class="s">  service_account: default
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">learningcenter:
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressDomain: &#34;tkg.io&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressClass: contour
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressSecret:
-</span></span></span><span class="line"><span class="cl"><span class="s">    secretName: workshops.example.com-tls
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">contour:
-</span></span></span><span class="line"><span class="cl"><span class="s">  envoy:
-</span></span></span><span class="line"><span class="cl"><span class="s">    service:
-</span></span></span><span class="line"><span class="cl"><span class="s">      type: LoadBalancer
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">tap_gui:
-</span></span></span><span class="line"><span class="cl"><span class="s">  service_type: ClusterIP
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressEnabled: &#34;true&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressDomain: &#34;tkg.io&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  app_config:
-</span></span></span><span class="line"><span class="cl"><span class="s">    app:
-</span></span></span><span class="line"><span class="cl"><span class="s">      baseUrl: http://tap-gui.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">      support:
-</span></span></span><span class="line"><span class="cl"><span class="s">        url: https://tanzu.vmware.com/support
-</span></span></span><span class="line"><span class="cl"><span class="s">        items:
-</span></span></span><span class="line"><span class="cl"><span class="s">          - title: Contact Support
-</span></span></span><span class="line"><span class="cl"><span class="s">            icon: email
-</span></span></span><span class="line"><span class="cl"><span class="s">            links:
-</span></span></span><span class="line"><span class="cl"><span class="s">              - url: https://tanzu.vmware.com/support
-</span></span></span><span class="line"><span class="cl"><span class="s">                title: Tanzu Support Page
-</span></span></span><span class="line"><span class="cl"><span class="s">          - title: Documentation
-</span></span></span><span class="line"><span class="cl"><span class="s">            icon: docs
-</span></span></span><span class="line"><span class="cl"><span class="s">            links:
-</span></span></span><span class="line"><span class="cl"><span class="s">              - url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html
-</span></span></span><span class="line"><span class="cl"><span class="s">                title: Tanzu Application Platform Documentation
-</span></span></span><span class="line"><span class="cl"><span class="s">    integrations:
-</span></span></span><span class="line"><span class="cl"><span class="s">      github: # Other integrations available see NOTE below
-</span></span></span><span class="line"><span class="cl"><span class="s">        - host: github.com
-</span></span></span><span class="line"><span class="cl"><span class="s">          token: &#34;{GIT TOKEN}&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">    catalog:
-</span></span></span><span class="line"><span class="cl"><span class="s">      locations:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - type: url
-</span></span></span><span class="line"><span class="cl"><span class="s">          target: https://github.com/huntedhappy/tanzu-java-web-app/catalog-info.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">    backend:
-</span></span></span><span class="line"><span class="cl"><span class="s">      baseUrl: http://tap-gui.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">      cors:
-</span></span></span><span class="line"><span class="cl"><span class="s">        origin: http://tap-gui.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">#    ##Existing values file above (OIDC)
-</span></span></span><span class="line"><span class="cl"><span class="s">#    auth:
-</span></span></span><span class="line"><span class="cl"><span class="s">#      allowGuestAccess: true
-</span></span></span><span class="line"><span class="cl"><span class="s">#      environment: development
-</span></span></span><span class="line"><span class="cl"><span class="s">#      loginPage:
-</span></span></span><span class="line"><span class="cl"><span class="s">#        github:
-</span></span></span><span class="line"><span class="cl"><span class="s">#          title: Github Login
-</span></span></span><span class="line"><span class="cl"><span class="s">#          message: Enter with your GitHub account
-</span></span></span><span class="line"><span class="cl"><span class="s">#      providers:
-</span></span></span><span class="line"><span class="cl"><span class="s">#        github:
-</span></span></span><span class="line"><span class="cl"><span class="s">#          development:
-</span></span></span><span class="line"><span class="cl"><span class="s">#            clientId: 
-</span></span></span><span class="line"><span class="cl"><span class="s">#            clientSecret: 
-</span></span></span><span class="line"><span class="cl"><span class="s">#            ## uncomment if using GitHub Enterprise
-</span></span></span><span class="line"><span class="cl"><span class="s">#            # enterpriseInstanceUrl:
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata_store:
-</span></span></span><span class="line"><span class="cl"><span class="s">  app_service_type: LoadBalancer # (optional) Defaults to LoadBalancer. Change to NodePort for distributions that don&#39;t support LoadBalancer
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">grype:
-</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: &#34;tap-install&#34; # (optional) Defaults to default namespace.
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>TAP 설치</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v <span class="nv">$TAP_VERSION</span> --values-file gcr-tap-values.yml -n tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<figure><figcaption>
-            <h4>TAP 설치 완료</h4>
-        </figcaption>
-</figure>
-
-<h3 id="24-tanzu-tap-rbac-설정">2.4. Tanzu TAP RBAC 설정</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>RBAC 설정<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">dockerconfigjson</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>kubectl get secret tbs-builder-secret-gen-placeholder-secret -n tap-install -o <span class="nv">jsonpath</span><span class="o">={</span>.data.<span class="se">\\</span>.dockerconfigjson<span class="o">}</span><span class="k">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span><span class="lnt">81
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | tee rbac.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: Secret
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-registry
-</span></span></span><span class="line"><span class="cl"><span class="s">  annotations:
-</span></span></span><span class="line"><span class="cl"><span class="s">    secretgen.carvel.dev/image-pull-secret: &#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">type: kubernetes.io/dockerconfigjson
-</span></span></span><span class="line"><span class="cl"><span class="s">data:
-</span></span></span><span class="line"><span class="cl"><span class="s">  .dockerconfigjson: $(echo $dockerconfigjson)
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">secrets:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - name: registry-credentials
-</span></span></span><span class="line"><span class="cl"><span class="s">imagePullSecrets:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - name: registry-credentials
-</span></span></span><span class="line"><span class="cl"><span class="s">  - name: tap-registry
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: Role
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">rules:
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [source.toolkit.fluxcd.io]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [gitrepositories]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [source.apps.tanzu.vmware.com]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [imagerepositories]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [carto.run]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [deliverables, runnables]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [kpack.io]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [images]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [conventions.apps.tanzu.vmware.com]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [podintents]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#34;&#34;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;configmaps&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#34;&#34;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;pods&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [tekton.dev]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [taskruns, pipelineruns]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [tekton.dev]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [pipelines]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [kappctrl.k14s.io]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [apps]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [serving.knative.dev]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;services&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [servicebinding.io]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;servicebindings&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [services.apps.tanzu.vmware.com]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;resourceclaims&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [scanning.apps.tanzu.vmware.com]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;imagescans&#39;, &#39;sourcescans&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;*&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: Role
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h3 id="25-workload-실행">2.5. workload 실행</h3>
-<p>INGRESS IP 확인</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get svc -n tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get httpproxy -A
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>ingress 및 DNS 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>gui 접속 후 Tanzu Java Web App 실행</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>gui 접속 후 Tanzu Java Web App 실행</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>gui 접속 후 Tanzu Java Web App 실행</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>gui 접속 후 Tanzu Java Web App 다운로드</h4>
-        </figcaption>
-</figure>
-</p>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>GIT PUSH<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>미리 GIT에 프로젝트 생성 후 다운로드 받은 ZIP파일 PUSH</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">unzip tanzu-java-web-app.zip
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">git init
-</span></span><span class="line"><span class="cl">git remote add origin git@github.com:huntedhappy/tanzu-java-web-app
-</span></span><span class="line"><span class="cl">git add .
-</span></span><span class="line"><span class="cl">git commit -m <span class="s1">&#39;first&#39;</span>
-</span></span><span class="line"><span class="cl">git push origin main
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>apps workload 실행</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu apps workload create tanzu-java-web-app <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --git-repo https://github.com/huntedhappy/tanzu-java-web-app <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --git-branch main <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --type web <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --label apps.tanzu.vmware.com/has-tests<span class="o">=</span><span class="nb">true</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --yes <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> -n tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>배포 상태 확인</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu apps cluster-supply-chain list
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu apps workload tail tanzu-java-web-app --since 10m --timestamp -n tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get workload,gitrepository,pipelinerun,images.kpack,podintent,app,services.serving -n tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h2 id="3-tap-110">3. TAP 1.1.0</h2>
-<p>Repository를 설정한다. 여기서는 GCR을 사용하기 때문에 GCR의 정보를 입력</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="o">=</span>gcr.io
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>1.1.0
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>TANZU NET 및 GCR docker login 후 GCR에 이미지들을 다운로드</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker login registry.tanzu.vmware.com
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">docker login -u _json_key --password-stdin https://gcr.io &lt; <span class="o">{</span>gcr key<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/<span class="o">{</span>gcr project<span class="o">}</span>/tap-packages
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>namespace 및 secret 생성 후 tanzu package Repository 생성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu secret registry add tap-registry --server gcr.io --username _json_key --password <span class="s2">&#34;</span><span class="k">$(</span>cat <span class="o">{</span>gcr key<span class="o">}</span><span class="k">)</span><span class="s2">&#34;</span> --export-to-all-namespaces --yes -n tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu secret registry add registry-credentials --server gcr.io --username _json_key --password <span class="s2">&#34;</span><span class="k">$(</span>cat <span class="o">{</span>gcr key<span class="o">}</span><span class="k">)</span><span class="s2">&#34;</span> --export-to-all-namespaces --yes -n tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu package repository add tanzu-tap-repository <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/main-tokenizer-343509/tap-packages:<span class="nv">$TAP_VERSION</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## Repository가 생성이 되었으면 설치 가능한 packages를 확인</span>
-</span></span><span class="line"><span class="cl">tanzu package available list tap.tanzu.vmware.com --namespace tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>권한 설정</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl annotate secret tap-registry -n tap-install secretgen.carvel.dev/image-pull-secret<span class="o">=</span><span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/secrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;,&#34;name&#34;:&#34;tap-registry&#34;]}]&#39;</span>
-</span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/imagePullSecrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;,&#34;name&#34;:&#34;tap-registry&#34;]}]&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl -n tap-install apply -f -
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-deliverable
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: deliverable
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-workload
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: workload
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: dev-permit-app-viewer
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: namespace-dev-permit-app-viewer
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer-cluster-access
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>TAP 1.1.0 설치</p>
-<p>GCR에서 키값을 json으로 다운로드 받은 후 service_account_key[변수] 저장</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu secret registry add registry-credentials --server gcr.io --username _json_key --password <span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span> --namespace tap-install
-</span></span><span class="line"><span class="cl"><span class="nv">service_account_key</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>실행 파일 설정</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF &gt; gcr-tap-values.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">profile: full
-</span></span></span><span class="line"><span class="cl"><span class="s">ceip_policy_disclosed: true # The value must be true for installation to succeed
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">buildservice:
-</span></span></span><span class="line"><span class="cl"><span class="s">  kp_default_repository: &#34;gcr.io/{Registry ID}/build-service&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  kp_default_repository_username: _json_key
-</span></span></span><span class="line"><span class="cl"><span class="s">  kp_default_repository_password: &#39;$(echo $service_account_key)&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s">  tanzunet_username: &#34;&#34;                             ## Tanzu Network ID
-</span></span></span><span class="line"><span class="cl"><span class="s">  tanzunet_password: &#34;&#34;                             ## Tanzu Network Password
-</span></span></span><span class="line"><span class="cl"><span class="s">  descriptor_name: &#34;full&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  enable_automatic_dependency_updates: true
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">supply_chain: basic
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">cnrs:
-</span></span></span><span class="line"><span class="cl"><span class="s">  domain_name: tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">accelerator:
-</span></span></span><span class="line"><span class="cl"><span class="s">  server:
-</span></span></span><span class="line"><span class="cl"><span class="s">    service_type: &#34;ClusterIP&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">ootb_supply_chain_basic:
-</span></span></span><span class="line"><span class="cl"><span class="s">  registry:
-</span></span></span><span class="line"><span class="cl"><span class="s">    server: &#34;gcr.io&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">    repository: &#34;{Registry ID}/supply_chain&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  gitops:
-</span></span></span><span class="line"><span class="cl"><span class="s">    #repository_prefix: git@github.com:vmware-tanzu/
-</span></span></span><span class="line"><span class="cl"><span class="s">    #branch: main
-</span></span></span><span class="line"><span class="cl"><span class="s">    #user_name: supplychain
-</span></span></span><span class="line"><span class="cl"><span class="s">    #user_email: supplychain
-</span></span></span><span class="line"><span class="cl"><span class="s">    #commit_message: supplychain@cluster.local
-</span></span></span><span class="line"><span class="cl"><span class="s">    #ssh_secret: git-ssh  
-</span></span></span><span class="line"><span class="cl"><span class="s">    ssh_secret: &#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  cluster_builder: default
-</span></span></span><span class="line"><span class="cl"><span class="s">  service_account: default
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">learningcenter:
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressDomain: &#34;tkg.io&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressClass: contour
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressSecret:
-</span></span></span><span class="line"><span class="cl"><span class="s">    secretName: workshops.example.com-tls
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">contour:
-</span></span></span><span class="line"><span class="cl"><span class="s">  envoy:
-</span></span></span><span class="line"><span class="cl"><span class="s">    service:
-</span></span></span><span class="line"><span class="cl"><span class="s">      type: LoadBalancer
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">tap_gui:
-</span></span></span><span class="line"><span class="cl"><span class="s">  service_type: ClusterIP
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressEnabled: &#34;true&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressDomain: &#34;tkg.io&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  app_config:
-</span></span></span><span class="line"><span class="cl"><span class="s">    app:
-</span></span></span><span class="line"><span class="cl"><span class="s">      baseUrl: http://tap-gui.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">      support:
-</span></span></span><span class="line"><span class="cl"><span class="s">        url: https://tanzu.vmware.com/support
-</span></span></span><span class="line"><span class="cl"><span class="s">        items:
-</span></span></span><span class="line"><span class="cl"><span class="s">          - title: Contact Support
-</span></span></span><span class="line"><span class="cl"><span class="s">            icon: email
-</span></span></span><span class="line"><span class="cl"><span class="s">            links:
-</span></span></span><span class="line"><span class="cl"><span class="s">              - url: https://tanzu.vmware.com/support
-</span></span></span><span class="line"><span class="cl"><span class="s">                title: Tanzu Support Page
-</span></span></span><span class="line"><span class="cl"><span class="s">          - title: Documentation
-</span></span></span><span class="line"><span class="cl"><span class="s">            icon: docs
-</span></span></span><span class="line"><span class="cl"><span class="s">            links:
-</span></span></span><span class="line"><span class="cl"><span class="s">              - url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html
-</span></span></span><span class="line"><span class="cl"><span class="s">                title: Tanzu Application Platform Documentation
-</span></span></span><span class="line"><span class="cl"><span class="s">    integrations:
-</span></span></span><span class="line"><span class="cl"><span class="s">      github: # Other integrations available see NOTE below
-</span></span></span><span class="line"><span class="cl"><span class="s">        - host: github.com
-</span></span></span><span class="line"><span class="cl"><span class="s">          token: &#34;{GIT TOKEN}&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">    catalog:
-</span></span></span><span class="line"><span class="cl"><span class="s">      locations:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - type: url
-</span></span></span><span class="line"><span class="cl"><span class="s">          target: https://github.com/huntedhappy/tanzu-java-web-app/catalog-info.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">    backend:
-</span></span></span><span class="line"><span class="cl"><span class="s">      baseUrl: http://tap-gui.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">      cors:
-</span></span></span><span class="line"><span class="cl"><span class="s">        origin: http://tap-gui.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">#    ##Existing values file above (OIDC)
-</span></span></span><span class="line"><span class="cl"><span class="s">#    auth:
-</span></span></span><span class="line"><span class="cl"><span class="s">#      allowGuestAccess: true
-</span></span></span><span class="line"><span class="cl"><span class="s">#      environment: development
-</span></span></span><span class="line"><span class="cl"><span class="s">#      loginPage:
-</span></span></span><span class="line"><span class="cl"><span class="s">#        github:
-</span></span></span><span class="line"><span class="cl"><span class="s">#          title: Github Login
-</span></span></span><span class="line"><span class="cl"><span class="s">#          message: Enter with your GitHub account
-</span></span></span><span class="line"><span class="cl"><span class="s">#      providers:
-</span></span></span><span class="line"><span class="cl"><span class="s">#        github:
-</span></span></span><span class="line"><span class="cl"><span class="s">#          development:
-</span></span></span><span class="line"><span class="cl"><span class="s">#            clientId: 
-</span></span></span><span class="line"><span class="cl"><span class="s">#            clientSecret: 
-</span></span></span><span class="line"><span class="cl"><span class="s">#            ## uncomment if using GitHub Enterprise
-</span></span></span><span class="line"><span class="cl"><span class="s">#            # enterpriseInstanceUrl:
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata_store:
-</span></span></span><span class="line"><span class="cl"><span class="s">  app_service_type: LoadBalancer # (optional) Defaults to LoadBalancer. Change to NodePort for distributions that don&#39;t support LoadBalancer
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">grype:
-</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: &#34;tap-install&#34; # (optional) Defaults to default namespace.
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>TANZU 설치</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v <span class="nv">$TAP_VERSION</span> --values-file gcr-tap-values.yaml -n tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="31-multicluster">3.1. MultiCluster</h3>
-<figure><figcaption>
-            <h4>MultiCluster</h4>
-        </figcaption>
-</figure>
-
-<p>3개의 클러스터를 생성한다. 여기서는 아래와 같이 구성 하였다.</p>
-<ul>
-<li>
-<p>tkgm01-tkc-dev02 = build</p>
-</li>
-<li>
-<p>tkgm02-tkc-dev03 = run</p>
-</li>
-<li>
-<p>tkgm03-tkc-dev04 = view</p>
-</li>
-</ul>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>이미지를 Repository에 저장한다.<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="o">=</span>gcr.io
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>1.1.0
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## Tanzu Network에 로그인을 한다.</span>
-</span></span><span class="line"><span class="cl">docker login registry.tanzu.vmware.com -u <span class="o">{</span>ID<span class="o">}</span> --password-stdin &lt; ./password.txt
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## GCR에 로그인을 한다.</span>
-</span></span><span class="line"><span class="cl">docker login -u _json_key --password-stdin https://gcr.io &lt; <span class="o">{</span>togken<span class="o">}}</span>.json
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 이미지를 GCR에 복사 한다.</span>
-</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/main-tokenizer-343509/tap-packages
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>모든 이미지가 GCR에 저장이 완료 되면 Repository를 각각의 클러스터에 등록 해준다.</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## Cluster 변경</span>
-</span></span><span class="line"><span class="cl">kubectl use-context <span class="o">{</span>cluster context<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="c1">## NameSpace 생성</span>
-</span></span><span class="line"><span class="cl">kubectl create ns tap-install
-</span></span><span class="line"><span class="cl"><span class="c1">## GCR 접속 Secret 생성</span>
-</span></span><span class="line"><span class="cl">tanzu secret registry add tap-registry --server gcr.io --username _json_key --password <span class="s2">&#34;</span><span class="k">$(</span>cat <span class="o">{</span>gcr-key<span class="o">}</span>.json<span class="k">)</span><span class="s2">&#34;</span>  --export-to-all-namespaces --yes -n tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu secret registry add registry-credentials --server gcr.io --username _json_key --password <span class="s2">&#34;</span><span class="k">$(</span>cat <span class="o">{</span>gcr-key<span class="o">}</span>.json<span class="k">)</span><span class="s2">&#34;</span> --export-to-all-namespaces --yes -n tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## Tanzu Package Repository 추가</span>
-</span></span><span class="line"><span class="cl">tanzu package repository add tanzu-tap-repository <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/main-tokenizer-343509/tap-packages:<span class="nv">$TAP_VERSION</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## Tanzu Package Repository 확인</span>
-</span></span><span class="line"><span class="cl">tanzu package repository list -n tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>각각의 클러스터의 맞는 tap을 설치 해준다.</li>
-<li>build-tap-values.yaml</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee build-tap-values.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">profile: build
-</span></span></span><span class="line"><span class="cl"><span class="s">ceip_policy_disclosed: true
-</span></span></span><span class="line"><span class="cl"><span class="s">buildservice:
-</span></span></span><span class="line"><span class="cl"><span class="s">  kp_default_repository: &#34;gcr.io/{gcr project}/tap-packages&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  kp_default_repository_username: _json_key
-</span></span></span><span class="line"><span class="cl"><span class="s">  kp_default_repository_password: {gcr key}
-</span></span></span><span class="line"><span class="cl"><span class="s">  tanzunet_username: &#34;&#34;                             ## Tanzu Network ID
-</span></span></span><span class="line"><span class="cl"><span class="s">  tanzunet_password: &#34;&#34;                                     ## Tanzu Network Password
-</span></span></span><span class="line"><span class="cl"><span class="s">  descriptor_name: &#34;full&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  enable_automatic_dependency_updates: true
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">supply_chain: basic
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">ootb_supply_chain_basic:
-</span></span></span><span class="line"><span class="cl"><span class="s">  registry:
-</span></span></span><span class="line"><span class="cl"><span class="s">    server: &#34;gcr.io&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">    repository: &#34;{gcr project}/supply_chain&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  gitops:
-</span></span></span><span class="line"><span class="cl"><span class="s">    ssh_secret: &#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  cluster_builder: default
-</span></span></span><span class="line"><span class="cl"><span class="s">  service_account: default
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">grype:
-</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: &#34;tap-install&#34; # (optional) Defaults to default namespace.
-</span></span></span><span class="line"><span class="cl"><span class="s">  targetImagePullSecret: tap-registry
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>run-tap-values.yaml</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee run-tap-values.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">profile: run
-</span></span></span><span class="line"><span class="cl"><span class="s">ceip_policy_disclosed: true # Installation fails if this is not set to true. Not a string.
-</span></span></span><span class="line"><span class="cl"><span class="s">supply_chain: basic
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">cnrs:
-</span></span></span><span class="line"><span class="cl"><span class="s">  domain_name: tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">contour:
-</span></span></span><span class="line"><span class="cl"><span class="s">  envoy:
-</span></span></span><span class="line"><span class="cl"><span class="s">    service:
-</span></span></span><span class="line"><span class="cl"><span class="s">      type: LoadBalancer #NodePort can be used if your Kubernetes cluster doesn&#39;t support LoadBalancing
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">appliveview_connector:
-</span></span></span><span class="line"><span class="cl"><span class="s">  backend:
-</span></span></span><span class="line"><span class="cl"><span class="s">    sslDisabled: &#34;true&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">    host: appliveview.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>클러스터를 변경 하면서 TAP을 설치 해준다.</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl use-context <span class="o">{</span>TAP 클러스터<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0 -f build-tap-values.yaml -n tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0 -f run-tap-values.yaml -n tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>build 와 run 클러스터에 TAP 설치가 완료 되었다면 클러스터의 URL 과 TOKEN을 확인한다.</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">CLUSTER_URL</span><span class="o">=</span><span class="k">$(</span>kubectl config view --minify -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.clusters[0].cluster.server}&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">CLUSTER_TOKEN</span><span class="o">=</span><span class="k">$(</span>kubectl -n tap-gui get secret <span class="k">$(</span>kubectl -n tap-gui get sa tap-gui-viewer -o<span class="o">=</span>json <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> jq -r <span class="s1">&#39;.secrets[0].name&#39;</span><span class="k">)</span> -o<span class="o">=</span>json <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> jq -r <span class="s1">&#39;.data[&#34;token&#34;]&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> base64 --decode<span class="k">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> CLUSTER_URL: <span class="nv">$CLUSTER_URL</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> CLUSTER_TOKEN: <span class="nv">$CLUSTER_TOKEN</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>view-tap-values.yaml</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee view-tap-values.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">profile: view
-</span></span></span><span class="line"><span class="cl"><span class="s">ceip_policy_disclosed: true # Installation fails if this is not set to true. Not a string.
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">contour:
-</span></span></span><span class="line"><span class="cl"><span class="s">  envoy:
-</span></span></span><span class="line"><span class="cl"><span class="s">    service:
-</span></span></span><span class="line"><span class="cl"><span class="s">      type: LoadBalancer #NodePort can be used if your Kubernetes cluster doesn&#39;t support LoadBalancing
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">learningcenter:
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressDomain: &#34;tkg.io&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">tap_gui:
-</span></span></span><span class="line"><span class="cl"><span class="s">  service_type: ClusterIP
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressEnabled: &#34;true&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressDomain: &#34;tkg.io&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  app_config:
-</span></span></span><span class="line"><span class="cl"><span class="s">    app:
-</span></span></span><span class="line"><span class="cl"><span class="s">      baseUrl: http://tap-gui.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">    catalog:
-</span></span></span><span class="line"><span class="cl"><span class="s">      locations:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - type: url
-</span></span></span><span class="line"><span class="cl"><span class="s">          target: https://GIT-CATALOG-URL/catalog-info.yaml
-</span></span></span><span class="line"><span class="cl"><span class="s">    backend:
-</span></span></span><span class="line"><span class="cl"><span class="s">      baseUrl: http://tap-gui.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">      cors:
-</span></span></span><span class="line"><span class="cl"><span class="s">        origin: http://tap-gui.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">    kubernetes:
-</span></span></span><span class="line"><span class="cl"><span class="s">      serviceLocatorMethod:
-</span></span></span><span class="line"><span class="cl"><span class="s">        type: &#39;multiTenant&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s">      clusterLocatorMethods:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - type: &#39;config&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s">          clusters:
-</span></span></span><span class="line"><span class="cl"><span class="s">            - url: https://10.253.125.252:6443
-</span></span></span><span class="line"><span class="cl"><span class="s">              name: tkgm01-tkc-dev02
-</span></span></span><span class="line"><span class="cl"><span class="s">              authProvider: serviceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">              skipTLSVerify: true
-</span></span></span><span class="line"><span class="cl"><span class="s">              serviceAccountToken: eyJhbGciOiJSUzI1NiIsImtpZCI6InZ4S25KYi1SVW96UmJmdnVXc2lSODlza1NTV0RBRkd1aG1acHI5Qy0xdjAifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0YXAtZ3VpIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InRhcC1ndWktdmlld2VyLXRva2VuLTk1c3EyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InRhcC1ndWktdmlld2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiNzJhOTY2ZGEtYzA2ZS00OTIyLTk5Y2YtM2ZjYTMwNmNkNWM5Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OnRhcC1ndWk6dGFwLWd1aS12aWV3ZXIifQ.Vit66qxirDMNcZlUHaDaNXJAWpU-J0o5wfBXK8U2kVnoP3RMcAGrSTodoZ3fnsNtTlPKSCMlw9I7m591Kcly1HL8CPLwkLH-P2Ew26eurQHvVb-NGQUFAIRSdrN6Ig6J5Xg09D5D8wGMJTk7egSud8cj5A1z1bT1ctLCX1N2WrqO3Hrcu0o8XHgSoiogTP_ELU8B2E93kHqdCPeh0xbY9pkTEvXRQun9PTeag6jepd7eNUgCXMab4jYxsEXDbJ3PPbDusuleY2LpcObYaWuuYMyRc5QSVG5EBlEKfaXnEvslTNxdohdEQwQOHwABKC4Au-KBYbzy2s_MI40g2K79iw
-</span></span></span><span class="line"><span class="cl"><span class="s">            - url: https://10.253.125.253:6443
-</span></span></span><span class="line"><span class="cl"><span class="s">              name: tkgm01-tkc-dev03
-</span></span></span><span class="line"><span class="cl"><span class="s">              authProvider: serviceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">              skipTLSVerify: true
-</span></span></span><span class="line"><span class="cl"><span class="s">              serviceAccountToken: eyJhbGciOiJSUzI1NiIsImtpZCI6Ii0tYzNpVm9HbXdfTkxqREZhU1ZXeEY0RXJCY29Sc0lwWkl5WW9XdENsYzgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJ0YXAtZ3VpIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InRhcC1ndWktdmlld2VyLXRva2VuLWs0aHQ2Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InRhcC1ndWktdmlld2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiNTBiNjMxYjktYjRlOS00ZjhhLThmZDgtNDAwMDE3ZWZkOTJmIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OnRhcC1ndWk6dGFwLWd1aS12aWV3ZXIifQ.DL4nTskvqSvEXwi0HN2rNk61UD3DquvCnRxrFZZT2cM7L7WznTlqdXFxXsqlabE9zcS3nTLQ2NWDjx2qrJEdiAzqr6rOGXkFzYeyuE9kvzcTnVbHYYlagA8UMCjeQUAw0DtTGip3UFqPoXUGdwlZHYR7e1VQcaSmdnFc0UVTrDlpDdGQgJujDvyiU18-pa7BeizBkPJbKPVOgn0sP5M_zZh5Rtzb4-PKc1pYiAG7lg_05U7w_5rfMeoaLFN0H36BKUpGHb7inakGjnR3Z7_6iPe7x4FUR4zK-WZFCT4LbckfR0NKaDGHCaGoMSqQ-W2j6GFdK1wRVGhnortD8mC4ww
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata_store:
-</span></span></span><span class="line"><span class="cl"><span class="s">  app_service_type: LoadBalancer # (optional) Defaults to LoadBalancer. Change to NodePort for distributions that don&#39;t support LoadBalancer
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">appliveview:
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressEnabled: &#34;true&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  ingressDomain: tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>view 클러스터에 TAP 설치</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0 -f view-tap-values.yaml -n tap-install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>설치 완료 후 build 와 run cluster에 권한 부여</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: Namespace
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-read-k8s
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">- kind: ServiceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: k8s-reader
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: k8s-reader
-</span></span></span><span class="line"><span class="cl"><span class="s">rules:
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;pods&#39;, &#39;services&#39;, &#39;configmaps&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;apps&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;deployments&#39;, &#39;replicasets&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;autoscaling&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;horizontalpodautoscalers&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;networking.k8s.io&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;ingresses&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;networking.internal.knative.dev&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;serverlessservices&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [ &#39;autoscaling.internal.knative.dev&#39; ]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [ &#39;podautoscalers&#39; ]
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [ &#39;get&#39;, &#39;watch&#39;, &#39;list&#39; ]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;serving.knative.dev&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - configurations
-</span></span></span><span class="line"><span class="cl"><span class="s">  - revisions
-</span></span></span><span class="line"><span class="cl"><span class="s">  - routes
-</span></span></span><span class="line"><span class="cl"><span class="s">  - services
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;carto.run&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterconfigtemplates
-</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterdeliveries
-</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterdeploymenttemplates
-</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterimagetemplates
-</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterruntemplates
-</span></span></span><span class="line"><span class="cl"><span class="s">  - clustersourcetemplates
-</span></span></span><span class="line"><span class="cl"><span class="s">  - clustersupplychains
-</span></span></span><span class="line"><span class="cl"><span class="s">  - clustertemplates
-</span></span></span><span class="line"><span class="cl"><span class="s">  - deliverables
-</span></span></span><span class="line"><span class="cl"><span class="s">  - runnables
-</span></span></span><span class="line"><span class="cl"><span class="s">  - workloads
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;source.toolkit.fluxcd.io&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - gitrepositories
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;source.apps.tanzu.vmware.com&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - imagerepositories
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;conventions.apps.tanzu.vmware.com&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - podintents
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;kpack.io&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - images
-</span></span></span><span class="line"><span class="cl"><span class="s">  - builds
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;scanning.apps.tanzu.vmware.com&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - sourcescans
-</span></span></span><span class="line"><span class="cl"><span class="s">  - imagescans
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;tekton.dev&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - taskruns
-</span></span></span><span class="line"><span class="cl"><span class="s">  - pipelineruns
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;kappctrl.k14s.io&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - apps
-</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>모든 클러스터에 개발자의 대한 권한을 부여</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl annotate secret tap-registry -n tap-install secretgen.carvel.dev/image-pull-secret<span class="o">=</span><span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/secrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;,&#34;name&#34;:&#34;tap-registry&#34;]}]&#39;</span>
-</span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/imagePullSecrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;,&#34;name&#34;:&#34;tap-registry&#34;]}]&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl apply -f - -n tap-install <span class="s">&lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-deliverable
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: deliverable
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-workload
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: workload
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: dev-permit-app-viewer
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">---
-</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
-</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
-</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: namespace-dev-permit-app-viewer
-</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
-</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
-</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer-cluster-access
-</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
-</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
-</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Build Cluster로 컨텍스트 변경 후 App을 배포한다.</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">DEVELOPER_NAMESPACE</span><span class="o">=</span>tap-install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu apps workload create tanzu-java-web-app <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --git-repo https://github.com/huntedhappy/tanzu-java-web-app <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --git-branch main <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --type web <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --label app.kubernetes.io/part-of<span class="o">=</span>tanzu-java-web-app <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> --yes <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<figure><figcaption>
-            <h4>app workload 상태 확인</h4>
-        </figcaption>
-</figure>
-
-<ul>
-<li>진행 상태 확인</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu apps workload tail tanzu-java-web-app --since 10m --timestamp -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>app workload 진행 상태 확인</h4>
-        </figcaption>
-</figure>
-
-<ul>
-<li>
-<p>생성이 완료 되면 GUI에서 확인
-<figure><figcaption>
-            <h4>supply chain 확인</h4>
-        </figcaption>
-</figure>
-</p>
-</li>
-<li>
-<p>deliverable이 되었는지 확인 한다. build 클러스터에서는 false로 나오는 것을 우선 확인 할 수 있다.</p>
-</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get deliverable -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>deliverable 실패 확인</h4>
-        </figcaption>
-</figure>
-
-<ul>
-<li>deliverable를 yaml파일로 저장한다.</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get deliverable tanzu-java-web-app -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span> -oyaml &gt; deliverable.yaml
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>저장된 파일에서 ownerReferences와 status 부분을 삭제 한다. 그럼 아래와 비슷할 것이다.</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apiVersion: carto.run/v1alpha1
-</span></span><span class="line"><span class="cl">kind: Deliverable
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  creationTimestamp: <span class="s2">&#34;2022-04-19T07:56:37Z&#34;</span>
-</span></span><span class="line"><span class="cl">  generation: <span class="m">1</span>
-</span></span><span class="line"><span class="cl">  labels:
-</span></span><span class="line"><span class="cl">    app.kubernetes.io/component: deliverable
-</span></span><span class="line"><span class="cl">    app.kubernetes.io/part-of: tanzu-java-web-app
-</span></span><span class="line"><span class="cl">    app.tanzu.vmware.com/deliverable-type: web
-</span></span><span class="line"><span class="cl">    apps.tanzu.vmware.com/workload-type: web
-</span></span><span class="line"><span class="cl">    carto.run/cluster-template-name: deliverable-template
-</span></span><span class="line"><span class="cl">    carto.run/resource-name: deliverable
-</span></span><span class="line"><span class="cl">    carto.run/supply-chain-name: source-to-url
-</span></span><span class="line"><span class="cl">    carto.run/template-kind: ClusterTemplate
-</span></span><span class="line"><span class="cl">    carto.run/workload-name: tanzu-java-web-app
-</span></span><span class="line"><span class="cl">    carto.run/workload-namespace: tap-install
-</span></span><span class="line"><span class="cl">  name: tanzu-java-web-app
-</span></span><span class="line"><span class="cl">  namespace: tap-install
-</span></span><span class="line"><span class="cl">  resourceVersion: <span class="s2">&#34;1451190&#34;</span>
-</span></span><span class="line"><span class="cl">  uid: 23c2d202-0186-4c62-b497-baaa961e3698
-</span></span><span class="line"><span class="cl">spec:
-</span></span><span class="line"><span class="cl">  source:
-</span></span><span class="line"><span class="cl">    image: <span class="o">{</span>image<span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>run cluster로 변경 후 저장한 deliverable파일을 실행 해준다.</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## RUN Cluster로 변경</span>
-</span></span><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>run cluster<span class="o">}</span>
-</span></span><span class="line"><span class="cl">kubectl apply -f deliverable.yaml -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>확인을 하면 성공한 것을 확인 할 수 있다.</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get deliverables -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>deliverable 상태 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>deliverable gui 상태 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="4-visual-studio">4. Visual Studio</h2>
-<p>IDE를 Visual Studio를 사용하여 동작, 현재는 Visual studio만 지원 하고 있음</p>
-<h3 id="41-extenstion-설정">4.1. Extenstion 설정</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apt search openjdk
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">apt install openjdk-11-jdk -y
-</span></span><span class="line"><span class="cl">java --version
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;allow_k8s_contexts(&#39;</span><span class="k">$(</span>kubectl config current-context<span class="k">)</span><span class="s2">&#39;)&#34;</span> &gt;&gt; /var/tmp/tap/tanzu-java-web-app/Tiltfile
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 맨아래 해당 context가 들어가 있는 것을 확인 할 수 있다.</span>
-</span></span><span class="line"><span class="cl">cat /var/tmp/tap/tanzu-java-web-app/Tiltfile
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ctrl + <span class="nb">shift</span> + p
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>VS 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>VS 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>VS 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>VS 설정</h4>
-        </figcaption>
-</figure>
-</p>
-<h3 id="42-live-update-start">4.2. Live Update Start</h3>
-<p>해당 부분을 수정 하면 자동으로 GIT에 업데이트가 되면서 바뀌는것을 볼수 있다.
-<figure><figcaption>
-            <h4>수정#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>수정#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>수정#3</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>수정#4</h4>
         </figcaption>
 </figure>
 </p>

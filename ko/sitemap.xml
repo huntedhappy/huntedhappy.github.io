@@ -3,8 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://huntedhappy.github.io/ko/cicd/</loc>
+    <lastmod>2022-03-09T19:08:05+09:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://huntedhappy.github.io/ko/tap-techdocs/</loc>
+    <lastmod>2023-03-04T22:33:00+09:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://huntedhappy.github.io/ko/tanzu-custom-image/</loc>
-    <lastmod>2023-03-01T11:10:02+09:00</lastmod>
+    <lastmod>2023-03-01T19:33:35+09:00</lastmod>
   </url>
 
   <url>
@@ -89,11 +99,6 @@
 
   <url>
     <loc>https://huntedhappy.github.io/ko/eks/</loc>
-    <lastmod>2022-03-09T19:08:05+09:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://huntedhappy.github.io/ko/cicd/</loc>
     <lastmod>2022-03-09T19:08:05+09:00</lastmod>
   </url>
 

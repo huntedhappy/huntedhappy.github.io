@@ -4,7 +4,604 @@
         <link>https://huntedhappy.github.io/ko/tags/tanzu/</link>
         <description>tanzu - Tag - Dokyung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation SupplyChain on TAP</title>
+    <link>https://huntedhappy.github.io/ko/cicd/</link>
+    <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/cicd/</guid>
+    <description><![CDATA[<h2 id="tanzu-supplychain">TANZU SUPPLYCHAIN</h2>
+<blockquote>
+<p>아래 내용은 기본적으로 VMWARE의 TAP솔루션을 알고 있다는 가정하에 작성을 하였습니다.</p>
+</blockquote>
+<p>CI/CD는 (Continuous Integration/Continuous Delivery) 지속적인 통합 및 지속적인 배포입니다.</p>
+<p>예를 들어:</p>
+<ol>
+<li>사용자는 IDE 환경 (IntelliJ or visual studio or eclipse)에서 소스코드를 수정 및 디버깅을 합니다.</li>
+<li>이 후에 수정된 소스코드를 GIT에 PUSH를 합니다.</li>
+<li>JENKINS에서는 GIT에 수정된 소스를 Webhook 또는 Polling을 통해 변경을 감지 합니다.</li>
+<li>JENKINS에서 수정된 코드를 통해 Docker Image를 생성을 합니다.</li>
+<li>생성된 Docker Image를 이미지 레포지토리에 업로드 합니다.</li>
+<li>Docker Image가 변경이 되었기 때문에 CD를 위해 별도의 GIT Project에 변경된 이미지를 수정 합니다.</li>
+<li>CD 솔루션을 통해 (ARGO 등) GIT이 변경이 되었으므로 컨테이너이미지를 업데이트 합니다.</li>
+</ol>
+<ul>
+<li>MANIFEST의 경우 HELM or KUSTOMIZATION or 각각 생성 할 수도 있습니다.</li>
+</ul>
+<blockquote>
+<ol>
+<li>JENKINS의 PIPELINE figure 1-1 와 같이 구성 할 수 있습니다.</li>
+<li>SLACK을 연동 후 원하는 문자로 알림을 받을 수 있습니다. figure 1-2</li>
+</ol>
+</blockquote>
+<figure><figcaption>
+            <h4>1-1 JENKINS PIPELINE</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>1-2 SLACK ALERT</h4>
+        </figcaption>
+</figure>
+
+<p>위와 같이 JENKINS와 ARGO 를 통해 CI/CD를 구성 할 수 있습니다. 하지만 각각 구성하기 위해서는 JENKINS 그리고 ARGO의 대해서도 이해가 필요 합니다. 또한 K8S에 배포를 하기 위해서는 MANIFEST의 대해서도 이해가 필요 합니다. 가령 Deployment, statfulset, ingress 등등의 대해서도, 이해가 필요 하며 HELM 또는 KUSTOMIZAION을 사용한다면 해당 오픈소스의 대해서도 이해가 필요 합니다.</p>
+<p>TANZU APPLICATION PLATFORM은 여러 이해가 필요 한부분을 workload.yaml을 구성하면 SUPPLYCHAIN을 통해 CI/CD 구성을 사용자가 각각 구성 할 필요 없이 제공을 하고 있습니다.</p>
+<p><a href="https://huntedhappy.github.io/tanzu-application-platform/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
+<figure><figcaption>
+            <h4>1-3 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+
+<p>기본적으로 하나의 클러스터에 3가지중 하나의 SUPPLYCHAIN을 제공 하고 있습니다. DEFULAT의 경우 위의 설명 드린 대로 사용자는 workload.yaml을 적절하게 작성을 하게 되면 CI/CD가 동작 합니다.</p>
+<p>아래 그림과 같이 workload.yaml 실행을 통해 supplychain이 순차적으로 동작을 하게 됩니다.
+<figure><figcaption>
+            <h4>1-4 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>GUI에서 확인을 해보면 아래와 같습니다. 
+<figure><figcaption>
+            <h4>1-5 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>그리고 두번째의 경우는 추가적으로 TEKTON을 통해 소스코드를 테스팅 할 수 있습니다. 
+그리고 마지막의 경우는 GRYPE을 통해 소스 및 이미지에 보안 취약점이 있는지 확인을 합니다.</p>
+<p>GUI에서 확인을 해보면 아래와 같이 취약점에 대해서 확인 할 수 있습니다.
+<figure><figcaption>
+            <h4>1-6 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<blockquote>
+<p>하지만 위에서 설명 드린 대로 하나의 클러스터에는 3가지중 하나만 사용을 할 수 있습니다. 추가적인 supplychain을 구성 하고 싶을수도 있을 것입니다. 동일한 서비스의 대해서 빠르게 개발을 위해 BASIC으로 구성을 하고 싶을 것이며, QA/STAGING은 소스/이미지에 보안취약점이 있는지 잘 생성을 했는지 확인을 하고 싶을 것입니다. 물론 클러스터를 분리해서 구성 할 수도 있을 것입니다. 하지만 리소스 부족으로 분리를 할 수 없을 경우 하나의 클러스터에 모두 구성이 필요할수도 있을수 있습니다. 만약 그런 상황이 발생하면 3개중에 하나의 supplychain만 사용이 가능하기 때문에 한가지를 선택 해야 합니다. 그렇기 때문에 supplychain을 추가 하는 방법이 필요 할 수 있습니다.</p>
+</blockquote>
+<p>아래와 같이 기본적으로 제공 하고 있습니다. 
+<figure><figcaption>
+            <h4>1-7 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>SUPPLYCHAIN ADD<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt; basic_supply_chain.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ load(&#34;@ytt:data&#34;, &#34;data&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ load(&#34;@ytt:assert&#34;, &#34;assert&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ data.values.registry.server or assert.fail(&#34;missing registry.server&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">#@ data.values.registry.repository or assert.fail(&#34;missing registry.repository&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: carto.run/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterSupplyChain
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: source-to-url-with-custom-support
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: source-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: #@ data.values.service_account
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: gitImplementation
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: #@ data.values.git_implementation
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterSourceTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: source-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: image-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">      value: #@ data.values.service_account
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">      value:
+</span></span></span><span class="line"><span class="cl"><span class="s">        ca_cert_data: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        repository: #@ data.values.registry.repository
+</span></span></span><span class="line"><span class="cl"><span class="s">        server: #@ data.values.registry.server
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: default
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: clusterBuilder
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: ./Dockerfile
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: dockerfile
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: ./
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: docker_build_context
+</span></span></span><span class="line"><span class="cl"><span class="s">    sources:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: source
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: source-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterImageTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      options:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: kpack-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchFields:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - key: spec.params[?(@.name==&#34;dockerfile&#34;)]
+</span></span></span><span class="line"><span class="cl"><span class="s">            operator: DoesNotExist
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: kaniko-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchFields:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - key: spec.params[?(@.name==&#34;dockerfile&#34;)]
+</span></span></span><span class="line"><span class="cl"><span class="s">            operator: Exists
+</span></span></span><span class="line"><span class="cl"><span class="s">  - images:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: image
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: image-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: config-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">      value: #@ data.values.service_account
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: convention-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: config
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: config-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: app-config
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      options:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: config-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            apps.tanzu.vmware.com/workload-type: web
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: server-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            apps.tanzu.vmware.com/workload-type: server
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: worker-template
+</span></span></span><span class="line"><span class="cl"><span class="s">        selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">          matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            apps.tanzu.vmware.com/workload-type: worker
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: app_def
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: app-config
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: service-bindings
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: service-bindings
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: app_def
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: service-bindings
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: api-descriptors
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterConfigTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: api-descriptors
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: config
+</span></span></span><span class="line"><span class="cl"><span class="s">      resource: api-descriptors
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: config-writer
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - default: default
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: serviceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">      value:
+</span></span></span><span class="line"><span class="cl"><span class="s">        ca_cert_data: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        repository: #@ data.values.registry.repository
+</span></span></span><span class="line"><span class="cl"><span class="s">        server: #@ data.values.registry.server
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: config-writer-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: deliverable
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: registry
+</span></span></span><span class="line"><span class="cl"><span class="s">      value:
+</span></span></span><span class="line"><span class="cl"><span class="s">        ca_cert_data: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        repository: #@ data.values.registry.repository
+</span></span></span><span class="line"><span class="cl"><span class="s">        server: #@ data.values.registry.server
+</span></span></span><span class="line"><span class="cl"><span class="s">    templateRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterTemplate
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: external-deliverable-template
+</span></span></span><span class="line"><span class="cl"><span class="s">  selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    apps.tanzu.vmware.com/custom: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  selectorMatchExpressions:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - key: apps.tanzu.vmware.com/workload-type
+</span></span></span><span class="line"><span class="cl"><span class="s">    operator: In
+</span></span></span><span class="line"><span class="cl"><span class="s">    values:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - web
+</span></span></span><span class="line"><span class="cl"><span class="s">    - server
+</span></span></span><span class="line"><span class="cl"><span class="s">    - worker
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p>위와 같이 추가하게 되면 별도로 SUPPLYCHAIN이 추가 된 것을 확인 할 수 있다. 
+<figure><figcaption>
+            <h4>1-8 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+<p>그리고 아래와 같이 다른 workload.yaml과는 다른 SUPPLYCHAIN이 등록 된 것을 확인 할 수 있습니다. 
+<figure><figcaption>
+            <h4>1-9 SUPPLYCHAIN</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
+    <title>The Documentation TechDocs in Tap</title>
+    <link>https://huntedhappy.github.io/ko/tap-techdocs/</link>
+    <pubDate>Sat, 04 Mar 2023 22:33:00 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/tap-techdocs/</guid>
+    <description><![CDATA[<h2 id="1-간단한-설명">1. 간단한 설명</h2>
+<h3 id="11-backstage">1.1. Backstage?</h3>
+<p>Backstage는 개발자 포털 구축을 위한 오픈 플랫폼입니다. 2년 전 Spotify의 소규모 팀이 내부에서 Backstage를 오픈소스로 출시 후 CNCF SANDBOX에서 현재는 INCUBATING 단계가 되었습니다. CNCF는 프로젝트 성숙도에 따라서 SANDBOX, INCUBATING, GRADUATED 단계로  구성 되어 있습니다.</p>
+<p>프로젝트의 성숙도는 CNCF 위원회 멤버들에 의해서 결정되며, GRADUATED 단계의 프로젝트가 되기 위해서는 GRADUATED 요건이 필요 하며 위원회 멤버 과반수 이상의 찬성표를 받아야 합니다.</p>
+<figure><figcaption>
+            <h4>https://www.cncf.io/projects/</h4>
+        </figcaption>
+</figure>
+
+<p>Backstage WebPage를 가게 되면 엄청 많은 기능들을 확인 할 수 있습니다.</p>
+<p><a href="https://backstage.io/docs/overview/what-is-backstage" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Backstage LINK</a></p>
+<h3 id="12-techdocs">1.2. TechDocs?</h3>
+<p>Backstage에 내장되어 있으며 MarkDown 파일을 작성 함으로 Backstage에 문서형 사이트를 얻을 수 있습니다.
+<a href="https://backstage.io/docs/features/techdocs/" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Backstage TechDocs 참고링크</a></p>
+<p>TANZU의 TAP의 경우 Backstage의 기능으로 구성이 되어 있습니다.</p>
+<h2 id="2-techdocs-설정">2. TechDocs 설정</h2>
+<blockquote>
+<p>사전 구성</p>
+<ol>
+<li>Object Storage : &lsquo;awsS3&rsquo; or &lsquo;googleGcs&rsquo; or &lsquo;azureBlobStorage&rsquo; or &lsquo;openStackSwift&rsquo;</li>
+<li>TANZU TAP</li>
+<li>npm, node, npx (9.5.0, 18.14.2, 9.5.0)의 버전으로 테스트 진행</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>앞서 설명에서 MarkDown를 통해 Tanzu의 TAP에 문서형태를 구성 할 수 있습니다. 사전에 Tanzu Net에서 sample을 다운로드 받을 수 있습니다.</p>
+</blockquote>
+<figure><figcaption>
+            <h4>Sample Download</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 압축 해제</span>
+</span></span><span class="line"><span class="cl">tar zxvf tap-gui-yelb-catalog.tgz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## markdown </span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> tap-gui-yelb-catalog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>위의 Sample 파일을 다운로드 받은 후 TAP에서 Catalog를 등록 한 후 DOCS를 보면 아래와 같이 오류가 나는 것을 확인 할 수 있습니다.</p>
+</blockquote>
+<figure><figcaption>
+            <h4>Error</h4>
+        </figcaption>
+</figure>
+
+<p>TANZU에서 TechDocs 관련 LINK는 아래에서 참고 할 수 있지만, 문서를 보면 어떻게 해야 되는지 잘 알지 못할 수도 있습니다.
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/tap-gui-techdocs-usage.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> TechDocs In TAP 참고링크</a></p>
+<blockquote>
+<p>그리고 SAMPLE에서 mkdocs.yml 의 내용을 보면 docs에 index.md, add-docs.md를 읽을 수 있게 구성이 되어져 있는 것을 확인 해 볼 수 있습니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">site_name: <span class="s1">&#39;Yelb demo catalog&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nav:
+</span></span><span class="line"><span class="cl">  - Home: index.md
+</span></span><span class="line"><span class="cl">  - Adding Documentation: add-docs.md
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">plugins:
+</span></span><span class="line"><span class="cl">  - techdocs-core
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>spotify에서 제공하는 techdocs docker를 다운로드 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull spotify/techdocs:v1.1.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>테스트 환경에서는 AWS의 S3를 구성 하지 않고, MINIO를 사용하여 구성하였습니다. S3의 계정 정보를 환경변수로 저장합니다. MINIO에 저장 할 수 있는 버킷을 생성 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_REGION</span><span class="o">=</span>ap-northeast-2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>페이지를 작성 하기 위해 MarkDown을 npx로 웹 관련 파일을 생성 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli generate --source-dir /var/tmp/tkgm/workload/catalog/yelb-catalog --output-dir ./site
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래와 같이 ./site 폴더에 파일들이 생성 된 것을 확인 할 수 있습니다.</span>
+</span></span><span class="line"><span class="cl">ls site/
+</span></span><span class="line"><span class="cl">404.html  README.md  add-docs  assets  images  index.html  search  sitemap.xml  sitemap.xml.gz  techdocs_metadata.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>사전에 Catalog를 등록 하면 DOCS에서 아래처럼 확인이 가능 합니다.</p>
+</blockquote>
+<figure><figcaption>
+            <h4>yelb-catalog-info</h4>
+        </figcaption>
+</figure>
+
+<blockquote>
+<p>확인 및 site 파일이 생성이 되면 오브젝트 스토리지에 파일들을 업로드 해줍니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli publish --publisher-type awsS3 --storage-name techdocs --entity default/location/yelb-catalog-info --directory ./site --awsEndpoint https://minio-volumes.huntedhappy.kro.kr --awsS3ForcePathStyle <span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>MINIO BUCKET</h4>
+        </figcaption>
+</figure>
+
+<blockquote>
+<p>여기까지 완료가 되면 tap values yaml 파일을 업데이트 합니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">    techdocs:
+</span></span><span class="line"><span class="cl">      builder: <span class="s1">&#39;external&#39;</span> <span class="c1"># Alternatives - &#39;external&#39;</span>
+</span></span><span class="line"><span class="cl">      publisher:
+</span></span><span class="line"><span class="cl">        type: <span class="s1">&#39;awsS3&#39;</span> <span class="c1"># Alternatives - &#39;googleGcs&#39; or &#39;awsS3&#39; or &#39;azureBlobStorage&#39; or &#39;openStackSwift&#39;. Read documentation for using alternatives.</span>
+</span></span><span class="line"><span class="cl">        awsS3:
+</span></span><span class="line"><span class="cl">          bucketName: <span class="s1">&#39;techdocs&#39;</span>
+</span></span><span class="line"><span class="cl">          credentials:
+</span></span><span class="line"><span class="cl">            accessKeyId: <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">            secretAccessKey: <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">          region: ap-northeast-2
+</span></span><span class="line"><span class="cl">          s3ForcePathStyle: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">          endpoint: https://minio-volumes.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 수정 후 </span>
+</span></span><span class="line"><span class="cl">tanzu package installed update tap -n tap-install --values-file <span class="o">{</span>file.yaml<span class="o">}</span>          
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>이 후 완료가 되면 아래 처럼 DOCS를 확인 할 수 있습니다. MARKDOWN을 작성 함으로 인해서 TAP에 개발을 한 Application의 대한 설명을 작성 할 수 있습니다.</p>
+</blockquote>
+<p><figure><figcaption>
+            <h4>DOCS1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DOCS2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DOCS3</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DOCS4</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
     <title>The Documentation TANZU CUSTOM IMAGE</title>
     <link>https://huntedhappy.github.io/ko/tanzu-custom-image/</link>
     <pubDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</pubDate>
@@ -11973,833 +12570,6 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
         </figcaption>
 </figure>
 </p>
-]]></description>
-</item><item>
-    <title>The Documentation NSXT and Ansible</title>
-    <link>https://huntedhappy.github.io/ko/nsxt/</link>
-    <pubDate>Wed, 19 Jan 2022 09:27:33 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/nsxt/</guid>
-    <description><![CDATA[<h2 id="1-ansible을-통한-nsxt-구성">1. Ansible을 통한 NSXT 구성</h2>
-<p>NSXT를 Ansible로 구성.</p>
-<p>Ansible의 대한 보충 설명을 할 수 있으면 추후에 진행 하기로 하고 우선 설정의 대해서 설명을 먼저 하겠다.</p>
-<p>먼저.. 이 부분을 블로그로 쓰는게 맞을까라는 고민을 좀 했다.</p>
-<p>이유는 우선 Ansible로 구성이 되어 있기 때문에 코드가 들어가 있다. 그래서 NSXT Ansible Module을 다운로드 받고 나서 추가 된 부분을 Git Hub에 올려 두었다.</p>
-<h2 id="2-설치">2. 설치</h2>
-<h3 id="21-파이썬-설치">2.1. 파이썬 설치</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">yum update -y
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">yum install epel-release yum-utils python3-pip -y
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">pip3 install --upgrade pip setuptools ansible pyvmomi pyvim requests ruamel.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">dnf install libnsl -y
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>파이썬을 설치 후 버전을 변경 하고 싶으면 아래 처럼 구성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rm /usr/bin/python
-</span></span><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python python /usr/bin/python<span class="o">(</span>TAB<span class="o">)</span> <span class="c1">## 설치되어 있는 버전을 확인 할 수 있다.</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>파이썬 버전 확인</h4>
-        </figcaption>
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 <span class="m">1</span>
-</span></span><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 <span class="m">2</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo update-alternatives --config python
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>파이썬 버전 선택</h4>
-        </figcaption>
-</figure>
-
-<h3 id="22-ovf-tool">2.2. OVF Tool</h3>
-<p>OVF Tool 다운로드</p>
-<p><a href="https://developer.vmware.com/web/tool/4.4.0/ovf" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> OVF Tool 다운로드 링크</a></p>
-<figure><figcaption>
-            <h4>원하는 버전으로 다운로드 받는다.</h4>
-        </figcaption>
-</figure>
-
-<h3 id="23-nsxt-ansible-download">2.3. NSXT Ansible Download</h3>
-<p>제공한 버전은 3.1 기준으로 구성을 하였다.</p>
-<figure><figcaption>
-            <h4>원하는 버전으로 다운로드 받는다.</h4>
-        </figcaption>
-</figure>
-
-<h3 id="24-ansible-실행">2.4. Ansible 실행</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ovftool -v 에러가 나오면 dnf install libnsl 설치
-</span></span><span class="line"><span class="cl">ansible-playbook 01_deploy_first_node.yml -vvv
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>에러 발생시 dnf install libnsl 설치.</h4>
-        </figcaption>
-</figure>
-
-<h3 id="25-github">2.5. Github</h3>
-<p>다운로드 NSXT Ansible Module을 압축을 해제 하면 되는대, 그 부분을 별도로 github에 올려두었다.</p>
-<p>추가적으로 vars라는 폴더와, 00 ~ 10 번 , answerfile,yml이 추가 된 것을 확인 할 수 있다.</p>
-<p>코드를 하나 하나 설명을 하기에는.. 좀 벅찬 느낌이 든다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/huntedhappy/nsxt3.1
-</span></span></code></pre></td></tr></table>
-</div>
-</div>]]></description>
-</item><item>
-    <title>The Documentation NAP</title>
-    <link>https://huntedhappy.github.io/ko/nap/</link>
-    <pubDate>Thu, 13 Jan 2022 18:10:20 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/nap/</guid>
-    <description><![CDATA[<h2 id="1-nap">1. NAP?</h2>
-<p>NAP(NGINX App Protect)은 WAF and DoS Protection을 제공 한다. NGINX Plus에서 제공을 하며 컨테이너 환경에서 App을 보호 하기 위한 솔루션이다. 대부분 컨테이너 환경에서 Ingress를 NGINX로 많이 사용 할 것이다. NGINX PLUS 라이센스를 구매 하면 NAP을 사용 할 수 있다.</p>
-<h2 id="2-사전-구성">2. 사전 구성</h2>
-<ul>
-<li>Docker v18.09+</li>
-<li>GNU Make</li>
-<li>git</li>
-<li>Helm3</li>
-<li>OpenSSL</li>
-<li><a href="https://github.com/OpenVPN/easy-rsa.git" target="_blank" rel="noopener noreffer">https://github.com/OpenVPN/easy-rsa.git</a></li>
-<li>apt install git \  make \ make-guile</li>
-</ul>
-<h2 id="3-설치">3. 설치</h2>
-<p>Namespace 생성 후 easy-rsa git clone</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns ingress-nginx
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">git clone https://github.com/OpenVPN/easy-rsa.git
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>easy rsa</h4>
-        </figcaption>
-</figure>
-
-<p>인증서 생성 (인증서 생성은 반드시 이렇게 하지 않아도 된다.)</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> easy-rsa/easyrsa3/
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">./easyrsa init-pki
-</span></span><span class="line"><span class="cl">./easyrsa build-ca
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>easy rsa 구성#1</h4>
-        </figcaption>
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./easyrsa gen-req wildcard
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">./easyrsa sign-req server wildcard
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>easy rsa 구성#2</h4>
-        </figcaption>
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">openssl rsa -in /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard.key -out /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 인증서 Secret 생성</span>
-</span></span><span class="line"><span class="cl">kubectl create -n ingress-nginx secret tls wildcard-tls --key /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key --cert /var/tmp/easy-rsa/easyrsa3/pki/issued/wildcard.crt
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 안지워도된다.</span>
-</span></span><span class="line"><span class="cl">rm /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>ssl 인증서 secret 생성</h4>
-        </figcaption>
-</figure>
-
-<p>secret 인증서 확인</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get secret -n ingress-nginx
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>secret 확인</h4>
-        </figcaption>
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## nap을 위한 yaml파일 다운로드</span>
-</span></span><span class="line"><span class="cl">git clone https://github.com/nginxinc/kubernetes-ingress/
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## nap을 위한 helm repo 주소 추가</span>
-</span></span><span class="line"><span class="cl">helm repo add nginx-stable https://helm.nginx.com/stable
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>git clone</h4>
-        </figcaption>
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp/kubernetes-ingress/deployments/helm-chart
-</span></span><span class="line"><span class="cl">git checkout v1.11.3
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>git checkout</h4>
-        </figcaption>
-</figure>
-
-<p>라이센스 발급 30일 trial을 받을 수 있다. 가입 필요
-<a href="https://www.nginx.com/free-trial-request-nginx-ingress-controller/" target="_blank" rel="noopener noreffer"><i class="far fa-file-archive fa-fw"></i>&nbsp;NAP 발급 링크</a></p>
-<p>미리 Harbor에 ingress-nginx project 생성이 되어 있어야함</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">REGISTRY</span><span class="o">=</span>&lt;registry IP or FQDN&gt;
-</span></span><span class="line"><span class="cl"><span class="nv">NS</span><span class="o">=</span>&lt;your namespace&gt;
-</span></span><span class="line"><span class="cl"><span class="nv">REGISTRY</span><span class="o">=</span>10.253.110.4
-</span></span><span class="line"><span class="cl"><span class="nv">NS</span><span class="o">=</span>ingress-nginx
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>Harbor 확인</h4>
-        </figcaption>
-</figure>
-
-<p>발급 받은 라이센스를 복사</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir -p /var/tmp/kubernetes-ingress
-</span></span><span class="line"><span class="cl">cp nginx-repo.key nginx-repo.crt  /var/tmp/kubernetes-ingress
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>라이센스 복사</h4>
-        </figcaption>
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp/kubernetes-ingress
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">make debian-image-nap-plus <span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress <span class="nv">TARGET</span><span class="o">=</span>container
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>Docker Pull</h4>
-        </figcaption>
-</figure>
-
-<p>docker image 확인</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker images
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>Docker Image 확인</h4>
-        </figcaption>
-</figure>
-
-<p>Harbor에 Push</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker image tag 18a49497920c <span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress:1.11.3
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">docker login &lt;harbor IP&gt;
-</span></span><span class="line"><span class="cl">make push <span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>Harbor push#1</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Harbor push#2</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Harbor push#3</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Helm Value 복사 (원본을 건드리지 않게 하기 위해 별도로 복사를 한다.)</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> deployments/helm-chart
-</span></span><span class="line"><span class="cl">cp values-plus.yaml values-plus.yaml.orig
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>Helm Value 복사</h4>
-        </figcaption>
-</figure>
-
-<p>복사한 파일을 열어 보면 아래와 같이 되어 있는대 수정해줘야 하는 부분을 수정 해준다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## vi 편집</span>
-</span></span><span class="line"><span class="cl">vi values-plus.yaml 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 내용 (imagePullSecretName의 경우 Harbor에 Public으로 만들었으면 상관 없음)</span>
-</span></span><span class="line"><span class="cl">controller:
-</span></span><span class="line"><span class="cl">  replicaCount: <span class="m">1</span>
-</span></span><span class="line"><span class="cl">  nginxplus: <span class="nb">true</span>
-</span></span><span class="line"><span class="cl">  image:
-</span></span><span class="line"><span class="cl">    repository: 10.253.106.46/ingress-nginx/nginx-plus-ingress
-</span></span><span class="line"><span class="cl">    tag: <span class="s2">&#34;1.11.3&#34;</span>
-</span></span><span class="line"><span class="cl">  service:
-</span></span><span class="line"><span class="cl">    externalTrafficPolicy: Cluster
-</span></span><span class="line"><span class="cl">  appprotect:
-</span></span><span class="line"><span class="cl">    <span class="c1">## Enable the App Protect module in the Ingress Controller.</span>
-</span></span><span class="line"><span class="cl">    enable: <span class="nb">true</span>
-</span></span><span class="line"><span class="cl">  wildcardTLS:
-</span></span><span class="line"><span class="cl">    <span class="c1">## The base64-encoded TLS certificate for every Ingress host that has TLS enabled but no secret specified.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">## If the parameter is not set, for such Ingress hosts NGINX will break any attempt to establish a TLS connection.</span>
-</span></span><span class="line"><span class="cl">    cert: <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">## The base64-encoded TLS key for every Ingress host that has TLS enabled but no secret specified.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">## If the parameter is not set, for such Ingress hosts NGINX will break any attempt to establish a TLS connection.</span>
-</span></span><span class="line"><span class="cl">    key: <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">## The secret with a TLS certificate and key for every Ingress host that has TLS enabled but no secret specified.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">## The value must follow the following format: `&lt;namespace&gt;/&lt;name&gt;`.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">## Used as an alternative to specifying a certificate and key using `controller.wildcardTLS.cert` and `controller.wildcardTLS.key` parameters.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">## Format: &lt;namespace&gt;/&lt;secret_name&gt;</span>
-</span></span><span class="line"><span class="cl">    secret: ingress-nginx/wildcard-tls
-</span></span><span class="line"><span class="cl">  serviceAccount:
-</span></span><span class="line"><span class="cl">    <span class="c1">## The name of the service account of the Ingress controller pods. Used for RBAC.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">## Autogenerated if not set or set to &#34;&#34;.</span>
-</span></span><span class="line"><span class="cl">    name: ingress-nginx
-</span></span><span class="line"><span class="cl">    <span class="c1">## The name of the secret containing docker registry credentials.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">## Secret must exist in the same namespace as the helm release.</span>
-</span></span><span class="line"><span class="cl">    imagePullSecretName: <span class="s2">&#34;regcred&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>PSP를 혀용하기 위해 해당 파일을 실행 해준다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/nginx-psp.yaml
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>psp 허용</h4>
-        </figcaption>
-</figure>
-
-<p>HELM 실행</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret generic regcred --from-file<span class="o">=</span>.dockerconfigjson<span class="o">=</span><span class="nv">$HOME</span>/.docker/config.json --type<span class="o">=</span>kubernetes.io/dockerconfigjson -n ingress-nginx
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">helm install nap nginx-stable/nginx-ingress -f values-plus.yaml -n ingress-nginx
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>helm으로 nap 설치</h4>
-        </figcaption>
-</figure>
-
-<p>설치 확인</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">watch -n <span class="m">1</span> kubectl -n ingress-nginx get all
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>설치 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>L4 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="4-waf">4. WAF</h2>
-<p>WAF TEST를 위해 웹 구성</p>
-<h3 id="41-test-web-구성">4.1. TEST WEB 구성</h3>
-<p>TEST를 하기 위해 제공하는 Manifest를 다운로드 한다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-rbac.yaml
-</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe.yaml
-</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-ingress.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl apply -f cafe-rbac.yaml -n <span class="nb">test</span>
-</span></span><span class="line"><span class="cl">kubectl apply -f cafe.yaml -n <span class="nb">test</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">vi cafe-ingress.yaml <span class="o">(</span>인증서 만들었던 Domain으로 변경<span class="o">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>Domain을 변경 한다.</h4>
-        </figcaption>
-</figure>
-
-<p>Domain 변경 후 실행</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f cafe-ingress.yaml -n <span class="nb">test</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>Ingress 확인.</h4>
-        </figcaption>
-</figure>
-
-<p>POSTMAN으로 접속이 되는지 확인
-<figure><figcaption>
-            <h4>POSTMAN 확인.</h4>
-        </figcaption>
-</figure>
-</p>
-<h3 id="42-waf-구성">4.2. WAF 구성</h3>
-<p>ELK를 구성 하기 위해 syslog pod를 구성한다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/syslog-rbac.yaml
-</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/syslog.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl apply -f syslog-rbac.yaml -n ingress-nginx
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f syslog.yaml -n ingress-nginx
-</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-apple-uds.yaml
-</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-dataguard-alarm-policy.yaml
-</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-logconf.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl apply -f  ap-apple-uds.yaml -n <span class="nb">test</span>
-</span></span><span class="line"><span class="cl">kubeclt apply -f  ap-dataguard-alarm-policy.yaml -n <span class="nb">test</span>
-</span></span><span class="line"><span class="cl">kubectl apply -f  ap-logconf.yaml -n <span class="nb">test</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>ingress에 annotation을 설정</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-ingress-ap.yaml
-</span></span><span class="line"><span class="cl">kubectl get pod -n ingress-nginx -o wide
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## vi 편집 실행</span>
-</span></span><span class="line"><span class="cl">vi cafe-ingress-ap.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">apiVersion: networking.k8s.io/v1beta1
-</span></span><span class="line"><span class="cl">kind: Ingress
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  name: cafe-ingress
-</span></span><span class="line"><span class="cl">  annotations:
-</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-policy: <span class="s2">&#34;test/dataguard-alarm&#34;</span>
-</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-enable: <span class="s2">&#34;True&#34;</span>
-</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-security-log-enable: <span class="s2">&#34;True&#34;</span>
-</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-security-log: <span class="s2">&#34;test/logconf&#34;</span>
-</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-security-log-destination: <span class="s2">&#34;syslog:server=SYSLOG:514&#34;</span>
-</span></span><span class="line"><span class="cl">spec:
-</span></span><span class="line"><span class="cl">  ingressClassName: nginx <span class="c1"># use only with k8s version &gt;= 1.18.0</span>
-</span></span><span class="line"><span class="cl">  tls:  - hosts:
-</span></span><span class="line"><span class="cl">    - cafe.vcf.local  <span class="c1">## 인증서와 동일한 도메인으로 변경</span>
-</span></span><span class="line"><span class="cl">  rules:
-</span></span><span class="line"><span class="cl">  - host: cafe.vcf.local <span class="c1">## 인증서와 동일한 도메인으로 변경</span>
-</span></span><span class="line"><span class="cl">    http:
-</span></span><span class="line"><span class="cl">      paths:
-</span></span><span class="line"><span class="cl">      - path: /tea
-</span></span><span class="line"><span class="cl">        backend:
-</span></span><span class="line"><span class="cl">          serviceName: tea-svc
-</span></span><span class="line"><span class="cl">          servicePort: <span class="m">80</span>
-</span></span><span class="line"><span class="cl">      - path: /coffee
-</span></span><span class="line"><span class="cl">        backend:
-</span></span><span class="line"><span class="cl">          serviceName: coffee-svc
-</span></span><span class="line"><span class="cl">          servicePort: <span class="m">80</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## syslog service ip</span>
-</span></span><span class="line"><span class="cl"><span class="nv">SYSLOG_IP</span><span class="o">=</span>10.101.182.155
-</span></span><span class="line"><span class="cl">vi cafe-ingress-ap.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sed -e <span class="s2">&#34;s/SYSLOG/</span><span class="nv">$SYSLOG_IP</span><span class="s2">/&#34;</span> cafe-ingress-ap.yaml &gt; cafe-ingress-ap-syslog.yaml
-</span></span><span class="line"><span class="cl">kubectl apply -n <span class="nb">test</span> -f cafe-ingress-ap-syslog.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get ingress -n <span class="nb">test</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 아래 명령어로 annotation을 확인 할 수 있다.</span>
-</span></span><span class="line"><span class="cl">kubrectl get ingress cafe-ingress -n <span class="nb">test</span> -o yaml
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>Annotation 확인.</h4>
-        </figcaption>
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get pod -n ingress-nginx
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">LOG 확인
-</span></span><span class="line"><span class="cl">kubectl -n ingress-nginx <span class="nb">exec</span> -it syslog-65d847447d-ghbvq -- tail -f /var/log/messages
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><figcaption>
-            <h4>syslog pod 확인.</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>PostMan 요청 후 REJECT확인.</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Pod 로그 확인시 Attack 확인.</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="5-elk">5. ELK</h2>
-<p>LOG를 좀 가시적이게 표현하기 위해 ELK를 구성</p>
-<h3 id="51-elastic-연동">5.1. Elastic 연동</h3>
-<p>logstach를 5144로 구성한 이유는 Logstach 구성시 514가 well-known 포트라 5144로 변경
-logstash yaml 파일, <a href="/ko/nap/logstash_test.yaml" rel=""><i class="far fa-file-archive fa-fw"></i>&nbsp;logstash_test.yaml</a>.</p>
-<figure><figcaption>
-            <h4>logstach 확인.</h4>
-        </figcaption>
-</figure>
-
-<p>ingress 설정에서 syslog server 를 logstash cluster IP로 설정
-<figure><figcaption>
-            <h4>annotation에서 logstach로 syslog IP 변경 .</h4>
-        </figcaption>
-</figure>
-</p>
-<p>해당 파일을 다운로드 받는다.</p>
-<p><a href="https://github.com/f5devcentral/f5-waf-elk-dashboards" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> Dashboard 링크 </a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir /var/tmp/kibana
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp/kibana
-</span></span><span class="line"><span class="cl">cp false-positives-dashboards.ndjson overview-dashboard.ndjson /var/tmp/kibana
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>파일 다운로드</h4>
-        </figcaption>
-</figure>
-
-<p>대쉬보드 업로드</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">KIBANA_URL</span><span class="o">=</span> <span class="o">{</span>FQDN or IP<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="nv">KIBANA_URL</span><span class="o">=</span>http://kibana.vcf.local:5601
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">jq -s . kibana/overview-dashboard.ndjson <span class="p">|</span> jq <span class="s1">&#39;{&#34;objects&#34;: . }&#39;</span> <span class="p">|</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>curl -k --location --request POST <span class="s2">&#34;</span><span class="nv">$KIBANA_URL</span><span class="s2">/api/kibana/dashboards/import&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;kbn-xsrf: true&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;Content-Type: text/plain&#39;</span> -d @- <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> jq
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">jq -s . kibana/false-positives-dashboards.ndjson <span class="p">|</span> jq <span class="s1">&#39;{&#34;objects&#34;: . }&#39;</span> <span class="p">|</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>curl -k --location --request POST <span class="s2">&#34;</span><span class="nv">$KIBANA_URL</span><span class="s2">/api/kibana/dashboards/import&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;kbn-xsrf: true&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;Content-Type: text/plain&#39;</span> -d @- <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> jq
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>kibana접속 후 index patterns에 waf-logs-* 확인
-<figure><figcaption>
-            <h4>kibana 확인</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>kibana 대시보드 확인</h4>
-        </figcaption>
-</figure>
-</p>
-<p><a href="https://devcentral.f5.com/s/articles/Deploying-NGINXplus-with-AppProtect-in-Tanzu-Kubernetes-Grid" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> 참고문헌 </a></p>
 ]]></description>
 </item></channel>
 </rss>
