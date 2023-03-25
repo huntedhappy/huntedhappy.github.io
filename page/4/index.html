@@ -106,6 +106,22 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-3" class="typeit"></div></h2><div class="links"><a href="https://github.com/huntedhappy" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://linkedin.com/in/huntedhappy" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw"></i></a><a href="mailto:huntedhappy@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/ldaps/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/ldaps/Active-Directory.jpg"
+        data-srcset="/ldaps/Active-Directory.jpg, /ldaps/Active-Directory.jpg 1.5x, /ldaps/Active-Directory.jpg 2x"
+        data-sizes="auto"
+        alt="/ldaps/Active-Directory.jpg"
+        title="LDAPS(AD) 관련" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/ldaps/">The Documentation LDAPS(AD)</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-16">2022-01-16</time></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">1. LDAP Over SSL 대략 설명 보다. 이미지를 많이 첨부
+LDAPS를 구성 할 경우 IP로 ldapsearch를 하면 실패하는 경우를 보게 될 것이다. FQDN인증서를 확인 하면 FQDN만 구성이 되어 있는 것을 알 수 있다. 그래서 SAN으로 구성하면서 IP도 포함되게 구성을 해보자.
+ Ldaps 인증서 확인   1.1. certreq.req 설정 1 2 3 4  ## 아래 IP로 ldapsearch를 하게 되면 에러가 난다. 만약 IP로도 가능하게 하려면 인증서 변경이 필요하다. ldapsearch -x -H ldaps://10.</div><div class="post-footer">
+        <a href="/ldaps/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ldpas/">Ldpas</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/nap/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -185,22 +201,6 @@ Object Storage?  오브젝트 스토리지는 이미지, 오디오 파일, 스�
  MiniO Console / Server - UI / Cloud Storage Server를 구성 할 수 있다. MiniO Client(mc,admin) - Minio Server, AWS S3, GCS등등 연결하여 파일 업로드 및 관리등을 할 수 있다.</div><div class="post-footer">
         <a href="/minio/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/minio/">minio</a>,&nbsp;<a href="/tags/object-storage/">object storage</a>,&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/devops/">devops</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a>,&nbsp;<a href="/tags/notification/">notification</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/tanzu/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/tanzu/tanzu.png"
-        data-srcset="/tanzu/tanzu.png, /tanzu/tanzu.png 1.5x, /tanzu/tanzu.png 2x"
-        data-sizes="auto"
-        alt="/tanzu/tanzu.png"
-        title="Tanzu Explain" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/tanzu/">The Documentation Tanzu</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-01">2022-01-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">1. VMware TANZU? 2019년 8월 VMware에서 처음으로 TANZU 포트 폴리오를 발표 했다. VM웨어의 대표 제품군인 ‘브이스피어(vSphere)’를 쿠버네티스 네이티브 플랫폼으로 바꾸겠다고 선언했다. 이를 위해 VM웨어는 ‘프로젝트 퍼시픽(Project Pacific)’을 진행했다.
-  Tanzu Portfolio    처음에는 VCF(VMware Cloud Foundation)라는 솔루션을 같이 설치 하면서 배포 해야 되었던 vsphere with tanzu가 현재는 VCF를 구성하지 않아도 설치가 가능하도록 변하게 되었다.
-VCF(VMware Cloud Foundation)?  VMware 제품군을 자동으로 설치 해주는 솔루션이다. Excel, JSON파일을 읽어 드려 vSphere, vCenter, vSAN 그리고 NSX-T를 한번에 배포 해주는 솔루션   1.</div><div class="post-footer">
-        <a href="/tanzu/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/devops/">devops</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
