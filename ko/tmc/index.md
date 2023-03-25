@@ -6,6 +6,6 @@ RUN & BUILD & MANAGE & LABS로 구성되어 있습니다. RUN의 경우는 멀�
 
 > 아래 영상은 MANAGE 역할을 하는 TMC, TSM, TO의 대한 설명및 데모를 보여주고 있으므로 해당 솔루션의 대한 정보를 확인 할 수 있습니다.
 
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/1divUkYb_tU" title="오픈베이스 x VMware 두 번째 Tanzu 시리즈 &quot;모두의 TANZU&quot;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="800" height="420" src="https://www.youtube.com/embed/1divUkYb_tU" title="오픈베이스 x VMware 두 번째 Tanzu 시리즈 &quot;모두의 TANZU&quot;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 위의 영상이 도움이 되었으면 좋겠습니다.
