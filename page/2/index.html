@@ -106,6 +106,20 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-3" class="typeit"></div></h2><div class="links"><a href="https://github.com/huntedhappy" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://linkedin.com/in/huntedhappy" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw"></i></a><a href="https://huntedhappy.tistory.com/" title="Tistory" target="_blank" rel="noopener noreffer me"><i data-svg-src="/svg/icons/tistory.min.svg"></i></a><a href="mailto:huntedhappy@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/harbor/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/harbor/harbor_logo.png"
+        data-srcset="/harbor/harbor_logo.png, /harbor/harbor_logo.png 1.5x, /harbor/harbor_logo.png 2x"
+        data-sizes="auto"
+        alt="/harbor/harbor_logo.png"
+        title="Harbor Disk Size Expand" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/harbor/">The Documentation Harbor</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-01-07">2023-01-07</time></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">Harbor에 VM Disk가 부족 하게 되면 사이즈를 늘려보자 1. Harbor VM DISK 증설 1 2 3 4 5 6 7 8 9 10  df -h fdisk -l ## 아래와 같이 에러가 나온다면 &gt;&gt; GPT PMBR size mismatch ## parted로 fix를 해보자 parted /dev/sda p &gt; f    Disk 상태 확인    Disk 증설    Disk 증설 후   1 2 3 4 5 6 7 8 9  ## 그리고 온라인 상태에서 디스크가 보이지 않은 경우는 아래와 같이 하자.</div><div class="post-footer">
+        <a href="/harbor/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/harbor/">harbor</a>,&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/devops/">devops</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a>,&nbsp;<a href="/tags/slack/">slack</a>,&nbsp;<a href="/tags/notification/">notification</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/tce/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -185,22 +199,6 @@
  출발지 맥 주소 6 bytes(48bits)  802.1q tag 4 bytes = 32 bits</div><div class="post-footer">
         <a href="/networks/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/network/">network</a>,&nbsp;<a href="/tags/l2/">l2</a>,&nbsp;<a href="/tags/l3/">l3</a>,&nbsp;<a href="/tags/l4/">l4</a>,&nbsp;<a href="/tags/osi-7layer/">osi 7layer</a>,&nbsp;<a href="/tags/tcp/">tcp</a>,&nbsp;<a href="/tags/vxlan/">vxlan</a>,&nbsp;<a href="/tags/vxlan-header/">vxlan header</a>,&nbsp;<a href="/tags/geneve/">geneve</a>,&nbsp;<a href="/tags/geneve-header/">geneve header</a>,&nbsp;<a href="/tags/ip-header/">ip header</a>,&nbsp;<a href="/tags/ethernet-header/">ethernet header</a>,&nbsp;<a href="/tags/ethernet-frame/">Ethernet Frame</a>,&nbsp;<a href="/tags/tpc/ip-header/">tpc/ip header</a>,&nbsp;<a href="/tags/vmware/">vmware</a>,&nbsp;<a href="/tags/nsxt/">nsxt</a>,&nbsp;<a href="/tags/https/">https</a>,&nbsp;<a href="/tags/tls/">tls</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/avi/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/avi/avi.png"
-        data-srcset="/avi/avi.png, /avi/avi.png 1.5x, /avi/avi.png 2x"
-        data-sizes="auto"
-        alt="/avi/avi.png"
-        title="VMware Tanzu with AVI" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/avi/">The Documentation vSphere Tanzu with AVI Load Balancer</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Dokyung</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-04-05">2022-04-05</time></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw"></i>Documentation</a></span></div><div class="content">AVI에서 제공하는 AKO인 INGRESS Controller를 사용 하는 방법 제공
-1. TANZU에서 Cluster ServiceType 변경 serviceType  ManageMent Cluster로 Context 변경
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37  ### NodePort 변경 kubectl apply -f - &lt;&lt; EOF apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1 kind: AKODeploymentConfig metadata: name: nodeport01 spec: adminCredentialRef: name: avi-controller-credentials namespace: tkg-system-networking certificateAuthorityRef: name: avi-controller-ca namespace: tkg-system-networking cloudName: Default-Cloud clusterSelector: matchLabels: ako-l7-nodeport-01: &#34;true&#34; controller: avi.</div><div class="post-footer">
-        <a href="/avi/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/avi/">avi</a>,&nbsp;<a href="/tags/tanzu-integration-avi/">tanzu integration avi</a>,&nbsp;<a href="/tags/aviinfrasetting/">AVIinfrasetting</a>,&nbsp;<a href="/tags/clusterip/">ClusterIP</a>,&nbsp;<a href="/tags/avi-bgp/">AVI BGP</a>,&nbsp;<a href="/tags/avi-autoscalling/">AVI AutoScalling</a>,&nbsp;<a href="/tags/nodeport/">NodePort</a>,&nbsp;<a href="/tags/nodeportlocal/">NodePortLocal</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a>,&nbsp;<a href="/tags/avi-rhi/">avi rhi</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
