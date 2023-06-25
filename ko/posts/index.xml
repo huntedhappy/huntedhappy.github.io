@@ -4,7 +4,421 @@
         <link>https://huntedhappy.github.io/ko/posts/</link>
         <description>All Posts | Dokyung&#39;s DevOoOps</description>
         <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 20 Jun 2023 19:22:18 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation TAP &amp; JENKINS</title>
+    <link>https://huntedhappy.github.io/ko/tap-jenkins/</link>
+    <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://huntedhappy.github.io/ko/tap-jenkins/</guid>
+    <description><![CDATA[<h2 id="out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer">Out of the Box Supply Chain with testing on Jenkins for Supply Chain Choreographer</h2>
+<p>기본적으로 TAP에서는 TEKTON을 사용하여 Source Testing을 제공 하고 있다. 하지만 별도로 Jenkins를 연동 해서 Source Testing을 진행 해보고 싶어 할 수 도 있을 거 같다.</p>
+<p>그래서 TAP에서는 Jenkins와 연동을 제공 하고 있다.</p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/scc-ootb-supply-chain-testing-with-jenkins.html" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> with jenkins</a></p>
+<p>사전구성으로 Build Cluster에 Out of the Box Supply Chain With Testing or Out of the Box Supply Chain With Testing and Scanning로 supply_chain 구성이 필요 하다.</p>
+<p>사전에 Jenkins의 정보를 넣기 위해 Secret을 생성 해 준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | kubectl apply -f - -n tap-install
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Secret
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: MY-SECRET # secret name that will be referenced by the workload
+</span></span></span><span class="line"><span class="cl"><span class="s">type: Opaque
+</span></span></span><span class="line"><span class="cl"><span class="s">stringData:
+</span></span></span><span class="line"><span class="cl"><span class="s">  url: JENKINS-URL # target jenkins instance url
+</span></span></span><span class="line"><span class="cl"><span class="s">  username: USERNAME # jenkins username
+</span></span></span><span class="line"><span class="cl"><span class="s">  password: PASSWORD # jenkins password
+</span></span></span><span class="line"><span class="cl"><span class="s">  ca-cert: (Optional) PEM-CA-CERT # PEM encoded certificate
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>그리고 Out of the Box Jenkins를 사용하기 위해 Jenkin pipeline을 설정이 필요 합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: tekton.dev/v1beta1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Pipeline
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: developer-defined-jenkins-tekton-pipeline
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: developer-namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    #! This label should be provided to the Workload so that
+</span></span></span><span class="line"><span class="cl"><span class="s">    #! the supply chain can find this pipeline
+</span></span></span><span class="line"><span class="cl"><span class="s">    apps.tanzu.vmware.com/pipeline: jenkins-pipeline
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  results:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: jenkins-job-url   #! To show the job URL on the
+</span></span></span><span class="line"><span class="cl"><span class="s">    #! Tanzu Application Platform GUI
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: $(tasks.jenkins-task.results.jenkins-job-url)
+</span></span></span><span class="line"><span class="cl"><span class="s">  params:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: source-url        #! Required
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: source-revision   #! Required
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: secret-name       #! Required
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: job-name          #! Required
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: job-params        #! Required
+</span></span></span><span class="line"><span class="cl"><span class="s">  tasks:
+</span></span></span><span class="line"><span class="cl"><span class="s">  #! Required: Include the built-in task that triggers the
+</span></span></span><span class="line"><span class="cl"><span class="s">  #! given job in Jenkins
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: jenkins-task
+</span></span></span><span class="line"><span class="cl"><span class="s">    taskRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: jenkins-task
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: ClusterTask
+</span></span></span><span class="line"><span class="cl"><span class="s">    params:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: source-url
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.source-url)
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: source-revision
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.source-revision)
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: secret-name
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.secret-name)
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: job-name
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.job-name)
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: job-params
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.job-params)
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Tekton pipeline은 아래와 같이 이루어 져 있다.</p>
+<p>개발자는 아래와 같이 매개변수를 사용하여 Tekton pipeline을 생성 해야 합니다.</p>
+<ul>
+<li>source-url, required: 테스트 중인 모든 소스 코드가 포함된 소스 형상관리의 주소를 작성</li>
+<li>source-revision, required: Branch명을 넣어 주면 된다.</li>
+<li>secret-name, required: Jenkins의 사용자 이름, 암호, 인증서(선택사항)가 포함된 Secret Name</li>
+<li>job-name, required: Jenkins에 설정한 Pipeline의 이름과 일치</li>
+<li>job-params, required: Workload에 작성 한 JSON 문자열로 인코딩된 키-값 쌍 목록 
+** 여기에 작성 한 값이 JENKINS에 전달해야 되는거 같은대 안되는 거 같다. 개인적인 생각. 이렇게 동작하라고 사용 하는거 같은대.. 실제로 동작하지 않아 보임.
+Tasks:</li>
+<li>jenkins-task, required: 설정된 ClusterTask중 Jenkins작업을 트리거 하기 위해 실행, kubeclt get clustertask로 이름을 확인 할 수 있다.</li>
+</ul>
+<p>그리고 아래와 같이 Jenkinsfile을 생성 해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">#!/bin/env groovy
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">pipeline {
+</span></span></span><span class="line"><span class="cl"><span class="s">  agent {
+</span></span></span><span class="line"><span class="cl"><span class="s">    // Use an agent that is appropriate 
+</span></span></span><span class="line"><span class="cl"><span class="s">    // for your Jenkins installation. 
+</span></span></span><span class="line"><span class="cl"><span class="s">    // This is only an example
+</span></span></span><span class="line"><span class="cl"><span class="s">    kubernetes { 
+</span></span></span><span class="line"><span class="cl"><span class="s">      label &#39;maven&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">  }
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">  stages {
+</span></span></span><span class="line"><span class="cl"><span class="s">    stage(&#39;Checkout code&#39;) {
+</span></span></span><span class="line"><span class="cl"><span class="s">      steps {
+</span></span></span><span class="line"><span class="cl"><span class="s">        script {
+</span></span></span><span class="line"><span class="cl"><span class="s">          sourceUrl = params.SOURCE_REVISION
+</span></span></span><span class="line"><span class="cl"><span class="s">          indexSlash = sourceUrl.indexOf(&#34;/&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s">          revision = sourceUrl.substring(indexSlash + 1)
+</span></span></span><span class="line"><span class="cl"><span class="s">        }
+</span></span></span><span class="line"><span class="cl"><span class="s">        sh &#34;git clone ${params.GIT_URL} target&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        dir(&#34;target&#34;) {
+</span></span></span><span class="line"><span class="cl"><span class="s">          sh &#34;git checkout ${revision}&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        }
+</span></span></span><span class="line"><span class="cl"><span class="s">      }
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">    stage(&#39;Maven test&#39;) {
+</span></span></span><span class="line"><span class="cl"><span class="s">      steps {
+</span></span></span><span class="line"><span class="cl"><span class="s">        container(&#39;maven&#39;) {
+</span></span></span><span class="line"><span class="cl"><span class="s">          dir(&#34;target&#34;) {
+</span></span></span><span class="line"><span class="cl"><span class="s">            // Example tests with maven
+</span></span></span><span class="line"><span class="cl"><span class="s">            sh &#34;mvn clean test --no-transfer-progress&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          }
+</span></span></span><span class="line"><span class="cl"><span class="s">        }
+</span></span></span><span class="line"><span class="cl"><span class="s">      }
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">  }
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음 필드는 Jenkins 작업 정의에도 필요합니다.</p>
+<ul>
+<li>SOURCE_REVISION string</li>
+<li>GIT_URL string</li>
+</ul>
+<p>Jenkins에 파라미터를 제공하기 위해 GIT_URL을 작성 해준다.</p>
+<p>** 현재 1.5.2 까지 GIT_URL 및 GIT_REVISION이 JENKINS로 전달 되지 않는 것으로 보인다. 하여 Jenkins파일에 파라미터를 추가를 해주어야 한다.</p>
+<p>이렇게 설정 한 후에 Workload를 실행을 하게 되면 실제적으로 Jenkins를 통해 소스테스트가 이루어지는 것을 확인 할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; &#39;EOF&#39; | kubectl -n tap-install apply -f - --context $b
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Workload
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app.kubernetes.io/part-of: jenkins-tanzu-java-web-app
+</span></span></span><span class="line"><span class="cl"><span class="s">    apps.tanzu.vmware.com/has-tests: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    apps.tanzu.vmware.com/workload-type: web
+</span></span></span><span class="line"><span class="cl"><span class="s">    tanzu.app.live.view: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    tanzu.app.live.view.application.name: jenkins-tanzu-java-web-app
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: jenkins-tanzu-java-web-app
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  build:
+</span></span></span><span class="line"><span class="cl"><span class="s">    env:
+</span></span></span><span class="line"><span class="cl"><span class="s">    - name: BP_JVM_VERSION
+</span></span></span><span class="line"><span class="cl"><span class="s">      value: 17.*
+</span></span></span><span class="line"><span class="cl"><span class="s">  env:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: JAVA_TOOL_OPTIONS
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: &gt;-
+</span></span></span><span class="line"><span class="cl"><span class="s">      -Dserver.port=8080
+</span></span></span><span class="line"><span class="cl"><span class="s">      -XX:MaxMetaspaceSize=589794K
+</span></span></span><span class="line"><span class="cl"><span class="s">      -XX:MaxDirectMemorySize=400M
+</span></span></span><span class="line"><span class="cl"><span class="s">      -XX:ReservedCodeCacheSize=240M
+</span></span></span><span class="line"><span class="cl"><span class="s">      -Dmanagement.endpoints.web.exposure.include=*
+</span></span></span><span class="line"><span class="cl"><span class="s">      -Dmanagement.endpoint.health.show-details=always
+</span></span></span><span class="line"><span class="cl"><span class="s">  params:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: testing_pipeline_matching_labels
+</span></span></span><span class="line"><span class="cl"><span class="s">    value:
+</span></span></span><span class="line"><span class="cl"><span class="s">      apps.tanzu.vmware.com/pipeline: jenkins-pipeline
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: testing_pipeline_params
+</span></span></span><span class="line"><span class="cl"><span class="s">    value:
+</span></span></span><span class="line"><span class="cl"><span class="s">      job-name: tap-jenkins
+</span></span></span><span class="line"><span class="cl"><span class="s">#      job-params: &#34;[{\&#34;name\&#34;:\&#34;GIT_URL\&#34;, \&#34;value\&#34;:\&#34;https://gitlab.huntedhappy.kro.kr/tanzu/jenkins-tanzu-java-web-app/\&#34;}, {\&#34;name\&#34;:\&#34;GIT_BRANCH\&#34;, \&#34;value\&#34;:\&#34;main\&#34;}]&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">      job-params:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - name: GIT_URL
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: https://gitlab.huntedhappy.kro.kr/tanzu/jenkins-tanzu-java-web-app
+</span></span></span><span class="line"><span class="cl"><span class="s">        name: GIT_BRANCH
+</span></span></span><span class="line"><span class="cl"><span class="s">        value: main
+</span></span></span><span class="line"><span class="cl"><span class="s">      secret-name: jenkins
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: scanning_source_policy
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: sample-scan-policy
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: scanning_image_policy
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: sample-scan-policy
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_server_address
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: https://gitlab.huntedhappy.kro.kr
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_repository_name
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: jenkins-tanzu-java-web-app-gitops
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_repository_owner
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: tanzu
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_branch
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: main
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_user_name
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: tanzu
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_user_email
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: my1208@openbase.co.kr
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_commit_message
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: test_giops
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_ssh_secret
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: git-https
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_server_kind
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: gitlab
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_commit_branch
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: &#34;staging&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_pull_request_title
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: &#34;ready for review&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: gitops_pull_request_body
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: &#34;generated by supply chain&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: debug
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">    requests:
+</span></span></span><span class="line"><span class="cl"><span class="s">      cpu: 300m
+</span></span></span><span class="line"><span class="cl"><span class="s">      memory: 500Mi
+</span></span></span><span class="line"><span class="cl"><span class="s">  source:
+</span></span></span><span class="line"><span class="cl"><span class="s">    git:
+</span></span></span><span class="line"><span class="cl"><span class="s">      ref:
+</span></span></span><span class="line"><span class="cl"><span class="s">       branch: main
+</span></span></span><span class="line"><span class="cl"><span class="s">      url: https://gitlab.huntedhappy.kro.kr/tanzu/jenkins-tanzu-java-web-app
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="result">RESULT</h2>
+<p><figure><figcaption>
+            <h4>Jenkins에서 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP에서 Jenkins를 통해 배포 확인</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item><item>
     <title>The Documentation Sops</title>
     <link>https://huntedhappy.github.io/ko/sops/</link>
     <pubDate>Tue, 20 Jun 2023 19:22:18 &#43;0900</pubDate>
@@ -9820,339 +10234,6 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 
 <figure><figcaption>
             <h4>Result</h4>
-        </figcaption>
-</figure>
-</p>
-]]></description>
-</item><item>
-    <title>The Documentation Tanzu &amp; Keycloak</title>
-    <link>https://huntedhappy.github.io/ko/tanzu-keycloak/</link>
-    <pubDate>Fri, 15 Jul 2022 17:49:37 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://huntedhappy.github.io/ko/tanzu-keycloak/</guid>
-    <description><![CDATA[<h2 id="1-tanzu와-keycloak-연동">1. TANZU와 KEYCLOAK 연동</h2>
-<p>TANZU는 기본적으로 LDAPS 또는 OIDC와 연동이 가능합니다. 그 중에 무료 서비스인 KEYCLOAK을 활용하여 TANZU와 KEYCLOAK 연동</p>
-<h2 id="2-keycloak-구성">2. KEYCLOAK 구성</h2>
-<p><a href="https://www.keycloak.org/downloads" target="_blank" rel="noopener noreffer"><i class="fas fa-link"></i> KEYCLOAK DOWNLOAD LINK</a></p>
-<figure><figcaption>
-            <h4>keycloak download</h4>
-        </figcaption>
-</figure>
-
-<p>KEYCLOAK 설치
-인증서는 사설 인증서로 생성</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 압축 해제</span>
-</span></span><span class="line"><span class="cl">tar zxvf keycloak-18.0.2.tar.gz
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> keycloak-18.0.2
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN</span><span class="o">=</span>admin
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KEYCLOAK_ADMIN_PASSWORD</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">bin/kc.sh start-dev --https-certificate-file <span class="o">{</span>인증서<span class="o">}</span> --https-certificate-key-file <span class="o">{</span>인증서 KEY<span class="o">}</span> --https-port <span class="m">8443</span> --hostname <span class="o">{</span>hostname<span class="o">}</span> <span class="p">&amp;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>reaml 생성
-<figure><figcaption>
-            <h4>realm 생성</h4>
-        </figcaption>
-</figure>
-</p>
-<p>필요한 Client Scopes
-<figure><figcaption>
-            <h4>Client Scopes</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Client Scopes</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Client Scopes</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Clients 생성
-<figure><figcaption>
-            <h4>Clients 생성</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Clients 생성</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Clients 생성</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Clients 생성</h4>
-        </figcaption>
-</figure>
-</p>
-<figure><figcaption>
-            <h4>Role</h4>
-        </figcaption>
-</figure>
-
-<p>생성한 Client Scopes를 Default Client Scopes에 이동
-<figure><figcaption>
-            <h4>Scopes 선택</h4>
-        </figcaption>
-</figure>
-</p>
-<p><figure><figcaption>
-            <h4>Groups 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Groups 설정</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Roles
-<figure><figcaption>
-            <h4>Roles 설정</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Groups
-<figure><figcaption>
-            <h4>Groups 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Groups 설정</h4>
-        </figcaption>
-</figure>
-</p>
-<p>Users
-<figure><figcaption>
-            <h4>Users 생성</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Users 생성</h4>
-        </figcaption>
-</figure>
-</p>
-<p>User Password 설정
-<figure><figcaption>
-            <h4>User Password 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>User Password 설정</h4>
-        </figcaption>
-</figure>
-
-<figure><figcaption>
-            <h4>Group에 할당</h4>
-        </figcaption>
-</figure>
-</p>
-<h2 id="3-tanzu-구성">3. TANZU 구성</h2>
-<p>사설 인증서로 구성을 했기 때문에 당연히 worker Node에도 신뢰된 인증서로 들어가 있어야 하며, 처음 구성시 CA를 넣는 부분이 없기 때문에 배포가 완료 후 CA를 넣어야 함</p>
-<p>OIDC 추출</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## management cluster 변경</span>
-</span></span><span class="line"><span class="cl"><span class="nv">cluster</span><span class="o">=</span>tkgm02
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$IDENTITY_MANAGEMENT_TYPE</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">_TKG_CLUSTER_FORCE_ROLE</span><span class="o">=</span><span class="s2">&#34;management&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">FILTER_BY_ADDON_TYPE</span><span class="o">=</span><span class="s2">&#34;authentication/pinniped&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu cluster create <span class="nv">$cluster</span> --dry-run -f tkgm01.yaml &gt; <span class="nv">$cluster</span>-example-secret.yaml
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>위와 같이 하면 아래와 같은 파일을 확인 할 수 있다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apiVersion: v1
-</span></span><span class="line"><span class="cl">kind: Secret
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  annotations:
-</span></span><span class="line"><span class="cl">    tkg.tanzu.vmware.com/addon-type: authentication/pinniped
-</span></span><span class="line"><span class="cl">  labels:
-</span></span><span class="line"><span class="cl">    clusterctl.cluster.x-k8s.io/move: <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    tkg.tanzu.vmware.com/addon-name: pinniped
-</span></span><span class="line"><span class="cl">    tkg.tanzu.vmware.com/cluster-name: tkgm02
-</span></span><span class="line"><span class="cl">  name: cjenm-tkgm02-pinniped-addon
-</span></span><span class="line"><span class="cl">  namespace: tkg-system
-</span></span><span class="line"><span class="cl">stringData:
-</span></span><span class="line"><span class="cl">  values.yaml: <span class="p">|</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">#@data/values</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">#@overlay/match-child-defaults missing_ok=True</span>
-</span></span><span class="line"><span class="cl">    ---
-</span></span><span class="line"><span class="cl">    infrastructure_provider: vsphere
-</span></span><span class="line"><span class="cl">    tkg_cluster_role: management
-</span></span><span class="line"><span class="cl">    custom_cluster_issuer: <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    custom_tls_secret: <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    http_proxy: <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    https_proxy: <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    no_proxy: <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    identity_management_type: oidc
-</span></span><span class="line"><span class="cl">    pinniped:
-</span></span><span class="line"><span class="cl">      cert_duration: 2160h
-</span></span><span class="line"><span class="cl">      cert_renew_before: 360h
-</span></span><span class="line"><span class="cl">      supervisor_svc_endpoint: https://0.0.0.0:31234
-</span></span><span class="line"><span class="cl">      supervisor_ca_bundle_data: ca_bundle_data_of_supervisor_svc
-</span></span><span class="line"><span class="cl">      supervisor_svc_external_ip: 0.0.0.0
-</span></span><span class="line"><span class="cl">      supervisor_svc_external_dns: null
-</span></span><span class="line"><span class="cl">      upstream_oidc_client_id: <span class="o">{</span>CLIENT ID<span class="o">}</span>
-</span></span><span class="line"><span class="cl">      upstream_oidc_client_secret: <span class="o">{</span>CLIENT SECRET<span class="o">}</span>
-</span></span><span class="line"><span class="cl">      upstream_oidc_issuer_url: https://<span class="o">{</span>KEYCLAOK FQDN<span class="o">}</span>:8443/realms/access
-</span></span><span class="line"><span class="cl">      upstream_oidc_tls_ca_data: <span class="o">{</span>base64로 CA인증서<span class="o">}</span>
-</span></span><span class="line"><span class="cl">      upstream_oidc_additional_scopes:
-</span></span><span class="line"><span class="cl">      - openid
-</span></span><span class="line"><span class="cl">      - profile
-</span></span><span class="line"><span class="cl">      - email
-</span></span><span class="line"><span class="cl">      - groups
-</span></span><span class="line"><span class="cl">      - offline_access
-</span></span><span class="line"><span class="cl">      upstream_oidc_claims:
-</span></span><span class="line"><span class="cl">        username: email
-</span></span><span class="line"><span class="cl">        groups: groups
-</span></span><span class="line"><span class="cl">      supervisor:
-</span></span><span class="line"><span class="cl">        service:
-</span></span><span class="line"><span class="cl">          name: pinniped-supervisor
-</span></span><span class="line"><span class="cl">          type: LoadBalancer
-</span></span><span class="line"><span class="cl">type: tkg.tanzu.vmware.com/addon
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>실행</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f <span class="nv">$cluster</span>-example-secret.yaml -n tkg-system
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ol start="4">
-<li>완료 후 테스트</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-tkgm02
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
-</span></span></code></pre></td></tr></table>
-</div>
-</div><figure><figcaption>
-            <h4>요청</h4>
-        </figcaption>
-</figure>
-
-<p>생성한 계정으로 로그인
-<figure><figcaption>
-            <h4>LOGIN</h4>
-        </figcaption>
-</figure>
-</p>
-<p>TOKEN을 얻을 수 있다.
-<figure><figcaption>
-            <h4>TOKEN 얻기</h4>
-        </figcaption>
-</figure>
-</p>
-<p>TOKEN을 붙여 넣으면 아래와 같이 요청이 되는 것을 확인 할 수 있다.
-<figure><figcaption>
-            <h4>kubectl 요청</h4>
-        </figcaption>
-</figure>
-</p>
-<p>만약 권한이 없다면 아래 처럼 권한이 없다고 나온다.
-<figure><figcaption>
-            <h4>kubectl 요청</h4>
         </figcaption>
 </figure>
 </p>
