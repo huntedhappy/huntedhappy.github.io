@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>The Documentation NAP - Dokyung&#39;s DevOoOps</title><meta name="Description" content="NAP Built"><meta property="og:title" content="The Documentation NAP" />
+<meta property="og:description" content="NAP Built" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huntedhappy.github.io/nap/" /><meta property="og:image" content="https://huntedhappy.github.io/nap/nap.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-13T18:10:22+09:00" />
+<meta property="article:modified_time" content="2022-01-13T18:10:22+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://huntedhappy.github.io/nap/nap.png"/>
+<meta name="twitter:title" content="The Documentation NAP"/>
+<meta name="twitter:description" content="NAP Built"/>
+<meta name="application-name" content="Dokyung&#39;s DevOoOps">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/nap/" /><link rel="prev" href="https://huntedhappy.github.io/openshift/" /><link rel="next" href="https://huntedhappy.github.io/ldaps/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The Documentation NAP",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/huntedhappy.github.io\/nap\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/huntedhappy.github.io\/nap\/nap.png",
+                            "width":  1500 ,
+                            "height":  900 
+                        }],"genre": "posts","keywords": "nap, tanzu, k8s, devops, dk, dokyung","wordcount":  1142 ,
+        "url": "https:\/\/huntedhappy.github.io\/nap\/","datePublished": "2022-01-13T18:10:22+09:00","dateModified": "2022-01-13T18:10:22+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Dokyung"
+            },"description": "NAP Built"
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/categories/documentation/"> Docs </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/nap/">Korean</option><option value="/nap/" selected>한국어</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/categories/documentation/" title="">Docs</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/ko/nap/">Korean</option><option value="/nap/" selected>한국어</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation NAP</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-13">2022-01-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1142 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/nap/nap.png"
+        data-srcset="/nap/nap.png, /nap/nap.png 1.5x, /nap/nap.png 2x"
+        data-sizes="auto"
+        alt="/nap/nap.png"
+        title="NAP Built" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-nap">1. NAP?</a></li>
+    <li><a href="#2-사전-구성">2. 사전 구성</a></li>
+    <li><a href="#3-설치">3. 설치</a></li>
+    <li><a href="#4-waf">4. WAF</a>
+      <ul>
+        <li><a href="#41-test-web-구성">4.1. TEST WEB 구성</a></li>
+        <li><a href="#42-waf-구성">4.2. WAF 구성</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-elk">5. ELK</a>
+      <ul>
+        <li><a href="#51-elastic-연동">5.1. Elastic 연동</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="1-nap">1. NAP?</h2>
+<p>NAP(NGINX App Protect)은 WAF and DoS Protection을 제공 한다. NGINX Plus에서 제공을 하며 컨테이너 환경에서 App을 보호 하기 위한 솔루션이다. 대부분 컨테이너 환경에서 Ingress를 NGINX로 많이 사용 할 것이다. NGINX Plus 라이센스를 구매 하면 NAP을 사용 할 수 있다.</p>
+<h2 id="2-사전-구성">2. 사전 구성</h2>
+<ul>
+<li>Docker v18.09+</li>
+<li>GNU Make</li>
+<li>git</li>
+<li>Helm3</li>
+<li>OpenSSL</li>
+<li><a href="https://github.com/OpenVPN/easy-rsa.git" target="_blank" rel="noopener noreffer ">https://github.com/OpenVPN/easy-rsa.git</a></li>
+<li>apt install git \  make \ make-guile</li>
+</ul>
+<h2 id="3-설치">3. 설치</h2>
+<p>Namespace 생성 후 easy-rsa git clone</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns ingress-nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git clone https://github.com/OpenVPN/easy-rsa.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-1.png"/><figcaption>
+            <h4>easy rsa</h4>
+        </figcaption>
+</figure>
+
+<p>인증서 생성 (인증서 생성은 반드시 이렇게 하지 않아도 된다.)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> easy-rsa/easyrsa3/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./easyrsa init-pki
+</span></span><span class="line"><span class="cl">./easyrsa build-ca
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-2.png"/><figcaption>
+            <h4>easy rsa 구성#1</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./easyrsa gen-req wildcard
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./easyrsa sign-req server wildcard
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-3.png"/><figcaption>
+            <h4>easy rsa 구성#2</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">openssl rsa -in /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard.key -out /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 인증서 Secret 생성</span>
+</span></span><span class="line"><span class="cl">kubectl create -n ingress-nginx secret tls wildcard-tls --key /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key --cert /var/tmp/easy-rsa/easyrsa3/pki/issued/wildcard.crt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 안지워도된다.</span>
+</span></span><span class="line"><span class="cl">rm /var/tmp/easy-rsa/easyrsa3/pki/private/wildcard-unencrypted.key
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-4.png"/><figcaption>
+            <h4>ssl 인증서 secret 생성</h4>
+        </figcaption>
+</figure>
+
+<p>secret 인증서 확인</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get secret -n ingress-nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-5.png"/><figcaption>
+            <h4>secret 확인</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## nap을 위한 yaml파일 다운로드</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/nginxinc/kubernetes-ingress/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## nap을 위한 helm repo 주소 추가</span>
+</span></span><span class="line"><span class="cl">helm repo add nginx-stable https://helm.nginx.com/stable
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-6.png"/><figcaption>
+            <h4>git clone</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp/kubernetes-ingress/deployments/helm-chart
+</span></span><span class="line"><span class="cl">git checkout v1.11.3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-7.png"/><figcaption>
+            <h4>git checkout</h4>
+        </figcaption>
+</figure>
+
+<p>라이센스 발급 30일 trial을 받을 수 있다. 가입 필요
+<a href="https://www.nginx.com/free-trial-request-nginx-ingress-controller/" target="_blank" rel="noopener noreffer "><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;NAP 발급 링크</a></p>
+<p>미리 Harbor에 ingress-nginx project 생성이 되어 있어야함</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">REGISTRY</span><span class="o">=</span>&lt;registry IP or FQDN&gt;
+</span></span><span class="line"><span class="cl"><span class="nv">NS</span><span class="o">=</span>&lt;your namespace&gt;
+</span></span><span class="line"><span class="cl"><span class="nv">REGISTRY</span><span class="o">=</span>10.253.110.4
+</span></span><span class="line"><span class="cl"><span class="nv">NS</span><span class="o">=</span>ingress-nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-8.png"/><figcaption>
+            <h4>Harbor 확인</h4>
+        </figcaption>
+</figure>
+
+<p>발급 받은 라이센스를 복사</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir -p /var/tmp/kubernetes-ingress
+</span></span><span class="line"><span class="cl">cp nginx-repo.key nginx-repo.crt  /var/tmp/kubernetes-ingress
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-9.png"/><figcaption>
+            <h4>라이센스 복사</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp/kubernetes-ingress
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">make debian-image-nap-plus <span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress <span class="nv">TARGET</span><span class="o">=</span>container
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-10.png"/><figcaption>
+            <h4>Docker Pull</h4>
+        </figcaption>
+</figure>
+
+<p>docker image 확인</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker images
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-11.png"/><figcaption>
+            <h4>Docker Image 확인</h4>
+        </figcaption>
+</figure>
+
+<p>Harbor에 Push</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker image tag 18a49497920c <span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress:1.11.3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker login &lt;harbor IP&gt;
+</span></span><span class="line"><span class="cl">make push <span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$REGISTRY</span>/<span class="nv">$NS</span>/nginx-plus-ingress
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img src="/images/nap/1-12.png"/><figcaption>
+            <h4>Harbor push#1</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/nap/1-13.png"/><figcaption>
+            <h4>Harbor push#2</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/nap/1-14.png"/><figcaption>
+            <h4>Harbor push#3</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Helm Value 복사 (원본을 건드리지 않게 하기 위해 별도로 복사를 한다.)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> deployments/helm-chart
+</span></span><span class="line"><span class="cl">cp values-plus.yaml values-plus.yaml.orig
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-15.png"/><figcaption>
+            <h4>Helm Value 복사</h4>
+        </figcaption>
+</figure>
+
+<p>복사한 파일을 열어 보면 아래와 같이 되어 있는대 수정해줘야 하는 부분을 수정 해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## vi 편집</span>
+</span></span><span class="line"><span class="cl">vi values-plus.yaml 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 내용 (imagePullSecretName의 경우 Harbor에 Public으로 만들었으면 상관 없음)</span>
+</span></span><span class="line"><span class="cl">controller:
+</span></span><span class="line"><span class="cl">  replicaCount: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  nginxplus: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  image:
+</span></span><span class="line"><span class="cl">    repository: 10.253.106.46/ingress-nginx/nginx-plus-ingress
+</span></span><span class="line"><span class="cl">    tag: <span class="s2">&#34;1.11.3&#34;</span>
+</span></span><span class="line"><span class="cl">  service:
+</span></span><span class="line"><span class="cl">    externalTrafficPolicy: Cluster
+</span></span><span class="line"><span class="cl">  appprotect:
+</span></span><span class="line"><span class="cl">    <span class="c1">## Enable the App Protect module in the Ingress Controller.</span>
+</span></span><span class="line"><span class="cl">    enable: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  wildcardTLS:
+</span></span><span class="line"><span class="cl">    <span class="c1">## The base64-encoded TLS certificate for every Ingress host that has TLS enabled but no secret specified.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## If the parameter is not set, for such Ingress hosts NGINX will break any attempt to establish a TLS connection.</span>
+</span></span><span class="line"><span class="cl">    cert: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">## The base64-encoded TLS key for every Ingress host that has TLS enabled but no secret specified.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## If the parameter is not set, for such Ingress hosts NGINX will break any attempt to establish a TLS connection.</span>
+</span></span><span class="line"><span class="cl">    key: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">## The secret with a TLS certificate and key for every Ingress host that has TLS enabled but no secret specified.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## The value must follow the following format: `&lt;namespace&gt;/&lt;name&gt;`.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## Used as an alternative to specifying a certificate and key using `controller.wildcardTLS.cert` and `controller.wildcardTLS.key` parameters.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## Format: &lt;namespace&gt;/&lt;secret_name&gt;</span>
+</span></span><span class="line"><span class="cl">    secret: ingress-nginx/wildcard-tls
+</span></span><span class="line"><span class="cl">  serviceAccount:
+</span></span><span class="line"><span class="cl">    <span class="c1">## The name of the service account of the Ingress controller pods. Used for RBAC.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## Autogenerated if not set or set to &#34;&#34;.</span>
+</span></span><span class="line"><span class="cl">    name: ingress-nginx
+</span></span><span class="line"><span class="cl">    <span class="c1">## The name of the secret containing docker registry credentials.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## Secret must exist in the same namespace as the helm release.</span>
+</span></span><span class="line"><span class="cl">    imagePullSecretName: <span class="s2">&#34;regcred&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>PSP를 혀용하기 위해 해당 파일을 실행 해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/nginx-psp.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-16.png"/><figcaption>
+            <h4>psp 허용</h4>
+        </figcaption>
+</figure>
+
+<p>HELM 실행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret generic regcred --from-file<span class="o">=</span>.dockerconfigjson<span class="o">=</span><span class="nv">$HOME</span>/.docker/config.json --type<span class="o">=</span>kubernetes.io/dockerconfigjson -n ingress-nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">helm install nap nginx-stable/nginx-ingress -f values-plus.yaml -n ingress-nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/1-17.png"/><figcaption>
+            <h4>helm으로 nap 설치</h4>
+        </figcaption>
+</figure>
+
+<p>설치 확인</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">watch -n <span class="m">1</span> kubectl -n ingress-nginx get all
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img src="/images/nap/1-18.png"/><figcaption>
+            <h4>설치 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/nap/1-19.png"/><figcaption>
+            <h4>L4 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="4-waf">4. WAF</h2>
+<p>WAF TEST를 위해 웹 구성</p>
+<h3 id="41-test-web-구성">4.1. TEST WEB 구성</h3>
+<p>TEST를 하기 위해 제공하는 Manifest를 다운로드 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-rbac.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-ingress.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f cafe-rbac.yaml -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f cafe.yaml -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vi cafe-ingress.yaml <span class="o">(</span>인증서 만들었던 Domain으로 변경<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/2-1.png"/><figcaption>
+            <h4>Domain을 변경 한다.</h4>
+        </figcaption>
+</figure>
+
+<p>Domain 변경 후 실행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f cafe-ingress.yaml -n <span class="nb">test</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/2-2.png"/><figcaption>
+            <h4>Ingress 확인.</h4>
+        </figcaption>
+</figure>
+
+<p>POSTMAN으로 접속이 되는지 확인
+<figure><img src="/images/nap/2-3.png"/><figcaption>
+            <h4>POSTMAN 확인.</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="42-waf-구성">4.2. WAF 구성</h3>
+<p>ELK를 구성 하기 위해 syslog pod를 구성한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/syslog-rbac.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/syslog.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f syslog-rbac.yaml -n ingress-nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f syslog.yaml -n ingress-nginx
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-apple-uds.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-dataguard-alarm-policy.yaml
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/ap-logconf.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f  ap-apple-uds.yaml -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">kubeclt apply -f  ap-dataguard-alarm-policy.yaml -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f  ap-logconf.yaml -n <span class="nb">test</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ingress에 annotation을 설정</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/f5devcentral/f5-bd-tanzu-tkg-nginxplus/main/cafe-ingress-ap.yaml
+</span></span><span class="line"><span class="cl">kubectl get pod -n ingress-nginx -o wide
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## vi 편집 실행</span>
+</span></span><span class="line"><span class="cl">vi cafe-ingress-ap.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: networking.k8s.io/v1beta1
+</span></span><span class="line"><span class="cl">kind: Ingress
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: cafe-ingress
+</span></span><span class="line"><span class="cl">  annotations:
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-policy: <span class="s2">&#34;test/dataguard-alarm&#34;</span>
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-enable: <span class="s2">&#34;True&#34;</span>
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-security-log-enable: <span class="s2">&#34;True&#34;</span>
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-security-log: <span class="s2">&#34;test/logconf&#34;</span>
+</span></span><span class="line"><span class="cl">    appprotect.f5.com/app-protect-security-log-destination: <span class="s2">&#34;syslog:server=SYSLOG:514&#34;</span>
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  ingressClassName: nginx <span class="c1"># use only with k8s version &gt;= 1.18.0</span>
+</span></span><span class="line"><span class="cl">  tls:  - hosts:
+</span></span><span class="line"><span class="cl">    - cafe.vcf.local  <span class="c1">## 인증서와 동일한 도메인으로 변경</span>
+</span></span><span class="line"><span class="cl">  rules:
+</span></span><span class="line"><span class="cl">  - host: cafe.vcf.local <span class="c1">## 인증서와 동일한 도메인으로 변경</span>
+</span></span><span class="line"><span class="cl">    http:
+</span></span><span class="line"><span class="cl">      paths:
+</span></span><span class="line"><span class="cl">      - path: /tea
+</span></span><span class="line"><span class="cl">        backend:
+</span></span><span class="line"><span class="cl">          serviceName: tea-svc
+</span></span><span class="line"><span class="cl">          servicePort: <span class="m">80</span>
+</span></span><span class="line"><span class="cl">      - path: /coffee
+</span></span><span class="line"><span class="cl">        backend:
+</span></span><span class="line"><span class="cl">          serviceName: coffee-svc
+</span></span><span class="line"><span class="cl">          servicePort: <span class="m">80</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## syslog service ip</span>
+</span></span><span class="line"><span class="cl"><span class="nv">SYSLOG_IP</span><span class="o">=</span>10.101.182.155
+</span></span><span class="line"><span class="cl">vi cafe-ingress-ap.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sed -e <span class="s2">&#34;s/SYSLOG/</span><span class="nv">$SYSLOG_IP</span><span class="s2">/&#34;</span> cafe-ingress-ap.yaml &gt; cafe-ingress-ap-syslog.yaml
+</span></span><span class="line"><span class="cl">kubectl apply -n <span class="nb">test</span> -f cafe-ingress-ap-syslog.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get ingress -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래 명령어로 annotation을 확인 할 수 있다.</span>
+</span></span><span class="line"><span class="cl">kubrectl get ingress cafe-ingress -n <span class="nb">test</span> -o yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/2-4.png"/><figcaption>
+            <h4>Annotation 확인.</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get pod -n ingress-nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">LOG 확인
+</span></span><span class="line"><span class="cl">kubectl -n ingress-nginx <span class="nb">exec</span> -it syslog-65d847447d-ghbvq -- tail -f /var/log/messages
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img src="/images/nap/2-5.png"/><figcaption>
+            <h4>syslog pod 확인.</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/nap/2-6.png"/><figcaption>
+            <h4>PostMan 요청 후 REJECT확인.</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/nap/2-7.png"/><figcaption>
+            <h4>Pod 로그 확인시 Attack 확인.</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="5-elk">5. ELK</h2>
+<p>LOG를 좀 가시적이게 표현하기 위해 ELK를 구성</p>
+<h3 id="51-elastic-연동">5.1. Elastic 연동</h3>
+<p>logstach를 5144로 구성한 이유는 Logstach 구성시 514가 well-known 포트라 5144로 변경
+logstash yaml 파일, <a href="/nap/logstash_test.yaml" rel=""><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;logstash_test.yaml</a>.</p>
+<figure><img src="/images/nap/5-1.png"/><figcaption>
+            <h4>logstach 확인.</h4>
+        </figcaption>
+</figure>
+
+<p>ingress 설정에서 syslog server 를 logstash cluster IP로 설정
+<figure><img src="/images/nap/5-2.png"/><figcaption>
+            <h4>annotation에서 logstach로 syslog IP 변경 .</h4>
+        </figcaption>
+</figure>
+</p>
+<p>해당 파일을 다운로드 받는다.</p>
+<p><a href="https://github.com/f5devcentral/f5-waf-elk-dashboards" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Dashboard 링크 </a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir /var/tmp/kibana
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp/kibana
+</span></span><span class="line"><span class="cl">cp false-positives-dashboards.ndjson overview-dashboard.ndjson /var/tmp/kibana
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nap/5-3.png"/><figcaption>
+            <h4>파일 다운로드</h4>
+        </figcaption>
+</figure>
+
+<p>대쉬보드 업로드</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /var/tmp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">KIBANA_URL</span><span class="o">=</span> <span class="o">{</span>FQDN or IP<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">KIBANA_URL</span><span class="o">=</span>http://kibana.vcf.local:5601
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jq -s . kibana/overview-dashboard.ndjson <span class="p">|</span> jq <span class="s1">&#39;{&#34;objects&#34;: . }&#39;</span> <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>curl -k --location --request POST <span class="s2">&#34;</span><span class="nv">$KIBANA_URL</span><span class="s2">/api/kibana/dashboards/import&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;kbn-xsrf: true&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;Content-Type: text/plain&#39;</span> -d @- <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> jq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jq -s . kibana/false-positives-dashboards.ndjson <span class="p">|</span> jq <span class="s1">&#39;{&#34;objects&#34;: . }&#39;</span> <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>curl -k --location --request POST <span class="s2">&#34;</span><span class="nv">$KIBANA_URL</span><span class="s2">/api/kibana/dashboards/import&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;kbn-xsrf: true&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;Content-Type: text/plain&#39;</span> -d @- <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> jq
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>kibana접속 후 index patterns에 waf-logs-* 확인
+<figure><img src="/images/nap/5-4.png"/><figcaption>
+            <h4>kibana 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/nap/5-5.png"/><figcaption>
+            <h4>kibana 대시보드 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<p><a href="https://devcentral.f5.com/s/articles/Deploying-NGINXplus-with-AppProtect-in-Tanzu-Kubernetes-Grid" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> 참고문헌 </a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-01-13</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/nap/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/nap/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/nap/" data-title="The Documentation NAP" data-description="NAP Built"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/nap/">nap</a>,&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/devops/">devops</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/openshift/" class="prev" rel="prev" title="The Documentation Openshift"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation Openshift</a>
+            <a href="/ldaps/" class="next" rel="next" title="The Documentation LDAPS(AD)">The Documentation LDAPS(AD)<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.en","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '216068312', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>The Documentation Tanzu - Dokyung&#39;s DevOoOps</title><meta name="Description" content="Tanzu Explain"><meta property="og:title" content="The Documentation Tanzu" />
+<meta property="og:description" content="Tanzu Explain" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huntedhappy.github.io/ko/tanzu/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/tanzu/tanzu.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-01T17:50:00+09:00" />
+<meta property="article:modified_time" content="2022-01-01T17:50:00+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://huntedhappy.github.io/ko/tanzu/tanzu.png"/>
+<meta name="twitter:title" content="The Documentation Tanzu"/>
+<meta name="twitter:description" content="Tanzu Explain"/>
+<meta name="application-name" content="Dokyung&#39;s DevOoOps">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/ko/tanzu/" /><link rel="prev" href="https://huntedhappy.github.io/ko/jenkins/" /><link rel="next" href="https://huntedhappy.github.io/ko/minio/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The Documentation Tanzu",
+        "inLanguage": "ko",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/huntedhappy.github.io\/ko\/tanzu\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/huntedhappy.github.io\/ko\/tanzu\/tanzu.png",
+                            "width":  1162 ,
+                            "height":  322 
+                        }],"genre": "posts","keywords": "tanzu, k8s, devops, dk, dokyung","wordcount":  285 ,
+        "url": "https:\/\/huntedhappy.github.io\/ko\/tanzu\/","datePublished": "2022-01-01T17:50:00+09:00","dateModified": "2022-01-01T17:50:00+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Dokyung"
+            },"description": "Tanzu Explain"
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/ko/posts/"> Posts </a><a class="menu-item" href="/ko/tags/"> Tags </a><a class="menu-item" href="/ko/categories/"> Categories </a><a class="menu-item" href="/ko/categories/documentation/"> Docs </a><a class="menu-item" href="/ko/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="검색">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="지우기">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="언어 변경">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/tanzu/" selected>Korean</option><option value="/tanzu/">한국어</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="검색">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="지우기">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        취소
+                    </a>
+                </div><a class="menu-item" href="/ko/posts/" title="">Posts</a><a class="menu-item" href="/ko/tags/" title="">Tags</a><a class="menu-item" href="/ko/categories/" title="">Categories</a><a class="menu-item" href="/ko/categories/documentation/" title="">Docs</a><a class="menu-item" href="/ko/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="언어 변경">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/ko/tanzu/" selected>Korean</option><option value="/tanzu/">한국어</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">목차</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation Tanzu</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">분류: <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;285 단어&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;읽는데 약 2분&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/ko/tanzu/tanzu.png"
+        data-srcset="/ko/tanzu/tanzu.png, /ko/tanzu/tanzu.png 1.5x, /ko/tanzu/tanzu.png 2x"
+        data-sizes="auto"
+        alt="/ko/tanzu/tanzu.png"
+        title="Tanzu Explain" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>목차</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-vmware-tanzu">1. VMware TANZU?</a>
+      <ul>
+        <li><a href="#11-vsphere-with-tanzu">1.1. vsphere with tanzu?</a></li>
+        <li><a href="#12-tanzu-kubernetes-grid">1.2. Tanzu Kubernetes Grid?</a></li>
+        <li><a href="#13-tanzu-kubernetes-integrated">1.3. Tanzu Kubernetes Integrated?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="1-vmware-tanzu">1. VMware TANZU?</h2>
+<p>2019년 8월 VMware에서 처음으로 TANZU 포트 폴리오를 발표 했다. VM웨어의 대표 제품군인 ‘브이스피어(vSphere)’를 쿠버네티스 네이티브 플랫폼으로 바꾸겠다고 선언했다. 이를 위해 VM웨어는 ‘프로젝트 퍼시픽(Project Pacific)’을 진행했다.</p>
+<blockquote>
+<figure><img src="/images/tanzu/1-1.png"/><figcaption>
+            <h4>Tanzu Portfolio</h4>
+        </figcaption>
+</figure>
+
+</blockquote>
+<p>처음에는 VCF(VMware Cloud Foundation)라는 솔루션을 같이 설치 하면서 배포 해야 되었던 vsphere with tanzu가 현재는 VCF를 구성하지 않아도 설치가 가능하도록 변하게 되었다.</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>VCF(VMware Cloud Foundation)?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">VMware 제품군을 자동으로 설치 해주는 솔루션이다. Excel, JSON파일을 읽어 드려 vSphere, vCenter, vSAN 그리고 NSX-T를 한번에 배포 해주는 솔루션</div>
+        </div>
+    </div>
+<h3 id="11-vsphere-with-tanzu">1.1. vsphere with tanzu?</h3>
+<p>vsphere with tanzu는 말그대로 vsphere 에서 컨테이너를 바로 올리는 컨셉으로 나왔다. 용어로 TKGS라고도 불린다. Tanzu를 서비스형태로 올릴 수 있다고 해서 TKGS라고 불리며, 말그대로 vCenter에서 서비스 형태로 설치를 할 수 있기 때문이다. 하지만 vCenter에 종속이 되버리기 때문에 vCenter가 업그레이드가 되어야 K8S의 버전을 올릴수 있다. 정확히 말하면 vsphere위에 올릴 경우는 이벤트 형식으로 올리고, 프로덕션의 경우 TKC위에다가 POD를 올리는 것이 낫지 않을까 싶다.</p>
+<p>그래서 컨셉은 아래와 같다.</p>
+<blockquote>
+<figure><img src="/images/tanzu/1-2.png"/><figcaption>
+            <h4>TKGS</h4>
+        </figcaption>
+</figure>
+
+</blockquote>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>TKC(Tanzu Kubernetes Cluster)?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">TKC는 별도로 클러스터를 배포 하는 것이다. vmware에서 배포되는 Supervisor가 관리를 하게 되며, 네임스페이스에 TKC를 배포 하여 사용 할 수 있다.</div>
+        </div>
+    </div>
+<p>자세한 TKGS의 대한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.vmware.com/kr/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-4D0D375F-C001-4F1D-AAB1-1789C5577A94.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VMware TKGS</a></p>
+<h3 id="12-tanzu-kubernetes-grid">1.2. Tanzu Kubernetes Grid?</h3>
+<p>TKGM이라고 하며, 예전 Pivotal에서 PKS가 이렇게 변한 것이 아닐까 싶다. 예전 Pivotal에서는 bosh라는 관리 솔루션을 통해 PKS를 배포 하여 클러스터를 구성 하였다. 그렇다고 TKG가 기존에 없었던 솔루션은 아니다 6.7에서 이미 TKG는 있었지만 많은 사람들이 사용하지는 않았다. 그리고 Pivotal이 VMware로 인수 되면서 Tanzu로 변화하고 있는 것으로 알고 있다. TKGM은 TKGS와는 다른게 별도로 관리 클러스터를 배포해야 한다. TKGS같은 경우에는 Supervisor가 그 역할을 하였다.
+그리고 TKC를 배포하는 형식이다.</p>
+<p>자세한 TKG의 대한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-tkg-concepts.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VMware TKG</a></p>
+<h3 id="13-tanzu-kubernetes-integrated">1.3. Tanzu Kubernetes Integrated?</h3>
+<p>기존 Pivotal에서 Bosh로 배포한 PKS라고 보면 될거 같다. 현재는 사용하지 않을 것 같으므로 설명은 패스 하겠다.</p>
+<p>자세한 TKGI의 대한 설명은 링크를 걸어 두도록 하겠다. <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/index.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VMware TKGI</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>수정: 2022-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/ko/tanzu/index.md" target="_blank">마크다운 읽기</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="공유하기 Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/tanzu/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="공유하기 Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/tanzu/" data-title="The Documentation Tanzu" data-description="Tanzu Explain"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/ko/tags/tanzu/">tanzu</a>,&nbsp;<a href="/ko/tags/k8s/">k8s</a>,&nbsp;<a href="/ko/tags/devops/">devops</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">뒤로</a></span>&nbsp;|&nbsp;<span><a href="/ko/">홈</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ko/jenkins/" class="prev" rel="prev" title="The Documentation Jenkins"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation Jenkins</a>
+            <a href="/ko/minio/" class="next" rel="next" title="The Documentation Minio">The Documentation Minio<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="맨 위로">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="댓글 보기">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"복사하기","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"검색 결과 없음","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '216068312', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+</html>

@@ -1,0 +1,167 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-configmap
+data:
+  logstash.yml: |
+    http.host: "0.0.0.0"
+    path.config: /usr/share/logstash/pipeline
+  logstash.conf: |
+    input {
+       syslog {
+         port => 5144
+         codec => plain {
+           charset => "ISO-8859-1"
+         }
+       }
+    }
+    filter {
+      grok {
+        match => {
+          "message" => [
+            ",attack_type=\"%{DATA:attack_type}\"",
+            ",blocking_exception_reason=\"%{DATA:blocking_exception_reason}\"",
+            ",bot_anomalies=\"%{DATA:bot_anomalies}\"",
+            ",bot_category=\"%{DATA:bot_category}\"",
+            ",bot_signature_name=\"%{DATA:bot_signature_name}\"",
+            ",client_class=\"%{DATA:client_class}\"",
+            ",date_time=\"%{DATA:date_time}\"",
+            ",dest_port=\"%{DATA:dest_port}\"",
+            ",enforced_bot_anomalies=\"%{DATA:enforced_bot_anomalies}\"",
+            ",grpc_method=\"%{DATA:grpc_method}\"",
+            ",grpc_service=\"%{DATA:grpc_service}\"",
+            ",ip_client=\"%{DATA:ip_client}\"",
+            ",is_truncated=\"%{DATA:is_truncated}\"",
+            ",method=\"%{DATA:method}\"",
+            ",outcome=\"%{DATA:outcome}\"",
+            ",outcome_reason=\"%{DATA:outcome_reason}\"",
+            ",policy_name=\"%{DATA:policy_name}\"",
+            ",protocol=\"%{DATA:protocol}\"",
+            ",request_status=\"%{DATA:request_status}\"",
+            ",request=\"%{DATA:request}\"",
+            ",request_body_base64=\"%{DATA:request_body_base64}\"",
+            ",response_code=\"%{DATA:response_code}\"",
+            ",severity=\"%{DATA:severity}\"",
+            ",sig_cves=\"%{DATA:sig_cves}\"",
+            ",sig_ids=\"%{DATA:sig_ids}\"",
+            ",sig_names=\"%{DATA:sig_names}\"",
+            ",sig_set_names=\"%{DATA:sig_set_names}\"",
+            ",src_port=\"%{DATA:src_port}\"",
+            ",sub_violations=\"%{DATA:sub_violations}\"",
+            ",support_id=\"%{DATA:support_id}\"",
+            ",unit_hostname=\"%{DATA:unit_hostname}\"",
+            ",uri=\"%{DATA:uri}\"",
+            ",violations=\"%{DATA:violations}\"",
+            ",violation_details=\"%{DATA:violation_details}\"",
+            ",violation_rating=\"%{DATA:violation_rating}\"",
+            ",vs_name=\"%{DATA:vs_name}\"",
+            ",x_forwarded_for_header_value=\"%{DATA:x_forwarded_for_header_value}\""
+          ]
+        }
+        break_on_match => false
+      }
+      mutate {
+        split => { "attack_type" => "," }
+        split => { "sig_ids" => "," }
+        split => { "sig_names" => "," }
+        split => { "sig_cves" => "," }
+        split => { "staged_sig_ids" => "," }
+        split => { "staged_sig_names" => "," }
+        split => { "staged_sig_cves" => "," }
+        split => { "sig_set_names" => "," }
+        split => { "threat_campaign_names" => "," }
+        split => { "staged_threat_campaign_names" => "," }
+        split => { "violations" => "," }
+        split => { "sub_violations" => "," }
+      }
+      if [x_forwarded_for_header_value] != "N/A" {
+        mutate { add_field => { "source_host" => "%{x_forwarded_for_header_value}"}}
+      } else {
+        mutate { add_field => { "source_host" => "%{ip_client}"}}
+      }
+      geoip {
+        source => "source_host"
+      }
+    }
+    output {
+      elasticsearch {
+        hosts => ['elasticsearch-prd-coordinating-only.elasticsearch.svc.vcf.local:9200']
+        index => "waf-logs-%{+YYY.MM.dd}"
+      }
+    }
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: logstash
+  name: logstash
+spec:
+  containers:
+  - image: docker.elastic.co/logstash/logstash:7.13.0
+    name: logstash
+    ports:
+    - containerPort: 25826
+    - containerPort: 5044
+    env:
+            #    - name: ES_HOSTS
+            #      value: "https://elasticsearch-es-http:9200"
+            #    - name: ES_USER
+            #      value: "elastic"
+            #    - name: ES_PASSWORD
+            #      valueFrom:
+            #        secretKeyRef:
+            #          name: elasticsearch-es-elastic-user
+            #          key: elastic
+    resources: {}
+    volumeMounts:
+    - name: config-volume
+      mountPath: /usr/share/logstash/config
+    - name: logstash-pipeline-volume
+      mountPath: /usr/share/logstash/pipeline
+      #    - name: cert-ca
+      #      mountPath: "/etc/logstash/certificates"
+      #      readOnly: true
+  restartPolicy: OnFailure
+  volumes:
+  - name: config-volume
+    configMap:
+      name: logstash-configmap
+      items:
+        - key: logstash.yml
+          path: logstash.yml
+  - name: logstash-pipeline-volume
+    configMap:
+      name: logstash-configmap
+      items:
+        - key: logstash.conf
+          path: logstash.conf
+          #  - name: cert-ca
+          #    secret:
+          #      secretName: elasticsearch-es-http-certs-public
+
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: logstash
+  name: logstash
+spec:
+  ports:
+  - name: "25826"
+    port: 25826
+    targetPort: 25826
+  - name: "5044"
+    port: 5044
+    targetPort: 5044
+  - name: "5144"
+    port: 5144
+    targetPort: 5144
+  selector:
+    app: logstash
+status:
+  loadBalancer: {}

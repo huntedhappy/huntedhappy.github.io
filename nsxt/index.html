@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>The Documentation NSXT and Ansible - Dokyung&#39;s DevOoOps</title><meta name="Description" content="Ansible Configuration for NSXT"><meta property="og:title" content="The Documentation NSXT and Ansible" />
+<meta property="og:description" content="Ansible Configuration for NSXT" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huntedhappy.github.io/nsxt/" /><meta property="og:image" content="https://huntedhappy.github.io/nsxt/nsxt-ansible.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-19T09:27:36+09:00" />
+<meta property="article:modified_time" content="2022-01-19T09:27:36+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://huntedhappy.github.io/nsxt/nsxt-ansible.png"/>
+<meta name="twitter:title" content="The Documentation NSXT and Ansible"/>
+<meta name="twitter:description" content="Ansible Configuration for NSXT"/>
+<meta name="application-name" content="Dokyung&#39;s DevOoOps">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/nsxt/" /><link rel="prev" href="https://huntedhappy.github.io/ldaps/" /><link rel="next" href="https://huntedhappy.github.io/vsan/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The Documentation NSXT and Ansible",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/huntedhappy.github.io\/nsxt\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/huntedhappy.github.io\/nsxt\/nsxt-ansible.png",
+                            "width":  2466 ,
+                            "height":  1308 
+                        }],"genre": "posts","keywords": "minio, object storage, tanzu, k8s, devops, dk, dokyung","wordcount":  254 ,
+        "url": "https:\/\/huntedhappy.github.io\/nsxt\/","datePublished": "2022-01-19T09:27:36+09:00","dateModified": "2022-01-19T09:27:36+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Dokyung"
+            },"description": "Ansible Configuration for NSXT"
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/categories/documentation/"> Docs </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/nsxt/">Korean</option><option value="/nsxt/" selected>한국어</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/categories/documentation/" title="">Docs</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/ko/nsxt/">Korean</option><option value="/nsxt/" selected>한국어</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation NSXT and Ansible</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-19">2022-01-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;254 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/nsxt/nsxt-ansible.png"
+        data-srcset="/nsxt/nsxt-ansible.png, /nsxt/nsxt-ansible.png 1.5x, /nsxt/nsxt-ansible.png 2x"
+        data-sizes="auto"
+        alt="/nsxt/nsxt-ansible.png"
+        title="Ansible Configuration for NSXT" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-ansible을-통한-nsxt-구성">1. Ansible을 통한 NSXT 구성</a></li>
+    <li><a href="#2-설치">2. 설치</a>
+      <ul>
+        <li><a href="#21-파이썬-설치">2.1. 파이썬 설치</a></li>
+        <li><a href="#22-ovf-tool">2.2. OVF Tool</a></li>
+        <li><a href="#23-nsxt-ansible-download">2.3. NSXT Ansible Download</a></li>
+        <li><a href="#24-ansible-실행">2.4. Ansible 실행</a></li>
+        <li><a href="#25-github">2.5. Github</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="1-ansible을-통한-nsxt-구성">1. Ansible을 통한 NSXT 구성</h2>
+<p>NSXT를 Ansible로 구성.</p>
+<p>Ansible의 대한 보충 설명을 할 수 있으면 추후에 진행 하기로 하고 우선 설정의 대해서 설명을 먼저 하겠다.</p>
+<p>먼저.. 이 부분을 블로그로 쓰는게 맞을까라는 고민을 좀 했다.</p>
+<p>이유는 우선 Ansible로 구성이 되어 있기 때문에 코드가 들어가 있다. 그래서 NSXT Ansible Module을 다운로드 받고 나서 추가 된 부분을 Git Hub에 올려 두었다.</p>
+<h2 id="2-설치">2. 설치</h2>
+<h3 id="21-파이썬-설치">2.1. 파이썬 설치</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">yum update -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">yum install epel-release yum-utils python3-pip -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pip3 install --upgrade pip setuptools ansible pyvmomi pyvim requests ruamel.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">dnf install libnsl -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>파이썬을 설치 후 버전을 변경 하고 싶으면 아래 처럼 구성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rm /usr/bin/python
+</span></span><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python python /usr/bin/python<span class="o">(</span>TAB<span class="o">)</span> <span class="c1">## 설치되어 있는 버전을 확인 할 수 있다.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nsxt/1-1.png"/><figcaption>
+            <h4>파이썬 버전 확인</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 <span class="m">1</span>
+</span></span><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 <span class="m">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo update-alternatives --config python
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nsxt/1-2.png"/><figcaption>
+            <h4>파이썬 버전 선택</h4>
+        </figcaption>
+</figure>
+
+<h3 id="22-ovf-tool">2.2. OVF Tool</h3>
+<p>OVF Tool 다운로드</p>
+<p><a href="https://developer.vmware.com/web/tool/4.4.0/ovf" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> OVF Tool 다운로드 링크</a></p>
+<figure><img src="/images/nsxt/1-3.png"/><figcaption>
+            <h4>원하는 버전으로 다운로드 받는다.</h4>
+        </figcaption>
+</figure>
+
+<h3 id="23-nsxt-ansible-download">2.3. NSXT Ansible Download</h3>
+<p>제공한 버전은 3.1 기준으로 구성을 하였다.</p>
+<figure><img src="/images/nsxt/1-4.png"/><figcaption>
+            <h4>원하는 버전으로 다운로드 받는다.</h4>
+        </figcaption>
+</figure>
+
+<h3 id="24-ansible-실행">2.4. Ansible 실행</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ovftool -v 에러가 나오면 dnf install libnsl 설치
+</span></span><span class="line"><span class="cl">ansible-playbook 01_deploy_first_node.yml -vvv
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/nsxt/1-5.png"/><figcaption>
+            <h4>에러 발생시 dnf install libnsl 설치.</h4>
+        </figcaption>
+</figure>
+
+<h3 id="25-github">2.5. Github</h3>
+<p>다운로드 NSXT Ansible Module을 압축을 해제 하면 되는대, 그 부분을 별도로 github에 올려두었다.</p>
+<p>추가적으로 vars라는 폴더와, 00 ~ 10 번 , answerfile,yml이 추가 된 것을 확인 할 수 있다.</p>
+<p>코드를 하나 하나 설명을 하기에는.. 좀 벅찬 느낌이 든다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/huntedhappy/nsxt3.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-01-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/nsxt/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/nsxt/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/nsxt/" data-title="The Documentation NSXT and Ansible" data-description="Ansible Configuration for NSXT"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/minio/">minio</a>,&nbsp;<a href="/tags/object-storage/">object storage</a>,&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/devops/">devops</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ldaps/" class="prev" rel="prev" title="The Documentation LDAPS(AD)"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation LDAPS(AD)</a>
+            <a href="/vsan/" class="next" rel="next" title="The Documentation vSAN">The Documentation vSAN<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.en","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '216068312', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+</html>

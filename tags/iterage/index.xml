@@ -1,0 +1,584 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>iterage - Tag - Dokyung&#39;s DevOoOps</title>
+        <link>https://huntedhappy.github.io/tags/iterage/</link>
+        <description>iterage - Tag - Dokyung&#39;s DevOoOps</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 06 Dec 2022 20:51:50 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/iterage/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation Tanzu Community Edition with TAP</title>
+    <link>https://huntedhappy.github.io/tce/</link>
+    <pubDate>Tue, 06 Dec 2022 20:51:50 &#43;0900</pubDate>
+    <author>Dokyung</author>
+    <guid>https://huntedhappy.github.io/tce/</guid>
+    <description><![CDATA[<h2 id="1-tanzu-community-edition">1. TANZU Community Edition?</h2>
+<p>Tanzu Community Edition은 무료로 사용 가능한 VMware에서 제공하는 Kubernetes 플랫폼으로 손쉽게 클러스터를 구성 할 수 있는 솔루션이다.
+유료 서비스인 TKG 플랫폼의 모든 기능을 사용 할 수 있지만, 몇가지 제약적인 부분이 있을 수 있다. 가령 하나의 클러스터만 배포를 할 수 있는 단점이 있을 수 있으며 별도로 솔루션의 대한 이슈 및 설치의 대해서 지원을 받지 못한다.</p>
+<p>하지만 TKG 솔루션의 대해서 사전에 테스트 환경을 구축 함으로 Kubernetes 플랫폼의 손쉬운 배포 와 VMware에서 제공하는 오픈소스 에코 시스템을 통해 확장의 대해서도 손쉽게 구현을 할 수 있을 것이다.</p>
+<p>아래에 제공하는 오픈소스를 효율적으로 구성을 할 수 있다.
+<figure><figcaption>
+            <h4>Eco System</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="2-tanzu-community-edition-구성">2. TANZU Community Edition 구성</h2>
+<p><a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Docker 설치 링크</a>
+<a href="https://kind.sigs.k8s.io/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> KIND 설치 링크</a></p>
+<p>KIND Kubernetes 클러스터는 싱글 노드에서 구축을 할 수 있으며, 비슷한 솔루션으로는 MINIKUBE, K3S등이 있다.
+구성환경은 윈도우 10, i7-4770 CPU 16GB 이며 아래는 gitops를 사용하지 않았으며, 마찬가지로 gitops로 구성하여 git에 소스를 머지 할 수도 있지만 여기서는 해당 기능의 대해서는 넣지 않았다.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>KIND Install<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># MAC OS</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># for Intel Macs</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span> <span class="k">$(</span>uname -m<span class="k">)</span> <span class="o">=</span> x86_64 <span class="o">]&amp;&amp;</span> curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-amd64
+</span></span><span class="line"><span class="cl"><span class="c1"># for M1 / ARM Macs</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span> <span class="k">$(</span>uname -m<span class="k">)</span> <span class="o">=</span> arm64 <span class="o">]</span> <span class="o">&amp;&amp;</span> curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-arm64
+</span></span><span class="line"><span class="cl">chmod +x ./kind
+</span></span><span class="line"><span class="cl">mv ./kind /some-dir-in-your-PATH/kind
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># WINDOWS</span>
+</span></span><span class="line"><span class="cl"><span class="n">curl</span><span class="p">.</span><span class="py">exe</span> <span class="n">-Lo</span> <span class="nb">kind-windows</span><span class="n">-amd64</span><span class="p">.</span><span class="py">exe</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">kind</span><span class="p">.</span><span class="py">sigs</span><span class="p">.</span><span class="py">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">dl</span><span class="p">/</span><span class="n">v0</span><span class="p">.</span><span class="py">17</span><span class="p">.</span><span class="mf">0</span><span class="p">/</span><span class="nb">kind-windows</span><span class="n">-amd64</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Move-Item</span> <span class="p">.\</span><span class="nb">kind-windows</span><span class="n">-amd64</span><span class="p">.</span><span class="py">exe</span> <span class="n">c:</span><span class="p">\</span><span class="nb">some-dir</span><span class="n">-in-your-PATH</span><span class="p">\</span><span class="n">kind</span><span class="p">.</span><span class="py">exe</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># Linux</span>
+</span></span><span class="line"><span class="cl">curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
+</span></span><span class="line"><span class="cl">chmod +x ./kind
+</span></span><span class="line"><span class="cl">sudo mv ./kind /usr/local/bin/kind
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>KIND Cluster 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>kind-expose-port.yaml 파일 생성 후 아래 내용 추가</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Cluster</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">kind.x-k8s.io/v1alpha4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">nodes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span>- <span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">control-plane</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">extraPortMappings</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">31443</span><span class="w"> </span><span class="c"># expose port 31443 of the node to port 80 on the host for use later by Contour ingress (envoy)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">hostPort</span><span class="p">:</span><span class="w"> </span><span class="m">443</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">31080</span><span class="w"> </span><span class="c"># expose port 31080 of the node to port 80 on the host for use later by Contour ingress (envoy)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">hostPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 실행</span>
+</span></span><span class="line"><span class="cl"><span class="n">kind</span> <span class="n">create</span> <span class="n">cluster</span> <span class="p">-</span><span class="n">-config</span> <span class="nb">kind-expose</span><span class="n">-port</span><span class="p">.</span><span class="py">yaml</span> <span class="p">-</span><span class="n">-image</span> <span class="n">kindest</span><span class="p">/</span><span class="n">node</span><span class="err">:</span><span class="n">v1</span><span class="p">.</span><span class="py">23</span><span class="p">.</span><span class="py">12</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<figure><figcaption>
+            <h4>Kind Cluster 확인</h4>
+        </figcaption>
+</figure>
+
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Pivnet 다운로드 <i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">curl</span><span class="p">.</span><span class="py">exe</span> <span class="n">-Lo</span> <span class="nb">pivnet-windows</span><span class="n">-amd64</span><span class="p">-</span><span class="mf">3.0</span><span class="p">.</span><span class="py">1</span><span class="p">.</span><span class="py">exe</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="nb">pivotal-cf</span><span class="p">/</span><span class="nb">pivnet-cli</span><span class="p">/</span><span class="n">releases</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">v3</span><span class="p">.</span><span class="py">0</span><span class="p">.</span><span class="mf">1</span><span class="p">/</span><span class="nb">pivnet-windows</span><span class="n">-amd64</span><span class="p">-</span><span class="mf">3.0</span><span class="p">.</span><span class="py">1</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Move-Item</span> <span class="p">.\</span><span class="nb">pivnet-windows</span><span class="n">-amd64</span><span class="p">-</span><span class="mf">3.0</span><span class="p">.</span><span class="py">1</span><span class="p">.</span><span class="py">exe</span> <span class="n">c:</span><span class="p">\</span><span class="n">tmc</span><span class="p">\</span><span class="n">pivnet</span><span class="p">.</span><span class="py">exe</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pivnet</span> <span class="n">login</span> <span class="p">-</span><span class="n">-api-token</span><span class="p">=&lt;</span><span class="n">API</span> <span class="n">Token</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">## TANZU NET에서 EULA Accept 필요</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tanzu CLI Install<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># tanzu application framework download</span>
+</span></span><span class="line"><span class="cl">pivnet dlpf -p tanzu-application-platform -r 1.3.2 -g *framework*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># Linux</span>
+</span></span><span class="line"><span class="cl">tar xvf tanzu-framework-*-amd64-*.tar
+</span></span><span class="line"><span class="cl">install cli/core/v0.25.0/tanzu-core-*_amd64 /usr/local/bin/tanzu
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TANZU_CLI_NO_INIT</span><span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Windows</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Expand-Archive</span> <span class="n">-Force</span> <span class="nb">tanzu-framework</span><span class="p">-*</span><span class="n">-amd64</span><span class="p">-*.</span><span class="n">zip</span> <span class="n">c:</span><span class="p">\</span><span class="n">tmc</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Copy-Item</span> <span class="n">C:</span><span class="p">\</span><span class="n">tmc</span><span class="p">\</span><span class="n">cli</span><span class="p">\</span><span class="n">core</span><span class="p">\</span><span class="n">v0</span><span class="p">.</span><span class="py">25</span><span class="p">.</span><span class="mf">0</span><span class="p">/</span><span class="nb">tanzu-core</span><span class="p">-*</span><span class="n">_amd64</span><span class="p">*</span> <span class="n">c:</span><span class="p">\</span><span class="n">tmc</span><span class="p">\</span><span class="n">tanzu</span><span class="p">.</span><span class="py">exe</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Version 확인</span>
+</span></span><span class="line"><span class="cl"><span class="n">tanzu</span> <span class="n">version</span>
+</span></span><span class="line"><span class="cl"><span class="p">-----------------</span>
+</span></span><span class="line"><span class="cl"><span class="n">version</span><span class="err">:</span> <span class="n">v0</span><span class="p">.</span><span class="py">25</span><span class="p">.</span><span class="py">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">buildDate</span><span class="err">:</span> <span class="mf">2022</span><span class="p">-</span><span class="mf">08</span><span class="p">-</span><span class="mf">25</span>
+</span></span><span class="line"><span class="cl"><span class="n">sha</span><span class="err">:</span> <span class="n">6288c751-dirty</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Plugin 설치</span>
+</span></span><span class="line"><span class="cl"><span class="n">tanzu</span> <span class="n">plugin</span> <span class="n">install</span> <span class="p">-</span><span class="n">-local</span> <span class="n">c:</span><span class="p">\</span><span class="n">tmc</span><span class="p">\</span><span class="nb">cli </span><span class="n">all</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Cluster Essentials Install<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># tanzu-cluster-essentials download</span>
+</span></span><span class="line"><span class="cl">pivnet dlpf -p tanzu-cluster-essentials -r 1.3.0 -g *essentials*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">tar</span> <span class="n">xzvf</span> <span class="nb">tanzu-cluster</span><span class="n">-essentials-windows-amd64</span><span class="p">-</span><span class="mf">1.3</span><span class="p">.</span><span class="py">0</span><span class="p">.</span><span class="py">tgz</span> <span class="n">-C</span> <span class="n">c:</span><span class="p">\</span><span class="n">tmc</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Env:TANZUNET_USERNAME</span><span class="p">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Env:TANZUNET_PASSWORD</span><span class="p">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Env:INSTALL_BUNDLE</span><span class="p">=</span><span class="s1">&#39;registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle:1.3.0&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Env:INSTALL_REGISTRY_HOSTNAME</span><span class="p">=</span><span class="s1">&#39;registry.tanzu.vmware.com&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Env:INSTALL_REGISTRY_USERNAME</span><span class="p">=</span><span class="nv">$Env:TANZUNET_USERNAME</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Env:INSTALL_REGISTRY_PASSWORD</span><span class="p">=</span><span class="nv">$Env:TANZUNET_PASSWORD</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">c:</span><span class="p">\</span><span class="n">tmc</span><span class="p">\</span><span class="n">install</span><span class="p">.</span><span class="py">bat</span> <span class="n">-y</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p>만약 원하는 OS만 받고 싶으면 해당 하는 파일이름을 -g {설치하고자 하는 OS 선택}
+<figure><figcaption>
+            <h4>TKGM Downloads</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>essentials Downloads</h4>
+        </figcaption>
+</figure>
+</p>
+<p>구성된 KIND cluster에 TAP iterate를 설치하여 source를 테스트 하고 빠르게 build를 함으로 개발의 민첩성을 제공 할 수 있다.
+별도의 클러스터를 구성해서 사용 할 수 있지만, 이렇게 TCE를 구성함으로 인해서 노트북에서도 생성 후 테스트를 할 수 있다.</p>
+<figure><figcaption>
+            <h4>iterate에 포함된 opensource</h4>
+        </figcaption>
+</figure>
+
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tanzu Application Install<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create secret docker-registry tap-registry --docker-server<span class="o">=</span>registry.tanzu.vmware.com --docker-username<span class="o">=</span><span class="nv">$Env</span>:TANZUNET_USERNAME --docker-password<span class="o">=</span><span class="nv">$Env</span>:TANZUNET_PASSWORD -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tanzu package repository add tanzu-tap-repository --url registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:1.3.2 -n tap-install --wait<span class="o">=</span><span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># plugin 확인</span>
+</span></span><span class="line"><span class="cl">tanzu package available list --namespace tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># GIT 환경변수 등록</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Env</span>:GITHUB_USERNAME<span class="o">=</span>github-name
+</span></span><span class="line"><span class="cl"><span class="nv">$Env</span>:GITHUB_TOKEN<span class="o">=</span>api-token
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># tap-values.yaml</span>
+</span></span><span class="line"><span class="cl">shared:
+</span></span><span class="line"><span class="cl">  ingress_domain: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  image_registry:
+</span></span><span class="line"><span class="cl">    project_path: ghcr.io/<span class="nv">$Env</span>:GITHUB_USERNAME
+</span></span><span class="line"><span class="cl">    username: <span class="nv">$Env</span>:GITHUB_USERNAME
+</span></span><span class="line"><span class="cl">    password: <span class="nv">$Env</span>:GITHUB_TOKEN
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">ceip_policy_disclosed: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">profile: iterate
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">supply_chain: basic
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">contour:
+</span></span><span class="line"><span class="cl">  contour:
+</span></span><span class="line"><span class="cl">    replicas: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  envoy:
+</span></span><span class="line"><span class="cl">    service:
+</span></span><span class="line"><span class="cl">      type: NodePort
+</span></span><span class="line"><span class="cl">      nodePorts:
+</span></span><span class="line"><span class="cl">        http: <span class="m">31080</span>
+</span></span><span class="line"><span class="cl">        https: <span class="m">31443</span>
+</span></span><span class="line"><span class="cl">    hostPorts:
+</span></span><span class="line"><span class="cl">      enable: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cnrs:
+</span></span><span class="line"><span class="cl">  domain_template: <span class="s2">&#34;{{.Name}}.{{.Domain}}&#34;</span>
+</span></span><span class="line"><span class="cl">  provider: <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">excluded_packages:
+</span></span><span class="line"><span class="cl">- policy.apps.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">- image-policy-webhook.signing.apps.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">- eventing.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">- sso.apps.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># TAP 설치</span>
+</span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.3.2 -f tap-values.yaml -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Namespace 생성</span>
+</span></span><span class="line"><span class="cl">kubectl get app -n tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Workload 실행 파일 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># git-repository-credentials 생성</span>
+</span></span><span class="line"><span class="cl">kubectl create secret docker-registry git-repository-credentials --docker-server ghcr.io --docker-username <span class="nv">$Env</span>:GITHUB_USERNAME --password <span class="nv">$Env</span>:GITHUB_TOKEN -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># rbac.yaml 생성</span>
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: ServiceAccount
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: default
+</span></span><span class="line"><span class="cl">secrets:
+</span></span><span class="line"><span class="cl">- name: git-registry-credentials
+</span></span><span class="line"><span class="cl">imagePullSecrets:
+</span></span><span class="line"><span class="cl">- name: git-registry-credentials
+</span></span><span class="line"><span class="cl">- name: tap-registry
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: rbac.authorization.k8s.io/v1
+</span></span><span class="line"><span class="cl">kind: RoleBinding
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: default-permit-deliverable
+</span></span><span class="line"><span class="cl">roleRef:
+</span></span><span class="line"><span class="cl">  apiGroup: rbac.authorization.k8s.io
+</span></span><span class="line"><span class="cl">  kind: ClusterRole
+</span></span><span class="line"><span class="cl">  name: deliverable
+</span></span><span class="line"><span class="cl">subjects:
+</span></span><span class="line"><span class="cl">  - kind: ServiceAccount
+</span></span><span class="line"><span class="cl">    name: default
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: rbac.authorization.k8s.io/v1
+</span></span><span class="line"><span class="cl">kind: RoleBinding
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: default-permit-workload
+</span></span><span class="line"><span class="cl">roleRef:
+</span></span><span class="line"><span class="cl">  apiGroup: rbac.authorization.k8s.io
+</span></span><span class="line"><span class="cl">  kind: ClusterRole
+</span></span><span class="line"><span class="cl">  name: workload
+</span></span><span class="line"><span class="cl">subjects:
+</span></span><span class="line"><span class="cl">- kind: ServiceAccount
+</span></span><span class="line"><span class="cl">  name: default
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># rbac 실행</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f rbac.yaml -n tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 새 파일 생성</span>
+</span></span><span class="line"><span class="cl">tanzu-java-web-app.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 아래 내용 추가</span>
+</span></span><span class="line"><span class="cl">apiVersion: carto.run/v1alpha1
+</span></span><span class="line"><span class="cl">kind: Workload
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    apps.tanzu.vmware.com/workload-type: web
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  params:
+</span></span><span class="line"><span class="cl">  - name: annotations
+</span></span><span class="line"><span class="cl">    value:
+</span></span><span class="line"><span class="cl">      autoscaling.knative.dev/minScale: <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">  source:
+</span></span><span class="line"><span class="cl">    git:
+</span></span><span class="line"><span class="cl">      ref:
+</span></span><span class="line"><span class="cl">        branch: main
+</span></span><span class="line"><span class="cl">      url: https://github.com/sample-accelerators/tanzu-java-web-app
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># workload 실행</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f tanzu-java-web-app.yaml -n tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Workload 확인<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu app workload get tanzu-java-web-app -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get pod, httpproxy -n tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p><figure><figcaption>
+            <h4>Workload 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Workload 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Result</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item>
+</channel>
+</rss>
