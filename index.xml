@@ -139,7 +139,7 @@
 </span></span><span class="line"><span class="cl">allow_k8s_contexts<span class="o">(</span><span class="s1">&#39;iterate-cluster-admin@iterate-cluster&#39;</span><span class="o">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="lsp의-설정이-제대로-들어-갔는지-확인이-필요-하다">LSP의 설정이 제대로 들어 갔는지 확인이 필요 하다.</h2>
+</div><p>LSP의 설정이 제대로 들어 갔는지 확인이 필요 하다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1

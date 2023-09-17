@@ -80,7 +80,7 @@ k8s_resource('tanzu-java-web-app-test', port_forwards=["8080:8080"],
 allow_k8s_contexts('iterate-cluster-admin@iterate-cluster')
 ```
 
-## LSP의 설정이 제대로 들어 갔는지 확인이 필요 하다.
+LSP의 설정이 제대로 들어 갔는지 확인이 필요 하다.
 ```shell
 tanzu apps lsp health
 
