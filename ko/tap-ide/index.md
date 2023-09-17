@@ -11,7 +11,7 @@ TANZU TAP 1.6 이전 버전에서는 윈도우에서 VisualStudioCode에서 라�
 
 해당 내용을 보자면 아래와 같다.
 
-LSP의 경우 개발자에게 로컬 소스 코드를 TAP 클러스터에 원활하게 업로드 할 수 있는 안전하고 또한 사용자 친화적인 접근 방식을 제공 한다고 한다. 
+LSP의 경우 개발자에게 로컬 소스 코드를 TAP 클러스터에 원활하게 그리고 안전하게 업로드 할 수 있으며 또한 사용자 친화적인 접근 방식을 제공 한다고 한다. 
 
 해당 패키지는 iterate 및 full 프로파일에서만 지원하며, 만약 제외를 하고 싶으면 local-source-proxy.apps.tanzu.vmware.com 을 tap-values.yaml에서 제외 하면 된다.
 
