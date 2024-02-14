@@ -3,9 +3,9 @@
 
 MiniO는 Minimal Object Storage를 의미 하며, 오픈소스 형태로 제공 하는 오브젝트 스토리지이다. 
 
-{{< admonition tip "Object Storage?" >}}
+{{&lt; admonition tip &#34;Object Storage?&#34; &gt;}}
 오브젝트 스토리지는 이미지, 오디오 파일, 스프레드시트 또는 바이너리 실행 코드등 문서 처럼 한줄 한문자 바꾸는 형식이 아니라 하나의 파일이 다 바뀌는 것으로 이해하면 쉬울 거 같다.
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 MiniO는 3가지 형태로 도구를 제공 한다.
 
@@ -30,9 +30,9 @@ Erasure Coding은 원본 데이터를 가져와서 데이터가 필요할 때 �
 
 이 경우 다음과 같은 방적식을 생성한다고 가정 합니다.
 
-* x + y = 14
+* x &#43; y = 14
 * x - y = 4
-* 2x + y = 23
+* 2x &#43; y = 23
 
 객체를 재생성 하려면 이 세 방정식 중 두가지가 필요 하므로 디코딩 할 수 있습니다. 따라서 방정식을 풀면 x와 y에 대한 값을 얻을 수 있습니다.
 
@@ -40,11 +40,11 @@ Erasure Coding은 원본 데이터를 가져와서 데이터가 필요할 때 �
 
 요약하자면, Erasure Code를 활용하여 데이터를 인코딩 하고, 데이터 손실시 디코딩 과정을 거쳐 원본 데이터를 복구하는 데이터 복구 기법중 하나
 
-{{< figure src="/images/minio/1-1.png" title="Decode / Encode" >}}
+{{&lt; figure src=&#34;/images/minio/1-1.png&#34; title=&#34;Decode / Encode&#34; &gt;}}
 
-자세한 설명은 링크를 걸어 두도록 하겠다. [<i class="fas fa-link"></i> Minio Erasure Coding](https://docs.min.io/minio/baremetal/concepts/erasure-coding.html)
+자세한 설명은 링크를 걸어 두도록 하겠다. [&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; Minio Erasure Coding](https://docs.min.io/minio/baremetal/concepts/erasure-coding.html)
 
-참고링크#1 [<i class="fas fa-link"></i> 참고링크#1](https://stonefly.com/blog/understanding-erasure-coding)
+참고링크#1 [&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; 참고링크#1](https://stonefly.com/blog/understanding-erasure-coding)
 
 ### 1.2. Erasure Coding vs RAID?
 RAID로 구성시 데이터를 다른 위치에 저장할 수 있으며 드라이브 오류로부터 보호, Erasure Coding은 데이터가 부분적으로 분할된 다음 확장되고 인코딩이 된다. 그 후 세그먼트는 여러 위치에 보관하도록 구성이 된다. 
@@ -62,12 +62,12 @@ Erasure Coding은 고급 데이터 보호 및 재해 복구 방법을 제공합�
 * Suitability: 데이터를 복구하는 데 데이터의 Suitability만 필요합니다. 원본 데이터가 필요하지 않습니다.
 * 유연성: 시스템을 오프라인으로 전환하지 않고도 편리할 때 고장난 구성 요소를 교체할 수 있습니다.
 
-{{< admonition tip "Suitablility?" >}}
+{{&lt; admonition tip &#34;Suitablility?&#34; &gt;}}
 Suitablility란 더 큰 집합에서의 부분적인 집합.
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### 1.4. MiniO Erasure Code 계산기
-> [<i class="fas fa-link"></i> 계산기 LINK](https://min.io/product/erasure-code-calculator?utm_term=erasure%20coding&utm_campaign=Erasure+Coding+1.4&utm_source=adwords&utm_medium=ppc&hsa_acc=8976569894&hsa_cam=13884673572&hsa_grp=127699937027&hsa_ad=533469681242&hsa_src=g&hsa_tgt=kwd-314402742856&hsa_kw=erasure%20coding&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gclid=Cj0KCQiAip-PBhDVARIsAPP2xc2nLMVBzYtNdDYlETP-3UjGr3ZqD7sA-IPzfhNnxWhzes03cq62ViUaAtprEALw_wcB)
+&gt; [&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; 계산기 LINK](https://min.io/product/erasure-code-calculator?utm_term=erasure%20coding&amp;utm_campaign=Erasure&#43;Coding&#43;1.4&amp;utm_source=adwords&amp;utm_medium=ppc&amp;hsa_acc=8976569894&amp;hsa_cam=13884673572&amp;hsa_grp=127699937027&amp;hsa_ad=533469681242&amp;hsa_src=g&amp;hsa_tgt=kwd-314402742856&amp;hsa_kw=erasure%20coding&amp;hsa_mt=p&amp;hsa_net=adwords&amp;hsa_ver=3&amp;gclid=Cj0KCQiAip-PBhDVARIsAPP2xc2nLMVBzYtNdDYlETP-3UjGr3ZqD7sA-IPzfhNnxWhzes03cq62ViUaAtprEALw_wcB)
 
 
 ## 2. Immutability
@@ -75,24 +75,30 @@ MiniO 서버는 특정 개체에 대해 WORM을 허용하거나 모든 객체에
 
 객체 잠금을 사용하려면 버킷 생성시 잠금을 활성화해야 하며, 객체 잠금도 버킷의 버전 관리를 자동으로 활성화 합니다. 또는 버킷에서 생성된 객체에 적용할 기본 보존 기간 및 보존 모드를 버킷에 구성 할 수 있습니다.
 
-{{< admonition tip "WORM?" >}}
+{{&lt; admonition tip &#34;WORM?&#34; &gt;}}
 Read Many(WORM)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 
 ### 2.1. 개념
-{{< admonition note "Immutability 개념" >}}
+{{&lt; admonition note &#34;Immutability 개념&#34; &gt;}}
 * 객체가 법적 보존 상태에 있는 경우 해당 버전ID에 대한 법적 보존이 명시적으로 제거되지 않는 한 삭제 할 수 없다. 그렇지 않으면 DeleteObjectVersio()이 실패 한다.
 * Compliance모드 에서는 해당 버전 ID의 보존기간이 만료될 때때가지 누구도 객체를 삭제 할 수 없다. 사용자에게 필요한 거버넌스 우회 권한이 있는 경우 Compliance모드 에서 개체의 보존 날짜를 연장 할 수 있다.
 * 객체 잠금 구성이 버킷으로 설정되면
-> * 새 객체는 버킷 객체 잠금 구성의 보존 설정을 자동으로 상속한다. 
-> * 개체를 업로드할 때 보존 헤더를 선택적으로 설정 할 수 있다.
-> * 개체에서 명시적으로 PutObjectRetention API 호출을 할 수 있다.
+&gt; * 새 객체는 버킷 객체 잠금 구성의 보존 설정을 자동으로 상속한다. 
+&gt; * 개체를 업로드할 때 보존 헤더를 선택적으로 설정 할 수 있다.
+&gt; * 개체에서 명시적으로 PutObjectRetention API 호출을 할 수 있다.
 * MINIO_NTP_SERVER환경 변수는 보존하는 날짜를 시스템시간으로 설정이 필요하지 않는 경우 원격 NTP 서버를 구성 할 수 있다.
 * 객체잠금 기능은 삭제 코드 및 분산 삭제 코드 설정에서만 사용 할 수 있다.
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-자세한 설명은 링크를 걸어 두도록 하겠다. [<i class="fas fa-link"></i> Minio Immutability](https://docs.min.io/docs/minio-bucket-object-lock-guide.html)
+자세한 설명은 링크를 걸어 두도록 하겠다. [&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; Minio Immutability](https://docs.min.io/docs/minio-bucket-object-lock-guide.html)
 
 
-### 카스텐 설정시 MiniO로 Backup Storage 구성 링크 참조. [<i class="fas fa-link"></i> Kasten MiniO Install](https://huntedhappy.github.io/ko/k10/)
+### 카스텐 설정시 MiniO로 Backup Storage 구성 링크 참조. [&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; Kasten MiniO Install](https://huntedhappy.github.io/ko/k10/)
+
+---
+
+> Author: Dokyung  
+> URL: https://huntedhappy.github.io/ko/minio/  
+

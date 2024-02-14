@@ -1,22 +1,21 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>jenkins - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/jenkins/</link>
-        <description>jenkins - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/jenkins/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation TAP &amp; JENKINS</title>
-    <link>https://huntedhappy.github.io/ko/tap-jenkins/</link>
-    <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tap-jenkins/</guid>
-    <description><![CDATA[<h2 id="out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer">Out of the Box Supply Chain with testing on Jenkins for Supply Chain Choreographer</h2>
-<p>기본적으로 TAP에서는 TEKTON을 사용하여 Source Testing을 제공 하고 있다. 하지만 별도로 Jenkins를 연동 해서 Source Testing을 진행 해보고 싶어 할 수 도 있을 거 같다.</p>
+  <channel>
+    <title>jenkins - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/jenkins/</link>
+    <description>jenkins - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/jenkins/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation TAP &amp; JENKINS</title>
+  <link>https://huntedhappy.github.io/ko/tap-jenkins/</link>
+  <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tap-jenkins/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tap-jenkins/index.png" alt="The Documentation TAP &amp; JENKINS" title="TANZU &amp; JENKINS" referrerpolicy="no-referrer"/></div><h2 id="out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer" class="heading-element">
+  <a href="#out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer" class="heading-mark"></a>Out of the Box Supply Chain with testing on Jenkins for Supply Chain Choreographer</h2><p>기본적으로 TAP에서는 TEKTON을 사용하여 Source Testing을 제공 하고 있다. 하지만 별도로 Jenkins를 연동 해서 Source Testing을 진행 해보고 싶어 할 수 도 있을 거 같다.</p>
 <p>그래서 TAP에서는 Jenkins와 연동을 제공 하고 있다.</p>
-<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/scc-ootb-supply-chain-testing-with-jenkins.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> with jenkins</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/scc-ootb-supply-chain-testing-with-jenkins.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> with jenkins</a></p>
 <p>사전구성으로 Build Cluster에 Out of the Box Supply Chain With Testing or Out of the Box Supply Chain With Testing and Scanning로 supply_chain 구성이 필요 하다.</p>
 <p>사전에 Jenkins의 정보를 넣기 위해 Secret을 생성 해 준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -43,11 +42,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">  username: USERNAME # jenkins username
 </span></span></span><span class="line"><span class="cl"><span class="s">  password: PASSWORD # jenkins password
 </span></span></span><span class="line"><span class="cl"><span class="s">  ca-cert: (Optional) PEM-CA-CERT # PEM encoded certificate
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 Out of the Box Jenkins를 사용하기 위해 Jenkin pipeline을 설정이 필요 합니다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -132,8 +130,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.job-name)
 </span></span></span><span class="line"><span class="cl"><span class="s">      - name: job-params
 </span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.job-params)
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> 
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Tekton pipeline은 아래와 같이 이루어 져 있다.</p>
 <p>개발자는 아래와 같이 매개변수를 사용하여 Tekton pipeline을 생성 해야 합니다.</p>
@@ -148,7 +145,7 @@ Tasks:</li>
 <li>jenkins-task, required: 설정된 ClusterTask중 Jenkins작업을 트리거 하기 위해 실행, kubeclt get clustertask로 이름을 확인 할 수 있다.</li>
 </ul>
 <p>그리고 아래와 같이 Jenkinsfile을 생성 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -233,8 +230,7 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">    }
 </span></span></span><span class="line"><span class="cl"><span class="s">  }
 </span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> 
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> </span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음 필드는 Jenkins 작업 정의에도 필요합니다.</p>
 <ul>
@@ -244,7 +240,7 @@ Tasks:</li>
 <p>Jenkins에 파라미터를 제공하기 위해 GIT_URL을 작성 해준다.</p>
 <p>** 현재 1.5.2 까지 GIT_URL 및 GIT_REVISION이 JENKINS로 전달 되지 않는 것으로 보인다. 하여 Jenkins파일에 파라미터를 추가를 해주어야 한다.</p>
 <p>이렇게 설정 한 후에 Workload를 실행을 하게 되면 실제적으로 Jenkins를 통해 소스테스트가 이루어지는 것을 확인 할 수 있다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -403,16 +399,15 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">      ref:
 </span></span></span><span class="line"><span class="cl"><span class="s">       branch: main
 </span></span></span><span class="line"><span class="cl"><span class="s">      url: https://gitlab.huntedhappy.kro.kr/tanzu/jenkins-tanzu-java-web-app
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="result">RESULT</h2>
-<p><figure><figcaption>
+</div><h2 id="result" class="heading-element">
+  <a href="#result" class="heading-mark"></a>RESULT</h2><p><figure><img src="/images/tap-jenkins/1-1.png"/><figcaption>
             <h4>Jenkins에서 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap-jenkins/1-2.png"/><figcaption>
             <h4>TAP에서 Jenkins를 통해 배포 확인</h4>
         </figcaption>
 </figure>
@@ -420,13 +415,13 @@ Tasks:</li>
 ]]></description>
 </item>
 <item>
-    <title>The Documentation SupplyChain on TAP</title>
-    <link>https://huntedhappy.github.io/ko/cicd/</link>
-    <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/cicd/</guid>
-    <description><![CDATA[<h2 id="tanzu-supplychain">TANZU SUPPLYCHAIN</h2>
-<blockquote>
+  <title>The Documentation SupplyChain on TAP</title>
+  <link>https://huntedhappy.github.io/ko/cicd/</link>
+  <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/cicd/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/cicd/cicd.png" alt="The Documentation SupplyChain on TAP" title="CICD Design And Built" referrerpolicy="no-referrer"/></div><h2 id="tanzu-supplychain" class="heading-element">
+  <a href="#tanzu-supplychain" class="heading-mark"></a>TANZU SUPPLYCHAIN</h2><blockquote>
 <p>아래 내용은 기본적으로 VMWARE의 TAP솔루션을 알고 있다는 가정하에 작성을 하였습니다.</p>
 </blockquote>
 <p>CI/CD는 (Continuous Integration/Continuous Delivery) 지속적인 통합 및 지속적인 배포입니다.</p>
@@ -449,34 +444,34 @@ Tasks:</li>
 <li>SLACK을 연동 후 원하는 문자로 알림을 받을 수 있습니다. figure 1-2</li>
 </ol>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-1.png"/><figcaption>
             <h4>1-1 JENKINS PIPELINE</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-2.png"/><figcaption>
             <h4>1-2 SLACK ALERT</h4>
         </figcaption>
 </figure>
 
 <p>위와 같이 JENKINS와 ARGO 를 통해 CI/CD를 구성 할 수 있습니다. 하지만 각각 구성하기 위해서는 JENKINS 그리고 ARGO의 대해서도 이해가 필요 합니다. 또한 K8S에 배포를 하기 위해서는 MANIFEST의 대해서도 이해가 필요 합니다. 가령 Deployment, statfulset, ingress 등등의 대해서도, 이해가 필요 하며 HELM 또는 KUSTOMIZAION을 사용한다면 해당 오픈소스의 대해서도 이해가 필요 합니다.</p>
 <p>TANZU APPLICATION PLATFORM은 여러 이해가 필요 한부분을 workload.yaml을 구성하면 SUPPLYCHAIN을 통해 CI/CD 구성을 사용자가 각각 구성 할 필요 없이 제공을 하고 있습니다.</p>
-<p><a href="https://huntedhappy.github.io/tanzu-application-platform/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
-<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
-<figure><figcaption>
+<p><a href="https://huntedhappy.github.io/tanzu-application-platform/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
+<figure><img src="/images/supplychain/1-3.png"/><figcaption>
             <h4>1-3 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 
 <p>기본적으로 하나의 클러스터에 3가지중 하나의 SUPPLYCHAIN을 제공 하고 있습니다. DEFULAT의 경우 위의 설명 드린 대로 사용자는 workload.yaml을 적절하게 작성을 하게 되면 CI/CD가 동작 합니다.</p>
 <p>아래 그림과 같이 workload.yaml 실행을 통해 supplychain이 순차적으로 동작을 하게 됩니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-4.png"/><figcaption>
             <h4>1-4 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <p>GUI에서 확인을 해보면 아래와 같습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-5.png"/><figcaption>
             <h4>1-5 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -484,7 +479,7 @@ Tasks:</li>
 <p>그리고 두번째의 경우는 추가적으로 TEKTON을 통해 소스코드를 테스팅 할 수 있습니다.
 그리고 마지막의 경우는 GRYPE을 통해 소스 및 이미지에 보안 취약점이 있는지 확인을 합니다.</p>
 <p>GUI에서 확인을 해보면 아래와 같이 취약점에 대해서 확인 할 수 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-6.png"/><figcaption>
             <h4>1-6 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -493,17 +488,17 @@ Tasks:</li>
 <p>하지만 위에서 설명 드린 대로 하나의 클러스터에는 3가지중 하나만 사용을 할 수 있습니다. 추가적인 supplychain을 구성 하고 싶을수도 있을 것입니다. 동일한 서비스의 대해서 빠르게 개발을 위해 BASIC으로 구성을 하고 싶을 것이며, QA/STAGING은 소스/이미지에 보안취약점이 있는지 잘 생성을 했는지 확인을 하고 싶을 것입니다. 물론 클러스터를 분리해서 구성 할 수도 있을 것입니다. 하지만 리소스 부족으로 분리를 할 수 없을 경우 하나의 클러스터에 모두 구성이 필요할수도 있을수 있습니다. 만약 그런 상황이 발생하면 3개중에 하나의 supplychain만 사용이 가능하기 때문에 한가지를 선택 해야 합니다. 그렇기 때문에 supplychain을 추가 하는 방법이 필요 할 수 있습니다.</p>
 </blockquote>
 <p>아래와 같이 기본적으로 제공 하고 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-7.png"/><figcaption>
             <h4>1-7 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>SUPPLYCHAIN ADD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>SUPPLYCHAIN ADD<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -776,20 +771,19 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">    - worker
 </span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>위와 같이 추가하게 되면 별도로 SUPPLYCHAIN이 추가 된 것을 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-8.png"/><figcaption>
             <h4>1-8 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <p>그리고 아래와 같이 다른 workload.yaml과는 다른 SUPPLYCHAIN이 등록 된 것을 확인 할 수 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-9.png"/><figcaption>
             <h4>1-9 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -797,42 +791,42 @@ Tasks:</li>
 ]]></description>
 </item>
 <item>
-    <title>The Documentation Jenkins</title>
-    <link>https://huntedhappy.github.io/ko/jenkins/</link>
-    <pubDate>Fri, 31 Dec 2021 20:49:26 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/jenkins/</guid>
-    <description><![CDATA[<h2 id="jenkins">Jenkins?</h2>
-<p>Jenkins는 아무래도 많이 사용하는 CI/CD 일것이다. 우선 컨테이너 환경에서 CI를 구성하기 위해서 Jenkins를 구성 하였고, 클러스터가 많은 환경에서도 접근을 할 수 있게 (물론 컨테이너로 구성을 해도 되나. 굳이 컨테이너로 구성할 필요성이 있나 싶어 별도의 VM으로 구성)
+  <title>The Documentation Jenkins</title>
+  <link>https://huntedhappy.github.io/ko/jenkins/</link>
+  <pubDate>Fri, 31 Dec 2021 20:49:26 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/jenkins/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/jenkins/jenkins.png" alt="The Documentation Jenkins" title="Jenkins Install Guide" referrerpolicy="no-referrer"/></div><h2 id="jenkins" class="heading-element">
+  <a href="#jenkins" class="heading-mark"></a>Jenkins?</h2><p>Jenkins는 아무래도 많이 사용하는 CI/CD 일것이다. 우선 컨테이너 환경에서 CI를 구성하기 위해서 Jenkins를 구성 하였고, 클러스터가 많은 환경에서도 접근을 할 수 있게 (물론 컨테이너로 구성을 해도 되나. 굳이 컨테이너로 구성할 필요성이 있나 싶어 별도의 VM으로 구성)
 VM형태로 설치를 하였다.</p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
 CI (Continuous Integration) CI를 통해 개발자들은 코드 변경사항을 공유 브랜치로 다시 병합하는 작업을 더욱 수월하게 자주 수행 할 수 있다.
 CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으로 사용됨.</p>
 <ul>
 <li>Continuous Deliver의 경우 코드 변경 , 병합으로부터 Prodcution에 적합한 빌드를 제공하여 모든 단계에 테스트 및 릴리스를 자동화한다.</li>
 <li>Continuous Deploy는 어플리케이션을 프로덕션으로 릴리스 작업을 자동화</li>
 </ul></div>
-        </div>
     </div>
-<figure><figcaption>
+  </div>
+<figure><img src="/images/jenkins/0-1.png"/><figcaption>
             <h4>CICD</h4>
         </figcaption>
 </figure>
 
-<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Redhat </a></p>
-<h2 id="1-설치">1. 설치</h2>
-<div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins Install<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>JAVA Install</p>
-<div class="highlight"><div class="chroma">
+<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Redhat </a></p>
+<h2 id="1-설치" class="heading-element">
+  <a href="#1-%ec%84%a4%ec%b9%98" class="heading-mark"></a>1. 설치</h2><div class="details admonition example open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins Install<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>JAVA Install</p>
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -849,11 +843,10 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo apt install openjdk-11-jdk -y
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">java --version
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">java --version</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Jenkins Install</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -872,64 +865,60 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">sudo apt install jenkins -y
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">systemctl restart jenkins
-</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> jenkins
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> jenkins</span></span></code></pre></td></tr></table>
 </div>
 </div><p>패스워드 확인</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat /var/lib/jenkins/secrets/initialAdminPassword
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat /var/lib/jenkins/secrets/initialAdminPassword</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="11-설치-완료">1.1. 설치 완료</h3>
-<p><figure><figcaption>
+  </div>
+<h3 id="11-설치-완료" class="heading-element">
+  <a href="#11-%ec%84%a4%ec%b9%98-%ec%99%84%eb%a3%8c" class="heading-mark"></a>1.1. 설치 완료</h3><p><figure><img src="/images/jenkins/1-1.png"/><figcaption>
             <h4>접속 화면 #1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/1-2.png"/><figcaption>
             <h4>접속 화면 #2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/1-3.png"/><figcaption>
             <h4>접속 화면 #3</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="2-ssl-설정">2. SSL 설정</h2>
-<p>인증서 설치, <a href="/ko/jenkins/root.sh" rel=""><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;root.sh</a>.</p>
+<h2 id="2-ssl-설정" class="heading-element">
+  <a href="#2-ssl-%ec%84%a4%ec%a0%95" class="heading-mark"></a>2. SSL 설정</h2><p>인증서 설치, <a href="/ko/jenkins/root.sh"><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;root.sh</a>.</p>
 <div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins SSL 구성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>인증서 생성</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins SSL 구성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>인증서 생성</p>
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>root.sh에 있는 파일 내용을 복사해서 shell 실행</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">. root.sh
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">. root.sh</span></span></code></pre></td></tr></table>
 </div>
 </div><p>인증서 권한 변경</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -938,11 +927,10 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">chmod <span class="m">700</span> /data/cert
 </span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.cert
-</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.key
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.key</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Jenkins 파일 변경</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -969,26 +957,25 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl"><span class="nv">JENKINS_ARGS</span><span class="o">=</span><span class="s2">&#34;--webroot=/var/cache/</span><span class="nv">$NAME</span><span class="s2">/war --httpPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpPort=</span><span class="nv">$HTTP_PORT_DISABLE</span><span class="s2"> --httpsPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpsCertificate=</span><span class="nv">$HTTPS_CERT</span><span class="s2"> --httpsPrivateKey=</span><span class="nv">$HTTPS_KEY</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">### jenkins restart</span>
-</span></span><span class="line"><span class="cl">systemctl restart jenkins
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">systemctl restart jenkins</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="21-설치-완료">2.1. 설치 완료</h3>
-<figure><figcaption>
+  </div>
+<h3 id="21-설치-완료" class="heading-element">
+  <a href="#21-%ec%84%a4%ec%b9%98-%ec%99%84%eb%a3%8c" class="heading-mark"></a>2.1. 설치 완료</h3><figure><img src="/images/jenkins/2-1.png"/><figcaption>
             <h4>HTTPS 접속 화면 #1</h4>
         </figcaption>
 </figure>
 
-<h3 id="22-nginx로-https-구성">2.2. NGINX로 HTTPS 구성</h3>
-<p><div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>NGINX PROXY 구성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>NGINX 가상 서버 구성</p>
-<div class="highlight"><div class="chroma">
+<h3 id="22-nginx로-https-구성" class="heading-element">
+  <a href="#22-nginx%eb%a1%9c-https-%ea%b5%ac%ec%84%b1" class="heading-mark"></a>2.2. NGINX로 HTTPS 구성</h3><p><div class="details admonition example open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>NGINX PROXY 구성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>NGINX 가상 서버 구성</p>
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1049,11 +1036,10 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    server_name jenkins.tkg.io<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> 404<span class="p">;</span> <span class="c1"># managed by Certbot</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>symbolic link 연결</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1062,79 +1048,78 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> <span class="nb">cd</span> /etc/nginx/sites-enabled
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> ln -s  /etc/nginx/sites-available/jenkins .
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"> ln -s  /etc/nginx/sites-available/jenkins .</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<figure><figcaption>
+  </div>
+<figure><img src="/images/jenkins/2-2.png"/><figcaption>
             <h4>NGINX로 연결 후 HTTPS 접속 화면 #1</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="3-slack-연동">3. SLACK 연동</h2>
-<p>SLACK을 연동하여 메시지를 받을 수 있게 구성을 한다.</p>
-<h3 id="31-slcak-설정">3.1. SLCAK 설정</h3>
-<figure><figcaption>
+<h2 id="3-slack-연동" class="heading-element">
+  <a href="#3-slack-%ec%97%b0%eb%8f%99" class="heading-mark"></a>3. SLACK 연동</h2><p>SLACK을 연동하여 메시지를 받을 수 있게 구성을 한다.</p>
+<h3 id="31-slcak-설정" class="heading-element">
+  <a href="#31-slcak-%ec%84%a4%ec%a0%95" class="heading-mark"></a>3.1. SLCAK 설정</h3><figure><img src="/images/jenkins/3-1.png"/><figcaption>
             <h4>SLACK 접속</h4>
         </figcaption>
 </figure>
 
 <p>APP 등록
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-2.png"/><figcaption>
             <h4>SLACK APP 추가#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-3.png"/><figcaption>
             <h4>SLACK APP 추가#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-4.png"/><figcaption>
             <h4>SLACK APP 추가#3</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-5.png"/><figcaption>
             <h4>SLACK APP 추가#4</h4>
         </figcaption>
 </figure>
 </p>
 <p>위에 내용까지 설정을 하면 Jenkins를 어떻게 설정하라고 나오는대 좀 오래 되었나보다. 요즘에 변경된 부분의 대해서 설정 하는 방법을 나열한다.</p>
-<h3 id="32-jenkins-설정">3.2. JENKINS 설정</h3>
-<p><figure><figcaption>
+<h3 id="32-jenkins-설정" class="heading-element">
+  <a href="#32-jenkins-%ec%84%a4%ec%a0%95" class="heading-mark"></a>3.2. JENKINS 설정</h3><p><figure><img src="/images/jenkins/3-6.png"/><figcaption>
             <h4>Jenkins Slack Plugin 설치#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-7.png"/><figcaption>
             <h4>Jenkins Slack Plugin 설치#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-8.png"/><figcaption>
             <h4>Jenkins Slack Plugin 설치#3</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-9.png"/><figcaption>
             <h4>Jenkins Slack 설정#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-10.png"/><figcaption>
             <h4>Jenkins Slack 설정#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-11.png"/><figcaption>
             <h4>Jenkins Slack Credentials 설정</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-12.png"/><figcaption>
             <h4>Jenkins Slack 설정 테스트</h4>
         </figcaption>
 </figure>

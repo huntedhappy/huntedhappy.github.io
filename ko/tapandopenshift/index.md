@@ -10,24 +10,24 @@ Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다
 기본적으로 OPENSHIFT는 설치가 되어 있다는 것을 가정으로 TAP를 설치를 진행을 하겠습니다.
 참고로 OPENSHIFT의 경우 TAP에서 지원하는 것은 4.10 , 4.11 두가지를 지원 합니다.
 
-{{< figure src="/images/tapandopenshift/0-0.png" title="ocp 지원 버전" >}}
+{{&lt; figure src=&#34;/images/tapandopenshift/0-0.png&#34; title=&#34;ocp 지원 버전&#34; &gt;}}
 
-{{< figure src="/images/tapandopenshift/0-1.png" title="ocp 설치 버전" >}}
-{{< figure src="/images/tapandopenshift/0-2.png" title="ocp 설치 버전" >}}
+{{&lt; figure src=&#34;/images/tapandopenshift/0-1.png&#34; title=&#34;ocp 설치 버전&#34; &gt;}}
+{{&lt; figure src=&#34;/images/tapandopenshift/0-2.png&#34; title=&#34;ocp 설치 버전&#34; &gt;}}
 
-> 설치 버전
-> * Openshift Version 4.11.9
-> * Tanzu Application Platform 1.4.0
-> * TBS 1.9.0
-> * AVI 22.1.2
+&gt; 설치 버전
+&gt; * Openshift Version 4.11.9
+&gt; * Tanzu Application Platform 1.4.0
+&gt; * TBS 1.9.0
+&gt; * AVI 22.1.2
 
-> 처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었습니다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.
+&gt; 처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었습니다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.
 
 아래에 route에 포함되어 있지 않은 도메인을 차단 하는것인지.. 여기 route에 tap를 구성 후 tap-gui 또는 어플리케이션의 대해서 어떻게 설정 해야 되는지는 아직 의문이 남아 있습니다.
-{{< figure src="/images/tapandopenshift/0-4.png" title="oc route 확인" >}}
+{{&lt; figure src=&#34;/images/tapandopenshift/0-4.png&#34; title=&#34;oc route 확인&#34; &gt;}}
 
 AVI 와 Openshift를 연동시 생성 되는 VIP가 많아서 이 부분도 당황 스러운 부분이 있었지만, 이 부분도 깊게 파고 들지는 않았습니다. 우선 목표는 TAP를 구성 하기 위함이 크기 때문입니다.
-{{< figure src="/images/tapandopenshift/0-3.png" title="AVI 상태" >}}
+{{&lt; figure src=&#34;/images/tapandopenshift/0-3.png&#34; title=&#34;AVI 상태&#34; &gt;}}
 
 ## 2. KAPP 설치 
 기본적으로 KAPP이 설치가 되어 있지 않기 때문에 KAPP 설치가 필요 합니다. 이유는 TAP이라는 솔루션이 Tanzu라는 명령어를 통해 설치가 되기 때문에 입니다.
@@ -42,16 +42,16 @@ kubectl apply -f https://github.com/carvel-dev/secretgen-controller/releases/lat
 ```
 kapp을 설치를 하게 되면 이제 tanzu package repository 및  secret repository를 등록 할 수 있습니다.
 
-{{< figure src="/images/tapandopenshift/1-1.png" title="package 및 reository" >}}
+{{&lt; figure src=&#34;/images/tapandopenshift/1-1.png&#34; title=&#34;package 및 reository&#34; &gt;}}
 
 그러면 위와 같이 list를 확인 할 수 있습니다. 위에 controller를 설치를 하지 않으면 에러가 발생 하는 것을 알 수 있습니다. 에러 내용은 아래와 같습니다.
 ```shell
 kapp contoller를 설치를 안할 경우 발생하는 에러
-## Error: failed to check for the availability of 'packaging.carvel.dev' API: failed to discover unmatched GroupVersionResources: the server is currently unable to handle the request
+## Error: failed to check for the availability of &#39;packaging.carvel.dev&#39; API: failed to discover unmatched GroupVersionResources: the server is currently unable to handle the request
 ## Error: exit status 1
 
 secret contoller를 설치를 안할 경우 발생하는 에러
-## Error: secret plugin can not be used as 'secretgen.carvel.dev/v1alpha1' API is not available in the cluster
+## Error: secret plugin can not be used as &#39;secretgen.carvel.dev/v1alpha1&#39; API is not available in the cluster
 ## Error: exit status 1
 ```
 
@@ -112,10 +112,10 @@ profile: full
 ceip_policy_disclosed: true
 
 buildservice:
-  kp_default_repository: "infra-harbor.huntedhappy.kro.kr/tap/tap-packages"
+  kp_default_repository: &#34;infra-harbor.huntedhappy.kro.kr/tap/tap-packages&#34;
   kp_default_repository_secret:
-    name: "registry-credentials"
-    namespace: "tap-install"
+    name: &#34;registry-credentials&#34;
+    namespace: &#34;tap-install&#34;
   exclude_dependencies: true
 
 springboot_conventions:
@@ -133,19 +133,19 @@ accelerator:
     secret_name: share-secret
     namespace: tap-install
   server:
-    service_type: "ClusterIP"
-    watched_namespace: "accelerator-system"
+    service_type: &#34;ClusterIP&#34;
+    watched_namespace: &#34;accelerator-system&#34;
   samples:
     include: false
 
 shared:
-  kubernetes_distribution: "openshift" # To be passed only for OpenShift. Defaults to "".
+  kubernetes_distribution: &#34;openshift&#34; # To be passed only for OpenShift. Defaults to &#34;&#34;.
   ingress_issuer: default-ca-issuer
   image_registry:
     secret:
-      name: "registry-credentials"
-      namespace: "tap-install"
-  ingress_domain: "huntedhappy.kro.kr"
+      name: &#34;registry-credentials&#34;
+      namespace: &#34;tap-install&#34;
+  ingress_domain: &#34;huntedhappy.kro.kr&#34;
 #  ca_cert_data: |
 
 appliveview:
@@ -162,19 +162,19 @@ appliveview_connector:
 
 cnrs:
   domain_name: huntedhappy.kro.kr
-  domain_template: "{{.Name}}.{{.Domain}}"
+  domain_template: &#34;{{.Name}}.{{.Domain}}&#34;
   default_tls_secret: tap-install/share-secret
 
 scanning:
   metadataStore:
-    url: "" # Disable embedded integration since it's deprecated
+    url: &#34;&#34; # Disable embedded integration since it&#39;s deprecated
 
 metadata_store:
-  ns_for_export_app_cert: "*"
+  ns_for_export_app_cert: &#34;*&#34;
   ingress_domain: huntedhappy.kro.kr
   app_service_type: ClusterIP
-  ingress_enabled: "true"
-  targetImagePullSecret: "registry-credentials"
+  ingress_enabled: &#34;true&#34;
+  targetImagePullSecret: &#34;registry-credentials&#34;
   tls:
     secretName: share-secret
     namespace: tap-install
@@ -183,26 +183,26 @@ supply_chain: basic
 
 ootb_supply_chain_basic:
   registry:
-    server: "infra-harbor.huntedhappy.kro.kr"
-    repository: "app/supply_chain"
+    server: &#34;infra-harbor.huntedhappy.kro.kr&#34;
+    repository: &#34;app/supply_chain&#34;
 
 grype:
-  namespace: "tap-install" # (optional) Defaults to default namespace.
-  targetImagePullSecret: "registry-credentials"
+  namespace: &#34;tap-install&#34; # (optional) Defaults to default namespace.
+  targetImagePullSecret: &#34;registry-credentials&#34;
 
 tap_gui:
   service_type: ClusterIP
-  ingressEnabled: "true"
-  ingressDomain: "huntedhappy.kro.kr"
+  ingressEnabled: &#34;true&#34;
+  ingressDomain: &#34;huntedhappy.kro.kr&#34;
   tls:
     namespace: tap-install
     secretName: share-secret
   app_config:
     organization:
-      name: 'huntedhappy'
+      name: &#39;huntedhappy&#39;
 
     app:
-      title: 'huntedhappy TAP'
+      title: &#39;huntedhappy TAP&#39;
       baseUrl: https://tap-gui.huntedhappy.kro.kr
       support:
         url: https://tanzu.vmware.com/support
@@ -238,7 +238,7 @@ excluded_packages:
 ```
 ```shell
 ## rback 설정
-cat << EOF | kubectl apply -f -
+cat &lt;&lt; EOF | kubectl apply -f -
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -278,32 +278,32 @@ kind: ClusterRole
 metadata:
   name: k8s-reader
 rules:
-- apiGroups: ['']
-  resources: ['pods', 'pods/log', 'services', 'configmaps']
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['apps']
-  resources: ['deployments', 'replicasets']
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['autoscaling']
-  resources: ['horizontalpodautoscalers']
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['networking.k8s.io']
-  resources: ['ingresses']
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['networking.internal.knative.dev']
-  resources: ['serverlessservices']
-  verbs: ['get', 'watch', 'list']
-- apiGroups: [ 'autoscaling.internal.knative.dev' ]
-  resources: [ 'podautoscalers' ]
-  verbs: [ 'get', 'watch', 'list' ]
-- apiGroups: ['serving.knative.dev']
+- apiGroups: [&#39;&#39;]
+  resources: [&#39;pods&#39;, &#39;pods/log&#39;, &#39;services&#39;, &#39;configmaps&#39;]
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;apps&#39;]
+  resources: [&#39;deployments&#39;, &#39;replicasets&#39;]
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;autoscaling&#39;]
+  resources: [&#39;horizontalpodautoscalers&#39;]
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;networking.k8s.io&#39;]
+  resources: [&#39;ingresses&#39;]
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;networking.internal.knative.dev&#39;]
+  resources: [&#39;serverlessservices&#39;]
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [ &#39;autoscaling.internal.knative.dev&#39; ]
+  resources: [ &#39;podautoscalers&#39; ]
+  verbs: [ &#39;get&#39;, &#39;watch&#39;, &#39;list&#39; ]
+- apiGroups: [&#39;serving.knative.dev&#39;]
   resources:
   - configurations
   - revisions
   - routes
   - services
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['carto.run']
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;carto.run&#39;]
   resources:
   - clusterconfigtemplates
   - clusterdeliveries
@@ -316,45 +316,45 @@ rules:
   - deliverables
   - runnables
   - workloads
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['source.toolkit.fluxcd.io']
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;source.toolkit.fluxcd.io&#39;]
   resources:
   - gitrepositories
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['source.apps.tanzu.vmware.com']
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;source.apps.tanzu.vmware.com&#39;]
   resources:
   - imagerepositories
   - mavenartifacts
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['conventions.carto.run']
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;conventions.carto.run&#39;]
   resources:
   - podintents
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['kpack.io']
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;kpack.io&#39;]
   resources:
   - images
   - builds
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['scanning.apps.tanzu.vmware.com']
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;scanning.apps.tanzu.vmware.com&#39;]
   resources:
   - sourcescans
   - imagescans
   - scanpolicies
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['tekton.dev']
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;tekton.dev&#39;]
   resources:
   - taskruns
   - pipelineruns
-  verbs: ['get', 'watch', 'list']
-- apiGroups: ['kappctrl.k14s.io']
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+- apiGroups: [&#39;kappctrl.k14s.io&#39;]
   resources:
   - apps
-  verbs: ['get', 'watch', 'list']
+  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
 EOF
 ```
 ```shell
 ## rolebding 설정
-cat << EOF | kubectl apply -f -
+cat &lt;&lt; EOF | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -389,7 +389,7 @@ roleRef:
   name: app-viewer
 subjects:
   - kind: Group
-    name: "namespace-developers"
+    name: &#34;namespace-developers&#34;
     apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -402,13 +402,13 @@ roleRef:
   name: app-viewer-cluster-access
 subjects:
   - kind: Group
-    name: "namespace-developers"
+    name: &#34;namespace-developers&#34;
     apiGroup: rbac.authorization.k8s.io
 EOF
 ```
 ```shell
-kubectl patch sa default -n tap-install --type 'json' -p '[{"op":"add","path":"/secrets","value":["name":"registry-credentials"]}]'
-kubectl patch sa default -n tap-install --type 'json' -p '[{"op":"add","path":"/imagePullSecrets","value":["name":"registry-credentials"]}]'
+kubectl patch sa default -n tap-install --type &#39;json&#39; -p &#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/secrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;
+kubectl patch sa default -n tap-install --type &#39;json&#39; -p &#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/imagePullSecrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;
 
 ```
 ```shell
@@ -421,23 +421,29 @@ tanzu package install full-tbs-deps -p full-tbs-deps.tanzu.vmware.com -v 1.9.0 -
 
 ## 6. 설치 완료
 
-{{< figure src="/images/tapandopenshift/1-2.png" title="설치 완료#1" >}}
+{{&lt; figure src=&#34;/images/tapandopenshift/1-2.png&#34; title=&#34;설치 완료#1&#34; &gt;}}
 
 Sample App Test
-{{< figure src="/images/tapandopenshift/1-3.png" title="설치 완료#2" >}}
+{{&lt; figure src=&#34;/images/tapandopenshift/1-3.png&#34; title=&#34;설치 완료#2&#34; &gt;}}
 
 Sample App Test를 하게 될 경우 아래와 같은 문구가 나오는대 왜 나오는지는 아직 파악 하지 못하였습니다. 하지만 SAMPLE APP 배포는 잘 동작 하는 것을 확인 할 수 있습니다.
 
 * I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to client-side throttling, not priority and fairness, request: GET:https://api.openshift.huntedhappy.kro.kr:6443/apis/console.openshift.io/v1alpha1?timeout=32s
 
 배포가 완료 되면 httpproxy,pod,deliverable을 확인 하여 httpproxy에 설정된 도메인으로 접속 할 수 있다.
-{{< figure src="/images/tapandopenshift/1-8.png" title="FQDN 확인" >}}
+{{&lt; figure src=&#34;/images/tapandopenshift/1-8.png&#34; title=&#34;FQDN 확인&#34; &gt;}}
 
-{{< figure src="/images/tapandopenshift/1-4.png" title="설치 완료#2" >}}
-{{< figure src="/images/tapandopenshift/1-5.png" title="TAP GUI 화면#1" >}}
-{{< figure src="/images/tapandopenshift/1-6.png" title="TAP GUI 화면#2" >}}
-{{< figure src="/images/tapandopenshift/1-7.png" title="TAP GUI 화면#2" >}}
+{{&lt; figure src=&#34;/images/tapandopenshift/1-4.png&#34; title=&#34;설치 완료#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/tapandopenshift/1-5.png&#34; title=&#34;TAP GUI 화면#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/tapandopenshift/1-6.png&#34; title=&#34;TAP GUI 화면#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/tapandopenshift/1-7.png&#34; title=&#34;TAP GUI 화면#2&#34; &gt;}}
 
 설치가 완료 되면 TAP의 대해서는 Visual Sutudio Code, IntelliJ 환경에서도 잘 동작하는 것을 확인 할 수 있습니다.
 
 * 나중에 추가적인 설명을 할 수 있으면 적을 수 있도록 하겠습니다.
+
+---
+
+> Author: Dokyung  
+> URL: https://huntedhappy.github.io/ko/tapandopenshift/  
+

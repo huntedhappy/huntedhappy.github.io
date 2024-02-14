@@ -1,7 +1,7 @@
 # About Dokyung
 
 
-# [<i class="fas fa-link"></i> My Projects](https://angry-shoemaker-4fc.notion.site/A-person-who-seeks-to-transform-the-data-center-2242bdb392f84342a13ae7dd82fa0d9b)
+# [&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; My Projects](https://angry-shoemaker-4fc.notion.site/A-person-who-seeks-to-transform-the-data-center-2242bdb392f84342a13ae7dd82fa0d9b)
 ---
 
 # About Ing....
@@ -43,9 +43,15 @@ VMware에 NSXT로 회사를 알리게 된 계기가 되면서, 농협과 삼성�
 - VMware Certified Advanced Professional – Network Virtualization Deployment, 2019
 - Red Hat Certified System Administrator, 2018
 - AWS Certified Solution Architect – Associate, 2017
-- LTM Specialist: Architect, Setup & Deploy F5 301a, 2015
-- LTM Specialist: Maintain & Troubleshoot F5 301b, 2015
+- LTM Specialist: Architect, Setup &amp; Deploy F5 301a, 2015
+- LTM Specialist: Maintain &amp; Troubleshoot F5 301b, 2015
 - GTM Specialist F5 302, 2015
 - Certified Information System Security Professional, 2012
 - Engineer Information Processing, 2010
 - Cisco Certified Network Professional, 2007
+
+---
+
+> Author:   
+> URL: https://huntedhappy.github.io/ko/about/  
+

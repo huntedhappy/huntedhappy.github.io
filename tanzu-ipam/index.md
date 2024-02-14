@@ -34,7 +34,7 @@ export DNS_SERVER=10.253.107.2
 위와 같이 환경변수를 적용 후 ippol을 실행 해주자.
 
 ```shell
-cat << EOF | kubectl apply -f -
+cat &lt;&lt; EOF | kubectl apply -f -
 apiVersion: ipam.metal3.io/v1alpha1
 kind: IPPool
 metadata:
@@ -65,7 +65,7 @@ kubectl label vspheremachinetemplates run2-worker cluster.x-k8s.io/ip-pool-name=
 
 아래와 같이 주석 처리 한부분을 추가 및 변경을 해준다.
 ```shell
-kubectl get VSphereMachineTemplate run2-control-plane -o yaml | kubectl neat > run2-control-plane.yaml
+kubectl get VSphereMachineTemplate run2-control-plane -o yaml | kubectl neat &gt; run2-control-plane.yaml
 
 vi run2-control-plan.yaml
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
@@ -94,7 +94,7 @@ spec:
       resourcePool: /OBDC/host/OBCLUSTER/Resources/dk-tanzu
       server: vcsa01.vcf.local
       storagePolicyName: k8s
-      template: /OBDC/vm/temp/photon-3-kube-v1.24.10+vmware.1
+      template: /OBDC/vm/temp/photon-3-kube-v1.24.10&#43;vmware.1
 
 kubectl apply -f run2-control-plan.yaml
 ```
@@ -102,7 +102,7 @@ kubectl apply -f run2-control-plan.yaml
 마찬가지로 worker노드도 템플릿을 생성 해준다.
 ```shell
 
-kubectl get VSphereMachineTemplate run2-worker -o yaml | kubectl neat > run2-worker.yaml
+kubectl get VSphereMachineTemplate run2-worker -o yaml | kubectl neat &gt; run2-worker.yaml
 vi run2-worker.yaml
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: VSphereMachineTemplate
@@ -130,15 +130,15 @@ spec:
       resourcePool: /OBDC/host/OBCLUSTER/Resources/dk-tanzu
       server: vcsa01.vcf.local
       storagePolicyName: k8s
-      template: /OBDC/vm/temp/photon-3-kube-v1.24.10+vmware.1
+      template: /OBDC/vm/temp/photon-3-kube-v1.24.10&#43;vmware.1
 
 kubectl apply -f run2-worker.yaml
 ```
 
 이렇게 구성을 하게 되면 준비는 다 된것이다. 이제 master, worker node의 template만 변경 하게 되면 된다.
 ```sheel
-kubectl patch md run2-md-0 --type 'json' -p '[{"op":"replace","path":"/spec/template/spec/infrastructureRef/name","value":"run2-worker01"}]' --dry-run=client -o yaml | kubectl apply -f -
-kubectl patch kcp run2-control-plane --type 'json' -p '[{"op":"replace","path":"/spec/machineTemplate/infrastructureRef/name","value":"run2-control-plane01"}]' --dry-run=client -o yaml | kubectl apply - f-
+kubectl patch md run2-md-0 --type &#39;json&#39; -p &#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/template/spec/infrastructureRef/name&#34;,&#34;value&#34;:&#34;run2-worker01&#34;}]&#39; --dry-run=client -o yaml | kubectl apply -f -
+kubectl patch kcp run2-control-plane --type &#39;json&#39; -p &#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/machineTemplate/infrastructureRef/name&#34;,&#34;value&#34;:&#34;run2-control-plane01&#34;}]&#39; --dry-run=client -o yaml | kubectl apply - f-
 ```
 
 이렇게 변경을 하게 되면 자동적으로 VM이 삭제 하고 재 생성 되는 것을 확인 할 수 있다.
@@ -159,4 +159,10 @@ Status:
 ```
 
 DHCP서버를 완전히 안사용하게 할 수는 없겠지만 이 방법으로 어느정도 DHCP서버를 대체 할 수 있지 않을까라는 조심스러운 생각을 해본다.
+
+
+---
+
+> Author: Dokyung  
+> URL: https://huntedhappy.github.io/tanzu-ipam/  
 

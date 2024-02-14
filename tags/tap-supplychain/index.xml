@@ -1,17 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>tap supplychain - Tag - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/tags/tap-supplychain/</link>
-        <description>tap supplychain - Tag - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/tap-supplychain/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation SupplyChain on TAP</title>
-    <link>https://huntedhappy.github.io/cicd/</link>
-    <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/cicd/</guid>
-    <description><![CDATA[<h2 id="tanzu-supplychain">TANZU SUPPLYCHAIN</h2>
-<blockquote>
+  <channel>
+    <title>tap supplychain - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/tags/tap-supplychain/</link>
+    <description>tap supplychain - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/tap-supplychain/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation SupplyChain on TAP</title>
+  <link>https://huntedhappy.github.io/cicd/</link>
+  <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/cicd/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/cicd/cicd.png" alt="The Documentation SupplyChain on TAP" title="CICD Design And Built" referrerpolicy="no-referrer"/></div><h2 id="tanzu-supplychain" class="heading-element">
+  <a href="#tanzu-supplychain" class="heading-mark"></a>TANZU SUPPLYCHAIN</h2><blockquote>
 <p>아래 내용은 기본적으로 VMWARE의 TAP솔루션을 알고 있다는 가정하에 작성을 하였습니다.</p>
 </blockquote>
 <p>CI/CD는 (Continuous Integration/Continuous Delivery) 지속적인 통합 및 지속적인 배포입니다.</p>
@@ -34,34 +33,34 @@
 <li>SLACK을 연동 후 원하는 문자로 알림을 받을 수 있습니다. figure 1-2</li>
 </ol>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-1.png"/><figcaption>
             <h4>1-1 JENKINS PIPELINE</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-2.png"/><figcaption>
             <h4>1-2 SLACK ALERT</h4>
         </figcaption>
 </figure>
 
 <p>위와 같이 JENKINS와 ARGO 를 통해 CI/CD를 구성 할 수 있습니다. 하지만 각각 구성하기 위해서는 JENKINS 그리고 ARGO의 대해서도 이해가 필요 합니다. 또한 K8S에 배포를 하기 위해서는 MANIFEST의 대해서도 이해가 필요 합니다. 가령 Deployment, statfulset, ingress 등등의 대해서도, 이해가 필요 하며 HELM 또는 KUSTOMIZAION을 사용한다면 해당 오픈소스의 대해서도 이해가 필요 합니다.</p>
 <p>TANZU APPLICATION PLATFORM은 여러 이해가 필요 한부분을 workload.yaml을 구성하면 SUPPLYCHAIN을 통해 CI/CD 구성을 사용자가 각각 구성 할 필요 없이 제공을 하고 있습니다.</p>
-<p><a href="https://huntedhappy.github.io/tanzu-application-platform/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
-<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
-<figure><figcaption>
+<p><a href="https://huntedhappy.github.io/tanzu-application-platform/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
+<figure><img src="/images/supplychain/1-3.png"/><figcaption>
             <h4>1-3 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 
 <p>기본적으로 하나의 클러스터에 3가지중 하나의 SUPPLYCHAIN을 제공 하고 있습니다. DEFULAT의 경우 위의 설명 드린 대로 사용자는 workload.yaml을 적절하게 작성을 하게 되면 CI/CD가 동작 합니다.</p>
 <p>아래 그림과 같이 workload.yaml 실행을 통해 supplychain이 순차적으로 동작을 하게 됩니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-4.png"/><figcaption>
             <h4>1-4 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <p>GUI에서 확인을 해보면 아래와 같습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-5.png"/><figcaption>
             <h4>1-5 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -69,7 +68,7 @@
 <p>그리고 두번째의 경우는 추가적으로 TEKTON을 통해 소스코드를 테스팅 할 수 있습니다.
 그리고 마지막의 경우는 GRYPE을 통해 소스 및 이미지에 보안 취약점이 있는지 확인을 합니다.</p>
 <p>GUI에서 확인을 해보면 아래와 같이 취약점에 대해서 확인 할 수 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-6.png"/><figcaption>
             <h4>1-6 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -78,17 +77,17 @@
 <p>하지만 위에서 설명 드린 대로 하나의 클러스터에는 3가지중 하나만 사용을 할 수 있습니다. 추가적인 supplychain을 구성 하고 싶을수도 있을 것입니다. 동일한 서비스의 대해서 빠르게 개발을 위해 BASIC으로 구성을 하고 싶을 것이며, QA/STAGING은 소스/이미지에 보안취약점이 있는지 잘 생성을 했는지 확인을 하고 싶을 것입니다. 물론 클러스터를 분리해서 구성 할 수도 있을 것입니다. 하지만 리소스 부족으로 분리를 할 수 없을 경우 하나의 클러스터에 모두 구성이 필요할수도 있을수 있습니다. 만약 그런 상황이 발생하면 3개중에 하나의 supplychain만 사용이 가능하기 때문에 한가지를 선택 해야 합니다. 그렇기 때문에 supplychain을 추가 하는 방법이 필요 할 수 있습니다.</p>
 </blockquote>
 <p>아래와 같이 기본적으로 제공 하고 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-7.png"/><figcaption>
             <h4>1-7 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>SUPPLYCHAIN ADD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>SUPPLYCHAIN ADD<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -361,20 +360,19 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">    - worker
 </span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>위와 같이 추가하게 되면 별도로 SUPPLYCHAIN이 추가 된 것을 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-8.png"/><figcaption>
             <h4>1-8 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <p>그리고 아래와 같이 다른 workload.yaml과는 다른 SUPPLYCHAIN이 등록 된 것을 확인 할 수 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-9.png"/><figcaption>
             <h4>1-9 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>

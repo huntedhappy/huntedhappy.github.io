@@ -1,32 +1,31 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>OKTA - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/okta/</link>
-        <description>OKTA - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 04 Mar 2023 22:33:00 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/okta/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation TechDocs in Tap</title>
-    <link>https://huntedhappy.github.io/ko/tap-techdocs/</link>
-    <pubDate>Sat, 04 Mar 2023 22:33:00 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tap-techdocs/</guid>
-    <description><![CDATA[<h2 id="1-간단한-설명">1. 간단한 설명</h2>
-<h3 id="11-backstage">1.1. Backstage?</h3>
-<p>Backstage는 개발자 포털 구축을 위한 오픈 플랫폼입니다. 2년 전 Spotify의 소규모 팀이 내부에서 Backstage를 오픈소스로 출시 후 CNCF SANDBOX에서 현재는 INCUBATING 단계가 되었습니다. CNCF는 프로젝트 성숙도에 따라서 SANDBOX, INCUBATING, GRADUATED 단계로  구성 되어 있습니다.</p>
+  <channel>
+    <title>OKTA - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/okta/</link>
+    <description>OKTA - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 04 Mar 2023 22:33:00 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/okta/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation TechDocs in Tap</title>
+  <link>https://huntedhappy.github.io/ko/tap-techdocs/</link>
+  <pubDate>Sat, 04 Mar 2023 22:33:00 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tap-techdocs/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tap-techdocs/header.png" alt="The Documentation TechDocs in Tap" title="TANZU &amp; OKTA" referrerpolicy="no-referrer"/></div><h2 id="1-간단한-설명" class="heading-element">
+  <a href="#1-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%84%a4%eb%aa%85" class="heading-mark"></a>1. 간단한 설명</h2><h3 id="11-backstage" class="heading-element">
+  <a href="#11-backstage" class="heading-mark"></a>1.1. Backstage?</h3><p>Backstage는 개발자 포털 구축을 위한 오픈 플랫폼입니다. 2년 전 Spotify의 소규모 팀이 내부에서 Backstage를 오픈소스로 출시 후 CNCF SANDBOX에서 현재는 INCUBATING 단계가 되었습니다. CNCF는 프로젝트 성숙도에 따라서 SANDBOX, INCUBATING, GRADUATED 단계로  구성 되어 있습니다.</p>
 <p>프로젝트의 성숙도는 CNCF 위원회 멤버들에 의해서 결정되며, GRADUATED 단계의 프로젝트가 되기 위해서는 GRADUATED 요건이 필요 하며 위원회 멤버 과반수 이상의 찬성표를 받아야 합니다.</p>
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-1.png"/><figcaption>
             <h4>https://www.cncf.io/projects/</h4>
         </figcaption>
 </figure>
 
 <p>Backstage WebPage를 가게 되면 엄청 많은 기능들을 확인 할 수 있습니다.</p>
-<p><a href="https://backstage.io/docs/overview/what-is-backstage" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Backstage LINK</a></p>
-<h3 id="12-techdocs">1.2. TechDocs?</h3>
-<p>Backstage에 내장되어 있으며 MarkDown 파일을 작성 함으로 Backstage에 문서형 사이트를 얻을 수 있습니다.
-<a href="https://backstage.io/docs/features/techdocs/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Backstage TechDocs 참고링크</a></p>
+<p><a href="https://backstage.io/docs/overview/what-is-backstage"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Backstage LINK</a></p>
+<h3 id="12-techdocs" class="heading-element">
+  <a href="#12-techdocs" class="heading-mark"></a>1.2. TechDocs?</h3><p>Backstage에 내장되어 있으며 MarkDown 파일을 작성 함으로 Backstage에 문서형 사이트를 얻을 수 있습니다.
+<a href="https://backstage.io/docs/features/techdocs/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Backstage TechDocs 참고링크</a></p>
 <p>TANZU의 TAP의 경우 Backstage의 기능으로 구성이 되어 있습니다.</p>
-<h2 id="2-techdocs-설정">2. TechDocs 설정</h2>
-<blockquote>
+<h2 id="2-techdocs-설정" class="heading-element">
+  <a href="#2-techdocs-%ec%84%a4%ec%a0%95" class="heading-mark"></a>2. TechDocs 설정</h2><blockquote>
 <p>사전 구성</p>
 <ol>
 <li>Object Storage : &lsquo;awsS3&rsquo; or &lsquo;googleGcs&rsquo; or &lsquo;azureBlobStorage&rsquo; or &lsquo;openStackSwift&rsquo;</li>
@@ -37,12 +36,12 @@
 <blockquote>
 <p>앞서 설명에서 MarkDown를 통해 Tanzu의 TAP에 문서형태를 구성 할 수 있습니다. 사전에 Tanzu Net에서 sample을 다운로드 받을 수 있습니다.</p>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-2.png"/><figcaption>
             <h4>Sample Download</h4>
         </figcaption>
 </figure>
 
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -55,23 +54,22 @@
 </span></span><span class="line"><span class="cl">tar zxvf tap-gui-yelb-catalog.tgz
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## markdown </span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> tap-gui-yelb-catalog
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> tap-gui-yelb-catalog</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>위의 Sample 파일을 다운로드 받은 후 TAP에서 Catalog를 등록 한 후 DOCS를 보면 아래와 같이 오류가 나는 것을 확인 할 수 있습니다.</p>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-3.webp"/><figcaption>
             <h4>Error</h4>
         </figcaption>
 </figure>
 
 <p>TANZU에서 TechDocs 관련 LINK는 아래에서 참고 할 수 있지만, 문서를 보면 어떻게 해야 되는지 잘 알지 못할 수도 있습니다.
-<a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/tap-gui-techdocs-usage.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> TechDocs In TAP 참고링크</a></p>
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/tap-gui-techdocs-usage.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> TechDocs In TAP 참고링크</a></p>
 <blockquote>
 <p>그리고 SAMPLE에서 mkdocs.yml 의 내용을 보면 docs에 index.md, add-docs.md를 읽을 수 있게 구성이 되어져 있는 것을 확인 해 볼 수 있습니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -90,24 +88,22 @@
 </span></span><span class="line"><span class="cl">  - Adding Documentation: add-docs.md
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">plugins:
-</span></span><span class="line"><span class="cl">  - techdocs-core
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  - techdocs-core</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>spotify에서 제공하는 techdocs docker를 다운로드 합니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull spotify/techdocs:v1.1.0
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull spotify/techdocs:v1.1.0</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>테스트 환경에서는 AWS의 S3를 구성 하지 않고, MINIO를 사용하여 구성하였습니다. S3의 계정 정보를 환경변수로 저장합니다. MINIO에 저장 할 수 있는 버킷을 생성 합니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -116,13 +112,12 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_REGION</span><span class="o">=</span>ap-northeast-2
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_REGION</span><span class="o">=</span>ap-northeast-2</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>페이지를 작성 하기 위해 MarkDown을 npx로 웹 관련 파일을 생성 합니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -135,13 +130,12 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 아래와 같이 ./site 폴더에 파일들이 생성 된 것을 확인 할 수 있습니다.</span>
 </span></span><span class="line"><span class="cl">ls site/
-</span></span><span class="line"><span class="cl">404.html  README.md  add-docs  assets  images  index.html  search  sitemap.xml  sitemap.xml.gz  techdocs_metadata.json
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">404.html  README.md  add-docs  assets  images  index.html  search  sitemap.xml  sitemap.xml.gz  techdocs_metadata.json</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>사전에 Catalog를 등록 하면 DOCS에서 아래처럼 확인이 가능 합니다.</p>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-3.png"/><figcaption>
             <h4>yelb-catalog-info</h4>
         </figcaption>
 </figure>
@@ -149,15 +143,14 @@
 <blockquote>
 <p>확인 및 site 파일이 생성이 되면 오브젝트 스토리지에 파일들을 업로드 해줍니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli publish --publisher-type awsS3 --storage-name techdocs --entity default/location/yelb-catalog-info --directory ./site --awsEndpoint https://minio-volumes.huntedhappy.kro.kr --awsS3ForcePathStyle <span class="nb">true</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli publish --publisher-type awsS3 --storage-name techdocs --entity default/location/yelb-catalog-info --directory ./site --awsEndpoint https://minio-volumes.huntedhappy.kro.kr --awsS3ForcePathStyle true</span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/tap-techdocs/1-4.png"/><figcaption>
             <h4>MINIO BUCKET</h4>
         </figcaption>
 </figure>
@@ -165,7 +158,7 @@
 <blockquote>
 <p>여기까지 완료가 되면 tap values yaml 파일을 업데이트 합니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -198,28 +191,27 @@
 </span></span><span class="line"><span class="cl">          endpoint: https://minio-volumes.huntedhappy.kro.kr
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 수정 후 </span>
-</span></span><span class="line"><span class="cl">tanzu package installed update tap -n tap-install --values-file <span class="o">{</span>file.yaml<span class="o">}</span>          
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">tanzu package installed update tap -n tap-install --values-file <span class="o">{</span>file.yaml<span class="o">}</span>          </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>이 후 완료가 되면 아래 처럼 DOCS를 확인 할 수 있습니다. MARKDOWN을 작성 함으로 인해서 TAP에 개발을 한 Application의 대한 설명을 작성 할 수 있습니다.</p>
 </blockquote>
-<p><figure><figcaption>
+<p><figure><img src="/images/tap-techdocs/1-5.png"/><figcaption>
             <h4>DOCS1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-6.png"/><figcaption>
             <h4>DOCS2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-7.png"/><figcaption>
             <h4>DOCS3</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-8.png"/><figcaption>
             <h4>DOCS4</h4>
         </figcaption>
 </figure>
@@ -227,81 +219,80 @@
 ]]></description>
 </item>
 <item>
-    <title>The Documentation Tanzu &amp; OTKA</title>
-    <link>https://huntedhappy.github.io/ko/tanzu-okta/</link>
-    <pubDate>Fri, 15 Jul 2022 17:17:42 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tanzu-okta/</guid>
-    <description><![CDATA[<h2 id="1-tanzu와-okta-연동">1. TANZU와 OKTA 연동</h2>
-<p>TANZU는 기본적으로 LDAPS 또는 OIDC와 연동이 가능합니다. 그 중에 OKTA 서비스를 활용하여 TANZU와 OKTA를 연동 하겠습니다.
+  <title>The Documentation Tanzu &amp; OTKA</title>
+  <link>https://huntedhappy.github.io/ko/tanzu-okta/</link>
+  <pubDate>Fri, 15 Jul 2022 17:17:42 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tanzu-okta/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tanzu-okta/tanzu-okta.png" alt="The Documentation Tanzu &amp; OTKA" title="TANZU &amp; OKTA" referrerpolicy="no-referrer"/></div><h2 id="1-tanzu와-okta-연동" class="heading-element">
+  <a href="#1-tanzu%ec%99%80-okta-%ec%97%b0%eb%8f%99" class="heading-mark"></a>1. TANZU와 OKTA 연동</h2><p>TANZU는 기본적으로 LDAPS 또는 OIDC와 연동이 가능합니다. 그 중에 OKTA 서비스를 활용하여 TANZU와 OKTA를 연동 하겠습니다.
 OKTA는 기본적으로 30일간 무료로 사용이 가능합니다.</p>
-<h2 id="2-okta-구성">2. OKTA 구성</h2>
-<p>OKTA접속 후 관리자로 변경</p>
-<figure><figcaption>
+<h2 id="2-okta-구성" class="heading-element">
+  <a href="#2-okta-%ea%b5%ac%ec%84%b1" class="heading-mark"></a>2. OKTA 구성</h2><p>OKTA접속 후 관리자로 변경</p>
+<figure><img src="/images/okta/1-1.png"/><figcaption>
             <h4>관리자로 변경</h4>
         </figcaption>
 </figure>
 
 <p>Application 추가</p>
-<p><figure><figcaption>
+<p><figure><img src="/images/okta/1-2.png"/><figcaption>
             <h4>Apps 추가</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/okta/1-3.png"/><figcaption>
             <h4>Apps 추가</h4>
         </figcaption>
 </figure>
 </p>
 <p>redirect URIs는 kubectl get svc를 통해 확인
-<figure><figcaption>
+<figure><img src="/images/okta/1-4.png"/><figcaption>
             <h4>Apps 추가</h4>
         </figcaption>
 </figure>
 </p>
-<figure><figcaption>
+<figure><img src="/images/okta/1-5.png"/><figcaption>
             <h4>Redirect URIs 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/okta/1-6.png"/><figcaption>
             <h4>Sign On 수정</h4>
         </figcaption>
 </figure>
 
 <p>Group을 생성은 Optional
-<figure><figcaption>
+<figure><img src="/images/okta/1-7.png"/><figcaption>
             <h4>Groups 생성 및 Assignment</h4>
         </figcaption>
 </figure>
 </p>
-<figure><figcaption>
+<figure><img src="/images/okta/1-8.png"/><figcaption>
             <h4>APP Assign</h4>
         </figcaption>
 </figure>
 
-<p><figure><figcaption>
+<p><figure><img src="/images/okta/1-9.png"/><figcaption>
             <h4>APP Assign</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/okta/1-11.png"/><figcaption>
             <h4>APP Assign</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="3-tanzu-구성">3. TANZU 구성</h2>
-<p>OIDC_IDENTITY_PROVIDER_CLIENT_SECRET를 base64로 변경 필요</p>
-<div class="highlight"><div class="chroma">
+<h2 id="3-tanzu-구성" class="heading-element">
+  <a href="#3-tanzu-%ea%b5%ac%ec%84%b1" class="heading-mark"></a>3. TANZU 구성</h2><p>OIDC_IDENTITY_PROVIDER_CLIENT_SECRET를 base64로 변경 필요</p>
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s1">&#39;{CLIENT SECRETS}&#39;</span> <span class="p">|</span> base64
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s1">&#39;{CLIENT SECRETS}&#39;</span> <span class="p">|</span> base64</span></span></code></pre></td></tr></table>
 </div>
 </div><p>TANZU MGMT 에서 OIDC 부분을 찾은 후 파일 수정</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -330,21 +321,19 @@ OKTA는 기본적으로 30일간 무료로 사용이 가능합니다.</p>
 </span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_GROUPS_CLAIM: groups
 </span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_ISSUER_URL: https://dev-<span class="o">[</span>...<span class="o">]</span>.okta.com
 </span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_SCOPES: openid,profile,email,groups,offline_access
-</span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">OIDC_IDENTITY_PROVIDER_USERNAME_CLAIM: email</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-sa-생성-후-test">4. SA 생성 후 TEST</h2>
-<p>SA 생성</p>
-<div class="highlight"><div class="chroma">
+</div><h2 id="4-sa-생성-후-test" class="heading-element">
+  <a href="#4-sa-%ec%83%9d%ec%84%b1-%ed%9b%84-test" class="heading-mark"></a>4. SA 생성 후 TEST</h2><p>SA 생성</p>
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create clusterrolebinding id-mgmt-test-user --clusterrole cluster-admin --user <span class="o">{</span>mail address<span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create clusterrolebinding id-mgmt-test-user --clusterrole cluster-admin --user <span class="o">{</span>mail address<span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>TEST</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -353,30 +342,29 @@ OKTA는 기본적으로 30일간 무료로 사용이 가능합니다.</p>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu mc kubeconfig get --export-file<span class="o">=</span>tanzu-cli-tkgm02
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get pod -A --kubeconfig tanzu-cli-tkgm02
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl get pod -A --kubeconfig tanzu-cli-tkgm02</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/okta/2-1.png"/><figcaption>
             <h4>TEST</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/okta/2-2.png"/><figcaption>
             <h4>TEST</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/okta/2-3.png"/><figcaption>
             <h4>TEST</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/okta/2-4.png"/><figcaption>
             <h4>TEST</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/okta/2-5.png"/><figcaption>
             <h4>TEST</h4>
         </figcaption>
 </figure>

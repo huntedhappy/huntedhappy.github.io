@@ -1,27 +1,26 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Ldpas - Tag - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/tags/ldpas/</link>
-        <description>Ldpas - Tag - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 16 Jan 2022 22:32:24 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/ldpas/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation LDAPS(AD)</title>
-    <link>https://huntedhappy.github.io/ldaps/</link>
-    <pubDate>Sun, 16 Jan 2022 22:32:24 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ldaps/</guid>
-    <description><![CDATA[<h2 id="1-ldap-over-ssl">1. LDAP Over SSL</h2>
-<p>대략 설명 보다. 이미지를 많이 첨부</p>
+  <channel>
+    <title>Ldpas - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/tags/ldpas/</link>
+    <description>Ldpas - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 16 Jan 2022 22:32:24 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/ldpas/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation LDAPS(AD)</title>
+  <link>https://huntedhappy.github.io/ldaps/</link>
+  <pubDate>Sun, 16 Jan 2022 22:32:24 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ldaps/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ldaps/Active-Directory.jpg" alt="The Documentation LDAPS(AD)" title="LDAPS(AD) 관련" referrerpolicy="no-referrer"/></div><h2 id="1-ldap-over-ssl" class="heading-element">
+  <a href="#1-ldap-over-ssl" class="heading-mark"></a>1. LDAP Over SSL</h2><p>대략 설명 보다. 이미지를 많이 첨부</p>
 <p>LDAPS를 구성 할 경우 IP로 ldapsearch를 하면 실패하는 경우를 보게 될 것이다.
 FQDN인증서를 확인 하면 FQDN만 구성이 되어 있는 것을 알 수 있다.
 그래서 SAN으로 구성하면서 IP도 포함되게 구성을 해보자.</p>
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-1.png"/><figcaption>
             <h4>Ldaps 인증서 확인</h4>
         </figcaption>
 </figure>
 
-<h3 id="11-certreqreq-설정">1.1. certreq.req 설정</h3>
-<div class="highlight"><div class="chroma">
+<h3 id="11-certreqreq-설정" class="heading-element">
+  <a href="#11-certreqreq-%ec%84%a4%ec%a0%95" class="heading-mark"></a>1.1. certreq.req 설정</h3><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -32,135 +31,133 @@ FQDN인증서를 확인 하면 FQDN만 구성이 되어 있는 것을 알 수 �
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 아래 IP로 ldapsearch를 하게 되면 에러가 난다. 만약 IP로도 가능하게 하려면 인증서 변경이 필요하다.</span>
 </span></span><span class="line"><span class="cl">ldapsearch -x -H ldaps://10.253.241.2 -D <span class="s1">&#39;cn=administrator,cn=users,dc=tkg,dc=io&#39;</span> -w <span class="s1">&#39;Passw0rd&#39;</span> -b <span class="s1">&#39;ou=tanzu,dc=tkg,dc=io&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">## 에러</span>
-</span></span><span class="line"><span class="cl">ldap_sasl_bind<span class="o">(</span>SIMPLE<span class="o">)</span>: Can<span class="err">&#39;</span>t contact LDAP server <span class="o">(</span>-1<span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">ldap_sasl_bind<span class="o">(</span>SIMPLE<span class="o">)</span>: Can<span class="err">&#39;</span>t contact LDAP server <span class="o">(</span>-1<span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/ldaps/1-2.png"/><figcaption>
             <h4>Ldaps Falied</h4>
         </figcaption>
 </figure>
 
 <p>윈도우에서 certlm.msc 실행</p>
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-3.png"/><figcaption>
             <h4>certlm.msc</h4>
         </figcaption>
 </figure>
 
 <p>certlm.msc &gt; 개인용 &gt; 모든 작업 &gt; 고급 작업 &gt; 사용자 지정 요청 만들기</p>
-<p><figure><figcaption>
+<p><figure><img src="/images/ldaps/1-4.png"/><figcaption>
             <h4>certlm #1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-5.png"/><figcaption>
             <h4>certlm #2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-6.png"/><figcaption>
             <h4>certlm #3</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-7.png"/><figcaption>
             <h4>certlm #4</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-8.png"/><figcaption>
             <h4>certlm #5</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-9.png"/><figcaption>
             <h4>certlm #6</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-10.png"/><figcaption>
             <h4>certlm #7</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-11.png"/><figcaption>
             <h4>certlm #8</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-12.png"/><figcaption>
             <h4>certlm #9</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-13.png"/><figcaption>
             <h4>certlm #10</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-14.png"/><figcaption>
             <h4>certlm #11</h4>
         </figcaption>
 </figure>
 </p>
 <p>인증서 생성</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">certreq</span> <span class="n">-submit</span> <span class="n">-sttrib</span> <span class="s2">&#34;CertificateTemplate:webserver&#34;</span> <span class="n">certreq</span><span class="p">.</span><span class="py">req</span> <span class="n">certreq</span><span class="p">.</span><span class="py">cer</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">certreq</span> <span class="n">-submit</span> <span class="n">-sttrib</span> <span class="s2">&#34;CertificateTemplate:webserver&#34;</span> <span class="n">certreq</span><span class="p">.</span><span class="py">req</span> <span class="n">certreq</span><span class="p">.</span><span class="n">cer</span></span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/ldaps/1-15.png"/><figcaption>
             <h4>certlm #12</h4>
         </figcaption>
 </figure>
 
-<h3 id="12-인증서-등록">1.2. 인증서 등록</h3>
-<p>certlm.msc &gt; 개인용 &gt; 인증서 &gt; 모든 작업 &gt; 가져오기</p>
-<p><figure><figcaption>
+<h3 id="12-인증서-등록" class="heading-element">
+  <a href="#12-%ec%9d%b8%ec%a6%9d%ec%84%9c-%eb%93%b1%eb%a1%9d" class="heading-mark"></a>1.2. 인증서 등록</h3><p>certlm.msc &gt; 개인용 &gt; 인증서 &gt; 모든 작업 &gt; 가져오기</p>
+<p><figure><img src="/images/ldaps/1-16.png"/><figcaption>
             <h4>인증서 등록#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-17.png"/><figcaption>
             <h4>인증서 등록#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-18.png"/><figcaption>
             <h4>인증서 등록#3</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-19.png"/><figcaption>
             <h4>인증서 등록#4</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-20.png"/><figcaption>
             <h4>인증서 등록#5</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-21.png"/><figcaption>
             <h4>인증서 등록#6</h4>
         </figcaption>
 </figure>
 </p>
 <p>등록 확인
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-22.png"/><figcaption>
             <h4>인증서 등록 확인#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-23.png"/><figcaption>
             <h4>인증서 등록 확인#2</h4>
         </figcaption>
 </figure>
 </p>
 <p>Ldapsearch를 IP로 했을 때 성공 하는 것을 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/ldaps/1-24.png"/><figcaption>
             <h4>인증서 등록 확인#2</h4>
         </figcaption>
 </figure>

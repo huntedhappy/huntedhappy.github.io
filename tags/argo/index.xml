@@ -1,17 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>argo - Tag - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/tags/argo/</link>
-        <description>argo - Tag - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/argo/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation SupplyChain on TAP</title>
-    <link>https://huntedhappy.github.io/cicd/</link>
-    <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/cicd/</guid>
-    <description><![CDATA[<h2 id="tanzu-supplychain">TANZU SUPPLYCHAIN</h2>
-<blockquote>
+  <channel>
+    <title>argo - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/tags/argo/</link>
+    <description>argo - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/argo/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation SupplyChain on TAP</title>
+  <link>https://huntedhappy.github.io/cicd/</link>
+  <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/cicd/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/cicd/cicd.png" alt="The Documentation SupplyChain on TAP" title="CICD Design And Built" referrerpolicy="no-referrer"/></div><h2 id="tanzu-supplychain" class="heading-element">
+  <a href="#tanzu-supplychain" class="heading-mark"></a>TANZU SUPPLYCHAIN</h2><blockquote>
 <p>아래 내용은 기본적으로 VMWARE의 TAP솔루션을 알고 있다는 가정하에 작성을 하였습니다.</p>
 </blockquote>
 <p>CI/CD는 (Continuous Integration/Continuous Delivery) 지속적인 통합 및 지속적인 배포입니다.</p>
@@ -34,34 +33,34 @@
 <li>SLACK을 연동 후 원하는 문자로 알림을 받을 수 있습니다. figure 1-2</li>
 </ol>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-1.png"/><figcaption>
             <h4>1-1 JENKINS PIPELINE</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-2.png"/><figcaption>
             <h4>1-2 SLACK ALERT</h4>
         </figcaption>
 </figure>
 
 <p>위와 같이 JENKINS와 ARGO 를 통해 CI/CD를 구성 할 수 있습니다. 하지만 각각 구성하기 위해서는 JENKINS 그리고 ARGO의 대해서도 이해가 필요 합니다. 또한 K8S에 배포를 하기 위해서는 MANIFEST의 대해서도 이해가 필요 합니다. 가령 Deployment, statfulset, ingress 등등의 대해서도, 이해가 필요 하며 HELM 또는 KUSTOMIZAION을 사용한다면 해당 오픈소스의 대해서도 이해가 필요 합니다.</p>
 <p>TANZU APPLICATION PLATFORM은 여러 이해가 필요 한부분을 workload.yaml을 구성하면 SUPPLYCHAIN을 통해 CI/CD 구성을 사용자가 각각 구성 할 필요 없이 제공을 하고 있습니다.</p>
-<p><a href="https://huntedhappy.github.io/tanzu-application-platform/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
-<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
-<figure><figcaption>
+<p><a href="https://huntedhappy.github.io/tanzu-application-platform/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
+<figure><img src="/images/supplychain/1-3.png"/><figcaption>
             <h4>1-3 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 
 <p>기본적으로 하나의 클러스터에 3가지중 하나의 SUPPLYCHAIN을 제공 하고 있습니다. DEFULAT의 경우 위의 설명 드린 대로 사용자는 workload.yaml을 적절하게 작성을 하게 되면 CI/CD가 동작 합니다.</p>
 <p>아래 그림과 같이 workload.yaml 실행을 통해 supplychain이 순차적으로 동작을 하게 됩니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-4.png"/><figcaption>
             <h4>1-4 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <p>GUI에서 확인을 해보면 아래와 같습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-5.png"/><figcaption>
             <h4>1-5 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -69,7 +68,7 @@
 <p>그리고 두번째의 경우는 추가적으로 TEKTON을 통해 소스코드를 테스팅 할 수 있습니다.
 그리고 마지막의 경우는 GRYPE을 통해 소스 및 이미지에 보안 취약점이 있는지 확인을 합니다.</p>
 <p>GUI에서 확인을 해보면 아래와 같이 취약점에 대해서 확인 할 수 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-6.png"/><figcaption>
             <h4>1-6 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -78,17 +77,17 @@
 <p>하지만 위에서 설명 드린 대로 하나의 클러스터에는 3가지중 하나만 사용을 할 수 있습니다. 추가적인 supplychain을 구성 하고 싶을수도 있을 것입니다. 동일한 서비스의 대해서 빠르게 개발을 위해 BASIC으로 구성을 하고 싶을 것이며, QA/STAGING은 소스/이미지에 보안취약점이 있는지 잘 생성을 했는지 확인을 하고 싶을 것입니다. 물론 클러스터를 분리해서 구성 할 수도 있을 것입니다. 하지만 리소스 부족으로 분리를 할 수 없을 경우 하나의 클러스터에 모두 구성이 필요할수도 있을수 있습니다. 만약 그런 상황이 발생하면 3개중에 하나의 supplychain만 사용이 가능하기 때문에 한가지를 선택 해야 합니다. 그렇기 때문에 supplychain을 추가 하는 방법이 필요 할 수 있습니다.</p>
 </blockquote>
 <p>아래와 같이 기본적으로 제공 하고 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-7.png"/><figcaption>
             <h4>1-7 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>SUPPLYCHAIN ADD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>SUPPLYCHAIN ADD<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -361,20 +360,19 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">    - worker
 </span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>위와 같이 추가하게 되면 별도로 SUPPLYCHAIN이 추가 된 것을 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-8.png"/><figcaption>
             <h4>1-8 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <p>그리고 아래와 같이 다른 workload.yaml과는 다른 SUPPLYCHAIN이 등록 된 것을 확인 할 수 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-9.png"/><figcaption>
             <h4>1-9 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -382,149 +380,137 @@
 ]]></description>
 </item>
 <item>
-    <title>The Documentation Argo-CD</title>
-    <link>https://huntedhappy.github.io/argo/</link>
-    <pubDate>Fri, 31 Dec 2021 20:05:51 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/argo/</guid>
-    <description><![CDATA[<h2 id="gitops-explain-ing">gitops explain ing&hellip;..</h2>
-<h2 id="argo">ARGO?</h2>
-<p>CI/CD에서 CD를 아르고로 선택한 이유는 인프라 변경 사항에 대한 추적이 좀 가능 하기도 하며 또한 구성 및 배포가 쉽다라고 생각 했다.</p>
+  <title>The Documentation Argo-CD</title>
+  <link>https://huntedhappy.github.io/argo/</link>
+  <pubDate>Fri, 31 Dec 2021 20:05:51 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/argo/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/argo/argo.png" alt="The Documentation Argo-CD" title="Argo Install Guide" referrerpolicy="no-referrer"/></div><h2 id="gitops-explain-ing" class="heading-element">
+  <a href="#gitops-explain-ing" class="heading-mark"></a>gitops explain ing&hellip;..</h2><h2 id="argo" class="heading-element">
+  <a href="#argo" class="heading-mark"></a>ARGO?</h2><p>CI/CD에서 CD를 아르고로 선택한 이유는 인프라 변경 사항에 대한 추적이 좀 가능 하기도 하며 또한 구성 및 배포가 쉽다라고 생각 했다.</p>
 <p>설치 환경은 Tanzu 1.4 버전으로 진행</p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
 CI (Continuous Integration) CI를 통해 개발자들은 코드 변경사항을 공유 브랜치로 다시 병합하는 작업을 더욱 수월하게 자주 수행 할 수 있다.
 CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으로 사용됨.</p>
 <ul>
 <li>Continuous Deliver의 경우 코드 변경 , 병합으로부터 Prodcution에 적합한 빌드를 제공하여 모든 단계에 테스트 및 릴리스를 자동화한다.</li>
 <li>Continuous Deploy는 어플리케이션을 프로덕션으로 릴리스 작업을 자동화</li>
 </ul></div>
-        </div>
     </div>
-<figure><figcaption>
+  </div>
+<figure><img src="/images/jenkins/0-1.png"/><figcaption>
             <h4>CICD</h4>
         </figcaption>
 </figure>
 
-<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Redhat </a></p>
-<h2 id="1-requirements">1. Requirements</h2>
-<p>helm 설치, <a href="https://github.com/helm/helm/releases" target="_blank" rel="noopener noreffer "><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;Helm</a>.</p>
-<h2 id="2-환경">2. 환경</h2>
-<p>vSphere : 7.0</p>
+<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Redhat </a></p>
+<h2 id="1-requirements" class="heading-element">
+  <a href="#1-requirements" class="heading-mark"></a>1. Requirements</h2><p>helm 설치, <a href="https://github.com/helm/helm/releases"target="_blank" rel="external nofollow noopener noreferrer"><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;Helm</a>.</p>
+<h2 id="2-환경" class="heading-element">
+  <a href="#2-%ed%99%98%ea%b2%bd" class="heading-mark"></a>2. 환경</h2><p>vSphere : 7.0</p>
 <p>vSAN</p>
 <p>NSX : 3.2</p>
 <p>AVI : 21.1.1</p>
 <p>Tanzu 1.4</p>
-<h2 id="3-설치">3. 설치</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>ARGO Install<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"></a></p>
+<h2 id="3-설치" class="heading-element">
+  <a href="#3-%ec%84%a4%ec%b9%98" class="heading-mark"></a>3. 설치</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>ARGO Install<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.en.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>Namespace 생성</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns argocd
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns argocd</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Helm Repo 등록</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm repo add argo https://argoproj.github.io/argo-helm
-</span></span><span class="line"><span class="cl">helm repo update
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">helm repo update</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>Optional : Helm 에서 value 값을 수정 하고 싶으면 별도로 다운로드</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values argo/argo-cd &gt; argocd.yaml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values argo/argo-cd &gt; argocd.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>Optional : HTTPS로 구성을 하려고 한다면 인증서 등록을 해준다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret tls argo-tls --cert<span class="o">=</span>/data/cert/yourdomain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n argocd
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret tls argo-tls --cert<span class="o">=</span>/data/cert/yourdomain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n argocd</span></span></code></pre></td></tr></table>
 </div>
 </div><p>수정이 필요 없으면 바로 시작 하면 된다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm install argocd argo/argo-cd -n argo
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm install argocd argo/argo-cd -n argo</span></span></code></pre></td></tr></table>
 </div>
 </div><p>접속 하기 위해 Portfoward를 하자</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ID는 admin 이며, PW는 별도의 명령으로 알아 낼수 있다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<p><figure><a class="lightgallery" href="/images/ARGO/3-1.png" title="접속 페이지" data-thumbnail="/images/ARGO/3-1.png" data-sub-html="<h2>접속 페이지</h2><p>접속 페이지</p>">
-        
-    </a><figcaption class="image-caption">접속 페이지</figcaption>
-    </figure>
-<figure><a class="lightgallery" href="/images/ARGO/3-2.png" title="User Info" data-thumbnail="/images/ARGO/3-2.png" data-sub-html="<h2>User Info</h2><p>User Info</p>">
-        
-    </a><figcaption class="image-caption">User Info</figcaption>
-    </figure></p>
-<h2 id="4-auth---ldap-integration">4. Auth - LDAP Integration</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LDAP Integration<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>LDAP을 연동 하기 위해선 values 값을 다운로드 하는 것이 좋다.</p>
-<div class="highlight"><div class="chroma">
+  </div>
+<p><figure><a class="lightgallery" href="/images/ARGO/3-1.png?size=large" data-thumbnail="/images/ARGO/3-1.png?size=small" data-sub-html="<h2>접속 페이지</h2><p>접속 페이지</p>"><img loading="lazy" src="/images/ARGO/3-1.png" alt="접속 페이지" srcset="/images/ARGO/3-1.png?size=small, /images/ARGO/3-1.png?size=medium 1.5x, /images/ARGO/3-1.png?size=large 2x" sizes="auto" data-title="접속 페이지" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">접속 페이지</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="/images/ARGO/3-2.png?size=large" data-thumbnail="/images/ARGO/3-2.png?size=small" data-sub-html="<h2>User Info</h2><p>User Info</p>"><img loading="lazy" src="/images/ARGO/3-2.png" alt="User Info" srcset="/images/ARGO/3-2.png?size=small, /images/ARGO/3-2.png?size=medium 1.5x, /images/ARGO/3-2.png?size=large 2x" sizes="auto" data-title="User Info" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">User Info</figcaption>
+  </figure></p>
+<h2 id="4-auth---ldap-integration" class="heading-element">
+  <a href="#4-auth---ldap-integration" class="heading-mark"></a>4. Auth - LDAP Integration</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LDAP Integration<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>LDAP을 연동 하기 위해선 values 값을 다운로드 하는 것이 좋다.</p>
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values argo/argo-cd &gt; argocd.yaml
-</span></span><span class="line"><span class="cl">vi argocd.yaml
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">vi argocd.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다운로드 받은 Yaml파일중에 dex부분을 수정한다, 없으면 추가 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -581,22 +567,20 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">            filter: <span class="o">(</span><span class="nv">objectClass</span><span class="o">=</span>person<span class="o">)</span>
 </span></span><span class="line"><span class="cl">            userAttr: DN
 </span></span><span class="line"><span class="cl">            groupAttr: member
-</span></span><span class="line"><span class="cl">            nameAttr: name
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">            nameAttr: name</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 Secret을 생성 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindPW\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s1">&#39;Passw0rd&#39;</span> <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span>
-</span></span><span class="line"><span class="cl">kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindDN\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">cn</span><span class="o">=</span>administrator,cn<span class="o">=</span>users,dc<span class="o">=</span>tanzu,dc<span class="o">=</span>io <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindDN\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">cn</span><span class="o">=</span>administrator,cn<span class="o">=</span>users,dc<span class="o">=</span>tanzu,dc<span class="o">=</span>io <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>HELM 실행</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -605,48 +589,44 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm install argocd argo/argo-cd -n argo <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set server.extraArgs<span class="o">[</span>0<span class="o">]=</span>--insecure <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-f argocd.yaml
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-f argocd.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>접속 하기 위해 Portfoward를 하자</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ID는 admin 이며, PW는 별도의 명령으로 알아 낼수 있다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="41-rbac-적용">4.1. RBAC 적용</h3>
-<p>RBAC을 적용 해주어 Admin 권한으로 접속이 되는지 확인
+  </div>
+<h3 id="41-rbac-적용" class="heading-element">
+  <a href="#41-rbac-%ec%a0%81%ec%9a%a9" class="heading-mark"></a>4.1. RBAC 적용</h3><p>RBAC을 적용 해주어 Admin 권한으로 접속이 되는지 확인
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LDAP Integration<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>confimap을 수정 해서 RBAC의 대한 설정을 해준다.</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LDAP Integration<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>confimap을 수정 해서 RBAC의 대한 설정을 해준다.</p>
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl edit cm argocd-rbac-cm -n argo
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl edit cm argocd-rbac-cm -n argo</span></span></code></pre></td></tr></table>
 </div>
 </div><p>configmap을 수정 하면 아래 내용이 있으면 수정 하고 없으면 추가 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -675,104 +655,102 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">    g, tkg, role:readonly
 </span></span><span class="line"><span class="cl">    g, my1208@openbase.co.kr, role:admin
 </span></span><span class="line"><span class="cl">  policy.default: role:none
-</span></span><span class="line"><span class="cl">  scopes: <span class="s1">&#39;[groups,email]&#39;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  scopes: <span class="s1">&#39;[groups,email]&#39;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Pod를 재 실행 해 준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">delete</span><span class="o">=</span><span class="sb">`</span>kubectl get pod -n argo <span class="p">|</span> grep -v  repo <span class="p">|</span> egrep  <span class="s1">&#39;server|dex&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> xargs <span class="nb">echo</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl">kubectl delete pod <span class="nv">$delete</span> -n argo
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl delete pod <span class="nv">$delete</span> -n argo</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
-    </div></p>
-<figure><figcaption>
+    </div>
+  </div></p>
+<figure><img src="/images/ARGO/4-1.png"/><figcaption>
             <h4>접속 화면</h4>
         </figcaption>
 </figure>
 
-<h2 id="5-slack-연동">5. SLACK 연동</h2>
-<p>메시지를 SLACK으로 받기 위해 연동</p>
-<h3 id="51-slack-설정">5.1. SLACK 설정</h3>
-<p><a href="https://api.slack.com/apps?new_app=1" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> SLACK APP 등록 </a>
-<figure><figcaption>
+<h2 id="5-slack-연동" class="heading-element">
+  <a href="#5-slack-%ec%97%b0%eb%8f%99" class="heading-mark"></a>5. SLACK 연동</h2><p>메시지를 SLACK으로 받기 위해 연동</p>
+<h3 id="51-slack-설정" class="heading-element">
+  <a href="#51-slack-%ec%84%a4%ec%a0%95" class="heading-mark"></a>5.1. SLACK 설정</h3><p><a href="https://api.slack.com/apps?new_app=1"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> SLACK APP 등록 </a>
+<figure><img src="/images/ARGO/5-1.png"/><figcaption>
             <h4>APP 추가#1</h4>
         </figcaption>
 </figure>
 </p>
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-2.png"/><figcaption>
             <h4>APP 추가#2</h4>
         </figcaption>
 </figure>
 
 <p>APP을 추가하기 위해 APP의 Name 설정 및 workspace를 선택 한다.
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-3.png"/><figcaption>
             <h4>APP 추가#3</h4>
         </figcaption>
 </figure>
 
 OAuth &amp; Permmissions을 클릭 하면 아래처럼 화면이 나온다.
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-4.png"/><figcaption>
             <h4>APP 추가#4</h4>
         </figcaption>
 </figure>
 
 Scopes를 찾아서 chat을 찾은후 적용
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-5.png"/><figcaption>
             <h4>APP 추가#5</h4>
         </figcaption>
 </figure>
 
 그러면 OAuth Tokens for Your Workspace가 활성화 되는 것을 확인 할 수 있다 그리고 Install to Workspaces를 클릭
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-6.png"/><figcaption>
             <h4>APP 추가#6</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-7.png"/><figcaption>
             <h4>APP 추가#7</h4>
         </figcaption>
 </figure>
 
 TOKEN을 복사 한다.
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-8.png"/><figcaption>
             <h4>APP 추가#8</h4>
         </figcaption>
 </figure>
 
 APP을 추가 해준다.
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-9.png"/><figcaption>
             <h4>APP 추가#9</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-10.png"/><figcaption>
             <h4>APP 추가#10</h4>
         </figcaption>
 </figure>
 
 새로 만든 APP이 나오는 것을 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-11.png"/><figcaption>
             <h4>APP 추가#11</h4>
         </figcaption>
 </figure>
 </p>
-<p>솔직히 여기 잘 나와 있다. <a href="https://argocd-notifications.readthedocs.io/en/stable/services/slack/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> SLACK APP 등록 </a></p>
-<h3 id="52-argo-설정">5.2. ARGO 설정</h3>
-<p>ARGO 설정은 별도로 UI에서 제공을 하지 않기 때문에 ConfigMap을 좀 수정 해야 한다. Helm에서 제공을 하긴 하는대 현재는 버그가 있는지 배포가 되지 않아 별도의 방법으로 구성한다.</p>
+<p>솔직히 여기 잘 나와 있다. <a href="https://argocd-notifications.readthedocs.io/en/stable/services/slack/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> SLACK APP 등록 </a></p>
+<h3 id="52-argo-설정" class="heading-element">
+  <a href="#52-argo-%ec%84%a4%ec%a0%95" class="heading-mark"></a>5.2. ARGO 설정</h3><p>ARGO 설정은 별도로 UI에서 제공을 하지 않기 때문에 ConfigMap을 좀 수정 해야 한다. Helm에서 제공을 하긴 하는대 현재는 버그가 있는지 배포가 되지 않아 별도의 방법으로 구성한다.</p>
 <p><div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>Slack 연동<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>해당 파일을 다운 로드 받은 후 실행</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>Slack 연동<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>해당 파일을 다운 로드 받은 후 실행</p>
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -785,11 +763,10 @@ APP을 추가 해준다.
 </span></span><span class="line"><span class="cl">wget -O argo-noty-config.yaml https://raw.githubusercontent.com/argoproj-labs/argocd-notifications/v1.2.1/catalog/install.yaml
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl apply -f argo-noty-secret.yaml -n argo
-</span></span><span class="line"><span class="cl">kubectl apply -f argo-noty-config.yaml -n argo
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl apply -f argo-noty-config.yaml -n argo</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 secret 과 configmap을 수정한다. 사전에 변경해도 상관은 없다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -834,20 +811,19 @@ APP을 추가 해준다.
 </span></span><span class="line"><span class="cl">    <span class="c1">## apiURL: &lt;url&gt;                 # optional URL, e.g. https://example.com/api</span>
 </span></span><span class="line"><span class="cl">    token: <span class="nv">$slack</span>-token              <span class="c1"># 위에 secret을 참고 함 </span>
 </span></span><span class="line"><span class="cl">    <span class="c1">## username: &lt;override-username&gt; # optional username</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">## icon: &lt;override-icon&gt; # optional icon for the message (supports both emoij and url notation)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    <span class="c1">## icon: &lt;override-icon&gt; # optional icon for the message (supports both emoij and url notation)</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-Default Definition 참고. <a href="https://argocd-notifications.readthedocs.io/en/stable/services/slack/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> SLACK으로 보낼 내용 정리 </a></p>
+  </div>
+Default Definition 참고. <a href="https://argocd-notifications.readthedocs.io/en/stable/services/slack/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> SLACK으로 보낼 내용 정리 </a></p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Slack 연동<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>테스트를 위해 Application을 배포 한다.</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>Slack 연동<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>테스트를 위해 Application을 배포 한다.</p>
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -900,30 +876,29 @@ Default Definition 참고. <a href="https://argocd-notifications.readthedocs.io/
 </span></span></span><span class="line"><span class="cl"><span class="s">    targetRevision: HEAD
 </span></span></span><span class="line"><span class="cl"><span class="s">  syncPolicy:
 </span></span></span><span class="line"><span class="cl"><span class="s">    automated: {}
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>그럼 아래와 같이 Slack으로 메시지가 오는 것을 확인 할 수 있다.</p>
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-12.png"/><figcaption>
             <h4>SLACK 확인</h4>
         </figcaption>
 </figure>
 
 <p>또는 UI에서 Application에 Annotation을 설정해서 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-13.png"/><figcaption>
             <h4>GUI에서 Annotation 설정#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-14.png"/><figcaption>
             <h4>GUI에서 Annotation 설정#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/ARGO/5-15.png"/><figcaption>
             <h4>GUI에서 Annotation 설정#3</h4>
         </figcaption>
 </figure>

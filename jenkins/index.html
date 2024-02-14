@@ -1,133 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>The Documentation Jenkins - Dokyung&#39;s DevOoOps</title><meta name="Description" content="Jenkins Install Guide"><meta property="og:title" content="The Documentation Jenkins" />
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>The Documentation Jenkins - Dokyung&#39;s DevOoOps</title><meta name="author" content="">
+<meta name="author-link" content="">
+<meta name="description" content="Jenkins Install Guide" /><meta name="keywords" content='Jenkins, CI/CD, tanzu, k8s, devops, dk, dokyung, jenkins slack, slack, jenkins slack 연동, notification' /><meta itemprop="name" content="The Documentation Jenkins">
+<meta itemprop="description" content="Jenkins Install Guide"><meta itemprop="datePublished" content="2021-12-31T20:49:23+09:00" />
+<meta itemprop="dateModified" content="2023-09-17T08:19:26+09:00" />
+<meta itemprop="wordCount" content="603"><meta itemprop="image" content="https://huntedhappy.github.io/jenkins/jenkins.png" />
+<meta itemprop="keywords" content="Jenkins,CI/CD,tanzu,k8s,devops,dk,dokyung,jenkins slack,slack,jenkins slack 연동,notification," /><meta property="og:title" content="The Documentation Jenkins" />
 <meta property="og:description" content="Jenkins Install Guide" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/jenkins/" /><meta property="og:image" content="https://huntedhappy.github.io/jenkins/jenkins.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-31T20:49:23+09:00" />
-<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://huntedhappy.github.io/jenkins/jenkins.png" /><meta name="twitter:title" content="The Documentation Jenkins"/>
 <meta name="twitter:description" content="Jenkins Install Guide"/>
 <meta name="application-name" content="Dokyung&#39;s DevOoOps">
-<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/jenkins/" /><link rel="prev" href="https://huntedhappy.github.io/argo/" /><link rel="next" href="https://huntedhappy.github.io/tanzu/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "The Documentation Jenkins",
-        "inLanguage": "en",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/huntedhappy.github.io\/jenkins\/"
-        },"image": [{
-                            "@type": "ImageObject",
-                            "url": "https:\/\/huntedhappy.github.io\/jenkins\/jenkins.png",
-                            "width":  500 ,
-                            "height":  200 
-                        }],"genre": "posts","keywords": "Jenkins, CI\/CD, tanzu, k8s, devops, dk, dokyung, jenkins slack, slack, jenkins slack 연동, notification","wordcount":  608 ,
-        "url": "https:\/\/huntedhappy.github.io\/jenkins\/","datePublished": "2021-12-31T20:49:23+09:00","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "Dokyung"
-            },"description": "Jenkins Install Guide"
-    }
-    </script></head>
-    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" data-light="#ffffff" data-dark="#ffffff" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://huntedhappy.github.io/jenkins/" /><link rel="prev" href="https://huntedhappy.github.io/argo/" /><link rel="next" href="https://huntedhappy.github.io/tanzu/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Documentation Jenkins",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/huntedhappy.github.io\/jenkins\/"
+    },"image": [{
+              "@type": "ImageObject",
+              "url": "https:\/\/huntedhappy.github.io\/jenkins\/jenkins.png",
+              "width":  500 ,
+              "height":  200 
+            }],"genre": "posts","keywords": "Jenkins, CI\/CD, tanzu, k8s, devops, dk, dokyung, jenkins slack, slack, jenkins slack 연동, notification","wordcount":  603 ,
+    "url": "https:\/\/huntedhappy.github.io\/jenkins\/","datePublished": "2021-12-31T20:49:23+09:00","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Dokyung"
+      },"description": "Jenkins Install Guide"
+  }
+  </script></head>
+  <body data-header-desktop="auto" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-desktop" class="typeit"></span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              >Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              >Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              >Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/documentation/"
+                
+                
+              >Docs</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              >About</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="https://github.com/huntedhappy"
+                title="GitHub"
+                rel="noopener noreferrer" target="_blank"
+              ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Search titles or contents ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li><li class="menu-item language-switch">
+            <span role="button" aria-label="Select Language" title="Select Language"><i class="fa-solid fa-language fa-fw" aria-hidden="true"></i></span>
+            <ul class="sub-menu"><li class="menu-item">
+                      <a href="/ko/jenkins/" class="menu-link" title="Korean">Korean</a>
+                    </li><li class="menu-item">
+                      <span class="menu-link text-secondary" title="한국어">한국어</span>
+                    </li></ul>
+          </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
     <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/categories/documentation/"> Docs </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
-                    <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/jenkins/">Korean</option><option value="/jenkins/" selected>한국어</option></select>
-                </a></div>
-        </div>
+      <div class="header-title">
+        <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-title-mobile" class="typeit"></span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Search titles or contents ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
             </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        Cancel
-                    </a>
-                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/categories/documentation/" title="">Docs</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
-                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/ko/jenkins/">Korean</option><option value="/jenkins/" selected>한국어</option></select>
-                </a></div>
-    </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Cancel
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                >Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                >Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                >Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/documentation/"
+                  
+                  
+                >Docs</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                >About</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="https://github.com/huntedhappy"
+                  title="GitHub"
+                  rel="noopener noreferrer" target="_blank"
+                ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span><span class="menu-system-item language-switch">
+              <span role="button" aria-label="Select Language" title="Select Language">한국어<i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+              <select class="language-select" onchange="location = this.value;"><option value="/ko/jenkins/">Korean</option><option value="/jenkins/" selected disabled>한국어</option></select>
+            </span></li>
+      </ul>
+    </nav>
+  </div>
 </header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">Contents</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation Jenkins</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-12-31">2021-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;608 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/jenkins/jenkins.png"
-        data-srcset="/jenkins/jenkins.png, /jenkins/jenkins.png 1.5x, /jenkins/jenkins.png 2x"
-        data-sizes="auto"
-        alt="/jenkins/jenkins.png"
-        title="Jenkins Install Guide" /></div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>Contents</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>The Documentation Jenkins</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Dokyung</span></span><span class="post-included-in">&nbsp;included in <a href="/categories/documentation/" class="post-category" title="Category - Documentation"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Documentation</a></span></div><div class="post-meta-line"><span title="published on 2021-12-31 20:49:23"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-12-31">2021-12-31</time></span>&nbsp;<span title="Updated on 2023-09-17 08:19:26"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-17">2023-09-17</time></span>&nbsp;<span title="603 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 700 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>3 minutes</span>&nbsp;</div>
+    </div><div class="featured-image"><img loading="lazy" src="/jenkins/jenkins.png" alt="/jenkins/jenkins.png" data-title="Jenkins Install Guide" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#jenkins">Jenkins?</a></li>
     <li><a href="#1-설치">1. 설치</a>
@@ -149,37 +228,37 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="jenkins">Jenkins?</h2>
-<p>Jenkins는 아무래도 많이 사용하는 CI/CD 일것이다. 우선 컨테이너 환경에서 CI를 구성하기 위해서 Jenkins를 구성 하였고, 클러스터가 많은 환경에서도 접근을 할 수 있게 (물론 컨테이너로 구성을 해도 되나. 굳이 컨테이너로 구성할 필요성이 있나 싶어 별도의 VM으로 구성)
+      </div><div class="content" id="content"><h2 id="jenkins" class="heading-element">
+  <a href="#jenkins" class="heading-mark"></a>Jenkins?</h2><p>Jenkins는 아무래도 많이 사용하는 CI/CD 일것이다. 우선 컨테이너 환경에서 CI를 구성하기 위해서 Jenkins를 구성 하였고, 클러스터가 많은 환경에서도 접근을 할 수 있게 (물론 컨테이너로 구성을 해도 되나. 굳이 컨테이너로 구성할 필요성이 있나 싶어 별도의 VM으로 구성)
 VM형태로 설치를 하였다.</p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
 CI (Continuous Integration) CI를 통해 개발자들은 코드 변경사항을 공유 브랜치로 다시 병합하는 작업을 더욱 수월하게 자주 수행 할 수 있다.
 CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으로 사용됨.</p>
 <ul>
 <li>Continuous Deliver의 경우 코드 변경 , 병합으로부터 Prodcution에 적합한 빌드를 제공하여 모든 단계에 테스트 및 릴리스를 자동화한다.</li>
 <li>Continuous Deploy는 어플리케이션을 프로덕션으로 릴리스 작업을 자동화</li>
 </ul></div>
-        </div>
     </div>
+  </div>
 <figure><img src="/images/jenkins/0-1.png"/><figcaption>
             <h4>CICD</h4>
         </figcaption>
 </figure>
 
-<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Redhat </a></p>
-<h2 id="1-설치">1. 설치</h2>
-<div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins Install<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>JAVA Install</p>
-<div class="highlight"><div class="chroma">
+<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Redhat </a></p>
+<h2 id="1-설치" class="heading-element">
+  <a href="#1-%ec%84%a4%ec%b9%98" class="heading-mark"></a>1. 설치</h2><div class="details admonition example open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins Install<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>JAVA Install</p>
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -196,11 +275,10 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo apt install openjdk-11-jdk -y
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">java --version
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">java --version</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Jenkins Install</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -219,23 +297,21 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">sudo apt install jenkins -y
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">systemctl restart jenkins
-</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> jenkins
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> jenkins</span></span></code></pre></td></tr></table>
 </div>
 </div><p>패스워드 확인</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat /var/lib/jenkins/secrets/initialAdminPassword
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat /var/lib/jenkins/secrets/initialAdminPassword</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="11-설치-완료">1.1. 설치 완료</h3>
-<p><figure><img src="/images/jenkins/1-1.png"/><figcaption>
+  </div>
+<h3 id="11-설치-완료" class="heading-element">
+  <a href="#11-%ec%84%a4%ec%b9%98-%ec%99%84%eb%a3%8c" class="heading-mark"></a>1.1. 설치 완료</h3><p><figure><img src="/images/jenkins/1-1.png"/><figcaption>
             <h4>접속 화면 #1</h4>
         </figcaption>
 </figure>
@@ -250,35 +326,33 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
         </figcaption>
 </figure>
 </p>
-<h2 id="2-https-설정">2. HTTPS 설정</h2>
-<p>내부에서 사용하기 때문에 HTTP로 구성을 해도 되나 보안상 HTTPS를 구성이 필요할 경우가 있을 수 있기 때문에 2가지 경우로 HTTPS 구성의 대해서 설명하고자 하자. 하나는 자체적으로 구성을 하는 것이고 다른 하나는 NGINX를 구성해요 HTTPS를 구성 하는 것이다. 물론 L4를 사용해서 구성 할 수 도 있으나, 굳이 L4 장비까지 사용할 이유가 없으니 간단하게 NGINX를 사용하기로 한다.</p>
-<h3 id="21-https-구성">2.1. HTTPS 구성</h3>
-<p>인증서 설치, <a href="/jenkins/root.sh" rel=""><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;root.sh</a>.</p>
+<h2 id="2-https-설정" class="heading-element">
+  <a href="#2-https-%ec%84%a4%ec%a0%95" class="heading-mark"></a>2. HTTPS 설정</h2><p>내부에서 사용하기 때문에 HTTP로 구성을 해도 되나 보안상 HTTPS를 구성이 필요할 경우가 있을 수 있기 때문에 2가지 경우로 HTTPS 구성의 대해서 설명하고자 하자. 하나는 자체적으로 구성을 하는 것이고 다른 하나는 NGINX를 구성해요 HTTPS를 구성 하는 것이다. 물론 L4를 사용해서 구성 할 수 도 있으나, 굳이 L4 장비까지 사용할 이유가 없으니 간단하게 NGINX를 사용하기로 한다.</p>
+<h3 id="21-https-구성" class="heading-element">
+  <a href="#21-https-%ea%b5%ac%ec%84%b1" class="heading-mark"></a>2.1. HTTPS 구성</h3><p>인증서 설치, <a href="/jenkins/root.sh"><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;root.sh</a>.</p>
 <div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins SSL 구성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>인증서 생성</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins SSL 구성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>인증서 생성</p>
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>root.sh에 있는 파일 내용을 복사해서 shell 실행</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">. root.sh
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">. root.sh</span></span></code></pre></td></tr></table>
 </div>
 </div><p>인증서 권한 변경</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -287,11 +361,10 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">chmod <span class="m">700</span> /data/cert
 </span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.cert
-</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.key
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.key</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Jenkins 파일 변경</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -318,28 +391,27 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl"><span class="nv">JENKINS_ARGS</span><span class="o">=</span><span class="s2">&#34;--webroot=/var/cache/</span><span class="nv">$NAME</span><span class="s2">/war --httpPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpPort=</span><span class="nv">$HTTP_PORT_DISABLE</span><span class="s2"> --httpsPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpsCertificate=</span><span class="nv">$HTTPS_CERT</span><span class="s2"> --httpsPrivateKey=</span><span class="nv">$HTTPS_KEY</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">### jenkins restart</span>
-</span></span><span class="line"><span class="cl">systemctl restart jenkins
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">systemctl restart jenkins</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <figure><img src="/images/jenkins/2-1.png"/><figcaption>
             <h4>HTTPS 접속 화면 #1</h4>
         </figcaption>
 </figure>
 
-<h3 id="22-nginx로-https-구성">2.2. NGINX로 HTTPS 구성</h3>
-<p>NGINX를 구성하기 위해 Jenkins 설정은 그냥 HTTP로 구성을 해도 무방하다. 여기서는 위에서 설정을 했기 때문에 별도로 설정을 변경하지 않고했기 때문에 뒷단의 Jenkins를 HTTPS로 그대로 놔둔것이라고 봐도 된다.
+<h3 id="22-nginx로-https-구성" class="heading-element">
+  <a href="#22-nginx%eb%a1%9c-https-%ea%b5%ac%ec%84%b1" class="heading-mark"></a>2.2. NGINX로 HTTPS 구성</h3><p>NGINX를 구성하기 위해 Jenkins 설정은 그냥 HTTP로 구성을 해도 무방하다. 여기서는 위에서 설정을 했기 때문에 별도로 설정을 변경하지 않고했기 때문에 뒷단의 Jenkins를 HTTPS로 그대로 놔둔것이라고 봐도 된다.
 만약에 Jenkins Server는 HTTP로 구성을 하려면 그냥 두고 NGINX에서 Reverse Proxy 구성을 하면 된다.
 용어가 나와서 헷갈릴수도 있지만. Proxy_pass 부분만 http:// 로 바꾸면 된다.</p>
 <p><div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>NGINX PROXY 구성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>NGINX 가상 서버 구성</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>NGINX PROXY 구성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>NGINX 가상 서버 구성</p>
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -400,11 +472,10 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    server_name jenkins.tkg.io<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> 404<span class="p">;</span> <span class="c1"># managed by Certbot</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>symbolic link 연결</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -413,21 +484,20 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> <span class="nb">cd</span> /etc/nginx/sites-enabled
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> ln -s  /etc/nginx/sites-available/jenkins .
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"> ln -s  /etc/nginx/sites-available/jenkins .</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <figure><img src="/images/jenkins/2-2.png"/><figcaption>
             <h4>NGINX로 연결 후 HTTPS 접속 화면 #1</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="3-slack-연동">3. SLACK 연동</h2>
-<p>SLACK을 연동하여 메시지를 받을 수 있게 구성을 한다.</p>
-<h3 id="31-slcak-설정">3.1. SLCAK 설정</h3>
-<figure><img src="/images/jenkins/3-1.png"/><figcaption>
+<h2 id="3-slack-연동" class="heading-element">
+  <a href="#3-slack-%ec%97%b0%eb%8f%99" class="heading-mark"></a>3. SLACK 연동</h2><p>SLACK을 연동하여 메시지를 받을 수 있게 구성을 한다.</p>
+<h3 id="31-slcak-설정" class="heading-element">
+  <a href="#31-slcak-%ec%84%a4%ec%a0%95" class="heading-mark"></a>3.1. SLCAK 설정</h3><figure><img src="/images/jenkins/3-1.png"/><figcaption>
             <h4>SLACK 접속</h4>
         </figcaption>
 </figure>
@@ -454,8 +524,8 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </figure>
 </p>
 <p>위에 내용까지 설정을 하면 Jenkins를 어떻게 설정하라고 나오는대 좀 오래 되었나보다. 요즘에 변경된 부분의 대해서 설정 하는 방법을 나열한다.</p>
-<h3 id="32-jenkins-설정">3.2. JENKINS 설정</h3>
-<p><figure><img src="/images/jenkins/3-6.png"/><figcaption>
+<h3 id="32-jenkins-설정" class="heading-element">
+  <a href="#32-jenkins-%ec%84%a4%ec%a0%95" class="heading-mark"></a>3.2. JENKINS 설정</h3><p><figure><img src="/images/jenkins/3-6.png"/><figcaption>
             <h4>Jenkins Slack Plugin 설치#1</h4>
         </figcaption>
 </figure>
@@ -491,47 +561,48 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </figure>
 </p>
 </div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>Updated on 2023-09-17&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/8f9e542c3d9a079137645ebc4858725c24bb6cc0" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 8f9e542c3d9a079137645ebc4858725c24bb6cc0: rebuilding site Sun Sep 17 08:19:26     2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8f9e542</a></span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/jenkins/index.md" target="_blank">Read Markdown</a>
-                        </span></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/jenkins/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/jenkins/" data-title="The Documentation Jenkins" data-description="Jenkins Install Guide"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
-            </div>
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2023-09-17 08:19:26">Updated on 2023-09-17&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/jenkins/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/jenkins/"><i class="fa-brands fa-linkedin fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/jenkins/" data-title="The Documentation Jenkins" data-description="Jenkins Install Guide"><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  </span>
         </div>
-    </div>
+      </div></div>
 
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/jenkins/">jenkins</a>,&nbsp;<a href="/tags/ci/cd/">CI/CD</a>,&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/devops/">devops</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a>,&nbsp;<a href="/tags/jenkins-slack/">jenkins slack</a>,&nbsp;<a href="/tags/slack/">slack</a>,&nbsp;<a href="/tags/jenkins-slack-%EC%97%B0%EB%8F%99/">jenkins slack 연동</a>,&nbsp;<a href="/tags/notification/">notification</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
-        </section>
-    </div>
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/jenkins/" class="post-tag" title="Tags - jenkins">jenkins</a><a href="/tags/ci/cd/" class="post-tag" title="Tags - CI/CD">CI/CD</a><a href="/tags/tanzu/" class="post-tag" title="Tags - tanzu">tanzu</a><a href="/tags/k8s/" class="post-tag" title="Tags - k8s">k8s</a><a href="/tags/devops/" class="post-tag" title="Tags - devops">devops</a><a href="/tags/dk/" class="post-tag" title="Tags - dk">dk</a><a href="/tags/dokyung/" class="post-tag" title="Tags - dokyung">dokyung</a><a href="/tags/jenkins-slack/" class="post-tag" title="Tags - jenkins slack">jenkins slack</a><a href="/tags/slack/" class="post-tag" title="Tags - slack">slack</a><a href="/tags/jenkins-slack-%EC%97%B0%EB%8F%99/" class="post-tag" title="Tags - jenkins slack 연동">jenkins slack 연동</a><a href="/tags/notification/" class="post-tag" title="Tags - notification">notification</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div>
 
-    <div class="post-nav"><a href="/argo/" class="prev" rel="prev" title="The Documentation Argo-CD"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation Argo-CD</a>
-            <a href="/tanzu/" class="next" rel="next" title="The Documentation Tanzu">The Documentation Tanzu<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/argo/" class="post-nav-item" rel="prev" title="The Documentation Argo-CD"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation Argo-CD</a>
+      <a href="/tanzu/" class="post-nav-item" rel="next" title="The Documentation Tanzu">The Documentation Tanzu<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-        </div>
-    </footer></div>
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
+      </noscript></div></article>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.en","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
-            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', '216068312', { 'anonymize_ip': true });
-        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/"></a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="View Comments"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Theme FixIt works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/algoliasearch/algoliasearch-lite.umd.min.js" defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":true,"expired":false,"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"typeit-header-desktop":"Dokyung's DevOoOps","typeit-header-title-mobile":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.en","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},"duration":-1,"loop":false,"speed":100}};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', '216068312', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
 </html>

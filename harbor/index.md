@@ -10,16 +10,16 @@ df -h
 fdisk -l
 
 ## 아래와 같이 에러가 나온다면
->> GPT PMBR size mismatch 
+&gt;&gt; GPT PMBR size mismatch 
 
 ## parted로 fix를 해보자
 parted /dev/sda
-p > f
+p &gt; f
 
 ```
-{{< figure src="/images/harbor/1-1.png" title="Disk 상태 확인" >}}
-{{< figure src="/images/harbor/1-2.png" title="Disk 증설" >}}
-{{< figure src="/images/harbor/1-3.png" title="Disk 증설 후" >}}
+{{&lt; figure src=&#34;/images/harbor/1-1.png&#34; title=&#34;Disk 상태 확인&#34; &gt;}}
+{{&lt; figure src=&#34;/images/harbor/1-2.png&#34; title=&#34;Disk 증설&#34; &gt;}}
+{{&lt; figure src=&#34;/images/harbor/1-3.png&#34; title=&#34;Disk 증설 후&#34; &gt;}}
 
 ```shell
 ## 그리고 온라인 상태에서 디스크가 보이지 않은 경우는 아래와 같이 하자.
@@ -27,14 +27,14 @@ ls /sys/class/scsi_host
 
 for line in $(ls /sys/class/scsi_host)
 do
- echo "- - -" > /sys/class/scsi_host/$line/scan
+ echo &#34;- - -&#34; &gt; /sys/class/scsi_host/$line/scan
 done
 
 ls -lat /dev/sd*
 ```
-{{< figure src="/images/harbor/1-4.png" title="Disk 증설 후 SCAN" >}}
-{{< figure src="/images/harbor/1-5.png" title="디스크 증설 확인#1" >}}
-{{< figure src="/images/harbor/1-6.png" title="디스크 증설 확인#2" >}}
+{{&lt; figure src=&#34;/images/harbor/1-4.png&#34; title=&#34;Disk 증설 후 SCAN&#34; &gt;}}
+{{&lt; figure src=&#34;/images/harbor/1-5.png&#34; title=&#34;디스크 증설 확인#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/harbor/1-6.png&#34; title=&#34;디스크 증설 확인#2&#34; &gt;}}
 
 ```shell
 pvs
@@ -45,8 +45,8 @@ lvextend /dev/mapper/ubuntu--vg-ubuntu--lv /dev/sdb
 resize2fs -p /dev/mapper/ubuntu--vg-ubuntu--lv
 ```
 
-{{< figure src="/images/harbor/1-7.png" title="Disk 확인 및 증설#1" >}}
-{{< figure src="/images/harbor/1-8.png" title="Disk 확인 및 증설#2" >}}
+{{&lt; figure src=&#34;/images/harbor/1-7.png&#34; title=&#34;Disk 확인 및 증설#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/harbor/1-8.png&#34; title=&#34;Disk 확인 및 증설#2&#34; &gt;}}
 
 ## 2. TANZU에 Pacakge로 설치 한 Harbor 사이즈 증설
 ```shell
@@ -54,7 +54,7 @@ kubectl -n tanzu-system-registry get pvc --selector=component=registry --show-la
 
 ## 아래 storage 용량을 설정한다.
 
-cat << EOF > harbor-registry-pvc.yaml
+cat &lt;&lt; EOF &gt; harbor-registry-pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -63,7 +63,7 @@ metadata:
   labels:
     app: harbor
     component: registry
-    kapp.k14s.io/app: "1610567506920108209"
+    kapp.k14s.io/app: &#34;1610567506920108209&#34;
     kapp.k14s.io/association: v1.034269eb21810ed9131cc41a27c729d4
   name: harbor-registry-200gb
   namespace: tanzu-system-registry
@@ -131,7 +131,7 @@ watch -n 5 kubectl get pod -n tanzu-system-registry
 
 ## pod에 접속 하여 storage repository를 확인 한 후 신규로 연결된 storage2에 Copy.
 kubectl -n tanzu-system-registry get po --selector=component=registry
-registry=$(kubectl -n tanzu-system-registry get po --selector=component=registry | awk '{print $1}' | grep  harbor)
+registry=$(kubectl -n tanzu-system-registry get po --selector=component=registry | awk &#39;{print $1}&#39; | grep  harbor)
 kubectl -n tanzu-system-registry exec -ti $registry -- /bin/bash
 df -h /storage
 ls storage/docker/registry/v2/repositories/library/
@@ -146,14 +146,14 @@ kubectl -n tanzu-system-registry edit deployment harbor-registry
 
 
 ## 새로 생성 한 pvc 확인
-newpvc=$(kubectl get pv |grep 200gb | awk '{print $1}')
-kubectl patch pv $newpvc -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+newpvc=$(kubectl get pv |grep 200gb | awk &#39;{print $1}&#39;)
+kubectl patch pv $newpvc -p &#39;{&#34;spec&#34;:{&#34;persistentVolumeReclaimPolicy&#34;:&#34;Retain&#34;}}&#39;
 
 kubectl get pv | grep harbor-registry
 kubectl -n tanzu-system-registry delete pvc --selector=component=registry
 
 ## pv에서 아래 내용 삭제
-newpv=$(kubectl get pv | grep 200gb | awk '{print $1}')
+newpv=$(kubectl get pv | grep 200gb | awk &#39;{print $1}&#39;)
 kubectl edit pv $newpv
 
 ## 아래 항목을 찾은 후 claimRef 내용을 삭제 해준다.
@@ -162,13 +162,13 @@ kubectl edit pv $newpv
     kind: PersistentVolumeClaim
     name: harbor-registry-100gb
     namespace: tanzu-system-registry
-    resourceVersion: "5894668"
+    resourceVersion: &#34;5894668&#34;
     uid: 326b24df-dd6f-4679-af84-6530013aed22
 ```
 
 ### pvc 생성
 ```shell
-cat << EOF > harbor-registry-200gb.yaml
+cat &lt;&lt; EOF &gt; harbor-registry-200gb.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -177,7 +177,7 @@ metadata:
   labels:
     app: harbor
     component: registry
-    kapp.k14s.io/app: "1610567506920108209"
+    kapp.k14s.io/app: &#34;1610567506920108209&#34;
     kapp.k14s.io/association: v1.034269eb21810ed9131cc41a27c729d4
   name: harbor-registry
   namespace: tanzu-system-registry
@@ -199,13 +199,19 @@ kubectl apply -f harbor-registry-200gb.yaml -n tanzu-system-registry
 kubectl -n tanzu-system-registry scale deployment harbor-registry --replicas=1
 watch -n 5 kubectl get pod -n tanzu-system-registry
 ## Delete로 변경
-kubectl patch pv $newpvc -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
+kubectl patch pv $newpvc -p &#39;{&#34;spec&#34;:{&#34;persistentVolumeReclaimPolicy&#34;:&#34;Delete&#34;}}&#39;
 
 ## 확인
-registry=$(kubectl -n tanzu-system-registry get po --selector=component=registry | awk '{print $1}' | grep  harbor)
+registry=$(kubectl -n tanzu-system-registry get po --selector=component=registry | awk &#39;{print $1}&#39; | grep  harbor)
 kubectl -n tanzu-system-registry exec -ti $registry -- /bin/bash
 df -h /storage
 ```
-{{< figure src="/images/harbor/2-3.png" title="증설 전" >}}
-{{< figure src="/images/harbor/2-2.png" title="증설 후 확인" >}}
-{{< figure src="/images/harbor/2-1.png" title="Docker Image 확인" >}}
+{{&lt; figure src=&#34;/images/harbor/2-3.png&#34; title=&#34;증설 전&#34; &gt;}}
+{{&lt; figure src=&#34;/images/harbor/2-2.png&#34; title=&#34;증설 후 확인&#34; &gt;}}
+{{&lt; figure src=&#34;/images/harbor/2-1.png&#34; title=&#34;Docker Image 확인&#34; &gt;}}
+
+---
+
+> Author: Dokyung  
+> URL: https://huntedhappy.github.io/harbor/  
+

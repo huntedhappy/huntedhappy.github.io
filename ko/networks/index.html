@@ -1,133 +1,212 @@
 <!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>The Documentation Networks - Dokyung&#39;s DevOoOps</title><meta name="Description" content="NAP Built"><meta property="og:title" content="The Documentation Networks" />
+<html itemscope itemtype="http://schema.org/WebPage" lang="ko">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>The Documentation Networks - Dokyung&#39;s DevOoOps</title><meta name="author" content="">
+<meta name="author-link" content="">
+<meta name="description" content="NAP Built" /><meta name="keywords" content='network, l2, l3, l4, osi 7layer, tcp, vxlan, vxlan header, geneve, geneve header, ip header, ethernet header, Ethernet Frame, tpc/ip header, vmware, nsxt, https, tls, dk, dokyung' /><meta itemprop="name" content="The Documentation Networks">
+<meta itemprop="description" content="NAP Built"><meta itemprop="datePublished" content="2022-04-10T18:32:52+09:00" />
+<meta itemprop="dateModified" content="2023-09-17T08:19:26+09:00" />
+<meta itemprop="wordCount" content="1812"><meta itemprop="image" content="https://huntedhappy.github.io/ko/networks/1-1.jpg" />
+<meta itemprop="keywords" content="network,l2,l3,l4,osi 7layer,tcp,vxlan,vxlan header,geneve,geneve header,ip header,ethernet header,Ethernet Frame,tpc/ip header,vmware,nsxt,https,tls,dk,dokyung," /><meta property="og:title" content="The Documentation Networks" />
 <meta property="og:description" content="NAP Built" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/ko/networks/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/networks/1-1.jpg" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-10T18:32:52+09:00" />
-<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://huntedhappy.github.io/ko/networks/1-1.jpg" /><meta name="twitter:title" content="The Documentation Networks"/>
 <meta name="twitter:description" content="NAP Built"/>
 <meta name="application-name" content="Dokyung&#39;s DevOoOps">
-<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/ko/networks/" /><link rel="prev" href="https://huntedhappy.github.io/ko/avi/" /><link rel="next" href="https://huntedhappy.github.io/ko/tanzu-okta/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "The Documentation Networks",
-        "inLanguage": "ko",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/huntedhappy.github.io\/ko\/networks\/"
-        },"image": [{
-                            "@type": "ImageObject",
-                            "url": "https:\/\/huntedhappy.github.io\/ko\/networks\/1-1.jpg",
-                            "width":  690 ,
-                            "height":  414 
-                        }],"genre": "posts","keywords": "network, l2, l3, l4, osi 7layer, tcp, vxlan, vxlan header, geneve, geneve header, ip header, ethernet header, Ethernet Frame, tpc\/ip header, vmware, nsxt, https, tls, dk, dokyung","wordcount":  1819 ,
-        "url": "https:\/\/huntedhappy.github.io\/ko\/networks\/","datePublished": "2022-04-10T18:32:52+09:00","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "Dokyung"
-            },"description": "NAP Built"
-    }
-    </script></head>
-    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" data-light="#ffffff" data-dark="#ffffff" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://huntedhappy.github.io/ko/networks/" /><link rel="prev" href="https://huntedhappy.github.io/ko/avi/" /><link rel="next" href="https://huntedhappy.github.io/ko/tanzu-okta/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Documentation Networks",
+    "inLanguage": "ko",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/huntedhappy.github.io\/ko\/networks\/"
+    },"image": [{
+              "@type": "ImageObject",
+              "url": "https:\/\/huntedhappy.github.io\/ko\/networks\/1-1.jpg",
+              "width":  690 ,
+              "height":  414 
+            }],"genre": "posts","keywords": "network, l2, l3, l4, osi 7layer, tcp, vxlan, vxlan header, geneve, geneve header, ip header, ethernet header, Ethernet Frame, tpc\/ip header, vmware, nsxt, https, tls, dk, dokyung","wordcount":  1812 ,
+    "url": "https:\/\/huntedhappy.github.io\/ko\/networks\/","datePublished": "2022-04-10T18:32:52+09:00","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Dokyung"
+      },"description": "NAP Built"
+  }
+  </script></head>
+  <body data-header-desktop="auto" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-desktop" class="typeit"></span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/posts/"
+                
+                
+              >Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/tags/"
+                
+                
+              >Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/"
+                
+                
+              >Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/documentation/"
+                
+                
+              >Docs</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/about/"
+                
+                
+              >About</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="https://github.com/huntedhappy/"
+                title="GitHub"
+                rel="noopener noreferrer" target="_blank"
+              ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Search titles or contents ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li><li class="menu-item language-switch">
+            <span role="button" aria-label="Select Language" title="Select Language"><i class="fa-solid fa-language fa-fw" aria-hidden="true"></i></span>
+            <ul class="sub-menu"><li class="menu-item">
+                      <span class="menu-link text-secondary" title="Korean">Korean</span>
+                    </li><li class="menu-item">
+                      <a href="/networks/" class="menu-link" title="한국어">한국어</a>
+                    </li></ul>
+          </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
     <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/ko/posts/"> Posts </a><a class="menu-item" href="/ko/tags/"> Tags </a><a class="menu-item" href="/ko/categories/"> Categories </a><a class="menu-item" href="/ko/categories/documentation/"> Docs </a><a class="menu-item" href="/ko/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a><a href="javascript:void(0);" class="menu-item language" title="언어 변경">
-                    <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/networks/" selected>Korean</option><option value="/networks/">한국어</option></select>
-                </a></div>
-        </div>
+      <div class="header-title">
+        <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-title-mobile" class="typeit"></span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Search titles or contents ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
             </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        취소
-                    </a>
-                </div><a class="menu-item" href="/ko/posts/" title="">Posts</a><a class="menu-item" href="/ko/tags/" title="">Tags</a><a class="menu-item" href="/ko/categories/" title="">Categories</a><a class="menu-item" href="/ko/categories/documentation/" title="">Docs</a><a class="menu-item" href="/ko/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a><a href="javascript:void(0);" class="menu-item" title="언어 변경">
-                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/ko/networks/" selected>Korean</option><option value="/networks/">한국어</option></select>
-                </a></div>
-    </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Cancel
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/posts/"
+                  
+                  
+                >Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/tags/"
+                  
+                  
+                >Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/"
+                  
+                  
+                >Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/documentation/"
+                  
+                  
+                >Docs</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/about/"
+                  
+                  
+                >About</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="https://github.com/huntedhappy/"
+                  title="GitHub"
+                  rel="noopener noreferrer" target="_blank"
+                ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span><span class="menu-system-item language-switch">
+              <span role="button" aria-label="Select Language" title="Select Language">Korean<i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+              <select class="language-select" onchange="location = this.value;"><option value="/ko/networks/" selected disabled>Korean</option><option value="/networks/">한국어</option></select>
+            </span></li>
+      </ul>
+    </nav>
+  </div>
 </header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">목차</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation Networks</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">분류: <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1819 단어&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;읽는데 약 9분&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/ko/networks/1-1.jpg"
-        data-srcset="/ko/networks/1-1.jpg, /ko/networks/1-1.jpg 1.5x, /ko/networks/1-1.jpg 2x"
-        data-sizes="auto"
-        alt="/ko/networks/1-1.jpg"
-        title="NAP Built" /></div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>목차</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>The Documentation Networks</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Dokyung</span></span><span class="post-included-in">&nbsp;included in <a href="/ko/categories/documentation/" class="post-category" title="Category - Documentation"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Documentation</a></span></div><div class="post-meta-line"><span title="published on 2022-04-10 18:32:52"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2022-04-10">2022-04-10</time></span>&nbsp;<span title="Updated on 2023-09-17 08:19:26"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-17">2023-09-17</time></span>&nbsp;<span title="1812 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1900 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>9 minutes</span>&nbsp;</div>
+    </div><div class="featured-image"><img loading="lazy" src="/ko/networks/1-1.jpg" alt="/ko/networks/1-1.jpg" data-title="NAP Built" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#0-osi-7-layer">0. OSI 7 Layer</a>
       <ul>
@@ -160,20 +239,20 @@
     <li><a href="#5-유저에서-웹서핑-까지">5. 유저에서 웹서핑 까지</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="0-osi-7-layer">0. OSI 7 Layer</h2>
-<figure><img src="/images/network/1-1.png"/><figcaption>
+      </div><div class="content" id="content"><h2 id="0-osi-7-layer" class="heading-element">
+  <a href="#0-osi-7-layer" class="heading-mark"></a>0. OSI 7 Layer</h2><figure><img src="/images/network/1-1.png"/><figcaption>
             <h4>OSI 7Layer</h4>
         </figcaption>
 </figure>
 
-<h3 id="01-ethernet-frame">0.1. Ethernet Frame</h3>
-<figure><img src="/images/network/2-1.png"/><figcaption>
+<h3 id="01-ethernet-frame" class="heading-element">
+  <a href="#01-ethernet-frame" class="heading-mark"></a>0.1. Ethernet Frame</h3><figure><img src="/images/network/2-1.png"/><figcaption>
             <h4>EthernetFrame</h4>
         </figcaption>
 </figure>
 
-<h3 id="02-ethernet-header--2-layer">0.2. Ethernet Header ( 2 Layer)</h3>
-<p>Destination Address 6 bytes = 48 bits</p>
+<h3 id="02-ethernet-header--2-layer" class="heading-element">
+  <a href="#02-ethernet-header--2-layer" class="heading-mark"></a>0.2. Ethernet Header ( 2 Layer)</h3><p>Destination Address 6 bytes = 48 bits</p>
 <ul>
 <li>목적지 맥 주소 6 bytes(48bits), 주소의 첫 번째 비트가 1이면 멀티캐스트 이며, 모든 비트가 1이면 브로드캐스트이다.
 FF:FF:FF:FF:FF = Broadcast</li>
@@ -275,8 +354,8 @@ FF:FF:FF:FF:FF = Broadcast</li>
 </tr>
 </tbody>
 </table>
-<h3 id="03-ip-header-3-layer">0.3. IP Header (3 Layer)</h3>
-<figure><img src="/images/network/2-2.png"/><figcaption>
+<h3 id="03-ip-header-3-layer" class="heading-element">
+  <a href="#03-ip-header-3-layer" class="heading-mark"></a>0.3. IP Header (3 Layer)</h3><figure><img src="/images/network/2-2.png"/><figcaption>
             <h4>IP Header</h4>
         </figcaption>
 </figure>
@@ -301,8 +380,8 @@ netsh interface ipv4 show interfaces</p>
 netsh interface ipv4 set subinterface &ldquo;색인 번호&rdquo; 또는 &ldquo;이름&rdquo; 으로 변경이 가능하다.</p>
 <p>netsh interface ipv4 set subinterface &ldquo;10&rdquo; mtu=9000 store=persistent</p>
 <p>netsh interface ipv4 set subinterface &ldquo;이더넷 2&rdquo; mtu=9000 store=persistent</p>
-<h3 id="04-tcp-header-4-layer">0.4. TCP Header (4 Layer)</h3>
-<figure><img src="/images/network/2-5.png"/><figcaption>
+<h3 id="04-tcp-header-4-layer" class="heading-element">
+  <a href="#04-tcp-header-4-layer" class="heading-mark"></a>0.4. TCP Header (4 Layer)</h3><figure><img src="/images/network/2-5.png"/><figcaption>
             <h4>TCP Header</h4>
         </figcaption>
 </figure>
@@ -353,13 +432,13 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
 <ul>
 <li>16비트 체크섬 필드는 TCP 헤더, 페이로드 및 IP 의사 헤더의 오류 검사에 사용됩니다. 의사 헤더는 소스 IP 주소 , 대상 IP 주소 , TCP 프로토콜의 프로토콜 번호 (6), TCP 헤더 및 페이로드의 길이(바이트)로 구성됩니다.</li>
 </ul>
-<p><a href="https://4network.tistory.com/entry/Sliding-Window-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0?category=286056" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Sliding Window 참고 블로그 </a></p>
-<p><a href="https://en.wikipedia.org/wiki/Ethernet_frame" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Ethernet frame wiki </a></p>
-<p><a href="https://en.wikipedia.org/wiki/IPv4" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> IP Header wiki  </a></p>
-<p><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> TCP Header wiki  </a></p>
-<p><a href="http://www.ktword.co.kr/test/view/view.php?m_temp1=2039" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Ethernet Type 참고 </a></p>
-<h4 id="041-fin-fin-wait관련">0.4.1. (FIN, FIN-WAIT)관련</h4>
-<figure><img src="/images/network/3-1.png"/><figcaption>
+<p><a href="https://4network.tistory.com/entry/Sliding-Window-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0?category=286056"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Sliding Window 참고 블로그 </a></p>
+<p><a href="https://en.wikipedia.org/wiki/Ethernet_frame"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Ethernet frame wiki </a></p>
+<p><a href="https://en.wikipedia.org/wiki/IPv4"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> IP Header wiki  </a></p>
+<p><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> TCP Header wiki  </a></p>
+<p><a href="http://www.ktword.co.kr/test/view/view.php?m_temp1=2039"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Ethernet Type 참고 </a></p>
+<h4 id="041-fin-fin-wait관련" class="heading-element">
+  <a href="#041-fin-fin-wait%ea%b4%80%eb%a0%a8" class="heading-mark"></a>0.4.1. (FIN, FIN-WAIT)관련</h4><figure><img src="/images/network/3-1.png"/><figcaption>
             <h4>FIN</h4>
         </figcaption>
 </figure>
@@ -382,9 +461,9 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
 <li>A는 TIME_WAIT상태가 되어 최종적으로 B와의 Connection이 닫히는지 확인 한다.</li>
 </ul>
 <p>즉 서버가 클라이언트로 부터 FIN에 대한 ACK을 받고나서 클라이언트의 FIN을 기다리는 상태가 FIN_WAIT2 상태이다.</p>
-<h3 id="05-overlay">0.5. Overlay</h3>
-<h4 id="051-vxlan">0.5.1. VXLAN</h4>
-<p>Outer IP Header 20 Bytes + UDP Header 8 bytes + VXLAN 8 bytes + Inner Ethernet 18 bytes</p>
+<h3 id="05-overlay" class="heading-element">
+  <a href="#05-overlay" class="heading-mark"></a>0.5. Overlay</h3><h4 id="051-vxlan" class="heading-element">
+  <a href="#051-vxlan" class="heading-mark"></a>0.5.1. VXLAN</h4><p>Outer IP Header 20 Bytes + UDP Header 8 bytes + VXLAN 8 bytes + Inner Ethernet 18 bytes</p>
 <p>VLAN 포함</p>
 <p>20 + 8 + 8 + 18 = 54</p>
 <p>만약 VLAN이 포함 되어 있지 않다면</p>
@@ -396,8 +475,8 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
         </figcaption>
 </figure>
 
-<h4 id="052-geneve">0.5.2. GENEVE</h4>
-<figure><img src="/images/network/4-2.png"/><figcaption>
+<h4 id="052-geneve" class="heading-element">
+  <a href="#052-geneve" class="heading-mark"></a>0.5.2. GENEVE</h4><figure><img src="/images/network/4-2.png"/><figcaption>
             <h4>GENEVE#1</h4>
         </figcaption>
 </figure>
@@ -478,10 +557,10 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
 </tr>
 </tbody>
 </table>
-<p><a href="https://ipwithease.com/vxlan-vs-geneve-understand-the-difference/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VXLAN - GENEVE 참고  </a></p>
-<h2 id="1-l2">1. L2</h2>
-<h3 id="11-mac주소">1.1. MAC주소</h3>
-<p>MAC은 일반적으로 OSI 7 Layer중에서 2 Layer에 속한다. 확인하는 방법은 윈두우에서 CMD창을 연 후 ipconfig /all명령어를 사용하면 확인할 수 있다. 나오는 부분중에 물리적 주소라고 나오는 것을 확인 할 수 있다. 리눅스의 경우는 ifconfig라고 치면 바로 확인을 할 수 있을 것이다.</p>
+<p><a href="https://ipwithease.com/vxlan-vs-geneve-understand-the-difference/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> VXLAN - GENEVE 참고  </a></p>
+<h2 id="1-l2" class="heading-element">
+  <a href="#1-l2" class="heading-mark"></a>1. L2</h2><h3 id="11-mac주소" class="heading-element">
+  <a href="#11-mac%ec%a3%bc%ec%86%8c" class="heading-mark"></a>1.1. MAC주소</h3><p>MAC은 일반적으로 OSI 7 Layer중에서 2 Layer에 속한다. 확인하는 방법은 윈두우에서 CMD창을 연 후 ipconfig /all명령어를 사용하면 확인할 수 있다. 나오는 부분중에 물리적 주소라고 나오는 것을 확인 할 수 있다. 리눅스의 경우는 ifconfig라고 치면 바로 확인을 할 수 있을 것이다.</p>
 <ul>
 <li>물론 H/W 주소이지만 변경은 가능하다. 그러므르 보안적으로 이슈가 될 수 있다.</li>
 </ul>
@@ -493,14 +572,14 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
 <p>확인을 하게 되면
 E0-3F-49-AB-C8-AD
 위와 같이 표시가 되며 절반으로 나누어 앞의 세부분은 생산자를 나타내고, 뒤의 세 부분은 장치의 일련번호(Host Identifier)을 나타낸다.</p>
-<p><a href="https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> MAC 제조회사 찾는 곳 </a>
+<p><a href="https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> MAC 제조회사 찾는 곳 </a>
 <figure><img src="/images/network/1-3.png"/><figcaption>
             <h4>제조회사 찾는 방법</h4>
         </figcaption>
 </figure>
 </p>
-<h3 id="12-arp--rarp--garp">1.2. ARP &amp; RARP &amp; GARP</h3>
-<p>ARP(Address Resolution Protofcol)는 IP주소를 MAC주소와 대응(Bind)시키기 위해 사용되는 프로토콜이다.
+<h3 id="12-arp--rarp--garp" class="heading-element">
+  <a href="#12-arp--rarp--garp" class="heading-mark"></a>1.2. ARP &amp; RARP &amp; GARP</h3><p>ARP(Address Resolution Protofcol)는 IP주소를 MAC주소와 대응(Bind)시키기 위해 사용되는 프로토콜이다.
 IP주소는 알지만 MAC주소를 모르는 경우 사용 할 수 있다.</p>
 <p>윈도우에서 arp -a {IP} 로 확인 할 수 있다.
 <figure><img src="/images/network/1-4.png"/><figcaption>
@@ -525,8 +604,8 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
         </figcaption>
 </figure>
 </p>
-<h3 id="13-l2-통신">1.3. L2 통신</h3>
-<table>
+<h3 id="13-l2-통신" class="heading-element">
+  <a href="#13-l2-%ed%86%b5%ec%8b%a0" class="heading-mark"></a>1.3. L2 통신</h3><table>
 <thead>
 <tr>
 <th>기능</th>
@@ -568,8 +647,8 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
         </figcaption>
 </figure>
 
-<h2 id="2-l3">2. L3</h2>
-<p>라우터에 Dynamic(RIP, EIGRP, OSPF, BGP) 또는 STATIC의 대한 설명은 하지 않는다.</p>
+<h2 id="2-l3" class="heading-element">
+  <a href="#2-l3" class="heading-mark"></a>2. L3</h2><p>라우터에 Dynamic(RIP, EIGRP, OSPF, BGP) 또는 STATIC의 대한 설명은 하지 않는다.</p>
 <p>Gateway를 적용 하면 아래와 같이 Gateway의 ARP를 얻기 위핸 Broadcast를 요청 하는 것을 확인 할 수 있다.</p>
 <figure><img src="/images/network/1-8.png"/><figcaption>
             <h4>GATEWAY</h4>
@@ -592,8 +671,8 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
         </figcaption>
 </figure>
 </p>
-<h2 id="3-l4">3. L4</h2>
-<p>L3라우터의 경우 IP N/W을 통해 라우팅 경로(라우팅 경로라고 하면 G/W를 통해 봤듯이 자기가 모르는 대역을 다른 라우터에 물어보기 위한 것이라고 보면 된다. 이에 활용되는 것이 STATIC, RIP, EIGRP, OSPF. BGP가 있으며 하나 하나의 대한 기술적 내용은 기술 하지 않는다.)를 확보하는 반면. L4의 경우 Port까지 확인 한다. 이때부터 세션 베이스라고 보면 된다. 한마디로 라우터의 경우 2개의 물리적인 라우터가 있을 경우 A라는 라우터를 통해 들어온 트래픽이 B라는 트래픽을 통해 나가더라도 통신에 이슈가 발생 하지 않는다.</p>
+<h2 id="3-l4" class="heading-element">
+  <a href="#3-l4" class="heading-mark"></a>3. L4</h2><p>L3라우터의 경우 IP N/W을 통해 라우팅 경로(라우팅 경로라고 하면 G/W를 통해 봤듯이 자기가 모르는 대역을 다른 라우터에 물어보기 위한 것이라고 보면 된다. 이에 활용되는 것이 STATIC, RIP, EIGRP, OSPF. BGP가 있으며 하나 하나의 대한 기술적 내용은 기술 하지 않는다.)를 확보하는 반면. L4의 경우 Port까지 확인 한다. 이때부터 세션 베이스라고 보면 된다. 한마디로 라우터의 경우 2개의 물리적인 라우터가 있을 경우 A라는 라우터를 통해 들어온 트래픽이 B라는 트래픽을 통해 나가더라도 통신에 이슈가 발생 하지 않는다.</p>
 <figure><img src="/images/network/1-9.png"/><figcaption>
             <h4>L3의 경우 Asymmetirc구조라도 상관 없음</h4>
         </figcaption>
@@ -606,8 +685,8 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 </figure>
 
 <p>또한 기술적으로 LoadBalancer의 경우 One-Arm구성 일 경우 어떻게 구성해야되는지의 대한 여러가지 방안들이 있지만 단순하게 어떻게 통신을 한다는지의 대한 내용만 적었다.. 마찬가지로 LoadBalancer의 경우 다양한 기술이 포함되어 있기 때문에 이렇게 되면 안됩니다. 라는 정도만 작성했다.</p>
-<h2 id="4-https-이야기">4. HTTPS 이야기</h2>
-<p>HTTPS는 공개키와 비공개키를 사용한다. 이유는 공개키는 비공개키보다 암/복호화 하는대 더 많은 트래픽이 필요 하기 때문에 공개키로 비공개키를 암호화하여 비공개키를 안전하게 전달 후 비공개키를 통해 데이터를 전달한다.</p>
+<h2 id="4-https-이야기" class="heading-element">
+  <a href="#4-https-%ec%9d%b4%ec%95%bc%ea%b8%b0" class="heading-mark"></a>4. HTTPS 이야기</h2><p>HTTPS는 공개키와 비공개키를 사용한다. 이유는 공개키는 비공개키보다 암/복호화 하는대 더 많은 트래픽이 필요 하기 때문에 공개키로 비공개키를 암호화하여 비공개키를 안전하게 전달 후 비공개키를 통해 데이터를 전달한다.</p>
 <p><figure><img src="/images/network/5-1.png"/><figcaption>
             <h4>HTTPS 이야기</h4>
         </figcaption>
@@ -659,15 +738,15 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 <ul>
 <li>공인된 인증기관에서 발급 받은 인증서의 경우 기본적으로 인증서에는 공개키와 개인키가 포함되어 있기 때문에 이미 브라우저에 내장되어 있는 인증기관의 공개키로 복호화 하여 사이트가 인증기관에서 인증을 받은 사이트라는것을 검증 한다. 만약 사설 인증서인 경우 웹브라우저에서 검증되지 않는 사이트라고 나오며 * 이는 인증기관에서 인증되지 않는 사이트라는 것만 검사 할뿐 이를 무시를 하게 되면 서버에서는 이미 공개키를 전달 했기 때문에 해당 공개키를 가지고 대칭키를 암호화 하여 사이트에 전달을 하게 된다 그리고 사이트에는 개인키로 복호화 하여 대칭키를 획득 한 후 대칭키로 암/복호화를 하여 데이터를 주고 받게 된다.</li>
 </ul>
-<h2 id="5-유저에서-웹서핑-까지">5. 유저에서 웹서핑 까지</h2>
-<figure><img src="/images/network/6-1.png"/><figcaption>
+<h2 id="5-유저에서-웹서핑-까지" class="heading-element">
+  <a href="#5-%ec%9c%a0%ec%a0%80%ec%97%90%ec%84%9c-%ec%9b%b9%ec%84%9c%ed%95%91-%ea%b9%8c%ec%a7%80" class="heading-mark"></a>5. 유저에서 웹서핑 까지</h2><figure><img src="/images/network/6-1.png"/><figcaption>
             <h4>웹서핑</h4>
         </figcaption>
 </figure>
 
 <ol>
 <li>
-<p>사용자가 웹서핑을 하기 위해 브라우저에서 해당하는 DOMAIN을 입력한다. 예를 들어 <a href="https://www.naver.com" target="_blank" rel="noopener noreffer ">www.naver.com</a>을 입력하게 되면 최초로 LDNS에게 요청하게 된다. LDNS는 자기가 잡은 DNS를 LDSN라고 한다.</p>
+<p>사용자가 웹서핑을 하기 위해 브라우저에서 해당하는 DOMAIN을 입력한다. 예를 들어 <a href="https://www.naver.com"target="_blank" rel="external nofollow noopener noreferrer">www.naver.com</a>을 입력하게 되면 최초로 LDNS에게 요청하게 된다. LDNS는 자기가 잡은 DNS를 LDSN라고 한다.</p>
 </li>
 <li>
 <p>LDSN에서는 해당 도메인의 ROOT DNS에 쿼리를 날린다.</p>
@@ -679,51 +758,52 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 <p>.COM의 DNS는 하위 DNS인 naver.com의 DNS의 IP를 응답해준다.</p>
 </li>
 <li>
-<p>naver.com은 실제적으로 <a href="https://www.naver.com" target="_blank" rel="noopener noreffer ">www.naver.com</a>의 A 레코드를 가지고 있으면 LDNS에게 응답을 해주고 LDNS는 최종적으로 사용자에게 <a href="https://www.naver.com" target="_blank" rel="noopener noreffer ">www.naver.com</a>의 IP를 알려주게 된다.</p>
+<p>naver.com은 실제적으로 <a href="https://www.naver.com"target="_blank" rel="external nofollow noopener noreferrer">www.naver.com</a>의 A 레코드를 가지고 있으면 LDNS에게 응답을 해주고 LDNS는 최종적으로 사용자에게 <a href="https://www.naver.com"target="_blank" rel="external nofollow noopener noreferrer">www.naver.com</a>의 IP를 알려주게 된다.</p>
 </li>
 </ol>
 </div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>수정: 2023-09-17&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/8f9e542c3d9a079137645ebc4858725c24bb6cc0" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 8f9e542c3d9a079137645ebc4858725c24bb6cc0: rebuilding site Sun Sep 17 08:19:26     2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8f9e542</a></span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/ko/networks/index.md" target="_blank">마크다운 읽기</a>
-                        </span></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="공유하기 Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/networks/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="공유하기 Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/networks/" data-title="The Documentation Networks" data-description="NAP Built"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
-            </div>
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2023-09-17 08:19:26">Updated on 2023-09-17&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/ko/networks/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/networks/"><i class="fa-brands fa-linkedin fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/networks/" data-title="The Documentation Networks" data-description="NAP Built"><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  </span>
         </div>
-    </div>
+      </div></div>
 
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/ko/tags/network/">network</a>,&nbsp;<a href="/ko/tags/l2/">l2</a>,&nbsp;<a href="/ko/tags/l3/">l3</a>,&nbsp;<a href="/ko/tags/l4/">l4</a>,&nbsp;<a href="/ko/tags/osi-7layer/">osi 7layer</a>,&nbsp;<a href="/ko/tags/tcp/">tcp</a>,&nbsp;<a href="/ko/tags/vxlan/">vxlan</a>,&nbsp;<a href="/ko/tags/vxlan-header/">vxlan header</a>,&nbsp;<a href="/ko/tags/geneve/">geneve</a>,&nbsp;<a href="/ko/tags/geneve-header/">geneve header</a>,&nbsp;<a href="/ko/tags/ip-header/">ip header</a>,&nbsp;<a href="/ko/tags/ethernet-header/">ethernet header</a>,&nbsp;<a href="/ko/tags/ethernet-frame/">Ethernet Frame</a>,&nbsp;<a href="/ko/tags/tpc/ip-header/">tpc/ip header</a>,&nbsp;<a href="/ko/tags/vmware/">vmware</a>,&nbsp;<a href="/ko/tags/nsxt/">nsxt</a>,&nbsp;<a href="/ko/tags/https/">https</a>,&nbsp;<a href="/ko/tags/tls/">tls</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">뒤로</a></span>&nbsp;|&nbsp;<span><a href="/ko/">홈</a></span>
-        </section>
-    </div>
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/ko/tags/network/" class="post-tag" title="Tags - network">network</a><a href="/ko/tags/l2/" class="post-tag" title="Tags - l2">l2</a><a href="/ko/tags/l3/" class="post-tag" title="Tags - l3">l3</a><a href="/ko/tags/l4/" class="post-tag" title="Tags - l4">l4</a><a href="/ko/tags/osi-7layer/" class="post-tag" title="Tags - osi 7layer">osi 7layer</a><a href="/ko/tags/tcp/" class="post-tag" title="Tags - tcp">tcp</a><a href="/ko/tags/vxlan/" class="post-tag" title="Tags - vxlan">vxlan</a><a href="/ko/tags/vxlan-header/" class="post-tag" title="Tags - vxlan header">vxlan header</a><a href="/ko/tags/geneve/" class="post-tag" title="Tags - geneve">geneve</a><a href="/ko/tags/geneve-header/" class="post-tag" title="Tags - geneve header">geneve header</a><a href="/ko/tags/ip-header/" class="post-tag" title="Tags - ip header">ip header</a><a href="/ko/tags/ethernet-header/" class="post-tag" title="Tags - ethernet header">ethernet header</a><a href="/ko/tags/ethernet-frame/" class="post-tag" title="Tags - Ethernet Frame">Ethernet Frame</a><a href="/ko/tags/tpc/ip-header/" class="post-tag" title="Tags - tpc/ip header">tpc/ip header</a><a href="/ko/tags/vmware/" class="post-tag" title="Tags - vmware">vmware</a><a href="/ko/tags/nsxt/" class="post-tag" title="Tags - nsxt">nsxt</a><a href="/ko/tags/https/" class="post-tag" title="Tags - https">https</a><a href="/ko/tags/tls/" class="post-tag" title="Tags - tls">tls</a><a href="/ko/tags/dk/" class="post-tag" title="Tags - dk">dk</a><a href="/ko/tags/dokyung/" class="post-tag" title="Tags - dokyung">dokyung</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/ko/">Home</a></span>
+    </section>
+  </div>
 
-    <div class="post-nav"><a href="/ko/avi/" class="prev" rel="prev" title="The Documentation vSphere Tanzu with AVI Load Balancer"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation vSphere Tanzu with AVI Load Balancer</a>
-            <a href="/ko/tanzu-okta/" class="next" rel="next" title="The Documentation Tanzu &amp; OTKA">The Documentation Tanzu & OTKA<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/ko/avi/" class="post-nav-item" rel="prev" title="The Documentation vSphere Tanzu with AVI Load Balancer"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation vSphere Tanzu with AVI Load Balancer</a>
+      <a href="/ko/tanzu-okta/" class="post-nav-item" rel="next" title="The Documentation Tanzu &amp; OTKA">The Documentation Tanzu &amp; OTKA<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-        </div>
-    </footer></div>
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
+      </noscript></div></article>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="맨 위로">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="댓글 보기">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"복사하기","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"검색 결과 없음","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
-            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', '216068312', { 'anonymize_ip': true });
-        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/ko/"></a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="View Comments"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Theme FixIt works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/algoliasearch/algoliasearch-lite.umd.min.js" defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":true,"expired":false,"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"typeit-header-desktop":"Dokyung's DevOoOps","typeit-header-title-mobile":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},"duration":-1,"loop":false,"speed":100}};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', '216068312', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
 </html>

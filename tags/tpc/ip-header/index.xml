@@ -1,29 +1,28 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>tpc/ip header - Tag - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/tags/tpc/ip-header/</link>
-        <description>tpc/ip header - Tag - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://huntedhappy.github.io/tags/tpc/ip-header/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation Networks</title>
-    <link>https://huntedhappy.github.io/networks/</link>
-    <pubDate>Sun, 10 Apr 2022 18:32:47 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/networks/</guid>
-    <description><![CDATA[<h2 id="0-osi-7-layer">0. OSI 7 Layer</h2>
-<figure><figcaption>
+  <channel>
+    <title>tpc/ip header - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/tags/tpc/ip-header/</link>
+    <description>tpc/ip header - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://huntedhappy.github.io/tags/tpc/ip-header/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation Networks</title>
+  <link>https://huntedhappy.github.io/networks/</link>
+  <pubDate>Sun, 10 Apr 2022 18:32:47 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/networks/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/networks/1-1.jpg" alt="The Documentation Networks" title="NAP Built" referrerpolicy="no-referrer"/></div><h2 id="0-osi-7-layer" class="heading-element">
+  <a href="#0-osi-7-layer" class="heading-mark"></a>0. OSI 7 Layer</h2><figure><img src="/images/network/1-1.png"/><figcaption>
             <h4>OSI 7Layer</h4>
         </figcaption>
 </figure>
 
-<h3 id="01-ethernet-frame">0.1. Ethernet Frame</h3>
-<figure><figcaption>
+<h3 id="01-ethernet-frame" class="heading-element">
+  <a href="#01-ethernet-frame" class="heading-mark"></a>0.1. Ethernet Frame</h3><figure><img src="/images/network/2-1.png"/><figcaption>
             <h4>EthernetFrame</h4>
         </figcaption>
 </figure>
 
-<h3 id="02-ethernet-header--2-layer">0.2. Ethernet Header ( 2 Layer)</h3>
-<p>Destination Address 6 bytes = 48 bits</p>
+<h3 id="02-ethernet-header--2-layer" class="heading-element">
+  <a href="#02-ethernet-header--2-layer" class="heading-mark"></a>0.2. Ethernet Header ( 2 Layer)</h3><p>Destination Address 6 bytes = 48 bits</p>
 <ul>
 <li>목적지 맥 주소 6 bytes(48bits), 주소의 첫 번째 비트가 1이면 멀티캐스트 이며, 모든 비트가 1이면 브로드캐스트이다.
 FF:FF:FF:FF:FF = Broadcast</li>
@@ -125,8 +124,8 @@ FF:FF:FF:FF:FF = Broadcast</li>
 </tr>
 </tbody>
 </table>
-<h3 id="03-ip-header-3-layer">0.3. IP Header (3 Layer)</h3>
-<figure><figcaption>
+<h3 id="03-ip-header-3-layer" class="heading-element">
+  <a href="#03-ip-header-3-layer" class="heading-mark"></a>0.3. IP Header (3 Layer)</h3><figure><img src="/images/network/2-2.png"/><figcaption>
             <h4>IP Header</h4>
         </figcaption>
 </figure>
@@ -135,14 +134,14 @@ FF:FF:FF:FF:FF = Broadcast</li>
 <p>ping Option 설정 -l size , -f 조각화 하지 않음, IP 20 bytes, ICMP 8 bytes</p>
 <p>1500 - (IP + ICMP) = 1472</p>
 <p>ping -l -f 1472</p>
-<figure><figcaption>
+<figure><img src="/images/network/2-3.png"/><figcaption>
             <h4>ICMP로 확인</h4>
         </figcaption>
 </figure>
 
 <p>명령어로 MTU 확인
 netsh interface ipv4 show interfaces</p>
-<figure><figcaption>
+<figure><img src="/images/network/2-4.png"/><figcaption>
             <h4>netsh로 확인</h4>
         </figcaption>
 </figure>
@@ -151,8 +150,8 @@ netsh interface ipv4 show interfaces</p>
 netsh interface ipv4 set subinterface &ldquo;색인 번호&rdquo; 또는 &ldquo;이름&rdquo; 으로 변경이 가능하다.</p>
 <p>netsh interface ipv4 set subinterface &ldquo;10&rdquo; mtu=9000 store=persistent</p>
 <p>netsh interface ipv4 set subinterface &ldquo;이더넷 2&rdquo; mtu=9000 store=persistent</p>
-<h3 id="04-tcp-header-4-layer">0.4. TCP Header (4 Layer)</h3>
-<figure><figcaption>
+<h3 id="04-tcp-header-4-layer" class="heading-element">
+  <a href="#04-tcp-header-4-layer" class="heading-mark"></a>0.4. TCP Header (4 Layer)</h3><figure><img src="/images/network/2-5.png"/><figcaption>
             <h4>TCP Header</h4>
         </figcaption>
 </figure>
@@ -203,13 +202,13 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
 <ul>
 <li>16비트 체크섬 필드는 TCP 헤더, 페이로드 및 IP 의사 헤더의 오류 검사에 사용됩니다. 의사 헤더는 소스 IP 주소 , 대상 IP 주소 , TCP 프로토콜의 프로토콜 번호 (6), TCP 헤더 및 페이로드의 길이(바이트)로 구성됩니다.</li>
 </ul>
-<p><a href="https://4network.tistory.com/entry/Sliding-Window-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0?category=286056" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Sliding Window 참고 블로그 </a></p>
-<p><a href="https://en.wikipedia.org/wiki/Ethernet_frame" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Ethernet frame wiki </a></p>
-<p><a href="https://en.wikipedia.org/wiki/IPv4" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> IP Header wiki  </a></p>
-<p><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> TCP Header wiki  </a></p>
-<p><a href="http://www.ktword.co.kr/test/view/view.php?m_temp1=2039" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Ethernet Type 참고 </a></p>
-<h4 id="041-fin-fin-wait관련">0.4.1. (FIN, FIN-WAIT)관련</h4>
-<figure><figcaption>
+<p><a href="https://4network.tistory.com/entry/Sliding-Window-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0?category=286056"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Sliding Window 참고 블로그 </a></p>
+<p><a href="https://en.wikipedia.org/wiki/Ethernet_frame"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Ethernet frame wiki </a></p>
+<p><a href="https://en.wikipedia.org/wiki/IPv4"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> IP Header wiki  </a></p>
+<p><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> TCP Header wiki  </a></p>
+<p><a href="http://www.ktword.co.kr/test/view/view.php?m_temp1=2039"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Ethernet Type 참고 </a></p>
+<h4 id="041-fin-fin-wait관련" class="heading-element">
+  <a href="#041-fin-fin-wait%ea%b4%80%eb%a0%a8" class="heading-mark"></a>0.4.1. (FIN, FIN-WAIT)관련</h4><figure><img src="/images/network/3-1.png"/><figcaption>
             <h4>FIN</h4>
         </figcaption>
 </figure>
@@ -232,27 +231,27 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
 <li>A는 TIME_WAIT상태가 되어 최종적으로 B와의 Connection이 닫히는지 확인 한다.</li>
 </ul>
 <p>즉 서버가 클라이언트로 부터 FIN에 대한 ACK을 받고나서 클라이언트의 FIN을 기다리는 상태가 FIN_WAIT2 상태이다.</p>
-<h3 id="05-overlay">0.5. Overlay</h3>
-<h4 id="051-vxlan">0.5.1. VXLAN</h4>
-<p>Outer IP Header 20 Bytes + UDP Header 8 bytes + VXLAN 8 bytes + Inner Ethernet 18 bytes</p>
+<h3 id="05-overlay" class="heading-element">
+  <a href="#05-overlay" class="heading-mark"></a>0.5. Overlay</h3><h4 id="051-vxlan" class="heading-element">
+  <a href="#051-vxlan" class="heading-mark"></a>0.5.1. VXLAN</h4><p>Outer IP Header 20 Bytes + UDP Header 8 bytes + VXLAN 8 bytes + Inner Ethernet 18 bytes</p>
 <p>VLAN 포함</p>
 <p>20 + 8 + 8 + 18 = 54</p>
 <p>만약 VLAN이 포함 되어 있지 않다면</p>
 <p>20 + 8 + 8 + 14 = 50</p>
 <p>그래서 1500 + 54 = 1554 가 필요 하지만 계산하기 편하게 1600 이상으로 설정 하는 것을 권고 한다.
 또한 요새는 SDN 제품들이 jumbo frame(9000) 으로 기본 셋팅 되어서 나오기 때문에 9000으로 설정을 해도 된다.</p>
-<figure><figcaption>
+<figure><img src="/images/network/4-1.png"/><figcaption>
             <h4>VXLAN</h4>
         </figcaption>
 </figure>
 
-<h4 id="052-geneve">0.5.2. GENEVE</h4>
-<figure><figcaption>
+<h4 id="052-geneve" class="heading-element">
+  <a href="#052-geneve" class="heading-mark"></a>0.5.2. GENEVE</h4><figure><img src="/images/network/4-2.png"/><figcaption>
             <h4>GENEVE#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/network/4-3.png"/><figcaption>
             <h4>GENEVE#2</h4>
         </figcaption>
 </figure>
@@ -328,14 +327,14 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
 </tr>
 </tbody>
 </table>
-<p><a href="https://ipwithease.com/vxlan-vs-geneve-understand-the-difference/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VXLAN - GENEVE 참고  </a></p>
-<h2 id="1-l2">1. L2</h2>
-<h3 id="11-mac주소">1.1. MAC주소</h3>
-<p>MAC은 일반적으로 OSI 7 Layer중에서 2 Layer에 속한다. 확인하는 방법은 윈두우에서 CMD창을 연 후 ipconfig /all명령어를 사용하면 확인할 수 있다. 나오는 부분중에 물리적 주소라고 나오는 것을 확인 할 수 있다. 리눅스의 경우는 ifconfig라고 치면 바로 확인을 할 수 있을 것이다.</p>
+<p><a href="https://ipwithease.com/vxlan-vs-geneve-understand-the-difference/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> VXLAN - GENEVE 참고  </a></p>
+<h2 id="1-l2" class="heading-element">
+  <a href="#1-l2" class="heading-mark"></a>1. L2</h2><h3 id="11-mac주소" class="heading-element">
+  <a href="#11-mac%ec%a3%bc%ec%86%8c" class="heading-mark"></a>1.1. MAC주소</h3><p>MAC은 일반적으로 OSI 7 Layer중에서 2 Layer에 속한다. 확인하는 방법은 윈두우에서 CMD창을 연 후 ipconfig /all명령어를 사용하면 확인할 수 있다. 나오는 부분중에 물리적 주소라고 나오는 것을 확인 할 수 있다. 리눅스의 경우는 ifconfig라고 치면 바로 확인을 할 수 있을 것이다.</p>
 <ul>
 <li>물론 H/W 주소이지만 변경은 가능하다. 그러므르 보안적으로 이슈가 될 수 있다.</li>
 </ul>
-<figure><figcaption>
+<figure><img src="/images/network/1-2.png"/><figcaption>
             <h4>MAC 주소 확인</h4>
         </figcaption>
 </figure>
@@ -343,17 +342,17 @@ Windows Szie는 가변적이므로 통신에 문제가 없으면 Size를 늘리�
 <p>확인을 하게 되면
 E0-3F-49-AB-C8-AD
 위와 같이 표시가 되며 절반으로 나누어 앞의 세부분은 생산자를 나타내고, 뒤의 세 부분은 장치의 일련번호(Host Identifier)을 나타낸다.</p>
-<p><a href="https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> MAC 제조회사 찾는 곳 </a>
-<figure><figcaption>
+<p><a href="https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> MAC 제조회사 찾는 곳 </a>
+<figure><img src="/images/network/1-3.png"/><figcaption>
             <h4>제조회사 찾는 방법</h4>
         </figcaption>
 </figure>
 </p>
-<h3 id="12-arp--rarp--garp">1.2. ARP &amp; RARP &amp; GARP</h3>
-<p>ARP(Address Resolution Protofcol)는 IP주소를 MAC주소와 대응(Bind)시키기 위해 사용되는 프로토콜이다.
+<h3 id="12-arp--rarp--garp" class="heading-element">
+  <a href="#12-arp--rarp--garp" class="heading-mark"></a>1.2. ARP &amp; RARP &amp; GARP</h3><p>ARP(Address Resolution Protofcol)는 IP주소를 MAC주소와 대응(Bind)시키기 위해 사용되는 프로토콜이다.
 IP주소는 알지만 MAC주소를 모르는 경우 사용 할 수 있다.</p>
 <p>윈도우에서 arp -a {IP} 로 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/network/1-4.png"/><figcaption>
             <h4>ARP 확인</h4>
         </figcaption>
 </figure>
@@ -363,20 +362,20 @@ MAC주소는 알지만 IP주소를 모르는 경우 사용 할 수 있다.</p>
 <p>GARP(Gratuitous ARP)는 PC를 스위치에 연결을 하게 되면 나의 IP와 MAC은 이거라고 알리는대 사용한다. 3번정도 GARP를 보낸다. 그래서 IP 주소 충돌을 감지 할 수 있으며, GARP를 수신한 모든 호스트/라우터는 ARP Table을 갱신할 수 있다. 또 다른 목적은 VRRP/HSRP프로토콜에서 사용된다(VRRP/HSRP의 설명은 패스한다).</p>
 <p>ARP probe
 ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주소의 충돌을 감지 할 수 있다.</p>
-<figure><figcaption>
+<figure><img src="/images/network/1-6.png"/><figcaption>
             <h4>Probe 확인</h4>
         </figcaption>
 </figure>
 
 <p>ARP announcements
 다른 호스트의 ARP 테이블을 갱신 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/network/1-7.png"/><figcaption>
             <h4>Announcement 확인</h4>
         </figcaption>
 </figure>
 </p>
-<h3 id="13-l2-통신">1.3. L2 통신</h3>
-<table>
+<h3 id="13-l2-통신" class="heading-element">
+  <a href="#13-l2-%ed%86%b5%ec%8b%a0" class="heading-mark"></a>1.3. L2 통신</h3><table>
 <thead>
 <tr>
 <th>기능</th>
@@ -413,15 +412,15 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 <li>PC2는 해당 브로드캐스트를 받고 반대로 PC1에게 전달을 하게 된다.</li>
 <li>스위치 및 PC는 해당 MAC Table에 저장한다. 그리고 스위치에서 연결된 PC에서 트래픽을 전달 한다.(Forwarding)</li>
 </ol>
-<figure><figcaption>
+<figure><img src="/images/network/1-5.png"/><figcaption>
             <h4>L2 통신</h4>
         </figcaption>
 </figure>
 
-<h2 id="2-l3">2. L3</h2>
-<p>라우터에 Dynamic(RIP, EIGRP, OSPF, BGP) 또는 STATIC의 대한 설명은 하지 않는다.</p>
+<h2 id="2-l3" class="heading-element">
+  <a href="#2-l3" class="heading-mark"></a>2. L3</h2><p>라우터에 Dynamic(RIP, EIGRP, OSPF, BGP) 또는 STATIC의 대한 설명은 하지 않는다.</p>
 <p>Gateway를 적용 하면 아래와 같이 Gateway의 ARP를 얻기 위핸 Broadcast를 요청 하는 것을 확인 할 수 있다.</p>
-<figure><figcaption>
+<figure><img src="/images/network/1-8.png"/><figcaption>
             <h4>GATEWAY</h4>
         </figcaption>
 </figure>
@@ -430,45 +429,45 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 <p>PC에서 라우팅 테이블을 확인 해 볼 수 있다.</p>
 <p>route print 명령어를 통해 확인 해보자. 만약 피시에 Network Interface가 두개이고 목적지가 각각 다른 NIC으로 향해야 한다면.
 모든 목적지는 G/W로 지정을 하고 STATIC하게 라우팅을 2번 Interface로 테이블을 지정 할 수 있을 것이다. 그리고 만약 동일한 목적지로 라우팅이 잡혀 있다면 METRIC이 더 빠른쪽으로 라우팅을 한다는 것을 확인 할 수 있을 것이다.</p>
-<figure><figcaption>
+<figure><img src="/images/network/1-11.png"/><figcaption>
             <h4>route print</h4>
         </figcaption>
 </figure>
 
 <p>그리고 MAC주소는 라우터를 거치면서 바뀌게 된다. 아래에서 보듯이
 실제 10.253.107.2의 MAC주소는 00:50:56:b0:f8:47 이지만 목적지 Host 10.253.126.25에서 확인하였을 때는 G/W인 10.253.126.1의 MAC주소로 바뀌어서 들어오는 것을 확인 할 수 있다.</p>
-<figure><figcaption>
+<figure><img src="/images/network/1-12.png"/><figcaption>
             <h4>route print</h4>
         </figcaption>
 </figure>
 
-<h2 id="3-l4">3. L4</h2>
-<p>L3라우터의 경우 IP N/W을 통해 라우팅 경로(라우팅 경로라고 하면 G/W를 통해 봤듯이 자기가 모르는 대역을 다른 라우터에 물어보기 위한 것이라고 보면 된다. 이에 활용되는 것이 STATIC, RIP, EIGRP, OSPF. BGP가 있으며 하나 하나의 대한 기술적 내용은 기술 하지 않는다.)를 확보하는 반면. L4의 경우 Port까지 확인 한다. 이때부터 세션 베이스라고 보면 된다. 한마디로 라우터의 경우 2개의 물리적인 라우터가 있을 경우 A라는 라우터를 통해 들어온 트래픽이 B라는 트래픽을 통해 나가더라도 통신에 이슈가 발생 하지 않는다.</p>
-<figure><figcaption>
+<h2 id="3-l4" class="heading-element">
+  <a href="#3-l4" class="heading-mark"></a>3. L4</h2><p>L3라우터의 경우 IP N/W을 통해 라우팅 경로(라우팅 경로라고 하면 G/W를 통해 봤듯이 자기가 모르는 대역을 다른 라우터에 물어보기 위한 것이라고 보면 된다. 이에 활용되는 것이 STATIC, RIP, EIGRP, OSPF. BGP가 있으며 하나 하나의 대한 기술적 내용은 기술 하지 않는다.)를 확보하는 반면. L4의 경우 Port까지 확인 한다. 이때부터 세션 베이스라고 보면 된다. 한마디로 라우터의 경우 2개의 물리적인 라우터가 있을 경우 A라는 라우터를 통해 들어온 트래픽이 B라는 트래픽을 통해 나가더라도 통신에 이슈가 발생 하지 않는다.</p>
+<figure><img src="/images/network/1-9.png"/><figcaption>
             <h4>L3의 경우 Asymmetirc구조라도 상관 없음</h4>
         </figcaption>
 </figure>
 
 <p>하지만 L4 Layer이상의 경우 세션 베이스이기 때문에 자기가 가지고 있지 않은 정보가 들어오면 Drop을 한다. 그래서 동일한 경로로 통신을 해야 한다.</p>
-<figure><figcaption>
+<figure><img src="/images/network/1-10.png"/><figcaption>
             <h4>L4의 경우 Asymmetirc구조일 경우 Drop</h4>
         </figcaption>
 </figure>
 
 <p>또한 기술적으로 LoadBalancer의 경우 One-Arm구성 일 경우 어떻게 구성해야되는지의 대한 여러가지 방안들이 있지만 단순하게 어떻게 통신을 한다는지의 대한 내용만 적었다.. 마찬가지로 LoadBalancer의 경우 다양한 기술이 포함되어 있기 때문에 이렇게 되면 안됩니다. 라는 정도만 작성했다.</p>
-<h2 id="4-https-이야기">4. HTTPS 이야기</h2>
-<p>HTTPS는 공개키와 비공개키를 사용한다. 이유는 공개키는 비공개키보다 암/복호화 하는대 더 많은 트래픽이 필요 하기 때문에 공개키로 비공개키를 암호화하여 비공개키를 안전하게 전달 후 비공개키를 통해 데이터를 전달한다.</p>
-<p><figure><figcaption>
+<h2 id="4-https-이야기" class="heading-element">
+  <a href="#4-https-%ec%9d%b4%ec%95%bc%ea%b8%b0" class="heading-mark"></a>4. HTTPS 이야기</h2><p>HTTPS는 공개키와 비공개키를 사용한다. 이유는 공개키는 비공개키보다 암/복호화 하는대 더 많은 트래픽이 필요 하기 때문에 공개키로 비공개키를 암호화하여 비공개키를 안전하게 전달 후 비공개키를 통해 데이터를 전달한다.</p>
+<p><figure><img src="/images/network/5-1.png"/><figcaption>
             <h4>HTTPS 이야기</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/network/5-2.png"/><figcaption>
             <h4>HTTPS 이야기</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/network/5-3.png"/><figcaption>
             <h4>HTTPS 이야기</h4>
         </figcaption>
 </figure>
@@ -509,15 +508,15 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 <ul>
 <li>공인된 인증기관에서 발급 받은 인증서의 경우 기본적으로 인증서에는 공개키와 개인키가 포함되어 있기 때문에 이미 브라우저에 내장되어 있는 인증기관의 공개키로 복호화 하여 사이트가 인증기관에서 인증을 받은 사이트라는것을 검증 한다. 만약 사설 인증서인 경우 웹브라우저에서 검증되지 않는 사이트라고 나오며 * 이는 인증기관에서 인증되지 않는 사이트라는 것만 검사 할뿐 이를 무시를 하게 되면 서버에서는 이미 공개키를 전달 했기 때문에 해당 공개키를 가지고 대칭키를 암호화 하여 사이트에 전달을 하게 된다 그리고 사이트에는 개인키로 복호화 하여 대칭키를 획득 한 후 대칭키로 암/복호화를 하여 데이터를 주고 받게 된다.</li>
 </ul>
-<h2 id="5-유저에서-웹서핑-까지">5. 유저에서 웹서핑 까지</h2>
-<figure><figcaption>
+<h2 id="5-유저에서-웹서핑-까지" class="heading-element">
+  <a href="#5-%ec%9c%a0%ec%a0%80%ec%97%90%ec%84%9c-%ec%9b%b9%ec%84%9c%ed%95%91-%ea%b9%8c%ec%a7%80" class="heading-mark"></a>5. 유저에서 웹서핑 까지</h2><figure><img src="/images/network/6-1.png"/><figcaption>
             <h4>웹서핑</h4>
         </figcaption>
 </figure>
 
 <ol>
 <li>
-<p>사용자가 웹서핑을 하기 위해 브라우저에서 해당하는 DOMAIN을 입력한다. 예를 들어 <a href="https://www.naver.com" target="_blank" rel="noopener noreffer ">www.naver.com</a>을 입력하게 되면 최초로 LDNS에게 요청하게 된다. LDNS는 자기가 잡은 DNS를 LDSN라고 한다.</p>
+<p>사용자가 웹서핑을 하기 위해 브라우저에서 해당하는 DOMAIN을 입력한다. 예를 들어 <a href="https://www.naver.com"target="_blank" rel="external nofollow noopener noreferrer">www.naver.com</a>을 입력하게 되면 최초로 LDNS에게 요청하게 된다. LDNS는 자기가 잡은 DNS를 LDSN라고 한다.</p>
 </li>
 <li>
 <p>LDSN에서는 해당 도메인의 ROOT DNS에 쿼리를 날린다.</p>
@@ -529,7 +528,7 @@ ARP probe는 sender의 IP주소를 0으로 해서 ARP요청을 하며 IPv4 주�
 <p>.COM의 DNS는 하위 DNS인 naver.com의 DNS의 IP를 응답해준다.</p>
 </li>
 <li>
-<p>naver.com은 실제적으로 <a href="https://www.naver.com" target="_blank" rel="noopener noreffer ">www.naver.com</a>의 A 레코드를 가지고 있으면 LDNS에게 응답을 해주고 LDNS는 최종적으로 사용자에게 <a href="https://www.naver.com" target="_blank" rel="noopener noreffer ">www.naver.com</a>의 IP를 알려주게 된다.</p>
+<p>naver.com은 실제적으로 <a href="https://www.naver.com"target="_blank" rel="external nofollow noopener noreferrer">www.naver.com</a>의 A 레코드를 가지고 있으면 LDNS에게 응답을 해주고 LDNS는 최종적으로 사용자에게 <a href="https://www.naver.com"target="_blank" rel="external nofollow noopener noreferrer">www.naver.com</a>의 IP를 알려주게 된다.</p>
 </li>
 </ol>
 ]]></description>

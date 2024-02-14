@@ -11,7 +11,7 @@
 
 `오픈시프트 컨테이너 플랫폼(OpenShift Container Platform)`은 레드햇의 사내(on-premises) 프라이빗 PaaS 제품으로, 도커가 제공하는 애플리케이션 컨테이너의 코어를 기반으로 빌드되며 레드햇 엔터프라이즈 리눅스의 토대 위에 쿠버네티스가 제공하는 오케스트레이션 및 관리가 포함되어 있다.
 
-참고문헌  [<i class="fas fa-link"></i> Openshift ](https://ko.wikipedia.org/wiki/%EC%98%A4%ED%94%88%EC%8B%9C%ED%94%84%ED%8A%B8)
+참고문헌  [&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; Openshift ](https://ko.wikipedia.org/wiki/%EC%98%A4%ED%94%88%EC%8B%9C%ED%94%84%ED%8A%B8)
 
 ## 2. 사전구성
 ### 2.1. DNS 구성
@@ -31,23 +31,23 @@
 |          | worker2 | openshift | vcf.local | 10.253.107.15 |
 |          | worker3 | openshift | vcf.local | 10.253.107.16 |
 
-{{< figure src="/images/openshift/1-3.png" title="DNS 구성" >}}
+{{&lt; figure src=&#34;/images/openshift/1-3.png&#34; title=&#34;DNS 구성&#34; &gt;}}
 
 ### 2.2. DHCP 구성
 DHCP 구성 - NSXT로 구성을 하였다.
 
-{{< figure src="/images/openshift/1-4.png" title="DHCP 구성#1" >}}
-{{< figure src="/images/openshift/1-5.png" title="DHCP 구성#2" >}}
-{{< figure src="/images/openshift/1-6.png" title="DHCP 구성#3" >}}
+{{&lt; figure src=&#34;/images/openshift/1-4.png&#34; title=&#34;DHCP 구성#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/1-5.png&#34; title=&#34;DHCP 구성#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/1-6.png&#34; title=&#34;DHCP 구성#3&#34; &gt;}}
 
 ## 3. 파일 다운로드
 
 OC를 다운로드 하기 위해 redhat에 가입 하고 Login 필요
 
-OC 다운로드 링크  [<i class="fas fa-link"></i> OC 다운로드 링크 ](https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/auth?client_id=cloud-services&redirect_uri=https%3A%2F%2Fconsole.redhat.com%2Fopenshift%2Finstall&state=3c149436-35f6-4385-9739-68ad3e7cfb3e&response_mode=fragment&response_type=code&scope=openid&nonce=50b0191c-64a2-4655-81da-8ee6e7665375)
+OC 다운로드 링크  [&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; OC 다운로드 링크 ](https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/auth?client_id=cloud-services&amp;redirect_uri=https%3A%2F%2Fconsole.redhat.com%2Fopenshift%2Finstall&amp;state=3c149436-35f6-4385-9739-68ad3e7cfb3e&amp;response_mode=fragment&amp;response_type=code&amp;scope=openid&amp;nonce=50b0191c-64a2-4655-81da-8ee6e7665375)
 
-{{< figure src="/images/openshift/1-1.png" title="OC 다운로드#1" >}}
-PullSecret을 저장해 둔다. {{< figure src="/images/openshift/1-2.png" title="OC 다운로드#2" >}}
+{{&lt; figure src=&#34;/images/openshift/1-1.png&#34; title=&#34;OC 다운로드#1&#34; &gt;}}
+PullSecret을 저장해 둔다. {{&lt; figure src=&#34;/images/openshift/1-2.png&#34; title=&#34;OC 다운로드#2&#34; &gt;}}
 
 압축을 해제 하고 환경변수를 별도로 구성하지 않게 /usr/local/bin 에다가 copy를 한다.
 ```shell
@@ -64,9 +64,9 @@ openshift-install version
 
 sshkeygen을 생성 한다.
 ```shell
-ssh-keygen -t ed25519 -N '' -f ~/.ssh/id_rsa
+ssh-keygen -t ed25519 -N &#39;&#39; -f ~/.ssh/id_rsa
 	
-eval "$(ssh-agent -s)"
+eval &#34;$(ssh-agent -s)&#34;
 
 ssh-add ~/.ssh/id_rsa
 ```
@@ -91,23 +91,23 @@ wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/lat
 ```
 또는 아래와 같이 GUI에서 다운로드 받을 수 있다.
 
-{{< figure src="/images/openshift/5-1.png" title="RHCOS OVA GUI 다운로드#2" >}}
-{{< figure src="/images/openshift/5-2.png" title="RHCOS OVA GUI 다운로드#2" >}}
-{{< figure src="/images/openshift/5-3.png" title="RHCOS OVA GUI 다운로드#3" >}}
-{{< figure src="/images/openshift/5-4.png" title="RHCOS OVA GUI 다운로드#4" >}}
+{{&lt; figure src=&#34;/images/openshift/5-1.png&#34; title=&#34;RHCOS OVA GUI 다운로드#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-2.png&#34; title=&#34;RHCOS OVA GUI 다운로드#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-3.png&#34; title=&#34;RHCOS OVA GUI 다운로드#3&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-4.png&#34; title=&#34;RHCOS OVA GUI 다운로드#4&#34; &gt;}}
 
 ### 5.1. Temp 구성
-{{< figure src="/images/openshift/5-5.png" title="vSphere Temp Upload#1" >}}
-{{< figure src="/images/openshift/5-6.png" title="vSphere Temp Upload#2" >}}
-{{< figure src="/images/openshift/5-7.png" title="vSphere Temp Upload#3" >}}
-{{< figure src="/images/openshift/5-8.png" title="vSphere Temp Upload#4" >}}
-{{< figure src="/images/openshift/5-9.png" title="vSphere Temp Upload#5" >}}
-{{< figure src="/images/openshift/5-10.png" title="vSphere Temp Upload#6" >}}
-{{< figure src="/images/openshift/5-11.png" title="vSphere Temp Upload#7" >}}
-{{< figure src="/images/openshift/5-12.png" title="vSphere Temp Upload#8" >}}
+{{&lt; figure src=&#34;/images/openshift/5-5.png&#34; title=&#34;vSphere Temp Upload#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-6.png&#34; title=&#34;vSphere Temp Upload#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-7.png&#34; title=&#34;vSphere Temp Upload#3&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-8.png&#34; title=&#34;vSphere Temp Upload#4&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-9.png&#34; title=&#34;vSphere Temp Upload#5&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-10.png&#34; title=&#34;vSphere Temp Upload#6&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-11.png&#34; title=&#34;vSphere Temp Upload#7&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/5-12.png&#34; title=&#34;vSphere Temp Upload#8&#34; &gt;}}
 
 ## 6. OC Install
-{{< admonition tip "SSL 구성" >}}
+{{&lt; admonition tip &#34;SSL 구성&#34; &gt;}}
 
 install-config.yaml 참조
 ```shell
@@ -150,7 +150,7 @@ platform:
     vCenter: vcsa01.vcf.local
   fips: false
 publish: External
-pullSecret: 'full secret 넣어줘야함'
+pullSecret: &#39;full secret 넣어줘야함&#39;
 sshKey: |
   ssh-ed25519 AAAAC
 
@@ -179,9 +179,9 @@ metadata:
   creationTimestamp: null
   name: cluster
 spec:
-  mastersSchedulable: false    ### true > false change
+  mastersSchedulable: false    ### true &gt; false change
   policy:
-    name: ""
+    name: &#34;&#34;
 status: {}
 ```
 ignition 실행
@@ -190,26 +190,26 @@ openshift-install create ignition-configs --dir ocp
 ```
 L4 VIP로 설정 필요
 ```shell
-cat << EOF | tee append-bootstrap.ign
+cat &lt;&lt; EOF | tee append-bootstrap.ign
 {
-  "ignition": {
-    "config": {
-      "merge": [
+  &#34;ignition&#34;: {
+    &#34;config&#34;: {
+      &#34;merge&#34;: [
         {
-          "source": "http://10.253.107.254:8080/bootstrap.ign" ## L4 VIP로 변경
+          &#34;source&#34;: &#34;http://10.253.107.254:8080/bootstrap.ign&#34; ## L4 VIP로 변경
         }
       ] 
     },
-    "version": "3.1.0"
+    &#34;version&#34;: &#34;3.1.0&#34;
   }
 }
 EOF
 ```
 BASE64 실행
 ```shell
-base64 -w0 append-bootstrap.ign > append-bootstrap.64
-base64 -w0 master.ign > master.64
-base64 -w0 worker.ign > worker.64
+base64 -w0 append-bootstrap.ign &gt; append-bootstrap.64
+base64 -w0 master.ign &gt; master.64
+base64 -w0 worker.ign &gt; worker.64
 ```
 웹 구성에서 파일을 다운로드 할 수 있게 file 폴더 구성 후 ign을 복사 한다.
 ```shell
@@ -217,18 +217,18 @@ mkdir -p /usr/share/nginx/html/files
 cp *.ign /usr/share/nginx/html/files/
 chmod 644 /usr/share/nginx/html/files/*.ign
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 7. NGINX
 
 NGINX 설치
 ```shell
-apt update && apt upgrade -y
+apt update &amp;&amp; apt upgrade -y
 
 make로 설치
 apt install gcc libpcre3 libpcre3-dev libssl-dev make -y
 
-mkdir -p /var/tmp/src && cd /var/tmp/src
+mkdir -p /var/tmp/src &amp;&amp; cd /var/tmp/src
 wget http://nginx.org/download/nginx-1.20.2.tar.gz
 tar -xzf nginx-1.20.2.tar.gz
 cd nginx-1.20.2
@@ -273,9 +273,9 @@ http {
     include       mime.types;
     default_type  application/octet-stream;
 
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;
+                      &#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;
+                      &#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;;
 
     access_log  logs/access.log  main;
 
@@ -306,7 +306,7 @@ http {
 ```
 웹 구성
 ```shell
-cat << EOF | tee /etc/nginx/conf.d/openshift.conf
+cat &lt;&lt; EOF | tee /etc/nginx/conf.d/openshift.conf
 server {
     listen       8080;
     server_name  localhost;
@@ -333,17 +333,17 @@ systemctl restart nginx
 systemctl enable nginx
 ```
 
-{{< figure src="/images/openshift/7-1.png" title="NGINX 확인" >}}
+{{&lt; figure src=&#34;/images/openshift/7-1.png&#34; title=&#34;NGINX 확인&#34; &gt;}}
 
 ## 8. Temp 이미지로 VM 구성
 `Temp를 활용하여 bootstrap , master 3개 , worker 3개를 배포한다.`
 
-{{< figure src="/images/openshift/8-1.png" title="Image 구성#1" >}}
-{{< figure src="/images/openshift/8-2.png" title="Image 구성#2" >}}
-{{< figure src="/images/openshift/8-3.png" title="Image 구성#3" >}}
+{{&lt; figure src=&#34;/images/openshift/8-1.png&#34; title=&#34;Image 구성#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/8-2.png&#34; title=&#34;Image 구성#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/8-3.png&#34; title=&#34;Image 구성#3&#34; &gt;}}
 base64로 변경한 값을 여기서 넣어 준다.
 bootstrap : cat append-bootstrap.64 , 마스터 : cat master.64 , Worker : cat worker.64 의 값을 넣어 주면 됨
-{{< figure src="/images/openshift/8-4.png" title="Image 구성#4" >}}
+{{&lt; figure src=&#34;/images/openshift/8-4.png&#34; title=&#34;Image 구성#4&#34; &gt;}}
 
 ## 9. L4 구성
 `L4장비가 없을 경우 / L4장비가 있을 경우를 생각해서 NGINX도 포함 시킴`
@@ -360,14 +360,14 @@ ocp_master-and-boot-api-6443: bootstrap 및 master
 ## Openshift는 Route를사용 하기 때문에 설정
 ocp_443, ocp_80 : master 및 worker
 ```
-{{< figure src="/images/openshift/9-1.png" title="L4 구성#1" >}}
-{{< figure src="/images/openshift/9-2.png" title="L4 구성#2" >}}
+{{&lt; figure src=&#34;/images/openshift/9-1.png&#34; title=&#34;L4 구성#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/9-2.png&#34; title=&#34;L4 구성#2&#34; &gt;}}
 
 ### 9.2. NGINX L4 구성
 ```shell
 
 ## LB 설정
-cat << EOF | tee /etc/nginx/stream.conf.d/lb.conf
+cat &lt;&lt; EOF | tee /etc/nginx/stream.conf.d/lb.conf
 
 stream{
     upstream ocp_k8s_api {
@@ -433,7 +433,7 @@ systemctl restart nginx
 ```
 ## 10. 완료 후 확인
 ```shell
-export KUBECONFIG=<installation_directory>/auth/kubeconfig
+export KUBECONFIG=&lt;installation_directory&gt;/auth/kubeconfig
 
 예시
 export KUBECONFIG=~/ocp/auth/kubeconfig
@@ -442,17 +442,17 @@ oc whoami
 
 oc get clusterversion
 ```
-{{< figure src="/images/openshift/10-1.png" title="완료#1" >}}
+{{&lt; figure src=&#34;/images/openshift/10-1.png&#34; title=&#34;완료#1&#34; &gt;}}
 
 ```sehll
 oc get clusteroperators
 
 oc describe clusterversion
 
-oc get clusterversion -o jsonpath='{.items[0].spec}{"\n"}'
+oc get clusterversion -o jsonpath=&#39;{.items[0].spec}{&#34;\n&#34;}&#39;
 ```
-{{< figure src="/images/openshift/10-2.png" title="완료#2" >}}
-{{< figure src="/images/openshift/10-3.png" title="완료#3" >}}
+{{&lt; figure src=&#34;/images/openshift/10-2.png&#34; title=&#34;완료#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/10-3.png&#34; title=&#34;완료#3&#34; &gt;}}
 
 
 ## 11. New Worker Node Add
@@ -464,7 +464,7 @@ kubectl get csr
 oc adm certificate approve csr-bghmp csr-hd9x8 csr-hlngb
 oc adm certificate approve csr-gpgv9 csr-n6lqm csr-zfws6 
 ```
-{{< figure src="/images/openshift/11-1.png" title="worker Node 추가" >}}
+{{&lt; figure src=&#34;/images/openshift/11-1.png&#34; title=&#34;worker Node 추가&#34; &gt;}}
 
 ## 12. 계정
 
@@ -479,8 +479,8 @@ Local 또는 AD을 통해 계정을 관리 할 수 있다.
 apt install apache2-utils -y
 
 # 유저 정보
-# htpasswd -Bbc htpasswd {username} '{password}'
-$ htpasswd -Bbc htpasswd my1208 'Passw0rd'
+# htpasswd -Bbc htpasswd {username} &#39;{password}&#39;
+$ htpasswd -Bbc htpasswd my1208 &#39;Passw0rd&#39;
 
 cat htpasswd
 
@@ -489,12 +489,12 @@ oc --user=admin create secret generic htpasswd \
 
 oc get secret -n openshift-config
 ```
-{{< figure src="/images/openshift/11-2.png" title="유저 추가" >}}
-{{< figure src="/images/openshift/11-3.png" title="secret 확인" >}}
+{{&lt; figure src=&#34;/images/openshift/11-2.png&#34; title=&#34;유저 추가&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/11-3.png&#34; title=&#34;secret 확인&#34; &gt;}}
 
 secret 추가
 ```shell
-cat << EOF | tee oauth-config.yaml
+cat &lt;&lt; EOF | tee oauth-config.yaml
 # oauth-config.yaml
 apiVersion: config.openshift.io/v1
 kind: OAuth
@@ -525,8 +525,8 @@ oc whoami --show-server
 oc whoami --show-token
 ```
 
-{{< figure src="/images/openshift/11-4.png" title="GUI 접속#1" >}}
-{{< figure src="/images/openshift/11-5.png" title="GUI 접속#2" >}}
+{{&lt; figure src=&#34;/images/openshift/11-4.png&#34; title=&#34;GUI 접속#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/openshift/11-5.png&#34; title=&#34;GUI 접속#2&#34; &gt;}}
 
 ### 12.2. AD 연동
 
@@ -537,7 +537,7 @@ oc create configmap ca-config-map --from-file=ca.crt=/path/to/ca -n openshift-co
 만약 LDAPS로 구성을 하지 않았으면 insecure: true, ca 항목을 삭제, url을 ldap으로 변경을 해주면 된다.
 
 ```shell
-oc apply -n openshift-config -f - << EOF
+oc apply -n openshift-config -f - &lt;&lt; EOF
 apiVersion: config.openshift.io/v1
 kind: OAuth
 metadata:
@@ -563,28 +563,28 @@ spec:
       ca:
         name: ca-config-map
       insecure: false
-      url: "ldaps://tanzu-dns.tkg.io/ou=tanzu,dc=tkg,dc=io?sAMAccountName"
+      url: &#34;ldaps://tanzu-dns.tkg.io/ou=tanzu,dc=tkg,dc=io?sAMAccountName&#34;
 EOF
 ```
 
-{{< figure src="/images/openshift/12-1.png" title="GUI 접속" >}}
+{{&lt; figure src=&#34;/images/openshift/12-1.png&#34; title=&#34;GUI 접속&#34; &gt;}}
  
  ### 12.3. 수동 GROUP-SYNC
 
  ```shell
  vi ldapsync.yaml
 
- # LDAP is case insensitive, but OpenShift is not, so all LDAP parameters have been converted to lower case as per https://access.redhat.com/solutions/3232051 (under "Case Sensitivity")
+ # LDAP is case insensitive, but OpenShift is not, so all LDAP parameters have been converted to lower case as per https://access.redhat.com/solutions/3232051 (under &#34;Case Sensitivity&#34;)
 kind: LDAPSyncConfig
 apiVersion: v1
 url: ldaps://tanzu-dns.tkg.io:636
 insecure: false
-ca: "/data/cert/ldapserver.pem"                       ### ldaps 인증서의 실제 위치 / 파일
+ca: &#34;/data/cert/ldapserver.pem&#34;                       ### ldaps 인증서의 실제 위치 / 파일
 bindDN: cn=administrator,cn=users,dc=tkg,dc=io
-bindPassword: "Password"
+bindPassword: &#34;Password&#34;
 rfc2307:
     groupsQuery:
-        baseDN: "ou=tanzu,dc=tkg,dc=io"
+        baseDN: &#34;ou=tanzu,dc=tkg,dc=io&#34;
         scope: sub
         filter: (objectClass=group)
         derefAliases: never
@@ -594,7 +594,7 @@ rfc2307:
     groupNameAttributes: [ cn ]
     groupMembershipAttributes: [ member ]
     usersQuery:
-        basedn: "ou=tanzu,dc=tkg,dc=io"
+        basedn: &#34;ou=tanzu,dc=tkg,dc=io&#34;
         scope: sub
         derefAliases: never
         pageSize: 0
@@ -617,7 +617,7 @@ oc adm policy remove-cluster-role-from-group cluster-admin tkg
 
 ```
 
-{{< figure src="/images/openshift/12-2.png" title="GROUP 확인 및 적용" >}}
+{{&lt; figure src=&#34;/images/openshift/12-2.png&#34; title=&#34;GROUP 확인 및 적용&#34; &gt;}}
 
 ### 12.4 CronJob Group-Sync
 
@@ -625,17 +625,17 @@ oc adm policy remove-cluster-role-from-group cluster-admin tkg
 
 ```shell
 ## password 이름 확인
-password=`oc get secret -n openshift-authentication | grep v4-0-config-user-idp-0 | awk '{print $1}'`
+password=`oc get secret -n openshift-authentication | grep v4-0-config-user-idp-0 | awk &#39;{print $1}&#39;`
 oc get secret -n openshift-authentication $password  -o jsonpath={.data}
 
 ## 인증서 이름 확인
-ca=`oc get cm -n openshift-authentication | grep v4-0-config-user | awk '{print $1}'`
-oc get cm -n openshift-authentication $ca -o jsonpath={.items[0].data} | awk '{print $1}'
+ca=`oc get cm -n openshift-authentication | grep v4-0-config-user | awk &#39;{print $1}&#39;`
+oc get cm -n openshift-authentication $ca -o jsonpath={.items[0].data} | awk &#39;{print $1}&#39;
 ```
 
 그리고 계정 및 권한 설정을 해준다.
 ```shell
-cat << EOF | tee ldap-sync-sa-clusterrole.yaml
+cat &lt;&lt; EOF | tee ldap-sync-sa-clusterrole.yaml
 kind: ServiceAccount
 apiVersion: v1
 metadata:
@@ -662,7 +662,7 @@ metadata:
     app: cronjob-ldap-group-sync
 rules:
   - apiGroups:
-      - ''
+      - &#39;&#39;
       - user.openshift.io
     resources:
       - groups
@@ -694,7 +694,7 @@ LDAP의 자동 Sync를 구성하기 위해 config-map 및 job 설정
 witelist / balcklist의 경우 ldapsearch에서 distinguishedName: CN=test test,OU=tanzu,DC=tkg,DC=io 이부분의 이름으로 넣어야함. , 만약 별도로 witelist / blacklist가 필요 없으면 제거 해도 된다.
 
 ```shell
-cat << EOF | tee ldap-sync-cm-cron.yaml
+cat &lt;&lt; EOF | tee ldap-sync-cm-cron.yaml
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -709,12 +709,12 @@ data:
     url: ldaps://tanzu-dns.tkg.io
     bindDN: cn=administrator,cn=users,dc=tkg,dc=io
     bindPassword:
-      file: "/etc/secrets/bindPassword"                   ## 위에서 설명한 secret, cronjob에서 voluemount 후 적용
+      file: &#34;/etc/secrets/bindPassword&#34;                   ## 위에서 설명한 secret, cronjob에서 voluemount 후 적용
     insecure: false
-    ca: "/ldap-sync/ca/ca.crt"                            ## 위에서 설명한 configmap, cronjob에서 voluemount 후 적용
+    ca: &#34;/ldap-sync/ca/ca.crt&#34;                            ## 위에서 설명한 configmap, cronjob에서 voluemount 후 적용
     rfc2307:
         groupsQuery:
-            baseDN: "ou=tanzu,dc=tkg,dc=io"
+            baseDN: &#34;ou=tanzu,dc=tkg,dc=io&#34;
             scope: sub
             derefAliases: never
             filter: (objectclass=group)
@@ -722,7 +722,7 @@ data:
         groupNameAttributes: [ cn ]
         groupMembershipAttributes: [ member ]
         usersQuery:
-            baseDN: "ou=tanzu,dc=tkg,dc=io"
+            baseDN: &#34;ou=tanzu,dc=tkg,dc=io&#34;
             scope: sub
             derefAliases: never
             pageSize: 0
@@ -763,7 +763,7 @@ metadata:
   labels:
     app: cronjob-ldap-group-sync
 spec:
-  schedule: "*/1 * * * *"
+  schedule: &#34;*/1 * * * *&#34;
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
@@ -780,44 +780,44 @@ spec:
         spec:
           containers:
             - name: ldap-group-sync
-              image: "registry.redhat.io/openshift4/ose-cli:v4.7"
+              image: &#34;registry.redhat.io/openshift4/ose-cli:v4.7&#34;
               command:
-                - "/bin/bash"
-                - "-c"
+                - &#34;/bin/bash&#34;
+                - &#34;-c&#34;
                 - oc adm groups sync --whitelist=/etc/whitelist/whitelist.txt --blacklist=/etc/blacklist/blacklist.txt --sync-config=/etc/config/ldap-group-sync.yaml --confirm
               volumeMounts:
-                - mountPath: "/etc/blacklist"
-                  name: "ldap-sync-volume-blacklist"
-                - mountPath: "/etc/whitelist"
-                  name: "ldap-sync-volume-whitelist"
-                - mountPath: "/etc/config"
-                  name: "ldap-sync-volume"
-                - mountPath: "/etc/secrets"
-                  name: "ldap-bind-password"
-                - mountPath: "/ldap-sync/ca"
-                  name: "ldap-sync-ca"
+                - mountPath: &#34;/etc/blacklist&#34;
+                  name: &#34;ldap-sync-volume-blacklist&#34;
+                - mountPath: &#34;/etc/whitelist&#34;
+                  name: &#34;ldap-sync-volume-whitelist&#34;
+                - mountPath: &#34;/etc/config&#34;
+                  name: &#34;ldap-sync-volume&#34;
+                - mountPath: &#34;/etc/secrets&#34;
+                  name: &#34;ldap-bind-password&#34;
+                - mountPath: &#34;/ldap-sync/ca&#34;
+                  name: &#34;ldap-sync-ca&#34;
           volumes:
-            - name: "ldap-sync-volume-blacklist"                  ## volumes을 모두 연결하여 assign
+            - name: &#34;ldap-sync-volume-blacklist&#34;                  ## volumes을 모두 연결하여 assign
               configMap:
-                name: "ldap-group-syncer-blacklist"
-            - name: "ldap-sync-volume-whitelist"                  ## volumes을 모두 연결하여 assign
+                name: &#34;ldap-group-syncer-blacklist&#34;
+            - name: &#34;ldap-sync-volume-whitelist&#34;                  ## volumes을 모두 연결하여 assign
               configMap:
-                name: "ldap-group-syncer-whitelist"           
-            - name: "ldap-sync-volume"                            ## volumes을 모두 연결하여 assign
+                name: &#34;ldap-group-syncer-whitelist&#34;           
+            - name: &#34;ldap-sync-volume&#34;                            ## volumes을 모두 연결하여 assign
               configMap:
-                name: "ldap-group-syncer"
-            - name: "ldap-sync-ca"                                ## volumes을 모두 연결하여 assign
+                name: &#34;ldap-group-syncer&#34;
+            - name: &#34;ldap-sync-ca&#34;                                ## volumes을 모두 연결하여 assign
               configMap:
-                name: "v4-0-config-user-idp-0-ca" 
-            - name: "ldap-bind-password"                          ## volumes을 모두 연결하여 assign
+                name: &#34;v4-0-config-user-idp-0-ca&#34; 
+            - name: &#34;ldap-bind-password&#34;                          ## volumes을 모두 연결하여 assign
               secret:
-                secretName: "v4-0-config-user-idp-0-bind-password"
-          restartPolicy: "Never"
+                secretName: &#34;v4-0-config-user-idp-0-bind-password&#34;
+          restartPolicy: &#34;Never&#34;
           terminationGracePeriodSeconds: 30
           activeDeadlineSeconds: 500
-          dnsPolicy: "ClusterFirst"
-          serviceAccountName: "ldap-group-syncer"
-          serviceAccount: "ldap-group-syncer"
+          dnsPolicy: &#34;ClusterFirst&#34;
+          serviceAccountName: &#34;ldap-group-syncer&#34;
+          serviceAccount: &#34;ldap-group-syncer&#34;
 EOF
 ```
 
@@ -833,4 +833,10 @@ oc adm policy add-cluster-role-to-group cluster-admin tkg
 oc adm policy remove-cluster-role-from-group cluster-admin tkg
 ```
 
-{{< figure src="/images/openshift/12-3.png" title="자동 sync 구성 완료" >}}
+{{&lt; figure src=&#34;/images/openshift/12-3.png&#34; title=&#34;자동 sync 구성 완료&#34; &gt;}}
+
+---
+
+> Author: Dokyung  
+> URL: https://huntedhappy.github.io/ko/openshift/  
+

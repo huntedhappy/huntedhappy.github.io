@@ -1,16 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>tanzu - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/tanzu/</link>
-        <description>tanzu - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 17 Sep 2023 00:29:40 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation VisualStudioCode in TAP</title>
-    <link>https://huntedhappy.github.io/ko/tap-ide/</link>
-    <pubDate>Sun, 17 Sep 2023 00:29:40 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tap-ide/</guid>
-    <description><![CDATA[<p>TANZU TAP 1.6 이전 버전에서는 윈도우에서 VisualStudioCode에서 라이브 업데이트를 구성하기 위해서는 Docker Desktop이 필요 했다.</p>
+  <channel>
+    <title>tanzu - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/tanzu/</link>
+    <description>tanzu - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 17 Sep 2023 00:29:40 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation VisualStudioCode in TAP</title>
+  <link>https://huntedhappy.github.io/ko/tap-ide/</link>
+  <pubDate>Sun, 17 Sep 2023 00:29:40 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tap-ide/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tap-ide/index.png" alt="The Documentation VisualStudioCode in TAP" title="TANZU &amp; VisualStudioCode" referrerpolicy="no-referrer"/></div><p>TANZU TAP 1.6 이전 버전에서는 윈도우에서 VisualStudioCode에서 라이브 업데이트를 구성하기 위해서는 Docker Desktop이 필요 했다.</p>
 <p>하지만 TANZU TAP 1.6 버전부터는 Docker Desktop이 필요 없이 클러스터를 통해서 바로 테스트를 하고 이미지를 하버에 업로드가 가능하다.</p>
 <p>** 정확히 TAP의 문제였는지 TILT의 문제였는지는 모르지만, 아마도 TILT에서는 기존 Docker Desktop이 무조건 필요 했던거 보면 어쩌면 TANZU TAP의 버전 문제는 아닐 수도 있다. 중요한건 지금은 필요없다는 것이다.</p>
 <p>신규로 나온 Local Source Proxy의 기능을 통해서 가능 한것으로 보인다.</p>
@@ -24,12 +23,12 @@
 </blockquote>
 <p>** 위에 말은 반은 맞고 반은 틀린거 같다. 윈도우에서는 레지스트리의 자격증명을 안넣으면 에러가 난다.</p>
 <p>Tilt 파일을 생성 할 때 아래와 같이 &ndash;source-image를 없어도 된다고 나와 있지만 실제적으로 해보면 리눅스는 필요 없으나, 윈도우에서는 안된다.</p>
-<figure><figcaption>
+<figure><img src="/images/tap-ide/1-1.png"/><figcaption>
             <h4>LSP 구조</h4>
         </figcaption>
 </figure>
 
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -78,10 +77,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">k8s_resource<span class="o">(</span><span class="s1">&#39;tanzu-java-web-app-test&#39;</span>, <span class="nv">port_forwards</span><span class="o">=[</span><span class="s2">&#34;8080:8080&#34;</span><span class="o">]</span>,
 </span></span><span class="line"><span class="cl">            <span class="nv">extra_pod_selectors</span><span class="o">=[{</span><span class="s1">&#39;carto.run/workload-name&#39;</span>: <span class="s1">&#39;tanzu-java-web-app-test&#39;</span>, <span class="s1">&#39;app.kubernetes.io/component&#39;</span>: <span class="s1">&#39;run&#39;</span><span class="o">}])</span>
-</span></span><span class="line"><span class="cl">allow_k8s_contexts<span class="o">(</span><span class="s1">&#39;iterate-cluster-admin@iterate-cluster&#39;</span><span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">allow_k8s_contexts<span class="o">(</span><span class="s1">&#39;iterate-cluster-admin@iterate-cluster&#39;</span><span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -132,11 +130,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">k8s_resource<span class="o">(</span><span class="s1">&#39;tanzu-java-web-app-test&#39;</span>, <span class="nv">port_forwards</span><span class="o">=[</span><span class="s2">&#34;8080:8080&#34;</span><span class="o">]</span>,
 </span></span><span class="line"><span class="cl">            <span class="nv">extra_pod_selectors</span><span class="o">=[{</span><span class="s1">&#39;carto.run/workload-name&#39;</span>: <span class="s1">&#39;tanzu-java-web-app-test&#39;</span>, <span class="s1">&#39;app.kubernetes.io/component&#39;</span>: <span class="s1">&#39;run&#39;</span><span class="o">}])</span>
-</span></span><span class="line"><span class="cl">allow_k8s_contexts<span class="o">(</span><span class="s1">&#39;iterate-cluster-admin@iterate-cluster&#39;</span><span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">allow_k8s_contexts<span class="o">(</span><span class="s1">&#39;iterate-cluster-admin@iterate-cluster&#39;</span><span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>LSP의 설정이 제대로 들어 갔는지 확인이 필요 하다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -155,11 +152,10 @@
 </span></span><span class="line"><span class="cl">reachable: <span class="nb">true</span>
 </span></span><span class="line"><span class="cl">upstream_authenticated: <span class="nb">true</span>
 </span></span><span class="line"><span class="cl">overall_health: <span class="nb">true</span>
-</span></span><span class="line"><span class="cl">message: All health checks passed
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">message: All health checks passed</span></span></code></pre></td></tr></table>
 </div>
 </div><p>강화 된 것은 IDE 환경에서 어플리케이션의 모니터링을 할 수 있다는 점이다.</p>
-<figure><figcaption>
+<figure><img src="/images/tap-ide/2-1.png"/><figcaption>
             <h4>Visual Studio Code에서 Application Monitoring</h4>
         </figcaption>
 </figure>
@@ -167,18 +163,18 @@
 ]]></description>
 </item>
 <item>
-    <title>The Documentation TAP &amp; JENKINS</title>
-    <link>https://huntedhappy.github.io/ko/tap-jenkins/</link>
-    <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tap-jenkins/</guid>
-    <description><![CDATA[<h2 id="out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer">Out of the Box Supply Chain with testing on Jenkins for Supply Chain Choreographer</h2>
-<p>기본적으로 TAP에서는 TEKTON을 사용하여 Source Testing을 제공 하고 있다. 하지만 별도로 Jenkins를 연동 해서 Source Testing을 진행 해보고 싶어 할 수 도 있을 거 같다.</p>
+  <title>The Documentation TAP &amp; JENKINS</title>
+  <link>https://huntedhappy.github.io/ko/tap-jenkins/</link>
+  <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tap-jenkins/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tap-jenkins/index.png" alt="The Documentation TAP &amp; JENKINS" title="TANZU &amp; JENKINS" referrerpolicy="no-referrer"/></div><h2 id="out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer" class="heading-element">
+  <a href="#out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer" class="heading-mark"></a>Out of the Box Supply Chain with testing on Jenkins for Supply Chain Choreographer</h2><p>기본적으로 TAP에서는 TEKTON을 사용하여 Source Testing을 제공 하고 있다. 하지만 별도로 Jenkins를 연동 해서 Source Testing을 진행 해보고 싶어 할 수 도 있을 거 같다.</p>
 <p>그래서 TAP에서는 Jenkins와 연동을 제공 하고 있다.</p>
-<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/scc-ootb-supply-chain-testing-with-jenkins.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> with jenkins</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/scc-ootb-supply-chain-testing-with-jenkins.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> with jenkins</a></p>
 <p>사전구성으로 Build Cluster에 Out of the Box Supply Chain With Testing or Out of the Box Supply Chain With Testing and Scanning로 supply_chain 구성이 필요 하다.</p>
 <p>사전에 Jenkins의 정보를 넣기 위해 Secret을 생성 해 준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -205,11 +201,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">  username: USERNAME # jenkins username
 </span></span></span><span class="line"><span class="cl"><span class="s">  password: PASSWORD # jenkins password
 </span></span></span><span class="line"><span class="cl"><span class="s">  ca-cert: (Optional) PEM-CA-CERT # PEM encoded certificate
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 Out of the Box Jenkins를 사용하기 위해 Jenkin pipeline을 설정이 필요 합니다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -294,8 +289,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.job-name)
 </span></span></span><span class="line"><span class="cl"><span class="s">      - name: job-params
 </span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.job-params)
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> 
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Tekton pipeline은 아래와 같이 이루어 져 있다.</p>
 <p>개발자는 아래와 같이 매개변수를 사용하여 Tekton pipeline을 생성 해야 합니다.</p>
@@ -310,7 +304,7 @@ Tasks:</li>
 <li>jenkins-task, required: 설정된 ClusterTask중 Jenkins작업을 트리거 하기 위해 실행, kubeclt get clustertask로 이름을 확인 할 수 있다.</li>
 </ul>
 <p>그리고 아래와 같이 Jenkinsfile을 생성 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -395,8 +389,7 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">    }
 </span></span></span><span class="line"><span class="cl"><span class="s">  }
 </span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> 
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> </span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음 필드는 Jenkins 작업 정의에도 필요합니다.</p>
 <ul>
@@ -406,7 +399,7 @@ Tasks:</li>
 <p>Jenkins에 파라미터를 제공하기 위해 GIT_URL을 작성 해준다.</p>
 <p>** 현재 1.5.2 까지 GIT_URL 및 GIT_REVISION이 JENKINS로 전달 되지 않는 것으로 보인다. 하여 Jenkins파일에 파라미터를 추가를 해주어야 한다.</p>
 <p>이렇게 설정 한 후에 Workload를 실행을 하게 되면 실제적으로 Jenkins를 통해 소스테스트가 이루어지는 것을 확인 할 수 있다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -565,16 +558,15 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">      ref:
 </span></span></span><span class="line"><span class="cl"><span class="s">       branch: main
 </span></span></span><span class="line"><span class="cl"><span class="s">      url: https://gitlab.huntedhappy.kro.kr/tanzu/jenkins-tanzu-java-web-app
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="result">RESULT</h2>
-<p><figure><figcaption>
+</div><h2 id="result" class="heading-element">
+  <a href="#result" class="heading-mark"></a>RESULT</h2><p><figure><img src="/images/tap-jenkins/1-1.png"/><figcaption>
             <h4>Jenkins에서 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap-jenkins/1-2.png"/><figcaption>
             <h4>TAP에서 Jenkins를 통해 배포 확인</h4>
         </figcaption>
 </figure>
@@ -582,50 +574,50 @@ Tasks:</li>
 ]]></description>
 </item>
 <item>
-    <title>The Documentation Sops</title>
-    <link>https://huntedhappy.github.io/ko/sops/</link>
-    <pubDate>Tue, 20 Jun 2023 19:22:18 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/sops/</guid>
-    <description><![CDATA[<h2 id="vmware-tanzu-sops-or-eso">VMware TANZU SOPS or ESO?</h2>
-<p>TANZU APPLICATION PLATFORM을 설치 할 때 GITOPS로 두가지 방식으로 설치 할 수 있다. SOPS 및 ESO 방식으로 설치 할 수 있으며 현재는 베타 버전이며 프로덕션 환경에서는 권장 하지 않는다.</p>
-<figure><figcaption>
+  <title>The Documentation Sops</title>
+  <link>https://huntedhappy.github.io/ko/sops/</link>
+  <pubDate>Tue, 20 Jun 2023 19:22:18 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/sops/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/sops/index.png" alt="The Documentation Sops" title="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)" referrerpolicy="no-referrer"/></div><h2 id="vmware-tanzu-sops-or-eso" class="heading-element">
+  <a href="#vmware-tanzu-sops-or-eso" class="heading-mark"></a>VMware TANZU SOPS or ESO?</h2><p>TANZU APPLICATION PLATFORM을 설치 할 때 GITOPS로 두가지 방식으로 설치 할 수 있다. SOPS 및 ESO 방식으로 설치 할 수 있으며 현재는 베타 버전이며 프로덕션 환경에서는 권장 하지 않는다.</p>
+<figure><img src="/images/sops/1-1.png"/><figcaption>
             <h4>warning</h4>
         </figcaption>
 </figure>
 
 <p>ESO의 경우 외부에 AWS Secrets Manager를 통해서 배포 할 수 있기 때문에 이 문서에서는 SOPS방식으로 배포를 할 예정이다.</p>
-<p><figure><figcaption>
+<p><figure><img src="/images/sops/1-2.png"/><figcaption>
             <h4>SOPS</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/sops/1-3.png"/><figcaption>
             <h4>ESO</h4>
         </figcaption>
 </figure>
 </p>
-<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-reference.html#choosing-sops-or-eso" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VMware TANZU GITOPS</a></p>
-<h2 id="prerequisites">Prerequisites</h2>
-<ul>
-<li>SOPS CLI to view and edit SOPS encrypted files. To install the SOPS CLI, see<a href="https://github.com/mozilla/sops/releases" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> SOPS documentation</a>in GitHub.</li>
-<li>Age CLI to create an ecryption key used to encrypt and decrypt sensitive data. To install the Age CLI, see<a href="https://github.com/FiloSottile/age#installation" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> age documentation </a>in GitHub.</li>
-<li>Completed the <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/prerequisites.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Prerequisites.</a></li>
-<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-tanzu-cli.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Accepted Tanzu Application Platform EULA and installed Tanzu CLI</a> with any required plug-ins.</li>
-<li>Installed <a href="https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.5/cluster-essentials/deploy.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Cluster Essentials for Tanzu.</a></li>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-reference.html#choosing-sops-or-eso"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> VMware TANZU GITOPS</a></p>
+<h2 id="prerequisites" class="heading-element">
+  <a href="#prerequisites" class="heading-mark"></a>Prerequisites</h2><ul>
+<li>SOPS CLI to view and edit SOPS encrypted files. To install the SOPS CLI, see<a href="https://github.com/mozilla/sops/releases"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> SOPS documentation</a>in GitHub.</li>
+<li>Age CLI to create an ecryption key used to encrypt and decrypt sensitive data. To install the Age CLI, see<a href="https://github.com/FiloSottile/age#installation"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> age documentation </a>in GitHub.</li>
+<li>Completed the <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/prerequisites.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Prerequisites.</a></li>
+<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-tanzu-cli.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Accepted Tanzu Application Platform EULA and installed Tanzu CLI</a> with any required plug-ins.</li>
+<li>Installed <a href="https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.5/cluster-essentials/deploy.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Cluster Essentials for Tanzu.</a></li>
 </ul>
-<h2 id="relocate-images-to-a-registry">Relocate images to a registry</h2>
-<p>탄주 네트워크에 있는 도커 이미지들을 내부에 내부 레지스트리에 저장 하는 것을 권장 한다. 탄주 네트워크 레지스트리를 사용 할 시 가동시간을 보장 하지 않기 때문이다.
+<h2 id="relocate-images-to-a-registry" class="heading-element">
+  <a href="#relocate-images-to-a-registry" class="heading-mark"></a>Relocate images to a registry</h2><p>탄주 네트워크에 있는 도커 이미지들을 내부에 내부 레지스트리에 저장 하는 것을 권장 한다. 탄주 네트워크 레지스트리를 사용 할 시 가동시간을 보장 하지 않기 때문이다.
 지원되는 레지스트리는 Harbor, Azure Container Registry, Google Container Registry 및 Quay.io를 제공하고 있습니다. 설정 방법을 알아 보려면 다음 문서를 참조 하면 된다.</p>
 <ul>
-<li><a href="https://goharbor.io/docs/2.5.0/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Harbor documentation</a></li>
-<li><a href="https://cloud.google.com/container-registry/docs" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Google Container Registry documentation</a></li>
-<li><a href="https://docs.projectquay.io/welcome.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Quay.io documentation</a></li>
+<li><a href="https://goharbor.io/docs/2.5.0/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Harbor documentation</a></li>
+<li><a href="https://cloud.google.com/container-registry/docs"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Google Container Registry documentation</a></li>
+<li><a href="https://docs.projectquay.io/welcome.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Quay.io documentation</a></li>
 </ul>
 <ol>
 <li>environment variables를 설정 한다.</li>
 </ol>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -650,13 +642,12 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="o">=</span>MY-REGISTRY-PASSWORD
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="o">=</span>MY-REGISTRY
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>VERSION-NUMBER
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REPO</span><span class="o">=</span>TARGET-REPOSITORY
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REPO</span><span class="o">=</span>TARGET-REPOSITORY</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="2">
-<li><a href="https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.5/cluster-essentials/deploy.html#optionally-install-clis-onto-your-path" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Install the Carvel tool imgpkg CLI.</a></li>
+<li><a href="https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.5/cluster-essentials/deploy.html#optionally-install-clis-onto-your-path"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Install the Carvel tool imgpkg CLI.</a></li>
 </ol>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -669,12 +660,11 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">imgpkg tag list -i registry.tanzu.vmware.com/tanzu-application-platform/tap-packages <span class="p">|</span> sort -V
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 이미지 버전을 내부 레지스트리로 복사</span>
-</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/<span class="si">${</span><span class="nv">INSTALL_REPO</span><span class="si">}</span>/tap-packages
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/<span class="si">${</span><span class="nv">INSTALL_REPO</span><span class="si">}</span>/tap-packages</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="create-a-new-git-repository">Create a new Git repository</h3>
-<p>GIT에 프로젝트를 생성 한다.</p>
-<div class="highlight"><div class="chroma">
+</div><h3 id="create-a-new-git-repository" class="heading-element">
+  <a href="#create-a-new-git-repository" class="heading-mark"></a>Create a new Git repository</h3><p>GIT에 프로젝트를 생성 한다.</p>
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -687,18 +677,17 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$HOME</span>/tap-gitops
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">git init
-</span></span><span class="line"><span class="cl">git remote add origin git@github.com:my-organization/tap-gitops.git
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">git remote add origin git@github.com:my-organization/tap-gitops.git</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="download-and-unpack-tanzu-gitops-reference-implementation-ri">Download and unpack Tanzu GitOps Reference Implementation (RI)</h3>
-<p>Tanzu Network에서 Tanzu GitOps Reference Implementation(RI)을 다운로드 받는다.
-<figure><figcaption>
+</div><h3 id="download-and-unpack-tanzu-gitops-reference-implementation-ri" class="heading-element">
+  <a href="#download-and-unpack-tanzu-gitops-reference-implementation-ri" class="heading-mark"></a>Download and unpack Tanzu GitOps Reference Implementation (RI)</h3><p>Tanzu Network에서 Tanzu GitOps Reference Implementation(RI)을 다운로드 받는다.
+<figure><img src="/images/sops/1-4.png"/><figcaption>
             <h4>RI를 Download 받는다</h4>
         </figcaption>
 </figure>
 </p>
 <p>다운로드 받은 RI를 내부 GIT에 업로드 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -713,12 +702,11 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$HOME</span>/tap-gitops
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&#34;Initialize Tanzu GitOps RI&#34;</span>
-</span></span><span class="line"><span class="cl">git push -u origin
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">git push -u origin</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="create-cluster-configuration">Create cluster configuration</h3>
-<p>CLUSTER-NAME은 현재 내가 설정한 CLUSTER를 선택한다</p>
-<div class="highlight"><div class="chroma">
+</div><h3 id="create-cluster-configuration" class="heading-element">
+  <a href="#create-cluster-configuration" class="heading-mark"></a>Create cluster configuration</h3><p>CLUSTER-NAME은 현재 내가 설정한 CLUSTER를 선택한다</p>
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -739,11 +727,10 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## Git에 업로드 </span>
 </span></span><span class="line"><span class="cl">git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&#34;Add full-tap-cluster&#34;</span>
-</span></span><span class="line"><span class="cl">git push
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">git push</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="preparing-sensitive-tanzu-application-platform-values">Preparing sensitive Tanzu Application Platform values</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="preparing-sensitive-tanzu-application-platform-values" class="heading-element">
+  <a href="#preparing-sensitive-tanzu-application-platform-values" class="heading-mark"></a>Preparing sensitive Tanzu Application Platform values</h3><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -940,11 +927,10 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">SOPS_AGE_RECIPIENTS</span><span class="o">=</span><span class="k">$(</span>cat key.txt <span class="p">|</span> grep <span class="s2">&#34;# public key: &#34;</span> <span class="p">|</span> sed <span class="s1">&#39;s/# public key: //&#39;</span><span class="k">)</span>
 </span></span><span class="line"><span class="cl">sops --encrypt tap-sensitive-values.yaml &gt; tap-sensitive-values.sops.yaml
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">mv tap-sensitive-values.sops.yaml <span class="nv">$HOME</span>/tap-gitops/clusters/full-tap-cluster/cluster-config/values/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">mv tap-sensitive-values.sops.yaml <span class="nv">$HOME</span>/tap-gitops/clusters/full-tap-cluster/cluster-config/values/</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="generate-tanzu-application-platform-installation-and-tanzu-sync-configuration">Generate Tanzu Application Platform installation and Tanzu Sync configuration</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="generate-tanzu-application-platform-installation-and-tanzu-sync-configuration" class="heading-element">
+  <a href="#generate-tanzu-application-platform-installation-and-tanzu-sync-configuration" class="heading-mark"></a>Generate Tanzu Application Platform installation and Tanzu Sync configuration</h3><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -975,11 +961,10 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">./tanzu-sync/scripts/configure.sh
 </span></span><span class="line"><span class="cl">git add cluster-config/ tanzu-sync/
 </span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Configure install of TAP 1.5.0&#34;</span>
-</span></span><span class="line"><span class="cl">git push
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">git push</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="deploy-tanzu-sync">Deploy Tanzu Sync</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="deploy-tanzu-sync" class="heading-element">
+  <a href="#deploy-tanzu-sync" class="heading-mark"></a>Deploy Tanzu Sync</h3><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -988,13 +973,12 @@ Tasks:</li>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$HOME</span>/tap-gitops/clusters/full-tap-cluster
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">./tanzu-sync/scripts/deploy.sh
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">./tanzu-sync/scripts/deploy.sh</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="결과">결과</h3>
-<p>완료가 되면 자동으로 모든게 다 설치가 되는 것을 확인 할 수 있지만.. 솔직히 불편하다.. 그냥 설치하는게 편한거 같은 느낌은..
+</div><h3 id="결과" class="heading-element">
+  <a href="#%ea%b2%b0%ea%b3%bc" class="heading-mark"></a>결과</h3><p>완료가 되면 자동으로 모든게 다 설치가 되는 것을 확인 할 수 있지만.. 솔직히 불편하다.. 그냥 설치하는게 편한거 같은 느낌은..
 아직 베타이기 때문일지 모른다.
-<figure><figcaption>
+<figure><img src="/images/sops/1-5.png"/><figcaption>
             <h4>Result</h4>
         </figcaption>
 </figure>
@@ -1002,19 +986,19 @@ Tasks:</li>
 ]]></description>
 </item>
 <item>
-    <title>The Documentation IPAM on TANZU</title>
-    <link>https://huntedhappy.github.io/ko/tanzu-ipam/</link>
-    <pubDate>Wed, 24 May 2023 01:42:56 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tanzu-ipam/</guid>
-    <description><![CDATA[<h1 id="1--ipam-on-tanzu">1.  IPAM ON TANZU</h1>
-<p>탄주는 기본적으로 DHCP 서버가 필요 하다. K8S 환경을 유지 하기 위해 VM의 라이프 사이클을 제공 하고 있기 때문이다. 그렇기 때문에 VM에 HANG이 걸리거나, 삭제가 되면 자동적으로 복구를 하게 된다. K8S에서 POD를 관리 하는 것처럼 탄주는 Master, Worker Node를 하나의 POD로 인식을 하게 설계를 한게 아닌가 싶다. 하지만 이런 자동화 시스템으로 인하여 STATIC하게 IP를 넣을 수도 없으며(DHCP서버를 통해 배포 후 IP를 변경 할 수 있겠지만 권장 하지 않는다.) 무조건적으로 DHCP 서버가 필요 하기 때문에 설치시 많은 어려움이 있을 수 있다. 또한 DHCP 서버를 운영 함으로 인해서 불필요한 자원을 사용하게 될 수도 있다.</p>
+  <title>The Documentation IPAM on TANZU</title>
+  <link>https://huntedhappy.github.io/ko/tanzu-ipam/</link>
+  <pubDate>Wed, 24 May 2023 01:42:56 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tanzu-ipam/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tanzu-ipam/ipam.png" alt="The Documentation IPAM on TANZU" title="IPAM on TANZU" referrerpolicy="no-referrer"/></div><h1 id="1--ipam-on-tanzu" class="heading-element">
+  <a href="#1--ipam-on-tanzu" class="heading-mark"></a>1.  IPAM ON TANZU</h1><p>탄주는 기본적으로 DHCP 서버가 필요 하다. K8S 환경을 유지 하기 위해 VM의 라이프 사이클을 제공 하고 있기 때문이다. 그렇기 때문에 VM에 HANG이 걸리거나, 삭제가 되면 자동적으로 복구를 하게 된다. K8S에서 POD를 관리 하는 것처럼 탄주는 Master, Worker Node를 하나의 POD로 인식을 하게 설계를 한게 아닌가 싶다. 하지만 이런 자동화 시스템으로 인하여 STATIC하게 IP를 넣을 수도 없으며(DHCP서버를 통해 배포 후 IP를 변경 할 수 있겠지만 권장 하지 않는다.) 무조건적으로 DHCP 서버가 필요 하기 때문에 설치시 많은 어려움이 있을 수 있다. 또한 DHCP 서버를 운영 함으로 인해서 불필요한 자원을 사용하게 될 수도 있다.</p>
 <p>지금 작성 하는 부분은 DHCP서버를 완전히 배제 할 수는 없다. 다만 메니저 클러스터를 배포 한 후 CLUSTER의 IP는 관리 클러스터에서 관리를 할 수 있게 설정을 할 수 있다. 두가지 방법이 있을 수 있는대 처음은 YTT를 구성함으로 인해서 처음부터 클러스터가 배포 될 경우 IP를 할당 받을 수 있게 할 수 도 있으며, 두번째로는 클러스터를 DHCP서버를 배포 후 IPAM을 사용하게 구성 할 수 있다.</p>
 <p>당연히 YTT로 구성을 하여서 처음부터 배포를 하는 것이 권장을 할 것이다. 하지만 한편으로는 걱정도 된다. 이렇게 구성 함으로 인해서 업그레이드가 잘 될지.. (추후에 업그레이드도 진행을 해봐야 할 것이다&hellip;)</p>
 <p>현재 작성하는 방법은 2번째 방법으로 진행 할 예정이다.
 방법은 간단하다. 우선 metal3-io가 무엇을 하는지는 알지 못하지만 해당 github에서 제공을 받아 설치를 해볼 수 있을 것이다.</p>
 <p>아래와 같이 GIT을 다운로드 받은 후 간단하게 실행을 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1023,11 +1007,10 @@ Tasks:</li>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/arbhoj/vsphere-ipam.git
 </span></span><span class="line"><span class="cl">kubectl apply -f vsphere-ipam/metal3ipam/provider-components/infrastructure-components.yaml
-</span></span><span class="line"><span class="cl">kubectl apply -f vsphere-ipam/spectro-ipam-adapter/install.yaml
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl apply -f vsphere-ipam/spectro-ipam-adapter/install.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 아래와 같이 환경 변수를 적용해도 되고, 그냥 입력을 해도 된다. 편한대로 설정을 해보자</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1044,11 +1027,10 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">END_IP</span><span class="o">=</span>10.253.127.130
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CIDR</span><span class="o">=</span><span class="m">24</span>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">GATEWAY</span><span class="o">=</span>10.253.127.1
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">DNS_SERVER</span><span class="o">=</span>10.253.107.2
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">DNS_SERVER</span><span class="o">=</span>10.253.107.2</span></span></code></pre></td></tr></table>
 </div>
 </div><p>위와 같이 환경변수를 적용 후 ippol을 실행 해주자.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1089,23 +1071,21 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">  prefix: 24
 </span></span></span><span class="line"><span class="cl"><span class="s">  gateway: ${GATEWAY}
 </span></span></span><span class="line"><span class="cl"><span class="s">  dnsServers: [${DNS_SERVER}]
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 machine에다가 lables을 붙여주어야 한다. 지금 해도 되고 새로 생성 할 때 해도 된다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl label vspheremachinetemplates run2-control-plane cluster.x-k8s.io/ip-pool-name<span class="o">=</span>run2-pool
-</span></span><span class="line"><span class="cl">kubectl label vspheremachinetemplates run2-worker cluster.x-k8s.io/ip-pool-name<span class="o">=</span>run2-pool
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl label vspheremachinetemplates run2-worker cluster.x-k8s.io/ip-pool-name<span class="o">=</span>run2-pool</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 구성을 하였다고 하더라도 실제적으로 vspheremachinetemplates 여기에 수정을 할 수가 없기 때문에 별도로 새로 생성을 해야 한다. 아마 이 부분은 vmsizing을 변경 할 때 많이 봤을 수도 있다. vmsizing은 이렇게 변경도 가능하지만 왠만하면 nodepool을 사용하여서 변경하는게 좋지 않을가 하는 생각을 잠시 한다.</p>
 <p>아래와 같이 주석 처리 한부분을 추가 및 변경을 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1172,11 +1152,10 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">      storagePolicyName: k8s
 </span></span><span class="line"><span class="cl">      template: /OBDC/vm/temp/photon-3-kube-v1.24.10+vmware.1
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl apply -f run2-control-plan.yaml
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl apply -f run2-control-plan.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>마찬가지로 worker노드도 템플릿을 생성 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1243,23 +1222,21 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">      storagePolicyName: k8s
 </span></span><span class="line"><span class="cl">      template: /OBDC/vm/temp/photon-3-kube-v1.24.10+vmware.1
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl apply -f run2-worker.yaml
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl apply -f run2-worker.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 구성을 하게 되면 준비는 다 된것이다. 이제 master, worker node의 template만 변경 하게 되면 된다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl patch md run2-md-0 --type &#39;json&#39; -p &#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/template/spec/infrastructureRef/name&#34;,&#34;value&#34;:&#34;run2-worker01&#34;}]&#39; --dry-run=client -o yaml | kubectl apply -f -
-</span></span><span class="line"><span class="cl">kubectl patch kcp run2-control-plane --type &#39;json&#39; -p &#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/machineTemplate/infrastructureRef/name&#34;,&#34;value&#34;:&#34;run2-control-plane01&#34;}]&#39; --dry-run=client -o yaml | kubectl apply - f-
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl patch kcp run2-control-plane --type &#39;json&#39; -p &#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/machineTemplate/infrastructureRef/name&#34;,&#34;value&#34;:&#34;run2-control-plane01&#34;}]&#39; --dry-run=client -o yaml | kubectl apply - f-</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 변경을 하게 되면 자동적으로 VM이 삭제 하고 재 생성 되는 것을 확인 할 수 있다.</p>
 <p>그러면 IPPOOL에서 제대로 받아 오는지 확인을 해볼 수 있을 것이다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1280,20 +1257,19 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">    run2-control-plane-wnng6-0:  10.253.127.124
 </span></span><span class="line"><span class="cl">    run2-worker-hcmw8-0:         10.253.127.120
 </span></span><span class="line"><span class="cl">    run2-worker-sgbmb-0:         10.253.127.122
-</span></span><span class="line"><span class="cl">    run2-worker-sjf5m-0:         10.253.127.123
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    run2-worker-sjf5m-0:         10.253.127.123</span></span></code></pre></td></tr></table>
 </div>
 </div><p>DHCP서버를 완전히 안사용하게 할 수는 없겠지만 이 방법으로 어느정도 DHCP서버를 대체 할 수 있지 않을까라는 조심스러운 생각을 해본다.</p>
 ]]></description>
 </item>
 <item>
-    <title>The Dcoumentation TMC</title>
-    <link>https://huntedhappy.github.io/ko/tmc/</link>
-    <pubDate>Fri, 24 Mar 2023 20:51:50 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tmc/</guid>
-    <description><![CDATA[<h2 id="1-tanzu-portfolio">1. TANZU Portfolio</h2>
-<p>RUN &amp; BUILD &amp; MANAGE &amp; LABS로 구성되어 있습니다. RUN의 경우는 멀티 클라우드에서 컨테이너 환경을 제공을 하며 BUILD의 경우 CI/CD 그리고 TAC (골든 이미지) 그리고 saas 형태로 제공하는 manage로 TMC (멀티 클러스터 관리), TSM (서비스 메쉬), TO (모니터링) 그리고 마지막으로 컨테이너를 잘 사용 할 수 있게 App Modernization을 도와주는 LABS 로 구성이 되어 있습니다.</p>
+  <title>The Dcoumentation TMC</title>
+  <link>https://huntedhappy.github.io/ko/tmc/</link>
+  <pubDate>Fri, 24 Mar 2023 20:51:50 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tmc/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tmc/tmc.png" alt="The Dcoumentation TMC" title="Tanzu Community Edition with TAP" referrerpolicy="no-referrer"/></div><h2 id="1-tanzu-portfolio" class="heading-element">
+  <a href="#1-tanzu-portfolio" class="heading-mark"></a>1. TANZU Portfolio</h2><p>RUN &amp; BUILD &amp; MANAGE &amp; LABS로 구성되어 있습니다. RUN의 경우는 멀티 클라우드에서 컨테이너 환경을 제공을 하며 BUILD의 경우 CI/CD 그리고 TAC (골든 이미지) 그리고 saas 형태로 제공하는 manage로 TMC (멀티 클러스터 관리), TSM (서비스 메쉬), TO (모니터링) 그리고 마지막으로 컨테이너를 잘 사용 할 수 있게 App Modernization을 도와주는 LABS 로 구성이 되어 있습니다.</p>
 <blockquote>
 <p>아래 영상은 MANAGE 역할을 하는 TMC, TSM, TO의 대한 설명및 데모를 보여주고 있으므로 해당 솔루션의 대한 정보를 확인 할 수 있습니다.</p>
 </blockquote>
@@ -1302,13 +1278,13 @@ Tasks:</li>
 ]]></description>
 </item>
 <item>
-    <title>The Documentation SupplyChain on TAP</title>
-    <link>https://huntedhappy.github.io/ko/cicd/</link>
-    <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/cicd/</guid>
-    <description><![CDATA[<h2 id="tanzu-supplychain">TANZU SUPPLYCHAIN</h2>
-<blockquote>
+  <title>The Documentation SupplyChain on TAP</title>
+  <link>https://huntedhappy.github.io/ko/cicd/</link>
+  <pubDate>Fri, 24 Mar 2023 19:46:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/cicd/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/cicd/cicd.png" alt="The Documentation SupplyChain on TAP" title="CICD Design And Built" referrerpolicy="no-referrer"/></div><h2 id="tanzu-supplychain" class="heading-element">
+  <a href="#tanzu-supplychain" class="heading-mark"></a>TANZU SUPPLYCHAIN</h2><blockquote>
 <p>아래 내용은 기본적으로 VMWARE의 TAP솔루션을 알고 있다는 가정하에 작성을 하였습니다.</p>
 </blockquote>
 <p>CI/CD는 (Continuous Integration/Continuous Delivery) 지속적인 통합 및 지속적인 배포입니다.</p>
@@ -1331,34 +1307,34 @@ Tasks:</li>
 <li>SLACK을 연동 후 원하는 문자로 알림을 받을 수 있습니다. figure 1-2</li>
 </ol>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-1.png"/><figcaption>
             <h4>1-1 JENKINS PIPELINE</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-2.png"/><figcaption>
             <h4>1-2 SLACK ALERT</h4>
         </figcaption>
 </figure>
 
 <p>위와 같이 JENKINS와 ARGO 를 통해 CI/CD를 구성 할 수 있습니다. 하지만 각각 구성하기 위해서는 JENKINS 그리고 ARGO의 대해서도 이해가 필요 합니다. 또한 K8S에 배포를 하기 위해서는 MANIFEST의 대해서도 이해가 필요 합니다. 가령 Deployment, statfulset, ingress 등등의 대해서도, 이해가 필요 하며 HELM 또는 KUSTOMIZAION을 사용한다면 해당 오픈소스의 대해서도 이해가 필요 합니다.</p>
 <p>TANZU APPLICATION PLATFORM은 여러 이해가 필요 한부분을 workload.yaml을 구성하면 SUPPLYCHAIN을 통해 CI/CD 구성을 사용자가 각각 구성 할 필요 없이 제공을 하고 있습니다.</p>
-<p><a href="https://huntedhappy.github.io/tanzu-application-platform/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
-<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
-<figure><figcaption>
+<p><a href="https://huntedhappy.github.io/tanzu-application-platform/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> TANZU APPLICATION PLATFORM?</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/overview.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> VMWARE TANZU TAP</a></p>
+<figure><img src="/images/supplychain/1-3.png"/><figcaption>
             <h4>1-3 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 
 <p>기본적으로 하나의 클러스터에 3가지중 하나의 SUPPLYCHAIN을 제공 하고 있습니다. DEFULAT의 경우 위의 설명 드린 대로 사용자는 workload.yaml을 적절하게 작성을 하게 되면 CI/CD가 동작 합니다.</p>
 <p>아래 그림과 같이 workload.yaml 실행을 통해 supplychain이 순차적으로 동작을 하게 됩니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-4.png"/><figcaption>
             <h4>1-4 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <p>GUI에서 확인을 해보면 아래와 같습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-5.png"/><figcaption>
             <h4>1-5 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -1366,7 +1342,7 @@ Tasks:</li>
 <p>그리고 두번째의 경우는 추가적으로 TEKTON을 통해 소스코드를 테스팅 할 수 있습니다.
 그리고 마지막의 경우는 GRYPE을 통해 소스 및 이미지에 보안 취약점이 있는지 확인을 합니다.</p>
 <p>GUI에서 확인을 해보면 아래와 같이 취약점에 대해서 확인 할 수 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-6.png"/><figcaption>
             <h4>1-6 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -1375,17 +1351,17 @@ Tasks:</li>
 <p>하지만 위에서 설명 드린 대로 하나의 클러스터에는 3가지중 하나만 사용을 할 수 있습니다. 추가적인 supplychain을 구성 하고 싶을수도 있을 것입니다. 동일한 서비스의 대해서 빠르게 개발을 위해 BASIC으로 구성을 하고 싶을 것이며, QA/STAGING은 소스/이미지에 보안취약점이 있는지 잘 생성을 했는지 확인을 하고 싶을 것입니다. 물론 클러스터를 분리해서 구성 할 수도 있을 것입니다. 하지만 리소스 부족으로 분리를 할 수 없을 경우 하나의 클러스터에 모두 구성이 필요할수도 있을수 있습니다. 만약 그런 상황이 발생하면 3개중에 하나의 supplychain만 사용이 가능하기 때문에 한가지를 선택 해야 합니다. 그렇기 때문에 supplychain을 추가 하는 방법이 필요 할 수 있습니다.</p>
 </blockquote>
 <p>아래와 같이 기본적으로 제공 하고 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-7.png"/><figcaption>
             <h4>1-7 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>SUPPLYCHAIN ADD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>SUPPLYCHAIN ADD<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -1658,20 +1634,19 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">    - worker
 </span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"> ytt -f basic_supply_chain.yaml -v registry.repository<span class="o">=</span>tap/supply_chain -v registry.server<span class="o">=</span>harbor-infra.huntedhappy.kro.kr -v <span class="nv">service_account</span><span class="o">=</span>default -v <span class="nv">git_implementation</span><span class="o">=</span>go-git <span class="p">|</span> kubectl apply -f -</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>위와 같이 추가하게 되면 별도로 SUPPLYCHAIN이 추가 된 것을 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-8.png"/><figcaption>
             <h4>1-8 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
 </p>
 <p>그리고 아래와 같이 다른 workload.yaml과는 다른 SUPPLYCHAIN이 등록 된 것을 확인 할 수 있습니다.
-<figure><figcaption>
+<figure><img src="/images/supplychain/1-9.png"/><figcaption>
             <h4>1-9 SUPPLYCHAIN</h4>
         </figcaption>
 </figure>
@@ -1679,28 +1654,28 @@ Tasks:</li>
 ]]></description>
 </item>
 <item>
-    <title>The Documentation TechDocs in Tap</title>
-    <link>https://huntedhappy.github.io/ko/tap-techdocs/</link>
-    <pubDate>Sat, 04 Mar 2023 22:33:00 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tap-techdocs/</guid>
-    <description><![CDATA[<h2 id="1-간단한-설명">1. 간단한 설명</h2>
-<h3 id="11-backstage">1.1. Backstage?</h3>
-<p>Backstage는 개발자 포털 구축을 위한 오픈 플랫폼입니다. 2년 전 Spotify의 소규모 팀이 내부에서 Backstage를 오픈소스로 출시 후 CNCF SANDBOX에서 현재는 INCUBATING 단계가 되었습니다. CNCF는 프로젝트 성숙도에 따라서 SANDBOX, INCUBATING, GRADUATED 단계로  구성 되어 있습니다.</p>
+  <title>The Documentation TechDocs in Tap</title>
+  <link>https://huntedhappy.github.io/ko/tap-techdocs/</link>
+  <pubDate>Sat, 04 Mar 2023 22:33:00 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tap-techdocs/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tap-techdocs/header.png" alt="The Documentation TechDocs in Tap" title="TANZU &amp; OKTA" referrerpolicy="no-referrer"/></div><h2 id="1-간단한-설명" class="heading-element">
+  <a href="#1-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%84%a4%eb%aa%85" class="heading-mark"></a>1. 간단한 설명</h2><h3 id="11-backstage" class="heading-element">
+  <a href="#11-backstage" class="heading-mark"></a>1.1. Backstage?</h3><p>Backstage는 개발자 포털 구축을 위한 오픈 플랫폼입니다. 2년 전 Spotify의 소규모 팀이 내부에서 Backstage를 오픈소스로 출시 후 CNCF SANDBOX에서 현재는 INCUBATING 단계가 되었습니다. CNCF는 프로젝트 성숙도에 따라서 SANDBOX, INCUBATING, GRADUATED 단계로  구성 되어 있습니다.</p>
 <p>프로젝트의 성숙도는 CNCF 위원회 멤버들에 의해서 결정되며, GRADUATED 단계의 프로젝트가 되기 위해서는 GRADUATED 요건이 필요 하며 위원회 멤버 과반수 이상의 찬성표를 받아야 합니다.</p>
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-1.png"/><figcaption>
             <h4>https://www.cncf.io/projects/</h4>
         </figcaption>
 </figure>
 
 <p>Backstage WebPage를 가게 되면 엄청 많은 기능들을 확인 할 수 있습니다.</p>
-<p><a href="https://backstage.io/docs/overview/what-is-backstage" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Backstage LINK</a></p>
-<h3 id="12-techdocs">1.2. TechDocs?</h3>
-<p>Backstage에 내장되어 있으며 MarkDown 파일을 작성 함으로 Backstage에 문서형 사이트를 얻을 수 있습니다.
-<a href="https://backstage.io/docs/features/techdocs/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Backstage TechDocs 참고링크</a></p>
+<p><a href="https://backstage.io/docs/overview/what-is-backstage"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Backstage LINK</a></p>
+<h3 id="12-techdocs" class="heading-element">
+  <a href="#12-techdocs" class="heading-mark"></a>1.2. TechDocs?</h3><p>Backstage에 내장되어 있으며 MarkDown 파일을 작성 함으로 Backstage에 문서형 사이트를 얻을 수 있습니다.
+<a href="https://backstage.io/docs/features/techdocs/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Backstage TechDocs 참고링크</a></p>
 <p>TANZU의 TAP의 경우 Backstage의 기능으로 구성이 되어 있습니다.</p>
-<h2 id="2-techdocs-설정">2. TechDocs 설정</h2>
-<blockquote>
+<h2 id="2-techdocs-설정" class="heading-element">
+  <a href="#2-techdocs-%ec%84%a4%ec%a0%95" class="heading-mark"></a>2. TechDocs 설정</h2><blockquote>
 <p>사전 구성</p>
 <ol>
 <li>Object Storage : &lsquo;awsS3&rsquo; or &lsquo;googleGcs&rsquo; or &lsquo;azureBlobStorage&rsquo; or &lsquo;openStackSwift&rsquo;</li>
@@ -1711,12 +1686,12 @@ Tasks:</li>
 <blockquote>
 <p>앞서 설명에서 MarkDown를 통해 Tanzu의 TAP에 문서형태를 구성 할 수 있습니다. 사전에 Tanzu Net에서 sample을 다운로드 받을 수 있습니다.</p>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-2.png"/><figcaption>
             <h4>Sample Download</h4>
         </figcaption>
 </figure>
 
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1729,23 +1704,22 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">tar zxvf tap-gui-yelb-catalog.tgz
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## markdown </span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> tap-gui-yelb-catalog
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> tap-gui-yelb-catalog</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>위의 Sample 파일을 다운로드 받은 후 TAP에서 Catalog를 등록 한 후 DOCS를 보면 아래와 같이 오류가 나는 것을 확인 할 수 있습니다.</p>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-3.webp"/><figcaption>
             <h4>Error</h4>
         </figcaption>
 </figure>
 
 <p>TANZU에서 TechDocs 관련 LINK는 아래에서 참고 할 수 있지만, 문서를 보면 어떻게 해야 되는지 잘 알지 못할 수도 있습니다.
-<a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/tap-gui-techdocs-usage.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> TechDocs In TAP 참고링크</a></p>
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/tap-gui-techdocs-usage.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> TechDocs In TAP 참고링크</a></p>
 <blockquote>
 <p>그리고 SAMPLE에서 mkdocs.yml 의 내용을 보면 docs에 index.md, add-docs.md를 읽을 수 있게 구성이 되어져 있는 것을 확인 해 볼 수 있습니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1764,24 +1738,22 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">  - Adding Documentation: add-docs.md
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">plugins:
-</span></span><span class="line"><span class="cl">  - techdocs-core
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  - techdocs-core</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>spotify에서 제공하는 techdocs docker를 다운로드 합니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull spotify/techdocs:v1.1.0
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull spotify/techdocs:v1.1.0</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>테스트 환경에서는 AWS의 S3를 구성 하지 않고, MINIO를 사용하여 구성하였습니다. S3의 계정 정보를 환경변수로 저장합니다. MINIO에 저장 할 수 있는 버킷을 생성 합니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1790,13 +1762,12 @@ Tasks:</li>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_REGION</span><span class="o">=</span>ap-northeast-2
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_REGION</span><span class="o">=</span>ap-northeast-2</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>페이지를 작성 하기 위해 MarkDown을 npx로 웹 관련 파일을 생성 합니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1809,13 +1780,12 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 아래와 같이 ./site 폴더에 파일들이 생성 된 것을 확인 할 수 있습니다.</span>
 </span></span><span class="line"><span class="cl">ls site/
-</span></span><span class="line"><span class="cl">404.html  README.md  add-docs  assets  images  index.html  search  sitemap.xml  sitemap.xml.gz  techdocs_metadata.json
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">404.html  README.md  add-docs  assets  images  index.html  search  sitemap.xml  sitemap.xml.gz  techdocs_metadata.json</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>사전에 Catalog를 등록 하면 DOCS에서 아래처럼 확인이 가능 합니다.</p>
 </blockquote>
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-3.png"/><figcaption>
             <h4>yelb-catalog-info</h4>
         </figcaption>
 </figure>
@@ -1823,15 +1793,14 @@ Tasks:</li>
 <blockquote>
 <p>확인 및 site 파일이 생성이 되면 오브젝트 스토리지에 파일들을 업로드 해줍니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli publish --publisher-type awsS3 --storage-name techdocs --entity default/location/yelb-catalog-info --directory ./site --awsEndpoint https://minio-volumes.huntedhappy.kro.kr --awsS3ForcePathStyle <span class="nb">true</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npx @techdocs/cli publish --publisher-type awsS3 --storage-name techdocs --entity default/location/yelb-catalog-info --directory ./site --awsEndpoint https://minio-volumes.huntedhappy.kro.kr --awsS3ForcePathStyle true</span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/tap-techdocs/1-4.png"/><figcaption>
             <h4>MINIO BUCKET</h4>
         </figcaption>
 </figure>
@@ -1839,7 +1808,7 @@ Tasks:</li>
 <blockquote>
 <p>여기까지 완료가 되면 tap values yaml 파일을 업데이트 합니다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1872,28 +1841,27 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">          endpoint: https://minio-volumes.huntedhappy.kro.kr
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 수정 후 </span>
-</span></span><span class="line"><span class="cl">tanzu package installed update tap -n tap-install --values-file <span class="o">{</span>file.yaml<span class="o">}</span>          
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">tanzu package installed update tap -n tap-install --values-file <span class="o">{</span>file.yaml<span class="o">}</span>          </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>이 후 완료가 되면 아래 처럼 DOCS를 확인 할 수 있습니다. MARKDOWN을 작성 함으로 인해서 TAP에 개발을 한 Application의 대한 설명을 작성 할 수 있습니다.</p>
 </blockquote>
-<p><figure><figcaption>
+<p><figure><img src="/images/tap-techdocs/1-5.png"/><figcaption>
             <h4>DOCS1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-6.png"/><figcaption>
             <h4>DOCS2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-7.png"/><figcaption>
             <h4>DOCS3</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap-techdocs/1-8.png"/><figcaption>
             <h4>DOCS4</h4>
         </figcaption>
 </figure>
@@ -1901,53 +1869,52 @@ Tasks:</li>
 ]]></description>
 </item>
 <item>
-    <title>The Documentation TANZU CUSTOM IMAGE</title>
-    <link>https://huntedhappy.github.io/ko/tanzu-custom-image/</link>
-    <pubDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tanzu-custom-image/</guid>
-    <description><![CDATA[<h2 id="1-tanzu-custom-image">1. Tanzu Custom Image</h2>
-<p>VMware에서 기본적으로 제공하는 이미지외에 별도로 Custom Image를 구성 할 수 있다.</p>
+  <title>The Documentation TANZU CUSTOM IMAGE</title>
+  <link>https://huntedhappy.github.io/ko/tanzu-custom-image/</link>
+  <pubDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tanzu-custom-image/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tanzu-custom-image/custom.png" alt="The Documentation TANZU CUSTOM IMAGE" title="How to Tanzu Custom Image Create" referrerpolicy="no-referrer"/></div><h2 id="1-tanzu-custom-image" class="heading-element">
+  <a href="#1-tanzu-custom-image" class="heading-mark"></a>1. Tanzu Custom Image</h2><p>VMware에서 기본적으로 제공하는 이미지외에 별도로 Custom Image를 구성 할 수 있다.</p>
 <p>호환되는 OS버전은 아래와 같다.
-<figure><figcaption>
+<figure><img src="/images/tanzu-custom-image/1-1.png"/><figcaption>
             <h4>지원 하는 OS Version</h4>
         </figcaption>
 </figure>
 </p>
-<p>1.6 버전 Custom Image 생성 <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.6/vmware-tanzu-kubernetes-grid-16/GUID-build-images-linux.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> 1.6 Custom-Image </a></p>
-<p>2.1 버전 Custom Image 생성 <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/2.1/tkg-deploy-mc-21/mgmt-byoi-linux.html#linux-tkr" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> 2.1 Custom-Image </a></p>
-<p>TANZU 버전별 Sample Download <a href="https://developer.vmware.com/samples" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Sample Downloads </a></p>
+<p>1.6 버전 Custom Image 생성 <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.6/vmware-tanzu-kubernetes-grid-16/GUID-build-images-linux.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> 1.6 Custom-Image </a></p>
+<p>2.1 버전 Custom Image 생성 <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/2.1/tkg-deploy-mc-21/mgmt-byoi-linux.html#linux-tkr"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> 2.1 Custom-Image </a></p>
+<p>TANZU 버전별 Sample Download <a href="https://developer.vmware.com/samples"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Sample Downloads </a></p>
 <blockquote>
 <p>사전에 도커가 설치 되어 있어야 함</p>
 </blockquote>
 <blockquote>
 <p>RHEL의 경우 Subscription이 되어 있어야 함</p>
 </blockquote>
-<h2 id="2-공통-작업">2. 공통 작업</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Docker Server 실행<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<h2 id="2-공통-작업" class="heading-element">
+  <a href="#2-%ea%b3%b5%ed%86%b5-%ec%9e%91%ec%97%85" class="heading-mark"></a>2. 공통 작업</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>Docker Server 실행<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull projects.registry.vmware.com/tkg/linux-resource-bundle:v1.23.10_vmware.1-tkg.1
-</span></span><span class="line"><span class="cl">docker run -d -p 3000:3000 projects.registry.vmware.com/tkg/linux-resource-bundle:v1.23.10_vmware.1-tkg.1
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">docker run -d -p 3000:3000 projects.registry.vmware.com/tkg/linux-resource-bundle:v1.23.10_vmware.1-tkg.1</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Sample 다운로드<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>Sample 다운로드<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1968,18 +1935,17 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1 Sample Download</span>
 </span></span><span class="line"><span class="cl">curl -L https://apigw.vmware.com/sampleExchange/v1/downloads/8061 -o TKG-Image-Builder-for-Kubernetes-v1.24.9-master.zip
 </span></span><span class="line"><span class="cl">unzip TKG-Image-Builder-for-Kubernetes-v1.24.9-master.zip
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /TKG-Image-Builder-for-Kubernetes-v1.24.9-on-TKG-v2.1.0-master/TKG-Image-Builder-for-Kubernetes-v1_24_9---vmware_1-tkg_v2_1_0/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /TKG-Image-Builder-for-Kubernetes-v1.24.9-on-TKG-v2.1.0-master/TKG-Image-Builder-for-Kubernetes-v1_24_9---vmware_1-tkg_v2_1_0/</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>tkg.json 설정 변경<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>tkg.json 설정 변경<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -2046,18 +2012,17 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;kubernetes_cni_http_checksum&#34;: &#34;&#34;,
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;kubernetes_load_additional_imgs&#34;: &#34;true&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>vCenter 및 Tanzu Kubernetes 버전 설정<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>vCenter 및 Tanzu Kubernetes 버전 설정<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -2126,19 +2091,18 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1</span>
 </span></span><span class="line"><span class="cl"><span class="o">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;VERSION&#34;</span>: <span class="s2">&#34;v1.24.9+vmware.1-dokyung.0&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="3-ubuntu-custom-image-생성">3. Ubuntu Custom Image 생성</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>이미지 생성 실행<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="3-ubuntu-custom-image-생성" class="heading-element">
+  <a href="#3-ubuntu-custom-image-%ec%83%9d%ec%84%b1" class="heading-mark"></a>3. Ubuntu Custom Image 생성</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>이미지 생성 실행<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -2203,18 +2167,17 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --env <span class="nv">IB_OVFTOOL</span><span class="o">=</span><span class="m">1</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --network host <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  projects.registry.vmware.com/tkg/image-builder:v0.1.13_vmware.2 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  build-node-ova-vsphere-ubuntu-2004
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  build-node-ova-vsphere-ubuntu-2004</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -3279,10 +3242,9 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1
-</span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -3301,19 +3263,18 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1</span>
 </span></span><span class="line"><span class="cl">ls output/ubuntu-2004-kube-v1.24.9_vmware.1/
-</span></span><span class="line"><span class="cl">packer-manifest.json  ubuntu-2004-kube-v1.24.9_vmware.1-disk-0.vmdk  ubuntu-2004-kube-v1.24.9+vmware.1.ova  ubuntu-2004-kube-v1.24.9+vmware.1.ova.sha256  ubuntu-2004-kube-v1.24.9+vmware.1.ovf  ubuntu-2004-kube-v1.24.9_vmware.1.ovf
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">packer-manifest.json  ubuntu-2004-kube-v1.24.9_vmware.1-disk-0.vmdk  ubuntu-2004-kube-v1.24.9+vmware.1.ova  ubuntu-2004-kube-v1.24.9+vmware.1.ova.sha256  ubuntu-2004-kube-v1.24.9+vmware.1.ovf  ubuntu-2004-kube-v1.24.9_vmware.1.ovf</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="4-rhel-custom-image-생성">4. RHEL Custom Image 생성</h2>
-<p><div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>rhel-8.json 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="4-rhel-custom-image-생성" class="heading-element">
+  <a href="#4-rhel-custom-image-%ec%83%9d%ec%84%b1" class="heading-mark"></a>4. RHEL Custom Image 생성</h2><p><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>rhel-8.json 생성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -3358,18 +3319,17 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;shutdown_command&#34;: &#34;shutdown -P now&#34;,
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;vsphere_guest_os_type&#34;: &#34;rhel8_64Guest&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>rhel-8 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>rhel-8 생성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -3454,19 +3414,18 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --env <span class="nv">IB_OVFTOOL</span><span class="o">=</span><span class="m">1</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --env <span class="nv">IB_OVFTOOL_ARGS</span><span class="o">=</span><span class="s2">&#34;--allowExtraConfig&#34;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  projects.registry.vmware.com/tkg/image-builder:v0.1.13_vmware.2 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  build-node-ova-vsphere-rhel-8
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  build-node-ova-vsphere-rhel-8</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
-    </div></p>
+    </div>
+  </div></p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><h2 id="rhel-8-이미지-로그">rhel 8 이미지 로그</h2>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><h2 id="rhel-8-이미지-로그" class="heading-element">
+  <a href="#rhel-8-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%a1%9c%ea%b7%b8" class="heading-mark"></a>rhel 8 이미지 로그</h2><div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -4483,10 +4442,9 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1
-</span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -4507,19 +4465,18 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1</span>
 </span></span><span class="line"><span class="cl">ls output/rhel-8-kube-v1.24.9_vmware.1/
-</span></span><span class="line"><span class="cl">packer-manifest.json  rhel-8-kube-v1.24.9_vmware.1-disk-0.vmdk  rhel-8-kube-v1.24.9+vmware.1.ova  rhel-8-kube-v1.24.9+vmware.1.ova.sha256  rhel-8-kube-v1.24.9+vmware.1.ovf  rhel-8-kube-v1.24.9_vmware.1.ovf
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">packer-manifest.json  rhel-8-kube-v1.24.9_vmware.1-disk-0.vmdk  rhel-8-kube-v1.24.9+vmware.1.ova  rhel-8-kube-v1.24.9+vmware.1.ova.sha256  rhel-8-kube-v1.24.9+vmware.1.ovf  rhel-8-kube-v1.24.9_vmware.1.ovf</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="5-photon-custom-image-생성">5. Photon Custom Image 생성</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="5-photon-custom-image-생성" class="heading-element">
+  <a href="#5-photon-custom-image-%ec%83%9d%ec%84%b1" class="heading-mark"></a>5. Photon Custom Image 생성</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">   1
 </span><span class="lnt">   2
@@ -8296,10 +8253,9 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1
-</span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -8320,19 +8276,18 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1</span>
 </span></span><span class="line"><span class="cl">ls output/photon-3-kube-v1.24.9_vmware.1/
-</span></span><span class="line"><span class="cl">packer-manifest.json  photon-3-kube-v1.24.9_vmware.1-disk-0.vmdk  photon-3-kube-v1.24.9+vmware.1.ova  photon-3-kube-v1.24.9+vmware.1.ova.sha256  photon-3-kube-v1.24.9+vmware.1.ovf  photon-3-kube-v1.24.9_vmware.1.ovf
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">packer-manifest.json  photon-3-kube-v1.24.9_vmware.1-disk-0.vmdk  photon-3-kube-v1.24.9+vmware.1.ova  photon-3-kube-v1.24.9+vmware.1.ova.sha256  photon-3-kube-v1.24.9+vmware.1.ovf  photon-3-kube-v1.24.9_vmware.1.ovf</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="6-tkr-등록">6. TKR 등록</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>TKR 등록<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="6-tkr-등록" class="heading-element">
+  <a href="#6-tkr-%eb%93%b1%eb%a1%9d" class="heading-mark"></a>6. TKR 등록</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>TKR 등록<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -8429,19 +8384,18 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">    name: rhel
 </span></span><span class="line"><span class="cl">    version: <span class="s2">&#34;8&#34;</span>
 </span></span><span class="line"><span class="cl">    arch: amd64
-</span></span><span class="line"><span class="cl">  version: v1.24.9+vmware.1-dokyung.0
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  version: v1.24.9+vmware.1-dokyung.0</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="7-ova-업로드">7. OVA 업로드</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>업로드<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="7-ova-업로드" class="heading-element">
+  <a href="#7-ova-%ec%97%85%eb%a1%9c%eb%93%9c" class="heading-mark"></a>7. OVA 업로드</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>업로드<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -8474,38 +8428,36 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl"><span class="c1">### ubuntu</span>
 </span></span><span class="line"><span class="cl">ovftool --acceptAllEulas --net:nic0<span class="o">={</span>NIC<span class="o">}</span>--datastore<span class="o">={</span>STORE<span class="o">}</span> --vmFolder<span class="o">={</span>FOLDER<span class="o">}</span> --importAsTemplate output/ubuntu-2004-kube-v1.24.9_vmware.1/ubuntu-2004-kube-v1.24.9+vmware.1.ova <span class="s1">&#39;vi://{ID}:{PW}}@{vCenter FQDN or IP}/{DATACENTER}/host/{CLUSTER}/&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">### rhel</span>
-</span></span><span class="line"><span class="cl">ovftool --acceptAllEulas --net:nic0<span class="o">={</span>NIC<span class="o">}</span>--datastore<span class="o">={</span>STORE<span class="o">}</span> --vmFolder<span class="o">={</span>FOLDER<span class="o">}</span> --importAsTemplate output/rhel-8-kube-v1.24.9_vmware.1/rhel-8-kube-v1.24.9+vmware.1.ova <span class="s1">&#39;vi://{ID}:{PW}}@{vCenter FQDN or IP}/{DATACENTER}/host/{CLUSTER}/&#39;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">ovftool --acceptAllEulas --net:nic0<span class="o">={</span>NIC<span class="o">}</span>--datastore<span class="o">={</span>STORE<span class="o">}</span> --vmFolder<span class="o">={</span>FOLDER<span class="o">}</span> --importAsTemplate output/rhel-8-kube-v1.24.9_vmware.1/rhel-8-kube-v1.24.9+vmware.1.ova <span class="s1">&#39;vi://{ID}:{PW}}@{vCenter FQDN or IP}/{DATACENTER}/host/{CLUSTER}/&#39;</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="6-배포">6. 배포</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>클러스터 배포<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="6-배포" class="heading-element">
+  <a href="#6-%eb%b0%b0%ed%8f%ac" class="heading-mark"></a>6. 배포</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>클러스터 배포<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu cluster create -f <span class="o">{</span>FILE<span class="o">}</span> -v <span class="m">9</span> -y
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu cluster create -f <span class="o">{</span>FILE<span class="o">}</span> -v <span class="m">9</span> -y</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="7-확인">7. 확인</h2>
-<blockquote>
+  </div>
+<h2 id="7-확인" class="heading-element">
+  <a href="#7-%ed%99%95%ec%9d%b8" class="heading-mark"></a>7. 확인</h2><blockquote>
 <p>1.6
-<figure><figcaption>
+<figure><img src="/images/tanzu-custom-image/1-3.png"/><figcaption>
             <h4>rhel node</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tanzu-custom-image/1-2.png"/><figcaption>
             <h4>photon node</h4>
         </figcaption>
 </figure>
@@ -8513,7 +8465,7 @@ Tasks:</li>
 </blockquote>
 <blockquote>
 <p>2.1
-<figure><figcaption>
+<figure><img src="/images/tanzu-custom-image/1-4.png"/><figcaption>
             <h4>All node</h4>
         </figcaption>
 </figure>
@@ -8522,28 +8474,28 @@ Tasks:</li>
 ]]></description>
 </item>
 <item>
-    <title>Tap install on Openshift</title>
-    <link>https://huntedhappy.github.io/ko/tapandopenshift/</link>
-    <pubDate>Sun, 29 Jan 2023 21:55:28 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tapandopenshift/</guid>
-    <description><![CDATA[<h2 id="1-tanzu-application-platform-on-openshift">1. TANZU APPLICATION PLATFORM ON OPENSHIFT</h2>
-<p>Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다. 기본 VMware제품들은 대부분 VMware 솔루션에 Dependency가 있었습니다.
+  <title>Tap install on Openshift</title>
+  <link>https://huntedhappy.github.io/ko/tapandopenshift/</link>
+  <pubDate>Sun, 29 Jan 2023 21:55:28 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tapandopenshift/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tapandopenshift/tapandopenshift.png" alt="Tap install on Openshift" title="TANZU Application Platform &amp; Openshift" referrerpolicy="no-referrer"/></div><h2 id="1-tanzu-application-platform-on-openshift" class="heading-element">
+  <a href="#1-tanzu-application-platform-on-openshift" class="heading-mark"></a>1. TANZU APPLICATION PLATFORM ON OPENSHIFT</h2><p>Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다. 기본 VMware제품들은 대부분 VMware 솔루션에 Dependency가 있었습니다.
 그러나 TAP의 경우는 K8S 환경이면 어디든 설치가 된다는 컨셉으로 나온 것이 아닌가 싶습니다.
 1.3.x 부터 OPENSHIFT에서도 지원을 한다고 해서 한번 설치를 진행 해 보았으며 어떻게 설치를 할 수 있는지 한번 알아 보도록 하겠습니다.</p>
 <p>기본적으로 OPENSHIFT는 설치가 되어 있다는 것을 가정으로 TAP를 설치를 진행을 하겠습니다.
 참고로 OPENSHIFT의 경우 TAP에서 지원하는 것은 4.10 , 4.11 두가지를 지원 합니다.</p>
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/0-0.png"/><figcaption>
             <h4>ocp 지원 버전</h4>
         </figcaption>
 </figure>
 
-<p><figure><figcaption>
+<p><figure><img src="/images/tapandopenshift/0-1.png"/><figcaption>
             <h4>ocp 설치 버전</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/0-2.png"/><figcaption>
             <h4>ocp 설치 버전</h4>
         </figcaption>
 </figure>
@@ -8561,20 +8513,20 @@ Tasks:</li>
 <p>처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었습니다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.</p>
 </blockquote>
 <p>아래에 route에 포함되어 있지 않은 도메인을 차단 하는것인지.. 여기 route에 tap를 구성 후 tap-gui 또는 어플리케이션의 대해서 어떻게 설정 해야 되는지는 아직 의문이 남아 있습니다.
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/0-4.png"/><figcaption>
             <h4>oc route 확인</h4>
         </figcaption>
 </figure>
 </p>
 <p>AVI 와 Openshift를 연동시 생성 되는 VIP가 많아서 이 부분도 당황 스러운 부분이 있었지만, 이 부분도 깊게 파고 들지는 않았습니다. 우선 목표는 TAP를 구성 하기 위함이 크기 때문입니다.
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/0-3.png"/><figcaption>
             <h4>AVI 상태</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="2-kapp-설치">2. KAPP 설치</h2>
-<p>기본적으로 KAPP이 설치가 되어 있지 않기 때문에 KAPP 설치가 필요 합니다. 이유는 TAP이라는 솔루션이 Tanzu라는 명령어를 통해 설치가 되기 때문에 입니다.</p>
-<div class="highlight"><div class="chroma">
+<h2 id="2-kapp-설치" class="heading-element">
+  <a href="#2-kapp-%ec%84%a4%ec%b9%98" class="heading-mark"></a>2. KAPP 설치</h2><p>기본적으로 KAPP이 설치가 되어 있지 않기 때문에 KAPP 설치가 필요 합니다. 이유는 TAP이라는 솔루션이 Tanzu라는 명령어를 통해 설치가 되기 때문에 입니다.</p>
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -8587,17 +8539,16 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">kubectl apply -f https://github.com/vmware-tanzu/carvel-kapp-controller/releases/latest/download/release.yml
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## tanzu에서 secret을 생성 할 수 있게 secretget-controller 설치</span>
-</span></span><span class="line"><span class="cl">kubectl apply -f https://github.com/carvel-dev/secretgen-controller/releases/latest/download/release.yml
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl apply -f https://github.com/carvel-dev/secretgen-controller/releases/latest/download/release.yml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>kapp을 설치를 하게 되면 이제 tanzu package repository 및  secret repository를 등록 할 수 있습니다.</p>
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/1-1.png"/><figcaption>
             <h4>package 및 reository</h4>
         </figcaption>
 </figure>
 
 <p>그러면 위와 같이 list를 확인 할 수 있습니다. 위에 controller를 설치를 하지 않으면 에러가 발생 하는 것을 알 수 있습니다. 에러 내용은 아래와 같습니다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -8614,13 +8565,12 @@ Tasks:</li>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">secret contoller를 설치를 안할 경우 발생하는 에러
 </span></span><span class="line"><span class="cl"><span class="c1">## Error: secret plugin can not be used as &#39;secretgen.carvel.dev/v1alpha1&#39; API is not available in the cluster</span>
-</span></span><span class="line"><span class="cl"><span class="c1">## Error: exit status 1</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: exit status 1</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-tanzu-framework-및-pcakage-image-repository-업로드">3. TANZU FRAMEWORK 및 Pcakage Image Repository 업로드</h2>
-<p>TANZU FRAMEWORK다운로드는 Tanzu Net에서 다운로드를 받을 수 있다.
+</div><h2 id="3-tanzu-framework-및-pcakage-image-repository-업로드" class="heading-element">
+  <a href="#3-tanzu-framework-%eb%b0%8f-pcakage-image-repository-%ec%97%85%eb%a1%9c%eb%93%9c" class="heading-mark"></a>3. TANZU FRAMEWORK 및 Pcakage Image Repository 업로드</h2><p>TANZU FRAMEWORK다운로드는 Tanzu Net에서 다운로드를 받을 수 있다.
 TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -8645,11 +8595,10 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl">docker login infra-harbor.huntedhappy.kro.kr -u admin
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## TAP Package 내부 Harbor에 업로드</span>
-</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:1.4.0 --to-repo infra-harbor.huntedhappy.kro.kr/tap-packages/1.4.0
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:1.4.0 --to-repo infra-harbor.huntedhappy.kro.kr/tap-packages/1.4.0</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-tap-package-등록">4. TAP Package 등록</h2>
-<div class="highlight"><div class="chroma">
+</div><h2 id="4-tap-package-등록" class="heading-element">
+  <a href="#4-tap-package-%eb%93%b1%eb%a1%9d" class="heading-mark"></a>4. TAP Package 등록</h2><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -8694,14 +8643,13 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl"><span class="c1">## TBS Repository 등록</span>
 </span></span><span class="line"><span class="cl">tanzu package repository add tbs-full-deps-repository <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url infra-harbor.huntedhappy.kro.kr/tap/tbs-full-deps/1.9.0 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="5-설치">5. 설치</h2>
-<p>TAP같은 경우 멀티 클러스터를 지원 하지만, 테스트는 full 기반으로 테스트를 진행 하였습니다.</p>
+</div><h2 id="5-설치" class="heading-element">
+  <a href="#5-%ec%84%a4%ec%b9%98" class="heading-mark"></a>5. 설치</h2><p>TAP같은 경우 멀티 클러스터를 지원 하지만, 테스트는 full 기반으로 테스트를 진행 하였습니다.</p>
 <p>설치는 ootb_supply_chain_testing_scanning 로 테스트를 진행 했지만. 좀 복잡 할 수 있기 때문에
 여기에는 ootb_supply_chain_basic으로 기술 합니다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -8962,10 +8910,9 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl">excluded_packages:
 </span></span><span class="line"><span class="cl">- policy.apps.tanzu.vmware.com
 </span></span><span class="line"><span class="cl">- learningcenter.tanzu.vmware.com
-</span></span><span class="line"><span class="cl">- workshops.learningcenter.tanzu.vmware.com
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">- workshops.learningcenter.tanzu.vmware.com</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -9196,10 +9143,9 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span></span><span class="line"><span class="cl"><span class="s">  resources:
 </span></span></span><span class="line"><span class="cl"><span class="s">  - apps
 </span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -9306,20 +9252,18 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
 </span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/secrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
-</span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/imagePullSecrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/imagePullSecrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -9332,17 +9276,16 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.4.0 -f tap-full-vaules.yaml -n tap-install
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## TBS 설치</span>
-</span></span><span class="line"><span class="cl">tanzu package install full-tbs-deps -p full-tbs-deps.tanzu.vmware.com -v 1.9.0 -n tap-install
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">tanzu package install full-tbs-deps -p full-tbs-deps.tanzu.vmware.com -v 1.9.0 -n tap-install</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="6-설치-완료">6. 설치 완료</h2>
-<figure><figcaption>
+</div><h2 id="6-설치-완료" class="heading-element">
+  <a href="#6-%ec%84%a4%ec%b9%98-%ec%99%84%eb%a3%8c" class="heading-mark"></a>6. 설치 완료</h2><figure><img src="/images/tapandopenshift/1-2.png"/><figcaption>
             <h4>설치 완료#1</h4>
         </figcaption>
 </figure>
 
 <p>Sample App Test
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/1-3.png"/><figcaption>
             <h4>설치 완료#2</h4>
         </figcaption>
 </figure>
@@ -9352,27 +9295,27 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 <li>I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to client-side throttling, not priority and fairness, request: GET:https://api.openshift.huntedhappy.kro.kr:6443/apis/console.openshift.io/v1alpha1?timeout=32s</li>
 </ul>
 <p>배포가 완료 되면 httpproxy,pod,deliverable을 확인 하여 httpproxy에 설정된 도메인으로 접속 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/1-8.png"/><figcaption>
             <h4>FQDN 확인</h4>
         </figcaption>
 </figure>
 </p>
-<p><figure><figcaption>
+<p><figure><img src="/images/tapandopenshift/1-4.png"/><figcaption>
             <h4>설치 완료#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/1-5.png"/><figcaption>
             <h4>TAP GUI 화면#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/1-6.png"/><figcaption>
             <h4>TAP GUI 화면#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tapandopenshift/1-7.png"/><figcaption>
             <h4>TAP GUI 화면#2</h4>
         </figcaption>
 </figure>
@@ -9384,14 +9327,14 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 ]]></description>
 </item>
 <item>
-    <title>The Documentation Harbor</title>
-    <link>https://huntedhappy.github.io/ko/harbor/</link>
-    <pubDate>Sat, 07 Jan 2023 19:00:14 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/harbor/</guid>
-    <description><![CDATA[<h2 id="harbor에-vm-disk가-부족-하게-되면-사이즈를-늘려보자">Harbor에 VM Disk가 부족 하게 되면 사이즈를 늘려보자</h2>
-<h2 id="1-harbor-vm-disk-증설">1. Harbor VM DISK 증설</h2>
-<div class="highlight"><div class="chroma">
+  <title>The Documentation Harbor</title>
+  <link>https://huntedhappy.github.io/ko/harbor/</link>
+  <pubDate>Sat, 07 Jan 2023 19:00:14 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/harbor/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/harbor/harbor_logo.png" alt="The Documentation Harbor" title="Harbor Disk Size Expand" referrerpolicy="no-referrer"/></div><h2 id="harbor에-vm-disk가-부족-하게-되면-사이즈를-늘려보자" class="heading-element">
+  <a href="#harbor%ec%97%90-vm-disk%ea%b0%80-%eb%b6%80%ec%a1%b1-%ed%95%98%ea%b2%8c-%eb%90%98%eb%a9%b4-%ec%82%ac%ec%9d%b4%ec%a6%88%eb%a5%bc-%eb%8a%98%eb%a0%a4%eb%b3%b4%ec%9e%90" class="heading-mark"></a>Harbor에 VM Disk가 부족 하게 되면 사이즈를 늘려보자</h2><h2 id="1-harbor-vm-disk-증설" class="heading-element">
+  <a href="#1-harbor-vm-disk-%ec%a6%9d%ec%84%a4" class="heading-mark"></a>1. Harbor VM DISK 증설</h2><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -9414,25 +9357,24 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## parted로 fix를 해보자</span>
 </span></span><span class="line"><span class="cl">parted /dev/sda
-</span></span><span class="line"><span class="cl">p &gt; f
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">p &gt; f</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/harbor/1-1.png"/><figcaption>
             <h4>Disk 상태 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-2.png"/><figcaption>
             <h4>Disk 증설</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-3.png"/><figcaption>
             <h4>Disk 증설 후</h4>
         </figcaption>
 </figure>
 </p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -9453,25 +9395,24 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl"> <span class="nb">echo</span> <span class="s2">&#34;- - -&#34;</span> &gt; /sys/class/scsi_host/<span class="nv">$line</span>/scan
 </span></span><span class="line"><span class="cl"><span class="k">done</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ls -lat /dev/sd*
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">ls -lat /dev/sd*</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/harbor/1-4.png"/><figcaption>
             <h4>Disk 증설 후 SCAN</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-5.png"/><figcaption>
             <h4>디스크 증설 확인#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-6.png"/><figcaption>
             <h4>디스크 증설 확인#2</h4>
         </figcaption>
 </figure>
 </p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -9486,21 +9427,20 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl">pvcreate /dev/sdb
 </span></span><span class="line"><span class="cl">vgextend ubuntu-vg /dev/sdb
 </span></span><span class="line"><span class="cl">lvextend /dev/mapper/ubuntu--vg-ubuntu--lv /dev/sdb
-</span></span><span class="line"><span class="cl">resize2fs -p /dev/mapper/ubuntu--vg-ubuntu--lv
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">resize2fs -p /dev/mapper/ubuntu--vg-ubuntu--lv</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/harbor/1-7.png"/><figcaption>
             <h4>Disk 확인 및 증설#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-8.png"/><figcaption>
             <h4>Disk 확인 및 증설#2</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="2-tanzu에-pacakge로-설치-한-harbor-사이즈-증설">2. TANZU에 Pacakge로 설치 한 Harbor 사이즈 증설</h2>
-<div class="highlight"><div class="chroma">
+<h2 id="2-tanzu에-pacakge로-설치-한-harbor-사이즈-증설" class="heading-element">
+  <a href="#2-tanzu%ec%97%90-pacakge%eb%a1%9c-%ec%84%a4%ec%b9%98-%ed%95%9c-harbor-%ec%82%ac%ec%9d%b4%ec%a6%88-%ec%a6%9d%ec%84%a4" class="heading-mark"></a>2. TANZU에 Pacakge로 설치 한 Harbor 사이즈 증설</h2><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -9565,10 +9505,9 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl"><span class="c1">## 그리고 pvc 생성 후 pod를 삭제 하기 위해 0으로 변경</span>
 </span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry apply -f harbor-registry-pvc.yaml
 </span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry scale deployment harbor-registry --replicas<span class="o">=</span><span class="m">0</span>
-</span></span><span class="line"><span class="cl">watch -n <span class="m">5</span> kubectl get pod -n tanzu-system-registry
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">watch -n <span class="m">5</span> kubectl get pod -n tanzu-system-registry</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -9733,11 +9672,10 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl">    name: harbor-registry-100gb
 </span></span><span class="line"><span class="cl">    namespace: tanzu-system-registry
 </span></span><span class="line"><span class="cl">    resourceVersion: <span class="s2">&#34;5894668&#34;</span>
-</span></span><span class="line"><span class="cl">    uid: 326b24df-dd6f-4679-af84-6530013aed22
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    uid: 326b24df-dd6f-4679-af84-6530013aed22</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="pvc-생성">pvc 생성</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="pvc-생성" class="heading-element">
+  <a href="#pvc-%ec%83%9d%ec%84%b1" class="heading-mark"></a>pvc 생성</h3><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -9814,20 +9752,19 @@ TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
 </span></span><span class="line"><span class="cl"><span class="c1">## 확인</span>
 </span></span><span class="line"><span class="cl"><span class="nv">registry</span><span class="o">=</span><span class="k">$(</span>kubectl -n tanzu-system-registry get po --selector<span class="o">=</span><span class="nv">component</span><span class="o">=</span>registry <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> grep  harbor<span class="k">)</span>
 </span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry <span class="nb">exec</span> -ti <span class="nv">$registry</span> -- /bin/bash
-</span></span><span class="line"><span class="cl">df -h /storage
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">df -h /storage</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/harbor/2-3.png"/><figcaption>
             <h4>증설 전</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/2-2.png"/><figcaption>
             <h4>증설 후 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/2-1.png"/><figcaption>
             <h4>Docker Image 확인</h4>
         </figcaption>
 </figure>

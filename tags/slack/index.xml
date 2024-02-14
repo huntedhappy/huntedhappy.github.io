@@ -1,18 +1,17 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>slack - Tag - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/tags/slack/</link>
-        <description>slack - Tag - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 07 Jan 2023 19:00:17 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/slack/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation Harbor</title>
-    <link>https://huntedhappy.github.io/harbor/</link>
-    <pubDate>Sat, 07 Jan 2023 19:00:17 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/harbor/</guid>
-    <description><![CDATA[<h2 id="harbor에-vm-disk가-부족-하게-되면-사이즈를-늘려보자">Harbor에 VM Disk가 부족 하게 되면 사이즈를 늘려보자</h2>
-<h2 id="1-harbor-vm-disk-증설">1. Harbor VM DISK 증설</h2>
-<div class="highlight"><div class="chroma">
+  <channel>
+    <title>slack - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/tags/slack/</link>
+    <description>slack - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 07 Jan 2023 19:00:17 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/slack/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation Harbor</title>
+  <link>https://huntedhappy.github.io/harbor/</link>
+  <pubDate>Sat, 07 Jan 2023 19:00:17 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/harbor/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/harbor/harbor_logo.png" alt="The Documentation Harbor" title="Harbor Disk Size Expand" referrerpolicy="no-referrer"/></div><h2 id="harbor에-vm-disk가-부족-하게-되면-사이즈를-늘려보자" class="heading-element">
+  <a href="#harbor%ec%97%90-vm-disk%ea%b0%80-%eb%b6%80%ec%a1%b1-%ed%95%98%ea%b2%8c-%eb%90%98%eb%a9%b4-%ec%82%ac%ec%9d%b4%ec%a6%88%eb%a5%bc-%eb%8a%98%eb%a0%a4%eb%b3%b4%ec%9e%90" class="heading-mark"></a>Harbor에 VM Disk가 부족 하게 되면 사이즈를 늘려보자</h2><h2 id="1-harbor-vm-disk-증설" class="heading-element">
+  <a href="#1-harbor-vm-disk-%ec%a6%9d%ec%84%a4" class="heading-mark"></a>1. Harbor VM DISK 증설</h2><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -35,25 +34,24 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## parted로 fix를 해보자</span>
 </span></span><span class="line"><span class="cl">parted /dev/sda
-</span></span><span class="line"><span class="cl">p &gt; f
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">p &gt; f</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/harbor/1-1.png"/><figcaption>
             <h4>Disk 상태 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-2.png"/><figcaption>
             <h4>Disk 증설</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-3.png"/><figcaption>
             <h4>Disk 증설 후</h4>
         </figcaption>
 </figure>
 </p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -74,25 +72,24 @@
 </span></span><span class="line"><span class="cl"> <span class="nb">echo</span> <span class="s2">&#34;- - -&#34;</span> &gt; /sys/class/scsi_host/<span class="nv">$line</span>/scan
 </span></span><span class="line"><span class="cl"><span class="k">done</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ls -lat /dev/sd*
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">ls -lat /dev/sd*</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/harbor/1-4.png"/><figcaption>
             <h4>Disk 증설 후 SCAN</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-5.png"/><figcaption>
             <h4>디스크 증설 확인#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-6.png"/><figcaption>
             <h4>디스크 증설 확인#2</h4>
         </figcaption>
 </figure>
 </p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -107,21 +104,20 @@
 </span></span><span class="line"><span class="cl">pvcreate /dev/sdb
 </span></span><span class="line"><span class="cl">vgextend ubuntu-vg /dev/sdb
 </span></span><span class="line"><span class="cl">lvextend /dev/mapper/ubuntu--vg-ubuntu--lv /dev/sdb
-</span></span><span class="line"><span class="cl">resize2fs -p /dev/mapper/ubuntu--vg-ubuntu--lv
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">resize2fs -p /dev/mapper/ubuntu--vg-ubuntu--lv</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/harbor/1-7.png"/><figcaption>
             <h4>Disk 확인 및 증설#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/1-8.png"/><figcaption>
             <h4>Disk 확인 및 증설#2</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="2-tanzu에-pacakge로-설치-한-harbor-사이즈-증설">2. TANZU에 Pacakge로 설치 한 Harbor 사이즈 증설</h2>
-<div class="highlight"><div class="chroma">
+<h2 id="2-tanzu에-pacakge로-설치-한-harbor-사이즈-증설" class="heading-element">
+  <a href="#2-tanzu%ec%97%90-pacakge%eb%a1%9c-%ec%84%a4%ec%b9%98-%ed%95%9c-harbor-%ec%82%ac%ec%9d%b4%ec%a6%88-%ec%a6%9d%ec%84%a4" class="heading-mark"></a>2. TANZU에 Pacakge로 설치 한 Harbor 사이즈 증설</h2><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -186,10 +182,9 @@
 </span></span><span class="line"><span class="cl"><span class="c1">## 그리고 pvc 생성 후 pod를 삭제 하기 위해 0으로 변경</span>
 </span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry apply -f harbor-registry-pvc.yaml
 </span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry scale deployment harbor-registry --replicas<span class="o">=</span><span class="m">0</span>
-</span></span><span class="line"><span class="cl">watch -n <span class="m">5</span> kubectl get pod -n tanzu-system-registry
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">watch -n <span class="m">5</span> kubectl get pod -n tanzu-system-registry</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -354,11 +349,10 @@
 </span></span><span class="line"><span class="cl">    name: harbor-registry-100gb
 </span></span><span class="line"><span class="cl">    namespace: tanzu-system-registry
 </span></span><span class="line"><span class="cl">    resourceVersion: <span class="s2">&#34;5894668&#34;</span>
-</span></span><span class="line"><span class="cl">    uid: 326b24df-dd6f-4679-af84-6530013aed22
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    uid: 326b24df-dd6f-4679-af84-6530013aed22</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="pvc-생성">pvc 생성</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="pvc-생성" class="heading-element">
+  <a href="#pvc-%ec%83%9d%ec%84%b1" class="heading-mark"></a>pvc 생성</h3><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -435,20 +429,19 @@
 </span></span><span class="line"><span class="cl"><span class="c1">## 확인</span>
 </span></span><span class="line"><span class="cl"><span class="nv">registry</span><span class="o">=</span><span class="k">$(</span>kubectl -n tanzu-system-registry get po --selector<span class="o">=</span><span class="nv">component</span><span class="o">=</span>registry <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> grep  harbor<span class="k">)</span>
 </span></span><span class="line"><span class="cl">kubectl -n tanzu-system-registry <span class="nb">exec</span> -ti <span class="nv">$registry</span> -- /bin/bash
-</span></span><span class="line"><span class="cl">df -h /storage
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">df -h /storage</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/harbor/2-3.png"/><figcaption>
             <h4>증설 전</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/2-2.png"/><figcaption>
             <h4>증설 후 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/harbor/2-1.png"/><figcaption>
             <h4>Docker Image 확인</h4>
         </figcaption>
 </figure>
@@ -456,42 +449,42 @@
 ]]></description>
 </item>
 <item>
-    <title>The Documentation Jenkins</title>
-    <link>https://huntedhappy.github.io/jenkins/</link>
-    <pubDate>Fri, 31 Dec 2021 20:49:23 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/jenkins/</guid>
-    <description><![CDATA[<h2 id="jenkins">Jenkins?</h2>
-<p>Jenkins는 아무래도 많이 사용하는 CI/CD 일것이다. 우선 컨테이너 환경에서 CI를 구성하기 위해서 Jenkins를 구성 하였고, 클러스터가 많은 환경에서도 접근을 할 수 있게 (물론 컨테이너로 구성을 해도 되나. 굳이 컨테이너로 구성할 필요성이 있나 싶어 별도의 VM으로 구성)
+  <title>The Documentation Jenkins</title>
+  <link>https://huntedhappy.github.io/jenkins/</link>
+  <pubDate>Fri, 31 Dec 2021 20:49:23 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/jenkins/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/jenkins/jenkins.png" alt="The Documentation Jenkins" title="Jenkins Install Guide" referrerpolicy="no-referrer"/></div><h2 id="jenkins" class="heading-element">
+  <a href="#jenkins" class="heading-mark"></a>Jenkins?</h2><p>Jenkins는 아무래도 많이 사용하는 CI/CD 일것이다. 우선 컨테이너 환경에서 CI를 구성하기 위해서 Jenkins를 구성 하였고, 클러스터가 많은 환경에서도 접근을 할 수 있게 (물론 컨테이너로 구성을 해도 되나. 굳이 컨테이너로 구성할 필요성이 있나 싶어 별도의 VM으로 구성)
 VM형태로 설치를 하였다.</p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
 CI (Continuous Integration) CI를 통해 개발자들은 코드 변경사항을 공유 브랜치로 다시 병합하는 작업을 더욱 수월하게 자주 수행 할 수 있다.
 CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으로 사용됨.</p>
 <ul>
 <li>Continuous Deliver의 경우 코드 변경 , 병합으로부터 Prodcution에 적합한 빌드를 제공하여 모든 단계에 테스트 및 릴리스를 자동화한다.</li>
 <li>Continuous Deploy는 어플리케이션을 프로덕션으로 릴리스 작업을 자동화</li>
 </ul></div>
-        </div>
     </div>
-<figure><figcaption>
+  </div>
+<figure><img src="/images/jenkins/0-1.png"/><figcaption>
             <h4>CICD</h4>
         </figcaption>
 </figure>
 
-<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Redhat </a></p>
-<h2 id="1-설치">1. 설치</h2>
-<div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins Install<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>JAVA Install</p>
-<div class="highlight"><div class="chroma">
+<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Redhat </a></p>
+<h2 id="1-설치" class="heading-element">
+  <a href="#1-%ec%84%a4%ec%b9%98" class="heading-mark"></a>1. 설치</h2><div class="details admonition example open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins Install<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>JAVA Install</p>
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -508,11 +501,10 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo apt install openjdk-11-jdk -y
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">java --version
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">java --version</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Jenkins Install</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -531,66 +523,62 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">sudo apt install jenkins -y
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">systemctl restart jenkins
-</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> jenkins
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> jenkins</span></span></code></pre></td></tr></table>
 </div>
 </div><p>패스워드 확인</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat /var/lib/jenkins/secrets/initialAdminPassword
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat /var/lib/jenkins/secrets/initialAdminPassword</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="11-설치-완료">1.1. 설치 완료</h3>
-<p><figure><figcaption>
+  </div>
+<h3 id="11-설치-완료" class="heading-element">
+  <a href="#11-%ec%84%a4%ec%b9%98-%ec%99%84%eb%a3%8c" class="heading-mark"></a>1.1. 설치 완료</h3><p><figure><img src="/images/jenkins/1-1.png"/><figcaption>
             <h4>접속 화면 #1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/1-2.png"/><figcaption>
             <h4>접속 화면 #2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/1-3.png"/><figcaption>
             <h4>접속 화면 #3</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="2-https-설정">2. HTTPS 설정</h2>
-<p>내부에서 사용하기 때문에 HTTP로 구성을 해도 되나 보안상 HTTPS를 구성이 필요할 경우가 있을 수 있기 때문에 2가지 경우로 HTTPS 구성의 대해서 설명하고자 하자. 하나는 자체적으로 구성을 하는 것이고 다른 하나는 NGINX를 구성해요 HTTPS를 구성 하는 것이다. 물론 L4를 사용해서 구성 할 수 도 있으나, 굳이 L4 장비까지 사용할 이유가 없으니 간단하게 NGINX를 사용하기로 한다.</p>
-<h3 id="21-https-구성">2.1. HTTPS 구성</h3>
-<p>인증서 설치, <a href="/jenkins/root.sh" rel=""><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;root.sh</a>.</p>
+<h2 id="2-https-설정" class="heading-element">
+  <a href="#2-https-%ec%84%a4%ec%a0%95" class="heading-mark"></a>2. HTTPS 설정</h2><p>내부에서 사용하기 때문에 HTTP로 구성을 해도 되나 보안상 HTTPS를 구성이 필요할 경우가 있을 수 있기 때문에 2가지 경우로 HTTPS 구성의 대해서 설명하고자 하자. 하나는 자체적으로 구성을 하는 것이고 다른 하나는 NGINX를 구성해요 HTTPS를 구성 하는 것이다. 물론 L4를 사용해서 구성 할 수 도 있으나, 굳이 L4 장비까지 사용할 이유가 없으니 간단하게 NGINX를 사용하기로 한다.</p>
+<h3 id="21-https-구성" class="heading-element">
+  <a href="#21-https-%ea%b5%ac%ec%84%b1" class="heading-mark"></a>2.1. HTTPS 구성</h3><p>인증서 설치, <a href="/jenkins/root.sh"><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;root.sh</a>.</p>
 <div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins SSL 구성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>인증서 생성</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>Jenkins SSL 구성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>인증서 생성</p>
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">domain</span><span class="o">=</span>jenkins.tkg.io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>root.sh에 있는 파일 내용을 복사해서 shell 실행</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">. root.sh
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">. root.sh</span></span></code></pre></td></tr></table>
 </div>
 </div><p>인증서 권한 변경</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -599,11 +587,10 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">chmod <span class="m">700</span> /data/cert
 </span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.cert
-</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.key
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /data/cert/yourdomain.com.key</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Jenkins 파일 변경</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -630,28 +617,27 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl"><span class="nv">JENKINS_ARGS</span><span class="o">=</span><span class="s2">&#34;--webroot=/var/cache/</span><span class="nv">$NAME</span><span class="s2">/war --httpPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpPort=</span><span class="nv">$HTTP_PORT_DISABLE</span><span class="s2"> --httpsPort=</span><span class="nv">$HTTP_PORT</span><span class="s2"> --httpsCertificate=</span><span class="nv">$HTTPS_CERT</span><span class="s2"> --httpsPrivateKey=</span><span class="nv">$HTTPS_KEY</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">### jenkins restart</span>
-</span></span><span class="line"><span class="cl">systemctl restart jenkins
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">systemctl restart jenkins</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<figure><figcaption>
+  </div>
+<figure><img src="/images/jenkins/2-1.png"/><figcaption>
             <h4>HTTPS 접속 화면 #1</h4>
         </figcaption>
 </figure>
 
-<h3 id="22-nginx로-https-구성">2.2. NGINX로 HTTPS 구성</h3>
-<p>NGINX를 구성하기 위해 Jenkins 설정은 그냥 HTTP로 구성을 해도 무방하다. 여기서는 위에서 설정을 했기 때문에 별도로 설정을 변경하지 않고했기 때문에 뒷단의 Jenkins를 HTTPS로 그대로 놔둔것이라고 봐도 된다.
+<h3 id="22-nginx로-https-구성" class="heading-element">
+  <a href="#22-nginx%eb%a1%9c-https-%ea%b5%ac%ec%84%b1" class="heading-mark"></a>2.2. NGINX로 HTTPS 구성</h3><p>NGINX를 구성하기 위해 Jenkins 설정은 그냥 HTTP로 구성을 해도 무방하다. 여기서는 위에서 설정을 했기 때문에 별도로 설정을 변경하지 않고했기 때문에 뒷단의 Jenkins를 HTTPS로 그대로 놔둔것이라고 봐도 된다.
 만약에 Jenkins Server는 HTTP로 구성을 하려면 그냥 두고 NGINX에서 Reverse Proxy 구성을 하면 된다.
 용어가 나와서 헷갈릴수도 있지만. Proxy_pass 부분만 http:// 로 바꾸면 된다.</p>
 <p><div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>NGINX PROXY 구성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>NGINX 가상 서버 구성</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>NGINX PROXY 구성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>NGINX 가상 서버 구성</p>
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -712,11 +698,10 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 </span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    server_name jenkins.tkg.io<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> 404<span class="p">;</span> <span class="c1"># managed by Certbot</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>symbolic link 연결</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -725,79 +710,78 @@ CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> <span class="nb">cd</span> /etc/nginx/sites-enabled
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> ln -s  /etc/nginx/sites-available/jenkins .
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"> ln -s  /etc/nginx/sites-available/jenkins .</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<figure><figcaption>
+  </div>
+<figure><img src="/images/jenkins/2-2.png"/><figcaption>
             <h4>NGINX로 연결 후 HTTPS 접속 화면 #1</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="3-slack-연동">3. SLACK 연동</h2>
-<p>SLACK을 연동하여 메시지를 받을 수 있게 구성을 한다.</p>
-<h3 id="31-slcak-설정">3.1. SLCAK 설정</h3>
-<figure><figcaption>
+<h2 id="3-slack-연동" class="heading-element">
+  <a href="#3-slack-%ec%97%b0%eb%8f%99" class="heading-mark"></a>3. SLACK 연동</h2><p>SLACK을 연동하여 메시지를 받을 수 있게 구성을 한다.</p>
+<h3 id="31-slcak-설정" class="heading-element">
+  <a href="#31-slcak-%ec%84%a4%ec%a0%95" class="heading-mark"></a>3.1. SLCAK 설정</h3><figure><img src="/images/jenkins/3-1.png"/><figcaption>
             <h4>SLACK 접속</h4>
         </figcaption>
 </figure>
 
 <p>APP 등록
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-2.png"/><figcaption>
             <h4>SLACK APP 추가#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-3.png"/><figcaption>
             <h4>SLACK APP 추가#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-4.png"/><figcaption>
             <h4>SLACK APP 추가#3</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-5.png"/><figcaption>
             <h4>SLACK APP 추가#4</h4>
         </figcaption>
 </figure>
 </p>
 <p>위에 내용까지 설정을 하면 Jenkins를 어떻게 설정하라고 나오는대 좀 오래 되었나보다. 요즘에 변경된 부분의 대해서 설정 하는 방법을 나열한다.</p>
-<h3 id="32-jenkins-설정">3.2. JENKINS 설정</h3>
-<p><figure><figcaption>
+<h3 id="32-jenkins-설정" class="heading-element">
+  <a href="#32-jenkins-%ec%84%a4%ec%a0%95" class="heading-mark"></a>3.2. JENKINS 설정</h3><p><figure><img src="/images/jenkins/3-6.png"/><figcaption>
             <h4>Jenkins Slack Plugin 설치#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-7.png"/><figcaption>
             <h4>Jenkins Slack Plugin 설치#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-8.png"/><figcaption>
             <h4>Jenkins Slack Plugin 설치#3</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-9.png"/><figcaption>
             <h4>Jenkins Slack 설정#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-10.png"/><figcaption>
             <h4>Jenkins Slack 설정#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-11.png"/><figcaption>
             <h4>Jenkins Slack Credentials 설정</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/jenkins/3-12.png"/><figcaption>
             <h4>Jenkins Slack 설정 테스트</h4>
         </figcaption>
 </figure>

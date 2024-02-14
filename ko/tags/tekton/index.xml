@@ -1,22 +1,21 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>tekton - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/tekton/</link>
-        <description>tekton - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tekton/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation TAP &amp; JENKINS</title>
-    <link>https://huntedhappy.github.io/ko/tap-jenkins/</link>
-    <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tap-jenkins/</guid>
-    <description><![CDATA[<h2 id="out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer">Out of the Box Supply Chain with testing on Jenkins for Supply Chain Choreographer</h2>
-<p>기본적으로 TAP에서는 TEKTON을 사용하여 Source Testing을 제공 하고 있다. 하지만 별도로 Jenkins를 연동 해서 Source Testing을 진행 해보고 싶어 할 수 도 있을 거 같다.</p>
+  <channel>
+    <title>tekton - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/tekton/</link>
+    <description>tekton - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tekton/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation TAP &amp; JENKINS</title>
+  <link>https://huntedhappy.github.io/ko/tap-jenkins/</link>
+  <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tap-jenkins/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tap-jenkins/index.png" alt="The Documentation TAP &amp; JENKINS" title="TANZU &amp; JENKINS" referrerpolicy="no-referrer"/></div><h2 id="out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer" class="heading-element">
+  <a href="#out-of-the-box-supply-chain-with-testing-on-jenkins-for-supply-chain-choreographer" class="heading-mark"></a>Out of the Box Supply Chain with testing on Jenkins for Supply Chain Choreographer</h2><p>기본적으로 TAP에서는 TEKTON을 사용하여 Source Testing을 제공 하고 있다. 하지만 별도로 Jenkins를 연동 해서 Source Testing을 진행 해보고 싶어 할 수 도 있을 거 같다.</p>
 <p>그래서 TAP에서는 Jenkins와 연동을 제공 하고 있다.</p>
-<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/scc-ootb-supply-chain-testing-with-jenkins.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> with jenkins</a></p>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/scc-ootb-supply-chain-testing-with-jenkins.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> with jenkins</a></p>
 <p>사전구성으로 Build Cluster에 Out of the Box Supply Chain With Testing or Out of the Box Supply Chain With Testing and Scanning로 supply_chain 구성이 필요 하다.</p>
 <p>사전에 Jenkins의 정보를 넣기 위해 Secret을 생성 해 준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -43,11 +42,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">  username: USERNAME # jenkins username
 </span></span></span><span class="line"><span class="cl"><span class="s">  password: PASSWORD # jenkins password
 </span></span></span><span class="line"><span class="cl"><span class="s">  ca-cert: (Optional) PEM-CA-CERT # PEM encoded certificate
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 Out of the Box Jenkins를 사용하기 위해 Jenkin pipeline을 설정이 필요 합니다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -132,8 +130,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.job-name)
 </span></span></span><span class="line"><span class="cl"><span class="s">      - name: job-params
 </span></span></span><span class="line"><span class="cl"><span class="s">        value: $(params.job-params)
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> 
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Tekton pipeline은 아래와 같이 이루어 져 있다.</p>
 <p>개발자는 아래와 같이 매개변수를 사용하여 Tekton pipeline을 생성 해야 합니다.</p>
@@ -148,7 +145,7 @@ Tasks:</li>
 <li>jenkins-task, required: 설정된 ClusterTask중 Jenkins작업을 트리거 하기 위해 실행, kubeclt get clustertask로 이름을 확인 할 수 있다.</li>
 </ul>
 <p>그리고 아래와 같이 Jenkinsfile을 생성 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -233,8 +230,7 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">    }
 </span></span></span><span class="line"><span class="cl"><span class="s">  }
 </span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> 
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span> </span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음 필드는 Jenkins 작업 정의에도 필요합니다.</p>
 <ul>
@@ -244,7 +240,7 @@ Tasks:</li>
 <p>Jenkins에 파라미터를 제공하기 위해 GIT_URL을 작성 해준다.</p>
 <p>** 현재 1.5.2 까지 GIT_URL 및 GIT_REVISION이 JENKINS로 전달 되지 않는 것으로 보인다. 하여 Jenkins파일에 파라미터를 추가를 해주어야 한다.</p>
 <p>이렇게 설정 한 후에 Workload를 실행을 하게 되면 실제적으로 Jenkins를 통해 소스테스트가 이루어지는 것을 확인 할 수 있다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -403,16 +399,15 @@ Tasks:</li>
 </span></span></span><span class="line"><span class="cl"><span class="s">      ref:
 </span></span></span><span class="line"><span class="cl"><span class="s">       branch: main
 </span></span></span><span class="line"><span class="cl"><span class="s">      url: https://gitlab.huntedhappy.kro.kr/tanzu/jenkins-tanzu-java-web-app
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="result">RESULT</h2>
-<p><figure><figcaption>
+</div><h2 id="result" class="heading-element">
+  <a href="#result" class="heading-mark"></a>RESULT</h2><p><figure><img src="/images/tap-jenkins/1-1.png"/><figcaption>
             <h4>Jenkins에서 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap-jenkins/1-2.png"/><figcaption>
             <h4>TAP에서 Jenkins를 통해 배포 확인</h4>
         </figcaption>
 </figure>

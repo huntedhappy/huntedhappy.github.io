@@ -1,30 +1,29 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>K10 - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/k10/</link>
-        <description>K10 - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 30 Dec 2021 19:26:46 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/k10/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation K10 Install</title>
-    <link>https://huntedhappy.github.io/ko/k10/</link>
-    <pubDate>Thu, 30 Dec 2021 19:26:46 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/k10/</guid>
-    <description><![CDATA[<p>컨테이너 환경에서 백업을 하기 위한 방법으로 Veeam에서 제공하는 Kasten 설치</p>
+  <channel>
+    <title>K10 - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/k10/</link>
+    <description>K10 - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 30 Dec 2021 19:26:46 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/k10/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation K10 Install</title>
+  <link>https://huntedhappy.github.io/ko/k10/</link>
+  <pubDate>Thu, 30 Dec 2021 19:26:46 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/k10/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/k10/k10.jpg" alt="The Documentation K10 Install" title="K10 Install Guide" referrerpolicy="no-referrer"/></div><p>컨테이너 환경에서 백업을 하기 위한 방법으로 Veeam에서 제공하는 Kasten 설치</p>
 <p>설치 환경은 Tanzu 1.4 버전으로 진행</p>
-<h2 id="1-requirements">1. Requirements</h2>
-<p>helm 설치, <a href="https://github.com/helm/helm/releases" target="_blank" rel="noopener noreffer "><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;Helm</a>.</p>
-<h2 id="2-환경">2. 환경</h2>
-<p>vSphere : 7.0</p>
+<h2 id="1-requirements" class="heading-element">
+  <a href="#1-requirements" class="heading-mark"></a>1. Requirements</h2><p>helm 설치, <a href="https://github.com/helm/helm/releases"target="_blank" rel="external nofollow noopener noreferrer"><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;Helm</a>.</p>
+<h2 id="2-환경" class="heading-element">
+  <a href="#2-%ed%99%98%ea%b2%bd" class="heading-mark"></a>2. 환경</h2><p>vSphere : 7.0</p>
 <p>vSAN</p>
 <p>NSX : 3.2</p>
 <p>AVI : 21.1.1</p>
 <p>Tanzu: 1.4</p>
 <p>Ingress: Contour</p>
-<h2 id="3-설치">3. 설치</h2>
-<p>Kasten은 백업으로 유명한 Veeam에서 인수를 하여 컨테이너 환경에서 백업을 도와준다.</p>
-<h3 id="31-helm-설치">3.1. Helm 설치</h3>
-<div class="highlight"><div class="chroma">
+<h2 id="3-설치" class="heading-element">
+  <a href="#3-%ec%84%a4%ec%b9%98" class="heading-mark"></a>3. 설치</h2><p>Kasten은 백업으로 유명한 Veeam에서 인수를 하여 컨테이너 환경에서 백업을 도와준다.</p>
+<h3 id="31-helm-설치" class="heading-element">
+  <a href="#31-helm-%ec%84%a4%ec%b9%98" class="heading-mark"></a>3.1. Helm 설치</h3><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -35,11 +34,10 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 </span></span><span class="line"><span class="cl">chmod <span class="m">700</span> get_helm.sh
 </span></span><span class="line"><span class="cl">./get_helm.sh
-</span></span><span class="line"><span class="cl">helm version
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">helm version</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="32-kasten-repo-update">3.2. Kasten Repo Update</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="32-kasten-repo-update" class="heading-element">
+  <a href="#32-kasten-repo-update" class="heading-mark"></a>3.2. Kasten Repo Update</h3><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -48,41 +46,36 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm repo add kasten https://charts.kasten.io/
 </span></span><span class="line"><span class="cl">helm repo update
-</span></span><span class="line"><span class="cl">helm search repo kasten
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">helm search repo kasten</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><a class="lightgallery" href="/images/K10/3-2.png" title="Kasten Repo Check" data-thumbnail="/images/K10/3-2.png" data-sub-html="<h2>Kasten Repo Check</h2><p>Kasten Repo Check</p>">
-        
-    </a><figcaption class="image-caption">Kasten Repo Check</figcaption>
-    </figure></p>
-<h3 id="33-kasten-install">3.3. Kasten Install</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>SSL 구성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"></a></p>
+</div><p><figure><a class="lightgallery" href="/images/K10/3-2.png?size=large" data-thumbnail="/images/K10/3-2.png?size=small" data-sub-html="<h2>Kasten Repo Check</h2><p>Kasten Repo Check</p>"><img loading="lazy" src="/images/K10/3-2.png" alt="Kasten Repo Check" srcset="/images/K10/3-2.png?size=small, /images/K10/3-2.png?size=medium 1.5x, /images/K10/3-2.png?size=large 2x" sizes="auto" data-title="Kasten Repo Check" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten Repo Check</figcaption>
+  </figure></p>
+<h3 id="33-kasten-install" class="heading-element">
+  <a href="#33-kasten-install" class="heading-mark"></a>3.3. Kasten Install</h3><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>SSL 구성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.ko.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>Namespace를 생성 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns kasten-io
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Kasten을 SSL을 구성 하려면 아래와 같이 인증서를 생성 후 Secret을 생성 해준다. 만약 SSL이 필요 없다면 아래는 패스해도 무관 하다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret tls kasten-tls --cert<span class="o">=</span>/data/cert/yourodmain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n kasten-io
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret tls kasten-tls --cert<span class="o">=</span>/data/cert/yourodmain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>helm을 통해 Kasten을 설치 하기 위해 아래와 같이 실행을 한다.
 Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -101,110 +94,98 @@ Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한�
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set ingress.tls.enabled<span class="o">=</span><span class="nb">true</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set ingress.tls.secretName<span class="o">=</span>kasten-tls <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set ingress.host<span class="o">=</span>kasten.tkg.io <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>만약 HTTPS로 구성 하면 자동으로 SSL Redirect를 해주기 위해서 ingress를 확인 후 Annotation을 설정 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl get ing
-</span></span><span class="line"><span class="cl">kubectl annotate ing k10-ingress -n kasten-io ingress.kubernetes.io/force-ssl-redirect=true
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl annotate ing k10-ingress -n kasten-io ingress.kubernetes.io/force-ssl-redirect=true</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="34-배포-완료">3.4. 배포 완료</h3>
-<p><figure><a class="lightgallery" href="/images/K10/3-4.png" title="Kasten Complate" data-thumbnail="/images/K10/3-4.png" data-sub-html="<h2>Kasten Complate</h2><p>Kasten Complate</p>">
-        
-    </a><figcaption class="image-caption">Kasten Complate</figcaption>
-    </figure></p>
-<h3 id="35-annotation-설정-완료">3.5. Annotation 설정 완료</h3>
-<p><figure><a class="lightgallery" href="/images/K10/3-5.png" title="Kasten ingress Annotation" data-thumbnail="/images/K10/3-5.png" data-sub-html="<h2>Kasten ingress Annotation</h2><p>Kasten ingress Annotation</p>">
-        
-    </a><figcaption class="image-caption">Kasten ingress Annotation</figcaption>
-    </figure></p>
-<h3 id="36-접속-방법">3.6. 접속 방법</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>접속을 하기 위해 유저 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"></a></p>
+  </div>
+<h3 id="34-배포-완료" class="heading-element">
+  <a href="#34-%eb%b0%b0%ed%8f%ac-%ec%99%84%eb%a3%8c" class="heading-mark"></a>3.4. 배포 완료</h3><p><figure><a class="lightgallery" href="/images/K10/3-4.png?size=large" data-thumbnail="/images/K10/3-4.png?size=small" data-sub-html="<h2>Kasten Complate</h2><p>Kasten Complate</p>"><img loading="lazy" src="/images/K10/3-4.png" alt="Kasten Complate" srcset="/images/K10/3-4.png?size=small, /images/K10/3-4.png?size=medium 1.5x, /images/K10/3-4.png?size=large 2x" sizes="auto" data-title="Kasten Complate" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten Complate</figcaption>
+  </figure></p>
+<h3 id="35-annotation-설정-완료" class="heading-element">
+  <a href="#35-annotation-%ec%84%a4%ec%a0%95-%ec%99%84%eb%a3%8c" class="heading-mark"></a>3.5. Annotation 설정 완료</h3><p><figure><a class="lightgallery" href="/images/K10/3-5.png?size=large" data-thumbnail="/images/K10/3-5.png?size=small" data-sub-html="<h2>Kasten ingress Annotation</h2><p>Kasten ingress Annotation</p>"><img loading="lazy" src="/images/K10/3-5.png" alt="Kasten ingress Annotation" srcset="/images/K10/3-5.png?size=small, /images/K10/3-5.png?size=medium 1.5x, /images/K10/3-5.png?size=large 2x" sizes="auto" data-title="Kasten ingress Annotation" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten ingress Annotation</figcaption>
+  </figure></p>
+<h3 id="36-접속-방법" class="heading-element">
+  <a href="#36-%ec%a0%91%ec%86%8d-%eb%b0%a9%eb%b2%95" class="heading-mark"></a>3.6. 접속 방법</h3><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>접속을 하기 위해 유저 생성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.ko.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>TOKEN으로 접속하기 위해 유저를 생성 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create serviceaccount my-kasten-sa --namespace kasten-io
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create serviceaccount my-kasten-sa --namespace kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>TOKEN 확인 방법</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">sa_secret</span><span class="o">=</span><span class="k">$(</span>kubectl get serviceaccount my-kasten-sa -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.secrets[0].name}&#34;</span> --namespace kasten-io<span class="k">)</span>
-</span></span><span class="line"><span class="cl">kubectl get secret <span class="nv">$sa_secret</span> --namespace kasten-io -ojsonpath<span class="o">=</span><span class="s2">&#34;{.data.token}{&#39;\n&#39;}&#34;</span> <span class="p">|</span> base64 --decode
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl get secret <span class="nv">$sa_secret</span> --namespace kasten-io -ojsonpath<span class="o">=</span><span class="s2">&#34;{.data.token}{&#39;\n&#39;}&#34;</span> <span class="p">|</span> base64 --decode</span></span></code></pre></td></tr></table>
 </div>
 </div><p>우선 Ingress로 구성을 했지만 여기선 포트 포워딩으로 설명 하겠다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl --namespace kasten-io port-forward service/gateway 8080:8000
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl --namespace kasten-io port-forward service/gateway 8080:8000</span></span></code></pre></td></tr></table>
 </div>
 </div><p>포트 포워딩을 위해 다른 SSH를 오픈 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ssh root@<span class="o">{</span>포트포워딩 한 OS<span class="o">}</span> -L 8080:localhost:8080
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ssh root@<span class="o">{</span>포트포워딩 한 OS<span class="o">}</span> -L 8080:localhost:8080</span></span></code></pre></td></tr></table>
 </div>
 </div><p>접속시 성공을 한 것을 확인 할 수 있다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl get ing
-</span></span><span class="line"><span class="cl">kubectl annotate ing k10-ingress -n kasten-io ingress.kubernetes.io/force-ssl-redirect=true
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl annotate ing k10-ingress -n kasten-io ingress.kubernetes.io/force-ssl-redirect=true</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="4-k10-auth-ldap-설정">4. K10 Auth LDAP 설정</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>K10 Auth 설정<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"></a></p>
+  </div>
+<h2 id="4-k10-auth-ldap-설정" class="heading-element">
+  <a href="#4-k10-auth-ldap-%ec%84%a4%ec%a0%95" class="heading-mark"></a>4. K10 Auth LDAP 설정</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>K10 Auth 설정<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.ko.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>values 파일을 다운로드 받는다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values kasten/k10 &gt; k10.yaml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values kasten/k10 &gt; k10.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Auth라는 부분을 찾은 후 아래 부분을 수정 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -269,11 +250,10 @@ Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한�
 </span></span><span class="line"><span class="cl">    usernameClaim: <span class="s2">&#34;email&#34;</span>
 </span></span><span class="line"><span class="cl">    usernamePrefix: <span class="s2">&#34;&#34;</span>
 </span></span><span class="line"><span class="cl">    groupnameClaim: <span class="s2">&#34;groups&#34;</span>
-</span></span><span class="line"><span class="cl">    groupnamePrefix: <span class="s2">&#34;&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    groupnamePrefix: <span class="s2">&#34;&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>아래와 같이 실행을 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -296,11 +276,10 @@ Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한�
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set auth.k10AdminUsers<span class="o">[</span>0<span class="o">]=</span><span class="s1">&#39;my1208@openbase.co.kr&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set auth.k10AdminGroups<span class="o">[</span>0<span class="o">]=</span><span class="s2">&#34;tkg&#34;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>-f k10.yaml <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>또는 아래와 같이 업그레이드를 해준다. 만약 실패 하면 삭제 후 다시 Install 해주면 된다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -323,27 +302,22 @@ Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한�
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set auth.k10AdminUsers<span class="o">[</span>0<span class="o">]=</span><span class="s1">&#39;my1208@openbase.co.kr&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set auth.k10AdminGroups<span class="o">[</span>0<span class="o">]=</span><span class="s2">&#34;tkg&#34;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>-f k10.yaml <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="41-완료-화면">4.1. 완료 화면</h3>
-<p><figure><a class="lightgallery" href="/images/K10/4-1.png" title="Kasten Auth Integration" data-thumbnail="/images/K10/4-1.png" data-sub-html="<h2>Kasten Auth Integration</h2><p>Kasten Auth Integration</p>">
-        
-    </a><figcaption class="image-caption">Kasten Auth Integration</figcaption>
-    </figure>
-<figure><a class="lightgallery" href="/images/K10/4-2.png" title="Kasten Auth Integration" data-thumbnail="/images/K10/4-2.png" data-sub-html="<h2>Kasten Auth Integration</h2><p>Kasten Auth Integration</p>">
-        
-    </a><figcaption class="image-caption">Kasten Auth Integration</figcaption>
-    </figure></p>
-<h2 id="5-nfs-연동">5. NFS 연동</h2>
-<blockquote>
+  </div>
+<h3 id="41-완료-화면" class="heading-element">
+  <a href="#41-%ec%99%84%eb%a3%8c-%ed%99%94%eb%a9%b4" class="heading-mark"></a>4.1. 완료 화면</h3><p><figure><a class="lightgallery" href="/images/K10/4-1.png?size=large" data-thumbnail="/images/K10/4-1.png?size=small" data-sub-html="<h2>Kasten Auth Integration</h2><p>Kasten Auth Integration</p>"><img loading="lazy" src="/images/K10/4-1.png" alt="Kasten Auth Integration" srcset="/images/K10/4-1.png?size=small, /images/K10/4-1.png?size=medium 1.5x, /images/K10/4-1.png?size=large 2x" sizes="auto" data-title="Kasten Auth Integration" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten Auth Integration</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="/images/K10/4-2.png?size=large" data-thumbnail="/images/K10/4-2.png?size=small" data-sub-html="<h2>Kasten Auth Integration</h2><p>Kasten Auth Integration</p>"><img loading="lazy" src="/images/K10/4-2.png" alt="Kasten Auth Integration" srcset="/images/K10/4-2.png?size=small, /images/K10/4-2.png?size=medium 1.5x, /images/K10/4-2.png?size=large 2x" sizes="auto" data-title="Kasten Auth Integration" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten Auth Integration</figcaption>
+  </figure></p>
+<h2 id="5-nfs-연동" class="heading-element">
+  <a href="#5-nfs-%ec%97%b0%eb%8f%99" class="heading-mark"></a>5. NFS 연동</h2><blockquote>
 <p>카스텐에서 스토리지를 저정하기 위해 여러가지 방법이 있지만 우선 NFS 연동을 하여 백업을 하는 방법에 대해서 기술</p>
 </blockquote>
-<h3 id="51-pvc-생성">5.1. PVC 생성</h3>
-<div class="highlight"><div class="chroma">
+<h3 id="51-pvc-생성" class="heading-element">
+  <a href="#51-pvc-%ec%83%9d%ec%84%b1" class="heading-mark"></a>5.1. PVC 생성</h3><div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -416,50 +390,49 @@ Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한�
 </span></span></span><span class="line"><span class="cl"><span class="s">      requests:
 </span></span></span><span class="line"><span class="cl"><span class="s">         storage: 10Gi
 </span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>         
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>         </span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/K10/5-1.png"/><figcaption>
             <h4>PVC 생성 완료 확인</h4>
         </figcaption>
 </figure>
 
-<h3 id="52-카스텐-설정">5.2. 카스텐 설정</h3>
-<p><figure><figcaption>
+<h3 id="52-카스텐-설정" class="heading-element">
+  <a href="#52-%ec%b9%b4%ec%8a%a4%ed%85%90-%ec%84%a4%ec%a0%95" class="heading-mark"></a>5.2. 카스텐 설정</h3><p><figure><img src="/images/K10/5-2.png"/><figcaption>
             <h4>카스텐 Locations 설정</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/K10/5-3.png"/><figcaption>
             <h4>카스텐 NFS 설정</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/K10/5-4.png"/><figcaption>
             <h4>카스텐 프로파일 설정 완료 확인</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="6-minio-연동">6. MINIO 연동</h2>
-<p>MINIO를 구성 하려면 먼저 Erasure Code와 Immutability가 되어야 한다.</p>
-<p>참고 링크<a href="https://docs.min.io/docs/minio-erasure-code-quickstart-guide.html" target="_blank" rel="noopener noreffer "><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;MINIO</a> 참조</p>
+<h2 id="6-minio-연동" class="heading-element">
+  <a href="#6-minio-%ec%97%b0%eb%8f%99" class="heading-mark"></a>6. MINIO 연동</h2><p>MINIO를 구성 하려면 먼저 Erasure Code와 Immutability가 되어야 한다.</p>
+<p>참고 링크<a href="https://docs.min.io/docs/minio-erasure-code-quickstart-guide.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;MINIO</a> 참조</p>
 <p>MINIO를 컨테이너 형태로 배포를 하게 되면 우선 Immutability를 지원 하지 않는 것으로 보인다. 그래서 별도로 VM을 생성 해서 진행</p>
-<h3 id="61-vm-설정">6.1. VM 설정</h3>
-<p>VM을 생성 할때 스토리지를 OS가 저장되는 HDD를 제외한 4개를 구성 후 배포를 완료 한다.
-<figure><figcaption>
+<h3 id="61-vm-설정" class="heading-element">
+  <a href="#61-vm-%ec%84%a4%ec%a0%95" class="heading-mark"></a>6.1. VM 설정</h3><p>VM을 생성 할때 스토리지를 OS가 저장되는 HDD를 제외한 4개를 구성 후 배포를 완료 한다.
+<figure><img src="/images/K10/6-1.png"/><figcaption>
             <h4>VM 생성</h4>
         </figcaption>
 </figure>
 </p>
-<h3 id="62-fdisk-생성">6.2 FDISK 생성</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>VOLUME 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"></a></p>
+<h3 id="62-fdisk-생성" class="heading-element">
+  <a href="#62-fdisk-%ec%83%9d%ec%84%b1" class="heading-mark"></a>6.2 FDISK 생성</h3><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>VOLUME 생성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.ko.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>모든 HDD를 FDISK구성 해준다. 순서는 (n &gt; p &gt; t &gt; 8e &gt; w) 로 입력 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -526,11 +499,10 @@ Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한�
 </span></span><span class="line"><span class="cl">Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: w
 </span></span><span class="line"><span class="cl">The partition table has been altered.
 </span></span><span class="line"><span class="cl">Calling ioctl<span class="o">()</span> to re-read partition table.
-</span></span><span class="line"><span class="cl">Syncing disks.
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">Syncing disks.</span></span></code></pre></td></tr></table>
 </div>
 </div><p>VOLUME을 생성해 준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -617,12 +589,11 @@ Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한�
 </span></span><span class="line"><span class="cl">mkdir /root/xfs_minio_4
 </span></span><span class="line"><span class="cl">mount /dev/vg_xfs_minio_4/xfs_minio_4 /root/xfs_minio_4/
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">df -hT /root/xfs_minio_4/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">df -hT /root/xfs_minio_4/</span></span></code></pre></td></tr></table>
 </div>
 </div><p>부팅 후에도 마운투가 될 수 있게 fstab에 저장해준다.
 blkid로 UUID를 확인</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -639,25 +610,24 @@ blkid로 UUID를 확인</p>
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=b6d3f331-deaf-428b-bcb0-c9b48bab2253 /root/xfs_minio_1 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=213694c7-bbaf-45c4-96c8-4e912dc70f3f /root/xfs_minio_2 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=e7aa0e12-3c0c-4e12-a00d-9ebeaab76669 /root/xfs_minio_3 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=ac211fab-162e-4f8a-854b-1960aa43e252 /root/xfs_minio_4 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=ac211fab-162e-4f8a-854b-1960aa43e252 /root/xfs_minio_4 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>UUID 확인
-<figure><figcaption>
+<figure><img src="/images/K10/6-2.png"/><figcaption>
             <h4>UUID 확인</h4>
         </figcaption>
 </figure>
 </p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>MINIO &amp; MC 설치<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"></a></p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>MINIO &amp; MC 설치<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.ko.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
+<div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -674,23 +644,21 @@ blkid로 UUID를 확인</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">wget https://dl.min.io/client/mc/release/linux-amd64/mc
 </span></span><span class="line"><span class="cl">chmod +x mc
-</span></span><span class="line"><span class="cl">cp mc /usr/local/bin/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">cp mc /usr/local/bin/</span></span></code></pre></td></tr></table>
 </div>
 </div><p>설치가 완료 되면 SSL을 생성한다. SSL 생성은 간단 하므로 여기서 표시 하지는 않겠다.
 생성된 SSL 인증서와 Key를 minio 폴더로 카피 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-21"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cp yourdomain.com.crt /root/.minio/certs/public.crt
-</span></span><span class="line"><span class="cl">cp yourdomain.com.key /root/.minio/certs/private.key
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">cp yourdomain.com.key /root/.minio/certs/private.key</span></span></code></pre></td></tr></table>
 </div>
 </div><p>MINIO를 생성 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-22"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -707,35 +675,34 @@ blkid로 UUID를 확인</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">mc mb --debug -l minio-veeam/veeam-immutable
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">mc retention <span class="nb">set</span> --default compliance 30d minio-veeam/veeam-immutable
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">mc retention <span class="nb">set</span> --default compliance 30d minio-veeam/veeam-immutable</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>프로파일 설정
-<figure><figcaption>
+<figure><img src="/images/K10/6-3.png"/><figcaption>
             <h4>카스텐 프로파일 설정</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/K10/6-4.png"/><figcaption>
             <h4>카스텐 프로파일 등록 완료 1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/K10/6-5.png"/><figcaption>
             <h4>카스텐 프로파일 등록 완료 2</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="7-백업-완료">7. 백업 완료</h2>
-<p><figure><figcaption>
+<h2 id="7-백업-완료" class="heading-element">
+  <a href="#7-%eb%b0%b1%ec%97%85-%ec%99%84%eb%a3%8c" class="heading-mark"></a>7. 백업 완료</h2><p><figure><img src="/images/K10/6-6.png"/><figcaption>
             <h4>카스텐에서 백업 실행후 완료 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/K10/6-7.png"/><figcaption>
             <h4>MINIO에서 백업 확인</h4>
         </figcaption>
 </figure>

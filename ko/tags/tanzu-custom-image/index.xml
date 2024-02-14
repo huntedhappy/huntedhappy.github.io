@@ -1,57 +1,55 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>tanzu Custom Image - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/tanzu-custom-image/</link>
-        <description>tanzu Custom Image - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu-custom-image/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation TANZU CUSTOM IMAGE</title>
-    <link>https://huntedhappy.github.io/ko/tanzu-custom-image/</link>
-    <pubDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tanzu-custom-image/</guid>
-    <description><![CDATA[<h2 id="1-tanzu-custom-image">1. Tanzu Custom Image</h2>
-<p>VMware에서 기본적으로 제공하는 이미지외에 별도로 Custom Image를 구성 할 수 있다.</p>
+  <channel>
+    <title>tanzu Custom Image - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/tanzu-custom-image/</link>
+    <description>tanzu Custom Image - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/tanzu-custom-image/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation TANZU CUSTOM IMAGE</title>
+  <link>https://huntedhappy.github.io/ko/tanzu-custom-image/</link>
+  <pubDate>Wed, 01 Mar 2023 11:10:02 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tanzu-custom-image/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tanzu-custom-image/custom.png" alt="The Documentation TANZU CUSTOM IMAGE" title="How to Tanzu Custom Image Create" referrerpolicy="no-referrer"/></div><h2 id="1-tanzu-custom-image" class="heading-element">
+  <a href="#1-tanzu-custom-image" class="heading-mark"></a>1. Tanzu Custom Image</h2><p>VMware에서 기본적으로 제공하는 이미지외에 별도로 Custom Image를 구성 할 수 있다.</p>
 <p>호환되는 OS버전은 아래와 같다.
-<figure><figcaption>
+<figure><img src="/images/tanzu-custom-image/1-1.png"/><figcaption>
             <h4>지원 하는 OS Version</h4>
         </figcaption>
 </figure>
 </p>
-<p>1.6 버전 Custom Image 생성 <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.6/vmware-tanzu-kubernetes-grid-16/GUID-build-images-linux.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> 1.6 Custom-Image </a></p>
-<p>2.1 버전 Custom Image 생성 <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/2.1/tkg-deploy-mc-21/mgmt-byoi-linux.html#linux-tkr" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> 2.1 Custom-Image </a></p>
-<p>TANZU 버전별 Sample Download <a href="https://developer.vmware.com/samples" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Sample Downloads </a></p>
+<p>1.6 버전 Custom Image 생성 <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.6/vmware-tanzu-kubernetes-grid-16/GUID-build-images-linux.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> 1.6 Custom-Image </a></p>
+<p>2.1 버전 Custom Image 생성 <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/2.1/tkg-deploy-mc-21/mgmt-byoi-linux.html#linux-tkr"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> 2.1 Custom-Image </a></p>
+<p>TANZU 버전별 Sample Download <a href="https://developer.vmware.com/samples"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Sample Downloads </a></p>
 <blockquote>
 <p>사전에 도커가 설치 되어 있어야 함</p>
 </blockquote>
 <blockquote>
 <p>RHEL의 경우 Subscription이 되어 있어야 함</p>
 </blockquote>
-<h2 id="2-공통-작업">2. 공통 작업</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Docker Server 실행<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<h2 id="2-공통-작업" class="heading-element">
+  <a href="#2-%ea%b3%b5%ed%86%b5-%ec%9e%91%ec%97%85" class="heading-mark"></a>2. 공통 작업</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>Docker Server 실행<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull projects.registry.vmware.com/tkg/linux-resource-bundle:v1.23.10_vmware.1-tkg.1
-</span></span><span class="line"><span class="cl">docker run -d -p 3000:3000 projects.registry.vmware.com/tkg/linux-resource-bundle:v1.23.10_vmware.1-tkg.1
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">docker run -d -p 3000:3000 projects.registry.vmware.com/tkg/linux-resource-bundle:v1.23.10_vmware.1-tkg.1</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Sample 다운로드<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>Sample 다운로드<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -72,18 +70,17 @@
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1 Sample Download</span>
 </span></span><span class="line"><span class="cl">curl -L https://apigw.vmware.com/sampleExchange/v1/downloads/8061 -o TKG-Image-Builder-for-Kubernetes-v1.24.9-master.zip
 </span></span><span class="line"><span class="cl">unzip TKG-Image-Builder-for-Kubernetes-v1.24.9-master.zip
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /TKG-Image-Builder-for-Kubernetes-v1.24.9-on-TKG-v2.1.0-master/TKG-Image-Builder-for-Kubernetes-v1_24_9---vmware_1-tkg_v2_1_0/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /TKG-Image-Builder-for-Kubernetes-v1.24.9-on-TKG-v2.1.0-master/TKG-Image-Builder-for-Kubernetes-v1_24_9---vmware_1-tkg_v2_1_0/</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>tkg.json 설정 변경<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>tkg.json 설정 변경<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -150,18 +147,17 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;kubernetes_cni_http_checksum&#34;: &#34;&#34;,
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;kubernetes_load_additional_imgs&#34;: &#34;true&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>vCenter 및 Tanzu Kubernetes 버전 설정<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>vCenter 및 Tanzu Kubernetes 버전 설정<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -230,19 +226,18 @@
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1</span>
 </span></span><span class="line"><span class="cl"><span class="o">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;VERSION&#34;</span>: <span class="s2">&#34;v1.24.9+vmware.1-dokyung.0&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="3-ubuntu-custom-image-생성">3. Ubuntu Custom Image 생성</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>이미지 생성 실행<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="3-ubuntu-custom-image-생성" class="heading-element">
+  <a href="#3-ubuntu-custom-image-%ec%83%9d%ec%84%b1" class="heading-mark"></a>3. Ubuntu Custom Image 생성</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>이미지 생성 실행<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -307,18 +302,17 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --env <span class="nv">IB_OVFTOOL</span><span class="o">=</span><span class="m">1</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --network host <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  projects.registry.vmware.com/tkg/image-builder:v0.1.13_vmware.2 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  build-node-ova-vsphere-ubuntu-2004
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  build-node-ova-vsphere-ubuntu-2004</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -1383,10 +1377,9 @@
 </span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1
-</span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">--&gt; vsphere: ubuntu-2004-kube-v1.23.10_vmware.1</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1405,19 +1398,18 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1</span>
 </span></span><span class="line"><span class="cl">ls output/ubuntu-2004-kube-v1.24.9_vmware.1/
-</span></span><span class="line"><span class="cl">packer-manifest.json  ubuntu-2004-kube-v1.24.9_vmware.1-disk-0.vmdk  ubuntu-2004-kube-v1.24.9+vmware.1.ova  ubuntu-2004-kube-v1.24.9+vmware.1.ova.sha256  ubuntu-2004-kube-v1.24.9+vmware.1.ovf  ubuntu-2004-kube-v1.24.9_vmware.1.ovf
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">packer-manifest.json  ubuntu-2004-kube-v1.24.9_vmware.1-disk-0.vmdk  ubuntu-2004-kube-v1.24.9+vmware.1.ova  ubuntu-2004-kube-v1.24.9+vmware.1.ova.sha256  ubuntu-2004-kube-v1.24.9+vmware.1.ovf  ubuntu-2004-kube-v1.24.9_vmware.1.ovf</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="4-rhel-custom-image-생성">4. RHEL Custom Image 생성</h2>
-<p><div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>rhel-8.json 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="4-rhel-custom-image-생성" class="heading-element">
+  <a href="#4-rhel-custom-image-%ec%83%9d%ec%84%b1" class="heading-mark"></a>4. RHEL Custom Image 생성</h2><p><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>rhel-8.json 생성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1462,18 +1454,17 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;shutdown_command&#34;: &#34;shutdown -P now&#34;,
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;vsphere_guest_os_type&#34;: &#34;rhel8_64Guest&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>rhel-8 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>rhel-8 생성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1558,19 +1549,18 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --env <span class="nv">IB_OVFTOOL</span><span class="o">=</span><span class="m">1</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --env <span class="nv">IB_OVFTOOL_ARGS</span><span class="o">=</span><span class="s2">&#34;--allowExtraConfig&#34;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  projects.registry.vmware.com/tkg/image-builder:v0.1.13_vmware.2 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  build-node-ova-vsphere-rhel-8
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  build-node-ova-vsphere-rhel-8</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
-    </div></p>
+    </div>
+  </div></p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><h2 id="rhel-8-이미지-로그">rhel 8 이미지 로그</h2>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><h2 id="rhel-8-이미지-로그" class="heading-element">
+  <a href="#rhel-8-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%a1%9c%ea%b7%b8" class="heading-mark"></a>rhel 8 이미지 로그</h2><div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -2587,10 +2577,9 @@
 </span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1
-</span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">--&gt; vsphere: rhel-8-kube-v1.23.10_vmware.1</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -2611,19 +2600,18 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1</span>
 </span></span><span class="line"><span class="cl">ls output/rhel-8-kube-v1.24.9_vmware.1/
-</span></span><span class="line"><span class="cl">packer-manifest.json  rhel-8-kube-v1.24.9_vmware.1-disk-0.vmdk  rhel-8-kube-v1.24.9+vmware.1.ova  rhel-8-kube-v1.24.9+vmware.1.ova.sha256  rhel-8-kube-v1.24.9+vmware.1.ovf  rhel-8-kube-v1.24.9_vmware.1.ovf
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">packer-manifest.json  rhel-8-kube-v1.24.9_vmware.1-disk-0.vmdk  rhel-8-kube-v1.24.9+vmware.1.ova  rhel-8-kube-v1.24.9+vmware.1.ova.sha256  rhel-8-kube-v1.24.9+vmware.1.ovf  rhel-8-kube-v1.24.9_vmware.1.ovf</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="5-photon-custom-image-생성">5. Photon Custom Image 생성</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="5-photon-custom-image-생성" class="heading-element">
+  <a href="#5-photon-custom-image-%ec%83%9d%ec%84%b1" class="heading-mark"></a>5. Photon Custom Image 생성</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LOG<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">   1
 </span><span class="lnt">   2
@@ -6400,10 +6388,9 @@
 </span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1
 </span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1
-</span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">--&gt; vsphere: photon-3-kube-v1.23.10_vmware.1</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6424,19 +6411,18 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 2.1</span>
 </span></span><span class="line"><span class="cl">ls output/photon-3-kube-v1.24.9_vmware.1/
-</span></span><span class="line"><span class="cl">packer-manifest.json  photon-3-kube-v1.24.9_vmware.1-disk-0.vmdk  photon-3-kube-v1.24.9+vmware.1.ova  photon-3-kube-v1.24.9+vmware.1.ova.sha256  photon-3-kube-v1.24.9+vmware.1.ovf  photon-3-kube-v1.24.9_vmware.1.ovf
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">packer-manifest.json  photon-3-kube-v1.24.9_vmware.1-disk-0.vmdk  photon-3-kube-v1.24.9+vmware.1.ova  photon-3-kube-v1.24.9+vmware.1.ova.sha256  photon-3-kube-v1.24.9+vmware.1.ovf  photon-3-kube-v1.24.9_vmware.1.ovf</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="6-tkr-등록">6. TKR 등록</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>TKR 등록<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="6-tkr-등록" class="heading-element">
+  <a href="#6-tkr-%eb%93%b1%eb%a1%9d" class="heading-mark"></a>6. TKR 등록</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>TKR 등록<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6533,19 +6519,18 @@
 </span></span><span class="line"><span class="cl">    name: rhel
 </span></span><span class="line"><span class="cl">    version: <span class="s2">&#34;8&#34;</span>
 </span></span><span class="line"><span class="cl">    arch: amd64
-</span></span><span class="line"><span class="cl">  version: v1.24.9+vmware.1-dokyung.0
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  version: v1.24.9+vmware.1-dokyung.0</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="7-ova-업로드">7. OVA 업로드</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>업로드<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="7-ova-업로드" class="heading-element">
+  <a href="#7-ova-%ec%97%85%eb%a1%9c%eb%93%9c" class="heading-mark"></a>7. OVA 업로드</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>업로드<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6578,38 +6563,36 @@
 </span></span><span class="line"><span class="cl"><span class="c1">### ubuntu</span>
 </span></span><span class="line"><span class="cl">ovftool --acceptAllEulas --net:nic0<span class="o">={</span>NIC<span class="o">}</span>--datastore<span class="o">={</span>STORE<span class="o">}</span> --vmFolder<span class="o">={</span>FOLDER<span class="o">}</span> --importAsTemplate output/ubuntu-2004-kube-v1.24.9_vmware.1/ubuntu-2004-kube-v1.24.9+vmware.1.ova <span class="s1">&#39;vi://{ID}:{PW}}@{vCenter FQDN or IP}/{DATACENTER}/host/{CLUSTER}/&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">### rhel</span>
-</span></span><span class="line"><span class="cl">ovftool --acceptAllEulas --net:nic0<span class="o">={</span>NIC<span class="o">}</span>--datastore<span class="o">={</span>STORE<span class="o">}</span> --vmFolder<span class="o">={</span>FOLDER<span class="o">}</span> --importAsTemplate output/rhel-8-kube-v1.24.9_vmware.1/rhel-8-kube-v1.24.9+vmware.1.ova <span class="s1">&#39;vi://{ID}:{PW}}@{vCenter FQDN or IP}/{DATACENTER}/host/{CLUSTER}/&#39;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">ovftool --acceptAllEulas --net:nic0<span class="o">={</span>NIC<span class="o">}</span>--datastore<span class="o">={</span>STORE<span class="o">}</span> --vmFolder<span class="o">={</span>FOLDER<span class="o">}</span> --importAsTemplate output/rhel-8-kube-v1.24.9_vmware.1/rhel-8-kube-v1.24.9+vmware.1.ova <span class="s1">&#39;vi://{ID}:{PW}}@{vCenter FQDN or IP}/{DATACENTER}/host/{CLUSTER}/&#39;</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="6-배포">6. 배포</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>클러스터 배포<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+  </div>
+<h2 id="6-배포" class="heading-element">
+  <a href="#6-%eb%b0%b0%ed%8f%ac" class="heading-mark"></a>6. 배포</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>클러스터 배포<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu cluster create -f <span class="o">{</span>FILE<span class="o">}</span> -v <span class="m">9</span> -y
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu cluster create -f <span class="o">{</span>FILE<span class="o">}</span> -v <span class="m">9</span> -y</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="7-확인">7. 확인</h2>
-<blockquote>
+  </div>
+<h2 id="7-확인" class="heading-element">
+  <a href="#7-%ed%99%95%ec%9d%b8" class="heading-mark"></a>7. 확인</h2><blockquote>
 <p>1.6
-<figure><figcaption>
+<figure><img src="/images/tanzu-custom-image/1-3.png"/><figcaption>
             <h4>rhel node</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tanzu-custom-image/1-2.png"/><figcaption>
             <h4>photon node</h4>
         </figcaption>
 </figure>
@@ -6617,7 +6600,7 @@
 </blockquote>
 <blockquote>
 <p>2.1
-<figure><figcaption>
+<figure><img src="/images/tanzu-custom-image/1-4.png"/><figcaption>
             <h4>All node</h4>
         </figcaption>
 </figure>

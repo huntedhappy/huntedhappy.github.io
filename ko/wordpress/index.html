@@ -1,133 +1,212 @@
 <!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>The Documentation Wordpress &amp; Nginx Install - Dokyung&#39;s DevOoOps</title><meta name="Description" content="Wordpress &amp; Nginx Install"><meta property="og:title" content="The Documentation Wordpress &amp; Nginx Install" />
+<html itemscope itemtype="http://schema.org/WebPage" lang="ko">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>The Documentation Wordpress &amp; Nginx Install - Dokyung&#39;s DevOoOps</title><meta name="author" content="">
+<meta name="author-link" content="">
+<meta name="description" content="Wordpress &amp; Nginx Install" /><meta name="keywords" content='nginx, wordpress, dk, dokyung' /><meta itemprop="name" content="The Documentation Wordpress &amp; Nginx Install">
+<meta itemprop="description" content="Wordpress &amp; Nginx Install">
+<meta itemprop="dateModified" content="2023-09-17T08:19:26+09:00" />
+<meta itemprop="wordCount" content="314"><meta itemprop="image" content="https://huntedhappy.github.io/ko/wordpress/wordpress.jpg" />
+<meta itemprop="keywords" content="nginx,wordpress,dk,dokyung," /><meta property="og:title" content="The Documentation Wordpress &amp; Nginx Install" />
 <meta property="og:description" content="Wordpress &amp; Nginx Install" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/ko/wordpress/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/wordpress/wordpress.jpg" /><meta property="article:section" content="posts" />
 
-<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://huntedhappy.github.io/ko/wordpress/wordpress.jpg" /><meta name="twitter:title" content="The Documentation Wordpress &amp; Nginx Install"/>
 <meta name="twitter:description" content="Wordpress &amp; Nginx Install"/>
 <meta name="application-name" content="Dokyung&#39;s DevOoOps">
-<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/ko/wordpress/" /><link rel="next" href="https://huntedhappy.github.io/ko/k10/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "The Documentation Wordpress \u0026 Nginx Install",
-        "inLanguage": "ko",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/huntedhappy.github.io\/ko\/wordpress\/"
-        },"image": [{
-                            "@type": "ImageObject",
-                            "url": "https:\/\/huntedhappy.github.io\/ko\/wordpress\/wordpress.jpg",
-                            "width":  1042 ,
-                            "height":  665 
-                        }],"genre": "posts","keywords": "nginx, wordpress, dk, dokyung","wordcount":  314 ,
-        "url": "https:\/\/huntedhappy.github.io\/ko\/wordpress\/","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "Dokyung"
-            },"description": "Wordpress \u0026 Nginx Install"
-    }
-    </script></head>
-    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" data-light="#ffffff" data-dark="#ffffff" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://huntedhappy.github.io/ko/wordpress/" /><link rel="next" href="https://huntedhappy.github.io/ko/k10/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Documentation Wordpress \u0026 Nginx Install",
+    "inLanguage": "ko",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/huntedhappy.github.io\/ko\/wordpress\/"
+    },"image": [{
+              "@type": "ImageObject",
+              "url": "https:\/\/huntedhappy.github.io\/ko\/wordpress\/wordpress.jpg",
+              "width":  1042 ,
+              "height":  665 
+            }],"genre": "posts","keywords": "nginx, wordpress, dk, dokyung","wordcount":  314 ,
+    "url": "https:\/\/huntedhappy.github.io\/ko\/wordpress\/","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Dokyung"
+      },"description": "Wordpress \u0026 Nginx Install"
+  }
+  </script></head>
+  <body data-header-desktop="auto" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-desktop" class="typeit"></span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/posts/"
+                
+                
+              >Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/tags/"
+                
+                
+              >Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/"
+                
+                
+              >Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/documentation/"
+                
+                
+              >Docs</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/about/"
+                
+                
+              >About</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="https://github.com/huntedhappy/"
+                title="GitHub"
+                rel="noopener noreferrer" target="_blank"
+              ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Search titles or contents ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li><li class="menu-item language-switch">
+            <span role="button" aria-label="Select Language" title="Select Language"><i class="fa-solid fa-language fa-fw" aria-hidden="true"></i></span>
+            <ul class="sub-menu"><li class="menu-item">
+                      <span class="menu-link text-secondary" title="Korean">Korean</span>
+                    </li><li class="menu-item">
+                      <a href="/wordpress/" class="menu-link" title="한국어">한국어</a>
+                    </li></ul>
+          </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
     <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/ko/posts/"> Posts </a><a class="menu-item" href="/ko/tags/"> Tags </a><a class="menu-item" href="/ko/categories/"> Categories </a><a class="menu-item" href="/ko/categories/documentation/"> Docs </a><a class="menu-item" href="/ko/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a><a href="javascript:void(0);" class="menu-item language" title="언어 변경">
-                    <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/wordpress/" selected>Korean</option><option value="/wordpress/">한국어</option></select>
-                </a></div>
-        </div>
+      <div class="header-title">
+        <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-title-mobile" class="typeit"></span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Search titles or contents ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
             </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        취소
-                    </a>
-                </div><a class="menu-item" href="/ko/posts/" title="">Posts</a><a class="menu-item" href="/ko/tags/" title="">Tags</a><a class="menu-item" href="/ko/categories/" title="">Categories</a><a class="menu-item" href="/ko/categories/documentation/" title="">Docs</a><a class="menu-item" href="/ko/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a><a href="javascript:void(0);" class="menu-item" title="언어 변경">
-                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/ko/wordpress/" selected>Korean</option><option value="/wordpress/">한국어</option></select>
-                </a></div>
-    </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Cancel
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/posts/"
+                  
+                  
+                >Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/tags/"
+                  
+                  
+                >Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/"
+                  
+                  
+                >Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/documentation/"
+                  
+                  
+                >Docs</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/about/"
+                  
+                  
+                >About</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="https://github.com/huntedhappy/"
+                  title="GitHub"
+                  rel="noopener noreferrer" target="_blank"
+                ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span><span class="menu-system-item language-switch">
+              <span role="button" aria-label="Select Language" title="Select Language">Korean<i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+              <select class="language-select" onchange="location = this.value;"><option value="/ko/wordpress/" selected disabled>Korean</option><option value="/wordpress/">한국어</option></select>
+            </span></li>
+      </ul>
+    </nav>
+  </div>
 </header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">목차</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation Wordpress & Nginx Install</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">분류: <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;314 단어&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;읽는데 약 2분&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/ko/wordpress/wordpress.jpg"
-        data-srcset="/ko/wordpress/wordpress.jpg, /ko/wordpress/wordpress.jpg 1.5x, /ko/wordpress/wordpress.jpg 2x"
-        data-sizes="auto"
-        alt="/ko/wordpress/wordpress.jpg"
-        title="Wordpress &amp; Nginx Install" /></div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>목차</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>The Documentation Wordpress &amp; Nginx Install</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Dokyung</span></span><span class="post-included-in">&nbsp;included in <a href="/ko/categories/documentation/" class="post-category" title="Category - Documentation"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Documentation</a></span></div><div class="post-meta-line"><span title="published on 0001-01-01 00:00:00"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="0001-01-01">0001-01-01</time></span>&nbsp;<span title="Updated on 2023-09-17 08:19:26"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-17">2023-09-17</time></span>&nbsp;<span title="314 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 400 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="featured-image"><img loading="lazy" src="/ko/wordpress/wordpress.jpg" alt="/ko/wordpress/wordpress.jpg" data-title="Wordpress &amp; Nginx Install" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#1-nginx-설치">1. NGINX 설치</a>
       <ul>
@@ -136,15 +215,15 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>NGINX를 사용하여 WORDPRESS를 설치</p>
-<h2 id="1-nginx-설치">1. NGINX 설치</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>설치<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><h4 id="nginx-설치">NGINX 설치</h4>
-<div class="highlight"><div class="chroma">
+      </div><div class="content" id="content"><p>NGINX를 사용하여 WORDPRESS를 설치</p>
+<h2 id="1-nginx-설치" class="heading-element">
+  <a href="#1-nginx-%ec%84%a4%ec%b9%98" class="heading-mark"></a>1. NGINX 설치</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>설치<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><h4 id="nginx-설치" class="heading-element">
+  <a href="#nginx-%ec%84%a4%ec%b9%98" class="heading-mark"></a>NGINX 설치</h4><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -159,11 +238,10 @@
 </span></span><span class="line"><span class="cl">sudo apt-get dist-upgrade -y
 </span></span><span class="line"><span class="cl">sudo apt-get install nginx -y
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">nginx -v
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">nginx -v</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="php-설치">PHP 설치</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="php-설치" class="heading-element">
+  <a href="#php-%ec%84%a4%ec%b9%98" class="heading-mark"></a>PHP 설치</h4><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -184,11 +262,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>php8.0-mbstring php8.0-opcache php8.0-redis <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>php8.0-soap php8.0-zip -y
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">php-fpm8.0 -v
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">php-fpm8.0 -v</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="nginx-구성">NGINX 구성</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="nginx-구성" class="heading-element">
+  <a href="#nginx-%ea%b5%ac%ec%84%b1" class="heading-mark"></a>NGINX 구성</h4><div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -255,11 +332,10 @@
 </span></span><span class="line"><span class="cl">nginx -t
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## Nginx Reload</span>
-</span></span><span class="line"><span class="cl">nginx -s reload
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">nginx -s reload</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="php-파일-수정">PHP 파일 수정</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="php-파일-수정" class="heading-element">
+  <a href="#php-%ed%8c%8c%ec%9d%bc-%ec%88%98%ec%a0%95" class="heading-mark"></a>PHP 파일 수정</h4><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -274,11 +350,10 @@
 </span></span><span class="line"><span class="cl">sed -i -e <span class="s2">&#34;s/post_max_size = 8M/post_max_size = 64M/g&#34;</span> /etc/php/8.0/fpm/php.ini
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo php-fpm8.0 -t
-</span></span><span class="line"><span class="cl">sudo systemctl restart php8.0-fpm
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">sudo systemctl restart php8.0-fpm</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="mariadb-설치">MARIADB 설치</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="mariadb-설치" class="heading-element">
+  <a href="#mariadb-%ec%84%a4%ec%b9%98" class="heading-mark"></a>MARIADB 설치</h4><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -289,31 +364,28 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get install software-properties-common
 </span></span><span class="line"><span class="cl">sudo apt-key adv --fetch-keys <span class="s1">&#39;https://mariadb.org/mariadb_release_signing_key.asc&#39;</span>
 </span></span><span class="line"><span class="cl">sudo add-apt-repository <span class="s1">&#39;deb [arch=amd64,arm64,ppc64el] http://mirrors.up.pt/pub/mariadb/repo/10.4/ubuntu focal main&#39;</span>
-</span></span><span class="line"><span class="cl">sudo apt-get install mariadb-server -y
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">sudo apt-get install mariadb-server -y</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="mariadb-password-변경">MARIADB PASSWORD 변경</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="mariadb-password-변경" class="heading-element">
+  <a href="#mariadb-password-%eb%b3%80%ea%b2%bd" class="heading-mark"></a>MARIADB PASSWORD 변경</h3><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mysql -u root -e <span class="s1">&#39;create database wordpress character set utf8; grant all privileges on wordpress.* to &#39;</span>root<span class="s1">&#39;@&#39;</span>localhost<span class="s1">&#39; identified by &#34;WordPress!234&#34;; flush privileges;&#39;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mysql -u root -e <span class="s1">&#39;create database wordpress character set utf8; grant all privileges on wordpress.* to &#39;</span>root<span class="s1">&#39;@&#39;</span>localhost<span class="s1">&#39; identified by &#34;WordPress!234&#34;; flush privileges;&#39;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="wordpress-설치">WordPress 설치</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="wordpress-설치" class="heading-element">
+  <a href="#wordpress-%ec%84%a4%ec%b9%98" class="heading-mark"></a>WordPress 설치</h4><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir /wordpress
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /wordpress <span class="o">&amp;&amp;</span> wget http://wordpress.org/latest.tar.gz <span class="o">&amp;&amp;</span> tar -xzf /wordpress/latest.tar.gz -C /wordpress --strip-components <span class="m">1</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /wordpress <span class="o">&amp;&amp;</span> wget http://wordpress.org/latest.tar.gz <span class="o">&amp;&amp;</span> tar -xzf /wordpress/latest.tar.gz -C /wordpress --strip-components <span class="m">1</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="wordpress-설정">WordPress 설정</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="wordpress-설정" class="heading-element">
+  <a href="#wordpress-%ec%84%a4%ec%a0%95" class="heading-mark"></a>WordPress 설정</h4><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -328,60 +400,60 @@
 </span></span><span class="line"><span class="cl">sed -i -e <span class="s2">&#34;s/username_here/root/g&#34;</span> /wordpress/wp-config.php
 </span></span><span class="line"><span class="cl">sed -i -e <span class="s2">&#34;s/password_here/WordPress\!234/g&#34;</span> /wordpress/wp-config.php
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">cp -R * /var/www/html/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">cp -R * /var/www/html/</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="완료-화면">완료 화면</h3>
-<figure><img src="/images/wordpress/1-1.png"/><figcaption>
+  </div>
+<h3 id="완료-화면" class="heading-element">
+  <a href="#%ec%99%84%eb%a3%8c-%ed%99%94%eb%a9%b4" class="heading-mark"></a>완료 화면</h3><figure><img src="/images/wordpress/1-1.png"/><figcaption>
             <h4>wordpress-install</h4>
         </figcaption>
 </figure>
 
 </div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>수정: 2023-09-17&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/8f9e542c3d9a079137645ebc4858725c24bb6cc0" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 8f9e542c3d9a079137645ebc4858725c24bb6cc0: rebuilding site Sun Sep 17 08:19:26     2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8f9e542</a></span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/ko/wordpress/index.md" target="_blank">마크다운 읽기</a>
-                        </span></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="공유하기 Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/wordpress/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="공유하기 Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/wordpress/" data-title="The Documentation Wordpress &amp; Nginx Install" data-description="Wordpress &amp; Nginx Install"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
-            </div>
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2023-09-17 08:19:26">Updated on 2023-09-17&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/ko/wordpress/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/wordpress/"><i class="fa-brands fa-linkedin fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/wordpress/" data-title="The Documentation Wordpress &amp; Nginx Install" data-description="Wordpress &amp; Nginx Install"><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  </span>
         </div>
-    </div>
+      </div></div>
 
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/ko/tags/nginx/">nginx</a>,&nbsp;<a href="/ko/tags/wordpress/">wordpress</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">뒤로</a></span>&nbsp;|&nbsp;<span><a href="/ko/">홈</a></span>
-        </section>
-    </div>
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/ko/tags/nginx/" class="post-tag" title="Tags - nginx">nginx</a><a href="/ko/tags/wordpress/" class="post-tag" title="Tags - wordpress">wordpress</a><a href="/ko/tags/dk/" class="post-tag" title="Tags - dk">dk</a><a href="/ko/tags/dokyung/" class="post-tag" title="Tags - dokyung">dokyung</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/ko/">Home</a></span>
+    </section>
+  </div>
 
-    <div class="post-nav">
-            <a href="/ko/k10/" class="next" rel="next" title="The Documentation K10 Install">The Documentation K10 Install<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav">
+      <a href="/ko/k10/" class="post-nav-item" rel="next" title="The Documentation K10 Install">The Documentation K10 Install<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-        </div>
-    </footer></div>
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
+      </noscript></div></article>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="맨 위로">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="댓글 보기">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"복사하기","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"검색 결과 없음","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
-            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', '216068312', { 'anonymize_ip': true });
-        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/ko/"></a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="View Comments"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Theme FixIt works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/algoliasearch/algoliasearch-lite.umd.min.js" defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":true,"expired":false,"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"typeit-header-desktop":"Dokyung's DevOoOps","typeit-header-title-mobile":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},"duration":-1,"loop":false,"speed":100}};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', '216068312', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
 </html>

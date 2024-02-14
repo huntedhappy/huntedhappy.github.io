@@ -1,22 +1,21 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>gitLab install - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/gitlab-install/</link>
-        <description>gitLab install - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/gitlab-install/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation GitLab</title>
-    <link>https://huntedhappy.github.io/ko/git/</link>
-    <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/git/</guid>
-    <description><![CDATA[<h2 id="1-gitlab-접속-유저별-아키텍쳐">1. GitLab 접속 유저별 아키텍쳐</h2>
-<p>GitLab은 1000명 2000명 3000명 4000명 5000명 10,000명 25,000명 50,000명 구성을 제공하고 있다. 여기서는 2000명정도 유저가 있을 경우 GIT을 배포 하는 방법에 대해서 설명하고자 한다.</p>
+  <channel>
+    <title>gitLab install - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/gitlab-install/</link>
+    <description>gitLab install - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/gitlab-install/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation GitLab</title>
+  <link>https://huntedhappy.github.io/ko/git/</link>
+  <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/git/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/git/git_logo.png" alt="The Documentation GitLab" title="GitLab Install" referrerpolicy="no-referrer"/></div><h2 id="1-gitlab-접속-유저별-아키텍쳐" class="heading-element">
+  <a href="#1-gitlab-%ec%a0%91%ec%86%8d-%ec%9c%a0%ec%a0%80%eb%b3%84-%ec%95%84%ed%82%a4%ed%85%8d%ec%b3%90" class="heading-mark"></a>1. GitLab 접속 유저별 아키텍쳐</h2><p>GitLab은 1000명 2000명 3000명 4000명 5000명 10,000명 25,000명 50,000명 구성을 제공하고 있다. 여기서는 2000명정도 유저가 있을 경우 GIT을 배포 하는 방법에 대해서 설명하고자 한다.</p>
 <p>2000 유저 구조에서는 고가용성을 제공하고 있지 않기 때문에 모든 Components에 대해서 고가용성을 가져가고 싶다면 3000 유저 이상의 구조로 가져가면 좋을거 같다.
-그래도 고가용성이 필요하고 3000 유저의 아키텍쳐가 부담이라면 <a href="https://docs.gitlab.com/ee/administration/reference_architectures/3k_users.html#supported-modifications-for-lower-user-counts-ha" target="_blank" rel="noopener noreffer ">3K 아키텍처</a>를 축소된 고가용성으로 구성 할 수 있다.</p>
+그래도 고가용성이 필요하고 3000 유저의 아키텍쳐가 부담이라면 <a href="https://docs.gitlab.com/ee/administration/reference_architectures/3k_users.html#supported-modifications-for-lower-user-counts-ha"target="_blank" rel="external nofollow noopener noreferrer">3K 아키텍처</a>를 축소된 고가용성으로 구성 할 수 있다.</p>
 <p>여기서는 2000 유저의 대한 GitLab Install을 설정 할 예정이다.</p>
 <p>구성도는 GitLab에서 아래와 같이 제공 하고 있다.</p>
-<figure><figcaption>
+<figure><img src="/images/GitLab/1-1.png"/><figcaption>
             <h4>구성도</h4>
         </figcaption>
 </figure>
@@ -108,7 +107,7 @@
 </tr>
 </tbody>
 </table>
-<figure><figcaption>
+<figure><img src="/images/GitLab/1-2.png"/><figcaption>
             <h4>FLOW</h4>
         </figcaption>
 </figure>
@@ -162,10 +161,10 @@
 <p>위와 같이 설정.</p>
 <ul>
 <li>
-<h4 id="postgresql을-아래와-같이-설정-한다">POSTGRESQL을 아래와 같이 설정 한다.</h4>
-</li>
+<h4 id="postgresql을-아래와-같이-설정-한다" class="heading-element">
+  <a href="#postgresql%ec%9d%84-%ec%95%84%eb%9e%98%ec%99%80-%ea%b0%99%ec%9d%b4-%ec%84%a4%ec%a0%95-%ed%95%9c%eb%8b%a4" class="heading-mark"></a>POSTGRESQL을 아래와 같이 설정 한다.</h4></li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -254,15 +253,14 @@
 </span></span><span class="line"><span class="cl">sudo gitlab-rake gitlab:db:decomposition:connection_status
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 아래와 같이 나오는 것을 확인 할 수 있다.</span>
-</span></span><span class="line"><span class="cl">GitLab database already running on two connections
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">GitLab database already running on two connections</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>
-<h4 id="redis을-아래와-같이-설정-한다">REDIS을 아래와 같이 설정 한다.</h4>
-</li>
+<h4 id="redis을-아래와-같이-설정-한다" class="heading-element">
+  <a href="#redis%ec%9d%84-%ec%95%84%eb%9e%98%ec%99%80-%ea%b0%99%ec%9d%b4-%ec%84%a4%ec%a0%95-%ed%95%9c%eb%8b%a4" class="heading-mark"></a>REDIS을 아래와 같이 설정 한다.</h4></li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -305,21 +303,20 @@
 </span></span><span class="line"><span class="cl">redis_exporter<span class="o">[</span><span class="s1">&#39;flags&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;redis.addr&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;redis://0.0.0.0:6379&#39;</span>,
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;redis.password&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;SECRET_PASSWORD_HERE&#39;</span>,
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/GitLab/1-3.png"/><figcaption>
             <h4>REDIS 상태 확인</h4>
         </figcaption>
 </figure>
 
-<h4 id="gitaly는-레파지토리에-rpc기반의-빠른-읽기쓰기를-가능하게-해준다">Gitaly는 레파지토리에 RPC기반의 빠른 읽기/쓰기를 가능하게 해준다.</h4>
-<ul>
+<h4 id="gitaly는-레파지토리에-rpc기반의-빠른-읽기쓰기를-가능하게-해준다" class="heading-element">
+  <a href="#gitaly%eb%8a%94-%eb%a0%88%ed%8c%8c%ec%a7%80%ed%86%a0%eb%a6%ac%ec%97%90-rpc%ea%b8%b0%eb%b0%98%ec%9d%98-%eb%b9%a0%eb%a5%b8-%ec%9d%bd%ea%b8%b0%ec%93%b0%ea%b8%b0%eb%a5%bc-%ea%b0%80%eb%8a%a5%ed%95%98%ea%b2%8c-%ed%95%b4%ec%a4%80%eb%8b%a4" class="heading-mark"></a>Gitaly는 레파지토리에 RPC기반의 빠른 읽기/쓰기를 가능하게 해준다.</h4><ul>
 <li>
-<h4 id="gitaly을-아래와-같이-설정-한다">Gitaly을 아래와 같이 설정 한다.</h4>
-</li>
+<h4 id="gitaly을-아래와-같이-설정-한다" class="heading-element">
+  <a href="#gitaly%ec%9d%84-%ec%95%84%eb%9e%98%ec%99%80-%ea%b0%99%ec%9d%b4-%ec%84%a4%ec%a0%95-%ed%95%9c%eb%8b%a4" class="heading-mark"></a>Gitaly을 아래와 같이 설정 한다.</h4></li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -444,15 +441,14 @@
 </span></span><span class="line"><span class="cl">         path: <span class="s1">&#39;/var/opt/gitlab/git-data&#39;</span>,
 </span></span><span class="line"><span class="cl">      <span class="o">}</span>,
 </span></span><span class="line"><span class="cl">   <span class="o">]</span>,
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>
-<h4 id="rails--sidekiq-을-아래와-같이-설정-한다">Rails &amp; Sidekiq 을 아래와 같이 설정 한다.</h4>
-</li>
+<h4 id="rails--sidekiq-을-아래와-같이-설정-한다" class="heading-element">
+  <a href="#rails--sidekiq-%ec%9d%84-%ec%95%84%eb%9e%98%ec%99%80-%ea%b0%99%ec%9d%b4-%ec%84%a4%ec%a0%95-%ed%95%9c%eb%8b%a4" class="heading-mark"></a>Rails &amp; Sidekiq 을 아래와 같이 설정 한다.</h4></li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -629,53 +625,51 @@
 </span></span><span class="line"><span class="cl">sudo gitlab-rake gitlab:db:configure
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 첫 번 째가 완료 되면 두번째는 아래와 같이 재 설정만 해주면 된다.</span>
-</span></span><span class="line"><span class="cl">gitlab-ctl reconfigure
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">gitlab-ctl reconfigure</span></span></code></pre></td></tr></table>
 </div>
-</div><h6 id="설정이-완료-되면-gitaly-host에서-아래-명령어를-통해-정상-여부를-확인-할-수-있다">설정이 완료 되면 Gitaly Host에서 아래 명령어를 통해 정상 여부를 확인 할 수 있다.</h6>
-<div class="highlight"><div class="chroma">
+</div><h6 id="설정이-완료-되면-gitaly-host에서-아래-명령어를-통해-정상-여부를-확인-할-수-있다" class="heading-element">
+  <a href="#%ec%84%a4%ec%a0%95%ec%9d%b4-%ec%99%84%eb%a3%8c-%eb%90%98%eb%a9%b4-gitaly-host%ec%97%90%ec%84%9c-%ec%95%84%eb%9e%98-%eb%aa%85%eb%a0%b9%ec%96%b4%eb%a5%bc-%ed%86%b5%ed%95%b4-%ec%a0%95%ec%83%81-%ec%97%ac%eb%b6%80%eb%a5%bc-%ed%99%95%ec%9d%b8-%ed%95%a0-%ec%88%98-%ec%9e%88%eb%8b%a4" class="heading-mark"></a>설정이 완료 되면 Gitaly Host에서 아래 명령어를 통해 정상 여부를 확인 할 수 있다.</h6><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo /opt/gitlab/embedded/bin/gitaly check /var/opt/gitlab/gitaly/config.toml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo /opt/gitlab/embedded/bin/gitaly check /var/opt/gitlab/gitaly/config.toml</span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/GitLab/1-4.png"/><figcaption>
             <h4>상태 확인</h4>
         </figcaption>
 </figure>
 
-<h5 id="-처음-접속-하면-root-패스워드를-변경하라고-나온-후-패스워드를-변경하면-접속-할-수-있다">* 처음 접속 하면 root 패스워드를 변경하라고 나온 후 패스워드를 변경하면 접속 할 수 있다.</h5>
-<figure><figcaption>
+<h5 id="-처음-접속-하면-root-패스워드를-변경하라고-나온-후-패스워드를-변경하면-접속-할-수-있다" class="heading-element">
+  <a href="#-%ec%b2%98%ec%9d%8c-%ec%a0%91%ec%86%8d-%ed%95%98%eb%a9%b4-root-%ed%8c%a8%ec%8a%a4%ec%9b%8c%eb%93%9c%eb%a5%bc-%eb%b3%80%ea%b2%bd%ed%95%98%eb%9d%bc%ea%b3%a0-%eb%82%98%ec%98%a8-%ed%9b%84-%ed%8c%a8%ec%8a%a4%ec%9b%8c%eb%93%9c%eb%a5%bc-%eb%b3%80%ea%b2%bd%ed%95%98%eb%a9%b4-%ec%a0%91%ec%86%8d-%ed%95%a0-%ec%88%98-%ec%9e%88%eb%8b%a4" class="heading-mark"></a>* 처음 접속 하면 root 패스워드를 변경하라고 나온 후 패스워드를 변경하면 접속 할 수 있다.</h5><figure><img src="/images/GitLab/1-5.png"/><figcaption>
             <h4>접속</h4>
         </figcaption>
 </figure>
 
-<h2 id="2-minio에-저장-확인">2. MINIO에 저장 확인</h2>
-<blockquote>
+<h2 id="2-minio에-저장-확인" class="heading-element">
+  <a href="#2-minio%ec%97%90-%ec%a0%80%ec%9e%a5-%ed%99%95%ec%9d%b8" class="heading-mark"></a>2. MINIO에 저장 확인</h2><blockquote>
 <ul>
 <li>아래와 같이 MINIO 오프젝트 스토리지에 저장 된 것을 확인 할 수 있다.</li>
 </ul>
 </blockquote>
-<h5 id="-프로젝트-생성">* 프로젝트 생성</h5>
-<figure><figcaption>
+<h5 id="-프로젝트-생성" class="heading-element">
+  <a href="#-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ec%83%9d%ec%84%b1" class="heading-mark"></a>* 프로젝트 생성</h5><figure><img src="/images/GitLab/2-1.png"/><figcaption>
             <h4>프로젝트 생성</h4>
         </figcaption>
 </figure>
 
-<h5 id="-이슈-생성">* 이슈 생성</h5>
-<p><figure><figcaption>
+<h5 id="-이슈-생성" class="heading-element">
+  <a href="#-%ec%9d%b4%ec%8a%88-%ec%83%9d%ec%84%b1" class="heading-mark"></a>* 이슈 생성</h5><p><figure><img src="/images/GitLab/2-2.png"/><figcaption>
             <h4>이슈 생성</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/GitLab/2-3.png"/><figcaption>
             <h4>이슈 생성</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/GitLab/2-4.png"/><figcaption>
             <h4>MINIO 업로드 확인</h4>
         </figcaption>
 </figure>

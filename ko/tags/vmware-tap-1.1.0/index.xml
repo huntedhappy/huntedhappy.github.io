@@ -1,17 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>vmware tap 1.1.0 - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/vmware-tap-1.1.0/</link>
-        <description>vmware tap 1.1.0 - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/vmware-tap-1.1.0/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation TAP</title>
-    <link>https://huntedhappy.github.io/ko/tanzu-application-platform/</link>
-    <pubDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tanzu-application-platform/</guid>
-    <description><![CDATA[<h2 id="1-vmware-tap">1. VMware TAP?</h2>
-<p>VMware Tanzu 애플리케이션 플랫폼은 개발자와 운영자가 Kubernetes 플랫폼에서 앱을 보다 쉽게 구축, 배포 및 관리할 수 있도록 도와주는 패키지된 구성 요소 집합입니다.</p>
+  <channel>
+    <title>vmware tap 1.1.0 - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/vmware-tap-1.1.0/</link>
+    <description>vmware tap 1.1.0 - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/vmware-tap-1.1.0/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation TAP</title>
+  <link>https://huntedhappy.github.io/ko/tanzu-application-platform/</link>
+  <pubDate>Wed, 09 Mar 2022 11:09:57 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tanzu-application-platform/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/tanzu-application-platform/tap.png" alt="The Documentation TAP" title="Tanzu Application Platform" referrerpolicy="no-referrer"/></div><h2 id="1-vmware-tap" class="heading-element">
+  <a href="#1-vmware-tap" class="heading-mark"></a>1. VMware TAP?</h2><p>VMware Tanzu 애플리케이션 플랫폼은 개발자와 운영자가 Kubernetes 플랫폼에서 앱을 보다 쉽게 구축, 배포 및 관리할 수 있도록 도와주는 패키지된 구성 요소 집합입니다.</p>
 <p>Tanzu 애플리케이션 플랫폼은 Kubernetes 기반 앱 개발의 내부 루프와 외부 루프 모두에서 워크플로를 단순화합니다.</p>
 <ul>
 <li>
@@ -22,18 +21,18 @@
 </li>
 </ul>
 <p>VMware Tanzu 애플리케이션 플랫폼은 보안 및 확장을 지원하는 모든 Kubernetes에서 코드를 실행할 수 있도록 사전 포장된 프로덕션 경로를 개발 팀에 제공합니다. 팀이 조직의 기본 설정에 따라 사용자 지정할 수 있도록 모듈화된 애플리케이션 인식 플랫폼입니다.</p>
-<h3 id="주의-사항">주의 사항</h3>
-<p>현재 버그가 있는것으로 보임 Private Harbor 구성시 사설 인증서 문제가 발생 하기 때문에 외부 Registry 활용 필요,
+<h3 id="주의-사항" class="heading-element">
+  <a href="#%ec%a3%bc%ec%9d%98-%ec%82%ac%ed%95%ad" class="heading-mark"></a>주의 사항</h3><p>현재 버그가 있는것으로 보임 Private Harbor 구성시 사설 인증서 문제가 발생 하기 때문에 외부 Registry 활용 필요,
 Github 연동시 Integration으로 설정</p>
-<h3 id="사전-설치">사전 설치</h3>
-<ul>
+<h3 id="사전-설치" class="heading-element">
+  <a href="#%ec%82%ac%ec%a0%84-%ec%84%a4%ec%b9%98" class="heading-mark"></a>사전 설치</h3><ul>
 <li>DOCKER</li>
 <li>GCR (Google Container Registry)</li>
 <li>GitHub</li>
 <li>DNS Records</li>
 </ul>
-<h3 id="resource-requirements">Resource requirements</h3>
-<p>To deploy all Tanzu Application Platform packages, your cluster must have at least:</p>
+<h3 id="resource-requirements" class="heading-element">
+  <a href="#resource-requirements" class="heading-mark"></a>Resource requirements</h3><p>To deploy all Tanzu Application Platform packages, your cluster must have at least:</p>
 <ul>
 <li>8 CPUs for i9 (or equivalent) available to Tanzu Application Platform components</li>
 <li>12 CPUs for i7 (or equivalent) available to Tanzu Application Platform components</li>
@@ -42,20 +41,20 @@ Github 연동시 Integration으로 설정</p>
 <li>70 GB of disk space available per node
 For the full profile, or use of Security Chain Security Tools - Store, your cluster must have a configured default StorageClass.</li>
 </ul>
-<h2 id="2-tap-101">2. TAP 1.0.1</h2>
-<h3 id="tools-and-cli-requirements">Tools and CLI requirements</h3>
-<p>Installation requires:</p>
+<h2 id="2-tap-101" class="heading-element">
+  <a href="#2-tap-101" class="heading-mark"></a>2. TAP 1.0.1</h2><h3 id="tools-and-cli-requirements" class="heading-element">
+  <a href="#tools-and-cli-requirements" class="heading-mark"></a>Tools and CLI requirements</h3><p>Installation requires:</p>
 <ul>
 <li>The Kubernetes CLI, kubectl, v1.20, v1.21 or v1.22, installed and authenticated with administrator rights for your target cluster. See Install Tools in the Kubernetes documentation.</li>
 </ul>
-<h3 id="21-tap">2.1. TAP</h3>
-<h4 id="211-tanzu-network-등록">2.1.1 Tanzu Network 등록</h4>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tanzu Network ID/PW<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<h3 id="21-tap" class="heading-element">
+  <a href="#21-tap" class="heading-mark"></a>2.1. TAP</h3><h4 id="211-tanzu-network-등록" class="heading-element">
+  <a href="#211-tanzu-network-%eb%93%b1%eb%a1%9d" class="heading-mark"></a>2.1.1 Tanzu Network 등록</h4><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>Tanzu Network ID/PW<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -66,20 +65,18 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_USERNAME</span><span class="o">=</span>        <span class="c1">#### Tanzu Network ID</span>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="o">=</span>        <span class="c1">#### Tanzu Network PW</span>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="o">=</span>registry.tanzu.vmware.com
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>1.0.1
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>1.0.1</span></span></code></pre></td></tr></table>
 </div>
 </div><p>namespace 생성</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns tap-install
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div><p>tanzu registry 추가</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -90,11 +87,10 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu secret registry add tap-registry <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --username <span class="si">${</span><span class="nv">INSTALL_REGISTRY_USERNAME</span><span class="si">}</span> --password <span class="si">${</span><span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="si">}</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --server <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --export-to-all-namespaces --yes --namespace tap-install
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --export-to-all-namespaces --yes --namespace tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div><p>tanzu repository 추가</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -103,29 +99,28 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package repository add tanzu-tap-repository <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="nv">$TAP_VERSION</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<p><figure><figcaption>
+  </div>
+<p><figure><img src="/images/tap/1-1.png"/><figcaption>
             <h4>EULA 허용</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/1-2.png"/><figcaption>
             <h4>EULA 허용</h4>
         </figcaption>
 </figure>
 </p>
-<h3 id="22-tanzu-tap-설치-리스트-확인">2.2. Tanzu TAP 설치 리스트 확인</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Registry / Repository 확인<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<h3 id="22-tanzu-tap-설치-리스트-확인" class="heading-element">
+  <a href="#22-tanzu-tap-%ec%84%a4%ec%b9%98-%eb%a6%ac%ec%8a%a4%ed%8a%b8-%ed%99%95%ec%9d%b8" class="heading-mark"></a>2.2. Tanzu TAP 설치 리스트 확인</h3><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>Registry / Repository 확인<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-21"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -146,47 +141,45 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">tanzu package available list --namespace tap-install
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu package available list tap.tanzu.vmware.com --namespace tap-install
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">tanzu package available list tap.tanzu.vmware.com --namespace tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<p><figure><figcaption>
+  </div>
+<p><figure><img src="/images/tap/2-1.png"/><figcaption>
             <h4>Registry 리스트 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/2-2.png"/><figcaption>
             <h4>Repository 리스트 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/2-3.png"/><figcaption>
             <h4>Package 리스트 확인</h4>
         </figcaption>
 </figure>
 </p>
-<h3 id="23-tanzu-tap-설치">2.3. Tanzu TAP 설치</h3>
-<p>Private Harbor의 경우 사설 인증서가 문제가 있으므로 외부에서 제공하는 Registry 사용하는 필요.</p>
+<h3 id="23-tanzu-tap-설치" class="heading-element">
+  <a href="#23-tanzu-tap-%ec%84%a4%ec%b9%98" class="heading-mark"></a>2.3. Tanzu TAP 설치</h3><p>Private Harbor의 경우 사설 인증서가 문제가 있으므로 외부에서 제공하는 Registry 사용하는 필요.</p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>TAP 설치<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>GCR에서 키값을 json으로 다운로드 받은 후 service_account_key[변수] 저장</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>TAP 설치<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>GCR에서 키값을 json으로 다운로드 받은 후 service_account_key[변수] 저장</p>
+<div class="highlight" id="id-22"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu secret registry add registry-credentials --server gcr.io --username _json_key --password <span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span> --namespace tap-install
-</span></span><span class="line"><span class="cl"><span class="nv">service_account_key</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nv">service_account_key</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>실행 파일 설정</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-23"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -399,41 +392,38 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="s">
 </span></span></span><span class="line"><span class="cl"><span class="s">grype:
 </span></span></span><span class="line"><span class="cl"><span class="s">  namespace: &#34;tap-install&#34; # (optional) Defaults to default namespace.
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>TAP 설치</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-24"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v <span class="nv">$TAP_VERSION</span> --values-file gcr-tap-values.yml -n tap-install
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v <span class="nv">$TAP_VERSION</span> --values-file gcr-tap-values.yml -n tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<figure><figcaption>
+  </div>
+<figure><img src="/images/tap/3-1.png"/><figcaption>
             <h4>TAP 설치 완료</h4>
         </figcaption>
 </figure>
 
-<h3 id="24-tanzu-tap-rbac-설정">2.4. Tanzu TAP RBAC 설정</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>RBAC 설정<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<h3 id="24-tanzu-tap-rbac-설정" class="heading-element">
+  <a href="#24-tanzu-tap-rbac-%ec%84%a4%ec%a0%95" class="heading-mark"></a>2.4. Tanzu TAP RBAC 설정</h3><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>RBAC 설정<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-25"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">dockerconfigjson</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>kubectl get secret tbs-builder-secret-gen-placeholder-secret -n tap-install -o <span class="nv">jsonpath</span><span class="o">={</span>.data.<span class="se">\\</span>.dockerconfigjson<span class="o">}</span><span class="k">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">dockerconfigjson</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>kubectl get secret tbs-builder-secret-gen-placeholder-secret -n tap-install -o <span class="nv">jsonpath</span><span class="o">={</span>.data.<span class="se">\\</span>.dockerconfigjson<span class="o">}</span><span class="k">)</span><span class="s2">&#34;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-26"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -598,15 +588,14 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="s">subjects:
 </span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
 </span></span></span><span class="line"><span class="cl"><span class="s">    name: default
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="25-workload-실행">2.5. workload 실행</h3>
-<p>INGRESS IP 확인</p>
-<div class="highlight"><div class="chroma">
+  </div>
+<h3 id="25-workload-실행" class="heading-element">
+  <a href="#25-workload-%ec%8b%a4%ed%96%89" class="heading-mark"></a>2.5. workload 실행</h3><p>INGRESS IP 확인</p>
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -615,41 +604,40 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get svc -n tap-install
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get httpproxy -A
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl get httpproxy -A</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/tap/3-2.png"/><figcaption>
             <h4>ingress 및 DNS 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/4-1.png"/><figcaption>
             <h4>gui 접속 후 Tanzu Java Web App 실행</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/4-2.png"/><figcaption>
             <h4>gui 접속 후 Tanzu Java Web App 실행</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/4-3.png"/><figcaption>
             <h4>gui 접속 후 Tanzu Java Web App 실행</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/4-4.png"/><figcaption>
             <h4>gui 접속 후 Tanzu Java Web App 다운로드</h4>
         </figcaption>
 </figure>
 </p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>GIT PUSH<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>미리 GIT에 프로젝트 생성 후 다운로드 받은 ZIP파일 PUSH</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>GIT PUSH<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>미리 GIT에 프로젝트 생성 후 다운로드 받은 ZIP파일 PUSH</p>
+<div class="highlight" id="id-27"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -666,11 +654,10 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span><span class="line"><span class="cl">git remote add origin git@github.com:huntedhappy/tanzu-java-web-app
 </span></span><span class="line"><span class="cl">git add .
 </span></span><span class="line"><span class="cl">git commit -m <span class="s1">&#39;first&#39;</span>
-</span></span><span class="line"><span class="cl">git push origin main
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">git push origin main</span></span></code></pre></td></tr></table>
 </div>
 </div><p>apps workload 실행</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-28"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -687,11 +674,10 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="se"></span> --type web <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span> --label apps.tanzu.vmware.com/has-tests<span class="o">=</span><span class="nb">true</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span> --yes <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> -n tap-install
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> -n tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div><p>배포 상태 확인</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-29"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -704,26 +690,24 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">tanzu apps workload tail tanzu-java-web-app --since 10m --timestamp -n tap-install
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get workload,gitrepository,pipelinerun,images.kpack,podintent,app,services.serving -n tap-install
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl get workload,gitrepository,pipelinerun,images.kpack,podintent,app,services.serving -n tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="3-tap-110">3. TAP 1.1.0</h2>
-<p>Repository를 설정한다. 여기서는 GCR을 사용하기 때문에 GCR의 정보를 입력</p>
-<div class="highlight"><div class="chroma">
+  </div>
+<h2 id="3-tap-110" class="heading-element">
+  <a href="#3-tap-110" class="heading-mark"></a>3. TAP 1.1.0</h2><p>Repository를 설정한다. 여기서는 GCR을 사용하기 때문에 GCR의 정보를 입력</p>
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="o">=</span>gcr.io
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>1.1.0
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>1.1.0</span></span></code></pre></td></tr></table>
 </div>
 </div><p>TANZU NET 및 GCR docker login 후 GCR에 이미지들을 다운로드</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -736,11 +720,10 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">docker login -u _json_key --password-stdin https://gcr.io &lt; <span class="o">{</span>gcr key<span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/<span class="o">{</span>gcr project<span class="o">}</span>/tap-packages
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/<span class="o">{</span>gcr project<span class="o">}</span>/tap-packages</span></span></code></pre></td></tr></table>
 </div>
 </div><p>namespace 및 secret 생성 후 tanzu package Repository 생성</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -765,11 +748,10 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## Repository가 생성이 되었으면 설치 가능한 packages를 확인</span>
-</span></span><span class="line"><span class="cl">tanzu package available list tap.tanzu.vmware.com --namespace tap-install
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">tanzu package available list tap.tanzu.vmware.com --namespace tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div><p>권한 설정</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -884,23 +866,21 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
 </span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>TAP 1.1.0 설치</p>
 <p>GCR에서 키값을 json으로 다운로드 받은 후 service_account_key[변수] 저장</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu secret registry add registry-credentials --server gcr.io --username _json_key --password <span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span> --namespace tap-install
-</span></span><span class="line"><span class="cl"><span class="nv">service_account_key</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nv">service_account_key</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>cat main-xxxx-xxx-xxxx.json<span class="k">)</span><span class="s2">&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>실행 파일 설정</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -1113,20 +1093,18 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="s">
 </span></span></span><span class="line"><span class="cl"><span class="s">grype:
 </span></span></span><span class="line"><span class="cl"><span class="s">  namespace: &#34;tap-install&#34; # (optional) Defaults to default namespace.
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>TANZU 설치</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v <span class="nv">$TAP_VERSION</span> --values-file gcr-tap-values.yaml -n tap-install
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v <span class="nv">$TAP_VERSION</span> --values-file gcr-tap-values.yaml -n tap-install</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="31-multicluster">3.1. MultiCluster</h3>
-<figure><figcaption>
+</div><h3 id="31-multicluster" class="heading-element">
+  <a href="#31-multicluster" class="heading-mark"></a>3.1. MultiCluster</h3><figure><img src="/images/tap/3-3.png"/><figcaption>
             <h4>MultiCluster</h4>
         </figcaption>
 </figure>
@@ -1144,11 +1122,11 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </li>
 </ul>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>이미지를 Repository에 저장한다.<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>이미지를 Repository에 저장한다.<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-30"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1173,13 +1151,12 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span><span class="line"><span class="cl">docker login -u _json_key --password-stdin https://gcr.io &lt; <span class="o">{</span>togken<span class="o">}}</span>.json
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 이미지를 GCR에 복사 한다.</span>
-</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/main-tokenizer-343509/tap-packages
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/main-tokenizer-343509/tap-packages</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>모든 이미지가 GCR에 저장이 완료 되면 Repository를 각각의 클러스터에 등록 해준다.</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-31"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1216,14 +1193,13 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## Tanzu Package Repository 확인</span>
-</span></span><span class="line"><span class="cl">tanzu package repository list -n tap-install
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">tanzu package repository list -n tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>각각의 클러스터의 맞는 tap을 설치 해준다.</li>
 <li>build-tap-values.yaml</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-32"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1282,13 +1258,12 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="s">grype:
 </span></span></span><span class="line"><span class="cl"><span class="s">  namespace: &#34;tap-install&#34; # (optional) Defaults to default namespace.
 </span></span></span><span class="line"><span class="cl"><span class="s">  targetImagePullSecret: tap-registry
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>run-tap-values.yaml</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-33"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1327,13 +1302,12 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="s">  backend:
 </span></span></span><span class="line"><span class="cl"><span class="s">    sslDisabled: &#34;true&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">    host: appliveview.tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>클러스터를 변경 하면서 TAP을 설치 해준다.</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-34"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1346,13 +1320,12 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0 -f build-tap-values.yaml -n tap-install
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0 -f run-tap-values.yaml -n tap-install
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0 -f run-tap-values.yaml -n tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>build 와 run 클러스터에 TAP 설치가 완료 되었다면 클러스터의 URL 과 TOKEN을 확인한다.</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-35"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1371,13 +1344,12 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> base64 --decode<span class="k">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> CLUSTER_URL: <span class="nv">$CLUSTER_URL</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> CLUSTER_TOKEN: <span class="nv">$CLUSTER_TOKEN</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> CLUSTER_TOKEN: <span class="nv">$CLUSTER_TOKEN</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>view-tap-values.yaml</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-36"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1482,24 +1454,22 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="s">appliveview:
 </span></span></span><span class="line"><span class="cl"><span class="s">  ingressEnabled: &#34;true&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">  ingressDomain: tkg.io
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>view 클러스터에 TAP 설치</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-37"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0 -f view-tap-values.yaml -n tap-install
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.1.0 -f view-tap-values.yaml -n tap-install</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>설치 완료 후 build 와 run cluster에 권한 부여</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-38"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -1704,13 +1674,12 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="s">  resources:
 </span></span></span><span class="line"><span class="cl"><span class="s">  - apps
 </span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>모든 클러스터에 개발자의 대한 권한을 부여</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-39"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1825,13 +1794,12 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
 </span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Build Cluster로 컨텍스트 변경 후 App을 배포한다.</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-40"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1852,13 +1820,12 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span></span><span class="line"><span class="cl"><span class="se"></span> --type web <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span> --label app.kubernetes.io/part-of<span class="o">=</span>tanzu-java-web-app <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span> --yes <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<figure><figcaption>
+  </div>
+<figure><img src="/images/tap/3-4.png"/><figcaption>
             <h4>app workload 상태 확인</h4>
         </figcaption>
 </figure>
@@ -1866,15 +1833,14 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <ul>
 <li>진행 상태 확인</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu apps workload tail tanzu-java-web-app --since 10m --timestamp -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tanzu apps workload tail tanzu-java-web-app --since 10m --timestamp -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/tap/3-5.png"/><figcaption>
             <h4>app workload 진행 상태 확인</h4>
         </figcaption>
 </figure>
@@ -1882,7 +1848,7 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <ul>
 <li>
 <p>생성이 완료 되면 GUI에서 확인
-<figure><figcaption>
+<figure><img src="/images/tap/3-6.png"/><figcaption>
             <h4>supply chain 확인</h4>
         </figcaption>
 </figure>
@@ -1892,15 +1858,14 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <p>deliverable이 되었는지 확인 한다. build 클러스터에서는 false로 나오는 것을 우선 확인 할 수 있다.</p>
 </li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get deliverable -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get deliverable -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/tap/3-7.png"/><figcaption>
             <h4>deliverable 실패 확인</h4>
         </figcaption>
 </figure>
@@ -1908,18 +1873,17 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <ul>
 <li>deliverable를 yaml파일로 저장한다.</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get deliverable tanzu-java-web-app -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span> -oyaml &gt; deliverable.yaml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get deliverable tanzu-java-web-app -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span> -oyaml &gt; deliverable.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>저장된 파일에서 ownerReferences와 status 부분을 삭제 한다. 그럼 아래와 비슷할 것이다.</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1968,13 +1932,12 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span><span class="line"><span class="cl">  uid: 23c2d202-0186-4c62-b497-baaa961e3698
 </span></span><span class="line"><span class="cl">spec:
 </span></span><span class="line"><span class="cl">  source:
-</span></span><span class="line"><span class="cl">    image: <span class="o">{</span>image<span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    image: <span class="o">{</span>image<span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>run cluster로 변경 후 저장한 deliverable파일을 실행 해준다.</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1983,34 +1946,32 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## RUN Cluster로 변경</span>
 </span></span><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>run cluster<span class="o">}</span>
-</span></span><span class="line"><span class="cl">kubectl apply -f deliverable.yaml -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl apply -f deliverable.yaml -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>확인을 하면 성공한 것을 확인 할 수 있다.</li>
 </ul>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get deliverables -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get deliverables -n <span class="si">${</span><span class="nv">DEVELOPER_NAMESPACE</span><span class="si">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/tap/3-8.png"/><figcaption>
             <h4>deliverable 상태 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/3-9.png"/><figcaption>
             <h4>deliverable gui 상태 확인</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="4-visual-studio">4. Visual Studio</h2>
-<p>IDE를 Visual Studio를 사용하여 동작, 현재는 Visual studio만 지원 하고 있음</p>
-<h3 id="41-extenstion-설정">4.1. Extenstion 설정</h3>
-<div class="highlight"><div class="chroma">
+<h2 id="4-visual-studio" class="heading-element">
+  <a href="#4-visual-studio" class="heading-mark"></a>4. Visual Studio</h2><p>IDE를 Visual Studio를 사용하여 동작, 현재는 Visual studio만 지원 하고 있음</p>
+<h3 id="41-extenstion-설정" class="heading-element">
+  <a href="#41-extenstion-%ec%84%a4%ec%a0%95" class="heading-mark"></a>4.1. Extenstion 설정</h3><div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -2021,10 +1982,9 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apt search openjdk
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">apt install openjdk-11-jdk -y
-</span></span><span class="line"><span class="cl">java --version
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">java --version</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -2039,47 +1999,46 @@ For the full profile, or use of Security Chain Security Tools - Store, your clus
 </span></span><span class="line"><span class="cl"><span class="c1">## 맨아래 해당 context가 들어가 있는 것을 확인 할 수 있다.</span>
 </span></span><span class="line"><span class="cl">cat /var/tmp/tap/tanzu-java-web-app/Tiltfile
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ctrl + <span class="nb">shift</span> + p
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">ctrl + <span class="nb">shift</span> + p</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/tap/5-1.png"/><figcaption>
             <h4>VS 설정</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/5-2.png"/><figcaption>
             <h4>VS 설정</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/5-3.png"/><figcaption>
             <h4>VS 설정</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/5-4.png"/><figcaption>
             <h4>VS 설정</h4>
         </figcaption>
 </figure>
 </p>
-<h3 id="42-live-update-start">4.2. Live Update Start</h3>
-<p>해당 부분을 수정 하면 자동으로 GIT에 업데이트가 되면서 바뀌는것을 볼수 있다.
-<figure><figcaption>
+<h3 id="42-live-update-start" class="heading-element">
+  <a href="#42-live-update-start" class="heading-mark"></a>4.2. Live Update Start</h3><p>해당 부분을 수정 하면 자동으로 GIT에 업데이트가 되면서 바뀌는것을 볼수 있다.
+<figure><img src="/images/tap/6-1.png"/><figcaption>
             <h4>수정#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/6-4.png"/><figcaption>
             <h4>수정#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/6-2.png"/><figcaption>
             <h4>수정#3</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/tap/6-3.png"/><figcaption>
             <h4>수정#4</h4>
         </figcaption>
 </figure>

@@ -33,7 +33,7 @@ dnf install libnsl -y
 sudo rm /usr/bin/python
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python(TAB) ## 설치되어 있는 버전을 확인 할 수 있다.
 ```
-{{< figure src="/images/nsxt/1-1.png" title="파이썬 버전 확인" >}}
+{{&lt; figure src=&#34;/images/nsxt/1-1.png&#34; title=&#34;파이썬 버전 확인&#34; &gt;}}
 
 ```shell
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
@@ -41,27 +41,27 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
 
 sudo update-alternatives --config python
 ```
-{{< figure src="/images/nsxt/1-2.png" title="파이썬 버전 선택" >}}
+{{&lt; figure src=&#34;/images/nsxt/1-2.png&#34; title=&#34;파이썬 버전 선택&#34; &gt;}}
 
 
 ### 2.2. OVF Tool
 OVF Tool 다운로드
 
-[<i class="fas fa-link"></i> OVF Tool 다운로드 링크](https://developer.vmware.com/web/tool/4.4.0/ovf)
+[&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; OVF Tool 다운로드 링크](https://developer.vmware.com/web/tool/4.4.0/ovf)
 
-{{< figure src="/images/nsxt/1-3.png" title="원하는 버전으로 다운로드 받는다." >}}
+{{&lt; figure src=&#34;/images/nsxt/1-3.png&#34; title=&#34;원하는 버전으로 다운로드 받는다.&#34; &gt;}}
 
 ### 2.3. NSXT Ansible Download
 제공한 버전은 3.1 기준으로 구성을 하였다.
 
-{{< figure src="/images/nsxt/1-4.png" title="원하는 버전으로 다운로드 받는다." >}}
+{{&lt; figure src=&#34;/images/nsxt/1-4.png&#34; title=&#34;원하는 버전으로 다운로드 받는다.&#34; &gt;}}
 
 ### 2.4. Ansible 실행
 ```shell
 ovftool -v 에러가 나오면 dnf install libnsl 설치
 ansible-playbook 01_deploy_first_node.yml -vvv
 ```
-{{< figure src="/images/nsxt/1-5.png" title="에러 발생시 dnf install libnsl 설치." >}}
+{{&lt; figure src=&#34;/images/nsxt/1-5.png&#34; title=&#34;에러 발생시 dnf install libnsl 설치.&#34; &gt;}}
 
 ### 2.5. Github
 
@@ -75,3 +75,9 @@ ansible-playbook 01_deploy_first_node.yml -vvv
 ```shell
 git clone https://github.com/huntedhappy/nsxt3.1
 ```
+
+---
+
+> Author: Dokyung  
+> URL: https://huntedhappy.github.io/nsxt/  
+

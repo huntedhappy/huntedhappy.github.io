@@ -1,24 +1,23 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>nginx - Tag - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/tags/nginx/</link>
-        <description>nginx - Tag - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Jun 2022 07:27:35 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/nginx/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation Wordpress &amp; Nginx Install</title>
-    <link>https://huntedhappy.github.io/wordpress/</link>
-    <pubDate>Wed, 01 Jun 2022 07:27:35 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/wordpress/</guid>
-    <description><![CDATA[<p>NGINX를 사용하여 WORDPRESS를 설치</p>
-<h2 id="1-nginx-설치">1. NGINX 설치</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>설치<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><h4 id="nginx-설치">NGINX 설치</h4>
-<div class="highlight"><div class="chroma">
+  <channel>
+    <title>nginx - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/tags/nginx/</link>
+    <description>nginx - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Jun 2022 07:27:35 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/nginx/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation Wordpress &amp; Nginx Install</title>
+  <link>https://huntedhappy.github.io/wordpress/</link>
+  <pubDate>Wed, 01 Jun 2022 07:27:35 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/wordpress/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/wordpress/wordpress.jpg" alt="The Documentation Wordpress &amp; Nginx Install" title="Wordpress &amp; Nginx Install" referrerpolicy="no-referrer"/></div><p>NGINX를 사용하여 WORDPRESS를 설치</p>
+<h2 id="1-nginx-설치" class="heading-element">
+  <a href="#1-nginx-%ec%84%a4%ec%b9%98" class="heading-mark"></a>1. NGINX 설치</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>설치<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><h4 id="nginx-설치" class="heading-element">
+  <a href="#nginx-%ec%84%a4%ec%b9%98" class="heading-mark"></a>NGINX 설치</h4><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -33,11 +32,10 @@
 </span></span><span class="line"><span class="cl">sudo apt-get dist-upgrade -y
 </span></span><span class="line"><span class="cl">sudo apt-get install nginx -y
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">nginx -v
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">nginx -v</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="php-설치">PHP 설치</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="php-설치" class="heading-element">
+  <a href="#php-%ec%84%a4%ec%b9%98" class="heading-mark"></a>PHP 설치</h4><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -58,11 +56,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>php8.0-mbstring php8.0-opcache php8.0-redis <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>php8.0-soap php8.0-zip -y
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">php-fpm8.0 -v
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">php-fpm8.0 -v</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="nginx-구성">NGINX 구성</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="nginx-구성" class="heading-element">
+  <a href="#nginx-%ea%b5%ac%ec%84%b1" class="heading-mark"></a>NGINX 구성</h4><div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -129,11 +126,10 @@
 </span></span><span class="line"><span class="cl">nginx -t
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## Nginx Reload</span>
-</span></span><span class="line"><span class="cl">nginx -s reload
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">nginx -s reload</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="php-파일-수정">PHP 파일 수정</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="php-파일-수정" class="heading-element">
+  <a href="#php-%ed%8c%8c%ec%9d%bc-%ec%88%98%ec%a0%95" class="heading-mark"></a>PHP 파일 수정</h4><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -148,11 +144,10 @@
 </span></span><span class="line"><span class="cl">sed -i -e <span class="s2">&#34;s/post_max_size = 8M/post_max_size = 64M/g&#34;</span> /etc/php/8.0/fpm/php.ini
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo php-fpm8.0 -t
-</span></span><span class="line"><span class="cl">sudo systemctl restart php8.0-fpm
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">sudo systemctl restart php8.0-fpm</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="mariadb-설치">MARIADB 설치</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="mariadb-설치" class="heading-element">
+  <a href="#mariadb-%ec%84%a4%ec%b9%98" class="heading-mark"></a>MARIADB 설치</h4><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -163,31 +158,28 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get install software-properties-common
 </span></span><span class="line"><span class="cl">sudo apt-key adv --fetch-keys <span class="s1">&#39;https://mariadb.org/mariadb_release_signing_key.asc&#39;</span>
 </span></span><span class="line"><span class="cl">sudo add-apt-repository <span class="s1">&#39;deb [arch=amd64,arm64,ppc64el] http://mirrors.up.pt/pub/mariadb/repo/10.4/ubuntu focal main&#39;</span>
-</span></span><span class="line"><span class="cl">sudo apt-get install mariadb-server -y
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">sudo apt-get install mariadb-server -y</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="mariadb-password-변경">MARIADB PASSWORD 변경</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="mariadb-password-변경" class="heading-element">
+  <a href="#mariadb-password-%eb%b3%80%ea%b2%bd" class="heading-mark"></a>MARIADB PASSWORD 변경</h3><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mysql -u root -e <span class="s1">&#39;create database wordpress character set utf8; grant all privileges on wordpress.* to &#39;</span>root<span class="s1">&#39;@&#39;</span>localhost<span class="s1">&#39; identified by &#34;WordPress!234&#34;; flush privileges;&#39;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mysql -u root -e <span class="s1">&#39;create database wordpress character set utf8; grant all privileges on wordpress.* to &#39;</span>root<span class="s1">&#39;@&#39;</span>localhost<span class="s1">&#39; identified by &#34;WordPress!234&#34;; flush privileges;&#39;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="wordpress-설치">WordPress 설치</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="wordpress-설치" class="heading-element">
+  <a href="#wordpress-%ec%84%a4%ec%b9%98" class="heading-mark"></a>WordPress 설치</h4><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir /wordpress
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /wordpress <span class="o">&amp;&amp;</span> wget http://wordpress.org/latest.tar.gz <span class="o">&amp;&amp;</span> tar -xzf /wordpress/latest.tar.gz -C /wordpress --strip-components <span class="m">1</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /wordpress <span class="o">&amp;&amp;</span> wget http://wordpress.org/latest.tar.gz <span class="o">&amp;&amp;</span> tar -xzf /wordpress/latest.tar.gz -C /wordpress --strip-components <span class="m">1</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="wordpress-설정">WordPress 설정</h4>
-<div class="highlight"><div class="chroma">
+</div><h4 id="wordpress-설정" class="heading-element">
+  <a href="#wordpress-%ec%84%a4%ec%a0%95" class="heading-mark"></a>WordPress 설정</h4><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -202,14 +194,13 @@
 </span></span><span class="line"><span class="cl">sed -i -e <span class="s2">&#34;s/username_here/root/g&#34;</span> /wordpress/wp-config.php
 </span></span><span class="line"><span class="cl">sed -i -e <span class="s2">&#34;s/password_here/WordPress\!234/g&#34;</span> /wordpress/wp-config.php
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">cp -R * /var/www/html/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">cp -R * /var/www/html/</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="완료-화면">완료 화면</h3>
-<figure><figcaption>
+  </div>
+<h3 id="완료-화면" class="heading-element">
+  <a href="#%ec%99%84%eb%a3%8c-%ed%99%94%eb%a9%b4" class="heading-mark"></a>완료 화면</h3><figure><img src="/images/wordpress/1-1.png"/><figcaption>
             <h4>wordpress-install</h4>
         </figcaption>
 </figure>

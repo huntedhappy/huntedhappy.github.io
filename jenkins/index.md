@@ -5,23 +5,23 @@
 Jenkins는 아무래도 많이 사용하는 CI/CD 일것이다. 우선 컨테이너 환경에서 CI를 구성하기 위해서 Jenkins를 구성 하였고, 클러스터가 많은 환경에서도 접근을 할 수 있게 (물론 컨테이너로 구성을 해도 되나. 굳이 컨테이너로 구성할 필요성이 있나 싶어 별도의 VM으로 구성)
 VM형태로 설치를 하였다.
 
-{{< admonition tip "CI/CD" >}}
+{{&lt; admonition tip &#34;CI/CD&#34; &gt;}}
 CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다. 
 CI (Continuous Integration) CI를 통해 개발자들은 코드 변경사항을 공유 브랜치로 다시 병합하는 작업을 더욱 수월하게 자주 수행 할 수 있다.
 CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으로 사용됨.
 * Continuous Deliver의 경우 코드 변경 , 병합으로부터 Prodcution에 적합한 빌드를 제공하여 모든 단계에 테스트 및 릴리스를 자동화한다.
 * Continuous Deploy는 어플리케이션을 프로덕션으로 릴리스 작업을 자동화
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< figure src="/images/jenkins/0-1.png" title="CICD" >}}
+{{&lt; figure src=&#34;/images/jenkins/0-1.png&#34; title=&#34;CICD&#34; &gt;}}
 
-참고 문헌 [<i class="fas fa-link"></i> Redhat ](https://www.redhat.com/ko/topics/devops/what-is-ci-cd)
+참고 문헌 [&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; Redhat ](https://www.redhat.com/ko/topics/devops/what-is-ci-cd)
 
 ## 1. 설치
-{{< admonition example "Jenkins Install" >}}
+{{&lt; admonition example &#34;Jenkins Install&#34; &gt;}}
 JAVA Install
 ```shell
-apt update && apt upgrade 
+apt update &amp;&amp; apt upgrade 
 
 sudo apt search openjdk
 
@@ -32,7 +32,7 @@ java --version
 Jenkins Install
 ```shell
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo sh -c &#39;echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list&#39;
 
 sudo apt update -y
 sudo apt install jenkins -y
@@ -44,12 +44,12 @@ systemctl enable jenkins
 ```shell
 cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### 1.1. 설치 완료
-{{< figure src="/images/jenkins/1-1.png" title="접속 화면 #1" >}}
-{{< figure src="/images/jenkins/1-2.png" title="접속 화면 #2" >}}
-{{< figure src="/images/jenkins/1-3.png" title="접속 화면 #3" >}}
+{{&lt; figure src=&#34;/images/jenkins/1-1.png&#34; title=&#34;접속 화면 #1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/1-2.png&#34; title=&#34;접속 화면 #2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/1-3.png&#34; title=&#34;접속 화면 #3&#34; &gt;}}
 
 ## 2. HTTPS 설정
 
@@ -58,7 +58,7 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 ### 2.1. HTTPS 구성
 인증서 설치, [:(far fa-file-archive fa-fw): root.sh](root.sh).
 
-{{< admonition example "Jenkins SSL 구성" >}}
+{{&lt; admonition example &#34;Jenkins SSL 구성&#34; &gt;}}
 인증서 생성
 ```shell
 export domain=jenkins.tkg.io
@@ -77,27 +77,27 @@ Jenkins 파일 변경
 ```shell
 vi /etc/default/jenkins
 
-HTTP_PORT=8080             ### ---> 이부분을 찾아서 아래 부분을 채워 넣어주자.
+HTTP_PORT=8080             ### ---&gt; 이부분을 찾아서 아래 부분을 채워 넣어주자.
 HTTP_PORT_DISABLE=-1       ### HTTP DISABLE
 HTTPS_CERT=/data/cert/yourdomain.com.cert      ### 인증서
 HTTPS_KEY=/data/cert/yourdomain.com.key        ### KEY
 
 ### args 마지막 줄에 빨간 부분을 채워서 넣어준다.
-JENKINS_ARGS="--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT --httpPort=$HTTP_PORT_DISABLE --httpsPort=$HTTP_PORT --httpsCertificate=$HTTPS_CERT --httpsPrivateKey=$HTTPS_KEY"
+JENKINS_ARGS=&#34;--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT --httpPort=$HTTP_PORT_DISABLE --httpsPort=$HTTP_PORT --httpsCertificate=$HTTPS_CERT --httpsPrivateKey=$HTTPS_KEY&#34;
 
 ### jenkins restart
 systemctl restart jenkins
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< figure src="/images/jenkins/2-1.png" title="HTTPS 접속 화면 #1" >}}
+{{&lt; figure src=&#34;/images/jenkins/2-1.png&#34; title=&#34;HTTPS 접속 화면 #1&#34; &gt;}}
 
 ### 2.2. NGINX로 HTTPS 구성
 NGINX를 구성하기 위해 Jenkins 설정은 그냥 HTTP로 구성을 해도 무방하다. 여기서는 위에서 설정을 했기 때문에 별도로 설정을 변경하지 않고했기 때문에 뒷단의 Jenkins를 HTTPS로 그대로 놔둔것이라고 봐도 된다. 
 만약에 Jenkins Server는 HTTP로 구성을 하려면 그냥 두고 NGINX에서 Reverse Proxy 구성을 하면 된다. 
 용어가 나와서 헷갈릴수도 있지만. Proxy_pass 부분만 http:// 로 바꾸면 된다.
 
-{{< admonition example "NGINX PROXY 구성" >}}
+{{&lt; admonition example &#34;NGINX PROXY 구성&#34; &gt;}}
 NGINX 가상 서버 구성
 ```shell
 vi  /etc/nginx/sites-available/jenkins
@@ -136,28 +136,34 @@ symbolic link 연결
 
  ln -s  /etc/nginx/sites-available/jenkins .
 ```
-{{< /admonition >}}
-{{< figure src="/images/jenkins/2-2.png" title="NGINX로 연결 후 HTTPS 접속 화면 #1" >}}
+{{&lt; /admonition &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/2-2.png&#34; title=&#34;NGINX로 연결 후 HTTPS 접속 화면 #1&#34; &gt;}}
 
 ## 3. SLACK 연동
 SLACK을 연동하여 메시지를 받을 수 있게 구성을 한다.
 
 ### 3.1. SLCAK 설정
-{{< figure src="/images/jenkins/3-1.png" title="SLACK 접속" >}}
+{{&lt; figure src=&#34;/images/jenkins/3-1.png&#34; title=&#34;SLACK 접속&#34; &gt;}}
 
 APP 등록
-{{< figure src="/images/jenkins/3-2.png" title="SLACK APP 추가#1" >}}
-{{< figure src="/images/jenkins/3-3.png" title="SLACK APP 추가#2" >}}
-{{< figure src="/images/jenkins/3-4.png" title="SLACK APP 추가#3" >}}
-{{< figure src="/images/jenkins/3-5.png" title="SLACK APP 추가#4" >}}
+{{&lt; figure src=&#34;/images/jenkins/3-2.png&#34; title=&#34;SLACK APP 추가#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/3-3.png&#34; title=&#34;SLACK APP 추가#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/3-4.png&#34; title=&#34;SLACK APP 추가#3&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/3-5.png&#34; title=&#34;SLACK APP 추가#4&#34; &gt;}}
 
 위에 내용까지 설정을 하면 Jenkins를 어떻게 설정하라고 나오는대 좀 오래 되었나보다. 요즘에 변경된 부분의 대해서 설정 하는 방법을 나열한다.
 
 ### 3.2. JENKINS 설정
-{{< figure src="/images/jenkins/3-6.png" title="Jenkins Slack Plugin 설치#1" >}}
-{{< figure src="/images/jenkins/3-7.png" title="Jenkins Slack Plugin 설치#2" >}}
-{{< figure src="/images/jenkins/3-8.png" title="Jenkins Slack Plugin 설치#3" >}}
-{{< figure src="/images/jenkins/3-9.png" title="Jenkins Slack 설정#1" >}}
-{{< figure src="/images/jenkins/3-10.png" title="Jenkins Slack 설정#2" >}}
-{{< figure src="/images/jenkins/3-11.png" title="Jenkins Slack Credentials 설정" >}}
-{{< figure src="/images/jenkins/3-12.png" title="Jenkins Slack 설정 테스트" >}}
+{{&lt; figure src=&#34;/images/jenkins/3-6.png&#34; title=&#34;Jenkins Slack Plugin 설치#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/3-7.png&#34; title=&#34;Jenkins Slack Plugin 설치#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/3-8.png&#34; title=&#34;Jenkins Slack Plugin 설치#3&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/3-9.png&#34; title=&#34;Jenkins Slack 설정#1&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/3-10.png&#34; title=&#34;Jenkins Slack 설정#2&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/3-11.png&#34; title=&#34;Jenkins Slack Credentials 설정&#34; &gt;}}
+{{&lt; figure src=&#34;/images/jenkins/3-12.png&#34; title=&#34;Jenkins Slack 설정 테스트&#34; &gt;}}
+
+---
+
+> Author: Dokyung  
+> URL: https://huntedhappy.github.io/jenkins/  
+

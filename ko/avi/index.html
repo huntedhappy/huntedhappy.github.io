@@ -1,133 +1,212 @@
 <!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>The Documentation vSphere Tanzu with AVI Load Balancer - Dokyung&#39;s DevOoOps</title><meta name="Description" content="VMware Tanzu with AVI"><meta property="og:title" content="The Documentation vSphere Tanzu with AVI Load Balancer" />
+<html itemscope itemtype="http://schema.org/WebPage" lang="ko">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>The Documentation vSphere Tanzu with AVI Load Balancer - Dokyung&#39;s DevOoOps</title><meta name="author" content="">
+<meta name="author-link" content="">
+<meta name="description" content="VMware Tanzu with AVI" /><meta name="keywords" content='tanzu, avi, tanzu integration avi, AVIinfrasetting, ClusterIP, AVI BGP, AVI AutoScalling, NodePort, NodePortLocal, dk, dokyung, avi rhi' /><meta itemprop="name" content="The Documentation vSphere Tanzu with AVI Load Balancer">
+<meta itemprop="description" content="VMware Tanzu with AVI"><meta itemprop="datePublished" content="2022-04-05T21:51:21+09:00" />
+<meta itemprop="dateModified" content="2024-02-15T01:46:09+09:00" />
+<meta itemprop="wordCount" content="1277"><meta itemprop="image" content="https://huntedhappy.github.io/ko/avi/avi.png" />
+<meta itemprop="keywords" content="tanzu,avi,tanzu integration avi,AVIinfrasetting,ClusterIP,AVI BGP,AVI AutoScalling,NodePort,NodePortLocal,dk,dokyung,avi rhi," /><meta property="og:title" content="The Documentation vSphere Tanzu with AVI Load Balancer" />
 <meta property="og:description" content="VMware Tanzu with AVI" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/ko/avi/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/avi/avi.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-05T21:51:21+09:00" />
-<meta property="article:modified_time" content="2024-02-15T01:46:09+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-02-15T01:46:09+09:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://huntedhappy.github.io/ko/avi/avi.png" /><meta name="twitter:title" content="The Documentation vSphere Tanzu with AVI Load Balancer"/>
 <meta name="twitter:description" content="VMware Tanzu with AVI"/>
 <meta name="application-name" content="Dokyung&#39;s DevOoOps">
-<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/ko/avi/" /><link rel="prev" href="https://huntedhappy.github.io/ko/vxrail/" /><link rel="next" href="https://huntedhappy.github.io/ko/networks/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "The Documentation vSphere Tanzu with AVI Load Balancer",
-        "inLanguage": "ko",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/huntedhappy.github.io\/ko\/avi\/"
-        },"image": [{
-                            "@type": "ImageObject",
-                            "url": "https:\/\/huntedhappy.github.io\/ko\/avi\/avi.png",
-                            "width":  914 ,
-                            "height":  328 
-                        }],"genre": "posts","keywords": "tanzu, avi, tanzu integration avi, AVIinfrasetting, ClusterIP, AVI BGP, AVI AutoScalling, NodePort, NodePortLocal, dk, dokyung, avi rhi","wordcount":  1280 ,
-        "url": "https:\/\/huntedhappy.github.io\/ko\/avi\/","datePublished": "2022-04-05T21:51:21+09:00","dateModified": "2024-02-15T01:46:09+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "Dokyung"
-            },"description": "VMware Tanzu with AVI"
-    }
-    </script></head>
-    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" data-light="#ffffff" data-dark="#ffffff" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://huntedhappy.github.io/ko/avi/" /><link rel="prev" href="https://huntedhappy.github.io/ko/vxrail/" /><link rel="next" href="https://huntedhappy.github.io/ko/networks/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Documentation vSphere Tanzu with AVI Load Balancer",
+    "inLanguage": "ko",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/huntedhappy.github.io\/ko\/avi\/"
+    },"image": [{
+              "@type": "ImageObject",
+              "url": "https:\/\/huntedhappy.github.io\/ko\/avi\/avi.png",
+              "width":  914 ,
+              "height":  328 
+            }],"genre": "posts","keywords": "tanzu, avi, tanzu integration avi, AVIinfrasetting, ClusterIP, AVI BGP, AVI AutoScalling, NodePort, NodePortLocal, dk, dokyung, avi rhi","wordcount":  1277 ,
+    "url": "https:\/\/huntedhappy.github.io\/ko\/avi\/","datePublished": "2022-04-05T21:51:21+09:00","dateModified": "2024-02-15T01:46:09+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Dokyung"
+      },"description": "VMware Tanzu with AVI"
+  }
+  </script></head>
+  <body data-header-desktop="auto" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-desktop" class="typeit"></span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/posts/"
+                
+                
+              >Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/tags/"
+                
+                
+              >Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/"
+                
+                
+              >Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/documentation/"
+                
+                
+              >Docs</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/about/"
+                
+                
+              >About</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="https://github.com/huntedhappy/"
+                title="GitHub"
+                rel="noopener noreferrer" target="_blank"
+              ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Search titles or contents ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li><li class="menu-item language-switch">
+            <span role="button" aria-label="Select Language" title="Select Language"><i class="fa-solid fa-language fa-fw" aria-hidden="true"></i></span>
+            <ul class="sub-menu"><li class="menu-item">
+                      <span class="menu-link text-secondary" title="Korean">Korean</span>
+                    </li><li class="menu-item">
+                      <a href="/avi/" class="menu-link" title="한국어">한국어</a>
+                    </li></ul>
+          </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
     <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/ko/posts/"> Posts </a><a class="menu-item" href="/ko/tags/"> Tags </a><a class="menu-item" href="/ko/categories/"> Categories </a><a class="menu-item" href="/ko/categories/documentation/"> Docs </a><a class="menu-item" href="/ko/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a><a href="javascript:void(0);" class="menu-item language" title="언어 변경">
-                    <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/avi/" selected>Korean</option><option value="/avi/">한국어</option></select>
-                </a></div>
-        </div>
+      <div class="header-title">
+        <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-title-mobile" class="typeit"></span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Search titles or contents ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
             </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        취소
-                    </a>
-                </div><a class="menu-item" href="/ko/posts/" title="">Posts</a><a class="menu-item" href="/ko/tags/" title="">Tags</a><a class="menu-item" href="/ko/categories/" title="">Categories</a><a class="menu-item" href="/ko/categories/documentation/" title="">Docs</a><a class="menu-item" href="/ko/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a><a href="javascript:void(0);" class="menu-item" title="언어 변경">
-                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/ko/avi/" selected>Korean</option><option value="/avi/">한국어</option></select>
-                </a></div>
-    </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Cancel
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/posts/"
+                  
+                  
+                >Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/tags/"
+                  
+                  
+                >Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/"
+                  
+                  
+                >Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/documentation/"
+                  
+                  
+                >Docs</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/about/"
+                  
+                  
+                >About</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="https://github.com/huntedhappy/"
+                  title="GitHub"
+                  rel="noopener noreferrer" target="_blank"
+                ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span><span class="menu-system-item language-switch">
+              <span role="button" aria-label="Select Language" title="Select Language">Korean<i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+              <select class="language-select" onchange="location = this.value;"><option value="/ko/avi/" selected disabled>Korean</option><option value="/avi/">한국어</option></select>
+            </span></li>
+      </ul>
+    </nav>
+  </div>
 </header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">목차</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation vSphere Tanzu with AVI Load Balancer</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">분류: <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-04-05">2022-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1280 단어&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;읽는데 약 7분&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/ko/avi/avi.png"
-        data-srcset="/ko/avi/avi.png, /ko/avi/avi.png 1.5x, /ko/avi/avi.png 2x"
-        data-sizes="auto"
-        alt="/ko/avi/avi.png"
-        title="VMware Tanzu with AVI" /></div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>목차</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>The Documentation vSphere Tanzu with AVI Load Balancer</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Dokyung</span></span><span class="post-included-in">&nbsp;included in <a href="/ko/categories/documentation/" class="post-category" title="Category - Documentation"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Documentation</a></span></div><div class="post-meta-line"><span title="published on 2022-04-05 21:51:21"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2022-04-05">2022-04-05</time></span>&nbsp;<span title="Updated on 2024-02-15 01:46:09"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="1277 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1300 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>6 minutes</span>&nbsp;</div>
+    </div><div class="featured-image"><img loading="lazy" src="/ko/avi/avi.png" alt="/ko/avi/avi.png" data-title="VMware Tanzu with AVI" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#1-tanzu에서-cluster-servicetype-변경">1. TANZU에서 Cluster ServiceType 변경</a></li>
     <li><a href="#2-avi-infra-settings">2. AVI Infra Settings</a></li>
@@ -136,15 +215,15 @@
     <li><a href="#5-gatewayclass">5. GatewayClass</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>AVI에서 제공하는 AKO인 INGRESS Controller를 사용 하는 방법 제공</p>
-<h2 id="1-tanzu에서-cluster-servicetype-변경">1. TANZU에서 Cluster ServiceType 변경</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>serviceType<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>ManageMent Cluster로 Context 변경</p>
-<div class="highlight"><div class="chroma">
+      </div><div class="content" id="content"><p>AVI에서 제공하는 AKO인 INGRESS Controller를 사용 하는 방법 제공</p>
+<h2 id="1-tanzu에서-cluster-servicetype-변경" class="heading-element">
+  <a href="#1-tanzu%ec%97%90%ec%84%9c-cluster-servicetype-%eb%b3%80%ea%b2%bd" class="heading-mark"></a>1. TANZU에서 Cluster ServiceType 변경</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>serviceType<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>ManageMent Cluster로 Context 변경</p>
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -221,10 +300,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePort
 </span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL
 </span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -301,10 +379,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: ClusterIP                                    # required
 </span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       # required
 </span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -387,14 +464,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePortLocal                                     # required
 </span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       
 </span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>NodePort 테스트</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -407,10 +483,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-nodeport-01<span class="o">=</span><span class="nb">true</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-nodeport-01<span class="o">=</span>true</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -427,8 +502,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>NodePort --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><figure><img src="/images/avi/1-1.png"/><figcaption>
             <h4>접속 화면</h4>
@@ -442,7 +516,7 @@
 </figure>
 </p>
 <p>ClusterIP 테스트</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -455,10 +529,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-clusterip-01<span class="o">=</span><span class="nb">true</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-clusterip-01<span class="o">=</span>true</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -479,8 +552,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><img src="/images/avi/1-3.png"/><figcaption>
             <h4>ServiceType 변경 확인</h4>
@@ -498,14 +570,14 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
         </figcaption>
 </figure>
 </p>
-<h2 id="2-avi-infra-settings">2. AVI Infra Settings</h2>
-<p>만약에 하나의 클러스터에서 VS별 SE-GROUP을 분리 하거나, 또는 VS의 IP 대역을 분리 하고 싶을 경우 AVIINFRASETTING을 사용하여 구성을 할 수 있다.
+<h2 id="2-avi-infra-settings" class="heading-element">
+  <a href="#2-avi-infra-settings" class="heading-mark"></a>2. AVI Infra Settings</h2><p>만약에 하나의 클러스터에서 VS별 SE-GROUP을 분리 하거나, 또는 VS의 IP 대역을 분리 하고 싶을 경우 AVIINFRASETTING을 사용하여 구성을 할 수 있다.
 <figure><img src="/images/avi/2-1.png"/><figcaption>
             <h4>구성</h4>
         </figcaption>
 </figure>
 </p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -566,11 +638,10 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: ako.vmware.com
 </span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
 </span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>테스트</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -583,8 +654,7 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>other-infra --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>other-infra --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><img src="/images/avi/2-3.png"/><figcaption>
             <h4>VS IP 변경 전</h4>
@@ -603,7 +673,7 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
         </figcaption>
 </figure>
 </p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -614,8 +684,7 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## SEGROUP을 변경</span>
 </span></span><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/seGroup/name&#34;,&#34;value&#34;:&#34;tkgm01&#34;}]&#39;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ingressClassName&#34;: &#34;other-infra&#34;}}&#39;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ingressClassName&#34;: &#34;other-infra&#34;}}&#39;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>현재는 SE가 기존의
 <figure><img src="/images/avi/2-5.png"/><figcaption>
@@ -634,18 +703,18 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </figure>
 </p>
 <p>위와 같은 방법으로 동일한 클러스터 내에서 FQDN별로 SE-GROUP 또는 IP 대역을 분리 할 수 있다.</p>
-<h2 id="3-avi-autoscalling">3. AVI AutoScalling</h2>
-<figure><img src="/images/avi/3-1.png"/><figcaption>
+<h2 id="3-avi-autoscalling" class="heading-element">
+  <a href="#3-avi-autoscalling" class="heading-mark"></a>3. AVI AutoScalling</h2><figure><img src="/images/avi/3-1.png"/><figcaption>
             <h4>AVI Autoscalling 기본 동작 </h4>
         </figcaption>
 </figure>
 
 <p><div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>autoscalling 재 조정값<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>autoscalling 재 조정값<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -720,12 +789,11 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </span></span><span class="line"><span class="cl">auto_rebalance_capacity_per_se <span class="m">200000</span>
 </span></span><span class="line"><span class="cl">max_cpu_usage <span class="m">70</span>
 </span></span><span class="line"><span class="cl">min_cpu_usage <span class="m">30</span>
-</span></span><span class="line"><span class="cl">save
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">save</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <figure><img src="/images/avi/3-2.png"/><figcaption>
             <h4>auto_rebalance 변경 전</h4>
         </figcaption>
@@ -741,8 +809,8 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
         </figcaption>
 </figure>
 
-<h2 id="4-bgp-연동-후-rhiroute-health-injection">4. BGP 연동 후 Rhi(Route Health Injection)</h2>
-<p>BGP ECMP를 구성 하여 SE를 탄력적으로 확장을 할 수 있습니다.</p>
+<h2 id="4-bgp-연동-후-rhiroute-health-injection" class="heading-element">
+  <a href="#4-bgp-%ec%97%b0%eb%8f%99-%ed%9b%84-rhiroute-health-injection" class="heading-mark"></a>4. BGP 연동 후 Rhi(Route Health Injection)</h2><p>BGP ECMP를 구성 하여 SE를 탄력적으로 확장을 할 수 있습니다.</p>
 <p>물리 스위치에는 ECMP를 구성이 필요.</p>
 <figure><img src="/images/avi/4-5.png"/><figcaption>
             <h4>구성</h4>
@@ -761,7 +829,7 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </figure>
 </p>
 <p>SE에 접속 해서 BGP 상태를 확인 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -792,8 +860,7 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </span></span><span class="line"><span class="cl">netcat localhost bgpd
 </span></span><span class="line"><span class="cl"><span class="nb">enable</span>
 </span></span><span class="line"><span class="cl">show run
-</span></span><span class="line"><span class="cl">show bgp summary
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">show bgp summary</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><img src="/images/avi/4-3.png"/><figcaption>
             <h4>BGP 상태 확인</h4>
@@ -806,13 +873,12 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </figure>
 </p>
 <p>RHI Enabled</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/network/enableRhi&#34;,&#34;value&#34;:true}]&#39;</span> 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/network/enableRhi&#34;,&#34;value&#34;:true}]&#39;</span> </span></span></code></pre></td></tr></table>
 </div>
 </div><figure><img src="/images/avi/4-6.png"/><figcaption>
             <h4>Rhi Enable</h4>
@@ -825,8 +891,8 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
         </figcaption>
 </figure>
 </p>
-<h2 id="5-gatewayclass">5. GatewayClass</h2>
-<p>GATEWAY를 사용하는 이유는 여러개의 LoadBalancer의 IP를 하나의 IP로 설정하고 Port를 사용하기 위해서다.
+<h2 id="5-gatewayclass" class="heading-element">
+  <a href="#5-gatewayclass" class="heading-mark"></a>5. GatewayClass</h2><p>GATEWAY를 사용하는 이유는 여러개의 LoadBalancer의 IP를 하나의 IP로 설정하고 Port를 사용하기 위해서다.
 SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 공통으로 사용을 할 수 있다.</p>
 <figure><img src="/images/avi/5-1.png"/><figcaption>
             <h4>GATEWAYCLASS 연계</h4>
@@ -835,7 +901,7 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 
 <p>구성을 하기 위해서는 클러스터에서 servicesAPI: true 를 True로 변경 필요 및 AutoFQDN와 DefaultDomain이 필요하다.</p>
 <p>위에서 언급한 AVIINFRASETTING을 한 후 GATEWAYCLASS를 생성한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -862,11 +928,10 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span></span></span><span class="line"><span class="cl"><span class="s">    group: ako.vmware.com
 </span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
 </span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>GATEWAY 생성</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -925,11 +990,10 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
 </span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
 </span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>만약에 LB IP를 지정 하고 싶다면. 아래와 같이 IP를 지정하면 된다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -994,19 +1058,17 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
 </span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
 </span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>테스트</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span> -l <span class="s1">&#39;ako.vmware.com/gateway-namespace=default&#39;</span>,<span class="s1">&#39;ako.vmware.com/gateway-name=avi-alb-gw&#39;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span> -l <span class="s1">&#39;ako.vmware.com/gateway-namespace=default&#39;</span>,<span class="s1">&#39;ako.vmware.com/gateway-name=avi-alb-gw&#39;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>아래와 같이 동일한 IP로 두개의 SVC를 동일한 IP로 Port(80 , 8080)만 다른게 구성 할 수 있다.
 <figure><img src="/images/avi/5-2.png"/><figcaption>
@@ -1025,47 +1087,48 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </figure>
 </p>
 </div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>수정: 2024-02-15&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/4357013f0c26ed3be4b1a0b7ba32454eac7de72c" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 4357013f0c26ed3be4b1a0b7ba32454eac7de72c: rebuilding site Thu Feb 15 01:46:09     2024">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>4357013</a></span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/ko/avi/index.md" target="_blank">마크다운 읽기</a>
-                        </span></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="공유하기 Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/avi/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="공유하기 Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/avi/" data-title="The Documentation vSphere Tanzu with AVI Load Balancer" data-description="VMware Tanzu with AVI"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
-            </div>
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-02-15 01:46:09">Updated on 2024-02-15&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/ko/avi/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/avi/"><i class="fa-brands fa-linkedin fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/avi/" data-title="The Documentation vSphere Tanzu with AVI Load Balancer" data-description="VMware Tanzu with AVI"><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  </span>
         </div>
-    </div>
+      </div></div>
 
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/ko/tags/tanzu/">tanzu</a>,&nbsp;<a href="/ko/tags/avi/">avi</a>,&nbsp;<a href="/ko/tags/tanzu-integration-avi/">tanzu integration avi</a>,&nbsp;<a href="/ko/tags/aviinfrasetting/">AVIinfrasetting</a>,&nbsp;<a href="/ko/tags/clusterip/">ClusterIP</a>,&nbsp;<a href="/ko/tags/avi-bgp/">AVI BGP</a>,&nbsp;<a href="/ko/tags/avi-autoscalling/">AVI AutoScalling</a>,&nbsp;<a href="/ko/tags/nodeport/">NodePort</a>,&nbsp;<a href="/ko/tags/nodeportlocal/">NodePortLocal</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a>,&nbsp;<a href="/ko/tags/avi-rhi/">avi rhi</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">뒤로</a></span>&nbsp;|&nbsp;<span><a href="/ko/">홈</a></span>
-        </section>
-    </div>
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/ko/tags/tanzu/" class="post-tag" title="Tags - tanzu">tanzu</a><a href="/ko/tags/avi/" class="post-tag" title="Tags - avi">avi</a><a href="/ko/tags/tanzu-integration-avi/" class="post-tag" title="Tags - tanzu integration avi">tanzu integration avi</a><a href="/ko/tags/aviinfrasetting/" class="post-tag" title="Tags - AVIinfrasetting">AVIinfrasetting</a><a href="/ko/tags/clusterip/" class="post-tag" title="Tags - ClusterIP">ClusterIP</a><a href="/ko/tags/avi-bgp/" class="post-tag" title="Tags - AVI BGP">AVI BGP</a><a href="/ko/tags/avi-autoscalling/" class="post-tag" title="Tags - AVI AutoScalling">AVI AutoScalling</a><a href="/ko/tags/nodeport/" class="post-tag" title="Tags - NodePort">NodePort</a><a href="/ko/tags/nodeportlocal/" class="post-tag" title="Tags - NodePortLocal">NodePortLocal</a><a href="/ko/tags/dk/" class="post-tag" title="Tags - dk">dk</a><a href="/ko/tags/dokyung/" class="post-tag" title="Tags - dokyung">dokyung</a><a href="/ko/tags/avi-rhi/" class="post-tag" title="Tags - avi rhi">avi rhi</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/ko/">Home</a></span>
+    </section>
+  </div>
 
-    <div class="post-nav"><a href="/ko/vxrail/" class="prev" rel="prev" title="The Documentation VxRail"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation VxRail</a>
-            <a href="/ko/networks/" class="next" rel="next" title="The Documentation Networks">The Documentation Networks<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/ko/vxrail/" class="post-nav-item" rel="prev" title="The Documentation VxRail"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation VxRail</a>
+      <a href="/ko/networks/" class="post-nav-item" rel="next" title="The Documentation Networks">The Documentation Networks<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-        </div>
-    </footer></div>
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
+      </noscript></div></article>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="맨 위로">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="댓글 보기">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"복사하기","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"검색 결과 없음","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
-            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', '216068312', { 'anonymize_ip': true });
-        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/ko/"></a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="View Comments"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Theme FixIt works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/algoliasearch/algoliasearch-lite.umd.min.js" defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":true,"expired":false,"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"typeit-header-desktop":"Dokyung's DevOoOps","typeit-header-title-mobile":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},"duration":-1,"loop":false,"speed":100}};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', '216068312', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
 </html>

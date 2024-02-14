@@ -1,17 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>OWASP - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/owasp/</link>
-        <description>OWASP - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 20 Jan 2022 13:37:45 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/owasp/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation OWASP</title>
-    <link>https://huntedhappy.github.io/ko/owsap/</link>
-    <pubDate>Thu, 20 Jan 2022 13:37:45 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/owsap/</guid>
-    <description><![CDATA[<p>OWASP TOP10을 정리해보자.
-<figure><figcaption>
+  <channel>
+    <title>OWASP - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/owasp/</link>
+    <description>OWASP - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 20 Jan 2022 13:37:45 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/owasp/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation OWASP</title>
+  <link>https://huntedhappy.github.io/ko/owsap/</link>
+  <pubDate>Thu, 20 Jan 2022 13:37:45 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/owsap/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/owsap/owasp.png" alt="The Documentation OWASP" title="owasp top 10" referrerpolicy="no-referrer"/></div><p>OWASP TOP10을 정리해보자.
+<figure><img src="/images/owasp/1-1.png"/><figcaption>
             <h4>owasp top10 출처:OWASP</h4>
         </figcaption>
 </figure>
@@ -77,8 +76,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="a01-broken-access-control">A01 Broken Access Control</h2>
-<table>
+<h2 id="a01-broken-access-control" class="heading-element">
+  <a href="#a01-broken-access-control" class="heading-mark"></a>A01 Broken Access Control</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -106,8 +105,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명">설명</h4>
-<p>액세스 제어는 사용자가 의도한 권한을 벗어나 행동할 수 없도록 정책을 시행합니다. 실패는 일반적으로 모든 데이터의 무단 정보 공개, 수정 또는 파괴로 이어지거나 사용자의 한계를 벗어난 비즈니스 기능을 수행하게 됩니다. 일반적인 액세스 제어 취약점은 다음과 같습니다.</p>
+<h4 id="설명" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85" class="heading-mark"></a>설명</h4><p>액세스 제어는 사용자가 의도한 권한을 벗어나 행동할 수 없도록 정책을 시행합니다. 실패는 일반적으로 모든 데이터의 무단 정보 공개, 수정 또는 파괴로 이어지거나 사용자의 한계를 벗어난 비즈니스 기능을 수행하게 됩니다. 일반적인 액세스 제어 취약점은 다음과 같습니다.</p>
 <ul>
 <li>
 <p>특정 기능, 역할 또는 사용자에게만 액세스 권한을 부여해야 하지만 누구나 사용할 수 있는 최소 권한 또는 기본 거부 원칙 위반입니다.</p>
@@ -134,8 +133,8 @@
 <p>인증되지 않은 사용자로 인증된 페이지를 강제로 탐색하거나 표준 사용자로 권한 있는 페이지를 탐색합니다.</p>
 </li>
 </ul>
-<h2 id="a02-cryptographic-failures">A02 Cryptographic Failures</h2>
-<table>
+<h2 id="a02-cryptographic-failures" class="heading-element">
+  <a href="#a02-cryptographic-failures" class="heading-mark"></a>A02 Cryptographic Failures</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -163,8 +162,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명-1">설명</h4>
-<p>첫 번째는 전송 중인 데이터와 저장되지 않은 데이터의 보호 요구 사항을 결정하는 것입니다. 예를 들어 암호, 신용 카드 번호, 건강 기록, 개인 정보 및 비즈니스 비밀은 주로 해당 데이터가 개인 정보 보호법(예: EU의 일반 데이터 보호 규정(GDPR) 또는 규정(예: 금융 데이터 보호)에 해당하는 경우 추가 보호가 필요합니다. PCI 데이터 보안 표준(PCI DSS)과 같은. 이러한 모든 데이터의 경우:</p>
+<h4 id="설명-1" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85-1" class="heading-mark"></a>설명</h4><p>첫 번째는 전송 중인 데이터와 저장되지 않은 데이터의 보호 요구 사항을 결정하는 것입니다. 예를 들어 암호, 신용 카드 번호, 건강 기록, 개인 정보 및 비즈니스 비밀은 주로 해당 데이터가 개인 정보 보호법(예: EU의 일반 데이터 보호 규정(GDPR) 또는 규정(예: 금융 데이터 보호)에 해당하는 경우 추가 보호가 필요합니다. PCI 데이터 보안 표준(PCI DSS)과 같은. 이러한 모든 데이터의 경우:</p>
 <ul>
 <li>
 <p>데이터가 일반 텍스트로 전송됩니까? 이는 STARTTLS와 같은 TLS 업그레이드도 사용하는 HTTP, SMTP, FTP와 같은 프로토콜과 관련이 있습니다. 외부 인터넷 트래픽은 위험합니다. 로드 밸런서, 웹 서버 또는 백엔드 시스템 간의 모든 내부 트래픽을 확인합니다.</p>
@@ -200,8 +199,8 @@
 <p>예를 들어 패딩 오라클 공격의 형태로 암호화 오류 메시지 또는 부채널 정보가 악용될 수 있습니까?</p>
 </li>
 </ul>
-<h2 id="a03-injection">A03 Injection</h2>
-<table>
+<h2 id="a03-injection" class="heading-element">
+  <a href="#a03-injection" class="heading-mark"></a>A03 Injection</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -229,8 +228,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명-2">설명</h4>
-<p>애플리케이션은 다음과 같은 경우 공격에 취약합니다.</p>
+<h4 id="설명-2" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85-2" class="heading-mark"></a>설명</h4><p>애플리케이션은 다음과 같은 경우 공격에 취약합니다.</p>
 <ul>
 <li>사용자 제공 데이터는 애플리케이션에서 검증, 필터링 또는 삭제되지 않습니다.</li>
 <li>컨텍스트 인식 이스케이프가 없는 동적 쿼리 또는 매개변수화되지 않은 호출은 인터프리터에서 직접 사용됩니다.</li>
@@ -238,8 +237,8 @@
 <li>적대적인 데이터를 직접 사용하거나 연결합니다. SQL 또는 명령은 동적 쿼리, 명령 또는 저장 프로시저의 구조 및 악성 데이터를 포함합니다.</li>
 <li>더 일반적인 주입에는 SQL, NoSQL, OS 명령, ORM(Object Relational Mapping), LDAP 및 EL(Expression Language) 또는 OGNL(Object Graph Navigation Library) 주입이 있습니다. 개념은 모든 통역사 간에 동일합니다. 소스 코드 검토는 애플리케이션이 주입에 취약한지 감지하는 가장 좋은 방법입니다. 모든 매개변수, 헤더, URL, 쿠키, JSON, SOAP 및 XML 데이터 입력에 대한 자동 테스트를 적극 권장합니다. 조직은 CI/CD 파이프라인에 정적(SAST), 동적(DAST) 및 대화형(IAST) 애플리케이션 보안 테스트 도구를 포함하여 프로덕션 배포 전에 도입된 주입 결함을 식별할 수 있습니다.</li>
 </ul>
-<h2 id="a04-insecure-design">A04 Insecure Design</h2>
-<table>
+<h2 id="a04-insecure-design" class="heading-element">
+  <a href="#a04-insecure-design" class="heading-mark"></a>A04 Insecure Design</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -267,10 +266,10 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명-3">설명</h4>
-<p>안전하지 않은 설계는 &ldquo;누락되거나 비효율적인 제어 설계&quot;로 표현되는 다양한 약점을 나타내는 광범위한 범주입니다. 안전하지 않은 디자인은 다른 모든 상위 10개 위험 범주의 원인이 아닙니다. 안전하지 않은 설계와 안전하지 않은 구현에는 차이가 있습니다. 우리는 근본 원인과 해결 방법이 다르기 때문에 설계 결함과 구현 결함을 구별합니다. 보안 설계에는 여전히 악용될 수 있는 취약점으로 이어지는 구현 결함이 있을 수 있습니다. 안전하지 않은 설계는 정의상 특정 공격을 방어하기 위해 필요한 보안 제어가 생성되지 않았기 때문에 완벽한 구현으로 수정할 수 없습니다. 안전하지 않은 설계에 기여하는 요인 중 하나는 개발 중인 소프트웨어 또는 시스템에 내재된 비즈니스 위험 프로파일링의 부족입니다.</p>
-<h2 id="a05-security-misconfiguration">A05 Security Misconfiguration</h2>
-<table>
+<h4 id="설명-3" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85-3" class="heading-mark"></a>설명</h4><p>안전하지 않은 설계는 &ldquo;누락되거나 비효율적인 제어 설계&quot;로 표현되는 다양한 약점을 나타내는 광범위한 범주입니다. 안전하지 않은 디자인은 다른 모든 상위 10개 위험 범주의 원인이 아닙니다. 안전하지 않은 설계와 안전하지 않은 구현에는 차이가 있습니다. 우리는 근본 원인과 해결 방법이 다르기 때문에 설계 결함과 구현 결함을 구별합니다. 보안 설계에는 여전히 악용될 수 있는 취약점으로 이어지는 구현 결함이 있을 수 있습니다. 안전하지 않은 설계는 정의상 특정 공격을 방어하기 위해 필요한 보안 제어가 생성되지 않았기 때문에 완벽한 구현으로 수정할 수 없습니다. 안전하지 않은 설계에 기여하는 요인 중 하나는 개발 중인 소프트웨어 또는 시스템에 내재된 비즈니스 위험 프로파일링의 부족입니다.</p>
+<h2 id="a05-security-misconfiguration" class="heading-element">
+  <a href="#a05-security-misconfiguration" class="heading-mark"></a>A05 Security Misconfiguration</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -298,8 +297,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명-4">설명</h4>
-<p>애플리케이션이 다음과 같은 경우 취약할 수 있습니다.</p>
+<h4 id="설명-4" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85-4" class="heading-mark"></a>설명</h4><p>애플리케이션이 다음과 같은 경우 취약할 수 있습니다.</p>
 <ul>
 <li>애플리케이션 스택의 모든 부분에서 적절한 보안 강화가 누락되었거나 클라우드 서비스에 대한 권한이 부적절하게 구성되었습니다.</li>
 <li>불필요한 기능이 활성화되거나 설치됩니다(예: 불필요한 포트, 서비스, 페이지, 계정 또는 권한).</li>
@@ -311,8 +310,8 @@
 <li>소프트웨어가 오래되었거나 취약합니다( A06:2021-Vulnerable and Outdated Components 참조).</li>
 </ul>
 <p>일관되고 반복 가능한 애플리케이션 보안 구성 프로세스가 없으면 시스템이 더 큰 위험에 노출됩니다.</p>
-<h2 id="a06-vulnerable-and-outdated-components">A06 Vulnerable and Outdated Components</h2>
-<table>
+<h2 id="a06-vulnerable-and-outdated-components" class="heading-element">
+  <a href="#a06-vulnerable-and-outdated-components" class="heading-mark"></a>A06 Vulnerable and Outdated Components</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -340,8 +339,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명-5">설명</h4>
-<p>당신은 취약할 가능성이 있습니다:</p>
+<h4 id="설명-5" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85-5" class="heading-mark"></a>설명</h4><p>당신은 취약할 가능성이 있습니다:</p>
 <ul>
 <li>사용하는 모든 구성 요소(클라이언트 측 및 서버 측 모두)의 버전을 모르는 경우. 여기에는 직접 사용하는 구성 요소와 중첩된 종속성이 포함됩니다.</li>
 <li>소프트웨어가 취약하거나 지원되지 않거나 오래된 경우. 여기에는 OS, 웹/애플리케이션 서버, 데이터베이스 관리 시스템(DBMS), 애플리케이션, API 및 모든 구성 요소, 런타임 환경 및 라이브러리가 포함됩니다.</li>
@@ -350,8 +349,8 @@
 <li>소프트웨어 개발자가 업데이트, 업그레이드 또는 패치된 라이브러리의 호환성을 테스트하지 않는 경우.</li>
 <li>구성 요소의 구성을 보호하지 않는 경우(A05:2021-Security Misconfiguration 참조).</li>
 </ul>
-<h2 id="a07-identification-and-authentication-failures">A07 Identification and Authentication Failures</h2>
-<table>
+<h2 id="a07-identification-and-authentication-failures" class="heading-element">
+  <a href="#a07-identification-and-authentication-failures" class="heading-mark"></a>A07 Identification and Authentication Failures</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -379,8 +378,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명-6">설명</h4>
-<p>사용자의 신원 확인, 인증 및 세션 관리는 인증 관련 공격으로부터 보호하는 데 중요합니다. 애플리케이션이 다음과 같은 경우 인증 취약점이 있을 수 있습니다.</p>
+<h4 id="설명-6" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85-6" class="heading-mark"></a>설명</h4><p>사용자의 신원 확인, 인증 및 세션 관리는 인증 관련 공격으로부터 보호하는 데 중요합니다. 애플리케이션이 다음과 같은 경우 인증 취약점이 있을 수 있습니다.</p>
 <ul>
 <li>공격자가 유효한 사용자 이름 및 암호 목록을 가지고 있는 경우 자격 증명 스터핑과 같은 자동화된 공격을 허용합니다.</li>
 <li>무차별 대입 또는 기타 자동화된 공격을 허용합니다.</li>
@@ -392,8 +391,8 @@
 <li>로그인 성공 후 세션 식별자를 재사용합니다.</li>
 <li>세션 ID를 올바르게 무효화하지 않습니다. 사용자 세션 또는 인증 토큰(주로 SSO(Single Sign-On) 토큰)은 로그아웃 또는 비활성 기간 동안 제대로 무효화되지 않습니다.</li>
 </ul>
-<h2 id="a08-software-and-data-integrity-failures">A08 Software and Data Integrity Failures</h2>
-<table>
+<h2 id="a08-software-and-data-integrity-failures" class="heading-element">
+  <a href="#a08-software-and-data-integrity-failures" class="heading-mark"></a>A08 Software and Data Integrity Failures</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -421,10 +420,10 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명-7">설명</h4>
-<p>소프트웨어 및 데이터 무결성 오류는 무결성 위반으로부터 보호하지 않는 코드 및 인프라와 관련됩니다. 이에 대한 예는 애플리케이션이 신뢰할 수 없는 소스, 저장소 및 CDN(콘텐츠 전달 네트워크)의 플러그인, 라이브러리 또는 모듈에 의존하는 경우입니다. 안전하지 않은 CI/CD 파이프라인은 무단 액세스, 악성 코드 또는 시스템 손상의 가능성을 유발할 수 있습니다. 마지막으로, 많은 응용 프로그램에는 이제 충분한 무결성 확인 없이 업데이트가 다운로드되고 이전에 신뢰했던 응용 프로그램에 적용되는 자동 업데이트 기능이 포함됩니다. 공격자는 잠재적으로 자신의 업데이트를 업로드하여 배포하고 모든 설치에서 실행할 수 있습니다. 또 다른 예는 공격자가 보고 수정할 수 있는 구조로 개체 또는 데이터가 인코딩되거나 직렬화되어 안전하지 않은 역직렬화에 취약한 경우입니다.</p>
-<h2 id="a09-security-logging-and-monitoring-failures">A09 Security Logging and Monitoring Failures</h2>
-<table>
+<h4 id="설명-7" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85-7" class="heading-mark"></a>설명</h4><p>소프트웨어 및 데이터 무결성 오류는 무결성 위반으로부터 보호하지 않는 코드 및 인프라와 관련됩니다. 이에 대한 예는 애플리케이션이 신뢰할 수 없는 소스, 저장소 및 CDN(콘텐츠 전달 네트워크)의 플러그인, 라이브러리 또는 모듈에 의존하는 경우입니다. 안전하지 않은 CI/CD 파이프라인은 무단 액세스, 악성 코드 또는 시스템 손상의 가능성을 유발할 수 있습니다. 마지막으로, 많은 응용 프로그램에는 이제 충분한 무결성 확인 없이 업데이트가 다운로드되고 이전에 신뢰했던 응용 프로그램에 적용되는 자동 업데이트 기능이 포함됩니다. 공격자는 잠재적으로 자신의 업데이트를 업로드하여 배포하고 모든 설치에서 실행할 수 있습니다. 또 다른 예는 공격자가 보고 수정할 수 있는 구조로 개체 또는 데이터가 인코딩되거나 직렬화되어 안전하지 않은 역직렬화에 취약한 경우입니다.</p>
+<h2 id="a09-security-logging-and-monitoring-failures" class="heading-element">
+  <a href="#a09-security-logging-and-monitoring-failures" class="heading-mark"></a>A09 Security Logging and Monitoring Failures</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -452,8 +451,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명-8">설명</h4>
-<p>OWASP Top 10 2021로 돌아가서 이 카테고리는 활성 침해를 감지, 에스컬레이션 및 대응하는 데 도움이 됩니다. 로깅 및 모니터링 없이는 위반을 감지할 수 없습니다. 불충분한 로깅, 탐지, 모니터링 및 활성 응답은 다음과 같은 경우에 발생합니다.</p>
+<h4 id="설명-8" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85-8" class="heading-mark"></a>설명</h4><p>OWASP Top 10 2021로 돌아가서 이 카테고리는 활성 침해를 감지, 에스컬레이션 및 대응하는 데 도움이 됩니다. 로깅 및 모니터링 없이는 위반을 감지할 수 없습니다. 불충분한 로깅, 탐지, 모니터링 및 활성 응답은 다음과 같은 경우에 발생합니다.</p>
 <ul>
 <li>로그인, 로그인 실패 및 가치가 높은 트랜잭션과 같은 감사 가능한 이벤트는 기록되지 않습니다.</li>
 <li>경고 및 오류는 아니오, 부적절하거나 불명확한 로그 메시지를 생성합니다.</li>
@@ -464,8 +463,8 @@
 <li>애플리케이션은 실시간 또는 거의 실시간으로 활성 공격을 감지, 확대 또는 경고할 수 없습니다.</li>
 </ul>
 <p>사용자나 공격자가 볼 수 있는 로깅 및 경고 이벤트를 통해 정보 유출에 취약합니다( A01:2021-Broken Access Control 참조).</p>
-<h2 id="a10-server-side-request-forgery-ssrf">A10 Server-Side Request Forgery (SSRF)</h2>
-<table>
+<h2 id="a10-server-side-request-forgery-ssrf" class="heading-element">
+  <a href="#a10-server-side-request-forgery-ssrf" class="heading-mark"></a>A10 Server-Side Request Forgery (SSRF)</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">CWEs Mapped</th>
@@ -493,10 +492,10 @@
 </tr>
 </tbody>
 </table>
-<h4 id="설명-9">설명</h4>
-<p>SSRF 결함은 웹 애플리케이션이 사용자가 제공한 URL의 유효성을 검사하지 않고 원격 리소스를 가져올 때마다 발생합니다. 이를 통해 공격자는 방화벽, VPN 또는 다른 유형의 네트워크 ACL(액세스 제어 목록)에 의해 보호되는 경우에도 응용 프로그램이 조작된 요청을 예기치 않은 대상으로 보내도록 강제할 수 있습니다.</p>
+<h4 id="설명-9" class="heading-element">
+  <a href="#%ec%84%a4%eb%aa%85-9" class="heading-mark"></a>설명</h4><p>SSRF 결함은 웹 애플리케이션이 사용자가 제공한 URL의 유효성을 검사하지 않고 원격 리소스를 가져올 때마다 발생합니다. 이를 통해 공격자는 방화벽, VPN 또는 다른 유형의 네트워크 ACL(액세스 제어 목록)에 의해 보호되는 경우에도 응용 프로그램이 조작된 요청을 예기치 않은 대상으로 보내도록 강제할 수 있습니다.</p>
 <p>최신 웹 애플리케이션이 최종 사용자에게 편리한 기능을 제공함에 따라 URL 가져오기가 일반적인 시나리오가 되었습니다. 그 결과 SSRF의 발병률이 증가하고 있습니다. 또한 클라우드 서비스와 아키텍처의 복잡성으로 인해 SSRF의 심각도가 높아지고 있습니다.</p>
-<p><a href="https://owasp.org/Top10/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> 자료출처: OWASP</a></p>
+<p><a href="https://owasp.org/Top10/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> 자료출처: OWASP</a></p>
 ]]></description>
 </item>
 </channel>

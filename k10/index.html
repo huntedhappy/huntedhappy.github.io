@@ -1,133 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>The Documentation K10 Install - Dokyung&#39;s DevOoOps</title><meta name="Description" content="K10 Install Guide"><meta property="og:title" content="The Documentation K10 Install" />
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>The Documentation K10 Install - Dokyung&#39;s DevOoOps</title><meta name="author" content="">
+<meta name="author-link" content="">
+<meta name="description" content="K10 Install Guide" /><meta name="keywords" content='K10, kasten, tanzu, k8s, devops, dk, dokyung' /><meta itemprop="name" content="The Documentation K10 Install">
+<meta itemprop="description" content="K10 Install Guide"><meta itemprop="datePublished" content="2021-12-30T19:26:46+09:00" />
+<meta itemprop="dateModified" content="2023-09-17T08:19:26+09:00" />
+<meta itemprop="wordCount" content="1272"><meta itemprop="image" content="https://huntedhappy.github.io/k10/k10.jpg" />
+<meta itemprop="keywords" content="K10,kasten,tanzu,k8s,devops,dk,dokyung," /><meta property="og:title" content="The Documentation K10 Install" />
 <meta property="og:description" content="K10 Install Guide" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/k10/" /><meta property="og:image" content="https://huntedhappy.github.io/k10/k10.jpg" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-30T19:26:46+09:00" />
-<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://huntedhappy.github.io/k10/k10.jpg" /><meta name="twitter:title" content="The Documentation K10 Install"/>
 <meta name="twitter:description" content="K10 Install Guide"/>
 <meta name="application-name" content="Dokyung&#39;s DevOoOps">
-<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/k10/" /><link rel="next" href="https://huntedhappy.github.io/argo/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "The Documentation K10 Install",
-        "inLanguage": "en",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/huntedhappy.github.io\/k10\/"
-        },"image": [{
-                            "@type": "ImageObject",
-                            "url": "https:\/\/huntedhappy.github.io\/k10\/k10.jpg",
-                            "width":  349 ,
-                            "height":  175 
-                        }],"genre": "posts","keywords": "K10, kasten, tanzu, k8s, devops, dk, dokyung","wordcount":  1280 ,
-        "url": "https:\/\/huntedhappy.github.io\/k10\/","datePublished": "2021-12-30T19:26:46+09:00","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "Dokyung"
-            },"description": "K10 Install Guide"
-    }
-    </script></head>
-    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" data-light="#ffffff" data-dark="#ffffff" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://huntedhappy.github.io/k10/" /><link rel="next" href="https://huntedhappy.github.io/about/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Documentation K10 Install",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/huntedhappy.github.io\/k10\/"
+    },"image": [{
+              "@type": "ImageObject",
+              "url": "https:\/\/huntedhappy.github.io\/k10\/k10.jpg",
+              "width":  349 ,
+              "height":  175 
+            }],"genre": "posts","keywords": "K10, kasten, tanzu, k8s, devops, dk, dokyung","wordcount":  1272 ,
+    "url": "https:\/\/huntedhappy.github.io\/k10\/","datePublished": "2021-12-30T19:26:46+09:00","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Dokyung"
+      },"description": "K10 Install Guide"
+  }
+  </script></head>
+  <body data-header-desktop="auto" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-desktop" class="typeit"></span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              >Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              >Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              >Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/documentation/"
+                
+                
+              >Docs</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              >About</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="https://github.com/huntedhappy"
+                title="GitHub"
+                rel="noopener noreferrer" target="_blank"
+              ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Search titles or contents ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li><li class="menu-item language-switch">
+            <span role="button" aria-label="Select Language" title="Select Language"><i class="fa-solid fa-language fa-fw" aria-hidden="true"></i></span>
+            <ul class="sub-menu"><li class="menu-item">
+                      <a href="/ko/k10/" class="menu-link" title="Korean">Korean</a>
+                    </li><li class="menu-item">
+                      <span class="menu-link text-secondary" title="한국어">한국어</span>
+                    </li></ul>
+          </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
     <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/categories/documentation/"> Docs </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
-                    <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/k10/">Korean</option><option value="/k10/" selected>한국어</option></select>
-                </a></div>
-        </div>
+      <div class="header-title">
+        <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-title-mobile" class="typeit"></span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Search titles or contents ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
             </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        Cancel
-                    </a>
-                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/categories/documentation/" title="">Docs</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
-                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/ko/k10/">Korean</option><option value="/k10/" selected>한국어</option></select>
-                </a></div>
-    </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Cancel
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                >Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                >Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                >Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/documentation/"
+                  
+                  
+                >Docs</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                >About</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="https://github.com/huntedhappy"
+                  title="GitHub"
+                  rel="noopener noreferrer" target="_blank"
+                ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span><span class="menu-system-item language-switch">
+              <span role="button" aria-label="Select Language" title="Select Language">한국어<i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+              <select class="language-select" onchange="location = this.value;"><option value="/ko/k10/">Korean</option><option value="/k10/" selected disabled>한국어</option></select>
+            </span></li>
+      </ul>
+    </nav>
+  </div>
 </header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">Contents</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation K10 Install</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-12-30">2021-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1280 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/k10/k10.jpg"
-        data-srcset="/k10/k10.jpg, /k10/k10.jpg 1.5x, /k10/k10.jpg 2x"
-        data-sizes="auto"
-        alt="/k10/k10.jpg"
-        title="K10 Install Guide" /></div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>Contents</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>The Documentation K10 Install</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Dokyung</span></span><span class="post-included-in">&nbsp;included in <a href="/categories/documentation/" class="post-category" title="Category - Documentation"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Documentation</a></span></div><div class="post-meta-line"><span title="published on 2021-12-30 19:26:46"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-12-30">2021-12-30</time></span>&nbsp;<span title="Updated on 2023-09-17 08:19:26"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-17">2023-09-17</time></span>&nbsp;<span title="1272 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1300 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>6 minutes</span>&nbsp;</div>
+    </div><div class="featured-image"><img loading="lazy" src="/k10/k10.jpg" alt="/k10/k10.jpg" data-title="K10 Install Guide" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#1-requirements">1. Requirements</a></li>
     <li><a href="#2-환경">2. 환경</a></li>
@@ -161,21 +240,21 @@
     <li><a href="#7-백업-완료">7. 백업 완료</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>컨테이너 환경에서 백업을 하기 위한 방법으로 Veeam에서 제공하는 Kasten 설치</p>
+      </div><div class="content" id="content"><p>컨테이너 환경에서 백업을 하기 위한 방법으로 Veeam에서 제공하는 Kasten 설치</p>
 <p>설치 환경은 Tanzu 1.4 버전으로 진행</p>
-<h2 id="1-requirements">1. Requirements</h2>
-<p>helm 설치, <a href="https://github.com/helm/helm/releases" target="_blank" rel="noopener noreffer "><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;Helm</a>.</p>
-<h2 id="2-환경">2. 환경</h2>
-<p>vSphere : 7.0</p>
+<h2 id="1-requirements" class="heading-element">
+  <a href="#1-requirements" class="heading-mark"></a>1. Requirements</h2><p>helm 설치, <a href="https://github.com/helm/helm/releases"target="_blank" rel="external nofollow noopener noreferrer"><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;Helm</a>.</p>
+<h2 id="2-환경" class="heading-element">
+  <a href="#2-%ed%99%98%ea%b2%bd" class="heading-mark"></a>2. 환경</h2><p>vSphere : 7.0</p>
 <p>vSAN</p>
 <p>NSX : 3.2</p>
 <p>AVI : 21.1.1</p>
 <p>Tanzu: 1.4</p>
 <p>Ingress: Contour</p>
-<h2 id="3-설치">3. 설치</h2>
-<p>Kasten은 백업으로 유명한 Veeam에서 인수를 하여 컨테이너 환경에서 백업을 도와준다.</p>
-<h3 id="31-helm-설치">3.1. Helm 설치</h3>
-<div class="highlight"><div class="chroma">
+<h2 id="3-설치" class="heading-element">
+  <a href="#3-%ec%84%a4%ec%b9%98" class="heading-mark"></a>3. 설치</h2><p>Kasten은 백업으로 유명한 Veeam에서 인수를 하여 컨테이너 환경에서 백업을 도와준다.</p>
+<h3 id="31-helm-설치" class="heading-element">
+  <a href="#31-helm-%ec%84%a4%ec%b9%98" class="heading-mark"></a>3.1. Helm 설치</h3><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -186,11 +265,10 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 </span></span><span class="line"><span class="cl">chmod <span class="m">700</span> get_helm.sh
 </span></span><span class="line"><span class="cl">./get_helm.sh
-</span></span><span class="line"><span class="cl">helm version
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">helm version</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="32-kasten-repo-update">3.2. Kasten Repo Update</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="32-kasten-repo-update" class="heading-element">
+  <a href="#32-kasten-repo-update" class="heading-mark"></a>3.2. Kasten Repo Update</h3><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -199,54 +277,36 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm repo add kasten https://charts.kasten.io/
 </span></span><span class="line"><span class="cl">helm repo update
-</span></span><span class="line"><span class="cl">helm search repo kasten
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">helm search repo kasten</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><a class="lightgallery" href="/images/K10/3-2.png" title="Kasten Repo Check" data-thumbnail="/images/K10/3-2.png" data-sub-html="<h2>Kasten Repo Check</h2><p>Kasten Repo Check</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/K10/3-2.png"
-            data-srcset="/images/K10/3-2.png, /images/K10/3-2.png 1.5x, /images/K10/3-2.png 2x"
-            data-sizes="auto"
-            alt="/images/K10/3-2.png" />
-    </a><figcaption class="image-caption">Kasten Repo Check</figcaption>
-    </figure></p>
-<h3 id="33-kasten-install">3.3. Kasten Install</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>SSL 구성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"><img
-class="lazyload version"
-src="/svg/loading.min.svg"
-data-src="/svg/version/0.2.0-new.en.min.svg"
-data-srcset="/svg/version/0.2.0-new.en.min.svg, /svg/version/0.2.0-new.en.min.svg 1.5x, /svg/version/0.2.0-new.en.min.svg 2x"
-data-sizes="auto"
-alt="LoveIt NEW | 0.2.0"
-title="LoveIt NEW | 0.2.0" /></a></p>
+</div><p><figure><a class="lightgallery" href="/images/K10/3-2.png?size=large" data-thumbnail="/images/K10/3-2.png?size=small" data-sub-html="<h2>Kasten Repo Check</h2><p>Kasten Repo Check</p>"><img loading="lazy" src="/images/K10/3-2.png" alt="Kasten Repo Check" srcset="/images/K10/3-2.png?size=small, /images/K10/3-2.png?size=medium 1.5x, /images/K10/3-2.png?size=large 2x" sizes="auto" data-title="Kasten Repo Check" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten Repo Check</figcaption>
+  </figure></p>
+<h3 id="33-kasten-install" class="heading-element">
+  <a href="#33-kasten-install" class="heading-mark"></a>3.3. Kasten Install</h3><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>SSL 구성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.en.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>Namespace를 생성 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns kasten-io
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Kasten을 SSL을 구성 하려면 아래와 같이 인증서를 생성 후 Secret을 생성 해준다. 만약 SSL이 필요 없다면 아래는 패스해도 무관 하다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret tls kasten-tls --cert<span class="o">=</span>/data/cert/yourodmain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n kasten-io
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret tls kasten-tls --cert<span class="o">=</span>/data/cert/yourodmain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>helm을 통해 Kasten을 설치 하기 위해 아래와 같이 실행을 한다.
 Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -265,136 +325,98 @@ Ingress를 사용하는 방식중 Token으로 접속 할 수 있게 구성 한�
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set ingress.tls.enabled<span class="o">=</span><span class="nb">true</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set ingress.tls.secretName<span class="o">=</span>kasten-tls <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set ingress.host<span class="o">=</span>kasten.tkg.io <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>만약 HTTPS로 구성 하면 자동으로 SSL Redirect를 해주기 위해서 ingress를 확인 후 Annotation을 설정 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl get ing
-</span></span><span class="line"><span class="cl">kubectl annotate ing k10-ingress -n kasten-io ingress.kubernetes.io/force-ssl-redirect=true
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl annotate ing k10-ingress -n kasten-io ingress.kubernetes.io/force-ssl-redirect=true</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="34-배포-완료">3.4. 배포 완료</h3>
-<p><figure><a class="lightgallery" href="/images/K10/3-4.png" title="Kasten Complate" data-thumbnail="/images/K10/3-4.png" data-sub-html="<h2>Kasten Complate</h2><p>Kasten Complate</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/K10/3-4.png"
-            data-srcset="/images/K10/3-4.png, /images/K10/3-4.png 1.5x, /images/K10/3-4.png 2x"
-            data-sizes="auto"
-            alt="/images/K10/3-4.png" />
-    </a><figcaption class="image-caption">Kasten Complate</figcaption>
-    </figure></p>
-<h3 id="35-annotation-설정-완료">3.5. Annotation 설정 완료</h3>
-<p><figure><a class="lightgallery" href="/images/K10/3-5.png" title="Kasten ingress Annotation" data-thumbnail="/images/K10/3-5.png" data-sub-html="<h2>Kasten ingress Annotation</h2><p>Kasten ingress Annotation</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/K10/3-5.png"
-            data-srcset="/images/K10/3-5.png, /images/K10/3-5.png 1.5x, /images/K10/3-5.png 2x"
-            data-sizes="auto"
-            alt="/images/K10/3-5.png" />
-    </a><figcaption class="image-caption">Kasten ingress Annotation</figcaption>
-    </figure></p>
-<h3 id="36-접속-방법">3.6. 접속 방법</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>접속을 하기 위해 유저 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"><img
-class="lazyload version"
-src="/svg/loading.min.svg"
-data-src="/svg/version/0.2.0-new.en.min.svg"
-data-srcset="/svg/version/0.2.0-new.en.min.svg, /svg/version/0.2.0-new.en.min.svg 1.5x, /svg/version/0.2.0-new.en.min.svg 2x"
-data-sizes="auto"
-alt="LoveIt NEW | 0.2.0"
-title="LoveIt NEW | 0.2.0" /></a></p>
+  </div>
+<h3 id="34-배포-완료" class="heading-element">
+  <a href="#34-%eb%b0%b0%ed%8f%ac-%ec%99%84%eb%a3%8c" class="heading-mark"></a>3.4. 배포 완료</h3><p><figure><a class="lightgallery" href="/images/K10/3-4.png?size=large" data-thumbnail="/images/K10/3-4.png?size=small" data-sub-html="<h2>Kasten Complate</h2><p>Kasten Complate</p>"><img loading="lazy" src="/images/K10/3-4.png" alt="Kasten Complate" srcset="/images/K10/3-4.png?size=small, /images/K10/3-4.png?size=medium 1.5x, /images/K10/3-4.png?size=large 2x" sizes="auto" data-title="Kasten Complate" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten Complate</figcaption>
+  </figure></p>
+<h3 id="35-annotation-설정-완료" class="heading-element">
+  <a href="#35-annotation-%ec%84%a4%ec%a0%95-%ec%99%84%eb%a3%8c" class="heading-mark"></a>3.5. Annotation 설정 완료</h3><p><figure><a class="lightgallery" href="/images/K10/3-5.png?size=large" data-thumbnail="/images/K10/3-5.png?size=small" data-sub-html="<h2>Kasten ingress Annotation</h2><p>Kasten ingress Annotation</p>"><img loading="lazy" src="/images/K10/3-5.png" alt="Kasten ingress Annotation" srcset="/images/K10/3-5.png?size=small, /images/K10/3-5.png?size=medium 1.5x, /images/K10/3-5.png?size=large 2x" sizes="auto" data-title="Kasten ingress Annotation" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten ingress Annotation</figcaption>
+  </figure></p>
+<h3 id="36-접속-방법" class="heading-element">
+  <a href="#36-%ec%a0%91%ec%86%8d-%eb%b0%a9%eb%b2%95" class="heading-mark"></a>3.6. 접속 방법</h3><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>접속을 하기 위해 유저 생성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.en.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>TOKEN으로 접속하기 위해 유저를 생성 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create serviceaccount my-kasten-sa --namespace kasten-io
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create serviceaccount my-kasten-sa --namespace kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>TOKEN 확인 방법</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">sa_secret</span><span class="o">=</span><span class="k">$(</span>kubectl get serviceaccount my-kasten-sa -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.secrets[0].name}&#34;</span> --namespace kasten-io<span class="k">)</span>
-</span></span><span class="line"><span class="cl">kubectl get secret <span class="nv">$sa_secret</span> --namespace kasten-io -ojsonpath<span class="o">=</span><span class="s2">&#34;{.data.token}{&#39;\n&#39;}&#34;</span> <span class="p">|</span> base64 --decode
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl get secret <span class="nv">$sa_secret</span> --namespace kasten-io -ojsonpath<span class="o">=</span><span class="s2">&#34;{.data.token}{&#39;\n&#39;}&#34;</span> <span class="p">|</span> base64 --decode</span></span></code></pre></td></tr></table>
 </div>
 </div><p>우선 Ingress로 구성을 했지만 여기선 포트 포워딩으로 설명 하겠다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl --namespace kasten-io port-forward service/gateway 8080:8000
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl --namespace kasten-io port-forward service/gateway 8080:8000</span></span></code></pre></td></tr></table>
 </div>
 </div><p>포트 포워딩을 위해 다른 SSH를 오픈 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ssh root@<span class="o">{</span>포트포워딩 한 OS<span class="o">}</span> -L 8080:localhost:8080
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ssh root@<span class="o">{</span>포트포워딩 한 OS<span class="o">}</span> -L 8080:localhost:8080</span></span></code></pre></td></tr></table>
 </div>
 </div><p>접속시 성공을 한 것을 확인 할 수 있다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl get ing
-</span></span><span class="line"><span class="cl">kubectl annotate ing k10-ingress -n kasten-io ingress.kubernetes.io/force-ssl-redirect=true
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl annotate ing k10-ingress -n kasten-io ingress.kubernetes.io/force-ssl-redirect=true</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h2 id="4-k10-auth-ldap-설정">4. K10 Auth LDAP 설정</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>K10 Auth 설정<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"><img
-class="lazyload version"
-src="/svg/loading.min.svg"
-data-src="/svg/version/0.2.0-new.en.min.svg"
-data-srcset="/svg/version/0.2.0-new.en.min.svg, /svg/version/0.2.0-new.en.min.svg 1.5x, /svg/version/0.2.0-new.en.min.svg 2x"
-data-sizes="auto"
-alt="LoveIt NEW | 0.2.0"
-title="LoveIt NEW | 0.2.0" /></a></p>
+  </div>
+<h2 id="4-k10-auth-ldap-설정" class="heading-element">
+  <a href="#4-k10-auth-ldap-%ec%84%a4%ec%a0%95" class="heading-mark"></a>4. K10 Auth LDAP 설정</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>K10 Auth 설정<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.en.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>values 파일을 다운로드 받는다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values kasten/k10 &gt; k10.yaml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values kasten/k10 &gt; k10.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Auth라는 부분을 찾은 후 아래 부분을 수정 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -459,11 +481,10 @@ title="LoveIt NEW | 0.2.0" /></a></p>
 </span></span><span class="line"><span class="cl">    usernameClaim: <span class="s2">&#34;email&#34;</span>
 </span></span><span class="line"><span class="cl">    usernamePrefix: <span class="s2">&#34;&#34;</span>
 </span></span><span class="line"><span class="cl">    groupnameClaim: <span class="s2">&#34;groups&#34;</span>
-</span></span><span class="line"><span class="cl">    groupnamePrefix: <span class="s2">&#34;&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    groupnamePrefix: <span class="s2">&#34;&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>아래와 같이 실행을 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -486,11 +507,10 @@ title="LoveIt NEW | 0.2.0" /></a></p>
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set auth.k10AdminUsers<span class="o">[</span>0<span class="o">]=</span><span class="s1">&#39;my1208@openbase.co.kr&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set auth.k10AdminGroups<span class="o">[</span>0<span class="o">]=</span><span class="s2">&#34;tkg&#34;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>-f k10.yaml <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div><p>또는 아래와 같이 업그레이드를 해준다. 만약 실패 하면 삭제 후 다시 Install 해주면 된다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -513,39 +533,22 @@ title="LoveIt NEW | 0.2.0" /></a></p>
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set auth.k10AdminUsers<span class="o">[</span>0<span class="o">]=</span><span class="s1">&#39;my1208@openbase.co.kr&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set auth.k10AdminGroups<span class="o">[</span>0<span class="o">]=</span><span class="s2">&#34;tkg&#34;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>-f k10.yaml <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-n kasten-io</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="41-완료-화면">4.1. 완료 화면</h3>
-<p><figure><a class="lightgallery" href="/images/K10/4-1.png" title="Kasten Auth Integration" data-thumbnail="/images/K10/4-1.png" data-sub-html="<h2>Kasten Auth Integration</h2><p>Kasten Auth Integration</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/K10/4-1.png"
-            data-srcset="/images/K10/4-1.png, /images/K10/4-1.png 1.5x, /images/K10/4-1.png 2x"
-            data-sizes="auto"
-            alt="/images/K10/4-1.png" />
-    </a><figcaption class="image-caption">Kasten Auth Integration</figcaption>
-    </figure>
-<figure><a class="lightgallery" href="/images/K10/4-2.png" title="Kasten Auth Integration" data-thumbnail="/images/K10/4-2.png" data-sub-html="<h2>Kasten Auth Integration</h2><p>Kasten Auth Integration</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/K10/4-2.png"
-            data-srcset="/images/K10/4-2.png, /images/K10/4-2.png 1.5x, /images/K10/4-2.png 2x"
-            data-sizes="auto"
-            alt="/images/K10/4-2.png" />
-    </a><figcaption class="image-caption">Kasten Auth Integration</figcaption>
-    </figure></p>
-<h2 id="5-nfs-연동">5. NFS 연동</h2>
-<blockquote>
+  </div>
+<h3 id="41-완료-화면" class="heading-element">
+  <a href="#41-%ec%99%84%eb%a3%8c-%ed%99%94%eb%a9%b4" class="heading-mark"></a>4.1. 완료 화면</h3><p><figure><a class="lightgallery" href="/images/K10/4-1.png?size=large" data-thumbnail="/images/K10/4-1.png?size=small" data-sub-html="<h2>Kasten Auth Integration</h2><p>Kasten Auth Integration</p>"><img loading="lazy" src="/images/K10/4-1.png" alt="Kasten Auth Integration" srcset="/images/K10/4-1.png?size=small, /images/K10/4-1.png?size=medium 1.5x, /images/K10/4-1.png?size=large 2x" sizes="auto" data-title="Kasten Auth Integration" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten Auth Integration</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="/images/K10/4-2.png?size=large" data-thumbnail="/images/K10/4-2.png?size=small" data-sub-html="<h2>Kasten Auth Integration</h2><p>Kasten Auth Integration</p>"><img loading="lazy" src="/images/K10/4-2.png" alt="Kasten Auth Integration" srcset="/images/K10/4-2.png?size=small, /images/K10/4-2.png?size=medium 1.5x, /images/K10/4-2.png?size=large 2x" sizes="auto" data-title="Kasten Auth Integration" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Kasten Auth Integration</figcaption>
+  </figure></p>
+<h2 id="5-nfs-연동" class="heading-element">
+  <a href="#5-nfs-%ec%97%b0%eb%8f%99" class="heading-mark"></a>5. NFS 연동</h2><blockquote>
 <p>카스텐에서 스토리지를 저정하기 위해 여러가지 방법이 있지만 우선 NFS 연동을 하여 백업을 하는 방법에 대해서 기술</p>
 </blockquote>
-<h3 id="51-pvc-생성">5.1. PVC 생성</h3>
-<div class="highlight"><div class="chroma">
+<h3 id="51-pvc-생성" class="heading-element">
+  <a href="#51-pvc-%ec%83%9d%ec%84%b1" class="heading-mark"></a>5.1. PVC 생성</h3><div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -618,16 +621,15 @@ title="LoveIt NEW | 0.2.0" /></a></p>
 </span></span></span><span class="line"><span class="cl"><span class="s">      requests:
 </span></span></span><span class="line"><span class="cl"><span class="s">         storage: 10Gi
 </span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>         
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>         </span></span></code></pre></td></tr></table>
 </div>
 </div><figure><img src="/images/K10/5-1.png"/><figcaption>
             <h4>PVC 생성 완료 확인</h4>
         </figcaption>
 </figure>
 
-<h3 id="52-카스텐-설정">5.2. 카스텐 설정</h3>
-<p><figure><img src="/images/K10/5-2.png"/><figcaption>
+<h3 id="52-카스텐-설정" class="heading-element">
+  <a href="#52-%ec%b9%b4%ec%8a%a4%ed%85%90-%ec%84%a4%ec%a0%95" class="heading-mark"></a>5.2. 카스텐 설정</h3><p><figure><img src="/images/K10/5-2.png"/><figcaption>
             <h4>카스텐 Locations 설정</h4>
         </figcaption>
 </figure>
@@ -642,33 +644,26 @@ title="LoveIt NEW | 0.2.0" /></a></p>
         </figcaption>
 </figure>
 </p>
-<h2 id="6-minio-연동">6. MINIO 연동</h2>
-<p>MINIO를 구성 하려면 먼저 Erasure Code와 Immutability가 되어야 한다.</p>
-<p>참고 링크<a href="https://docs.min.io/docs/minio-erasure-code-quickstart-guide.html" target="_blank" rel="noopener noreffer "><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;MINIO</a> 참조</p>
+<h2 id="6-minio-연동" class="heading-element">
+  <a href="#6-minio-%ec%97%b0%eb%8f%99" class="heading-mark"></a>6. MINIO 연동</h2><p>MINIO를 구성 하려면 먼저 Erasure Code와 Immutability가 되어야 한다.</p>
+<p>참고 링크<a href="https://docs.min.io/docs/minio-erasure-code-quickstart-guide.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;MINIO</a> 참조</p>
 <p>MINIO를 컨테이너 형태로 배포를 하게 되면 우선 Immutability를 지원 하지 않는 것으로 보인다. 그래서 별도로 VM을 생성 해서 진행</p>
-<h3 id="61-vm-설정">6.1. VM 설정</h3>
-<p>VM을 생성 할때 스토리지를 OS가 저장되는 HDD를 제외한 4개를 구성 후 배포를 완료 한다.
+<h3 id="61-vm-설정" class="heading-element">
+  <a href="#61-vm-%ec%84%a4%ec%a0%95" class="heading-mark"></a>6.1. VM 설정</h3><p>VM을 생성 할때 스토리지를 OS가 저장되는 HDD를 제외한 4개를 구성 후 배포를 완료 한다.
 <figure><img src="/images/K10/6-1.png"/><figcaption>
             <h4>VM 생성</h4>
         </figcaption>
 </figure>
 </p>
-<h3 id="62-fdisk-생성">6.2 FDISK 생성</h3>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>VOLUME 생성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"><img
-class="lazyload version"
-src="/svg/loading.min.svg"
-data-src="/svg/version/0.2.0-new.en.min.svg"
-data-srcset="/svg/version/0.2.0-new.en.min.svg, /svg/version/0.2.0-new.en.min.svg 1.5x, /svg/version/0.2.0-new.en.min.svg 2x"
-data-sizes="auto"
-alt="LoveIt NEW | 0.2.0"
-title="LoveIt NEW | 0.2.0" /></a></p>
+<h3 id="62-fdisk-생성" class="heading-element">
+  <a href="#62-fdisk-%ec%83%9d%ec%84%b1" class="heading-mark"></a>6.2 FDISK 생성</h3><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>VOLUME 생성<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.en.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>모든 HDD를 FDISK구성 해준다. 순서는 (n &gt; p &gt; t &gt; 8e &gt; w) 로 입력 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -735,11 +730,10 @@ title="LoveIt NEW | 0.2.0" /></a></p>
 </span></span><span class="line"><span class="cl">Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: w
 </span></span><span class="line"><span class="cl">The partition table has been altered.
 </span></span><span class="line"><span class="cl">Calling ioctl<span class="o">()</span> to re-read partition table.
-</span></span><span class="line"><span class="cl">Syncing disks.
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">Syncing disks.</span></span></code></pre></td></tr></table>
 </div>
 </div><p>VOLUME을 생성해 준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -826,12 +820,11 @@ title="LoveIt NEW | 0.2.0" /></a></p>
 </span></span><span class="line"><span class="cl">mkdir /root/xfs_minio_4
 </span></span><span class="line"><span class="cl">mount /dev/vg_xfs_minio_4/xfs_minio_4 /root/xfs_minio_4/
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">df -hT /root/xfs_minio_4/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">df -hT /root/xfs_minio_4/</span></span></code></pre></td></tr></table>
 </div>
 </div><p>부팅 후에도 마운투가 될 수 있게 fstab에 저장해준다.
 blkid로 UUID를 확인</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -848,12 +841,11 @@ blkid로 UUID를 확인</p>
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=b6d3f331-deaf-428b-bcb0-c9b48bab2253 /root/xfs_minio_1 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=213694c7-bbaf-45c4-96c8-4e912dc70f3f /root/xfs_minio_2 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=e7aa0e12-3c0c-4e12-a00d-9ebeaab76669 /root/xfs_minio_3 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=ac211fab-162e-4f8a-854b-1960aa43e252 /root/xfs_minio_4 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;UUID=ac211fab-162e-4f8a-854b-1960aa43e252 /root/xfs_minio_4 xfs defaults 1 1&#39;</span> &gt;&gt; /etc/fstab</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>UUID 확인
 <figure><img src="/images/K10/6-2.png"/><figcaption>
             <h4>UUID 확인</h4>
@@ -861,19 +853,12 @@ blkid로 UUID를 확인</p>
 </figure>
 </p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>MINIO &amp; MC 설치<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"><img
-class="lazyload version"
-src="/svg/loading.min.svg"
-data-src="/svg/version/0.2.0-new.en.min.svg"
-data-srcset="/svg/version/0.2.0-new.en.min.svg, /svg/version/0.2.0-new.en.min.svg 1.5x, /svg/version/0.2.0-new.en.min.svg 2x"
-data-sizes="auto"
-alt="LoveIt NEW | 0.2.0"
-title="LoveIt NEW | 0.2.0" /></a></p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>MINIO &amp; MC 설치<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.en.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
+<div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -890,23 +875,21 @@ title="LoveIt NEW | 0.2.0" /></a></p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">wget https://dl.min.io/client/mc/release/linux-amd64/mc
 </span></span><span class="line"><span class="cl">chmod +x mc
-</span></span><span class="line"><span class="cl">cp mc /usr/local/bin/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">cp mc /usr/local/bin/</span></span></code></pre></td></tr></table>
 </div>
 </div><p>설치가 완료 되면 SSL을 생성한다. SSL 생성은 간단 하므로 여기서 표시 하지는 않겠다.
 생성된 SSL 인증서와 Key를 minio 폴더로 카피 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-21"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cp yourdomain.com.crt /root/.minio/certs/public.crt
-</span></span><span class="line"><span class="cl">cp yourdomain.com.key /root/.minio/certs/private.key
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">cp yourdomain.com.key /root/.minio/certs/private.key</span></span></code></pre></td></tr></table>
 </div>
 </div><p>MINIO를 생성 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-22"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -923,12 +906,11 @@ title="LoveIt NEW | 0.2.0" /></a></p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">mc mb --debug -l minio-veeam/veeam-immutable
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">mc retention <span class="nb">set</span> --default compliance 30d minio-veeam/veeam-immutable
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">mc retention <span class="nb">set</span> --default compliance 30d minio-veeam/veeam-immutable</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>프로파일 설정
 <figure><img src="/images/K10/6-3.png"/><figcaption>
             <h4>카스텐 프로파일 설정</h4>
@@ -945,8 +927,8 @@ title="LoveIt NEW | 0.2.0" /></a></p>
         </figcaption>
 </figure>
 </p>
-<h2 id="7-백업-완료">7. 백업 완료</h2>
-<p><figure><img src="/images/K10/6-6.png"/><figcaption>
+<h2 id="7-백업-완료" class="heading-element">
+  <a href="#7-%eb%b0%b1%ec%97%85-%ec%99%84%eb%a3%8c" class="heading-mark"></a>7. 백업 완료</h2><p><figure><img src="/images/K10/6-6.png"/><figcaption>
             <h4>카스텐에서 백업 실행후 완료 확인</h4>
         </figcaption>
 </figure>
@@ -956,47 +938,48 @@ title="LoveIt NEW | 0.2.0" /></a></p>
         </figcaption>
 </figure>
 </p></div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>Updated on 2023-09-17&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/8f9e542c3d9a079137645ebc4858725c24bb6cc0" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 8f9e542c3d9a079137645ebc4858725c24bb6cc0: rebuilding site Sun Sep 17 08:19:26     2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8f9e542</a></span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/k10/index.md" target="_blank">Read Markdown</a>
-                        </span></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/k10/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/k10/" data-title="The Documentation K10 Install" data-description="K10 Install Guide"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
-            </div>
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2023-09-17 08:19:26">Updated on 2023-09-17&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/k10/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/k10/"><i class="fa-brands fa-linkedin fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/k10/" data-title="The Documentation K10 Install" data-description="K10 Install Guide"><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  </span>
         </div>
-    </div>
+      </div></div>
 
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/k10/">K10</a>,&nbsp;<a href="/tags/kasten/">kasten</a>,&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/devops/">devops</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
-        </section>
-    </div>
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/k10/" class="post-tag" title="Tags - K10">K10</a><a href="/tags/kasten/" class="post-tag" title="Tags - kasten">kasten</a><a href="/tags/tanzu/" class="post-tag" title="Tags - tanzu">tanzu</a><a href="/tags/k8s/" class="post-tag" title="Tags - k8s">k8s</a><a href="/tags/devops/" class="post-tag" title="Tags - devops">devops</a><a href="/tags/dk/" class="post-tag" title="Tags - dk">dk</a><a href="/tags/dokyung/" class="post-tag" title="Tags - dokyung">dokyung</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div>
 
-    <div class="post-nav">
-            <a href="/argo/" class="next" rel="next" title="The Documentation Argo-CD">The Documentation Argo-CD<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav">
+      <a href="/argo/" class="post-nav-item" rel="next" title="The Documentation Argo-CD">The Documentation Argo-CD<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-        </div>
-    </footer></div>
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
+      </noscript></div></article>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.en","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
-            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', '216068312', { 'anonymize_ip': true });
-        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/"></a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="View Comments"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Theme FixIt works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/algoliasearch/algoliasearch-lite.umd.min.js" defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":true,"expired":false,"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"typeit-header-desktop":"Dokyung's DevOoOps","typeit-header-title-mobile":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.en","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},"duration":-1,"loop":false,"speed":100}};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', '216068312', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
 </html>

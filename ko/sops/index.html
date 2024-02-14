@@ -1,133 +1,212 @@
 <!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>The Documentation Sops - Dokyung&#39;s DevOoOps</title><meta name="Description" content="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)"><meta property="og:title" content="The Documentation Sops" />
+<html itemscope itemtype="http://schema.org/WebPage" lang="ko">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>The Documentation Sops - Dokyung&#39;s DevOoOps</title><meta name="author" content="">
+<meta name="author-link" content="">
+<meta name="description" content="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)" /><meta name="keywords" content='tanzu, k8s, devops, dk, dokyung' /><meta itemprop="name" content="The Documentation Sops">
+<meta itemprop="description" content="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)"><meta itemprop="datePublished" content="2023-06-20T19:22:18+09:00" />
+<meta itemprop="dateModified" content="2023-09-17T08:19:26+09:00" />
+<meta itemprop="wordCount" content="1089"><meta itemprop="image" content="https://huntedhappy.github.io/ko/sops/index.png" />
+<meta itemprop="keywords" content="tanzu,k8s,devops,dk,dokyung," /><meta property="og:title" content="The Documentation Sops" />
 <meta property="og:description" content="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/ko/sops/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/sops/index.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-06-20T19:22:18+09:00" />
-<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://huntedhappy.github.io/ko/sops/index.png" /><meta name="twitter:title" content="The Documentation Sops"/>
 <meta name="twitter:description" content="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)"/>
 <meta name="application-name" content="Dokyung&#39;s DevOoOps">
-<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/ko/sops/" /><link rel="prev" href="https://huntedhappy.github.io/ko/tanzu-ipam/" /><link rel="next" href="https://huntedhappy.github.io/ko/tap-jenkins/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "The Documentation Sops",
-        "inLanguage": "ko",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/huntedhappy.github.io\/ko\/sops\/"
-        },"image": [{
-                            "@type": "ImageObject",
-                            "url": "https:\/\/huntedhappy.github.io\/ko\/sops\/index.png",
-                            "width":  1265 ,
-                            "height":  462 
-                        }],"genre": "posts","keywords": "tanzu, k8s, devops, dk, dokyung","wordcount":  1095 ,
-        "url": "https:\/\/huntedhappy.github.io\/ko\/sops\/","datePublished": "2023-06-20T19:22:18+09:00","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "Dokyung"
-            },"description": "Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)"
-    }
-    </script></head>
-    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" data-light="#ffffff" data-dark="#ffffff" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://huntedhappy.github.io/ko/sops/" /><link rel="prev" href="https://huntedhappy.github.io/ko/tanzu-ipam/" /><link rel="next" href="https://huntedhappy.github.io/ko/tap-jenkins/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Documentation Sops",
+    "inLanguage": "ko",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/huntedhappy.github.io\/ko\/sops\/"
+    },"image": [{
+              "@type": "ImageObject",
+              "url": "https:\/\/huntedhappy.github.io\/ko\/sops\/index.png",
+              "width":  1265 ,
+              "height":  462 
+            }],"genre": "posts","keywords": "tanzu, k8s, devops, dk, dokyung","wordcount":  1089 ,
+    "url": "https:\/\/huntedhappy.github.io\/ko\/sops\/","datePublished": "2023-06-20T19:22:18+09:00","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Dokyung"
+      },"description": "Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)"
+  }
+  </script></head>
+  <body data-header-desktop="auto" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-desktop" class="typeit"></span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/posts/"
+                
+                
+              >Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/tags/"
+                
+                
+              >Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/"
+                
+                
+              >Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/documentation/"
+                
+                
+              >Docs</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/about/"
+                
+                
+              >About</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="https://github.com/huntedhappy/"
+                title="GitHub"
+                rel="noopener noreferrer" target="_blank"
+              ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Search titles or contents ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li><li class="menu-item language-switch">
+            <span role="button" aria-label="Select Language" title="Select Language"><i class="fa-solid fa-language fa-fw" aria-hidden="true"></i></span>
+            <ul class="sub-menu"><li class="menu-item">
+                      <span class="menu-link text-secondary" title="Korean">Korean</span>
+                    </li><li class="menu-item">
+                      <a href="/sops/" class="menu-link" title="한국어">한국어</a>
+                    </li></ul>
+          </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
     <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/ko/posts/"> Posts </a><a class="menu-item" href="/ko/tags/"> Tags </a><a class="menu-item" href="/ko/categories/"> Categories </a><a class="menu-item" href="/ko/categories/documentation/"> Docs </a><a class="menu-item" href="/ko/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a><a href="javascript:void(0);" class="menu-item language" title="언어 변경">
-                    <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/sops/" selected>Korean</option><option value="/sops/">한국어</option></select>
-                </a></div>
-        </div>
+      <div class="header-title">
+        <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-title-mobile" class="typeit"></span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Search titles or contents ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
             </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        취소
-                    </a>
-                </div><a class="menu-item" href="/ko/posts/" title="">Posts</a><a class="menu-item" href="/ko/tags/" title="">Tags</a><a class="menu-item" href="/ko/categories/" title="">Categories</a><a class="menu-item" href="/ko/categories/documentation/" title="">Docs</a><a class="menu-item" href="/ko/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a><a href="javascript:void(0);" class="menu-item" title="언어 변경">
-                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/ko/sops/" selected>Korean</option><option value="/sops/">한국어</option></select>
-                </a></div>
-    </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Cancel
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/posts/"
+                  
+                  
+                >Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/tags/"
+                  
+                  
+                >Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/"
+                  
+                  
+                >Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/documentation/"
+                  
+                  
+                >Docs</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/about/"
+                  
+                  
+                >About</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="https://github.com/huntedhappy/"
+                  title="GitHub"
+                  rel="noopener noreferrer" target="_blank"
+                ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span><span class="menu-system-item language-switch">
+              <span role="button" aria-label="Select Language" title="Select Language">Korean<i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+              <select class="language-select" onchange="location = this.value;"><option value="/ko/sops/" selected disabled>Korean</option><option value="/sops/">한국어</option></select>
+            </span></li>
+      </ul>
+    </nav>
+  </div>
 </header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">목차</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation Sops</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">분류: <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-20">2023-06-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1095 단어&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;읽는데 약 6분&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/ko/sops/index.png"
-        data-srcset="/ko/sops/index.png, /ko/sops/index.png 1.5x, /ko/sops/index.png 2x"
-        data-sizes="auto"
-        alt="/ko/sops/index.png"
-        title="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)" /></div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>목차</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>The Documentation Sops</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Dokyung</span></span><span class="post-included-in">&nbsp;included in <a href="/ko/categories/documentation/" class="post-category" title="Category - Documentation"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Documentation</a></span></div><div class="post-meta-line"><span title="published on 2023-06-20 19:22:18"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2023-06-20">2023-06-20</time></span>&nbsp;<span title="Updated on 2023-09-17 08:19:26"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-09-17">2023-09-17</time></span>&nbsp;<span title="1089 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1100 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>6 minutes</span>&nbsp;</div>
+    </div><div class="featured-image"><img loading="lazy" src="/ko/sops/index.png" alt="/ko/sops/index.png" data-title="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#vmware-tanzu-sops-or-eso">VMware TANZU SOPS or ESO?</a></li>
     <li><a href="#prerequisites">Prerequisites</a></li>
@@ -144,8 +223,8 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="vmware-tanzu-sops-or-eso">VMware TANZU SOPS or ESO?</h2>
-<p>TANZU APPLICATION PLATFORM을 설치 할 때 GITOPS로 두가지 방식으로 설치 할 수 있다. SOPS 및 ESO 방식으로 설치 할 수 있으며 현재는 베타 버전이며 프로덕션 환경에서는 권장 하지 않는다.</p>
+      </div><div class="content" id="content"><h2 id="vmware-tanzu-sops-or-eso" class="heading-element">
+  <a href="#vmware-tanzu-sops-or-eso" class="heading-mark"></a>VMware TANZU SOPS or ESO?</h2><p>TANZU APPLICATION PLATFORM을 설치 할 때 GITOPS로 두가지 방식으로 설치 할 수 있다. SOPS 및 ESO 방식으로 설치 할 수 있으며 현재는 베타 버전이며 프로덕션 환경에서는 권장 하지 않는다.</p>
 <figure><img src="/images/sops/1-1.png"/><figcaption>
             <h4>warning</h4>
         </figcaption>
@@ -162,27 +241,27 @@
         </figcaption>
 </figure>
 </p>
-<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-reference.html#choosing-sops-or-eso" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> VMware TANZU GITOPS</a></p>
-<h2 id="prerequisites">Prerequisites</h2>
-<ul>
-<li>SOPS CLI to view and edit SOPS encrypted files. To install the SOPS CLI, see<a href="https://github.com/mozilla/sops/releases" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> SOPS documentation</a>in GitHub.</li>
-<li>Age CLI to create an ecryption key used to encrypt and decrypt sensitive data. To install the Age CLI, see<a href="https://github.com/FiloSottile/age#installation" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> age documentation </a>in GitHub.</li>
-<li>Completed the <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/prerequisites.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Prerequisites.</a></li>
-<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-tanzu-cli.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Accepted Tanzu Application Platform EULA and installed Tanzu CLI</a> with any required plug-ins.</li>
-<li>Installed <a href="https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.5/cluster-essentials/deploy.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Cluster Essentials for Tanzu.</a></li>
+<p><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-reference.html#choosing-sops-or-eso"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> VMware TANZU GITOPS</a></p>
+<h2 id="prerequisites" class="heading-element">
+  <a href="#prerequisites" class="heading-mark"></a>Prerequisites</h2><ul>
+<li>SOPS CLI to view and edit SOPS encrypted files. To install the SOPS CLI, see<a href="https://github.com/mozilla/sops/releases"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> SOPS documentation</a>in GitHub.</li>
+<li>Age CLI to create an ecryption key used to encrypt and decrypt sensitive data. To install the Age CLI, see<a href="https://github.com/FiloSottile/age#installation"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> age documentation </a>in GitHub.</li>
+<li>Completed the <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/prerequisites.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Prerequisites.</a></li>
+<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-tanzu-cli.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Accepted Tanzu Application Platform EULA and installed Tanzu CLI</a> with any required plug-ins.</li>
+<li>Installed <a href="https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.5/cluster-essentials/deploy.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Cluster Essentials for Tanzu.</a></li>
 </ul>
-<h2 id="relocate-images-to-a-registry">Relocate images to a registry</h2>
-<p>탄주 네트워크에 있는 도커 이미지들을 내부에 내부 레지스트리에 저장 하는 것을 권장 한다. 탄주 네트워크 레지스트리를 사용 할 시 가동시간을 보장 하지 않기 때문이다.
+<h2 id="relocate-images-to-a-registry" class="heading-element">
+  <a href="#relocate-images-to-a-registry" class="heading-mark"></a>Relocate images to a registry</h2><p>탄주 네트워크에 있는 도커 이미지들을 내부에 내부 레지스트리에 저장 하는 것을 권장 한다. 탄주 네트워크 레지스트리를 사용 할 시 가동시간을 보장 하지 않기 때문이다.
 지원되는 레지스트리는 Harbor, Azure Container Registry, Google Container Registry 및 Quay.io를 제공하고 있습니다. 설정 방법을 알아 보려면 다음 문서를 참조 하면 된다.</p>
 <ul>
-<li><a href="https://goharbor.io/docs/2.5.0/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Harbor documentation</a></li>
-<li><a href="https://cloud.google.com/container-registry/docs" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Google Container Registry documentation</a></li>
-<li><a href="https://docs.projectquay.io/welcome.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Quay.io documentation</a></li>
+<li><a href="https://goharbor.io/docs/2.5.0/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Harbor documentation</a></li>
+<li><a href="https://cloud.google.com/container-registry/docs"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Google Container Registry documentation</a></li>
+<li><a href="https://docs.projectquay.io/welcome.html"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Quay.io documentation</a></li>
 </ul>
 <ol>
 <li>environment variables를 설정 한다.</li>
 </ol>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -207,13 +286,12 @@
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="o">=</span>MY-REGISTRY-PASSWORD
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="o">=</span>MY-REGISTRY
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TAP_VERSION</span><span class="o">=</span>VERSION-NUMBER
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REPO</span><span class="o">=</span>TARGET-REPOSITORY
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INSTALL_REPO</span><span class="o">=</span>TARGET-REPOSITORY</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="2">
-<li><a href="https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.5/cluster-essentials/deploy.html#optionally-install-clis-onto-your-path" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Install the Carvel tool imgpkg CLI.</a></li>
+<li><a href="https://docs.vmware.com/en/Cluster-Essentials-for-VMware-Tanzu/1.5/cluster-essentials/deploy.html#optionally-install-clis-onto-your-path"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Install the Carvel tool imgpkg CLI.</a></li>
 </ol>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -226,12 +304,11 @@
 </span></span><span class="line"><span class="cl">imgpkg tag list -i registry.tanzu.vmware.com/tanzu-application-platform/tap-packages <span class="p">|</span> sort -V
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## 이미지 버전을 내부 레지스트리로 복사</span>
-</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/<span class="si">${</span><span class="nv">INSTALL_REPO</span><span class="si">}</span>/tap-packages
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:<span class="si">${</span><span class="nv">TAP_VERSION</span><span class="si">}</span> --to-repo <span class="si">${</span><span class="nv">INSTALL_REGISTRY_HOSTNAME</span><span class="si">}</span>/<span class="si">${</span><span class="nv">INSTALL_REPO</span><span class="si">}</span>/tap-packages</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="create-a-new-git-repository">Create a new Git repository</h3>
-<p>GIT에 프로젝트를 생성 한다.</p>
-<div class="highlight"><div class="chroma">
+</div><h3 id="create-a-new-git-repository" class="heading-element">
+  <a href="#create-a-new-git-repository" class="heading-mark"></a>Create a new Git repository</h3><p>GIT에 프로젝트를 생성 한다.</p>
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -244,18 +321,17 @@
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$HOME</span>/tap-gitops
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">git init
-</span></span><span class="line"><span class="cl">git remote add origin git@github.com:my-organization/tap-gitops.git
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">git remote add origin git@github.com:my-organization/tap-gitops.git</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="download-and-unpack-tanzu-gitops-reference-implementation-ri">Download and unpack Tanzu GitOps Reference Implementation (RI)</h3>
-<p>Tanzu Network에서 Tanzu GitOps Reference Implementation(RI)을 다운로드 받는다.
+</div><h3 id="download-and-unpack-tanzu-gitops-reference-implementation-ri" class="heading-element">
+  <a href="#download-and-unpack-tanzu-gitops-reference-implementation-ri" class="heading-mark"></a>Download and unpack Tanzu GitOps Reference Implementation (RI)</h3><p>Tanzu Network에서 Tanzu GitOps Reference Implementation(RI)을 다운로드 받는다.
 <figure><img src="/images/sops/1-4.png"/><figcaption>
             <h4>RI를 Download 받는다</h4>
         </figcaption>
 </figure>
 </p>
 <p>다운로드 받은 RI를 내부 GIT에 업로드 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -270,12 +346,11 @@
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$HOME</span>/tap-gitops
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&#34;Initialize Tanzu GitOps RI&#34;</span>
-</span></span><span class="line"><span class="cl">git push -u origin
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">git push -u origin</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="create-cluster-configuration">Create cluster configuration</h3>
-<p>CLUSTER-NAME은 현재 내가 설정한 CLUSTER를 선택한다</p>
-<div class="highlight"><div class="chroma">
+</div><h3 id="create-cluster-configuration" class="heading-element">
+  <a href="#create-cluster-configuration" class="heading-mark"></a>Create cluster configuration</h3><p>CLUSTER-NAME은 현재 내가 설정한 CLUSTER를 선택한다</p>
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -296,11 +371,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">## Git에 업로드 </span>
 </span></span><span class="line"><span class="cl">git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&#34;Add full-tap-cluster&#34;</span>
-</span></span><span class="line"><span class="cl">git push
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">git push</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="preparing-sensitive-tanzu-application-platform-values">Preparing sensitive Tanzu Application Platform values</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="preparing-sensitive-tanzu-application-platform-values" class="heading-element">
+  <a href="#preparing-sensitive-tanzu-application-platform-values" class="heading-mark"></a>Preparing sensitive Tanzu Application Platform values</h3><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -497,11 +571,10 @@
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">SOPS_AGE_RECIPIENTS</span><span class="o">=</span><span class="k">$(</span>cat key.txt <span class="p">|</span> grep <span class="s2">&#34;# public key: &#34;</span> <span class="p">|</span> sed <span class="s1">&#39;s/# public key: //&#39;</span><span class="k">)</span>
 </span></span><span class="line"><span class="cl">sops --encrypt tap-sensitive-values.yaml &gt; tap-sensitive-values.sops.yaml
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">mv tap-sensitive-values.sops.yaml <span class="nv">$HOME</span>/tap-gitops/clusters/full-tap-cluster/cluster-config/values/
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">mv tap-sensitive-values.sops.yaml <span class="nv">$HOME</span>/tap-gitops/clusters/full-tap-cluster/cluster-config/values/</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="generate-tanzu-application-platform-installation-and-tanzu-sync-configuration">Generate Tanzu Application Platform installation and Tanzu Sync configuration</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="generate-tanzu-application-platform-installation-and-tanzu-sync-configuration" class="heading-element">
+  <a href="#generate-tanzu-application-platform-installation-and-tanzu-sync-configuration" class="heading-mark"></a>Generate Tanzu Application Platform installation and Tanzu Sync configuration</h3><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -532,11 +605,10 @@
 </span></span><span class="line"><span class="cl">./tanzu-sync/scripts/configure.sh
 </span></span><span class="line"><span class="cl">git add cluster-config/ tanzu-sync/
 </span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Configure install of TAP 1.5.0&#34;</span>
-</span></span><span class="line"><span class="cl">git push
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">git push</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="deploy-tanzu-sync">Deploy Tanzu Sync</h3>
-<div class="highlight"><div class="chroma">
+</div><h3 id="deploy-tanzu-sync" class="heading-element">
+  <a href="#deploy-tanzu-sync" class="heading-mark"></a>Deploy Tanzu Sync</h3><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -545,11 +617,10 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$HOME</span>/tap-gitops/clusters/full-tap-cluster
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">./tanzu-sync/scripts/deploy.sh
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">./tanzu-sync/scripts/deploy.sh</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="결과">결과</h3>
-<p>완료가 되면 자동으로 모든게 다 설치가 되는 것을 확인 할 수 있지만.. 솔직히 불편하다.. 그냥 설치하는게 편한거 같은 느낌은..
+</div><h3 id="결과" class="heading-element">
+  <a href="#%ea%b2%b0%ea%b3%bc" class="heading-mark"></a>결과</h3><p>완료가 되면 자동으로 모든게 다 설치가 되는 것을 확인 할 수 있지만.. 솔직히 불편하다.. 그냥 설치하는게 편한거 같은 느낌은..
 아직 베타이기 때문일지 모른다.
 <figure><img src="/images/sops/1-5.png"/><figcaption>
             <h4>Result</h4>
@@ -557,47 +628,48 @@
 </figure>
 </p>
 </div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>수정: 2023-09-17&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/8f9e542c3d9a079137645ebc4858725c24bb6cc0" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 8f9e542c3d9a079137645ebc4858725c24bb6cc0: rebuilding site Sun Sep 17 08:19:26     2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8f9e542</a></span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/ko/sops/index.md" target="_blank">마크다운 읽기</a>
-                        </span></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="공유하기 Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/sops/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="공유하기 Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/sops/" data-title="The Documentation Sops" data-description="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
-            </div>
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2023-09-17 08:19:26">Updated on 2023-09-17&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/ko/sops/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/sops/"><i class="fa-brands fa-linkedin fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/sops/" data-title="The Documentation Sops" data-description="Install Tanzu Application Platform through Gitops with Secrets OPerationS (SOPS)"><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  </span>
         </div>
-    </div>
+      </div></div>
 
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/ko/tags/tanzu/">tanzu</a>,&nbsp;<a href="/ko/tags/k8s/">k8s</a>,&nbsp;<a href="/ko/tags/devops/">devops</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">뒤로</a></span>&nbsp;|&nbsp;<span><a href="/ko/">홈</a></span>
-        </section>
-    </div>
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/ko/tags/tanzu/" class="post-tag" title="Tags - tanzu">tanzu</a><a href="/ko/tags/k8s/" class="post-tag" title="Tags - k8s">k8s</a><a href="/ko/tags/devops/" class="post-tag" title="Tags - devops">devops</a><a href="/ko/tags/dk/" class="post-tag" title="Tags - dk">dk</a><a href="/ko/tags/dokyung/" class="post-tag" title="Tags - dokyung">dokyung</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/ko/">Home</a></span>
+    </section>
+  </div>
 
-    <div class="post-nav"><a href="/ko/tanzu-ipam/" class="prev" rel="prev" title="The Documentation IPAM on TANZU"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation IPAM on TANZU</a>
-            <a href="/ko/tap-jenkins/" class="next" rel="next" title="The Documentation TAP &amp; JENKINS">The Documentation TAP & JENKINS<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/ko/tanzu-ipam/" class="post-nav-item" rel="prev" title="The Documentation IPAM on TANZU"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation IPAM on TANZU</a>
+      <a href="/ko/tap-jenkins/" class="post-nav-item" rel="next" title="The Documentation TAP &amp; JENKINS">The Documentation TAP &amp; JENKINS<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-        </div>
-    </footer></div>
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
+      </noscript></div></article>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="맨 위로">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="댓글 보기">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"복사하기","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"검색 결과 없음","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
-            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', '216068312', { 'anonymize_ip': true });
-        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/ko/"></a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="View Comments"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Theme FixIt works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/algoliasearch/algoliasearch-lite.umd.min.js" defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":true,"expired":false,"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"typeit-header-desktop":"Dokyung's DevOoOps","typeit-header-title-mobile":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},"duration":-1,"loop":false,"speed":100}};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', '216068312', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
 </html>

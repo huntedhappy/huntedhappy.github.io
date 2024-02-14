@@ -9,24 +9,24 @@ Tanzu Community Edition은 무료로 사용 가능한 VMware에서 제공하는 
 하지만 TKG 솔루션의 대해서 사전에 테스트 환경을 구축 함으로 Kubernetes 플랫폼의 손쉬운 배포 와 VMware에서 제공하는 오픈소스 에코 시스템을 통해 확장의 대해서도 손쉽게 구현을 할 수 있을 것이다.
 
 아래에 제공하는 오픈소스를 효율적으로 구성을 할 수 있다.
-{{< figure src="/images/tce/1-1.png" title="Eco System" >}}
+{{&lt; figure src=&#34;/images/tce/1-1.png&#34; title=&#34;Eco System&#34; &gt;}}
 
 ## 2. TANZU Community Edition 구성
 
-[<i class="fas fa-link"></i> Docker 설치 링크](https://docs.docker.com/desktop/install/windows-install/)
-[<i class="fas fa-link"></i> KIND 설치 링크](https://kind.sigs.k8s.io/)
+[&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; Docker 설치 링크](https://docs.docker.com/desktop/install/windows-install/)
+[&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; KIND 설치 링크](https://kind.sigs.k8s.io/)
 
 KIND Kubernetes 클러스터는 싱글 노드에서 구축을 할 수 있으며, 비슷한 솔루션으로는 MINIKUBE, K3S등이 있다.
 구성환경은 윈도우 10, i7-4770 CPU 16GB 이며 아래는 gitops를 사용하지 않았으며, 마찬가지로 gitops로 구성하여 git에 소스를 머지 할 수도 있지만 여기서는 해당 기능의 대해서는 넣지 않았다.
 
-{{< admonition tip "KIND Install" true >}}
+{{&lt; admonition tip &#34;KIND Install&#34; true &gt;}}
 ```shell
 # MAC OS
 # for Intel Macs
-[ $(uname -m) = x86_64 ]&& curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-amd64
+[ $(uname -m) = x86_64 ]&amp;&amp; curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-amd64
 # for M1 / ARM Macs
-[ $(uname -m) = arm64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-arm64
-chmod +x ./kind
+[ $(uname -m) = arm64 ] &amp;&amp; curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-arm64
+chmod &#43;x ./kind
 mv ./kind /some-dir-in-your-PATH/kind
 ```
 ```powershell
@@ -37,13 +37,13 @@ Move-Item .\kind-windows-amd64.exe c:\some-dir-in-your-PATH\kind.exe
 ```shell
 # Linux
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
-chmod +x ./kind
+chmod &#43;x ./kind
 sudo mv ./kind /usr/local/bin/kind
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 
-{{< admonition tip "KIND Cluster 생성" true >}}
+{{&lt; admonition tip &#34;KIND Cluster 생성&#34; true &gt;}}
 kind-expose-port.yaml 파일 생성 후 아래 내용 추가
 ```yaml
 kind: Cluster
@@ -60,23 +60,23 @@ nodes:
 # 실행
 kind create cluster --config kind-expose-port.yaml --image kindest/node:v1.23.12
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< figure src="/images/tce/1-2.png" title="Kind Cluster 확인" >}}
+{{&lt; figure src=&#34;/images/tce/1-2.png&#34; title=&#34;Kind Cluster 확인&#34; &gt;}}
 
 
-{{< admonition tip "Pivnet 다운로드 " true >}}
+{{&lt; admonition tip &#34;Pivnet 다운로드 &#34; true &gt;}}
 ```powershell
 curl.exe -Lo pivnet-windows-amd64-3.0.1.exe https://github.com/pivotal-cf/pivnet-cli/releases/download/v3.0.1/pivnet-windows-amd64-3.0.1
 Move-Item .\pivnet-windows-amd64-3.0.1.exe c:\tmc\pivnet.exe
 
-pivnet login --api-token=<API Token>
+pivnet login --api-token=&lt;API Token&gt;
 
 ## TANZU NET에서 EULA Accept 필요
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition tip "Tanzu CLI Install" true >}}
+{{&lt; admonition tip &#34;Tanzu CLI Install&#34; true &gt;}}
 
 ```shell
 # tanzu application framework download
@@ -105,9 +105,9 @@ sha: 6288c751-dirty
 # Plugin 설치
 tanzu plugin install --local c:\tmc\cli all
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition tip "Cluster Essentials Install" true >}}
+{{&lt; admonition tip &#34;Cluster Essentials Install&#34; true &gt;}}
 
 ```shell
 # tanzu-cluster-essentials download
@@ -116,27 +116,27 @@ pivnet dlpf -p tanzu-cluster-essentials -r 1.3.0 -g *essentials*
 ```powershell
 tar xzvf tanzu-cluster-essentials-windows-amd64-1.3.0.tgz -C c:\tmc
 
-$Env:TANZUNET_USERNAME=''
-$Env:TANZUNET_PASSWORD=''
-$Env:INSTALL_BUNDLE='registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle:1.3.0'
-$Env:INSTALL_REGISTRY_HOSTNAME='registry.tanzu.vmware.com'
+$Env:TANZUNET_USERNAME=&#39;&#39;
+$Env:TANZUNET_PASSWORD=&#39;&#39;
+$Env:INSTALL_BUNDLE=&#39;registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle:1.3.0&#39;
+$Env:INSTALL_REGISTRY_HOSTNAME=&#39;registry.tanzu.vmware.com&#39;
 $Env:INSTALL_REGISTRY_USERNAME=$Env:TANZUNET_USERNAME
 $Env:INSTALL_REGISTRY_PASSWORD=$Env:TANZUNET_PASSWORD
 
 c:\tmc\install.bat -y
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 만약 원하는 OS만 받고 싶으면 해당 하는 파일이름을 -g {설치하고자 하는 OS 선택}
-{{< figure src="/images/tce/1-3.png" title="TKGM Downloads" >}}
-{{< figure src="/images/tce/1-4.png" title="essentials Downloads" >}}
+{{&lt; figure src=&#34;/images/tce/1-3.png&#34; title=&#34;TKGM Downloads&#34; &gt;}}
+{{&lt; figure src=&#34;/images/tce/1-4.png&#34; title=&#34;essentials Downloads&#34; &gt;}}
 
 구성된 KIND cluster에 TAP iterate를 설치하여 source를 테스트 하고 빠르게 build를 함으로 개발의 민첩성을 제공 할 수 있다.
 별도의 클러스터를 구성해서 사용 할 수 있지만, 이렇게 TCE를 구성함으로 인해서 노트북에서도 생성 후 테스트를 할 수 있다.
 
-{{< figure src="/images/tce/1-5.png" title="iterate에 포함된 opensource" >}}
+{{&lt; figure src=&#34;/images/tce/1-5.png&#34; title=&#34;iterate에 포함된 opensource&#34; &gt;}}
 
-{{< admonition tip "Tanzu Application Install" true >}}
+{{&lt; admonition tip &#34;Tanzu Application Install&#34; true &gt;}}
 ```shell
 kubectl create ns tap-install
 
@@ -177,7 +177,7 @@ contour:
       enable: true
 
 cnrs:
-  domain_template: "{{.Name}}.{{.Domain}}"
+  domain_template: &#34;{{.Name}}.{{.Domain}}&#34;
   provider: local
 
 excluded_packages:
@@ -193,9 +193,9 @@ tanzu package install tap -p tap.tanzu.vmware.com -v 1.3.2 -f tap-values.yaml -n
 kubectl get app -n tap-install
 ```
 
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition tip "Workload 실행 파일 생성" true >}}
+{{&lt; admonition tip &#34;Workload 실행 파일 생성&#34; true &gt;}}
 ```shell
 # git-repository-credentials 생성
 kubectl create secret docker-registry git-repository-credentials --docker-server ghcr.io --docker-username $Env:GITHUB_USERNAME --password $Env:GITHUB_TOKEN -n tap-install
@@ -252,7 +252,7 @@ spec:
   params:
   - name: annotations
     value:
-      autoscaling.knative.dev/minScale: "1"
+      autoscaling.knative.dev/minScale: &#34;1&#34;
   source:
     git:
       ref:
@@ -262,16 +262,22 @@ spec:
 # workload 실행
 kubectl apply -f tanzu-java-web-app.yaml -n tap-install
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition tip "Workload 확인" true >}}
+{{&lt; admonition tip &#34;Workload 확인&#34; true &gt;}}
 ```shell
 tanzu app workload get tanzu-java-web-app -n tap-install
 
 kubectl get pod, httpproxy -n tap-install
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< figure src="/images/tce/2-1.png" title="Workload 확인" >}}
-{{< figure src="/images/tce/2-2.png" title="Workload 확인" >}}
-{{< figure src="/images/tce/2-3.png" title="Result" >}}
+{{&lt; figure src=&#34;/images/tce/2-1.png&#34; title=&#34;Workload 확인&#34; &gt;}}
+{{&lt; figure src=&#34;/images/tce/2-2.png&#34; title=&#34;Workload 확인&#34; &gt;}}
+{{&lt; figure src=&#34;/images/tce/2-3.png&#34; title=&#34;Result&#34; &gt;}}
+
+---
+
+> Author: Dokyung  
+> URL: https://huntedhappy.github.io/ko/tce/  
+

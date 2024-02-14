@@ -1,88 +1,87 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Tags - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/</link>
-        <description>Tags - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>devops</title>
-    <link>https://huntedhappy.github.io/ko/tags/devops/</link>
-    <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/devops/</guid>
-    <description><![CDATA[]]></description>
+  <channel>
+    <title>Tags - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/</link>
+    <description>Tags - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/" rel="self" type="application/rss+xml" /><item>
+  <title>devops</title>
+  <link>https://huntedhappy.github.io/ko/tags/devops/</link>
+  <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/devops/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>dk</title>
-    <link>https://huntedhappy.github.io/ko/tags/dk/</link>
-    <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/dk/</guid>
-    <description><![CDATA[]]></description>
+  <title>dk</title>
+  <link>https://huntedhappy.github.io/ko/tags/dk/</link>
+  <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/dk/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>dokyung</title>
-    <link>https://huntedhappy.github.io/ko/tags/dokyung/</link>
-    <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/dokyung/</guid>
-    <description><![CDATA[]]></description>
+  <title>dokyung</title>
+  <link>https://huntedhappy.github.io/ko/tags/dokyung/</link>
+  <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/dokyung/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>gitLab</title>
-    <link>https://huntedhappy.github.io/ko/tags/gitlab/</link>
-    <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/gitlab/</guid>
-    <description><![CDATA[]]></description>
+  <title>gitLab</title>
+  <link>https://huntedhappy.github.io/ko/tags/gitlab/</link>
+  <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/gitlab/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>gitLab ha</title>
-    <link>https://huntedhappy.github.io/ko/tags/gitlab-ha/</link>
-    <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/gitlab-ha/</guid>
-    <description><![CDATA[]]></description>
+  <title>gitLab ha</title>
+  <link>https://huntedhappy.github.io/ko/tags/gitlab-ha/</link>
+  <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/gitlab-ha/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>gitLab install</title>
-    <link>https://huntedhappy.github.io/ko/tags/gitlab-install/</link>
-    <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/gitlab-install/</guid>
-    <description><![CDATA[]]></description>
+  <title>gitLab install</title>
+  <link>https://huntedhappy.github.io/ko/tags/gitlab-install/</link>
+  <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/gitlab-install/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>k8s</title>
-    <link>https://huntedhappy.github.io/ko/tags/k8s/</link>
-    <pubDate>Sun, 17 Sep 2023 00:29:40 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/k8s/</guid>
-    <description><![CDATA[]]></description>
+  <title>k8s</title>
+  <link>https://huntedhappy.github.io/ko/tags/k8s/</link>
+  <pubDate>Sun, 17 Sep 2023 00:29:40 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/k8s/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>tanzu</title>
-    <link>https://huntedhappy.github.io/ko/tags/tanzu/</link>
-    <pubDate>Sun, 17 Sep 2023 00:29:40 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/tanzu/</guid>
-    <description><![CDATA[]]></description>
+  <title>tanzu</title>
+  <link>https://huntedhappy.github.io/ko/tags/tanzu/</link>
+  <pubDate>Sun, 17 Sep 2023 00:29:40 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/tanzu/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>jenkins</title>
-    <link>https://huntedhappy.github.io/ko/tags/jenkins/</link>
-    <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/jenkins/</guid>
-    <description><![CDATA[]]></description>
+  <title>jenkins</title>
+  <link>https://huntedhappy.github.io/ko/tags/jenkins/</link>
+  <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/jenkins/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>tekton</title>
-    <link>https://huntedhappy.github.io/ko/tags/tekton/</link>
-    <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/tags/tekton/</guid>
-    <description><![CDATA[]]></description>
+  <title>tekton</title>
+  <link>https://huntedhappy.github.io/ko/tags/tekton/</link>
+  <pubDate>Sun, 25 Jun 2023 11:12:22 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/tags/tekton/</guid>
+  <description><![CDATA[]]></description>
 </item>
 </channel>
 </rss>

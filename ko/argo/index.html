@@ -1,133 +1,212 @@
 <!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>The Documentation Argo-CD - Dokyung&#39;s DevOoOps</title><meta name="Description" content="Argo Install Guide"><meta property="og:title" content="The Documentation Argo-CD" />
+<html itemscope itemtype="http://schema.org/WebPage" lang="ko">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>The Documentation Argo-CD - Dokyung&#39;s DevOoOps</title><meta name="author" content="">
+<meta name="author-link" content="">
+<meta name="description" content="Argo Install Guide" /><meta name="keywords" content='argo, CD, cicd, tanzu, k8s, devops, dk, dokyung, argo slack, argo slack 연동, argocd, argocd slack, notification' /><meta itemprop="name" content="The Documentation Argo-CD">
+<meta itemprop="description" content="Argo Install Guide"><meta itemprop="datePublished" content="2021-12-31T20:05:51+09:00" />
+<meta itemprop="dateModified" content="2024-02-15T01:46:09+09:00" />
+<meta itemprop="wordCount" content="937"><meta itemprop="image" content="https://huntedhappy.github.io/ko/argo/argo.png" />
+<meta itemprop="keywords" content="argo,CD,cicd,tanzu,k8s,devops,dk,dokyung,argo slack,argo slack 연동,argocd,argocd slack,notification," /><meta property="og:title" content="The Documentation Argo-CD" />
 <meta property="og:description" content="Argo Install Guide" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huntedhappy.github.io/ko/argo/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/argo/argo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-31T20:05:51+09:00" />
-<meta property="article:modified_time" content="2024-02-15T01:46:09+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-02-15T01:46:09+09:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://huntedhappy.github.io/ko/argo/argo.png" /><meta name="twitter:title" content="The Documentation Argo-CD"/>
 <meta name="twitter:description" content="Argo Install Guide"/>
 <meta name="application-name" content="Dokyung&#39;s DevOoOps">
-<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/ko/argo/" /><link rel="prev" href="https://huntedhappy.github.io/ko/k10/" /><link rel="next" href="https://huntedhappy.github.io/ko/jenkins/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "The Documentation Argo-CD",
-        "inLanguage": "ko",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/huntedhappy.github.io\/ko\/argo\/"
-        },"image": [{
-                            "@type": "ImageObject",
-                            "url": "https:\/\/huntedhappy.github.io\/ko\/argo\/argo.png",
-                            "width":  1200 ,
-                            "height":  675 
-                        }],"genre": "posts","keywords": "argo, CD, cicd, tanzu, k8s, devops, dk, dokyung, argo slack, argo slack 연동, argocd, argocd slack, notification","wordcount":  943 ,
-        "url": "https:\/\/huntedhappy.github.io\/ko\/argo\/","datePublished": "2021-12-31T20:05:51+09:00","dateModified": "2024-02-15T01:46:09+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "Dokyung"
-            },"description": "Argo Install Guide"
-    }
-    </script></head>
-    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" data-light="#ffffff" data-dark="#ffffff" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://huntedhappy.github.io/ko/argo/" /><link rel="prev" href="https://huntedhappy.github.io/ko/about/" /><link rel="next" href="https://huntedhappy.github.io/ko/jenkins/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Documentation Argo-CD",
+    "inLanguage": "ko",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/huntedhappy.github.io\/ko\/argo\/"
+    },"image": [{
+              "@type": "ImageObject",
+              "url": "https:\/\/huntedhappy.github.io\/ko\/argo\/argo.png",
+              "width":  1200 ,
+              "height":  675 
+            }],"genre": "posts","keywords": "argo, CD, cicd, tanzu, k8s, devops, dk, dokyung, argo slack, argo slack 연동, argocd, argocd slack, notification","wordcount":  937 ,
+    "url": "https:\/\/huntedhappy.github.io\/ko\/argo\/","datePublished": "2021-12-31T20:05:51+09:00","dateModified": "2024-02-15T01:46:09+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Dokyung"
+      },"description": "Argo Install Guide"
+  }
+  </script></head>
+  <body data-header-desktop="auto" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-desktop" class="typeit"></span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/posts/"
+                
+                
+              >Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/tags/"
+                
+                
+              >Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/"
+                
+                
+              >Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/categories/documentation/"
+                
+                
+              >Docs</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/ko/about/"
+                
+                
+              >About</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="https://github.com/huntedhappy/"
+                title="GitHub"
+                rel="noopener noreferrer" target="_blank"
+              ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Search titles or contents ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li><li class="menu-item language-switch">
+            <span role="button" aria-label="Select Language" title="Select Language"><i class="fa-solid fa-language fa-fw" aria-hidden="true"></i></span>
+            <ul class="sub-menu"><li class="menu-item">
+                      <span class="menu-link text-secondary" title="Korean">Korean</span>
+                    </li><li class="menu-item">
+                      <a href="/argo/" class="menu-link" title="한국어">한국어</a>
+                    </li></ul>
+          </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
     <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/ko/posts/"> Posts </a><a class="menu-item" href="/ko/tags/"> Tags </a><a class="menu-item" href="/ko/categories/"> Categories </a><a class="menu-item" href="/ko/categories/documentation/"> Docs </a><a class="menu-item" href="/ko/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a><a href="javascript:void(0);" class="menu-item language" title="언어 변경">
-                    <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/argo/" selected>Korean</option><option value="/argo/">한국어</option></select>
-                </a></div>
-        </div>
+      <div class="header-title">
+        <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="typeit-header-title-mobile" class="typeit"></span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Search titles or contents ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
             </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="검색">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="지우기">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        취소
-                    </a>
-                </div><a class="menu-item" href="/ko/posts/" title="">Posts</a><a class="menu-item" href="/ko/tags/" title="">Tags</a><a class="menu-item" href="/ko/categories/" title="">Categories</a><a class="menu-item" href="/ko/categories/documentation/" title="">Docs</a><a class="menu-item" href="/ko/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a><a href="javascript:void(0);" class="menu-item" title="언어 변경">
-                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/ko/argo/" selected>Korean</option><option value="/argo/">한국어</option></select>
-                </a></div>
-    </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Cancel
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/posts/"
+                  
+                  
+                >Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/tags/"
+                  
+                  
+                >Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/"
+                  
+                  
+                >Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/categories/documentation/"
+                  
+                  
+                >Docs</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/ko/about/"
+                  
+                  
+                >About</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="https://github.com/huntedhappy/"
+                  title="GitHub"
+                  rel="noopener noreferrer" target="_blank"
+                ><i class='fab fa-github fa-fw'></i> </a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span><span class="menu-system-item language-switch">
+              <span role="button" aria-label="Select Language" title="Select Language">Korean<i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+              <select class="language-select" onchange="location = this.value;"><option value="/ko/argo/" selected disabled>Korean</option><option value="/argo/">한국어</option></select>
+            </span></li>
+      </ul>
+    </nav>
+  </div>
 </header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">목차</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation Argo-CD</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">분류: <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-12-31">2021-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;943 단어&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;읽는데 약 5분&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/ko/argo/argo.png"
-        data-srcset="/ko/argo/argo.png, /ko/argo/argo.png 1.5x, /ko/argo/argo.png 2x"
-        data-sizes="auto"
-        alt="/ko/argo/argo.png"
-        title="Argo Install Guide" /></div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>목차</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>The Documentation Argo-CD</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Dokyung</span></span><span class="post-included-in">&nbsp;included in <a href="/ko/categories/documentation/" class="post-category" title="Category - Documentation"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Documentation</a></span></div><div class="post-meta-line"><span title="published on 2021-12-31 20:05:51"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2021-12-31">2021-12-31</time></span>&nbsp;<span title="Updated on 2024-02-15 01:46:09"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="937 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1000 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>5 minutes</span>&nbsp;</div>
+    </div><div class="featured-image"><img loading="lazy" src="/ko/argo/argo.png" alt="/ko/argo/argo.png" data-title="Argo Install Guide" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#gitops-explain-ing">gitops explain ing&hellip;..</a></li>
     <li><a href="#argo">ARGO?</a></li>
@@ -147,163 +226,132 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="gitops-explain-ing">gitops explain ing&hellip;..</h2>
-<h2 id="argo">ARGO?</h2>
-<p>CI/CD에서 CD를 아르고로 선택한 이유는 인프라 변경 사항에 대한 추적이 좀 가능 하기도 하며 또한 구성 및 배포가 쉽다라고 생각 했다.</p>
+      </div><div class="content" id="content"><h2 id="gitops-explain-ing" class="heading-element">
+  <a href="#gitops-explain-ing" class="heading-mark"></a>gitops explain ing&hellip;..</h2><h2 id="argo" class="heading-element">
+  <a href="#argo" class="heading-mark"></a>ARGO?</h2><p>CI/CD에서 CD를 아르고로 선택한 이유는 인프라 변경 사항에 대한 추적이 좀 가능 하기도 하며 또한 구성 및 배포가 쉽다라고 생각 했다.</p>
 <p>설치 환경은 Tanzu 1.4 버전으로 진행</p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>CI/CD<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>CI/CD는 애플리케이션 개발 단계를 자동화하여 애플리케이션을 보다 짧은 주기로 고객에게 제공한다.
 CI (Continuous Integration) CI를 통해 개발자들은 코드 변경사항을 공유 브랜치로 다시 병합하는 작업을 더욱 수월하게 자주 수행 할 수 있다.
 CD (Continuous Delivery || Continuous Deploy) 두용어는 상호 교환적으로 사용됨.</p>
 <ul>
 <li>Continuous Deliver의 경우 코드 변경 , 병합으로부터 Prodcution에 적합한 빌드를 제공하여 모든 단계에 테스트 및 릴리스를 자동화한다.</li>
 <li>Continuous Deploy는 어플리케이션을 프로덕션으로 릴리스 작업을 자동화</li>
 </ul></div>
-        </div>
     </div>
+  </div>
 <figure><img src="/images/jenkins/0-1.png"/><figcaption>
             <h4>CICD</h4>
         </figcaption>
 </figure>
 
-<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Redhat </a></p>
-<h2 id="1-requirements">1. Requirements</h2>
-<p>helm 설치, <a href="https://github.com/helm/helm/releases" target="_blank" rel="noopener noreffer "><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;Helm</a>.</p>
-<h2 id="2-환경">2. 환경</h2>
-<p>vSphere : 7.0</p>
+<p>참고 문헌 <a href="https://www.redhat.com/ko/topics/devops/what-is-ci-cd"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> Redhat </a></p>
+<h2 id="1-requirements" class="heading-element">
+  <a href="#1-requirements" class="heading-mark"></a>1. Requirements</h2><p>helm 설치, <a href="https://github.com/helm/helm/releases"target="_blank" rel="external nofollow noopener noreferrer"><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;Helm</a>.</p>
+<h2 id="2-환경" class="heading-element">
+  <a href="#2-%ed%99%98%ea%b2%bd" class="heading-mark"></a>2. 환경</h2><p>vSphere : 7.0</p>
 <p>vSAN</p>
 <p>NSX : 3.2</p>
 <p>AVI : 21.1.1</p>
 <p>Tanzu 1.4</p>
-<h2 id="3-설치">3. 설치</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>ARGO Install<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"><img
-class="lazyload version"
-src="/svg/loading.min.svg"
-data-src="/svg/version/0.2.0-new.ko.min.svg"
-data-srcset="/svg/version/0.2.0-new.ko.min.svg, /svg/version/0.2.0-new.ko.min.svg 1.5x, /svg/version/0.2.0-new.ko.min.svg 2x"
-data-sizes="auto"
-alt="LoveIt 신규 | 0.2.0"
-title="LoveIt 신규 | 0.2.0" /></a></p>
+<h2 id="3-설치" class="heading-element">
+  <a href="#3-%ec%84%a4%ec%b9%98" class="heading-mark"></a>3. 설치</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>ARGO Install<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><a href="https://github.com/hugo-fixit/FixIt/releases/tag/v0.2.0" rel="external nofollow noopener noreferrer" target="_blank"><img loading="lazy" src="/images/version/0.2.0-new.ko.min.svg" alt="FixIt 0.2.0 | NEW" data-title="FixIt 0.2.0 | NEW" class="version" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <p>Namespace 생성</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns argocd
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create ns argocd</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Helm Repo 등록</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm repo add argo https://argoproj.github.io/argo-helm
-</span></span><span class="line"><span class="cl">helm repo update
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">helm repo update</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>Optional : Helm 에서 value 값을 수정 하고 싶으면 별도로 다운로드</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values argo/argo-cd &gt; argocd.yaml
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values argo/argo-cd &gt; argocd.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>Optional : HTTPS로 구성을 하려고 한다면 인증서 등록을 해준다.</p>
 </blockquote>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret tls argo-tls --cert<span class="o">=</span>/data/cert/yourdomain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n argocd
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret tls argo-tls --cert<span class="o">=</span>/data/cert/yourdomain.com.crt --key<span class="o">=</span>/data/cert/yourdomain.com.key -n argocd</span></span></code></pre></td></tr></table>
 </div>
 </div><p>수정이 필요 없으면 바로 시작 하면 된다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm install argocd argo/argo-cd -n argo
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm install argocd argo/argo-cd -n argo</span></span></code></pre></td></tr></table>
 </div>
 </div><p>접속 하기 위해 Portfoward를 하자</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ID는 admin 이며, PW는 별도의 명령으로 알아 낼수 있다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<p><figure><a class="lightgallery" href="/images/ARGO/3-1.png" title="접속 페이지" data-thumbnail="/images/ARGO/3-1.png" data-sub-html="<h2>접속 페이지</h2><p>접속 페이지</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/ARGO/3-1.png"
-            data-srcset="/images/ARGO/3-1.png, /images/ARGO/3-1.png 1.5x, /images/ARGO/3-1.png 2x"
-            data-sizes="auto"
-            alt="/images/ARGO/3-1.png" />
-    </a><figcaption class="image-caption">접속 페이지</figcaption>
-    </figure>
-<figure><a class="lightgallery" href="/images/ARGO/3-2.png" title="User Info" data-thumbnail="/images/ARGO/3-2.png" data-sub-html="<h2>User Info</h2><p>User Info</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/ARGO/3-2.png"
-            data-srcset="/images/ARGO/3-2.png, /images/ARGO/3-2.png 1.5x, /images/ARGO/3-2.png 2x"
-            data-sizes="auto"
-            alt="/images/ARGO/3-2.png" />
-    </a><figcaption class="image-caption">User Info</figcaption>
-    </figure></p>
-<h2 id="4-auth---ldap-integration">4. Auth - LDAP Integration</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LDAP Integration<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>LDAP을 연동 하기 위해선 values 값을 다운로드 하는 것이 좋다.</p>
-<div class="highlight"><div class="chroma">
+  </div>
+<p><figure><a class="lightgallery" href="/images/ARGO/3-1.png?size=large" data-thumbnail="/images/ARGO/3-1.png?size=small" data-sub-html="<h2>접속 페이지</h2><p>접속 페이지</p>"><img loading="lazy" src="/images/ARGO/3-1.png" alt="접속 페이지" srcset="/images/ARGO/3-1.png?size=small, /images/ARGO/3-1.png?size=medium 1.5x, /images/ARGO/3-1.png?size=large 2x" sizes="auto" data-title="접속 페이지" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">접속 페이지</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="/images/ARGO/3-2.png?size=large" data-thumbnail="/images/ARGO/3-2.png?size=small" data-sub-html="<h2>User Info</h2><p>User Info</p>"><img loading="lazy" src="/images/ARGO/3-2.png" alt="User Info" srcset="/images/ARGO/3-2.png?size=small, /images/ARGO/3-2.png?size=medium 1.5x, /images/ARGO/3-2.png?size=large 2x" sizes="auto" data-title="User Info" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">User Info</figcaption>
+  </figure></p>
+<h2 id="4-auth---ldap-integration" class="heading-element">
+  <a href="#4-auth---ldap-integration" class="heading-mark"></a>4. Auth - LDAP Integration</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LDAP Integration<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>LDAP을 연동 하기 위해선 values 값을 다운로드 하는 것이 좋다.</p>
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm show values argo/argo-cd &gt; argocd.yaml
-</span></span><span class="line"><span class="cl">vi argocd.yaml
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">vi argocd.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다운로드 받은 Yaml파일중에 dex부분을 수정한다, 없으면 추가 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -360,22 +408,20 @@ title="LoveIt 신규 | 0.2.0" /></a></p>
 </span></span><span class="line"><span class="cl">            filter: <span class="o">(</span><span class="nv">objectClass</span><span class="o">=</span>person<span class="o">)</span>
 </span></span><span class="line"><span class="cl">            userAttr: DN
 </span></span><span class="line"><span class="cl">            groupAttr: member
-</span></span><span class="line"><span class="cl">            nameAttr: name
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">            nameAttr: name</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 Secret을 생성 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindPW\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s1">&#39;Passw0rd&#39;</span> <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span>
-</span></span><span class="line"><span class="cl">kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindDN\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">cn</span><span class="o">=</span>administrator,cn<span class="o">=</span>users,dc<span class="o">=</span>tanzu,dc<span class="o">=</span>io <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl -n argo patch secrets argocd-secret --patch <span class="s2">&#34;{\&#34;data\&#34;:{\&#34;dex.ldap.bindDN\&#34;:\&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">cn</span><span class="o">=</span>administrator,cn<span class="o">=</span>users,dc<span class="o">=</span>tanzu,dc<span class="o">=</span>io <span class="p">|</span> base64 -w 0<span class="k">)</span><span class="s2">\&#34;}}&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>HELM 실행</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -384,48 +430,44 @@ title="LoveIt 신규 | 0.2.0" /></a></p>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm install argocd argo/argo-cd -n argo <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--set server.extraArgs<span class="o">[</span>0<span class="o">]=</span>--insecure <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-f argocd.yaml
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-f argocd.yaml</span></span></code></pre></td></tr></table>
 </div>
 </div><p>접속 하기 위해 Portfoward를 하자</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward service/argocd-server -n argo 8080:443</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ID는 admin 이며, PW는 별도의 명령으로 알아 낼수 있다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl -n argo get secret argocd-initial-admin-secret -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.password}&#34;</span> <span class="p">|</span> base64 -d</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<h3 id="41-rbac-적용">4.1. RBAC 적용</h3>
-<p>RBAC을 적용 해주어 Admin 권한으로 접속이 되는지 확인
+  </div>
+<h3 id="41-rbac-적용" class="heading-element">
+  <a href="#41-rbac-%ec%a0%81%ec%9a%a9" class="heading-mark"></a>4.1. RBAC 적용</h3><p>RBAC을 적용 해주어 Admin 권한으로 접속이 되는지 확인
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>LDAP Integration<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>confimap을 수정 해서 RBAC의 대한 설정을 해준다.</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>LDAP Integration<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>confimap을 수정 해서 RBAC의 대한 설정을 해준다.</p>
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl edit cm argocd-rbac-cm -n argo
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl edit cm argocd-rbac-cm -n argo</span></span></code></pre></td></tr></table>
 </div>
 </div><p>configmap을 수정 하면 아래 내용이 있으면 수정 하고 없으면 추가 해준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -454,32 +496,30 @@ title="LoveIt 신규 | 0.2.0" /></a></p>
 </span></span><span class="line"><span class="cl">    g, tkg, role:readonly
 </span></span><span class="line"><span class="cl">    g, my1208@openbase.co.kr, role:admin
 </span></span><span class="line"><span class="cl">  policy.default: role:none
-</span></span><span class="line"><span class="cl">  scopes: <span class="s1">&#39;[groups,email]&#39;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  scopes: <span class="s1">&#39;[groups,email]&#39;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Pod를 재 실행 해 준다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">delete</span><span class="o">=</span><span class="sb">`</span>kubectl get pod -n argo <span class="p">|</span> grep -v  repo <span class="p">|</span> egrep  <span class="s1">&#39;server|dex&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> xargs <span class="nb">echo</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl">kubectl delete pod <span class="nv">$delete</span> -n argo
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl delete pod <span class="nv">$delete</span> -n argo</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
-    </div></p>
+    </div>
+  </div></p>
 <figure><img src="/images/ARGO/4-1.png"/><figcaption>
             <h4>접속 화면</h4>
         </figcaption>
 </figure>
 
-<h2 id="5-slack-연동">5. SLACK 연동</h2>
-<p>메시지를 SLACK으로 받기 위해 연동</p>
-<h3 id="51-slack-설정">5.1. SLACK 설정</h3>
-<p><a href="https://api.slack.com/apps?new_app=1" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> SLACK APP 등록 </a>
+<h2 id="5-slack-연동" class="heading-element">
+  <a href="#5-slack-%ec%97%b0%eb%8f%99" class="heading-mark"></a>5. SLACK 연동</h2><p>메시지를 SLACK으로 받기 위해 연동</p>
+<h3 id="51-slack-설정" class="heading-element">
+  <a href="#51-slack-%ec%84%a4%ec%a0%95" class="heading-mark"></a>5.1. SLACK 설정</h3><p><a href="https://api.slack.com/apps?new_app=1"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> SLACK APP 등록 </a>
 <figure><img src="/images/ARGO/5-1.png"/><figcaption>
             <h4>APP 추가#1</h4>
         </figcaption>
@@ -542,16 +582,16 @@ APP을 추가 해준다.
         </figcaption>
 </figure>
 </p>
-<p>솔직히 여기 잘 나와 있다. <a href="https://argocd-notifications.readthedocs.io/en/stable/services/slack/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> SLACK APP 등록 </a></p>
-<h3 id="52-argo-설정">5.2. ARGO 설정</h3>
-<p>ARGO 설정은 별도로 UI에서 제공을 하지 않기 때문에 ConfigMap을 좀 수정 해야 한다. Helm에서 제공을 하긴 하는대 현재는 버그가 있는지 배포가 되지 않아 별도의 방법으로 구성한다.</p>
+<p>솔직히 여기 잘 나와 있다. <a href="https://argocd-notifications.readthedocs.io/en/stable/services/slack/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> SLACK APP 등록 </a></p>
+<h3 id="52-argo-설정" class="heading-element">
+  <a href="#52-argo-%ec%84%a4%ec%a0%95" class="heading-mark"></a>5.2. ARGO 설정</h3><p>ARGO 설정은 별도로 UI에서 제공을 하지 않기 때문에 ConfigMap을 좀 수정 해야 한다. Helm에서 제공을 하긴 하는대 현재는 버그가 있는지 배포가 되지 않아 별도의 방법으로 구성한다.</p>
 <p><div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>Slack 연동<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>해당 파일을 다운 로드 받은 후 실행</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>Slack 연동<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>해당 파일을 다운 로드 받은 후 실행</p>
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -564,11 +604,10 @@ APP을 추가 해준다.
 </span></span><span class="line"><span class="cl">wget -O argo-noty-config.yaml https://raw.githubusercontent.com/argoproj-labs/argocd-notifications/v1.2.1/catalog/install.yaml
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl apply -f argo-noty-secret.yaml -n argo
-</span></span><span class="line"><span class="cl">kubectl apply -f argo-noty-config.yaml -n argo
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl apply -f argo-noty-config.yaml -n argo</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 secret 과 configmap을 수정한다. 사전에 변경해도 상관은 없다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -613,20 +652,19 @@ APP을 추가 해준다.
 </span></span><span class="line"><span class="cl">    <span class="c1">## apiURL: &lt;url&gt;                 # optional URL, e.g. https://example.com/api</span>
 </span></span><span class="line"><span class="cl">    token: <span class="nv">$slack</span>-token              <span class="c1"># 위에 secret을 참고 함 </span>
 </span></span><span class="line"><span class="cl">    <span class="c1">## username: &lt;override-username&gt; # optional username</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">## icon: &lt;override-icon&gt; # optional icon for the message (supports both emoij and url notation)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    <span class="c1">## icon: &lt;override-icon&gt; # optional icon for the message (supports both emoij and url notation)</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-Default Definition 참고. <a href="https://argocd-notifications.readthedocs.io/en/stable/services/slack/" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> SLACK으로 보낼 내용 정리 </a></p>
+  </div>
+Default Definition 참고. <a href="https://argocd-notifications.readthedocs.io/en/stable/services/slack/"target="_blank" rel="external nofollow noopener noreferrer"><i class="fas fa-link"></i> SLACK으로 보낼 내용 정리 </a></p>
 <div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Slack 연동<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>테스트를 위해 Application을 배포 한다.</p>
-<div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>Slack 연동<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>테스트를 위해 Application을 배포 한다.</p>
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -679,12 +717,11 @@ Default Definition 참고. <a href="https://argocd-notifications.readthedocs.io/
 </span></span></span><span class="line"><span class="cl"><span class="s">    targetRevision: HEAD
 </span></span></span><span class="line"><span class="cl"><span class="s">  syncPolicy:
 </span></span></span><span class="line"><span class="cl"><span class="s">    automated: {}
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>그럼 아래와 같이 Slack으로 메시지가 오는 것을 확인 할 수 있다.</p>
 <figure><img src="/images/ARGO/5-12.png"/><figcaption>
             <h4>SLACK 확인</h4>
@@ -708,47 +745,48 @@ Default Definition 참고. <a href="https://argocd-notifications.readthedocs.io/
 </figure>
 </p>
 </div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>수정: 2024-02-15&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/4357013f0c26ed3be4b1a0b7ba32454eac7de72c" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 4357013f0c26ed3be4b1a0b7ba32454eac7de72c: rebuilding site Thu Feb 15 01:46:09     2024">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>4357013</a></span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/ko/argo/index.md" target="_blank">마크다운 읽기</a>
-                        </span></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="공유하기 Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/argo/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="공유하기 Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/argo/" data-title="The Documentation Argo-CD" data-description="Argo Install Guide"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
-            </div>
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-02-15 01:46:09">Updated on 2024-02-15&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/ko/argo/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/argo/"><i class="fa-brands fa-linkedin fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/argo/" data-title="The Documentation Argo-CD" data-description="Argo Install Guide"><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  </span>
         </div>
-    </div>
+      </div></div>
 
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/ko/tags/argo/">argo</a>,&nbsp;<a href="/ko/tags/cd/">CD</a>,&nbsp;<a href="/ko/tags/cicd/">cicd</a>,&nbsp;<a href="/ko/tags/tanzu/">tanzu</a>,&nbsp;<a href="/ko/tags/k8s/">k8s</a>,&nbsp;<a href="/ko/tags/devops/">devops</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a>,&nbsp;<a href="/ko/tags/argo-slack/">argo slack</a>,&nbsp;<a href="/ko/tags/argo-slack-%EC%97%B0%EB%8F%99/">argo slack 연동</a>,&nbsp;<a href="/ko/tags/argocd/">argocd</a>,&nbsp;<a href="/ko/tags/argocd-slack/">argocd slack</a>,&nbsp;<a href="/ko/tags/notification/">notification</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">뒤로</a></span>&nbsp;|&nbsp;<span><a href="/ko/">홈</a></span>
-        </section>
-    </div>
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/ko/tags/argo/" class="post-tag" title="Tags - argo">argo</a><a href="/ko/tags/cd/" class="post-tag" title="Tags - CD">CD</a><a href="/ko/tags/cicd/" class="post-tag" title="Tags - cicd">cicd</a><a href="/ko/tags/tanzu/" class="post-tag" title="Tags - tanzu">tanzu</a><a href="/ko/tags/k8s/" class="post-tag" title="Tags - k8s">k8s</a><a href="/ko/tags/devops/" class="post-tag" title="Tags - devops">devops</a><a href="/ko/tags/dk/" class="post-tag" title="Tags - dk">dk</a><a href="/ko/tags/dokyung/" class="post-tag" title="Tags - dokyung">dokyung</a><a href="/ko/tags/argo-slack/" class="post-tag" title="Tags - argo slack">argo slack</a><a href="/ko/tags/argo-slack-%EC%97%B0%EB%8F%99/" class="post-tag" title="Tags - argo slack 연동">argo slack 연동</a><a href="/ko/tags/argocd/" class="post-tag" title="Tags - argocd">argocd</a><a href="/ko/tags/argocd-slack/" class="post-tag" title="Tags - argocd slack">argocd slack</a><a href="/ko/tags/notification/" class="post-tag" title="Tags - notification">notification</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/ko/">Home</a></span>
+    </section>
+  </div>
 
-    <div class="post-nav"><a href="/ko/k10/" class="prev" rel="prev" title="The Documentation K10 Install"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation K10 Install</a>
-            <a href="/ko/jenkins/" class="next" rel="next" title="The Documentation Jenkins">The Documentation Jenkins<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/ko/k10/" class="post-nav-item" rel="prev" title="The Documentation K10 Install"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation K10 Install</a>
+      <a href="/ko/jenkins/" class="post-nav-item" rel="next" title="The Documentation Jenkins">The Documentation Jenkins<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-        </div>
-    </footer></div>
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
+      </noscript></div></article>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="맨 위로">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="댓글 보기">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"복사하기","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"검색 결과 없음","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
-            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', '216068312', { 'anonymize_ip': true });
-        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.122.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/ko/"></a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="View Comments"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Theme FixIt works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/algoliasearch/algoliasearch-lite.umd.min.js" defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":true,"expired":false,"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"typeit-header-desktop":"Dokyung's DevOoOps","typeit-header-title-mobile":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},"duration":-1,"loop":false,"speed":100}};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', '216068312', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
 </html>

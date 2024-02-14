@@ -2,7 +2,7 @@
 
 
 OWASP TOP10을 정리해보자.
-{{< figure src="/images/owasp/1-1.png" title="owasp top10 출처:OWASP" >}}
+{{&lt; figure src=&#34;/images/owasp/1-1.png&#34; title=&#34;owasp top10 출처:OWASP&#34; &gt;}}
 
 
 |  | Name | 설명 |
@@ -10,12 +10,12 @@ OWASP TOP10을 정리해보자.
 | A01 | Broken Access Control | Moving up from the fifth position, 94% of applications were tested for some form of broken access control with the average incidence rate of 3.81%, and has the most occurrences in the contributed dataset with over 318k. Notable Common Weakness Enumerations (CWEs) included are CWE-200: Exposure of Sensitive Information to an Unauthorized Actor, CWE-201: Exposure of Sensitive Information Through Sent Data, and CWE-352: Cross-Site Request Forgery. |
 | A02 | Cryptographic Failures | Shifting up one position to #2, previously known as Sensitive Data Exposure, which is more of a broad symptom rather than a root cause, the focus is on failures related to cryptography (or lack thereof). Which often lead to exposure of sensitive data. Notable Common Weakness Enumerations (CWEs) included are CWE-259: Use of Hard-coded Password, CWE-327: Broken or Risky Crypto Algorithm, and CWE-331 Insufficient Entropy . |
 | A03 | Injection | Injection slides down to the third position. 94% of the applications were tested for some form of injection with a max incidence rate of 19%, an average incidence rate of 3%, and 274k occurances. Notable Common Weakness Enumerations (CWEs) included are CWE-79: Cross-site Scripting, CWE-89: SQL Injection, and CWE-73: External Control of File Name or Path. |
-| A04 | Insecure Design | A new category for 2021 focuses on risks related to design and architectural flaws, with a call for more use of threat modeling, secure design patterns, and reference architectures. As a community we need to move beyond "shift-left" in the coding space to pre-code activities that are critical for the principles of Secure by Design. Notable Common Weakness Enumerations (CWEs) include CWE-209: Generation of Error Message Containing Sensitive Information, CWE-256: Unprotected Storage of Credentials, CWE-501: Trust Boundary Violation, and CWE-522: Insufficiently Protected Credentials. |
-| A05 | Security Misconfiguration | Moving up from #6 in the previous edition, 90% of applications were tested for some form of misconfiguration, with an average incidence rate of 4.%, and over 208k occurences of a Common Weakness Enumeration (CWE) in this risk category. With more shifts into highly configurable software, it's not surprising to see this category move up. Notable CWEs included are CWE-16 Configuration and CWE-611 Improper Restriction of XML External Entity Reference. |
+| A04 | Insecure Design | A new category for 2021 focuses on risks related to design and architectural flaws, with a call for more use of threat modeling, secure design patterns, and reference architectures. As a community we need to move beyond &#34;shift-left&#34; in the coding space to pre-code activities that are critical for the principles of Secure by Design. Notable Common Weakness Enumerations (CWEs) include CWE-209: Generation of Error Message Containing Sensitive Information, CWE-256: Unprotected Storage of Credentials, CWE-501: Trust Boundary Violation, and CWE-522: Insufficiently Protected Credentials. |
+| A05 | Security Misconfiguration | Moving up from #6 in the previous edition, 90% of applications were tested for some form of misconfiguration, with an average incidence rate of 4.%, and over 208k occurences of a Common Weakness Enumeration (CWE) in this risk category. With more shifts into highly configurable software, it&#39;s not surprising to see this category move up. Notable CWEs included are CWE-16 Configuration and CWE-611 Improper Restriction of XML External Entity Reference. |
 | A06 | Vulnerable and Outdated Components | It was #2 from the Top 10 community survey but also had enough data to make the Top 10 via data. Vulnerable Components are a known issue that we struggle to test and assess risk and is the only category to not have any Common Weakness Enumerations (CWEs) mapped to the included CWEs, so a default exploits/impact weight of 5.0 is used. Notable CWEs included are CWE-1104: Use of Unmaintained Third-Party Components and the two CWEs from Top 10 2013 and 2017. |
 | A07 | Identification and Authentication Failures | Previously known as Broken Authentication, this category slid down from the second position and now includes Common Weakness Enumerations (CWEs) related to identification failures. Notable CWEs included are CWE-297: Improper Validation of Certificate with Host Mismatch, CWE-287: Improper Authentication, and CWE-384: Session Fixation |
 | A08 | Software and Data Integrity Failures | A new category for 2021 focuses on making assumptions related to software updates, critical data, and CI/CD pipelines without verifying integrity. One of the highest weighted impacts from Common Vulnerability and Exposures/Common Vulnerability Scoring System (CVE/CVSS) data. Notable Common Weakness Enumerations (CWEs) include CWE-829: Inclusion of Functionality from Untrusted Control Sphere, CWE-494: Download of Code Without Integrity Check, and CWE-502: Deserialization of Untrusted Data. |
-| A09 | Security Logging and Monitoring Failures | Security logging and monitoring came from the Top 10 community survey (#3), up slightly from the tenth position in the OWASP Top 10 2017. Logging and monitoring can be challenging to test, often involving interviews or asking if attacks were detected during a penetration test. There isn't much CVE/CVSS data for this category, but detecting and responding to breaches is critical. Still, it can be very impactful for accountability, visibility, incident alerting, and forensics. This category expands beyond CWE-778 Insufficient Logging to include CWE-117 Improper Output Neutralization for Logs, CWE-223 Omission of Security-relevant Information, and CWE-532 Insertion of Sensitive Information into Log File. |
+| A09 | Security Logging and Monitoring Failures | Security logging and monitoring came from the Top 10 community survey (#3), up slightly from the tenth position in the OWASP Top 10 2017. Logging and monitoring can be challenging to test, often involving interviews or asking if attacks were detected during a penetration test. There isn&#39;t much CVE/CVSS data for this category, but detecting and responding to breaches is critical. Still, it can be very impactful for accountability, visibility, incident alerting, and forensics. This category expands beyond CWE-778 Insufficient Logging to include CWE-117 Improper Output Neutralization for Logs, CWE-223 Omission of Security-relevant Information, and CWE-532 Insertion of Sensitive Information into Log File. |
 | A10 | Server-Side Request Forgery (SSRF) | This category is added from the Top 10 community survey (#1). The data shows a relatively low incidence rate with above average testing coverage and above-average Exploit and Impact potential ratings. As new entries are likely to be a single or small cluster of Common Weakness Enumerations (CWEs) for attention and awareness, the hope is that they are subject to focus and can be rolled into a larger category in a future edition. |
 
 
@@ -94,7 +94,7 @@ OWASP TOP10을 정리해보자.
 | 40 | 24.19% | 3.00% | 6.46 | 6.78 | 77.25% | 42.51% | 262,407 | 2,691 |
 
 #### 설명
-안전하지 않은 설계는 "누락되거나 비효율적인 제어 설계"로 표현되는 다양한 약점을 나타내는 광범위한 범주입니다. 안전하지 않은 디자인은 다른 모든 상위 10개 위험 범주의 원인이 아닙니다. 안전하지 않은 설계와 안전하지 않은 구현에는 차이가 있습니다. 우리는 근본 원인과 해결 방법이 다르기 때문에 설계 결함과 구현 결함을 구별합니다. 보안 설계에는 여전히 악용될 수 있는 취약점으로 이어지는 구현 결함이 있을 수 있습니다. 안전하지 않은 설계는 정의상 특정 공격을 방어하기 위해 필요한 보안 제어가 생성되지 않았기 때문에 완벽한 구현으로 수정할 수 없습니다. 안전하지 않은 설계에 기여하는 요인 중 하나는 개발 중인 소프트웨어 또는 시스템에 내재된 비즈니스 위험 프로파일링의 부족입니다.
+안전하지 않은 설계는 &#34;누락되거나 비효율적인 제어 설계&#34;로 표현되는 다양한 약점을 나타내는 광범위한 범주입니다. 안전하지 않은 디자인은 다른 모든 상위 10개 위험 범주의 원인이 아닙니다. 안전하지 않은 설계와 안전하지 않은 구현에는 차이가 있습니다. 우리는 근본 원인과 해결 방법이 다르기 때문에 설계 결함과 구현 결함을 구별합니다. 보안 설계에는 여전히 악용될 수 있는 취약점으로 이어지는 구현 결함이 있을 수 있습니다. 안전하지 않은 설계는 정의상 특정 공격을 방어하기 위해 필요한 보안 제어가 생성되지 않았기 때문에 완벽한 구현으로 수정할 수 없습니다. 안전하지 않은 설계에 기여하는 요인 중 하나는 개발 중인 소프트웨어 또는 시스템에 내재된 비즈니스 위험 프로파일링의 부족입니다.
 
 ## A05 Security Misconfiguration
 | CWEs Mapped | Max Incidence Rate | Avg Incidence Rate | Avg Weighted Exploit| Avg Weighted Impact | Max Coverage | Avg Coverage | Total Occurrences | Total CVEs |
@@ -142,8 +142,8 @@ OWASP TOP10을 정리해보자.
 
 * 공격자가 유효한 사용자 이름 및 암호 목록을 가지고 있는 경우 자격 증명 스터핑과 같은 자동화된 공격을 허용합니다.
 * 무차별 대입 또는 기타 자동화된 공격을 허용합니다.
-* "Password1" 또는 "admin/admin"과 같은 기본 암호, 취약하거나 잘 알려진 암호를 허용합니다.
-* 안전할 수 없는 "지식 기반 답변"과 같은 취약하거나 비효율적인 자격 증명 복구 및 비밀번호 찾기 프로세스를 사용합니다.
+* &#34;Password1&#34; 또는 &#34;admin/admin&#34;과 같은 기본 암호, 취약하거나 잘 알려진 암호를 허용합니다.
+* 안전할 수 없는 &#34;지식 기반 답변&#34;과 같은 취약하거나 비효율적인 자격 증명 복구 및 비밀번호 찾기 프로세스를 사용합니다.
 * 일반 텍스트, 암호화되거나 약하게 해시된 암호 데이터 저장소를 사용합니다( A02:2021-Cryptographic Failures 참조).
 * 다단계 인증이 없거나 비효율적입니다.
 * URL의 세션 식별자를 노출합니다.
@@ -191,4 +191,10 @@ SSRF 결함은 웹 애플리케이션이 사용자가 제공한 URL의 유효성
 최신 웹 애플리케이션이 최종 사용자에게 편리한 기능을 제공함에 따라 URL 가져오기가 일반적인 시나리오가 되었습니다. 그 결과 SSRF의 발병률이 증가하고 있습니다. 또한 클라우드 서비스와 아키텍처의 복잡성으로 인해 SSRF의 심각도가 높아지고 있습니다.
 
 
-[<i class="fas fa-link"></i> 자료출처: OWASP](https://owasp.org/Top10/)
+[&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; 자료출처: OWASP](https://owasp.org/Top10/)
+
+---
+
+> Author: Dokyung  
+> URL: https://huntedhappy.github.io/owsap/  
+

@@ -1,24 +1,23 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>NodePort - 태그 - Dokyung&#39;s DevOoOps</title>
-        <link>https://huntedhappy.github.io/ko/tags/nodeport/</link>
-        <description>NodePort - 태그 - Dokyung&#39;s DevOoOps</description>
-        <generator>Hugo -- gohugo.io</generator><language>ko</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
-            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 05 Apr 2022 21:51:21 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/nodeport/" rel="self" type="application/rss+xml" /><item>
-    <title>The Documentation vSphere Tanzu with AVI Load Balancer</title>
-    <link>https://huntedhappy.github.io/ko/avi/</link>
-    <pubDate>Tue, 05 Apr 2022 21:51:21 &#43;0900</pubDate>
-    <author>Dokyung</author>
-    <guid>https://huntedhappy.github.io/ko/avi/</guid>
-    <description><![CDATA[<p>AVI에서 제공하는 AKO인 INGRESS Controller를 사용 하는 방법 제공</p>
-<h2 id="1-tanzu에서-cluster-servicetype-변경">1. TANZU에서 Cluster ServiceType 변경</h2>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>serviceType<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>ManageMent Cluster로 Context 변경</p>
-<div class="highlight"><div class="chroma">
+  <channel>
+    <title>NodePort - Tag - Dokyung&#39;s DevOoOps</title>
+    <link>https://huntedhappy.github.io/ko/tags/nodeport/</link>
+    <description>NodePort - Tag | Dokyung&#39;s DevOoOps</description>
+    <generator>Hugo -- gohugo.io</generator><language>ko</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 05 Apr 2022 21:51:21 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/ko/tags/nodeport/" rel="self" type="application/rss+xml" /><item>
+  <title>The Documentation vSphere Tanzu with AVI Load Balancer</title>
+  <link>https://huntedhappy.github.io/ko/avi/</link>
+  <pubDate>Tue, 05 Apr 2022 21:51:21 &#43;0900</pubDate>
+  <author>Author</author>
+  <guid>https://huntedhappy.github.io/ko/avi/</guid>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://huntedhappy.github.io/ko/avi/avi.png" alt="The Documentation vSphere Tanzu with AVI Load Balancer" title="VMware Tanzu with AVI" referrerpolicy="no-referrer"/></div><p>AVI에서 제공하는 AKO인 INGRESS Controller를 사용 하는 방법 제공</p>
+<h2 id="1-tanzu에서-cluster-servicetype-변경" class="heading-element">
+  <a href="#1-tanzu%ec%97%90%ec%84%9c-cluster-servicetype-%eb%b3%80%ea%b2%bd" class="heading-mark"></a>1. TANZU에서 Cluster ServiceType 변경</h2><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>serviceType<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>ManageMent Cluster로 Context 변경</p>
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -95,10 +94,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePort
 </span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL
 </span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -175,10 +173,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: ClusterIP                                    # required
 </span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       # required
 </span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -261,14 +258,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePortLocal                                     # required
 </span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       
 </span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
+  </div>
 <p>NodePort 테스트</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -281,10 +277,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-nodeport-01<span class="o">=</span><span class="nb">true</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-nodeport-01<span class="o">=</span>true</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -301,22 +296,21 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>NodePort --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/avi/1-1.png"/><figcaption>
             <h4>접속 화면</h4>
         </figcaption>
 </figure>
 
 <p>NodePort로 구성이 되어 있기 때문에 아래와 같이 NodeIP와 30000번대의 Port로 서버풀이 지정되는 것을 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/avi/1-2.png"/><figcaption>
             <h4>AVI VS 상태 확인</h4>
         </figcaption>
 </figure>
 </p>
 <p>ClusterIP 테스트</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -329,10 +323,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-clusterip-01<span class="o">=</span><span class="nb">true</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-clusterip-01<span class="o">=</span>true</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -353,33 +346,32 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/avi/1-3.png"/><figcaption>
             <h4>ServiceType 변경 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/avi/1-4.png"/><figcaption>
             <h4>AVI Routing 확인</h4>
         </figcaption>
 </figure>
 
 ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 실제 Port로 서버풀이 지정되는 것을 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/avi/1-5.png"/><figcaption>
             <h4>AVI VS 상태 확인</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="2-avi-infra-settings">2. AVI Infra Settings</h2>
-<p>만약에 하나의 클러스터에서 VS별 SE-GROUP을 분리 하거나, 또는 VS의 IP 대역을 분리 하고 싶을 경우 AVIINFRASETTING을 사용하여 구성을 할 수 있다.
-<figure><figcaption>
+<h2 id="2-avi-infra-settings" class="heading-element">
+  <a href="#2-avi-infra-settings" class="heading-mark"></a>2. AVI Infra Settings</h2><p>만약에 하나의 클러스터에서 VS별 SE-GROUP을 분리 하거나, 또는 VS의 IP 대역을 분리 하고 싶을 경우 AVIINFRASETTING을 사용하여 구성을 할 수 있다.
+<figure><img src="/images/avi/2-1.png"/><figcaption>
             <h4>구성</h4>
         </figcaption>
 </figure>
 </p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -440,11 +432,10 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: ako.vmware.com
 </span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
 </span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>테스트</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -457,27 +448,26 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>other-infra --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>other-infra --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/avi/2-3.png"/><figcaption>
             <h4>VS IP 변경 전</h4>
         </figcaption>
 </figure>
 
 아래와 같이 VS IP가 변경 된 것을 확인 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/avi/2-2.png"/><figcaption>
             <h4>VS IP 변경 후</h4>
         </figcaption>
 </figure>
 </p>
 <p>기존의 하나의 SE그룹에 모두 VS가 구성이 되어 있다.
-<figure><figcaption>
+<figure><img src="/images/avi/2-4.png"/><figcaption>
             <h4>SE Group 생성</h4>
         </figcaption>
 </figure>
 </p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -488,38 +478,37 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## SEGROUP을 변경</span>
 </span></span><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/seGroup/name&#34;,&#34;value&#34;:&#34;tkgm01&#34;}]&#39;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ingressClassName&#34;: &#34;other-infra&#34;}}&#39;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ingressClassName&#34;: &#34;other-infra&#34;}}&#39;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>현재는 SE가 기존의
-<figure><figcaption>
+<figure><img src="/images/avi/2-5.png"/><figcaption>
             <h4>기존 SE 배포 전</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/avi/2-7.png"/><figcaption>
             <h4>다른 SE 그룹으로 변경 후 </h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/avi/2-6.png"/><figcaption>
             <h4>다른 SE 그룹으로 변경 후 </h4>
         </figcaption>
 </figure>
 </p>
 <p>위와 같은 방법으로 동일한 클러스터 내에서 FQDN별로 SE-GROUP 또는 IP 대역을 분리 할 수 있다.</p>
-<h2 id="3-avi-autoscalling">3. AVI AutoScalling</h2>
-<figure><figcaption>
+<h2 id="3-avi-autoscalling" class="heading-element">
+  <a href="#3-avi-autoscalling" class="heading-mark"></a>3. AVI AutoScalling</h2><figure><img src="/images/avi/3-1.png"/><figcaption>
             <h4>AVI Autoscalling 기본 동작 </h4>
         </figcaption>
 </figure>
 
 <p><div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>autoscalling 재 조정값<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>autoscalling 재 조정값<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -594,48 +583,47 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </span></span><span class="line"><span class="cl">auto_rebalance_capacity_per_se <span class="m">200000</span>
 </span></span><span class="line"><span class="cl">max_cpu_usage <span class="m">70</span>
 </span></span><span class="line"><span class="cl">min_cpu_usage <span class="m">30</span>
-</span></span><span class="line"><span class="cl">save
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">save</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
-        </div>
     </div>
-<figure><figcaption>
+  </div>
+<figure><img src="/images/avi/3-2.png"/><figcaption>
             <h4>auto_rebalance 변경 전</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/avi/3-3.png"/><figcaption>
             <h4>auto_rebalance 변경 후</h4>
         </figcaption>
 </figure>
 </p>
-<figure><figcaption>
+<figure><img src="/images/avi/3-4.png"/><figcaption>
             <h4>auto scallingout </h4>
         </figcaption>
 </figure>
 
-<h2 id="4-bgp-연동-후-rhiroute-health-injection">4. BGP 연동 후 Rhi(Route Health Injection)</h2>
-<p>BGP ECMP를 구성 하여 SE를 탄력적으로 확장을 할 수 있습니다.</p>
+<h2 id="4-bgp-연동-후-rhiroute-health-injection" class="heading-element">
+  <a href="#4-bgp-%ec%97%b0%eb%8f%99-%ed%9b%84-rhiroute-health-injection" class="heading-mark"></a>4. BGP 연동 후 Rhi(Route Health Injection)</h2><p>BGP ECMP를 구성 하여 SE를 탄력적으로 확장을 할 수 있습니다.</p>
 <p>물리 스위치에는 ECMP를 구성이 필요.</p>
-<figure><figcaption>
+<figure><img src="/images/avi/4-5.png"/><figcaption>
             <h4>구성</h4>
         </figcaption>
 </figure>
 
 <p>AVI에서 BGP 설정
-<figure><figcaption>
+<figure><img src="/images/avi/4-1.png"/><figcaption>
             <h4>BGP 설정</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/avi/4-2.png"/><figcaption>
             <h4>BGP 설정</h4>
         </figcaption>
 </figure>
 </p>
 <p>SE에 접속 해서 BGP 상태를 확인 한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -666,50 +654,48 @@ ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 �
 </span></span><span class="line"><span class="cl">netcat localhost bgpd
 </span></span><span class="line"><span class="cl"><span class="nb">enable</span>
 </span></span><span class="line"><span class="cl">show run
-</span></span><span class="line"><span class="cl">show bgp summary
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">show bgp summary</span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><figcaption>
+</div><p><figure><img src="/images/avi/4-3.png"/><figcaption>
             <h4>BGP 상태 확인</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/avi/4-4.png"/><figcaption>
             <h4>BGP 상태 확인</h4>
         </figcaption>
 </figure>
 </p>
 <p>RHI Enabled</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/network/enableRhi&#34;,&#34;value&#34;:true}]&#39;</span> 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/network/enableRhi&#34;,&#34;value&#34;:true}]&#39;</span> </span></span></code></pre></td></tr></table>
 </div>
-</div><figure><figcaption>
+</div><figure><img src="/images/avi/4-6.png"/><figcaption>
             <h4>Rhi Enable</h4>
         </figcaption>
 </figure>
 
 <p>스위치에서 라우팅 확인
-<figure><figcaption>
+<figure><img src="/images/avi/4-7.png"/><figcaption>
             <h4>BGP 라우팅</h4>
         </figcaption>
 </figure>
 </p>
-<h2 id="5-gatewayclass">5. GatewayClass</h2>
-<p>GATEWAY를 사용하는 이유는 여러개의 LoadBalancer의 IP를 하나의 IP로 설정하고 Port를 사용하기 위해서다.
+<h2 id="5-gatewayclass" class="heading-element">
+  <a href="#5-gatewayclass" class="heading-mark"></a>5. GatewayClass</h2><p>GATEWAY를 사용하는 이유는 여러개의 LoadBalancer의 IP를 하나의 IP로 설정하고 Port를 사용하기 위해서다.
 SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 공통으로 사용을 할 수 있다.</p>
-<figure><figcaption>
+<figure><img src="/images/avi/5-1.png"/><figcaption>
             <h4>GATEWAYCLASS 연계</h4>
         </figcaption>
 </figure>
 
 <p>구성을 하기 위해서는 클러스터에서 servicesAPI: true 를 True로 변경 필요 및 AutoFQDN와 DefaultDomain이 필요하다.</p>
 <p>위에서 언급한 AVIINFRASETTING을 한 후 GATEWAYCLASS를 생성한다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -736,11 +722,10 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span></span></span><span class="line"><span class="cl"><span class="s">    group: ako.vmware.com
 </span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
 </span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>GATEWAY 생성</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -799,11 +784,10 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
 </span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
 </span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>만약에 LB IP를 지정 하고 싶다면. 아래와 같이 IP를 지정하면 된다.</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -868,32 +852,30 @@ SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 �
 </span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
 </span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
 </span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>테스트</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
-</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span> -l <span class="s1">&#39;ako.vmware.com/gateway-namespace=default&#39;</span>,<span class="s1">&#39;ako.vmware.com/gateway-name=avi-alb-gw&#39;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span> -l <span class="s1">&#39;ako.vmware.com/gateway-namespace=default&#39;</span>,<span class="s1">&#39;ako.vmware.com/gateway-name=avi-alb-gw&#39;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>아래와 같이 동일한 IP로 두개의 SVC를 동일한 IP로 Port(80 , 8080)만 다른게 구성 할 수 있다.
-<figure><figcaption>
+<figure><img src="/images/avi/5-2.png"/><figcaption>
             <h4>VS상태#1</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/avi/5-3.png"/><figcaption>
             <h4>VS상태#2</h4>
         </figcaption>
 </figure>
 
-<figure><figcaption>
+<figure><img src="/images/avi/5-4.png"/><figcaption>
             <h4>VS상태#2</h4>
         </figcaption>
 </figure>
