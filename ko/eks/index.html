@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>The Documentation EKS - Dokyung&#39;s DevOoOps</title><meta name="Description" content="EKS set up"><meta property="og:title" content="The Documentation EKS" />
+<meta property="og:description" content="EKS set up" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huntedhappy.github.io/ko/eks/" /><meta property="og:image" content="https://huntedhappy.github.io/ko/eks/what-is-eks.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-13T14:02:41+09:00" />
+<meta property="article:modified_time" content="2023-09-17T08:19:26+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://huntedhappy.github.io/ko/eks/what-is-eks.png" /><meta name="twitter:title" content="The Documentation EKS"/>
+<meta name="twitter:description" content="EKS set up"/>
+<meta name="application-name" content="Dokyung&#39;s DevOoOps">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/ko/eks/" /><link rel="prev" href="https://huntedhappy.github.io/ko/k8s/" /><link rel="next" href="https://huntedhappy.github.io/ko/openshift/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The Documentation EKS",
+        "inLanguage": "ko",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/huntedhappy.github.io\/ko\/eks\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/huntedhappy.github.io\/ko\/eks\/what-is-eks.png",
+                            "width":  1019 ,
+                            "height":  301 
+                        }],"genre": "posts","keywords": "EKS, k8s, dk, dokyung","wordcount":  340 ,
+        "url": "https:\/\/huntedhappy.github.io\/ko\/eks\/","datePublished": "2022-01-13T14:02:41+09:00","dateModified": "2023-09-17T08:19:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Dokyung"
+            },"description": "EKS set up"
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/ko/posts/"> Posts </a><a class="menu-item" href="/ko/tags/"> Tags </a><a class="menu-item" href="/ko/categories/"> Categories </a><a class="menu-item" href="/ko/categories/documentation/"> Docs </a><a class="menu-item" href="/ko/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="검색">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="지우기">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="언어 변경">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/eks/" selected>Korean</option><option value="/eks/">한국어</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/ko/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="제목이나 내용을 입력..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="검색">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="지우기">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        취소
+                    </a>
+                </div><a class="menu-item" href="/ko/posts/" title="">Posts</a><a class="menu-item" href="/ko/tags/" title="">Tags</a><a class="menu-item" href="/ko/categories/" title="">Categories</a><a class="menu-item" href="/ko/categories/documentation/" title="">Docs</a><a class="menu-item" href="/ko/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy/" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="테마 변경">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="언어 변경">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/ko/eks/" selected>Korean</option><option value="/eks/">한국어</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">목차</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation EKS</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">분류: <a href="/ko/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-13">2022-01-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;340 단어&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;읽는데 약 2분&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/ko/eks/what-is-eks.png"
+        data-srcset="/ko/eks/what-is-eks.png, /ko/eks/what-is-eks.png 1.5x, /ko/eks/what-is-eks.png 2x"
+        data-sizes="auto"
+        alt="/ko/eks/what-is-eks.png"
+        title="EKS set up" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>목차</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-eksamazon-elastic-kubernetes-service">1. EKS(Amazon Elastic Kubernetes Service)?</a>
+      <ul>
+        <li><a href="#11-사전설치">1.1. 사전설치</a></li>
+      </ul>
+    </li>
+    <li><a href="#12-vpc-생성">1.2. VPC 생성</a>
+      <ul>
+        <li><a href="#13-private-key등록">1.3. private key등록</a></li>
+        <li><a href="#14-eks-실행">1.4. EKS 실행</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-csi-efs구성-작성예정">2. CSI EFS구성 (작성예정)</a></li>
+    <li><a href="#iam">IAM</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="1-eksamazon-elastic-kubernetes-service">1. EKS(Amazon Elastic Kubernetes Service)?</h2>
+<p>Kubernetes를 실행하는 데 사용할 수 있는 관리형 서비스이다. 마스터노드, 워커노드를 설치, 작동 및 유지관리를 할 필요 없는 솔루션이다.</p>
+<p>우선 문서가 너무 잘되어 있지만 그래도 나름 예전에 EKS를 테스트 했었던 지라 내가 테스트 했던 방법을 공유하고자 한다.</p>
+<p>참고 문헌 <a href="https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/what-is-eks.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> AWS </a></p>
+<h3 id="11-사전설치">1.1. 사전설치</h3>
+<p>우선 OS의 따라 설치해야 되는 것들이 조금 있다. (chocolatey를 설치한 이유는 chocolatey를 통해 eksctl을 배포 하기 위함)</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>설치 Tool<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Chocolatey 설치 링크 <a href="https://chocolatey.org/install" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> chocolatey </a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Set-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="n">-Scope</span> <span class="k">Process</span> <span class="n">-Force</span><span class="p">;</span> <span class="p">[</span><span class="no">System.Net.ServicePointManager</span><span class="p">]::</span><span class="n">SecurityProtocol</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Net.ServicePointManager</span><span class="p">]::</span><span class="n">SecurityProtocol</span> <span class="o">-bor</span> <span class="mf">3072</span><span class="p">;</span> <span class="nb">iex </span><span class="p">((</span><span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="py">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://community.chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>eksctl 설치 링크 <a href="https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/eksctl.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> AWS eksctl </a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">chocolatey</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">eksctl</span> <span class="nb">aws-iam</span><span class="n">-authenticator</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>kubectl 설치 링크 <a href="https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/install-kubectl.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> AWS kubectl </a></p>
+<p>링크를 보게 되면 버전별로 다운로드 받을 수 있게 되어 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">curl </span><span class="n">-o</span> <span class="n">kubectl</span><span class="p">.</span><span class="py">exe</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="nb">amazon-eks</span><span class="p">.</span><span class="py">s3</span><span class="p">.</span><span class="nb">us-west</span><span class="p">-</span><span class="mf">2</span><span class="p">.</span><span class="py">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="mf">1.21</span><span class="p">.</span><span class="mf">2</span><span class="p">/</span><span class="mf">2021</span><span class="p">-</span><span class="mf">07</span><span class="p">-</span><span class="mf">05</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">windows</span><span class="p">/</span><span class="n">amd64</span><span class="p">/</span><span class="n">kubectl</span><span class="p">.</span><span class="py">exe</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>awscli 설치링크 <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> AWS awscli </a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">msiexec</span><span class="p">.</span><span class="py">exe</span> <span class="p">/</span><span class="n">i</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">awscli</span><span class="p">.</span><span class="py">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">AWSCLIV2</span><span class="p">.</span><span class="py">msi</span>
+</span></span><span class="line"><span class="cl"><span class="n">aws</span> <span class="p">-</span><span class="n">-version</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<h2 id="12-vpc-생성">1.2. VPC 생성</h2>
+<p>CloudFormation을 통해 vpc를 자동으로 생성 해준다. 아래 링크는 현재 최신상태인지 확인이 가능.</p>
+<p>eks vcp cloudformation 최신 상태 확인 링크 <a href="https://docs.aws.amazon.com/eks/latest/userguide/creating-a-vpc.html" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> AWS eks vcp </a></p>
+<p>eks vcp cloudformation 최신 파일 링크 <a href="https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2020-10-29/amazon-eks-vpc-private-subnets.yaml" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> AWS eks vcp download </a></p>
+<p>위에 받은 파일로 cloudformation을 설정 해주면 된다.
+<figure><img src="/images/eks/1-1.png"/><figcaption>
+            <h4>cloud formation 설정#1</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/eks/1-2.png"/><figcaption>
+            <h4>cloud formation 설정#2</h4>
+        </figcaption>
+</figure>
+
+원하는 N/W으로 수정 후 그 이후에는 그냥 NEXT 후 CREATE만 하면 VPC가 구성이 된다.
+<figure><img src="/images/eks/1-3.png"/><figcaption>
+            <h4>cloud formation 설정#3</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/eks/1-4.png"/><figcaption>
+            <h4>cloud formation 설정#4</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/eks/1-5.png"/><figcaption>
+            <h4>cloud formation 설정#5</h4>
+        </figcaption>
+</figure>
+
+완료가 되면 보는 바와 같이 VPC가 생성이 된 것을 확인 할 수 있다.
+<figure><img src="/images/eks/1-6.png"/><figcaption>
+            <h4>VPC 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/eks/1-7.png"/><figcaption>
+            <h4>Route Table 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/eks/1-8.png"/><figcaption>
+            <h4>IGW 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/eks/1-9.png"/><figcaption>
+            <h4>NAT GW 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="13-private-key등록">1.3. private key등록</h3>
+<p>aws에서 ec2에 접속하기 위한 security 키를 sshkeygen으로 publickey 생성
+<figure><img src="/images/eks/1-10.png"/><figcaption>
+            <h4>public key 생성#1</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/eks/1-11.png"/><figcaption>
+            <h4>public key 생성#2</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/eks/1-12.png"/><figcaption>
+            <h4>Notepad로 복사</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="14-eks-실행">1.4. EKS 실행</h3>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>EKS 실행<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>그리고 아래와 같이 명령어를 넣어 준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">eksctl</span> <span class="n">create</span> <span class="n">cluster</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-name</span> <span class="nb">aws-eks</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-region</span> <span class="nb">us-east</span><span class="p">-</span><span class="mf">2</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-nodegroup-name</span> <span class="nb">aws-node</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-node-type</span> <span class="n">t3</span><span class="p">.</span><span class="py">medium</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-nodes</span> <span class="mf">3</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-nodes-min</span> <span class="mf">1</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-nodes-max</span> <span class="mf">4</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-ssh-access</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-ssh-public-key</span> <span class="n">huntedhappy</span><span class="p">.</span><span class="py">pub</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-with-oidc</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl"> <span class="p">-</span><span class="n">-managed</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>구성 EKS 연동 및 확인
+aws eks update-kubeconfig &ndash;name aws-eks</p>
+</div>
+        </div>
+    </div>
+<p>Cloud Formation이 자동으로 돌아간다
+<figure><img src="/images/eks/1-13.png"/><figcaption>
+            <h4>Cloud Formation</h4>
+        </figcaption>
+</figure>
+
+IAM에서 OIDC가 생성 되었는지 확인 한다. OIDC는 CSI를 EFS로 구성 할 떄 필요 하다.
+<figure><img src="/images/eks/1-14.png"/><figcaption>
+            <h4>OIDC 생성 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="2-csi-efs구성-작성예정">2. CSI EFS구성 (작성예정)</h2>
+<h2 id="iam">IAM</h2>
+<p>참고로 IAM은 아래와 같이 구성 하였다.
+<figure><img src="/images/eks/1-15.png"/><figcaption>
+            <h4>IAM</h4>
+        </figcaption>
+</figure>
+</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>수정: 2023-09-17&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/8f9e542c3d9a079137645ebc4858725c24bb6cc0" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 8f9e542c3d9a079137645ebc4858725c24bb6cc0: rebuilding site Sun Sep 17 08:19:26     2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8f9e542</a></span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/ko/eks/index.md" target="_blank">마크다운 읽기</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="공유하기 Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/ko/eks/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="공유하기 Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/ko/eks/" data-title="The Documentation EKS" data-description="EKS set up"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/ko/tags/eks/">EKS</a>,&nbsp;<a href="/ko/tags/k8s/">k8s</a>,&nbsp;<a href="/ko/tags/dk/">dk</a>,&nbsp;<a href="/ko/tags/dokyung/">dokyung</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">뒤로</a></span>&nbsp;|&nbsp;<span><a href="/ko/">홈</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ko/k8s/" class="prev" rel="prev" title="The Documentation K8s"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation K8s</a>
+            <a href="/ko/openshift/" class="next" rel="next" title="The Documentation Openshift">The Documentation Openshift<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="맨 위로">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="댓글 보기">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"복사하기","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.ko","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"검색 결과 없음","snippetLength":50,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '216068312', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+</html>

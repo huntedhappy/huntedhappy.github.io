@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>The Documentation vSphere Tanzu with AVI Load Balancer - Dokyung&#39;s DevOoOps</title><meta name="Description" content="VMware Tanzu with AVI"><meta property="og:title" content="The Documentation vSphere Tanzu with AVI Load Balancer" />
+<meta property="og:description" content="VMware Tanzu with AVI" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huntedhappy.github.io/avi/" /><meta property="og:image" content="https://huntedhappy.github.io/avi/avi.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-05T21:51:21+09:00" />
+<meta property="article:modified_time" content="2024-02-15T01:46:09+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://huntedhappy.github.io/avi/avi.png" /><meta name="twitter:title" content="The Documentation vSphere Tanzu with AVI Load Balancer"/>
+<meta name="twitter:description" content="VMware Tanzu with AVI"/>
+<meta name="application-name" content="Dokyung&#39;s DevOoOps">
+<meta name="apple-mobile-web-app-title" content="Dokyung&#39;s DevOoOps"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://huntedhappy.github.io/avi/" /><link rel="prev" href="https://huntedhappy.github.io/vxrail/" /><link rel="next" href="https://huntedhappy.github.io/networks/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The Documentation vSphere Tanzu with AVI Load Balancer",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/huntedhappy.github.io\/avi\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/huntedhappy.github.io\/avi\/avi.png",
+                            "width":  914 ,
+                            "height":  328 
+                        }],"genre": "posts","keywords": "tanzu, avi, tanzu integration avi, AVIinfrasetting, ClusterIP, AVI BGP, AVI AutoScalling, NodePort, NodePortLocal, dk, dokyung, avi rhi","wordcount":  1280 ,
+        "url": "https:\/\/huntedhappy.github.io\/avi\/","datePublished": "2022-04-05T21:51:21+09:00","dateModified": "2024-02-15T01:46:09+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Dokyung"
+            },"description": "VMware Tanzu with AVI"
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/categories/documentation/"> Docs </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/ko/avi/">Korean</option><option value="/avi/" selected>한국어</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Dokyung&#39;s DevOoOps"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/categories/documentation/" title="">Docs</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/huntedhappy" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/ko/avi/">Korean</option><option value="/avi/" selected>한국어</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The Documentation vSphere Tanzu with AVI Load Balancer</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://huntedhappy.tistory.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dokyung</a></span>&nbsp;<span class="post-category">included in <a href="/categories/documentation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Documentation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-04-05">2022-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1280 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/avi/avi.png"
+        data-srcset="/avi/avi.png, /avi/avi.png 1.5x, /avi/avi.png 2x"
+        data-sizes="auto"
+        alt="/avi/avi.png"
+        title="VMware Tanzu with AVI" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-tanzu에서-cluster-servicetype-변경">1. TANZU에서 Cluster ServiceType 변경</a></li>
+    <li><a href="#2-avi-infra-settings">2. AVI Infra Settings</a></li>
+    <li><a href="#3-avi-autoscalling">3. AVI AutoScalling</a></li>
+    <li><a href="#4-bgp-연동-후-rhiroute-health-injection">4. BGP 연동 후 Rhi(Route Health Injection)</a></li>
+    <li><a href="#5-gatewayclass">5. GatewayClass</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>AVI에서 제공하는 AKO인 INGRESS Controller를 사용 하는 방법 제공</p>
+<h2 id="1-tanzu에서-cluster-servicetype-변경">1. TANZU에서 Cluster ServiceType 변경</h2>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>serviceType<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>ManageMent Cluster로 Context 변경</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### NodePort 변경</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: AKODeploymentConfig
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: nodeport01
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  adminCredentialRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-credentials
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  certificateAuthorityRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-ca
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  cloudName: Default-Cloud
+</span></span></span><span class="line"><span class="cl"><span class="s">  clusterSelector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      ako-l7-nodeport-01: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: avi.tkg.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  dataNetwork:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">  extraConfigs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cniPlugin: antrea
+</span></span></span><span class="line"><span class="cl"><span class="s">    disableStaticRouteSync: false
+</span></span></span><span class="line"><span class="cl"><span class="s">    l4Config:
+</span></span></span><span class="line"><span class="cl"><span class="s">      autoFQDN: disabled
+</span></span></span><span class="line"><span class="cl"><span class="s">    ingress:
+</span></span></span><span class="line"><span class="cl"><span class="s">      defaultIngressController: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      disableIngressClass: false  
+</span></span></span><span class="line"><span class="cl"><span class="s">      nodeNetworkList:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - cidrs:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">          networkName: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePort
+</span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL
+</span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### ClusterIP 변경</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: AKODeploymentConfig
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: clusterip01
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  adminCredentialRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-credentials
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  certificateAuthorityRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-ca
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  cloudName: Default-Cloud
+</span></span></span><span class="line"><span class="cl"><span class="s">  clusterSelector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      ako-l7-clusterip-01: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: avi.tkg.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  dataNetwork:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">  extraConfigs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cniPlugin: antrea
+</span></span></span><span class="line"><span class="cl"><span class="s">    disableStaticRouteSync: false                               # required
+</span></span></span><span class="line"><span class="cl"><span class="s">    l4Config:
+</span></span></span><span class="line"><span class="cl"><span class="s">      autoFQDN: disabled
+</span></span></span><span class="line"><span class="cl"><span class="s">    ingress:
+</span></span></span><span class="line"><span class="cl"><span class="s">      defaultIngressController: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      disableIngressClass: false                                # required
+</span></span></span><span class="line"><span class="cl"><span class="s">      nodeNetworkList:                                          # required
+</span></span></span><span class="line"><span class="cl"><span class="s">        - cidrs:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">          networkName: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: ClusterIP                                    # required
+</span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       # required
+</span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### NodePortLocal 변경</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.tkg.tanzu.vmware.com/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: AKODeploymentConfig
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: npl-enabled
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  adminCredentialRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-credentials
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  certificateAuthorityRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: avi-controller-ca
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: tkg-system-networking
+</span></span></span><span class="line"><span class="cl"><span class="s">  cloudName: Default-Cloud
+</span></span></span><span class="line"><span class="cl"><span class="s">  clusterSelector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      npl-enabled: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  controlPlaneNetwork:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: avi.tkg.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  dataNetwork:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cidr: 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">  extraConfigs:
+</span></span></span><span class="line"><span class="cl"><span class="s">    cniPlugin: antrea
+</span></span></span><span class="line"><span class="cl"><span class="s">    disableStaticRouteSync: false                               # required
+</span></span></span><span class="line"><span class="cl"><span class="s">    l4Config:
+</span></span></span><span class="line"><span class="cl"><span class="s">      autoFQDN: disabled
+</span></span></span><span class="line"><span class="cl"><span class="s">    ingress:
+</span></span></span><span class="line"><span class="cl"><span class="s">      defaultIngressController: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      disableIngressClass: false                               
+</span></span></span><span class="line"><span class="cl"><span class="s">      nodeNetworkList:                                          
+</span></span></span><span class="line"><span class="cl"><span class="s">        - cidrs:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - 10.253.127.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">          networkName: LS_TKGM_10.253.127.x
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceType: NodePortLocal                                     # required
+</span></span></span><span class="line"><span class="cl"><span class="s">      shardVSSize: SMALL                                       
+</span></span></span><span class="line"><span class="cl"><span class="s">  serviceEngineGroup: Default-Group
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p>NodePort 테스트</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>Management Cluster<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-nodeport-01<span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>TKC<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>NodePort --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/avi/1-1.png"/><figcaption>
+            <h4>접속 화면</h4>
+        </figcaption>
+</figure>
+
+<p>NodePort로 구성이 되어 있기 때문에 아래와 같이 NodeIP와 30000번대의 Port로 서버풀이 지정되는 것을 확인 할 수 있다.
+<figure><img src="/images/avi/1-2.png"/><figcaption>
+            <h4>AVI VS 상태 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<p>ClusterIP 테스트</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>Management Cluster<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get cluster --show-labels
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl label cluster tkgm01-tkc-dev01 ako-l7-clusterip-01<span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl config use-context <span class="o">{</span>TKC<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get cm avi-k8s-config -n avi-system -o <span class="nv">jsonpath</span><span class="o">={</span>.data.serviceType<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>avi-lb --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img src="/images/avi/1-3.png"/><figcaption>
+            <h4>ServiceType 변경 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/1-4.png"/><figcaption>
+            <h4>AVI Routing 확인</h4>
+        </figcaption>
+</figure>
+
+ClusterIP로 구성이 되어 있기 때문에 아래와 같이 실제 Pod와 실제 Port로 서버풀이 지정되는 것을 확인 할 수 있다.
+<figure><img src="/images/avi/1-5.png"/><figcaption>
+            <h4>AVI VS 상태 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="2-avi-infra-settings">2. AVI Infra Settings</h2>
+<p>만약에 하나의 클러스터에서 VS별 SE-GROUP을 분리 하거나, 또는 VS의 IP 대역을 분리 하고 싶을 경우 AVIINFRASETTING을 사용하여 구성을 할 수 있다.
+<figure><img src="/images/avi/2-1.png"/><figcaption>
+            <h4>구성</h4>
+        </figcaption>
+</figure>
+</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: ako.vmware.com/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: AviInfraSetting
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: other-infra
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  seGroup:
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: Default-Group
+</span></span></span><span class="line"><span class="cl"><span class="s">  network:
+</span></span></span><span class="line"><span class="cl"><span class="s">    vipNetworks:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - networkName: pg-dk-10.253.107.x
+</span></span></span><span class="line"><span class="cl"><span class="s">        cidr: 10.253.107.0/24
+</span></span></span><span class="line"><span class="cl"><span class="s">    enableRhi: false
+</span></span></span><span class="line"><span class="cl"><span class="s">  l7Settings:
+</span></span></span><span class="line"><span class="cl"><span class="s">    shardSize: MEDIUM
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: IngressClass
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: other-infra
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: ako.vmware.com/avi-lb
+</span></span></span><span class="line"><span class="cl"><span class="s">  parameters:
+</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: ako.vmware.com
+</span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>테스트</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>ClusterIP --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create ingress hello --class<span class="o">=</span>other-infra --rule<span class="o">=</span><span class="s2">&#34;hello.avi.tkg.io/=hello:8080&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img src="/images/avi/2-3.png"/><figcaption>
+            <h4>VS IP 변경 전</h4>
+        </figcaption>
+</figure>
+
+아래와 같이 VS IP가 변경 된 것을 확인 할 수 있다.
+<figure><img src="/images/avi/2-2.png"/><figcaption>
+            <h4>VS IP 변경 후</h4>
+        </figcaption>
+</figure>
+</p>
+<p>기존의 하나의 SE그룹에 모두 VS가 구성이 되어 있다.
+<figure><img src="/images/avi/2-4.png"/><figcaption>
+            <h4>SE Group 생성</h4>
+        </figcaption>
+</figure>
+</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## SEGROUP을 변경</span>
+</span></span><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/seGroup/name&#34;,&#34;value&#34;:&#34;tkgm01&#34;}]&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl patch ing hello --patch <span class="s1">&#39;{&#34;spec&#34;: {&#34;ingressClassName&#34;: &#34;other-infra&#34;}}&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>현재는 SE가 기존의
+<figure><img src="/images/avi/2-5.png"/><figcaption>
+            <h4>기존 SE 배포 전</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/2-7.png"/><figcaption>
+            <h4>다른 SE 그룹으로 변경 후 </h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/2-6.png"/><figcaption>
+            <h4>다른 SE 그룹으로 변경 후 </h4>
+        </figcaption>
+</figure>
+</p>
+<p>위와 같은 방법으로 동일한 클러스터 내에서 FQDN별로 SE-GROUP 또는 IP 대역을 분리 할 수 있다.</p>
+<h2 id="3-avi-autoscalling">3. AVI AutoScalling</h2>
+<figure><img src="/images/avi/3-1.png"/><figcaption>
+            <h4>AVI Autoscalling 기본 동작 </h4>
+        </figcaption>
+</figure>
+
+<p><div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>autoscalling 재 조정값<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## AVI Controller SSH접속 </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">switchto tenant admin
+</span></span><span class="line"><span class="cl">switchto cloud Default-Cloud
+</span></span><span class="line"><span class="cl">auto_rebalance
+</span></span><span class="line"><span class="cl">save
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">configure serviceenginegroup Default-Group
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">auto_rebalance_interval interval-value 
+</span></span><span class="line"><span class="cl">auto_rebalance_criteria option
+</span></span><span class="line"><span class="cl">auto_rebalance_capacity_per_se integer-value
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">예시: auto_rebalance_interval <span class="m">300</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">auto_rebalance_criteria 의 옵션 값은 아래와 같음
+</span></span><span class="line"><span class="cl">se_auto_rebalance_cpu
+</span></span><span class="line"><span class="cl">se_auto_rebalance_mbps
+</span></span><span class="line"><span class="cl">se_auto_rebalance_open_conns
+</span></span><span class="line"><span class="cl">se_auto_rebalance_pps
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">예시: auto_rebalance_capacity_per_se <span class="m">200000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">max_cpu_usage value
+</span></span><span class="line"><span class="cl">min_cpu_usage value
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 종합 </span>
+</span></span><span class="line"><span class="cl">switchto tenant Avi
+</span></span><span class="line"><span class="cl">switchto cloud azure
+</span></span><span class="line"><span class="cl">configure serviceenginegroup Default-Group
+</span></span><span class="line"><span class="cl">auto_rebalance_interval <span class="m">300</span>
+</span></span><span class="line"><span class="cl">auto_rebalance_criteria se_auto_rebalance_pps
+</span></span><span class="line"><span class="cl">auto_rebalance_capacity_per_se <span class="m">200000</span>
+</span></span><span class="line"><span class="cl">max_cpu_usage <span class="m">70</span>
+</span></span><span class="line"><span class="cl">min_cpu_usage <span class="m">30</span>
+</span></span><span class="line"><span class="cl">save
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<figure><img src="/images/avi/3-2.png"/><figcaption>
+            <h4>auto_rebalance 변경 전</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/3-3.png"/><figcaption>
+            <h4>auto_rebalance 변경 후</h4>
+        </figcaption>
+</figure>
+</p>
+<figure><img src="/images/avi/3-4.png"/><figcaption>
+            <h4>auto scallingout </h4>
+        </figcaption>
+</figure>
+
+<h2 id="4-bgp-연동-후-rhiroute-health-injection">4. BGP 연동 후 Rhi(Route Health Injection)</h2>
+<p>BGP ECMP를 구성 하여 SE를 탄력적으로 확장을 할 수 있습니다.</p>
+<p>물리 스위치에는 ECMP를 구성이 필요.</p>
+<figure><img src="/images/avi/4-5.png"/><figcaption>
+            <h4>구성</h4>
+        </figcaption>
+</figure>
+
+<p>AVI에서 BGP 설정
+<figure><img src="/images/avi/4-1.png"/><figcaption>
+            <h4>BGP 설정</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/4-2.png"/><figcaption>
+            <h4>BGP 설정</h4>
+        </figcaption>
+</figure>
+</p>
+<p>SE에 접속 해서 BGP 상태를 확인 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## AVI Controller SSH 접속</span>
+</span></span><span class="line"><span class="cl">shell
+</span></span><span class="line"><span class="cl">admin /  <span class="o">{</span>password<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 서비스 엔진 접속</span>
+</span></span><span class="line"><span class="cl">attach serviceengine tkcdevAvi-se-jpjbe
+</span></span><span class="line"><span class="cl">ip netns
+</span></span><span class="line"><span class="cl"><span class="c1">## 서비스 엔진 bash 접속</span>
+</span></span><span class="line"><span class="cl">sudo ip netns <span class="nb">exec</span> avi_ns1 bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## BGP 확인</span>
+</span></span><span class="line"><span class="cl">netcat localhost bgpd
+</span></span><span class="line"><span class="cl"><span class="nb">enable</span>
+</span></span><span class="line"><span class="cl">show run
+</span></span><span class="line"><span class="cl">show bgp summary
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img src="/images/avi/4-3.png"/><figcaption>
+            <h4>BGP 상태 확인</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/4-4.png"/><figcaption>
+            <h4>BGP 상태 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<p>RHI Enabled</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch aviinfrasettings other-infra --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/spec/network/enableRhi&#34;,&#34;value&#34;:true}]&#39;</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/images/avi/4-6.png"/><figcaption>
+            <h4>Rhi Enable</h4>
+        </figcaption>
+</figure>
+
+<p>스위치에서 라우팅 확인
+<figure><img src="/images/avi/4-7.png"/><figcaption>
+            <h4>BGP 라우팅</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="5-gatewayclass">5. GatewayClass</h2>
+<p>GATEWAY를 사용하는 이유는 여러개의 LoadBalancer의 IP를 하나의 IP로 설정하고 Port를 사용하기 위해서다.
+SVC를 생성하면 생성하는 만큼 IP가 생성이 되기때문에 IP를 공통으로 사용을 할 수 있다.</p>
+<figure><img src="/images/avi/5-1.png"/><figcaption>
+            <h4>GATEWAYCLASS 연계</h4>
+        </figcaption>
+</figure>
+
+<p>구성을 하기 위해서는 클러스터에서 servicesAPI: true 를 True로 변경 필요 및 AutoFQDN와 DefaultDomain이 필요하다.</p>
+<p>위에서 언급한 AVIINFRASETTING을 한 후 GATEWAYCLASS를 생성한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: GatewayClass
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: critical-gwc
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  controller: ako.vmware.com/avi-lb
+</span></span></span><span class="line"><span class="cl"><span class="s">  parametersRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">    group: ako.vmware.com
+</span></span></span><span class="line"><span class="cl"><span class="s">    kind: AviInfraSetting
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: other-infra
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>GATEWAY 생성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Gateway
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: default
+</span></span></span><span class="line"><span class="cl"><span class="s">spec: 
+</span></span></span><span class="line"><span class="cl"><span class="s">  gatewayClassName: critical-gwc    
+</span></span></span><span class="line"><span class="cl"><span class="s">  listeners: 
+</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
+</span></span></span><span class="line"><span class="cl"><span class="s">    port: 8080 
+</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
+</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
+</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
+</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
+</span></span></span><span class="line"><span class="cl"><span class="s">    port: 80 
+</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
+</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
+</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>만약에 LB IP를 지정 하고 싶다면. 아래와 같이 IP를 지정하면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: networking.x-k8s.io/v1alpha1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Gateway
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: default
+</span></span></span><span class="line"><span class="cl"><span class="s">spec: 
+</span></span></span><span class="line"><span class="cl"><span class="s">  gatewayClassName: critical-gwc
+</span></span></span><span class="line"><span class="cl"><span class="s">  addresses:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - type: IPAddress
+</span></span></span><span class="line"><span class="cl"><span class="s">    value: 10.253.107.203
+</span></span></span><span class="line"><span class="cl"><span class="s">  listeners: 
+</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
+</span></span></span><span class="line"><span class="cl"><span class="s">    port: 8080 
+</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
+</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
+</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
+</span></span></span><span class="line"><span class="cl"><span class="s">  - protocol: TCP 
+</span></span></span><span class="line"><span class="cl"><span class="s">    port: 80 
+</span></span></span><span class="line"><span class="cl"><span class="s">    routes: 
+</span></span></span><span class="line"><span class="cl"><span class="s">      selector: 
+</span></span></span><span class="line"><span class="cl"><span class="s">       matchLabels: 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-namespace: default 
+</span></span></span><span class="line"><span class="cl"><span class="s">        ako.vmware.com/gateway-name: avi-alb-gw
+</span></span></span><span class="line"><span class="cl"><span class="s">      group: v1 
+</span></span></span><span class="line"><span class="cl"><span class="s">      kind: Service
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>테스트</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create deploy hello --image<span class="o">=</span>paulbouwer/hello-kubernetes:1.7 --replicas<span class="o">=</span><span class="m">3</span> --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">kubectl expose deployment hello --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">8080</span> -l <span class="s1">&#39;ako.vmware.com/gateway-namespace=default&#39;</span>,<span class="s1">&#39;ako.vmware.com/gateway-name=avi-alb-gw&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>아래와 같이 동일한 IP로 두개의 SVC를 동일한 IP로 Port(80 , 8080)만 다른게 구성 할 수 있다.
+<figure><img src="/images/avi/5-2.png"/><figcaption>
+            <h4>VS상태#1</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/5-3.png"/><figcaption>
+            <h4>VS상태#2</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/images/avi/5-4.png"/><figcaption>
+            <h4>VS상태#2</h4>
+        </figcaption>
+</figure>
+</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-02-15&nbsp;<a class="git-hash" href="https://github.com/huntedhappy/huntedhappy.github.io/commit/4357013f0c26ed3be4b1a0b7ba32454eac7de72c" target="_blank" title="commit by huntedhappy(huntedhappy@gmail.com) 4357013f0c26ed3be4b1a0b7ba32454eac7de72c: rebuilding site Thu Feb 15 01:46:09     2024">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>4357013</a></span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/avi/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://huntedhappy.github.io/avi/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://huntedhappy.github.io/avi/" data-title="The Documentation vSphere Tanzu with AVI Load Balancer" data-description="VMware Tanzu with AVI"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/tanzu/">tanzu</a>,&nbsp;<a href="/tags/avi/">avi</a>,&nbsp;<a href="/tags/tanzu-integration-avi/">tanzu integration avi</a>,&nbsp;<a href="/tags/aviinfrasetting/">AVIinfrasetting</a>,&nbsp;<a href="/tags/clusterip/">ClusterIP</a>,&nbsp;<a href="/tags/avi-bgp/">AVI BGP</a>,&nbsp;<a href="/tags/avi-autoscalling/">AVI AutoScalling</a>,&nbsp;<a href="/tags/nodeport/">NodePort</a>,&nbsp;<a href="/tags/nodeportlocal/">NodePortLocal</a>,&nbsp;<a href="/tags/dk/">dk</a>,&nbsp;<a href="/tags/dokyung/">dokyung</a>,&nbsp;<a href="/tags/avi-rhi/">avi rhi</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vxrail/" class="prev" rel="prev" title="The Documentation VxRail"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The Documentation VxRail</a>
+            <a href="/networks/" class="next" rel="next" title="The Documentation Networks">The Documentation Networks<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://huntedhappy.tistory.com" target="_blank">Dokyung</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comments","lightTheme":"github-light","repo":"huntedhappy/comments"}},"data":{"id-1":"Dokyung's DevOoOps","id-2":"Dokyung's DevOoOps"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.en","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '216068312', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=216068312" async></script></body>
+</html>

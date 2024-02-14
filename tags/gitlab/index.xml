@@ -1,0 +1,686 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>gitLab - Tag - Dokyung&#39;s DevOoOps</title>
+        <link>https://huntedhappy.github.io/tags/gitlab/</link>
+        <description>gitLab - Tag - Dokyung&#39;s DevOoOps</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/gitlab/" rel="self" type="application/rss+xml" /><item>
+    <title>The Documentation GitLab</title>
+    <link>https://huntedhappy.github.io/git/</link>
+    <pubDate>Wed, 14 Feb 2024 22:43:06 &#43;0900</pubDate>
+    <author>Dokyung</author>
+    <guid>https://huntedhappy.github.io/git/</guid>
+    <description><![CDATA[<h2 id="1-gitlab-접속-유저별-아키텍쳐">1. GitLab 접속 유저별 아키텍쳐</h2>
+<p>GitLab은 1000명 2000명 3000명 4000명 5000명 10,000명 25,000명 50,000명 구성을 제공하고 있다. 여기서는 2000명정도 유저가 있을 경우 GIT을 배포 하는 방법에 대해서 설명하고자 한다.</p>
+<p>2000 유저 구조에서는 고가용성을 제공하고 있지 않기 때문에 모든 Components에 대해서 고가용성을 가져가고 싶다면 3000 유저 이상의 구조로 가져가면 좋을거 같다.
+그래도 고가용성이 필요하고 3000 유저의 아키텍쳐가 부담이라면 <a href="https://docs.gitlab.com/ee/administration/reference_architectures/3k_users.html#supported-modifications-for-lower-user-counts-ha" target="_blank" rel="noopener noreffer ">3K 아키텍처</a>를 축소된 고가용성으로 구성 할 수 있다.</p>
+<p>여기서는 2000 유저의 대한 GitLab Install을 설정 할 예정이다.</p>
+<p>구성도는 GitLab에서 아래와 같이 제공 하고 있다.</p>
+<figure><figcaption>
+            <h4>구성도</h4>
+        </figcaption>
+</figure>
+
+<blockquote>
+<ul>
+<li>Target Load: API: 40 RPS, Web: 4 RPS, Git (Pull): 4 RPS, Git (Push): 1 RPS</li>
+<li>High Availability: No. For a highly-available environment, you can follow a modified 3K reference architecture.</li>
+<li>Estimated Costs: See cost table</li>
+<li>Cloud Native Hybrid: Yes</li>
+<li>Unsure which Reference Architecture to use? Go to this guide for more info.</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th style="text-align:center">Nodes</th>
+<th>Configuration</th>
+<th>GCP</th>
+<th>AWS</th>
+<th>AZURE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Load balancer3</td>
+<td style="text-align:center">1</td>
+<td>2 vCPU, 1.8 GB memory</td>
+<td>n1-highcpu-2</td>
+<td>c5.large</td>
+<td>F2s v2</td>
+</tr>
+<tr>
+<td>PostgreSQL1</td>
+<td style="text-align:center">1</td>
+<td>2 vCPU, 7.5 GB memory</td>
+<td>n1-standard-2</td>
+<td>m5.large</td>
+<td>D2s v3</td>
+</tr>
+<tr>
+<td>Redis2</td>
+<td style="text-align:center">1</td>
+<td>1 vCPU, 3.75 GB memory</td>
+<td>n1-standard-1</td>
+<td>m5.large</td>
+<td>D2s v3</td>
+</tr>
+<tr>
+<td>Gitaly5</td>
+<td style="text-align:center">1</td>
+<td>4 vCPU, 15 GB memory5</td>
+<td>n1-standard-4</td>
+<td>m5.xlarge</td>
+<td>D4s v3</td>
+</tr>
+<tr>
+<td>Sidekiq6</td>
+<td style="text-align:center">1</td>
+<td>4 vCPU, 15 GB memory</td>
+<td>n1-standard-4</td>
+<td>m5.xlarge</td>
+<td>D4s v3</td>
+</tr>
+<tr>
+<td>GitLab Rails6</td>
+<td style="text-align:center">2</td>
+<td>8 vCPU, 7.2 GB memory</td>
+<td>n1-highcpu-8</td>
+<td>c5.2xlarge</td>
+<td>F8s v2</td>
+</tr>
+<tr>
+<td>Monitoring node</td>
+<td style="text-align:center">1</td>
+<td>2 vCPU, 1.8 GB memory</td>
+<td>n1-highcpu-2</td>
+<td>c5.large</td>
+<td>F2s v2</td>
+</tr>
+<tr>
+<td>Object storage4</td>
+<td style="text-align:center">-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<figure><figcaption>
+            <h4>FLOW</h4>
+        </figcaption>
+</figure>
+
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th style="text-align:center">Platform</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Load balancer3</td>
+<td style="text-align:center">AVI</td>
+<td>AVI Clustering</td>
+</tr>
+<tr>
+<td>PostgreSQL1</td>
+<td style="text-align:center">UBUNTU</td>
+<td>10.253.126.123</td>
+</tr>
+<tr>
+<td>Redis2</td>
+<td style="text-align:center">UBUNTU</td>
+<td>10.253.126.120</td>
+</tr>
+<tr>
+<td>Gitaly5</td>
+<td style="text-align:center">UBUNTU</td>
+<td>10.253.126.129</td>
+</tr>
+<tr>
+<td>Sidekiq6</td>
+<td style="text-align:center">UBUNTU</td>
+<td>10.253.126.132,10.253.126.133</td>
+</tr>
+<tr>
+<td>GitLab Rails6</td>
+<td style="text-align:center">UBUNTU</td>
+<td>10.253.126.132,10.253.126.133</td>
+</tr>
+<tr>
+<td>Object storage4</td>
+<td style="text-align:center">MINIO(UBUNTU)</td>
+<td>MINIO Clustring</td>
+</tr>
+</tbody>
+</table>
+<p>위와 같이 설정.</p>
+<ul>
+<li>
+<h4 id="postgresql을-아래와-같이-설정-한다">POSTGRESQL을 아래와 같이 설정 한다.</h4>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## postgresql에 사용할 패스워드를 hsah로 생성 한다.</span>
+</span></span><span class="line"><span class="cl">sudo gitlab-ctl pg-password-md5 gitlab
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Enter password:
+</span></span><span class="line"><span class="cl">Confirm password:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 생성된 HASH값</span>
+</span></span><span class="line"><span class="cl">b7a289c0600988fe8e709dd2887e4d37
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* 아래 파일을 수정한다.
+</span></span><span class="line"><span class="cl">vim /etc/gitlab/gitlab.rb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Disable all components except PostgreSQL related ones</span>
+</span></span><span class="line"><span class="cl">roles<span class="o">([</span><span class="s1">&#39;postgres_role&#39;</span><span class="o">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set the network addresses that the exporters used for monitoring will listen on</span>
+</span></span><span class="line"><span class="cl">node_exporter<span class="o">[</span><span class="s1">&#39;listen_address&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0:9100&#39;</span>
+</span></span><span class="line"><span class="cl">postgres_exporter<span class="o">[</span><span class="s1">&#39;listen_address&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0:9187&#39;</span>
+</span></span><span class="line"><span class="cl">postgres_exporter<span class="o">[</span><span class="s1">&#39;dbname&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;gitlabhq_production&#39;</span>
+</span></span><span class="line"><span class="cl">postgres_exporter<span class="o">[</span><span class="s1">&#39;password&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;b7a289c0600988fe8e709dd2887e4d37&#39;</span> <span class="c1">## &lt;&lt; ADD</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set the PostgreSQL address and port</span>
+</span></span><span class="line"><span class="cl">postgresql<span class="o">[</span><span class="s1">&#39;listen_address&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0&#39;</span>
+</span></span><span class="line"><span class="cl">postgresql<span class="o">[</span><span class="s1">&#39;port&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">5432</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Replace POSTGRESQL_PASSWORD_HASH with a generated md5 value</span>
+</span></span><span class="line"><span class="cl">postgresql<span class="o">[</span><span class="s1">&#39;sql_user_password&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;Pb7a289c0600988fe8e709dd2887e4d37&#39;</span> <span class="c1">## &lt;&lt; ADD</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Replace APPLICATION_SERVER_IP_BLOCK with the CIDR address of the application node</span>
+</span></span><span class="line"><span class="cl">postgresql<span class="o">[</span><span class="s1">&#39;trust_auth_cidr_addresses&#39;</span><span class="o">]</span> <span class="o">=</span> %w<span class="o">(</span>127.0.0.1/32 10.253.126.0/24<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Prevent database migrations from running on upgrade automatically</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;auto_migrate&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 저장 완료 후 아래 명령어를 통해 GitLab을 재 설정 해준다.</span>
+</span></span><span class="line"><span class="cl">gitlab-ctl reconfigure
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 완료 후 DB 테이블을 확인 할 수 있다.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 또는 아래 명령어를 입력 하면</span>
+</span></span><span class="line"><span class="cl">sudo gitlab-rake gitlab:db:decomposition:connection_status
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 아래와 같이 나오는 것을 확인 할 수 있다.</span>
+</span></span><span class="line"><span class="cl">GitLab database already running on two connections
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<h4 id="redis을-아래와-같이-설정-한다">REDIS을 아래와 같이 설정 한다.</h4>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* 아래 파일을 수정한다.
+</span></span><span class="line"><span class="cl">vim /etc/gitlab/gitlab.rb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Enable Redis</span>
+</span></span><span class="line"><span class="cl">roles<span class="o">([</span><span class="s2">&#34;redis_master_role&#34;</span><span class="o">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">redis<span class="o">[</span><span class="s1">&#39;bind&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0&#39;</span>
+</span></span><span class="line"><span class="cl">redis<span class="o">[</span><span class="s1">&#39;port&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">6379</span>
+</span></span><span class="line"><span class="cl">redis<span class="o">[</span><span class="s1">&#39;password&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;SECRET_PASSWORD_HERE&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set the network addresses that the exporters used for monitoring will listen on</span>
+</span></span><span class="line"><span class="cl">node_exporter<span class="o">[</span><span class="s1">&#39;listen_address&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0:9100&#39;</span>
+</span></span><span class="line"><span class="cl">redis_exporter<span class="o">[</span><span class="s1">&#39;listen_address&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0:9121&#39;</span>
+</span></span><span class="line"><span class="cl">redis_exporter<span class="o">[</span><span class="s1">&#39;flags&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;redis.addr&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;redis://0.0.0.0:6379&#39;</span>,
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;redis.password&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;SECRET_PASSWORD_HERE&#39;</span>,
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>REDIS 상태 확인</h4>
+        </figcaption>
+</figure>
+
+<h4 id="gitaly는-레파지토리에-rpc기반의-빠른-읽기쓰기를-가능하게-해준다">Gitaly는 레파지토리에 RPC기반의 빠른 읽기/쓰기를 가능하게 해준다.</h4>
+<ul>
+<li>
+<h4 id="gitaly을-아래와-같이-설정-한다">Gitaly을 아래와 같이 설정 한다.</h4>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># Avoid running unnecessary services on the Gitaly server</span>
+</span></span><span class="line"><span class="cl">postgresql<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">redis<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">nginx<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">puma<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">sidekiq<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">gitlab_workhorse<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">prometheus<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">alertmanager<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">gitlab_exporter<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">gitlab_kas<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Prevent database migrations from running on upgrade automatically</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;auto_migrate&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Configure the gitlab-shell API callback URL. Without this, `git push` will</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># fail. This can be your &#39;front door&#39; GitLab URL or an internal load</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># balancer.</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;internal_api_url&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;https://gitlab.huntedhappy.kro.kr&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Gitaly</span>
+</span></span><span class="line"><span class="cl">gitaly<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># The secret token is used for authentication callbacks from Gitaly to the GitLab internal API.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># This must match the respective value in GitLab Rails application setup.</span>
+</span></span><span class="line"><span class="cl">gitlab_shell<span class="o">[</span><span class="s1">&#39;secret_token&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;shellsecret&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set the network addresses that the exporters used for monitoring will listen on</span>
+</span></span><span class="line"><span class="cl">node_exporter<span class="o">[</span><span class="s1">&#39;listen_address&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0:9100&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">gitaly<span class="o">[</span><span class="s1">&#39;configuration&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># ...</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># Make Gitaly accept connections on all network interfaces. You must use</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># firewalls to restrict access to this address/port.</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># Comment out following line if you only want to support TLS connections</span>
+</span></span><span class="line"><span class="cl">   listen_addr: <span class="s1">&#39;0.0.0.0:8075&#39;</span>,
+</span></span><span class="line"><span class="cl">   prometheus_listen_addr: <span class="s1">&#39;0.0.0.0:9236&#39;</span>,
+</span></span><span class="line"><span class="cl">   <span class="c1"># Gitaly Auth Token</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># Should be the same as praefect_internal_token</span>
+</span></span><span class="line"><span class="cl">   auth: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># ...</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># Gitaly&#39;s authentication token is used to authenticate gRPC requests to Gitaly. This must match</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># the respective value in GitLab Rails application setup.</span>
+</span></span><span class="line"><span class="cl">      token: <span class="s1">&#39;gitalysecret&#39;</span>,
+</span></span><span class="line"><span class="cl">   <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">   <span class="c1"># Gitaly Pack-objects cache</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># Recommended to be enabled for improved performance but can notably increase disk I/O</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># Refer to https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#pack-objects-cache for more info</span>
+</span></span><span class="line"><span class="cl">   pack_objects_cache: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># ...</span>
+</span></span><span class="line"><span class="cl">      enabled: true,
+</span></span><span class="line"><span class="cl">   <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">   storage: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">      <span class="o">{</span>
+</span></span><span class="line"><span class="cl">         name: <span class="s1">&#39;default&#39;</span>,
+</span></span><span class="line"><span class="cl">         path: <span class="s1">&#39;/var/opt/gitlab/git-data&#39;</span>,
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">   <span class="o">]</span>,
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<h4 id="rails--sidekiq-을-아래와-같이-설정-한다">Rails &amp; Sidekiq 을 아래와 같이 설정 한다.</h4>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vi /etc/gitlab/gitlab.rb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">external_url <span class="s1">&#39;https://gitlab.huntedhappy.kro.kr&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Gitaly and GitLab use two shared secrets for authentication, one to authenticate gRPC requests</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># to Gitaly, and a second for authentication callbacks from GitLab-Shell to the GitLab internal API.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># The following two values must be the same as their respective values</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># of the Gitaly setup</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;gitaly_token&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;gitalysecret&#39;</span>
+</span></span><span class="line"><span class="cl">gitlab_shell<span class="o">[</span><span class="s1">&#39;secret_token&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;shellsecret&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git_data_dirs<span class="o">({</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;default&#39;</span> <span class="o">=</span>&gt; <span class="o">{</span> <span class="s1">&#39;gitaly_address&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;tcp://10.253.126.129:8075&#39;</span> <span class="o">}</span>,
+</span></span><span class="line"><span class="cl"><span class="o">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Disable components that will not be on the GitLab application server</span>
+</span></span><span class="line"><span class="cl">roles<span class="o">([</span><span class="s1">&#39;application_role&#39;</span>, <span class="s1">&#39;sidekiq_role&#39;</span><span class="o">])</span>
+</span></span><span class="line"><span class="cl">gitaly<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## PostgreSQL connection details</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;db_adapter&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;postgresql&#39;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;db_encoding&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;unicode&#39;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;db_host&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;10.253.126.123&#39;</span> <span class="c1"># IP/hostname of database server</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;db_password&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;Password&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Redis connection details</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;redis_port&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;6379&#39;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;redis_host&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;10.253.126.120&#39;</span> <span class="c1"># IP/hostname of Redis server</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;redis_password&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;Password&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Prevent database migrations from running on upgrade automatically</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;auto_migrate&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set the network addresses that the exporters used for monitoring will listen on</span>
+</span></span><span class="line"><span class="cl">node_exporter<span class="o">[</span><span class="s1">&#39;listen_address&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0:9100&#39;</span>
+</span></span><span class="line"><span class="cl">gitlab_workhorse<span class="o">[</span><span class="s1">&#39;prometheus_listen_addr&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0:9229&#39;</span>
+</span></span><span class="line"><span class="cl">puma<span class="o">[</span><span class="s1">&#39;listen&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sidekiq</span>
+</span></span><span class="line"><span class="cl">sidekiq<span class="o">[</span><span class="s1">&#39;enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">sidekiq<span class="o">[</span><span class="s1">&#39;listen_address&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;0.0.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Configure Sidekiq with 2 workers and 20 max concurrency</span>
+</span></span><span class="line"><span class="cl">sidekiq<span class="o">[</span><span class="s1">&#39;max_concurrency&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl">sidekiq<span class="o">[</span><span class="s1">&#39;queue_groups&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;*&#39;</span><span class="o">]</span> * <span class="m">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add the monitoring node&#39;s IP address to the monitoring whitelist and allow it to</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># scrape the NGINX metrics. Replace placeholder `monitoring.gitlab.example.com` with</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># the address and/or subnets gathered from the monitoring node</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;monitoring_whitelist&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;10.253.0.0/16&#39;</span>, <span class="s1">&#39;127.0.0.0/8&#39;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">nginx<span class="o">[</span><span class="s1">&#39;status&#39;</span><span class="o">][</span><span class="s1">&#39;options&#39;</span><span class="o">][</span><span class="s1">&#39;allow&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;10.253.0.0/16&#39;</span>, <span class="s1">&#39;127.0.0.0/8&#39;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Object Storage</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## This is an example for configuring Object Storage on GCP</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Replace this config with your chosen Object Storage provider as desired</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;object_store&#39;</span><span class="o">][</span><span class="s1">&#39;enabled&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;object_store&#39;</span><span class="o">][</span><span class="s1">&#39;connection&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;provider&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;AWS&#39;</span>,
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;endpoint&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;https://minio-volumes.huntedhappy.kro.kr&#39;</span>,
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;path_style&#39;</span> <span class="o">=</span>&gt; true,
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;aws_access_key_id&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;minioadmin&#39;</span>,
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;aws_secret_access_key&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;&#39;</span>,
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;region&#39;</span> <span class="o">=</span>&gt; <span class="s1">&#39;us-west&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;object_store&#39;</span><span class="o">][</span><span class="s1">&#39;objects&#39;</span><span class="o">][</span><span class="s1">&#39;artifacts&#39;</span><span class="o">][</span><span class="s1">&#39;bucket&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;artifacts&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;object_store&#39;</span><span class="o">][</span><span class="s1">&#39;objects&#39;</span><span class="o">][</span><span class="s1">&#39;external_diffs&#39;</span><span class="o">][</span><span class="s1">&#39;bucket&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;external-diffs&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;object_store&#39;</span><span class="o">][</span><span class="s1">&#39;objects&#39;</span><span class="o">][</span><span class="s1">&#39;lfs&#39;</span><span class="o">][</span><span class="s1">&#39;bucket&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;lfs&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;object_store&#39;</span><span class="o">][</span><span class="s1">&#39;objects&#39;</span><span class="o">][</span><span class="s1">&#39;uploads&#39;</span><span class="o">][</span><span class="s1">&#39;bucket&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;uploads&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;object_store&#39;</span><span class="o">][</span><span class="s1">&#39;objects&#39;</span><span class="o">][</span><span class="s1">&#39;packages&#39;</span><span class="o">][</span><span class="s1">&#39;bucket&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;packages&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;object_store&#39;</span><span class="o">][</span><span class="s1">&#39;objects&#39;</span><span class="o">][</span><span class="s1">&#39;dependency_proxy&#39;</span><span class="o">][</span><span class="s1">&#39;bucket&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;dependency-proxy&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;object_store&#39;</span><span class="o">][</span><span class="s1">&#39;objects&#39;</span><span class="o">][</span><span class="s1">&#39;terraform_state&#39;</span><span class="o">][</span><span class="s1">&#39;bucket&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;terraform-state&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#### END </span>
+</span></span><span class="line"><span class="cl"><span class="c1">######################################################################</span>
+</span></span><span class="line"><span class="cl">sudo touch /etc/gitlab/skip-auto-reconfigure
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">gitlab-ctl reconfigure
+</span></span><span class="line"><span class="cl">gitlab-ctl restart
+</span></span><span class="line"><span class="cl">gitlab-ctl status
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## DB 마이그레이션 </span>
+</span></span><span class="line"><span class="cl">sudo gitlab-rake gitlab:db:configure
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 첫 번 째가 완료 되면 두번째는 아래와 같이 재 설정만 해주면 된다.</span>
+</span></span><span class="line"><span class="cl">gitlab-ctl reconfigure
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="설정이-완료-되면-gitaly-host에서-아래-명령어를-통해-정상-여부를-확인-할-수-있다">설정이 완료 되면 Gitaly Host에서 아래 명령어를 통해 정상 여부를 확인 할 수 있다.</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo /opt/gitlab/embedded/bin/gitaly check /var/opt/gitlab/gitaly/config.toml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>상태 확인</h4>
+        </figcaption>
+</figure>
+
+<h5 id="-처음-접속-하면-root-패스워드를-변경하라고-나온-후-패스워드를-변경하면-접속-할-수-있다">* 처음 접속 하면 root 패스워드를 변경하라고 나온 후 패스워드를 변경하면 접속 할 수 있다.</h5>
+<figure><figcaption>
+            <h4>접속</h4>
+        </figcaption>
+</figure>
+
+<h2 id="2-minio에-저장-확인">2. MINIO에 저장 확인</h2>
+<blockquote>
+<ul>
+<li>아래와 같이 MINIO 오프젝트 스토리지에 저장 된 것을 확인 할 수 있다.</li>
+</ul>
+</blockquote>
+<h5 id="프로젝트-생성">프로젝트 생성</h5>
+<figure><figcaption>
+            <h4>프로젝트 생성</h4>
+        </figcaption>
+</figure>
+
+<h5 id="이슈-생성">이슈 생성</h5>
+<p><figure><figcaption>
+            <h4>이슈 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>이슈 생성</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>MINIO 업로드 확인</h4>
+        </figcaption>
+</figure>
+</p>
+]]></description>
+</item>
+</channel>
+</rss>

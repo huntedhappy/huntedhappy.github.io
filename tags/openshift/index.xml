@@ -1,0 +1,2593 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>openshift - Tag - Dokyung&#39;s DevOoOps</title>
+        <link>https://huntedhappy.github.io/tags/openshift/</link>
+        <description>openshift - Tag - Dokyung&#39;s DevOoOps</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>huntedhappy@gmail.com (Dokyung)</managingEditor>
+            <webMaster>huntedhappy@gmail.com (Dokyung)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 29 Jan 2023 21:55:28 &#43;0900</lastBuildDate><atom:link href="https://huntedhappy.github.io/tags/openshift/" rel="self" type="application/rss+xml" /><item>
+    <title>Tap install on Openshift</title>
+    <link>https://huntedhappy.github.io/tapandopenshift/</link>
+    <pubDate>Sun, 29 Jan 2023 21:55:28 &#43;0900</pubDate>
+    <author>Dokyung</author>
+    <guid>https://huntedhappy.github.io/tapandopenshift/</guid>
+    <description><![CDATA[<h2 id="1-tanzu-application-platform-on-openshift">1. TANZU APPLICATION PLATFORM ON OPENSHIFT</h2>
+<p>Tanzu Application Platform은 VMware에서 제공하는 CI/CD 솔루션입니다. 기본 VMware제품들은 대부분 VMware 솔루션에 Dependency가 있었습니다.
+그러나 TAP의 경우는 K8S 환경이면 어디든 설치가 된다는 컨셉으로 나온 것이 아닌가 싶습니다.
+1.3.x 부터 OPENSHIFT에서도 지원을 한다고 해서 한번 설치를 진행 해 보았으며 어떻게 설치를 할 수 있는지 한번 알아 보도록 하겠습니다.</p>
+<p>기본적으로 OPENSHIFT는 설치가 되어 있다는 것을 가정으로 TAP를 설치를 진행을 하겠습니다.
+참고로 OPENSHIFT의 경우 TAP에서 지원하는 것은 4.10 , 4.11 두가지를 지원 합니다.</p>
+<figure><figcaption>
+            <h4>ocp 지원 버전</h4>
+        </figcaption>
+</figure>
+
+<p><figure><figcaption>
+            <h4>ocp 설치 버전</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>ocp 설치 버전</h4>
+        </figcaption>
+</figure>
+</p>
+<blockquote>
+<p>설치 버전</p>
+<ul>
+<li>Openshift Version 4.11.9</li>
+<li>Tanzu Application Platform 1.4.0</li>
+<li>TBS 1.9.0</li>
+<li>AVI 22.1.2</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>처음에 Openshift(Openshift를 잘 모르다 보니)를 통해 TAP를 배포하려고 하다 보니 여러가지 이슈가 발생했는대, 해결이 안되는 부분이 AVI 그러니까 외부 로드밸런서를 사용하지 않고 Openshift가 가지고 있는 Ingress를 사용하려고 했는대 실패를 하였습니다. 또한 문제는 Openshift를 잘 몰라서 그럴 수 있겠지만, 내가 원하는 Domain을 설정 하는 것도 어려운 부분이 있었습니다. 그래서 우선 별도로 AVI를 구성하여 설치를 진행 후 TAP 설치를 하였습니다. 그리고 설명이 부족한 부분이 많을 수 있는대, 설명 할 것이 너무 많기 때문에 좀더 Install에 대해서 집중을 해서 글을 작성 하였습니다.</p>
+</blockquote>
+<p>아래에 route에 포함되어 있지 않은 도메인을 차단 하는것인지.. 여기 route에 tap를 구성 후 tap-gui 또는 어플리케이션의 대해서 어떻게 설정 해야 되는지는 아직 의문이 남아 있습니다.
+<figure><figcaption>
+            <h4>oc route 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<p>AVI 와 Openshift를 연동시 생성 되는 VIP가 많아서 이 부분도 당황 스러운 부분이 있었지만, 이 부분도 깊게 파고 들지는 않았습니다. 우선 목표는 TAP를 구성 하기 위함이 크기 때문입니다.
+<figure><figcaption>
+            <h4>AVI 상태</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="2-kapp-설치">2. KAPP 설치</h2>
+<p>기본적으로 KAPP이 설치가 되어 있지 않기 때문에 KAPP 설치가 필요 합니다. 이유는 TAP이라는 솔루션이 Tanzu라는 명령어를 통해 설치가 되기 때문에 입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## package를 설치 할 수 있게 kapp-contoller 설치</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f https://github.com/vmware-tanzu/carvel-kapp-controller/releases/latest/download/release.yml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## tanzu에서 secret을 생성 할 수 있게 secretget-controller 설치</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f https://github.com/carvel-dev/secretgen-controller/releases/latest/download/release.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>kapp을 설치를 하게 되면 이제 tanzu package repository 및  secret repository를 등록 할 수 있습니다.</p>
+<figure><figcaption>
+            <h4>package 및 reository</h4>
+        </figcaption>
+</figure>
+
+<p>그러면 위와 같이 list를 확인 할 수 있습니다. 위에 controller를 설치를 하지 않으면 에러가 발생 하는 것을 알 수 있습니다. 에러 내용은 아래와 같습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kapp contoller를 설치를 안할 경우 발생하는 에러
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: failed to check for the availability of &#39;packaging.carvel.dev&#39; API: failed to discover unmatched GroupVersionResources: the server is currently unable to handle the request</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: exit status 1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">secret contoller를 설치를 안할 경우 발생하는 에러
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: secret plugin can not be used as &#39;secretgen.carvel.dev/v1alpha1&#39; API is not available in the cluster</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Error: exit status 1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-tanzu-framework-및-pcakage-image-repository-업로드">3. TANZU FRAMEWORK 및 Pcakage Image Repository 업로드</h2>
+<p>TANZU FRAMEWORK다운로드는 Tanzu Net에서 다운로드를 받을 수 있다.
+TANZU APPLICATION PLATFORM 설치는 1.4.0으로 진행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tar xvf tanzu-framework-linux-amd64-v0.25.4.1.tar
+</span></span><span class="line"><span class="cl">tanzu plugin install -l ./cli/ all
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 이미지를 받기 위해 tanzu net에 로그인 한다.</span>
+</span></span><span class="line"><span class="cl">docker login registry.tanzu.vmware.com -u <span class="o">{</span>tanzuusername<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 이후에 내부 또는 gcr 등등 repository에 로그인 한다. 테스트는 내부 Harbor를 사용한다.</span>
+</span></span><span class="line"><span class="cl">docker login infra-harbor.huntedhappy.kro.kr -u admin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TAP Package 내부 Harbor에 업로드</span>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:1.4.0 --to-repo infra-harbor.huntedhappy.kro.kr/tap-packages/1.4.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-tap-package-등록">4. TAP Package 등록</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## namespace 생성</span>
+</span></span><span class="line"><span class="cl">kubectl create ns tap-install 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Harbor Secret 사용할 경우</span>
+</span></span><span class="line"><span class="cl">kubectl create secret docker-registry registry-credentials --docker-server<span class="o">=</span>infra-harbor.huntedhappy.kro.kr --docker-username<span class="o">=</span>admin --docker-password<span class="o">=</span><span class="si">${</span><span class="nv">INSTALL_REGISTRY_PASSWORD</span><span class="si">}</span> -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## package repository 추가</span>
+</span></span><span class="line"><span class="cl">tanzu package repository add tanzu-tap-repository <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url harbor-infra.huntedhappy.kro.kr/tap-packages/1.4.0 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS 설치</span>
+</span></span><span class="line"><span class="cl">imgpkg copy -b registry.tanzu.vmware.com/tanzu-application-platform/full-tbs-deps-package-repo:1.9.0 --to-tar<span class="o">=</span>tbs-full-deps-1.9.0.tar
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS Harobr업로드</span>
+</span></span><span class="line"><span class="cl">imgpkg copy --tar tbs-full-deps-1.9.0.tar --to-repo harbor-infra.huntedhappy.kro.kr/tap/tbs-full-deps/1.9.0 --include-non-distributable-layers
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS Repository 등록</span>
+</span></span><span class="line"><span class="cl">tanzu package repository add tbs-full-deps-repository <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --url infra-harbor.huntedhappy.kro.kr/tap/tbs-full-deps/1.9.0 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-설치">5. 설치</h2>
+<p>TAP같은 경우 멀티 클러스터를 지원 하지만, 테스트는 full 기반으로 테스트를 진행 하였습니다.</p>
+<p>설치는 ootb_supply_chain_testing_scanning 로 테스트를 진행 했지만. 좀 복잡 할 수 있기 때문에
+여기에는 ootb_supply_chain_basic으로 기술 합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vi tap-full-vaules.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">profile: full
+</span></span><span class="line"><span class="cl">ceip_policy_disclosed: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">buildservice:
+</span></span><span class="line"><span class="cl">  kp_default_repository: <span class="s2">&#34;infra-harbor.huntedhappy.kro.kr/tap/tap-packages&#34;</span>
+</span></span><span class="line"><span class="cl">  kp_default_repository_secret:
+</span></span><span class="line"><span class="cl">    name: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">    namespace: <span class="s2">&#34;tap-install&#34;</span>
+</span></span><span class="line"><span class="cl">  exclude_dependencies: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">springboot_conventions:
+</span></span><span class="line"><span class="cl">  autoConfigureActuators: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">policy:
+</span></span><span class="line"><span class="cl">  tuf_enable: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">accelerator:
+</span></span><span class="line"><span class="cl">  domain: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  ingress:
+</span></span><span class="line"><span class="cl">    include: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">    enable_tls: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    secret_name: share-secret
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">  server:
+</span></span><span class="line"><span class="cl">    service_type: <span class="s2">&#34;ClusterIP&#34;</span>
+</span></span><span class="line"><span class="cl">    watched_namespace: <span class="s2">&#34;accelerator-system&#34;</span>
+</span></span><span class="line"><span class="cl">  samples:
+</span></span><span class="line"><span class="cl">    include: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">shared:
+</span></span><span class="line"><span class="cl">  kubernetes_distribution: <span class="s2">&#34;openshift&#34;</span> <span class="c1"># To be passed only for OpenShift. Defaults to &#34;&#34;.</span>
+</span></span><span class="line"><span class="cl">  ingress_issuer: default-ca-issuer
+</span></span><span class="line"><span class="cl">  image_registry:
+</span></span><span class="line"><span class="cl">    secret:
+</span></span><span class="line"><span class="cl">      name: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">      namespace: <span class="s2">&#34;tap-install&#34;</span>
+</span></span><span class="line"><span class="cl">  ingress_domain: <span class="s2">&#34;huntedhappy.kro.kr&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  ca_cert_data: |</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">appliveview:
+</span></span><span class="line"><span class="cl">  ingressEnabled: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  sslDisabled: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">    secretName: share-secret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">appliveview_connector:
+</span></span><span class="line"><span class="cl">  backend:
+</span></span><span class="line"><span class="cl">    sslDisabled: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">    host: appliveview.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cnrs:
+</span></span><span class="line"><span class="cl">  domain_name: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  domain_template: <span class="s2">&#34;{{.Name}}.{{.Domain}}&#34;</span>
+</span></span><span class="line"><span class="cl">  default_tls_secret: tap-install/share-secret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">scanning:
+</span></span><span class="line"><span class="cl">  metadataStore:
+</span></span><span class="line"><span class="cl">    url: <span class="s2">&#34;&#34;</span> <span class="c1"># Disable embedded integration since it&#39;s deprecated</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">metadata_store:
+</span></span><span class="line"><span class="cl">  ns_for_export_app_cert: <span class="s2">&#34;*&#34;</span>
+</span></span><span class="line"><span class="cl">  ingress_domain: huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">  app_service_type: ClusterIP
+</span></span><span class="line"><span class="cl">  ingress_enabled: <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">  targetImagePullSecret: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    secretName: share-secret
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">supply_chain: basic
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ootb_supply_chain_basic:
+</span></span><span class="line"><span class="cl">  registry:
+</span></span><span class="line"><span class="cl">    server: <span class="s2">&#34;infra-harbor.huntedhappy.kro.kr&#34;</span>
+</span></span><span class="line"><span class="cl">    repository: <span class="s2">&#34;app/supply_chain&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">grype:
+</span></span><span class="line"><span class="cl">  namespace: <span class="s2">&#34;tap-install&#34;</span> <span class="c1"># (optional) Defaults to default namespace.</span>
+</span></span><span class="line"><span class="cl">  targetImagePullSecret: <span class="s2">&#34;registry-credentials&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tap_gui:
+</span></span><span class="line"><span class="cl">  service_type: ClusterIP
+</span></span><span class="line"><span class="cl">  ingressEnabled: <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">  ingressDomain: <span class="s2">&#34;huntedhappy.kro.kr&#34;</span>
+</span></span><span class="line"><span class="cl">  tls:
+</span></span><span class="line"><span class="cl">    namespace: tap-install
+</span></span><span class="line"><span class="cl">    secretName: share-secret
+</span></span><span class="line"><span class="cl">  app_config:
+</span></span><span class="line"><span class="cl">    organization:
+</span></span><span class="line"><span class="cl">      name: <span class="s1">&#39;huntedhappy&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    app:
+</span></span><span class="line"><span class="cl">      title: <span class="s1">&#39;huntedhappy TAP&#39;</span>
+</span></span><span class="line"><span class="cl">      baseUrl: https://tap-gui.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">      support:
+</span></span><span class="line"><span class="cl">        url: https://tanzu.vmware.com/support
+</span></span><span class="line"><span class="cl">        items:
+</span></span><span class="line"><span class="cl">          - title: Contact Support
+</span></span><span class="line"><span class="cl">            icon: email
+</span></span><span class="line"><span class="cl">            links:
+</span></span><span class="line"><span class="cl">              - url: https://tanzu.vmware.com/support
+</span></span><span class="line"><span class="cl">                title: Tanzu Support Page
+</span></span><span class="line"><span class="cl">          - title: Documentation
+</span></span><span class="line"><span class="cl">            icon: doc
+</span></span><span class="line"><span class="cl">            links:
+</span></span><span class="line"><span class="cl">              - url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html
+</span></span><span class="line"><span class="cl">                title: Tanzu Application Platform Documentation
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    backend:
+</span></span><span class="line"><span class="cl">      baseUrl: https://tap-gui.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">      cors:
+</span></span><span class="line"><span class="cl">        origin: https://tap-gui.huntedhappy.kro.kr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">contour:
+</span></span><span class="line"><span class="cl">  certificates.duration: 87600h
+</span></span><span class="line"><span class="cl">  certificates.renewBefore: 360h
+</span></span><span class="line"><span class="cl">  envoy:
+</span></span><span class="line"><span class="cl">    service:
+</span></span><span class="line"><span class="cl">      type: LoadBalancer
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">excluded_packages:
+</span></span><span class="line"><span class="cl">- policy.apps.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">- learningcenter.tanzu.vmware.com
+</span></span><span class="line"><span class="cl">- workshops.learningcenter.tanzu.vmware.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## rback 설정</span>
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">automountServiceAccountToken: false
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Secret
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">  annotations:
+</span></span></span><span class="line"><span class="cl"><span class="s">    kubernetes.io/service-account.name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">type: kubernetes.io/service-account-token
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-read-k8s
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">- kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: tap-gui
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: tap-gui-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: k8s-reader
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: k8s-reader
+</span></span></span><span class="line"><span class="cl"><span class="s">rules:
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;pods&#39;, &#39;pods/log&#39;, &#39;services&#39;, &#39;configmaps&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;apps&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;deployments&#39;, &#39;replicasets&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;autoscaling&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;horizontalpodautoscalers&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;networking.k8s.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;ingresses&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;networking.internal.knative.dev&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [&#39;serverlessservices&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [ &#39;autoscaling.internal.knative.dev&#39; ]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources: [ &#39;podautoscalers&#39; ]
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [ &#39;get&#39;, &#39;watch&#39;, &#39;list&#39; ]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;serving.knative.dev&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - configurations
+</span></span></span><span class="line"><span class="cl"><span class="s">  - revisions
+</span></span></span><span class="line"><span class="cl"><span class="s">  - routes
+</span></span></span><span class="line"><span class="cl"><span class="s">  - services
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;carto.run&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterconfigtemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterdeliveries
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterdeploymenttemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterimagetemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clusterruntemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clustersourcetemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clustersupplychains
+</span></span></span><span class="line"><span class="cl"><span class="s">  - clustertemplates
+</span></span></span><span class="line"><span class="cl"><span class="s">  - deliverables
+</span></span></span><span class="line"><span class="cl"><span class="s">  - runnables
+</span></span></span><span class="line"><span class="cl"><span class="s">  - workloads
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;source.toolkit.fluxcd.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - gitrepositories
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;source.apps.tanzu.vmware.com&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - imagerepositories
+</span></span></span><span class="line"><span class="cl"><span class="s">  - mavenartifacts
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;conventions.carto.run&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - podintents
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;kpack.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - images
+</span></span></span><span class="line"><span class="cl"><span class="s">  - builds
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;scanning.apps.tanzu.vmware.com&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - sourcescans
+</span></span></span><span class="line"><span class="cl"><span class="s">  - imagescans
+</span></span></span><span class="line"><span class="cl"><span class="s">  - scanpolicies
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;tekton.dev&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - taskruns
+</span></span></span><span class="line"><span class="cl"><span class="s">  - pipelineruns
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">- apiGroups: [&#39;kappctrl.k14s.io&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - apps
+</span></span></span><span class="line"><span class="cl"><span class="s">  verbs: [&#39;get&#39;, &#39;watch&#39;, &#39;list&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## rolebding 설정</span>
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | kubectl apply -f -
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-deliverable
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: deliverable
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: default-permit-workload
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: workload
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: default
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: RoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: dev-permit-app-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: namespace-dev-permit-app-viewer
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: app-viewer-cluster-access
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: Group
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: &#34;namespace-developers&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/secrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
+</span></span><span class="line"><span class="cl">kubectl patch sa default -n tap-install --type <span class="s1">&#39;json&#39;</span> -p <span class="s1">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/imagePullSecrets&#34;,&#34;value&#34;:[&#34;name&#34;:&#34;registry-credentials&#34;]}]&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## TANZU PACKAGE 1.4.0 설치</span>
+</span></span><span class="line"><span class="cl">tanzu package install tap -p tap.tanzu.vmware.com -v 1.4.0 -f tap-full-vaules.yaml -n tap-install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## TBS 설치</span>
+</span></span><span class="line"><span class="cl">tanzu package install full-tbs-deps -p full-tbs-deps.tanzu.vmware.com -v 1.9.0 -n tap-install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6-설치-완료">6. 설치 완료</h2>
+<figure><figcaption>
+            <h4>설치 완료#1</h4>
+        </figcaption>
+</figure>
+
+<p>Sample App Test
+<figure><figcaption>
+            <h4>설치 완료#2</h4>
+        </figcaption>
+</figure>
+</p>
+<p>Sample App Test를 하게 될 경우 아래와 같은 문구가 나오는대 왜 나오는지는 아직 파악 하지 못하였습니다. 하지만 SAMPLE APP 배포는 잘 동작 하는 것을 확인 할 수 있습니다.</p>
+<ul>
+<li>I0129 14:54:36.521207 2768383 request.go:682] Waited for 1.007213447s due to client-side throttling, not priority and fairness, request: GET:https://api.openshift.huntedhappy.kro.kr:6443/apis/console.openshift.io/v1alpha1?timeout=32s</li>
+</ul>
+<p>배포가 완료 되면 httpproxy,pod,deliverable을 확인 하여 httpproxy에 설정된 도메인으로 접속 할 수 있다.
+<figure><figcaption>
+            <h4>FQDN 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<p><figure><figcaption>
+            <h4>설치 완료#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP GUI 화면#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP GUI 화면#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>TAP GUI 화면#2</h4>
+        </figcaption>
+</figure>
+</p>
+<p>설치가 완료 되면 TAP의 대해서는 Visual Sutudio Code, IntelliJ 환경에서도 잘 동작하는 것을 확인 할 수 있습니다.</p>
+<ul>
+<li>나중에 추가적인 설명을 할 수 있으면 적을 수 있도록 하겠습니다.</li>
+</ul>
+]]></description>
+</item>
+<item>
+    <title>The Documentation Openshift</title>
+    <link>https://huntedhappy.github.io/openshift/</link>
+    <pubDate>Thu, 13 Jan 2022 15:48:08 &#43;0900</pubDate>
+    <author>Dokyung</author>
+    <guid>https://huntedhappy.github.io/openshift/</guid>
+    <description><![CDATA[<h2 id="1-openshift">1. Openshift</h2>
+<p><code>오픈시프트 오리진(OpenShift Origin)</code>은 오픈시프트 온라인, 오픈시프트 데디케이티드, 오픈시프트 컨테이너 플랫폼에 사용되는 업스트림 커뮤니티 프로젝트이다. 도커 컨테이너 패키징 코어와 쿠버네티스 컨테이너 클러스터 관리 기능을 기반에 두고 개발된 오리진은 애플리케이션 수명 관리 기능과 데브옵스 도구를 통해 증강된다. 오리진은 오픈 소스 애플리케이션 컨테이너 플랫폼을 제공한다. 오리진 프로젝트의 모든 소스 코드는 깃허브에서 아파치 라이선스 (버전 2.0)을 통해 이용이 가능하다.[4]</p>
+<p><code>오픈시프트 온라인(OpenShift Online)</code>은 레드햇의 퍼블릭 클라우드 애플리케이션 개발 및 호스팅 서비스이다. 온라인은 오리진 프로젝트 소스 코드의 버전 2를 제공하였으며, 아파치 라이선스 버전 2.0 하에서 이용이 가능하다.[5] 온라인은 리소스 할당 기어(gear) 하에서 구동되는 미리 빌드된 카트리지를 통해 다양한 언어, 프레임워크 데이터베이스를 지원한다. 개발자들은 오픈시프트 카트리지 API를 통해 다른 언어, 데이터베이스, 구성 요소를 추가할 수 있다.[6] 오픈시프트 3의 선호로 사용이 권장되지 않는다(deprecated).</p>
+<p><code>오픈시프트 데디케이티드(OpenShift Dedicated)</code>는 레드햇의 매니지드 프라이빗 클러스터 기능으로, 도커가 제공하는 애플리케이션 컨테이너의 코어를 기반으로 빌드되며 레드햇 엔터프라이즈 리눅스의 토대 위에 쿠버네티스가 제공하는 오케스트레이션 및 관리가 포함되어 있다. 아마존 웹 서비스(AWS)와 구글 클라우드 플랫폼(GCP) 마켓플레이스를 통해 이용이 가능하다.</p>
+<p><code>오픈시프트 컨테이너 플랫폼(OpenShift Container Platform)</code>은 레드햇의 사내(on-premises) 프라이빗 PaaS 제품으로, 도커가 제공하는 애플리케이션 컨테이너의 코어를 기반으로 빌드되며 레드햇 엔터프라이즈 리눅스의 토대 위에 쿠버네티스가 제공하는 오케스트레이션 및 관리가 포함되어 있다.</p>
+<p>참고문헌  <a href="https://ko.wikipedia.org/wiki/%EC%98%A4%ED%94%88%EC%8B%9C%ED%94%84%ED%8A%B8" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> Openshift </a></p>
+<h2 id="2-사전구성">2. 사전구성</h2>
+<h3 id="21-dns-구성">2.1. DNS 구성</h3>
+<table>
+<thead>
+<tr>
+<th>Common</th>
+<th>Component Name</th>
+<th>Cluster Name</th>
+<th>BaseDomain</th>
+<th>A Record</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>api</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.254</td>
+</tr>
+<tr>
+<td></td>
+<td>api-int</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.254</td>
+</tr>
+<tr>
+<td>*</td>
+<td>apps</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.10</td>
+</tr>
+<tr>
+<td>console-openshift-console</td>
+<td>apps</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.10</td>
+</tr>
+<tr>
+<td>*</td>
+<td>apps</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.10</td>
+</tr>
+<tr>
+<td></td>
+<td>bootstrap</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.10</td>
+</tr>
+<tr>
+<td></td>
+<td>master0</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.11</td>
+</tr>
+<tr>
+<td></td>
+<td>master1</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.12</td>
+</tr>
+<tr>
+<td></td>
+<td>master2</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.13</td>
+</tr>
+<tr>
+<td></td>
+<td>worker1</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.14</td>
+</tr>
+<tr>
+<td></td>
+<td>worker2</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.15</td>
+</tr>
+<tr>
+<td></td>
+<td>worker3</td>
+<td>openshift</td>
+<td>vcf.local</td>
+<td>10.253.107.16</td>
+</tr>
+</tbody>
+</table>
+<figure><figcaption>
+            <h4>DNS 구성</h4>
+        </figcaption>
+</figure>
+
+<h3 id="22-dhcp-구성">2.2. DHCP 구성</h3>
+<p>DHCP 구성 - NSXT로 구성을 하였다.</p>
+<p><figure><figcaption>
+            <h4>DHCP 구성#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DHCP 구성#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>DHCP 구성#3</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="3-파일-다운로드">3. 파일 다운로드</h2>
+<p>OC를 다운로드 하기 위해 redhat에 가입 하고 Login 필요</p>
+<p>OC 다운로드 링크  <a href="https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/auth?client_id=cloud-services&amp;redirect_uri=https%3A%2F%2Fconsole.redhat.com%2Fopenshift%2Finstall&amp;state=3c149436-35f6-4385-9739-68ad3e7cfb3e&amp;response_mode=fragment&amp;response_type=code&amp;scope=openid&amp;nonce=50b0191c-64a2-4655-81da-8ee6e7665375" target="_blank" rel="noopener noreffer "><i class="fas fa-link"></i> OC 다운로드 링크 </a></p>
+<p><figure><figcaption>
+            <h4>OC 다운로드#1</h4>
+        </figcaption>
+</figure>
+
+PullSecret을 저장해 둔다. <figure><figcaption>
+            <h4>OC 다운로드#2</h4>
+        </figcaption>
+</figure>
+</p>
+<p>압축을 해제 하고 환경변수를 별도로 구성하지 않게 /usr/local/bin 에다가 copy를 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tar -xzvf openshift-client-linux.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tar -xzvf openshift-install-linux.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mv oc kubectl openshift-install /usr/local/bin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">oc version
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">openshift-install version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>sshkeygen을 생성 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ssh-keygen -t ed25519 -N <span class="s1">&#39;&#39;</span> -f ~/.ssh/id_rsa
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl"><span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>ssh-agent -s<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh-add ~/.ssh/id_rsa
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-vcenter-ssh-thumbprint-얻기">4. vCenter SSH thumbprint 얻기</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">openssl s_client -servername vcsa01.vcf.local -connect vcsa01.vcf.local:443 <span class="p">|</span> openssl x509 <span class="p">|</span> tee ca.crt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp ca.crt /usr/local/share/ca-certificates/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">update-ca-certificates
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-temp-image">5. Temp Image</h2>
+<p><a href="https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/" target="_blank" rel="noopener noreffer "><i class="far fa-file-archive fa-fw" aria-hidden="true"></i>&nbsp;RHCOS Download Link</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-vmware.x86_64.ova
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>또는 아래와 같이 GUI에서 다운로드 받을 수 있다.</p>
+<p><figure><figcaption>
+            <h4>RHCOS OVA GUI 다운로드#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>RHCOS OVA GUI 다운로드#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>RHCOS OVA GUI 다운로드#3</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>RHCOS OVA GUI 다운로드#4</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="51-temp-구성">5.1. Temp 구성</h3>
+<p><figure><figcaption>
+            <h4>vSphere Temp Upload#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>vSphere Temp Upload#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>vSphere Temp Upload#3</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>vSphere Temp Upload#4</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>vSphere Temp Upload#5</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>vSphere Temp Upload#6</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>vSphere Temp Upload#7</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>vSphere Temp Upload#8</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="6-oc-install">6. OC Install</h2>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>SSL 구성<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>install-config.yaml 참조</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">baseDomain: vcf.local
+</span></span><span class="line"><span class="cl">compute:
+</span></span><span class="line"><span class="cl">- architecture: amd64
+</span></span><span class="line"><span class="cl">  hyperthreading: Enabled
+</span></span><span class="line"><span class="cl">  name: worker
+</span></span><span class="line"><span class="cl">  platform: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">3</span>
+</span></span><span class="line"><span class="cl">controlPlane:
+</span></span><span class="line"><span class="cl">  architecture: amd64
+</span></span><span class="line"><span class="cl">  hyperthreading: Enabled
+</span></span><span class="line"><span class="cl">  name: master
+</span></span><span class="line"><span class="cl">  platform: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">3</span>
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  creationTimestamp: null
+</span></span><span class="line"><span class="cl">  name: ocp
+</span></span><span class="line"><span class="cl">networking:
+</span></span><span class="line"><span class="cl">  clusterNetwork:
+</span></span><span class="line"><span class="cl">  - cidr: 10.128.0.0/14
+</span></span><span class="line"><span class="cl">    hostPrefix: <span class="m">23</span>
+</span></span><span class="line"><span class="cl">  machineNetwork:
+</span></span><span class="line"><span class="cl">  - cidr: 10.0.0.0/16
+</span></span><span class="line"><span class="cl">  networkType: OpenShiftSDN
+</span></span><span class="line"><span class="cl">  serviceNetwork:
+</span></span><span class="line"><span class="cl">  - 172.30.0.0/16
+</span></span><span class="line"><span class="cl">platform:
+</span></span><span class="line"><span class="cl">  vsphere:
+</span></span><span class="line"><span class="cl">    apiVIP: 10.253.107.254
+</span></span><span class="line"><span class="cl">    cluster: OBCLUSTER
+</span></span><span class="line"><span class="cl">    datacenter: OBDC
+</span></span><span class="line"><span class="cl">    defaultDatastore: vsanDatastore
+</span></span><span class="line"><span class="cl">    ingressVIP: 10.253.107.253
+</span></span><span class="line"><span class="cl">    network: LS-MGMT-10.253.107.x
+</span></span><span class="line"><span class="cl">    password: Openbase!234
+</span></span><span class="line"><span class="cl">    username: administrator@vsphere.local
+</span></span><span class="line"><span class="cl">    vCenter: vcsa01.vcf.local
+</span></span><span class="line"><span class="cl">  fips: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">publish: External
+</span></span><span class="line"><span class="cl">pullSecret: <span class="s1">&#39;full secret 넣어줘야함&#39;</span>
+</span></span><span class="line"><span class="cl">sshKey: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">  ssh-ed25519 AAAAC
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ocp 실행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir ocp
+</span></span><span class="line"><span class="cl">cp install-config.yaml ocp
+</span></span><span class="line"><span class="cl">openshift-install create install-config --dir<span class="o">=</span>ocp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Manifest 변경</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">openshift-install create manifests --dir ocp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/ocp/openshift
+</span></span><span class="line"><span class="cl">rm -rf 99_openshift-cluster-api_master-*
+</span></span><span class="line"><span class="cl">rm -rf 99_openshift-cluster-api_worker-machineset-0.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/ocp/manifests/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vi cluster-scheduler-02-config.yml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: config.openshift.io/v1
+</span></span><span class="line"><span class="cl">kind: Scheduler
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  creationTimestamp: null
+</span></span><span class="line"><span class="cl">  name: cluster
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  mastersSchedulable: <span class="nb">false</span>    <span class="c1">### true &gt; false change</span>
+</span></span><span class="line"><span class="cl">  policy:
+</span></span><span class="line"><span class="cl">    name: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">status: <span class="o">{}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ignition 실행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">openshift-install create ignition-configs --dir ocp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>L4 VIP로 설정 필요</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee append-bootstrap.ign
+</span></span></span><span class="line"><span class="cl"><span class="s">{
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;ignition&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;config&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;merge&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">          &#34;source&#34;: &#34;http://10.253.107.254:8080/bootstrap.ign&#34; ## L4 VIP로 변경
+</span></span></span><span class="line"><span class="cl"><span class="s">        }
+</span></span></span><span class="line"><span class="cl"><span class="s">      ] 
+</span></span></span><span class="line"><span class="cl"><span class="s">    },
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;version&#34;: &#34;3.1.0&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  }
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>BASE64 실행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">base64 -w0 append-bootstrap.ign &gt; append-bootstrap.64
+</span></span><span class="line"><span class="cl">base64 -w0 master.ign &gt; master.64
+</span></span><span class="line"><span class="cl">base64 -w0 worker.ign &gt; worker.64
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>웹 구성에서 파일을 다운로드 할 수 있게 file 폴더 구성 후 ign을 복사 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir -p /usr/share/nginx/html/files
+</span></span><span class="line"><span class="cl">cp *.ign /usr/share/nginx/html/files/
+</span></span><span class="line"><span class="cl">chmod <span class="m">644</span> /usr/share/nginx/html/files/*.ign
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<h2 id="7-nginx">7. NGINX</h2>
+<p>NGINX 설치</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apt update <span class="o">&amp;&amp;</span> apt upgrade -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">make로 설치
+</span></span><span class="line"><span class="cl">apt install gcc libpcre3 libpcre3-dev libssl-dev make -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mkdir -p /var/tmp/src <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /var/tmp/src
+</span></span><span class="line"><span class="cl">wget http://nginx.org/download/nginx-1.20.2.tar.gz
+</span></span><span class="line"><span class="cl">tar -xzf nginx-1.20.2.tar.gz
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> nginx-1.20.2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./configure --prefix<span class="o">=</span>/var/www/html --sbin-path<span class="o">=</span>/usr/sbin/nginx --conf-path<span class="o">=</span>/etc/nginx/nginx.conf --http-log-path<span class="o">=</span>/var/log/nginx/access.log --error-log-path<span class="o">=</span>/var/log/nginx/error.log --with-pcre  --lock-path<span class="o">=</span>/var/lock/nginx.lock --pid-path<span class="o">=</span>/var/run/nginx.pid --with-http_ssl_module --with-http_image_filter_module<span class="o">=</span>dynamic --modules-path<span class="o">=</span>/etc/nginx/modules --with-http_v2_module --with-stream<span class="o">=</span>dynamic --with-http_addition_module --with-http_mp4_module --with-stream
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">make
+</span></span><span class="line"><span class="cl">make install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vi /lib/systemd/system/nginx.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Unit<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Description</span><span class="o">=</span>The NGINX HTTP and reverse proxy server
+</span></span><span class="line"><span class="cl"><span class="nv">After</span><span class="o">=</span>syslog.target network-online.target remote-fs.target nss-lookup.target
+</span></span><span class="line"><span class="cl"><span class="nv">Wants</span><span class="o">=</span>network-online.target
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span>forking
+</span></span><span class="line"><span class="cl"><span class="nv">PIDFile</span><span class="o">=</span>/var/run/nginx.pid
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStartPre</span><span class="o">=</span>/usr/sbin/nginx -t
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStart</span><span class="o">=</span>/usr/sbin/nginx
+</span></span><span class="line"><span class="cl"><span class="nv">ExecReload</span><span class="o">=</span>/usr/sbin/nginx -s reload
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStop</span><span class="o">=</span>/bin/kill -s QUIT <span class="nv">$MAINPID</span>
+</span></span><span class="line"><span class="cl"><span class="nv">PrivateTmp</span><span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Install<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>nginx.conf 설정</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 아래 내용 추가</span>
+</span></span><span class="line"><span class="cl">vi etc/nginx/nginx.conf 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">worker_processes auto<span class="p">;</span>                    <span class="c1">## 추가  </span>
+</span></span><span class="line"><span class="cl">error_log /var/log/nginx/error.log<span class="p">;</span>       <span class="c1">## 추가</span>
+</span></span><span class="line"><span class="cl">pid /run/nginx.pid<span class="p">;</span>                       <span class="c1">## 추가</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">include /etc/nginx/stream.conf.d/*.conf<span class="p">;</span>  <span class="c1">## 추가</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">http <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    include       mime.types<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    default_type  application/octet-stream<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    log_format  main  <span class="s1">&#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
+</span></span><span class="line"><span class="cl">                      <span class="s1">&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
+</span></span><span class="line"><span class="cl">                      <span class="s1">&#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    access_log  logs/access.log  main<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    sendfile        on<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#tcp_nopush     on;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#keepalive_timeout  0;</span>
+</span></span><span class="line"><span class="cl">    keepalive_timeout  65<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#gzip  on;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        listen       8081<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        server_name  localhost<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            root   html<span class="p">;</span>
+</span></span><span class="line"><span class="cl">            index  index.html index.htm<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        error_page   <span class="m">500</span> <span class="m">502</span> <span class="m">503</span> <span class="m">504</span>  /50x.html<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">location</span> <span class="o">=</span> /50x.html <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            root   html<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    include /etc/nginx/conf.d/*.conf<span class="p">;</span>   <span class="c1">## 추가</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>웹 구성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee /etc/nginx/conf.d/openshift.conf
+</span></span></span><span class="line"><span class="cl"><span class="s">server {
+</span></span></span><span class="line"><span class="cl"><span class="s">    listen       8080;
+</span></span></span><span class="line"><span class="cl"><span class="s">    server_name  localhost;
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">    location / {
+</span></span></span><span class="line"><span class="cl"><span class="s">        root   /usr/share/nginx/html/files;
+</span></span></span><span class="line"><span class="cl"><span class="s">        autoindex on;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">    error_page   500 502 503 504  /50x.html;
+</span></span></span><span class="line"><span class="cl"><span class="s">    location = /50x.html {
+</span></span></span><span class="line"><span class="cl"><span class="s">        root   /usr/share/nginx/html;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>nginx 테스트 및 실행</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nginx -t
+</span></span><span class="line"><span class="cl">systemctl restart nginx
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>NGINX 확인</h4>
+        </figcaption>
+</figure>
+
+<h2 id="8-temp-이미지로-vm-구성">8. Temp 이미지로 VM 구성</h2>
+<p><code>Temp를 활용하여 bootstrap , master 3개 , worker 3개를 배포한다.</code></p>
+<p><figure><figcaption>
+            <h4>Image 구성#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Image 구성#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>Image 구성#3</h4>
+        </figcaption>
+</figure>
+
+base64로 변경한 값을 여기서 넣어 준다.
+bootstrap : cat append-bootstrap.64 , 마스터 : cat master.64 , Worker : cat worker.64 의 값을 넣어 주면 됨
+<figure><figcaption>
+            <h4>Image 구성#4</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="9-l4-구성">9. L4 구성</h2>
+<p><code>L4장비가 없을 경우 / L4장비가 있을 경우를 생각해서 NGINX도 포함 시킴</code></p>
+<h3 id="91-nsxt-l4-구성">9.1. NSXT L4 구성</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 설명</span>
+</span></span><span class="line"><span class="cl">ocp_8080 : jumphost <span class="o">(</span>nginx에서 파일을 땡기기 위해 구성<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 배포 완료 후 bootstrap은 삭제 해도 됨</span>
+</span></span><span class="line"><span class="cl">ocp-master-and-boot-machine-22623 : bootstrap 및 master
+</span></span><span class="line"><span class="cl">ocp_master-and-boot-api-6443: bootstrap 및 master
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Openshift는 Route를사용 하기 때문에 설정</span>
+</span></span><span class="line"><span class="cl">ocp_443, ocp_80 : master 및 worker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>L4 구성#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>L4 구성#2</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="92-nginx-l4-구성">9.2. NGINX L4 구성</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## LB 설정</span>
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee /etc/nginx/stream.conf.d/lb.conf
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">stream{
+</span></span></span><span class="line"><span class="cl"><span class="s">    upstream ocp_k8s_api {
+</span></span></span><span class="line"><span class="cl"><span class="s">        #round-robin;
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.10:6443; #bootstrap
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.11:6443; #master1
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.12:6443; #master2
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.13:6443; #master3
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">    server {
+</span></span></span><span class="line"><span class="cl"><span class="s">        listen 6443;
+</span></span></span><span class="line"><span class="cl"><span class="s">        proxy_pass ocp_k8s_api;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">    upstream ocp_m_config {
+</span></span></span><span class="line"><span class="cl"><span class="s">        #round-robin;
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.10:22623; #bootstrap
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.11:22623; #master1
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.12:22623; #master2
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.13:22623; #master3
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">    server {
+</span></span></span><span class="line"><span class="cl"><span class="s">        listen 22623;
+</span></span></span><span class="line"><span class="cl"><span class="s">        proxy_pass ocp_m_config;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">    upstream ocp_http {
+</span></span></span><span class="line"><span class="cl"><span class="s">        #round-robin;
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.11:80; #master1
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.12:80; #master2
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.13:80; #master3
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.14:80; #worker1
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.15:80; #worker2
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.16:80; #worker3
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">    server{
+</span></span></span><span class="line"><span class="cl"><span class="s">        listen 80;
+</span></span></span><span class="line"><span class="cl"><span class="s">        proxy_pass ocp_http;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">    upstream ocp_https {
+</span></span></span><span class="line"><span class="cl"><span class="s">        #round-robin;
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.11:443; #master1
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.12:443; #master2
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.13:443; #master3
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.14:443; #worker1
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.15:443; #worker2
+</span></span></span><span class="line"><span class="cl"><span class="s">        server 10.253.107.16:443; #worker3   
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">    server{
+</span></span></span><span class="line"><span class="cl"><span class="s">        listen 443;
+</span></span></span><span class="line"><span class="cl"><span class="s">        proxy_pass ocp_https;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## nginx restart</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nginx -t
+</span></span><span class="line"><span class="cl">systemctl restart nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="10-완료-후-확인">10. 완료 후 확인</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KUBECONFIG</span><span class="o">=</span>&lt;installation_directory&gt;/auth/kubeconfig
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">예시
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KUBECONFIG</span><span class="o">=</span>~/ocp/auth/kubeconfig
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">oc whoami
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">oc get clusterversion
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>완료#1</h4>
+        </figcaption>
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">oc get clusteroperators
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">oc describe clusterversion
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">oc get clusterversion -o jsonpath=&#39;{.items[0].spec}{&#34;\n&#34;}&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>완료#2</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>완료#3</h4>
+        </figcaption>
+</figure>
+</p>
+<h2 id="11-new-worker-node-add">11. New Worker Node Add</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## PENDING 확인</span>
+</span></span><span class="line"><span class="cl">kubectl get csr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## PENDING 확인 후 적용</span>
+</span></span><span class="line"><span class="cl">oc adm certificate approve csr-bghmp csr-hd9x8 csr-hlngb
+</span></span><span class="line"><span class="cl">oc adm certificate approve csr-gpgv9 csr-n6lqm csr-zfws6 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>worker Node 추가</h4>
+        </figcaption>
+</figure>
+
+<h2 id="12-계정">12. 계정</h2>
+<p>Local 또는 AD을 통해 계정을 관리 할 수 있다.</p>
+<h3 id="121-local-계정-생성">12.1. Local 계정 생성</h3>
+<p>아래는 htpasswd를 사용 하는 방법의 대해서 구성 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 우분투</span>
+</span></span><span class="line"><span class="cl">apt install apache2-utils -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 유저 정보</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># htpasswd -Bbc htpasswd {username} &#39;{password}&#39;</span>
+</span></span><span class="line"><span class="cl">$ htpasswd -Bbc htpasswd my1208 <span class="s1">&#39;Passw0rd&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat htpasswd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">oc --user<span class="o">=</span>admin create secret generic htpasswd <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --from-file<span class="o">=</span>htpasswd -n openshift-config
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">oc get secret -n openshift-config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>유저 추가</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>secret 확인</h4>
+        </figcaption>
+</figure>
+</p>
+<p>secret 추가</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee oauth-config.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s"># oauth-config.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: config.openshift.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: OAuth
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: cluster
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  identityProviders:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: Local Password
+</span></span></span><span class="line"><span class="cl"><span class="s">    mappingMethod: claim
+</span></span></span><span class="line"><span class="cl"><span class="s">    type: HTPasswd
+</span></span></span><span class="line"><span class="cl"><span class="s">    htpasswd:
+</span></span></span><span class="line"><span class="cl"><span class="s">      fileData:
+</span></span></span><span class="line"><span class="cl"><span class="s">        name: htpasswd
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">oc replace -f oauth-config.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## shows current user</span>
+</span></span><span class="line"><span class="cl">oc whoami
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## shows cluster web console URL</span>
+</span></span><span class="line"><span class="cl">oc whoami --show-console
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## shows cluster API URL</span>
+</span></span><span class="line"><span class="cl">oc whoami --show-server
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## shows current OAuth token</span>
+</span></span><span class="line"><span class="cl">oc whoami --show-token
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><figcaption>
+            <h4>GUI 접속#1</h4>
+        </figcaption>
+</figure>
+
+<figure><figcaption>
+            <h4>GUI 접속#2</h4>
+        </figcaption>
+</figure>
+</p>
+<h3 id="122-ad-연동">12.2. AD 연동</h3>
+<p>LDPAS를 구성하기 위한 configmap 생성</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">oc create configmap ca-config-map --from-file=ca.crt=/path/to/ca -n openshift-config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>만약 LDAPS로 구성을 하지 않았으면 insecure: true, ca 항목을 삭제, url을 ldap으로 변경을 해주면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">oc apply -n openshift-config -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: config.openshift.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: OAuth
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: cluster
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  identityProviders:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - name: ldapidp
+</span></span></span><span class="line"><span class="cl"><span class="s">    mappingMethod: claim
+</span></span></span><span class="line"><span class="cl"><span class="s">    type: LDAP
+</span></span></span><span class="line"><span class="cl"><span class="s">    ldap:
+</span></span></span><span class="line"><span class="cl"><span class="s">      attributes:
+</span></span></span><span class="line"><span class="cl"><span class="s">        id:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - dn
+</span></span></span><span class="line"><span class="cl"><span class="s">        email:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - mail
+</span></span></span><span class="line"><span class="cl"><span class="s">        name:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - sAMAccountName
+</span></span></span><span class="line"><span class="cl"><span class="s">        preferredUsername:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - sAMAccountName
+</span></span></span><span class="line"><span class="cl"><span class="s">      bindDN: cn=administrator,cn=users,dc=tkg,dc=io
+</span></span></span><span class="line"><span class="cl"><span class="s">      bindPassword:
+</span></span></span><span class="line"><span class="cl"><span class="s">        name: ldap-secret
+</span></span></span><span class="line"><span class="cl"><span class="s">      ca:
+</span></span></span><span class="line"><span class="cl"><span class="s">        name: ca-config-map
+</span></span></span><span class="line"><span class="cl"><span class="s">      insecure: false
+</span></span></span><span class="line"><span class="cl"><span class="s">      url: &#34;ldaps://tanzu-dns.tkg.io/ou=tanzu,dc=tkg,dc=io?sAMAccountName&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>GUI 접속</h4>
+        </figcaption>
+</figure>
+
+<h3 id="123-수동-group-sync">12.3. 수동 GROUP-SYNC</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vi ldapsync.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># LDAP is case insensitive, but OpenShift is not, so all LDAP parameters have been converted to lower case as per https://access.redhat.com/solutions/3232051 (under &#34;Case Sensitivity&#34;)</span>
+</span></span><span class="line"><span class="cl">kind: LDAPSyncConfig
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">url: ldaps://tanzu-dns.tkg.io:636
+</span></span><span class="line"><span class="cl">insecure: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">ca: <span class="s2">&#34;/data/cert/ldapserver.pem&#34;</span>                       <span class="c1">### ldaps 인증서의 실제 위치 / 파일</span>
+</span></span><span class="line"><span class="cl">bindDN: <span class="nv">cn</span><span class="o">=</span>administrator,cn<span class="o">=</span>users,dc<span class="o">=</span>tkg,dc<span class="o">=</span>io
+</span></span><span class="line"><span class="cl">bindPassword: <span class="s2">&#34;Password&#34;</span>
+</span></span><span class="line"><span class="cl">rfc2307:
+</span></span><span class="line"><span class="cl">   groupsQuery:
+</span></span><span class="line"><span class="cl">       baseDN: <span class="s2">&#34;ou=tanzu,dc=tkg,dc=io&#34;</span>
+</span></span><span class="line"><span class="cl">       scope: sub
+</span></span><span class="line"><span class="cl">       filter: <span class="o">(</span><span class="nv">objectClass</span><span class="o">=</span>group<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       derefAliases: never
+</span></span><span class="line"><span class="cl">       timeout: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">       pageSize: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">   groupUIDAttribute: dn
+</span></span><span class="line"><span class="cl">   groupNameAttributes: <span class="o">[</span> cn <span class="o">]</span>
+</span></span><span class="line"><span class="cl">   groupMembershipAttributes: <span class="o">[</span> member <span class="o">]</span>
+</span></span><span class="line"><span class="cl">   usersQuery:
+</span></span><span class="line"><span class="cl">       basedn: <span class="s2">&#34;ou=tanzu,dc=tkg,dc=io&#34;</span>
+</span></span><span class="line"><span class="cl">       scope: sub
+</span></span><span class="line"><span class="cl">       derefAliases: never
+</span></span><span class="line"><span class="cl">       pageSize: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">   userUIDAttribute: dn
+</span></span><span class="line"><span class="cl">   userNameAttributes: <span class="o">[</span> cn <span class="o">]</span>
+</span></span><span class="line"><span class="cl">   tolerateMemberNotFoundErrors: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">   tolerateMemberOutOfScopeErrors: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"><span class="c1">## 적용전 제대로 받아오는지 확인을 한다.</span>
+</span></span><span class="line"><span class="cl">oc adm groups sync --sync-config<span class="o">=</span>ldapsync.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 확인이 끝나면 적용한다.</span>
+</span></span><span class="line"><span class="cl">oc adm groups sync --sync-config<span class="o">=</span>ldapsync.yaml --confirm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 권한 설정</span>
+</span></span><span class="line"><span class="cl">oc adm policy add-cluster-role-to-group cluster-admin tkg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 권한 삭제</span>
+</span></span><span class="line"><span class="cl">oc adm policy remove-cluster-role-from-group cluster-admin tkg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>GROUP 확인 및 적용</h4>
+        </figcaption>
+</figure>
+
+<h3 id="124-cronjob-group-sync">12.4 CronJob Group-Sync</h3>
+<p>위에서 LDAP을 연동 하였다면 cm , secret 이 생성 된 것을 확인 할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## password 이름 확인</span>
+</span></span><span class="line"><span class="cl"><span class="nv">password</span><span class="o">=</span><span class="sb">`</span>oc get secret -n openshift-authentication <span class="p">|</span> grep v4-0-config-user-idp-0 <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">oc get secret -n openshift-authentication <span class="nv">$password</span>  -o <span class="nv">jsonpath</span><span class="o">={</span>.data<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 인증서 이름 확인</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ca</span><span class="o">=</span><span class="sb">`</span>oc get cm -n openshift-authentication <span class="p">|</span> grep v4-0-config-user <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">oc get cm -n openshift-authentication <span class="nv">$ca</span> -o <span class="nv">jsonpath</span><span class="o">={</span>.items<span class="o">[</span>0<span class="o">]</span>.data<span class="o">}</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>그리고 계정 및 권한 설정을 해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee ldap-sync-sa-clusterrole.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: ldap-group-syncer
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: openshift-authentication
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: ldap-group-syncer
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: openshift-authentication
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">root@ubuntu:/var/tmp/oc/ldaps#
+</span></span></span><span class="line"><span class="cl"><span class="s">root@ubuntu:/var/tmp/oc/ldaps# cat clusterrole.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: ldap-group-syncer
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">rules:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - apiGroups:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">      - user.openshift.io
+</span></span></span><span class="line"><span class="cl"><span class="s">    resources:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - groups
+</span></span></span><span class="line"><span class="cl"><span class="s">    verbs:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - get
+</span></span></span><span class="line"><span class="cl"><span class="s">      - list
+</span></span></span><span class="line"><span class="cl"><span class="s">      - create
+</span></span></span><span class="line"><span class="cl"><span class="s">      - update
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: ldap-group-syncer
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">    name: ldap-group-syncer
+</span></span></span><span class="line"><span class="cl"><span class="s">    namespace: openshift-authentication
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: ldap-group-syncer
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>LDAP의 자동 Sync를 구성하기 위해 config-map 및 job 설정
+witelist / balcklist의 경우 ldapsearch에서 distinguishedName: CN=test test,OU=tanzu,DC=tkg,DC=io 이부분의 이름으로 넣어야함. , 만약 별도로 witelist / blacklist가 필요 없으면 제거 해도 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF | tee ldap-sync-cm-cron.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ConfigMap
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: ldap-group-syncer
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: openshift-authentication
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">data:
+</span></span></span><span class="line"><span class="cl"><span class="s">  ldap-group-sync.yaml: |
+</span></span></span><span class="line"><span class="cl"><span class="s">    kind: LDAPSyncConfig
+</span></span></span><span class="line"><span class="cl"><span class="s">    apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">    url: ldaps://tanzu-dns.tkg.io
+</span></span></span><span class="line"><span class="cl"><span class="s">    bindDN: cn=administrator,cn=users,dc=tkg,dc=io
+</span></span></span><span class="line"><span class="cl"><span class="s">    bindPassword:
+</span></span></span><span class="line"><span class="cl"><span class="s">      file: &#34;/etc/secrets/bindPassword&#34;                   ## 위에서 설명한 secret, cronjob에서 voluemount 후 적용
+</span></span></span><span class="line"><span class="cl"><span class="s">    insecure: false
+</span></span></span><span class="line"><span class="cl"><span class="s">    ca: &#34;/ldap-sync/ca/ca.crt&#34;                            ## 위에서 설명한 configmap, cronjob에서 voluemount 후 적용
+</span></span></span><span class="line"><span class="cl"><span class="s">    rfc2307:
+</span></span></span><span class="line"><span class="cl"><span class="s">        groupsQuery:
+</span></span></span><span class="line"><span class="cl"><span class="s">            baseDN: &#34;ou=tanzu,dc=tkg,dc=io&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            scope: sub
+</span></span></span><span class="line"><span class="cl"><span class="s">            derefAliases: never
+</span></span></span><span class="line"><span class="cl"><span class="s">            filter: (objectclass=group)
+</span></span></span><span class="line"><span class="cl"><span class="s">        groupUIDAttribute: dn
+</span></span></span><span class="line"><span class="cl"><span class="s">        groupNameAttributes: [ cn ]
+</span></span></span><span class="line"><span class="cl"><span class="s">        groupMembershipAttributes: [ member ]
+</span></span></span><span class="line"><span class="cl"><span class="s">        usersQuery:
+</span></span></span><span class="line"><span class="cl"><span class="s">            baseDN: &#34;ou=tanzu,dc=tkg,dc=io&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            scope: sub
+</span></span></span><span class="line"><span class="cl"><span class="s">            derefAliases: never
+</span></span></span><span class="line"><span class="cl"><span class="s">            pageSize: 0
+</span></span></span><span class="line"><span class="cl"><span class="s">        userUIDAttribute: dn
+</span></span></span><span class="line"><span class="cl"><span class="s">        userNameAttributes: [ sAMAccountName ]
+</span></span></span><span class="line"><span class="cl"><span class="s">        tolerateMemberNotFoundErrors: true
+</span></span></span><span class="line"><span class="cl"><span class="s">        tolerateMemberOutOfScopeErrors: true
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ConfigMap
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: ldap-group-syncer-whitelist
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: openshift-authentication
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">data:
+</span></span></span><span class="line"><span class="cl"><span class="s">  whitelist.txt: |
+</span></span></span><span class="line"><span class="cl"><span class="s">    CN=kim dokyung,OU=tanzu,DC=tkg,DC=io
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ConfigMap
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: ldap-group-syncer-blacklist
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: openshift-authentication
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">data:
+</span></span></span><span class="line"><span class="cl"><span class="s">  blacklist.txt: |
+</span></span></span><span class="line"><span class="cl"><span class="s">    CN=tkg,OU=tanzu,DC=tkg,DC=io
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: CronJob
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: batch/v1beta1
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: ldap-group-syncer
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: openshift-authentication
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  schedule: &#34;*/1 * * * *&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  concurrencyPolicy: Forbid
+</span></span></span><span class="line"><span class="cl"><span class="s">  successfulJobsHistoryLimit: 5
+</span></span></span><span class="line"><span class="cl"><span class="s">  failedJobsHistoryLimit: 5
+</span></span></span><span class="line"><span class="cl"><span class="s">  jobTemplate:
+</span></span></span><span class="line"><span class="cl"><span class="s">    metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">      labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">        app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">    spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">      backoffLimit: 0
+</span></span></span><span class="line"><span class="cl"><span class="s">      template:
+</span></span></span><span class="line"><span class="cl"><span class="s">        metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">          labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">            app: cronjob-ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">        spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">          containers:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - name: ldap-group-sync
+</span></span></span><span class="line"><span class="cl"><span class="s">              image: &#34;registry.redhat.io/openshift4/ose-cli:v4.7&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">              command:
+</span></span></span><span class="line"><span class="cl"><span class="s">                - &#34;/bin/bash&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                - &#34;-c&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                - oc adm groups sync --whitelist=/etc/whitelist/whitelist.txt --blacklist=/etc/blacklist/blacklist.txt --sync-config=/etc/config/ldap-group-sync.yaml --confirm
+</span></span></span><span class="line"><span class="cl"><span class="s">              volumeMounts:
+</span></span></span><span class="line"><span class="cl"><span class="s">                - mountPath: &#34;/etc/blacklist&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                  name: &#34;ldap-sync-volume-blacklist&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                - mountPath: &#34;/etc/whitelist&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                  name: &#34;ldap-sync-volume-whitelist&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                - mountPath: &#34;/etc/config&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                  name: &#34;ldap-sync-volume&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                - mountPath: &#34;/etc/secrets&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                  name: &#34;ldap-bind-password&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                - mountPath: &#34;/ldap-sync/ca&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                  name: &#34;ldap-sync-ca&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          volumes:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - name: &#34;ldap-sync-volume-blacklist&#34;                  ## volumes을 모두 연결하여 assign
+</span></span></span><span class="line"><span class="cl"><span class="s">              configMap:
+</span></span></span><span class="line"><span class="cl"><span class="s">                name: &#34;ldap-group-syncer-blacklist&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            - name: &#34;ldap-sync-volume-whitelist&#34;                  ## volumes을 모두 연결하여 assign
+</span></span></span><span class="line"><span class="cl"><span class="s">              configMap:
+</span></span></span><span class="line"><span class="cl"><span class="s">                name: &#34;ldap-group-syncer-whitelist&#34;           
+</span></span></span><span class="line"><span class="cl"><span class="s">            - name: &#34;ldap-sync-volume&#34;                            ## volumes을 모두 연결하여 assign
+</span></span></span><span class="line"><span class="cl"><span class="s">              configMap:
+</span></span></span><span class="line"><span class="cl"><span class="s">                name: &#34;ldap-group-syncer&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            - name: &#34;ldap-sync-ca&#34;                                ## volumes을 모두 연결하여 assign
+</span></span></span><span class="line"><span class="cl"><span class="s">              configMap:
+</span></span></span><span class="line"><span class="cl"><span class="s">                name: &#34;v4-0-config-user-idp-0-ca&#34; 
+</span></span></span><span class="line"><span class="cl"><span class="s">            - name: &#34;ldap-bind-password&#34;                          ## volumes을 모두 연결하여 assign
+</span></span></span><span class="line"><span class="cl"><span class="s">              secret:
+</span></span></span><span class="line"><span class="cl"><span class="s">                secretName: &#34;v4-0-config-user-idp-0-bind-password&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          restartPolicy: &#34;Never&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          terminationGracePeriodSeconds: 30
+</span></span></span><span class="line"><span class="cl"><span class="s">          activeDeadlineSeconds: 500
+</span></span></span><span class="line"><span class="cl"><span class="s">          dnsPolicy: &#34;ClusterFirst&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          serviceAccountName: &#34;ldap-group-syncer&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          serviceAccount: &#34;ldap-group-syncer&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이후에 자동으로 싱크가 되는 것을 알수 있다. 만약에 그룹을 추가 했는대 그 그룹만 막고 싶으면 blacklist, 또는 기존에 있는 것만 하고 자동 싱크 하고 싶으면 witelist를 적용 하면된다.
+흠 생각에는 그냥 witelist 방식으로만 적용하면 될 것으로 보인다. 만약에 필요 하다면 필요 없이 모든 그룹을 자동 싱크 하겠따면 witelist / blaklist는 필요 없다.</p>
+<p>자동 싱크가 되었으면 해당하는 그룹에 권한을 준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 권한 설정</span>
+</span></span><span class="line"><span class="cl">oc adm policy add-cluster-role-to-group cluster-admin tkg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 권한 삭제</span>
+</span></span><span class="line"><span class="cl">oc adm policy remove-cluster-role-from-group cluster-admin tkg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><figcaption>
+            <h4>자동 sync 구성 완료</h4>
+        </figcaption>
+</figure>
+
+]]></description>
+</item>
+</channel>
+</rss>
